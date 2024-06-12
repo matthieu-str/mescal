@@ -1,0 +1,86 @@
+Product,CPC,Type
+biodiesel,35491: Biodiesel,contains
+"biomethane, from biogas upgrading, using amine scrubbing","12020: Natural gas, liquefied or in the gaseous state",equals
+"biomethane, high pressure","12020: Natural gas, liquefied or in the gaseous state",equals
+"biomethane, high pressure, vehicle grade","12020: Natural gas, liquefied or in the gaseous state",equals
+"biomethane, low pressure","12020: Natural gas, liquefied or in the gaseous state",equals
+"biomethane, low pressure, vehicle grade","12020: Natural gas, liquefied or in the gaseous state",equals
+"biomethane, medium pressure, vehicle grade","12020: Natural gas, liquefied or in the gaseous state",equals
+"carbon dioxide, captured",34210b: Carbon dioxide and monoxide,equals
+"carbon dioxide, captured from atmosphere",34210b: Carbon dioxide and monoxide,equals
+"carbon dioxide, in chemical industry",34210b: Carbon dioxide and monoxide,equals
+"carbon dioxide, liquid",34210b: Carbon dioxide and monoxide,equals
+"carbon dioxide, stored",34210b: Carbon dioxide and monoxide,equals
+"carbon monoxide, from RWGS",34210b: Carbon dioxide and monoxide,equals
+"chemical factory, organics",53269: Other constructions for manufacturing,equals
+diesel,33370: Fuel oils n.e.c.,equals
+"diesel, low-sulfur",33370: Fuel oils n.e.c.,equals
+"diesel, synthetic",33370: Fuel oils n.e.c.,equals
+"diesel, synthetic, vehicle grade",33370: Fuel oils n.e.c.,equals
+direct air capture system,43230: Air or vacuum pumps; air or other gas compressors,equals
+electricity production,17100: Electrical energy,contains
+"electricity, high voltage",17100: Electrical energy,equals
+"electricity, low voltage",17100: Electrical energy,equals
+"electricity, medium voltage",17100: Electrical energy,equals
+"electrolyzer, 1MWe, AEC, Balance of Plant",46410: Primary cells and primary batteries,equals
+"electrolyzer, 1MWe, AEC, Stack",46410: Primary cells and primary batteries,equals
+"electrolyzer, 1MWe, PEM, Balance of Plant",46410: Primary cells and primary batteries,equals
+"electrolyzer, 1MWe, PEM, Stack",46410: Primary cells and primary batteries,equals
+"electrolyzer, 1MWe, SOEC, Balance of Plant",46410: Primary cells and primary batteries,equals
+"electrolyzer, 1MWe, SOEC, Stack",46410: Primary cells and primary batteries,equals
+"ethanol, from corn","34139: Other alcohols, phenols, phenol-alcohols, and their halogenated, sulphonated, nitrated or nitrosated derivativ[…]",equals
+"ethanol, from forest residue","34139: Other alcohols, phenols, phenol-alcohols, and their halogenated, sulphonated, nitrated or nitrosated derivativ[…]",equals
+"facility, construction",53269: Other constructions for manufacturing,contains
+farming and supply of,23140: Other cereal grain products (including corn flakes),contains
+forest residue,23140: Other cereal grain products (including corn flakes),equals
+"fuel cell system, 1 kWe, proton exchange membrane (PEM)",46410: Primary cells and primary batteries,equals
+geothermal heat plant,"43913: Refrigerating and freezing equipment and heat pumps, except household type equipment",equals
+hard coal IGCC power plant 450MW,53262: Power plants,equals
+"heat, deep geothermal",17300: Steam and hot water,equals
+hydrogen storage,67220: Bulk liquid or gas storage services,equals
+"hydrogen, 700 bar","34210: Hydrogen, nitrogen, oxygen, carbon dioxide and rare gases; inorganic oxygen compounds of non-metals n.e.c.",equals
+"hydrogen, gaseous","34210: Hydrogen, nitrogen, oxygen, carbon dioxide and rare gases; inorganic oxygen compounds of non-metals n.e.c.",contains
+"hydrogen, liquid","34210: Hydrogen, nitrogen, oxygen, carbon dioxide and rare gases; inorganic oxygen compounds of non-metals n.e.c.",equals
+"kerosene, synthetic",3334: Kerosenes,equals
+light duty truck,49114: Motor vehicles n.e.c. for the transport of goods,contains
+Light duty truck,49114: Motor vehicles n.e.c. for the transport of goods,contains
+medium duty truck,49114: Motor vehicles n.e.c. for the transport of goods,contains
+Medium duty truck,49114: Motor vehicles n.e.c. for the transport of goods,contains
+"methane, from electrochemical methanation","17200: Coal gas, water gas, producer gas and similar gases, other than petroleum gases and other gaseous hydrocarbons",equals
+methanol,"34139: Other alcohols, phenols, phenol-alcohols, and their halogenated, sulphonated, nitrated or nitrosated derivativ[…]",equals
+"methanol, from biomass","34139: Other alcohols, phenols, phenol-alcohols, and their halogenated, sulphonated, nitrated or nitrosated derivativ[…]",equals
+"methanol, purified","34139: Other alcohols, phenols, phenol-alcohols, and their halogenated, sulphonated, nitrated or nitrosated derivativ[…]",equals
+"methanol, unpurified","34139: Other alcohols, phenols, phenol-alcohols, and their halogenated, sulphonated, nitrated or nitrosated derivativ[…]",equals
+"NGCC power plant, 400MWe",53262: Power plants,equals
+passenger bus,49112: Public-transport type passenger motor vehicles,equals
+"Passenger bus, EURO-VI",49112: Public-transport type passenger motor vehicles,equals
+passenger car,49113: Motor cars and other motor vehicles principally designed for the transport of persons (except public-transport[…],contains
+Passenger car,49113: Motor cars and other motor vehicles principally designed for the transport of persons (except public-transport[…],contains
+petroleum refinery,53290: Other civil engineering works,equals
+"photovoltaic open ground installation, 560 kWp, single-Si, on open ground",87360: Installation services of electrical machinery and apparatus n.e.c.,equals
+"photovoltaic slanted-roof installation, 1.3 MWp, multi-Si, panel, mounted, on roof",87360: Installation services of electrical machinery and apparatus n.e.c.,equals
+"pipeline, for hydrogen distribution",53251: Local pipelines,equals
+"pipeline, for hydrogen transmission",53251: Local pipelines,equals
+plant construction,53269: Other constructions for manufacturing,contains
+"syngas, from biomass gasification","12020: Natural gas, liquefied or in the gaseous state",equals
+"syngas, from biomass gasification, pre, pipeline 200km, storage 1000m","12020: Natural gas, liquefied or in the gaseous state",equals
+"syngas, from biomass gasification, pre, pipeline 400km, storage 3000m","12020: Natural gas, liquefied or in the gaseous state",equals
+"syngas, RWGS, Production","12020: Natural gas, liquefied or in the gaseous state",equals
+"syngas, RWGS, Production, for Fischer Tropsch process, hydrogen from electrolysis","12020: Natural gas, liquefied or in the gaseous state",equals
+synthetic gas factory,53269: Other constructions for manufacturing,equals
+tank construction,53269: Other constructions for manufacturing,contains
+"transport, freight, lorry",6511: Road transport services of freight,contains
+"transport, passenger bus",64: Passenger transport services,contains
+"transport, passenger car","64119: Other land transportation services of passengers, n.e.c.",contains
+unit construction,53269: Other constructions for manufacturing,contains
+"used fuel cell balance of plant, 1MWe, AEC",46410: Primary cells and primary batteries,equals
+"used fuel cell balance of plant, 1MWe, PEM",46410: Primary cells and primary batteries,equals
+"used fuel cell balance of plant, 1MWe, SOEC",46410: Primary cells and primary batteries,equals
+"used fuel cell stack, 1MWe, AEC",46410: Primary cells and primary batteries,equals
+"used fuel cell stack, 1MWe, PEM",46410: Primary cells and primary batteries,equals
+"used fuel cell stack, 1MWe, SOEC",46410: Primary cells and primary batteries,equals
+wave energy converter platform,53262: Power plants,equals
+"wood chips and particles, willow",31230: Wood in chips or particles,equals
+"wood chips, dry, measured as dry mass",31230: Wood in chips or particles,equals
+"wood chips, from post-consumer wood, measured as dry mass",31230: Wood in chips or particles,equals
+"wood chips, wet, measured as dry mass",31230: Wood in chips or particles,equals
