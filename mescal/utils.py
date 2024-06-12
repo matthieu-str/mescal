@@ -6,9 +6,10 @@ import bw2data as bd
 from mescal.caching import cache_database, load_db
 
 
-def load_extract_db(db_name):
+def load_extract_db(db_name, create_pickle=True):
     """
     Load or extract a database
+    :param create_pickle: (bool) if True, create a pickle file to store the database
     :param db_name: (str) name of the database
     :return: (list of dict) dictionary of the LCI database
     """
@@ -18,7 +19,8 @@ def load_extract_db(db_name):
         db = load_db(db_name)
     else:
         db = wurst.extract_brightway2_databases(db_name, add_identifiers=True)
-        cache_database(db, db_name)
+        if create_pickle:
+            cache_database(db, db_name)
     return db
 
 
@@ -136,14 +138,8 @@ def wurst_to_brightway2_database(db):
 
         # Add the input and output keys in exchanges
         for exc in act['exchanges']:
-            try:
-                exc['input']
-            except KeyError:
-                exc['input'] = (exc['database'], exc['code'])
-            try:
-                exc['output']
-            except KeyError:
-                exc['output'] = (act['database'], act['code'])
+            exc['input'] = (exc['database'], exc['code'])
+            exc['output'] = (act['database'], act['code'])
 
         # Restore parameters to Brightway2 format which allows for uncertainty and comments
         if "parameters" in act:
@@ -151,22 +147,65 @@ def wurst_to_brightway2_database(db):
                 name: {"amount": amount} for name, amount in act["parameters"].items()
             }
 
+        if "categories" in act:
+            del act["categories"]
+
     return db
+
+
+def change_database_name(db, new_db_name):
+    """
+    Change the name of the database
+    :param db: (list of dict) dictionary of the LCI database
+    :param new_db_name: (str) new name of the database
+    :return: (list of dict) updated dictionary of the LCI database
+    """
+    old_db_name = db[0]['database']
+    for act in db:
+        act['database'] = new_db_name
+        for exc in act['exchanges']:
+            if exc['database'] == old_db_name:
+                exc['database'] = new_db_name
+            else:
+                pass
+    return db
+
+
+def relink_database(db, name_old_database, name_new_database):
+    """
+    Relink a database and write it
+    :param db: (list of dict) LCI database
+    :param name_old_database: (str) name of the old database
+    :param name_new_database: (str) name of the new database
+    :return: None
+    """
+    db_name = db[0]['database']
+    for act in db:
+        for exc in act['exchanges']:
+            if exc['database'] == name_old_database:
+                exc['database'] = name_new_database
+            else:
+                pass
+    write_wurst_database_to_brightway(db, db_name)
 
 
 def write_wurst_database_to_brightway(db, db_name):
     """
-    Write a wurst database to a Brightway2 database. This function will overwrite the database if it already exists.
+    Write a wurst database to a Brightway2 project. This function will overwrite the database if it already exists.
     :param db: (list of dict) dictionary of the LCI database
     :param db_name: (str) name of the Brightway2 database
     :return: None
     """
-    db = wurst_to_brightway2_database(db)
-    db = {(i['database'], i['code']): i for i in db}
-    bw_database = bd.Database(db_name)
-    if db_name in list(bd.databases):  # If the database already exists, delete it to avoid duplicates
+    if db_name in list(bd.databases):  # if the database already exists, delete it
         del bd.databases[db_name]
     else:
         pass
+    bw_database = bd.Database(db_name)
     bw_database.register()
+    if db[0]['database'] != db_name:
+        db = change_database_name(db, db_name)
+    else:
+        pass
+    db = wurst_to_brightway2_database(db)
+    db = {(i['database'], i['code']): i for i in db}
     bw_database.write(db)
