@@ -3,24 +3,23 @@ import copy
 from mescal.utils import *
 
 
-def create_complementary_database(df_mapping, esm_region, name_premise_db):
+def create_complementary_database(df_mapping, premise_db, name_complement_db):
     """
     Relink the technologies to the premise database
     :param df_mapping: (pandas dataframe) dataframe with the mapping of the technologies and resources
-    :param esm_region: (str) modeled region of the energy system model
-    :param name_premise_db: (str) name of the premise database
+    :param premise_db: (list of dict) premise database
+    :param name_complement_db: (str) name of the complementary database
     :return: (pandas dataframe) dataframe with the mapping of the technologies and resources linked to the premise
     database
     """
 
+    name_premise_db = premise_db[0]['database']
     tech_premise = pd.DataFrame(columns=['Name', 'Type', 'Product', 'Activity', 'Location', 'Database'])
-    name_complement_db = name_premise_db + '_comp_' + esm_region
     complement_premise = []
 
     base_db = concatenate_databases(list(df_mapping.Database.unique()))
     base_db_dict_name = database_list_to_dict(base_db, 'name')
 
-    premise_db = load_extract_db(name_premise_db)
     premise_db_dict_name = database_list_to_dict(premise_db, 'name')
     premise_db_dict_code = database_list_to_dict(premise_db, 'code')
 
@@ -43,14 +42,14 @@ def create_complementary_database(df_mapping, esm_region, name_premise_db):
         new_activity = new_activity.replace('EURO-6d', 'EURO-6ab')
 
         try:
-            act = premise_db_dict_name[(new_activity, new_product, region, name_premise_db)]
+            premise_db_dict_name[(new_activity, new_product, region, name_premise_db)]
 
         except KeyError:
             new_product = new_product[0].lower() + new_product[1:]
             new_activity = new_activity[0].lower() + new_activity[1:]
 
             try:
-                act = premise_db_dict_name[(new_activity, new_product, region, name_premise_db)]
+                premise_db_dict_name[(new_activity, new_product, region, name_premise_db)]
 
             except KeyError:
                 print(f"No inventory in the premise database for {esm_tech_name, type}")
@@ -78,7 +77,7 @@ def create_complementary_database(df_mapping, esm_region, name_premise_db):
         act = base_db_dict_name[(activity, product, region, database)]
 
         try:
-            act_db = premise_db_dict_name[(activity, product, region, name_complement_db)]
+            premise_db_dict_name[(activity, product, region, name_complement_db)]
         except KeyError:
             new_act = copy.deepcopy(act)
             new_code = random_code()
@@ -94,7 +93,7 @@ def create_complementary_database(df_mapping, esm_region, name_premise_db):
 
     unlinked_activities = [i for i in premise_db if i['database'] == name_complement_db]
     while len(unlinked_activities) > 0:
-        unlinked_activities, premise_db = relink(name_premise_db, name_complement_db, base_db, premise_db)
+        unlinked_activities, premise_db = relink(name_complement_db, base_db, premise_db)
 
     complement_db = [i for i in premise_db if i['database'] == name_complement_db]
     write_wurst_database_to_brightway(complement_db, name_complement_db)
@@ -118,15 +117,15 @@ def create_complementary_database(df_mapping, esm_region, name_premise_db):
     return tech_premise_adjusted
 
 
-def relink(name_premise_db, name_complement_db, base_db, premise_db):
+def relink(name_complement_db, base_db, premise_db):
     """
-    :param name_premise_db: (str) name of the premise database
     :param name_complement_db: (str) name of the complementary database
     :param base_db: (list of dictionaries) list of activities in the base database
     :param premise_db: (list of dictionaries) list of activities in the premise database
     :return: (list of dict) list of unlinked flows, (list of dict) updated premise database
     """
 
+    name_premise_db = premise_db[0]['database']
     unlinked_activities = []
     complement_database = [i for i in premise_db if i['database'] == name_complement_db]
     premise_db_dict_name = database_list_to_dict(premise_db, 'name')
@@ -148,10 +147,6 @@ def relink(name_premise_db, name_complement_db, base_db, premise_db):
                 else:
                     raise ValueError('No reference product found')
                 region = flow['location']
-
-                # delete input key (will be added during database writing)
-                if 'input' in flow.keys():
-                    del flow['input']
 
                 try:
                     act_db = premise_db_dict_name[(activity, product, region, name_complement_db)]
