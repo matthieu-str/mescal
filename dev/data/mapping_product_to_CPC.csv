@@ -1,18 +1,21 @@
 Product,CPC,Type
+amine-based silica,"35310: Organic surface active agents, except soap",equals
 biodiesel,35491: Biodiesel,contains
+"biomass, used as fuel",31230: Wood in chips or particles,equals
 "biomethane, from biogas upgrading, using amine scrubbing","12020: Natural gas, liquefied or in the gaseous state",equals
 "biomethane, high pressure","12020: Natural gas, liquefied or in the gaseous state",equals
 "biomethane, high pressure, vehicle grade","12020: Natural gas, liquefied or in the gaseous state",equals
 "biomethane, low pressure","12020: Natural gas, liquefied or in the gaseous state",equals
 "biomethane, low pressure, vehicle grade","12020: Natural gas, liquefied or in the gaseous state",equals
 "biomethane, medium pressure, vehicle grade","12020: Natural gas, liquefied or in the gaseous state",equals
-"carbon dioxide, captured",34210b: Carbon dioxide and monoxide,equals
+"carbon dioxide, captured",34210b: Carbon dioxide and monoxide,contains
 "carbon dioxide, captured from atmosphere",34210b: Carbon dioxide and monoxide,equals
 "carbon dioxide, in chemical industry",34210b: Carbon dioxide and monoxide,equals
 "carbon dioxide, liquid",34210b: Carbon dioxide and monoxide,equals
 "carbon dioxide, stored",34210b: Carbon dioxide and monoxide,equals
 "carbon monoxide, from RWGS",34210b: Carbon dioxide and monoxide,equals
 "chemical factory, organics",53269: Other constructions for manufacturing,equals
+"construction, hard coal IGCC power plant 450MW",53262: Power plants,equals
 diesel,33370: Fuel oils n.e.c.,equals
 "diesel, low-sulfur",33370: Fuel oils n.e.c.,equals
 "diesel, synthetic",33370: Fuel oils n.e.c.,equals
@@ -30,6 +33,7 @@ electricity production,17100: Electrical energy,contains
 "electrolyzer, 1MWe, SOEC, Stack",46410: Primary cells and primary batteries,equals
 "ethanol, from corn","34139: Other alcohols, phenols, phenol-alcohols, and their halogenated, sulphonated, nitrated or nitrosated derivativ[…]",equals
 "ethanol, from forest residue","34139: Other alcohols, phenols, phenol-alcohols, and their halogenated, sulphonated, nitrated or nitrosated derivativ[…]",equals
+EV charger,"464: Accumulators, primary cells and primary batteries, and parts thereof",contains
 "facility, construction",53269: Other constructions for manufacturing,contains
 farming and supply of,23140: Other cereal grain products (including corn flakes),contains
 forest residue,23140: Other cereal grain products (including corn flakes),equals
@@ -52,6 +56,7 @@ methanol,"34139: Other alcohols, phenols, phenol-alcohols, and their halogenated
 "methanol, purified","34139: Other alcohols, phenols, phenol-alcohols, and their halogenated, sulphonated, nitrated or nitrosated derivativ[…]",equals
 "methanol, unpurified","34139: Other alcohols, phenols, phenol-alcohols, and their halogenated, sulphonated, nitrated or nitrosated derivativ[…]",equals
 "NGCC power plant, 400MWe",53262: Power plants,equals
+nickel-based catalyst for methanation,"415: Semi-finished products of copper, nickel, aluminium, lead, zinc and tin or their alloys",equals
 passenger bus,49112: Public-transport type passenger motor vehicles,equals
 "Passenger bus, EURO-VI",49112: Public-transport type passenger motor vehicles,equals
 passenger car,49113: Motor cars and other motor vehicles principally designed for the transport of persons (except public-transport[…],contains
@@ -62,6 +67,7 @@ petroleum refinery,53290: Other civil engineering works,equals
 "pipeline, for hydrogen distribution",53251: Local pipelines,equals
 "pipeline, for hydrogen transmission",53251: Local pipelines,equals
 plant construction,53269: Other constructions for manufacturing,contains
+sabatier reaction methanation unit,53269: Other constructions for manufacturing,equals
 "syngas, from biomass gasification","12020: Natural gas, liquefied or in the gaseous state",equals
 "syngas, from biomass gasification, pre, pipeline 200km, storage 1000m","12020: Natural gas, liquefied or in the gaseous state",equals
 "syngas, from biomass gasification, pre, pipeline 400km, storage 3000m","12020: Natural gas, liquefied or in the gaseous state",equals
@@ -69,6 +75,7 @@ plant construction,53269: Other constructions for manufacturing,contains
 "syngas, RWGS, Production, for Fischer Tropsch process, hydrogen from electrolysis","12020: Natural gas, liquefied or in the gaseous state",equals
 synthetic gas factory,53269: Other constructions for manufacturing,equals
 tank construction,53269: Other constructions for manufacturing,contains
+tap water,18000: Natural water,contains
 "transport, freight, lorry",6511: Road transport services of freight,contains
 "transport, passenger bus",64: Passenger transport services,contains
 "transport, passenger car","64119: Other land transportation services of passengers, n.e.c.",contains
