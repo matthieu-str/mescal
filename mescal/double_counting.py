@@ -266,12 +266,13 @@ def background_search(act, k, k_lim, amount, explore_type, ES_inputs, db, db_dic
                                     # the activity will be added for double counting
                                 else:
                                     # if the limit is reached, we consider the last activity for double counting removal
-                                    perform_d_c.append(
-                                        [new_act['name'], new_act['code'], amount * flow['amount'], k + 1, ES_inputs])
+                                    perform_d_c.append([new_act['name'], new_act['code'],
+                                                        amount*flow['amount'], k+1, ES_inputs])
                             else:
                                 raise ValueError(f"No CPC cat: ({techno_act['database']}, {techno_act['code']})")
                         else:
                             raise ValueError(f"No CPC cat: ({techno_act['database']}, {techno_act['code']})")
+        return perform_d_c, db, db_dict_code, db_dict_name
 
     else:  # the activity is not a market, thus it is added to the list for double-counting removal
         perform_d_c.append([act['name'], act['code'], amount, k, ES_inputs])

@@ -1,17 +1,17 @@
 Name,Specifics,Amount
-DIRECT_USAGE ,No construction,N/A
-DOGR ,No construction,N/A
-EOR ,No construction,N/A
-DEEP_SALINE ,No construction,N/A
-MINES_STORAGE ,No construction,N/A
+DIRECT_USAGE,No construction,N/A
+DOGR,No construction,N/A
+EOR,No construction,N/A
+DEEP_SALINE,No construction,N/A
+MINES_STORAGE,No construction,N/A
 UNMINEABLE_COAL_SEAM,No construction,N/A
-ALKALINE_ELECTROLYSIS ,Decommissioning,N/A
-PEM_ELECTROLYSIS ,Decommissioning,N/A
-SOEC_ELECTROLYSIS ,Decommissioning,N/A
-DAC_HT ,Decommissioning,N/A
+ALKALINE_ELECTROLYSIS,Decommissioning,N/A
+PEM_ELECTROLYSIS,Decommissioning,N/A
+SOEC_ELECTROLYSIS,Decommissioning,N/A
+DAC_HT,Decommissioning,N/A
 DAC_LT,Decommissioning,N/A
-AEC_OG ,Decommissioning,N/A
-PEMEC_OG ,Decommissioning,N/A
+AEC_OG,Decommissioning,N/A
+PEMEC_OG,Decommissioning,N/A
 SOEC_OG,Decommissioning,N/A
 MOB_PUBLIC_SD,Mobility,N/A
 MOB_PRIVATE_SD,Mobility,N/A
@@ -32,14 +32,14 @@ HYDRO_GAS,Background search,1
 HYDRO_GAS_CHP,Background search,1
 CO2_TO_DIESEL,Background search,2
 GASIFICATION_SNG,Background search,1
-CO2_METHANOL ,Process,N/A
-ETHANOL_TO_JETFUELS ,Process,N/A
-ETHANE_OXIDATION ,Process,N/A
-METHANOL_TO_AROMATICS ,Process,N/A
-METHANOL_TO_OLEFINS ,Process,N/A
-PYROLYSIS ,Process,N/A
-BIOGAS_ATR ,Process,N/A
-BIOGAS_ATR_CCS ,Process,N/A
-BIOGAS_BIOMETHANE ,Process,N/A
-BIOGAS_SMR ,Process,N/A
+CO2_METHANOL,Process,N/A
+ETHANOL_TO_JETFUELS,Process,N/A
+ETHANE_OXIDATION,Process,N/A
+METHANOL_TO_AROMATICS,Process,N/A
+METHANOL_TO_OLEFINS,Process,N/A
+PYROLYSIS,Process,N/A
+BIOGAS_ATR,Process,N/A
+BIOGAS_ATR_CCS,Process,N/A
+BIOGAS_BIOMETHANE,Process,N/A
+BIOGAS_SMR,Process,N/A
 BIOGAS_SMR_CCS,Process,N/A
