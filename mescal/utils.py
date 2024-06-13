@@ -62,14 +62,15 @@ def database_list_to_dict(database_list, key):
 
 
 def get_code(db_dict_name, product, activity, region, database):
-    '''
+    """
     Get the code of an activity
     :param db_dict_name: (dict) dictionary of the LCI database with the (name, product, location, database) tuple as key
     :param product: (str) product name in the LCI database
     :param activity: (str) activity name in the LCI database
     :param region: (str) region name in the LCI database
+    :param database: (str) name of the LCI database
     :return: (str) activity code in the LCI database
-    '''
+    """
 
     ds = db_dict_name[(activity, product, region, database)]
 
@@ -81,10 +82,10 @@ def get_code(db_dict_name, product, activity, region, database):
 
 
 def random_code():
-    '''
+    """
     Create a random code
     :return: (str) code
-    '''
+    """
     length = 32
     code_rand = ''.join(random.choices(string.ascii_lowercase + string.digits, k=length))
     return code_rand

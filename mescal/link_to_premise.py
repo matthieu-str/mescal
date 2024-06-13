@@ -26,7 +26,7 @@ def create_complementary_database(df_mapping, premise_db, name_complement_db):
     for i in range(len(df_mapping)):
 
         esm_tech_name = df_mapping.Name.iloc[i]
-        type = df_mapping.Type.iloc[i]
+        act_type = df_mapping.Type.iloc[i]
         product = df_mapping.Product.iloc[i]
         activity = df_mapping.Activity.iloc[i]
         region = df_mapping.Location.iloc[i]
@@ -52,27 +52,27 @@ def create_complementary_database(df_mapping, premise_db, name_complement_db):
                 premise_db_dict_name[(new_activity, new_product, region, name_premise_db)]
 
             except KeyError:
-                print(f"No inventory in the premise database for {esm_tech_name, type}")
-                complement_premise.append((esm_tech_name, type))
-                tech_premise.loc[i] = [esm_tech_name, type, product, activity, region, database]
+                print(f"No inventory in the premise database for {esm_tech_name, act_type}")
+                complement_premise.append((esm_tech_name, act_type))
+                tech_premise.loc[i] = [esm_tech_name, act_type, product, activity, region, database]
 
             else:
-                tech_premise.loc[i] = [esm_tech_name, type, new_product, new_activity, region, name_premise_db]
+                tech_premise.loc[i] = [esm_tech_name, act_type, new_product, new_activity, region, name_premise_db]
 
         else:
-            tech_premise.loc[i] = [esm_tech_name, type, new_product, new_activity, region, name_premise_db]
+            tech_premise.loc[i] = [esm_tech_name, act_type, new_product, new_activity, region, name_premise_db]
 
     for i in range(len(complement_premise)):
         esm_tech_name = complement_premise[i][0]
-        type = complement_premise[i][1]
+        act_type = complement_premise[i][1]
         activity = tech_premise[(tech_premise.Name == esm_tech_name)
-                                & (tech_premise.Type == type)].Activity.iloc[0]
+                                & (tech_premise.Type == act_type)].Activity.iloc[0]
         product = tech_premise[(tech_premise.Name == esm_tech_name)
-                               & (tech_premise.Type == type)].Product.iloc[0]
+                               & (tech_premise.Type == act_type)].Product.iloc[0]
         region = tech_premise[(tech_premise.Name == esm_tech_name)
-                              & (tech_premise.Type == type)].Location.iloc[0]
+                              & (tech_premise.Type == act_type)].Location.iloc[0]
         database = tech_premise[(tech_premise.Name == esm_tech_name)
-                                & (tech_premise.Type == type)].Database.iloc[0]
+                                & (tech_premise.Type == act_type)].Database.iloc[0]
 
         act = base_db_dict_name[(activity, product, region, database)]
 
@@ -103,16 +103,16 @@ def create_complementary_database(df_mapping, premise_db, name_complement_db):
 
     for i in range(len(tech_premise)):
         esm_tech_name = tech_premise.Name.iloc[i]
-        type = tech_premise.Type.iloc[i]
+        act_type = tech_premise.Type.iloc[i]
         product = tech_premise.Product.iloc[i]
         activity = tech_premise.Activity.iloc[i]
         region = tech_premise.Location.iloc[i]
         database = tech_premise.Database.iloc[i]
 
         if database == name_premise_db:
-            tech_premise_adjusted.loc[i] = [esm_tech_name, type, product, activity, region, database]
+            tech_premise_adjusted.loc[i] = [esm_tech_name, act_type, product, activity, region, database]
         else:
-            tech_premise_adjusted.loc[i] = [esm_tech_name, type, product, activity, region, name_complement_db]
+            tech_premise_adjusted.loc[i] = [esm_tech_name, act_type, product, activity, region, name_complement_db]
 
     return tech_premise_adjusted
 

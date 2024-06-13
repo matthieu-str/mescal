@@ -2,18 +2,18 @@ import wurst
 from .utils import write_wurst_database_to_brightway
 
 
-def add_CPC_category(db, product, CPC_category, type):
+def add_CPC_category(db, product, CPC_category, search_type):
     """
     Add a CPC category to a set of activities in a wurst database
     :param db: (list of dict) LCI database
     :param product: (str) name of the product
     :param CPC_category: (str) CPC category
-    :param type: (str) type of search: 'equals' or 'contains'
+    :param search_type: (str) type of search: 'equals' or 'contains'
     :return: (list of dict) updated LCI database
     """
-    if type == 'equals':
+    if search_type == 'equals':
         act_list = [a for a in wurst.get_many(db, *[wurst.searching.equals("reference product", product)])]
-    elif type == 'contains':
+    elif search_type == 'contains':
         act_list = [a for a in wurst.get_many(db, *[wurst.searching.contains("reference product", product)])]
     else:
         raise ValueError('Type must be either "equals" or "contains"')
@@ -41,7 +41,7 @@ def create_new_database_with_CPC_categories(db, new_db_name, mapping_product_to_
     for i in range(len(mapping_product_to_CPC)):
         product = mapping_product_to_CPC.Product.iloc[i]
         CPC_category = mapping_product_to_CPC.CPC.iloc[i]
-        type = mapping_product_to_CPC.Type.iloc[i]
-        db = add_CPC_category(db, product, CPC_category, type)
+        search_type = mapping_product_to_CPC.Type.iloc[i]
+        db = add_CPC_category(db, product, CPC_category, search_type)
 
     write_wurst_database_to_brightway(db, new_db_name)

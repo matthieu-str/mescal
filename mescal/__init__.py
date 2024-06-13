@@ -9,6 +9,12 @@ __all__ = (
     "concatenate_databases",
     "create_complementary_database",
     "create_new_database_with_CPC_categories",
+    "get_technosphere_flows",
+    "get_production_flow",
+    "get_biosphere_flows",
+    "get_code",
+    "random_code",
+    "database_list_to_dict",
 )
 
 __version__ = "0.0.1"
