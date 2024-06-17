@@ -16,6 +16,7 @@ __all__ = (
     "random_code",
     "database_list_to_dict",
     "create_esm_database",
+    "compute_impact_scores",
 )
 
 __version__ = "0.0.1"
@@ -25,3 +26,4 @@ from .utils import *
 from .link_to_premise import *
 from .CPC import *
 from .double_counting import *
+from.impact_assessment import *
