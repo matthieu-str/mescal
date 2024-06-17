@@ -5,8 +5,7 @@ import ast
 
 
 def create_new_activity(name, act_type, current_code, new_code, database, db, db_dict_name, db_dict_code, esm_db_name,
-                        regionalize_foregrounds=False, mismatch_regions=None, target_region=None,
-                        locations_ranking=None):
+                        regionalize_foregrounds, mismatch_regions, target_region, locations_ranking):
     """
     Create a new LCI dataset for the esm technology or resource
     :param name: (str) name of the technology or resource in the esm
@@ -50,7 +49,8 @@ def create_new_activity(name, act_type, current_code, new_code, database, db, db
     return new_ds
 
 
-def add_activities_to_database(mapping, act_type, db, db_dict_name, db_dict_code, esm_db_name):
+def add_activities_to_database(mapping, act_type, db, db_dict_name, db_dict_code, esm_db_name, regionalize_foregrounds,
+                               mismatch_regions, target_region, locations_ranking):
     mapping_type = mapping[mapping['Type'] == act_type]
     for i in range(len(mapping_type)):
         ds = create_new_activity(
@@ -62,7 +62,11 @@ def add_activities_to_database(mapping, act_type, db, db_dict_name, db_dict_code
             db=db,
             db_dict_name=db_dict_name,
             db_dict_code=db_dict_code,
-            esm_db_name=esm_db_name
+            esm_db_name=esm_db_name,
+            regionalize_foregrounds=regionalize_foregrounds,
+            mismatch_regions=mismatch_regions,
+            target_region=target_region,
+            locations_ranking=locations_ranking
         )
         db.append(ds)
     return db
@@ -390,13 +394,13 @@ def double_counting_removal(df_op, df_constr, esm_db_name, mapping_esm_flows_to_
 
             if regionalize_foregrounds:
                 regionalize_activity_foreground(
-                    new_act_op_d_c,
-                    mismatch_regions,
-                    target_region,
-                    locations_ranking,
-                    db,
-                    db_dict_code,
-                    db_dict_name
+                    act=new_act_op_d_c,
+                    mismatch_regions=mismatch_regions,
+                    target_region=target_region,
+                    locations_ranking=locations_ranking,
+                    db=db,
+                    db_dict_code=db_dict_code,
+                    db_dict_name=db_dict_name
                 )
 
             if perform_d_c[id_d_c][4] == 'all':
@@ -588,7 +592,8 @@ def add_technology_specifics(mapping_op, df_tech_specifics):
 
 
 def create_esm_database(mapping, model, tech_specifics, technology_compositions, mapping_esm_flows_to_CPC_cat,
-                        main_database, esm_db_name, results_path_file):
+                        main_database, esm_db_name, results_path_file, regionalize_foregrounds=False,
+                        mismatch_regions=None, target_region=None, locations_ranking=None):
     db_dict_name = database_list_to_dict(main_database, 'name')
     db_dict_code = database_list_to_dict(main_database, 'code')
 
@@ -622,9 +627,11 @@ def create_esm_database(mapping, model, tech_specifics, technology_compositions,
 
     # Add construction and resource activities to the database (which do not need double counting removal)
     main_database = add_activities_to_database(mapping, 'Construction', main_database, db_dict_name,
-                                               db_dict_code, esm_db_name)
+                                               db_dict_code, esm_db_name, regionalize_foregrounds, mismatch_regions,
+                                               target_region, locations_ranking)
     main_database = add_activities_to_database(mapping, 'Resource', main_database, db_dict_name,
-                                               db_dict_code, esm_db_name)
+                                               db_dict_code, esm_db_name, regionalize_foregrounds, mismatch_regions,
+                                               target_region, locations_ranking)
 
     main_database, db_dict_code, db_dict_name, flows_set_to_zero, ei_removal = double_counting_removal(
         df_op=mapping_op,
@@ -634,14 +641,14 @@ def create_esm_database(mapping, model, tech_specifics, technology_compositions,
         technology_compositions_dict=technology_compositions_dict,
         db=main_database,
         db_dict_code=db_dict_code,
-        db_dict_name=db_dict_code,
+        db_dict_name=db_dict_name,
         N=N,
         background_search_act=background_search_act,
         no_construction_list=no_construction_list,
-        regionalize_foregrounds=False,
-        mismatch_regions=None,
-        target_region=None,
-        locations_ranking=None
+        regionalize_foregrounds=regionalize_foregrounds,
+        mismatch_regions=mismatch_regions,
+        target_region=target_region,
+        locations_ranking=locations_ranking
     )
 
     esm_db = [act for act in main_database if act['database'] == esm_db_name]

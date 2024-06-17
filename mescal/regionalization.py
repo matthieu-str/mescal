@@ -7,7 +7,7 @@ def regionalize_activity_foreground(act, mismatch_regions, target_region, locati
 
     if act['location'] in mismatch_regions:  # if we are not satisfied with the current location
 
-        act['comment'] = f'This LCI dataset has been adapted to {target_region}. ' + act['comment']
+        act['comment'] = f'This LCI dataset has been adapted to {target_region}. ' + act.get('comment', '')
         act['location'] = target_region
         prod_flow = get_production_flow(act)
         prod_flow['location'] = target_region
