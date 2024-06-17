@@ -183,7 +183,7 @@ def background_search(act, k, k_lim, amount, explore_type, ES_inputs, db, db_dic
                         if 'CPC' in dict(techno_act['classifications']):
                             CPC_cat_new = dict(techno_act['classifications'])['CPC']
                             if CPC_cat == CPC_cat_new:
-                                # Modify and save the activity in energyscope database
+                                # Modify and save the activity in the esm database
                                 new_act = copy.deepcopy(techno_act)
                                 new_code = random_code()
                                 new_act['database'] = esm_db_name
@@ -217,6 +217,8 @@ def background_search(act, k, k_lim, amount, explore_type, ES_inputs, db, db_dic
                                     # adding 1 to the current depth k and multiply amount by the flow's amount
                                 else:
                                     # if the limit is reached, we consider the last activity for double counting removal
+                                    new_act['comment'] = (f"Subject to double-counting removal ({explore_type}). "
+                                                          + new_act.get('comment', ''))
                                     perform_d_c.append(
                                         [new_act['name'], new_act['code'], amount * flow['amount'], k + 1, ES_inputs]
                                     )
@@ -266,6 +268,8 @@ def background_search(act, k, k_lim, amount, explore_type, ES_inputs, db, db_dic
                                     # the activity will be added for double counting
                                 else:
                                     # if the limit is reached, we consider the last activity for double counting removal
+                                    new_act['comment'] = (f"Subject to double-counting removal ({explore_type}). "
+                                                          + new_act.get('comment', ''))
                                     perform_d_c.append([new_act['name'], new_act['code'],
                                                         amount*flow['amount'], k+1, ES_inputs])
                             else:
@@ -275,6 +279,7 @@ def background_search(act, k, k_lim, amount, explore_type, ES_inputs, db, db_dic
         return perform_d_c, db, db_dict_code, db_dict_name
 
     else:  # the activity is not a market, thus it is added to the list for double-counting removal
+        act['comment'] = f"Subject to double-counting removal ({explore_type}). " + act.get('comment', '')
         perform_d_c.append([act['name'], act['code'], amount, k, ES_inputs])
         return perform_d_c, db, db_dict_code, db_dict_name
 
@@ -395,13 +400,13 @@ def double_counting_removal(df_op, df_constr, esm_db_name, mapping_esm_flows_to_
                 )
 
             if perform_d_c[id_d_c][4] == 'all':
-                # list of inputs in Energyscope (i.e., negative flows in layers_in_out)
+                # list of inputs in the ESM (i.e., negative flows in layers_in_out)
                 ES_inputs = list(df_op.iloc[:, N:].iloc[i][df_op.iloc[:, N:].iloc[i] < 0].index)
             else:
                 ES_inputs = perform_d_c[id_d_c][4]
 
             # CPCs corresponding to the ESM list of inputs
-            CPC_inputs = list(mapping_esm_flows_to_CPC_dict[input] for input in ES_inputs)
+            CPC_inputs = list(mapping_esm_flows_to_CPC_dict[inp] for inp in ES_inputs)
             CPC_inputs = [item for sublist in CPC_inputs for item in sublist]  # flatten the list of lists
 
             # Creating the list containing the CPCs of all technosphere flows of the activity
@@ -425,7 +430,7 @@ def double_counting_removal(df_op, df_constr, esm_db_name, mapping_esm_flows_to_
                 else:
                     technosphere_inputs_CPC.append('None')
 
-            # Finding the indices of technosphere flows that are also in Energyscope's inputs
+            # Finding the indices of technosphere flows that are also in the ESM inputs
             # (i.e., flows that we want to put to zero)
             set_CPC_inputs = set(CPC_inputs)
             id_technosphere_inputs_zero = [i for i, e in enumerate(technosphere_inputs_CPC) if e in set_CPC_inputs]
@@ -496,7 +501,8 @@ def double_counting_removal(df_op, df_constr, esm_db_name, mapping_esm_flows_to_
                 # Setting the amount to zero
                 flow['amount'] = 0
 
-            # Go deeper in the process tree if some flows were not found
+            # Go deeper in the process tree if some flows were not found.
+            # This is not applied to construction datasets, which should be found the foreground inventory.
             missing_ES_inputs = []
             for cat in ES_inputs:
                 if ((tech in list(background_search_act.keys()))
@@ -582,7 +588,7 @@ def add_technology_specifics(mapping_op, df_tech_specifics):
 
 
 def create_esm_database(mapping, model, tech_specifics, technology_compositions, mapping_esm_flows_to_CPC_cat,
-                        main_database, esm_db_name):
+                        main_database, esm_db_name, results_path_file):
     db_dict_name = database_list_to_dict(main_database, 'name')
     db_dict_code = database_list_to_dict(main_database, 'code')
 
@@ -659,6 +665,6 @@ def create_esm_database(mapping, model, tech_specifics, technology_compositions,
 
     double_counting_removal_amount = pd.DataFrame.from_dict(ei_removal_amount, orient='index')
     double_counting_removal_count = pd.DataFrame.from_dict(ei_removal_count, orient='index')
-    double_counting_removal_amount.to_csv("energyscope_data/results/double_counting_removal.csv")
-    double_counting_removal_count.to_csv("energyscope_data/results/double_counting_removal_count.csv")
-    df_flows_set_to_zero.to_csv("energyscope_data/results/removed_flows_list.csv", index=False)
+    double_counting_removal_amount.to_csv(f"{results_path_file}double_counting_removal.csv")
+    double_counting_removal_count.to_csv(f"{results_path_file}double_counting_removal_count.csv")
+    df_flows_set_to_zero.to_csv(f"{results_path_file}removed_flows_list.csv", index=False)
