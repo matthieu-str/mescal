@@ -36,8 +36,8 @@ def lcia_methods_short_names(lcia_method: str) -> str:
         raise ValueError(f"Unknown LCIA method: {lcia_method}")
 
 
-def normalize_lca_metrics(path: str, R: pd.DataFrame, f_norm: float, mip_gap: float, refactor: float, lcia_method: str,
-                          impact_abbrev: pd.DataFrame, biogenic: bool = False) -> None:
+def normalize_lca_metrics(R: pd.DataFrame, f_norm: float, mip_gap: float, refactor: float, lcia_method: str,
+                          impact_abbrev: pd.DataFrame, biogenic: bool = False, path: str = 'results/') -> None:
     """
     Create a .dat file containing the normalized LCA metrics for AMPL and a csv file containing the normalization
     factors

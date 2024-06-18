@@ -670,7 +670,7 @@ def add_technology_specifics(mapping_op: pd.DataFrame, df_tech_specifics: pd.Dat
 
 def create_esm_database(mapping: pd.DataFrame, model: pd.DataFrame, tech_specifics: pd.DataFrame,
                         technology_compositions: pd.DataFrame, mapping_esm_flows_to_CPC_cat: pd.DataFrame,
-                        main_database: list[dict], esm_db_name: str, results_path_file: str,
+                        main_database: list[dict], esm_db_name: str, results_path_file: str = 'results/',
                         regionalize_foregrounds: bool = False, mismatch_regions: list[str] = None,
                         target_region: str = None, locations_ranking: list[str] = None) -> None:
     """

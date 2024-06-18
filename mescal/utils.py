@@ -6,7 +6,7 @@ import bw2data as bd
 from mescal.caching import cache_database, load_db
 
 
-def load_extract_db(db_name: str, create_pickle: bool = True) -> list[dict]:
+def load_extract_db(db_name: str, create_pickle: bool = False) -> list[dict]:
     """
     Load or extract a database
     :param db_name: (str) name of the database
@@ -24,19 +24,20 @@ def load_extract_db(db_name: str, create_pickle: bool = True) -> list[dict]:
     return db
 
 
-def concatenate_databases(database_list: list[str]) -> list[dict]:
+def concatenate_databases(database_list: list[str], create_pickle: bool = False) -> list[dict]:
     """
     Concatenates databases in a list of dictionaries (including dependencies)
     :param database_list: (list of str) list of LCI database names
+    :param create_pickle: (bool) if True, create a pickle file to store the database
     :return: (list of dict) list of dictionaries of the concatenated databases
     """
     db = []
     for db_name in database_list:
-        db += load_extract_db(db_name)
+        db += load_extract_db(db_name, create_pickle)
         dependencies = list(set([a['exchanges'][i]['database'] for a in db for i in range(len(a['exchanges']))]))
         for dep_db_name in dependencies:
             if (dep_db_name not in database_list) & (dep_db_name != 'biosphere3'):
-                db += load_extract_db(dep_db_name)
+                db += load_extract_db(dep_db_name, create_pickle)
                 database_list.append(dep_db_name)
             else:
                 pass
