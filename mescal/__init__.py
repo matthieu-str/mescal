@@ -17,6 +17,7 @@ __all__ = (
     "database_list_to_dict",
     "create_esm_database",
     "compute_impact_scores",
+    "normalize_lca_metrics",
 )
 
 __version__ = "0.0.1"
@@ -26,4 +27,5 @@ from .utils import *
 from .link_to_premise import *
 from .CPC import *
 from .double_counting import *
-from.impact_assessment import *
+from .impact_assessment import *
+from .normalization import *
