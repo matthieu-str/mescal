@@ -2,6 +2,7 @@ from .utils import *
 import bw2calc as bc
 import pandas as pd
 import ast
+pd.options.mode.chained_assignment = None  # default='warn'
 
 
 def get_impact_categories(methods):
@@ -11,6 +12,13 @@ def get_impact_categories(methods):
     :return: (list of str) list of impact categories
     """
     return [i for i in bd.methods if i[0] in methods]
+
+
+def is_empty(row, technology_compositions):
+    if (row.Name not in list(technology_compositions.Name)) & (pd.isna(row.LCA)):
+        return row.ESM
+    else:
+        return row.LCA
 
 
 def compute_impact_scores(esm_db, mapping, technology_compositions, methods, unit_conversion, lifetime=None):
@@ -53,12 +61,15 @@ def compute_impact_scores(esm_db, mapping, technology_compositions, methods, uni
     R_tech_constr = R[list(mapping[mapping.Type == 'Construction'].New_code)]
     R_res = R[list(mapping[mapping.Type == 'Resource'].New_code)]
 
-    lifetime_lca_code = pd.merge(mapping[mapping.Type == 'Construction'][['Name', 'New_code']], lifetime, on='Name',
-                                 how='left')
-    lifetime_lca_code = pd.Series(data=lifetime_lca_code.LCA.values, index=lifetime_lca_code.New_code)
+    if lifetime is None:
+        pass
+    else:
+        lifetime['LCA'] = lifetime.apply(lambda row: is_empty(row, technology_compositions), axis=1)
+        lifetime_lca_code = pd.merge(mapping[mapping.Type == 'Construction'][['Name', 'New_code']], lifetime, on='Name')
+        lifetime_lca_code = pd.Series(data=lifetime_lca_code.LCA.values, index=lifetime_lca_code.New_code)
 
-    # divide each column (construction only) by its lifetime
-    R_tech_constr = R_tech_constr / lifetime_lca_code[R_tech_constr.columns]
+        # divide each column (construction only) by its lifetime
+        R_tech_constr = R_tech_constr / lifetime_lca_code[R_tech_constr.columns]
 
     # Reading the list of subcomponents as a list (and not as a string)
     technology_compositions.Components = technology_compositions.apply(lambda x: ast.literal_eval(x.Components), axis=1)
@@ -72,7 +83,7 @@ def compute_impact_scores(esm_db, mapping, technology_compositions, methods, uni
 
     for i in range(len(technology_compositions)):
         for j in range(len(technology_compositions.Components.iloc[i])):
-            technology_compositions.loc[i, 'Component_' + str(j)] = technology_compositions.Components.iloc[i][j]
+            technology_compositions.loc[i, 'Component_' + str(j+1)] = technology_compositions.Components.iloc[i][j]
 
     # Find the new codes of the subcomponents
     for i in range(1, N_subcomp_max + 1):
@@ -88,7 +99,7 @@ def compute_impact_scores(esm_db, mapping, technology_compositions, methods, uni
         tech_name = technology_compositions.iloc[i].Name
         subcomp_list = technology_compositions.iloc[i].Components
         new_code_composition = technology_compositions.iloc[i].New_code
-        R_tech_constr[new_code_composition] = len(methods) * [0]
+        R_tech_constr[new_code_composition] = len(impact_categories) * [0]  # initialize the new column
 
         for j in range(1, len(subcomp_list) + 1):
             R_tech_constr[new_code_composition] += R_tech_constr[
@@ -96,29 +107,27 @@ def compute_impact_scores(esm_db, mapping, technology_compositions, methods, uni
             ]  # sum up the impacts of the subcomponents
 
         R_tech_constr[new_code_composition] *= float(
-            unit_conversion[(unit_conversion.Name == tech_name) & (unit_conversion.Type == 'Construction')].Value
-        )  # unit conversion
+            unit_conversion[(unit_conversion.Name == tech_name)
+                            & (unit_conversion.Type == 'Construction')].Value.iloc[0]
+        )  # multiply the composition column with its unit conversion factor
 
         R_tech_constr.drop(columns=[technology_compositions.iloc[i][f'New_code_component_{j}']
                                     for j in range(1, len(subcomp_list) + 1)], inplace=True)
         # remove subcomponents from dataframe
 
-    lifetime_esm_code = pd.merge(mapping[mapping.Type == 'Construction'][['Name', 'New_code']], lifetime, on='Name',
-                                 how='left')
-    lifetime_esm_code = pd.Series(data=lifetime_esm_code.ESM.values, index=lifetime_esm_code.New_code)
-
-    R_tech_constr = R_tech_constr * lifetime_esm_code[R_tech_constr.columns]  # multiply by lifetime of ESM
+    if lifetime is None:
+        pass
+    else:
+        lifetime_esm_code = pd.merge(pd.concat([mapping[mapping.Type == 'Construction'][['Name', 'New_code']],
+                                                technology_compositions[['Name', 'New_code']]]), lifetime, on='Name')
+        lifetime_esm_code = pd.Series(data=lifetime_esm_code.ESM.values, index=lifetime_esm_code.New_code)
+        R_tech_constr = R_tech_constr * lifetime_esm_code[R_tech_constr.columns]  # multiply by lifetime of ESM
 
     name_to_new_code = pd.concat([mapping[['Name', 'Type', 'New_code']],
                                  technology_compositions[['Name', 'Type', 'New_code']]])
 
-    R_long_constr = R_tech_constr.melt(ignore_index=False, var_name='New_code')
-    R_long_constr = R_long_constr.reset_index().merge(right=name_to_new_code, on='New_code')
-    R_long_op = R_tech_op.melt(ignore_index=False, var_name='New_code')
-    R_long_op = R_long_op.reset_index().merge(right=name_to_new_code, on='New_code')
-    R_long_res = R_res.melt(ignore_index=False, var_name='New_code')
-    R_long_res = R_long_res.reset_index().merge(right=name_to_new_code, on='New_code')
+    R_long = pd.concat([R_tech_constr, R_tech_op, R_res], axis=1).melt(ignore_index=False, var_name='New_code')
+    R_long = R_long.reset_index().merge(right=name_to_new_code, on='New_code')
+    R_long.rename(columns={'index': 'Impact_category', 'value': 'Value'}, inplace=True)
 
-    R_long_constr.to_csv("results/R_constr.csv")
-    R_long_op.to_csv("results/R_op.csv")
-    R_long_res.to_csv("results/R_res.csv")
+    return R_long
