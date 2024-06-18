@@ -7,10 +7,10 @@ def create_complementary_database(df_mapping: pd.DataFrame, premise_db: list[dic
                                   name_complement_db: str) -> pd.DataFrame:
     """
     Relink the technologies to the premise database
-    :param df_mapping: (pandas dataframe) dataframe with the mapping of the technologies and resources
+    :param df_mapping: (pd.Dataframe) dataframe with the mapping of the technologies and resources
     :param premise_db: (list of dict) premise database
     :param name_complement_db: (str) name of the complementary database
-    :return: (pandas dataframe) dataframe with the mapping of the technologies and resources linked to the premise
+    :return: (pd.Dataframe) dataframe with the mapping of the technologies and resources linked to the premise
     database
     """
 
