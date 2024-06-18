@@ -18,6 +18,7 @@ __all__ = (
     "create_esm_database",
     "compute_impact_scores",
     "normalize_lca_metrics",
+    "gen_lcia_obj",
 )
 
 __version__ = "0.0.1"
@@ -29,3 +30,4 @@ from .CPC import *
 from .double_counting import *
 from .impact_assessment import *
 from .normalization import *
+from .generate_lcia_obj_ampl import *
