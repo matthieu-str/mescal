@@ -5,7 +5,7 @@ import ast
 pd.options.mode.chained_assignment = None  # default='warn'
 
 
-def get_impact_categories(methods):
+def get_impact_categories(methods: list[str]) -> list[str]:
     """
     Get all impact categories from a list of methods
     :param methods: (list of str) list of methods
@@ -14,14 +14,32 @@ def get_impact_categories(methods):
     return [i for i in bd.methods if i[0] in methods]
 
 
-def is_empty(row, technology_compositions):
+def is_empty(row: pd.Series, technology_compositions: pd.DataFrame) -> float:
+    """
+    Fill empty cells with the ESM value if the technology is not in the technology compositions file
+    :param row: (pd.Series) row of the lifetime dataframe
+    :param technology_compositions: (pd.DataFrame) technology compositions dataframe
+    :return: (float) lifetime value
+    """
     if (row.Name not in list(technology_compositions.Name)) & (pd.isna(row.LCA)):
         return row.ESM
     else:
         return row.LCA
 
 
-def compute_impact_scores(esm_db, mapping, technology_compositions, methods, unit_conversion, lifetime=None):
+def compute_impact_scores(esm_db: list[dict], mapping: pd.DataFrame, technology_compositions: pd.DataFrame,
+                          methods: list[str], unit_conversion: pd.DataFrame,
+                          lifetime: pd.DataFrame = None) -> pd.DataFrame:
+    """
+    Compute the impact scores of the technologies and resources
+    :param esm_db: (list of dict) LCI database of the ESM
+    :param mapping: (pd.DataFrame) mapping file
+    :param technology_compositions: (pd.DataFrame) technology compositions file
+    :param methods: (list of str) list of impact assessment methods
+    :param unit_conversion: (pd.DataFrame) unit conversion file
+    :param lifetime: (pd.DataFrame) lifetime file
+    :return: (pd.DataFrame) impact scores of the technologies and resources for all impact categories in the methods
+    """
 
     esm_db_name = esm_db[0]['database']
     esm_db_dict_code = database_list_to_dict(esm_db, 'code')

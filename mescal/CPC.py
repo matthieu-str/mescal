@@ -1,8 +1,9 @@
 import wurst
+import pandas as pd
 from .utils import write_wurst_database_to_brightway
 
 
-def add_CPC_category(db, name, CPC_category, search_type, key):
+def add_CPC_category(db: list[dict], name: str, CPC_category: str, search_type: str, key: str) -> list[dict]:
     """
     Add a CPC category to a set of activities in a wurst database
     :param db: (list of dict) LCI database
@@ -31,7 +32,8 @@ def add_CPC_category(db, name, CPC_category, search_type, key):
     return db
 
 
-def create_new_database_with_CPC_categories(db, new_db_name, mapping_product_to_CPC):
+def create_new_database_with_CPC_categories(db: list[dict], new_db_name: str,
+                                            mapping_product_to_CPC: pd.DataFrame) -> None:
     """
     Create a new database with additional CPC categories
     :param db: (list of dict) LCI database

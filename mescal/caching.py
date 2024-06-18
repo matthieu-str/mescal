@@ -4,7 +4,7 @@ from pathlib import Path
 DIR_DATABASE_CACHE = Path.cwd() / "export" / "cache"
 
 
-def cache_database(database, database_name):
+def cache_database(database: list[dict], database_name: str) -> None:
     """
     Create a pickle file to store the database
     :param database: (list of dict) database to store
@@ -17,7 +17,7 @@ def cache_database(database, database_name):
         print(f"{database_name}.pickle created!")
 
 
-def load_db(database_name, filepath=None):
+def load_db(database_name: str, filepath: str = None) -> list[dict]:
     """
     Load a database from a pickle file
     :param database_name: (str) name of the database

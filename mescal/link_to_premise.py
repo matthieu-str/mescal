@@ -3,7 +3,8 @@ import copy
 from mescal.utils import *
 
 
-def create_complementary_database(df_mapping, premise_db, name_complement_db):
+def create_complementary_database(df_mapping: pd.DataFrame, premise_db: list[dict],
+                                  name_complement_db: str) -> pd.DataFrame:
     """
     Relink the technologies to the premise database
     :param df_mapping: (pandas dataframe) dataframe with the mapping of the technologies and resources
@@ -117,12 +118,12 @@ def create_complementary_database(df_mapping, premise_db, name_complement_db):
     return tech_premise_adjusted
 
 
-def relink(name_complement_db, base_db, premise_db):
+def relink(name_complement_db: str, base_db: list[dict], premise_db: list[dict]) -> tuple[list[dict], list[dict]]:
     """
     :param name_complement_db: (str) name of the complementary database
     :param base_db: (list of dictionaries) list of activities in the base database
     :param premise_db: (list of dictionaries) list of activities in the premise database
-    :return: (list of dict) list of unlinked flows, (list of dict) updated premise database
+    :return: (tuple) (list of dict) list of unlinked flows, (list of dict) updated premise database
     """
 
     name_premise_db = premise_db[0]['database']

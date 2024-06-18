@@ -1,10 +1,12 @@
+import pandas as pd
 import wurst
 
 
-def change_location_activity(esm_tech_name, product, activity, database, locations_ranking, db, esm_region):
+def change_location_activity(esm_tech_name: str or None, product: str, activity: str, database: str,
+                             locations_ranking: list[str], db: list[dict], esm_region: str) -> str:
     """
     Changes the location of a process given a ranking of preferred locations
-    :param esm_tech_name: (str) name of the technology or resource in the energy system model
+    :param esm_tech_name: (str or None) name of the technology or resource in the energy system model
     :param product: (str) name of the product in the LCI database
     :param activity: (str) name of the activity in the LCI database
     :param database: (str) name of the database in the brightway project
@@ -48,14 +50,15 @@ def change_location_activity(esm_tech_name, product, activity, database, locatio
     raise ValueError(f'No location found in your ranking for {esm_tech_name} - {product} - {activity} - {database}')
 
 
-def change_location_mapping_file(df_mapping, locations_ranking, database, esm_region):
+def change_location_mapping_file(df_mapping: pd.DataFrame, locations_ranking: list[str],
+                                 database: list[dict], esm_region: str) -> pd.DataFrame:
     """
     Changes the location of a process given a mapping file
-    :param df_mapping: (pandas dataframe) dataframe with the mapping of the technologies and resources
+    :param df_mapping: (pd.Dataframe) dataframe with the mapping of the technologies and resources
     :param locations_ranking: (list of str) list of preferred locations by order of preference
     :param database: (list of dict) dictionary of the LCI database
     :param esm_region: (str) name of the modeled region in the energy system model
-    :return: (pandas dataframe) dataframe with the mapping of the technologies and resources with the new location
+    :return: (pd.Dataframe) dataframe with the mapping of the technologies and resources with the new location
     """
     df_mapping['Location'] = df_mapping.apply(lambda row: change_location_activity(
         esm_tech_name=row['Name'],

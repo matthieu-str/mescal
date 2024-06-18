@@ -4,15 +4,16 @@ from .regionalization import *
 import ast
 
 
-def create_new_activity(name, act_type, current_code, new_code, database, db, db_dict_name, db_dict_code, esm_db_name,
-                        regionalize_foregrounds, mismatch_regions, target_region, locations_ranking):
+def create_new_activity(name: str, act_type: str, current_code: str, new_code: str, database_name: str, db: list[dict],
+                        db_dict_name: dict, db_dict_code: dict, esm_db_name: str, regionalize_foregrounds: bool,
+                        mismatch_regions: list[str], target_region: str, locations_ranking: list[str]) -> dict:
     """
-    Create a new LCI dataset for the esm technology or resource
+    Create a new LCI dataset for the ESM technology or resource
     :param name: (str) name of the technology or resource in the esm
     :param act_type: (str) can be 'Construction', 'Operation', or 'Resource'
     :param current_code: (str) code of the activity in the original LCI database
     :param new_code: (str) code of the new activity in the new LCI database
-    :param database: (str) name of the original LCI database
+    :param database_name: (str) name of the original LCI database
     :param db: (list of dict) LCI database
     :param db_dict_name: (dict) dictionary original LCI database with (name, product, location, database) as key
     :param db_dict_code: (dict) dictionary original LCI database with (database, code) as key
@@ -24,7 +25,7 @@ def create_new_activity(name, act_type, current_code, new_code, database, db, db
     :return: (dict) new LCI dataset for the technology or resource
     """
 
-    ds = db_dict_code[(database, current_code)]
+    ds = db_dict_code[(database_name, current_code)]
 
     new_ds = copy.deepcopy(ds)
     new_ds['name'] = f'{name}, {act_type}'
@@ -49,8 +50,24 @@ def create_new_activity(name, act_type, current_code, new_code, database, db, db
     return new_ds
 
 
-def add_activities_to_database(mapping, act_type, db, db_dict_name, db_dict_code, esm_db_name, regionalize_foregrounds,
-                               mismatch_regions, target_region, locations_ranking):
+def add_activities_to_database(mapping: pd.DataFrame, act_type: str, db: list[dict], db_dict_name: dict,
+                               db_dict_code: dict, esm_db_name: str, regionalize_foregrounds: bool,
+                               mismatch_regions: list[str], target_region: str,
+                               locations_ranking: list[str]) -> list[dict]:
+    """
+    Add new activities to the LCI database
+    :param mapping: (pd.DataFrame) mapping file between the ESM technologies and resources and the original LCI database
+    :param act_type: (str) can be 'Construction', 'Operation', or 'Resource'
+    :param db: (list of dict) LCI database
+    :param db_dict_name: (dict) dictionary original LCI database with (name, product, location, database) as key
+    :param db_dict_code: (dict) dictionary original LCI database with (database, code) as key
+    :param esm_db_name: (str) name of the new LCI database
+    :param regionalize_foregrounds: (bool) if True, regionalize the foreground activities
+    :param mismatch_regions: (list of str) list of regions to be changed in case of regionalization
+    :param target_region: (str) target region in case of regionalization
+    :param locations_ranking: (list of str) ranking of the preferred locations in case of regionalization
+    :return: (list of dict) updated LCI database
+    """
     mapping_type = mapping[mapping['Type'] == act_type]
     for i in range(len(mapping_type)):
         ds = create_new_activity(
@@ -58,7 +75,7 @@ def add_activities_to_database(mapping, act_type, db, db_dict_name, db_dict_code
             act_type=act_type,
             current_code=mapping_type['Current_code'].iloc[i],
             new_code=mapping_type['New_code'].iloc[i],
-            database=mapping_type['Database'].iloc[i],
+            database_name=mapping_type['Database'].iloc[i],
             db=db,
             db_dict_name=db_dict_name,
             db_dict_code=db_dict_code,
@@ -72,8 +89,9 @@ def add_activities_to_database(mapping, act_type, db, db_dict_name, db_dict_code
     return db
 
 
-def background_search(act, k, k_lim, amount, explore_type, ES_inputs, db, db_dict_code, db_dict_name, esm_db_name,
-                      perform_d_c):
+def background_search(act: dict, k: int, k_lim: int, amount: float, explore_type: str, ESM_inputs: list[str] or str,
+                      db: list[dict], db_dict_code: dict, db_dict_name: dict, esm_db_name: str,
+                      perform_d_c: list[list]) -> tuple[list[list], list[dict], dict, dict]:
     """
     Explores the tree of the market activity with a recursive approach and write the activities to actually check for
     double-counting in the list perform_d_c.
@@ -82,13 +100,15 @@ def background_search(act, k, k_lim, amount, explore_type, ES_inputs, db, db_dic
     :param k_lim: (int) maximum allowed tree depth (i.e., maximum recursion depth)
     :param amount: (float) product of amounts when going down in the tree
     :param explore_type: (str) can be 'market' or 'background_removal'
-    :param ES_inputs: (list of str) list of ES flows to perform double counting removal on
+    :param ESM_inputs: (list of str) or (str) list of ES flows to perform double counting removal on
     :param db: (list of dict) LCI database
     :param db_dict_code: (dict) dictionary LCI database with (database, code) as key
     :param db_dict_name: (dict) dictionary LCI database with (name, product, location, database) as key
     :param esm_db_name: (str) name of the new LCI database
     :param perform_d_c: (list of list) list of activities to check for double counting
-    :return: (list of list) list of activities to check for double counting (updated with new activities to explore)
+    :return: (tuple) (list of list) list of activities to check for double counting (updated with new activities to
+    explore), (list of dict) updated LCI database, (dict) dictionary LCI database with (database, code) as key,
+    (dict) dictionary LCI database with (name, product, location, database) as key
     """
 
     if explore_type == 'market':
@@ -211,7 +231,7 @@ def background_search(act, k, k_lim, amount, explore_type, ES_inputs, db, db_dic
                                         k_lim,
                                         amount * flow['amount'],
                                         'market',
-                                        ES_inputs,
+                                        ESM_inputs,
                                         db,
                                         db_dict_code,
                                         db_dict_name,
@@ -224,7 +244,7 @@ def background_search(act, k, k_lim, amount, explore_type, ES_inputs, db, db_dic
                                     new_act['comment'] = (f"Subject to double-counting removal ({explore_type}). "
                                                           + new_act.get('comment', ''))
                                     perform_d_c.append(
-                                        [new_act['name'], new_act['code'], amount * flow['amount'], k + 1, ES_inputs]
+                                        [new_act['name'], new_act['code'], amount * flow['amount'], k + 1, ESM_inputs]
                                     )
                     else:
                         pass
@@ -261,7 +281,7 @@ def background_search(act, k, k_lim, amount, explore_type, ES_inputs, db, db_dic
                                         k_lim,
                                         amount * flow['amount'],
                                         'market',
-                                        ES_inputs,
+                                        ESM_inputs,
                                         db,
                                         db_dict_code,
                                         db_dict_name,
@@ -275,7 +295,7 @@ def background_search(act, k, k_lim, amount, explore_type, ES_inputs, db, db_dic
                                     new_act['comment'] = (f"Subject to double-counting removal ({explore_type}). "
                                                           + new_act.get('comment', ''))
                                     perform_d_c.append([new_act['name'], new_act['code'],
-                                                        amount*flow['amount'], k+1, ES_inputs])
+                                                        amount*flow['amount'], k+1, ESM_inputs])
                             else:
                                 raise ValueError(f"No CPC cat: ({techno_act['database']}, {techno_act['code']})")
                         else:
@@ -284,14 +304,40 @@ def background_search(act, k, k_lim, amount, explore_type, ES_inputs, db, db_dic
 
     else:  # the activity is not a market, thus it is added to the list for double-counting removal
         act['comment'] = f"Subject to double-counting removal ({explore_type}). " + act.get('comment', '')
-        perform_d_c.append([act['name'], act['code'], amount, k, ES_inputs])
+        perform_d_c.append([act['name'], act['code'], amount, k, ESM_inputs])
         return perform_d_c, db, db_dict_code, db_dict_name
 
 
-def double_counting_removal(df_op, df_constr, esm_db_name, mapping_esm_flows_to_CPC, technology_compositions_dict,
-                            db, db_dict_code, db_dict_name, N, background_search_act, no_construction_list,
-                            regionalize_foregrounds=False, mismatch_regions=None, target_region=None,
-                            locations_ranking=None):
+def double_counting_removal(df_op: pd.DataFrame, df_constr: pd.DataFrame, esm_db_name: str,
+                            mapping_esm_flows_to_CPC: pd.DataFrame, technology_compositions_dict: dict,
+                            db: list[dict], db_dict_code: dict, db_dict_name: dict, N: int,
+                            background_search_act: dict, no_construction_list: list[str],
+                            regionalize_foregrounds: bool = False, mismatch_regions: list[str] = None,
+                            target_region: str = None, locations_ranking: list[str] = None) \
+        -> tuple[list[dict], dict, dict, list[list], dict]:
+    """
+    Remove double counting in the ESM database and write it in the brightway project
+    :param df_op: (pd.DataFrame) operation activities
+    :param df_constr: (pd.DataFrame) construction activities
+    :param esm_db_name: (str) name of the new LCI database
+    :param mapping_esm_flows_to_CPC: (pd.DataFrame) mapping file between the ESM flows and the CPC categories
+    :param technology_compositions_dict: (dict) dictionary of technology compositions, with the composition name as a
+    key and the list of subcomponents as a value
+    :param db: (list of dict) LCI database
+    :param db_dict_code: (dict) dictionary LCI database with (database, code) as key
+    :param db_dict_name: (dict) dictionary LCI database with (name, product, location, database) as key
+    :param N: (int) number of columns of the original mapping file
+    :param background_search_act: (dict) dictionary of the maximum depth of the tree to explore for specific
+    technologies
+    :param no_construction_list: (list of str) list of technologies for which the construction phase is not considered
+    :param regionalize_foregrounds: (bool) if True, regionalize the foreground activities
+    :param mismatch_regions: (list of str) list of regions to be changed in case of regionalization
+    :param target_region: (str) target region in case of regionalization
+    :param locations_ranking: (list of str) ranking of the preferred locations in case of regionalization
+    :return: (list of dict) updated LCI database, (dict) dictionary LCI database with (database, code) as key,
+    (dict) dictionary LCI database with (name, product, location, database) as key,
+    (list of list) list of removed flows, (dict) dictionary of removed quantities
+    """
     # Initializing list of removed flows
     flows_set_to_zero = []
 
@@ -371,7 +417,7 @@ def double_counting_removal(df_op, df_constr, esm_db_name, mapping_esm_flows_to_
             k_lim=10,
             amount=1,
             explore_type='market',
-            ES_inputs='all',
+            ESM_inputs='all',
             db=db,
             db_dict_code=db_dict_code,
             db_dict_name=db_dict_name,
@@ -383,10 +429,9 @@ def double_counting_removal(df_op, df_constr, esm_db_name, mapping_esm_flows_to_
         prod_flow = get_production_flow(new_act_op)
         prod_flow['name'] = f'{tech}, Operation'
 
-        # M = len(perform_d_c)
         id_d_c = 0
         while id_d_c < len(perform_d_c):
-            new_act_op_d_c_name = perform_d_c[id_d_c][0]  # activity name
+
             new_act_op_d_c_code = perform_d_c[id_d_c][1]  # activity code
             new_act_op_d_c_amount = perform_d_c[id_d_c][2]  # multiplying factor as we went down in the tree
             k_deep = perform_d_c[id_d_c][3]  # depth level in the process tree
@@ -535,21 +580,39 @@ def double_counting_removal(df_op, df_constr, esm_db_name, mapping_esm_flows_to_
     return db, db_dict_code, db_dict_name, flows_set_to_zero, ei_removal
 
 
-def has_construction(row, no_construction_list):
+def has_construction(row: pd.Series, no_construction_list: list[str]) -> int:
+    """
+    Add a construction input to technologies that have a construction phase
+    :param row: (pd.Series) row of the model file
+    :param no_construction_list: (list of str) list of technologies for which the construction phase is not considered
+    :return: (int) 0 if no construction phase, -1 otherwise
+    """
     if row.Name in no_construction_list:
         return 0
     else:
         return -1
 
 
-def has_decommissioning(row, decom_list):
+def has_decommissioning(row: pd.Series, decom_list: list[str]) -> int:
+    """
+    Add a decommissioning input to technologies that have a decommissioning phase outside their construction phase
+    :param row: (pd.Series) row of the model file
+    :param decom_list: (list of str) list of technologies for which the decommissioning phase is considered
+    :return: (int) -1 if decommissioning phase, 0 otherwise
+    """
     if row.Name in decom_list:
         return -1
     else:
         return 0
 
 
-def is_transport(row, mobility_list):
+def is_transport(row: pd.Series, mobility_list: list[str]) -> int:
+    """
+    Add a fuel input to mobility technologies (due to possible mismatch)
+    :param row: (pd.Series) row of the model file
+    :param mobility_list: (list of str) list of mobility technologies
+    :return: (int) -1 if mobility technology, 0 otherwise
+    """
     if len(row[row == 1]) == 0:
         return 0
     elif row[row == 1].index[0] in mobility_list:
@@ -558,14 +621,28 @@ def is_transport(row, mobility_list):
         return 0
 
 
-def is_process_activity(row, process_list):
+def is_process_activity(row: pd.Series, process_list: list[str]) -> int:
+    """
+    Add a fuel input to process activities that could have a mismatch
+    :param row: (pd.Series) row of the model file
+    :param process_list: (list of str) list of process activities
+    :return: (int) -1 if process activity, 0 otherwise
+    """
     if row.Name in process_list:
         return -1
     else:
         return 0
 
 
-def add_technology_specifics(mapping_op, df_tech_specifics):
+def add_technology_specifics(mapping_op: pd.DataFrame, df_tech_specifics: pd.DataFrame) \
+        -> tuple[pd.DataFrame, dict, list[str]]:
+    """
+    Add technology-specific inputs to the model file
+    :param mapping_op: (pd.DataFrame) operation activities, mapping file merged with the model file
+    :param df_tech_specifics: (pd.DataFrame) dataframe of technology specifics
+    :return: (tuple) (pd.DataFrame) updated mapping file, (dict) dictionary of background search activities,
+    (list of str) list of technologies for which the construction phase is not considered
+    """
     # Add a construction input to technologies that have a construction phase
     no_construction_list = list(df_tech_specifics[df_tech_specifics.Specifics == 'No construction'].Name)
     mapping_op['OWN_CONSTRUCTION'] = mapping_op.apply(lambda row: has_construction(row, no_construction_list), axis=1)
@@ -591,9 +668,27 @@ def add_technology_specifics(mapping_op, df_tech_specifics):
     return mapping_op, background_search_act, no_construction_list
 
 
-def create_esm_database(mapping, model, tech_specifics, technology_compositions, mapping_esm_flows_to_CPC_cat,
-                        main_database, esm_db_name, results_path_file, regionalize_foregrounds=False,
-                        mismatch_regions=None, target_region=None, locations_ranking=None):
+def create_esm_database(mapping: pd.DataFrame, model: pd.DataFrame, tech_specifics: pd.DataFrame,
+                        technology_compositions: pd.DataFrame, mapping_esm_flows_to_CPC_cat: pd.DataFrame,
+                        main_database: list[dict], esm_db_name: str, results_path_file: str,
+                        regionalize_foregrounds: bool = False, mismatch_regions: list[str] = None,
+                        target_region: str = None, locations_ranking: list[str] = None) -> None:
+    """
+    Create the ESM database after double counting removal
+    :param mapping: (pd.DataFrame) mapping file
+    :param model: (pd.DataFrame) model file
+    :param tech_specifics: (pd.DataFrame) technology specifics
+    :param technology_compositions: (pd.DataFrame) technology compositions
+    :param mapping_esm_flows_to_CPC_cat: (pd.DataFrame) mapping file between the ESM flows and the CPC categories
+    :param main_database: (list of dict) LCI database
+    :param esm_db_name: (str) name of the new LCI database
+    :param results_path_file: (str) path to the results folder
+    :param regionalize_foregrounds: (bool) if True, regionalize the foreground activities
+    :param mismatch_regions: (list of str) list of regions to be changed in case of regionalization
+    :param target_region: (str) target region in case of regionalization
+    :param locations_ranking: (list of str) ranking of the preferred locations in case of regionalization
+    :return: None
+    """
     db_dict_name = database_list_to_dict(main_database, 'name')
     db_dict_code = database_list_to_dict(main_database, 'code')
 
