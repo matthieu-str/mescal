@@ -6,11 +6,12 @@ def gen_lcia_obj(lcia_method: str, refactor: str, impact_abbrev: pd.DataFrame, b
                  path: str = 'results/') -> None:
     """
     Create an AMPL mod file containing everything related to LCA
-    :param lcia_method: (str) lcia method to be used, can be 'midpoints', 'endpoints' or 'endpoints_tot'
-    :param refactor: (str) value of refactor to apply for construction metrics
-    :param impact_abbrev: (pd.DataFrame) dataframe containing the impact abbreviations
-    :param biogenic: (boolean) whether biogenic carbon flows impact assessment method should be included or not
-    :param path: (str) path to EnergyScope AMPL folder
+
+    :param lcia_method: lcia method to be used, can be 'midpoints', 'endpoints' or 'endpoints_tot'
+    :param refactor: value of refactor to apply for construction metrics
+    :param impact_abbrev: dataframe containing the impact abbreviations
+    :param biogenic: whether biogenic carbon flows impact assessment method should be included or not
+    :param path: path to EnergyScope AMPL folder
     :return: None
     """
 

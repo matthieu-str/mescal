@@ -7,10 +7,11 @@ def create_complementary_database(df_mapping: pd.DataFrame, premise_db: list[dic
                                   name_complement_db: str) -> pd.DataFrame:
     """
     Relink the technologies to the premise database
-    :param df_mapping: (pd.Dataframe) dataframe with the mapping of the technologies and resources
-    :param premise_db: (list of dict) premise database
-    :param name_complement_db: (str) name of the complementary database
-    :return: (pd.Dataframe) dataframe with the mapping of the technologies and resources linked to the premise
+
+    :param df_mapping: dataframe with the mapping of the technologies and resources
+    :param premise_db: premise database
+    :param name_complement_db: name of the complementary database
+    :return: dataframe with the mapping of the technologies and resources linked to the premise
     database
     """
 
@@ -120,10 +121,12 @@ def create_complementary_database(df_mapping: pd.DataFrame, premise_db: list[dic
 
 def relink(name_complement_db: str, base_db: list[dict], premise_db: list[dict]) -> tuple[list[dict], list[dict]]:
     """
-    :param name_complement_db: (str) name of the complementary database
-    :param base_db: (list of dictionaries) list of activities in the base database
-    :param premise_db: (list of dictionaries) list of activities in the premise database
-    :return: (tuple) (list of dict) list of unlinked flows, (list of dict) updated premise database
+    Relink the activities in the complementary database to the premise database
+
+    :param name_complement_db: name of the complementary database
+    :param base_db: list of activities in the base database
+    :param premise_db: list of activities in the premise database
+    :return: list of unlinked flows, updated premise database
     """
 
     name_premise_db = premise_db[0]['database']

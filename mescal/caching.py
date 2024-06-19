@@ -7,8 +7,9 @@ DIR_DATABASE_CACHE = Path.cwd() / "export" / "cache"
 def cache_database(database: list[dict], database_name: str) -> None:
     """
     Create a pickle file to store the database
-    :param database: (list of dict) database to store
-    :param database_name: (str) name of the database
+
+    :param database: database to store
+    :param database_name: name of the database
     :return: None
     """
     Path(DIR_DATABASE_CACHE).mkdir(parents=True, exist_ok=True)
@@ -20,9 +21,10 @@ def cache_database(database: list[dict], database_name: str) -> None:
 def load_db(database_name: str, filepath: str = None) -> list[dict]:
     """
     Load a database from a pickle file
-    :param database_name: (str) name of the database
-    :param filepath: (str) path to the pickle file
-    :return: (list of dict) database
+
+    :param database_name: name of the database
+    :param filepath: path to the pickle file
+    :return: database
     """
     if filepath is None:
         filepath = DIR_DATABASE_CACHE / f"{database_name}.pickle"

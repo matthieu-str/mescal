@@ -9,9 +9,10 @@ from mescal.caching import cache_database, load_db
 def load_extract_db(db_name: str, create_pickle: bool = False) -> list[dict]:
     """
     Load or extract a database
-    :param db_name: (str) name of the database
-    :param create_pickle: (bool) if True, create a pickle file to store the database
-    :return: (list of dict) dictionary of the LCI database
+
+    :param db_name: name of the database
+    :param create_pickle: if True, create a pickle file to store the database
+    :return: list of activities of the LCI database
     """
     if db_name not in bd.databases:
         raise ValueError(f"{db_name} is not a registered database")
@@ -27,9 +28,10 @@ def load_extract_db(db_name: str, create_pickle: bool = False) -> list[dict]:
 def concatenate_databases(database_list: list[str], create_pickle: bool = False) -> list[dict]:
     """
     Concatenates databases in a list of dictionaries (including dependencies)
-    :param database_list: (list of str) list of LCI database names
-    :param create_pickle: (bool) if True, create a pickle file to store the database
-    :return: (list of dict) list of dictionaries of the concatenated databases
+
+    :param database_list: list of LCI database names
+    :param create_pickle: if True, create a pickle file to store the database
+    :return: list of dictionaries of the concatenated databases
     """
     db = []
     for db_name in database_list:
@@ -48,9 +50,10 @@ def database_list_to_dict(database_list: list[dict], key: str) -> dict:
     """
     Converts a list of dictionaries into a dictionary with the (database, code) tuple or the (name, product, location,
     database) tuple as key.
-    :param database_list: (list of dict) LCI database
-    :param key: (str) 'code' or 'name'
-    :return: (dict) LCI database as a dictionary
+
+    :param database_list: LCI database
+    :param key: 'code' or 'name'
+    :return: LCI database as a dictionary
     """
     if key == 'code':
         db_dict = {(a['database'], a['code']): a for a in database_list}
@@ -65,12 +68,13 @@ def database_list_to_dict(database_list: list[dict], key: str) -> dict:
 def get_code(db_dict_name: dict, product: str, activity: str, region: str, database: str) -> str or None:
     """
     Get the code of an activity
-    :param db_dict_name: (dict) dictionary of the LCI database with the (name, product, location, database) tuple as key
-    :param product: (str) product name in the LCI database
-    :param activity: (str) activity name in the LCI database
-    :param region: (str) region name in the LCI database
-    :param database: (str) name of the LCI database
-    :return: (str or None) activity code in the LCI database or None if it does not exist
+
+    :param db_dict_name: dictionary of the LCI database with the (name, product, location, database) tuple as key
+    :param product: product name in the LCI database
+    :param activity: activity name in the LCI database
+    :param region: region name in the LCI database
+    :param database: name of the LCI database
+    :return: activity code in the LCI database or None if it does not exist
     """
 
     ds = db_dict_name[(activity, product, region, database)]
@@ -85,7 +89,8 @@ def get_code(db_dict_name: dict, product: str, activity: str, region: str, datab
 def random_code() -> str:
     """
     Create a random code
-    :return: (str) code
+
+    :return: code
     """
     length = 32
     code_rand = ''.join(random.choices(string.ascii_lowercase + string.digits, k=length))
@@ -95,8 +100,9 @@ def random_code() -> str:
 def get_technosphere_flows(act: dict) -> list[dict]:
     """
     Get the technosphere flows of an activity
-    :param act: (dict) activity
-    :return: (list of dict) list of technosphere flows
+
+    :param act: dictionary of the activity
+    :return: list of technosphere flows
     """
     flows = []
     for exc in act['exchanges']:
@@ -108,8 +114,9 @@ def get_technosphere_flows(act: dict) -> list[dict]:
 def get_biosphere_flows(act: dict) -> list[dict]:
     """
     Get the biosphere flows of an activity
-    :param act: (dict) activity
-    :return: (list of dict) list of biosphere flows
+
+    :param act: dictionary of the activity
+    :return: list of biosphere flows
     """
     flows = []
     for exc in act['exchanges']:
@@ -121,8 +128,9 @@ def get_biosphere_flows(act: dict) -> list[dict]:
 def get_production_flow(act: dict) -> dict or None:
     """
     Get the production flow of an activity
-    :param act: (dict) activity
-    :return: (dict or None) production flow or None if it does not exist
+
+    :param act: dictionary of the activity
+    :return: production flow or None if it does not exist
     """
     for exc in act['exchanges']:
         if exc['type'] == 'production':
@@ -133,8 +141,9 @@ def get_production_flow(act: dict) -> dict or None:
 def wurst_to_brightway2_database(db: list[dict]) -> list[dict]:
     """
     Adjust the database to the Brightway2 format
-    :param db: (list of dict) dictionary of the LCI database
-    :return: (list of dict) adjusted dictionary of the LCI database
+
+    :param db: list of activities of the LCI database
+    :return: adjusted LCI database
     """
     for act in db:
 
@@ -158,9 +167,10 @@ def wurst_to_brightway2_database(db: list[dict]) -> list[dict]:
 def change_database_name(db: list[dict], new_db_name: str) -> list[dict]:
     """
     Change the name of the database
-    :param db: (list of dict) dictionary of the LCI database
-    :param new_db_name: (str) new name of the database
-    :return: (list of dict) updated dictionary of the LCI database
+
+    :param db: list of activities of the LCI database
+    :param new_db_name: new name of the database
+    :return: updated LCI database
     """
     old_db_name = db[0]['database']
     for act in db:
@@ -176,9 +186,10 @@ def change_database_name(db: list[dict], new_db_name: str) -> list[dict]:
 def relink_database(db: list[dict], name_old_database: str, name_new_database: str) -> None:
     """
     Relink a database and write it
-    :param db: (list of dict) LCI database
-    :param name_old_database: (str) name of the old database
-    :param name_new_database: (str) name of the new database
+
+    :param db: list of activities of the LCI database
+    :param name_old_database: name of the old database
+    :param name_new_database: name of the new database
     :return: None
     """
     db_name = db[0]['database']
@@ -193,9 +204,10 @@ def relink_database(db: list[dict], name_old_database: str, name_new_database: s
 
 def write_wurst_database_to_brightway(db: list[dict], db_name: str) -> None:
     """
-    Write a wurst database to a Brightway2 project. This function will overwrite the database if it already exists.
-    :param db: (list of dict) dictionary of the LCI database
-    :param db_name: (str) name of the Brightway2 database
+    Write a wurst database to a Brightway2 project. This function will overwrite the database if it already exists
+
+    :param db: list of activities of the LCI database
+    :param db_name: name of the brightway database to be written
     :return: None
     """
     if db_name in list(bd.databases):  # if the database already exists, delete it

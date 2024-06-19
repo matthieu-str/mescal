@@ -6,15 +6,16 @@ def regionalize_activity_foreground(act: dict, mismatch_regions: list[str], targ
                                     locations_ranking: list[str], db: list[dict], db_dict_code: dict,
                                     db_dict_name: dict) -> dict:
     """
-    Regionalize a foreground activity according to the user ranking of locations.
-    :param act: (dict) activity to regionalize
-    :param mismatch_regions: (list of str) list of regions that are not satisfying the user
-    :param target_region: (str) region to which the activity should be regionalized
-    :param locations_ranking: (list of str) list of preferred locations
-    :param db: (list of dict) list of activities in the LCI database
-    :param db_dict_code: (dict) dictionary of the LCI database with (database, code) as key
-    :param db_dict_name: (dict) dictionary of the LCI database with (name, product, location, database) as key
-    :return: (dict) the regionalized activity
+    Regionalize a foreground activity according to the user ranking of locations
+
+    :param act: activity to regionalize
+    :param mismatch_regions: list of regions that are not satisfying the user
+    :param target_region: region to which the activity should be regionalized
+    :param locations_ranking: list of preferred locations
+    :param db: list of activities in the LCI database
+    :param db_dict_code: dictionary of the LCI database with (database, code) as key
+    :param db_dict_name: dictionary of the LCI database with (name, product, location, database) as key
+    :return: the regionalized activity
     """
     if act['location'] in mismatch_regions:  # if we are not satisfied with the current location
 

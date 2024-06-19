@@ -6,15 +6,16 @@ def change_location_activity(esm_tech_name: str or None, product: str, activity:
                              locations_ranking: list[str], db: list[dict], esm_region: str) -> str:
     """
     Changes the location of a process given a ranking of preferred locations
-    :param esm_tech_name: (str or None) name of the technology or resource in the energy system model
-    :param product: (str) name of the product in the LCI database
-    :param activity: (str) name of the activity in the LCI database
-    :param database: (str) name of the database in the brightway project
-    :param locations_ranking: (list of str) list of preferred locations
-    :param db: (list of dict) dictionary of the LCI database
-    :param esm_region: (str) name of the modeled region in the energy system model
-    :return: (str) the highest available location within the ranking, or the initial location is any of the list's
-    locations is available
+
+    :param esm_tech_name: name of the technology or resource in the energy system model
+    :param product: name of the product in the LCI database
+    :param activity: name of the activity in the LCI database
+    :param database: name of the database in the brightway project
+    :param locations_ranking: list of preferred locations
+    :param db: dictionary of the LCI database
+    :param esm_region: name of the modeled region in the energy system model
+    :return: the highest available location within the ranking, or the initial location is any of the list's
+        locations is available
     """
 
     locations = []
@@ -54,11 +55,12 @@ def change_location_mapping_file(df_mapping: pd.DataFrame, locations_ranking: li
                                  database: list[dict], esm_region: str) -> pd.DataFrame:
     """
     Changes the location of a process given a mapping file
-    :param df_mapping: (pd.Dataframe) dataframe with the mapping of the technologies and resources
-    :param locations_ranking: (list of str) list of preferred locations by order of preference
-    :param database: (list of dict) dictionary of the LCI database
-    :param esm_region: (str) name of the modeled region in the energy system model
-    :return: (pd.Dataframe) dataframe with the mapping of the technologies and resources with the new location
+
+    :param df_mapping: dataframe with the mapping of the technologies and resources
+    :param locations_ranking: list of preferred locations by order of preference
+    :param database: dictionary of the LCI database
+    :param esm_region: name of the modeled region in the energy system model
+    :return: dataframe with the mapping of the technologies and resources with the new location
     """
     df_mapping['Location'] = df_mapping.apply(lambda row: change_location_activity(
         esm_tech_name=row['Name'],

@@ -5,8 +5,9 @@ import ast
 def tech_type(tech: str) -> str:
     """
     Returns the short name of the technology type
-    :param tech: (str) technology type
-    :return: (str) short name of the technology type
+
+    :param tech: type of technology
+    :return: short name of the technology type
     """
     if tech == 'Construction':
         return 'constr'
@@ -21,8 +22,9 @@ def tech_type(tech: str) -> str:
 def lcia_methods_short_names(lcia_method: str) -> str:
     """
     Returns the short name of the LCIA method
-    :param lcia_method: (str) LCIA method
-    :return: (str) short name of the LCIA method
+
+    :param lcia_method: name of the LCIA method
+    :return: short name for the LCIA method
     """
     if lcia_method == 'IMPACT World+ Damage 2.0.1':
         return 'endpoint'
@@ -37,7 +39,13 @@ def lcia_methods_short_names(lcia_method: str) -> str:
 
 
 def from_str_to_tuple(df: pd.DataFrame, col: str) -> pd.DataFrame:
+    """
+    Convert a column of strings to tuples
 
+    :param df: dataframe containing the column to be converted
+    :param col: column to be converted
+    :return: dataframe with the column converted to tuples
+    """
     if type(df[col].iloc[0]) is tuple:
         pass
     elif type(df[col].iloc[0]) is str:
@@ -48,8 +56,14 @@ def from_str_to_tuple(df: pd.DataFrame, col: str) -> pd.DataFrame:
     return df
 
 
-def restrict_lcia_metrics(df, lcia_method):
+def restrict_lcia_metrics(df: pd.DataFrame, lcia_method: str) -> pd.DataFrame:
+    """
+    Restrict the dataframe to the LCIA method specified
 
+    :param df: dataframe containing the LCA metrics
+    :param lcia_method: LCIA method to be used
+    :return: dataframe containing the LCA metrics for the specified LCIA method
+    """
     if lcia_method == 'IMPACT World+ Damage 2.0.1 - Total only':
         df = df[df.apply(lambda x: x.Impact_category[0] == 'IMPACT World+ Damage 2.0.1', axis=1)]
         df = df[df.apply(lambda x: 'Total' in x.Impact_category[2], axis=1)]
@@ -64,15 +78,16 @@ def normalize_lca_metrics(R: pd.DataFrame, f_norm: float, mip_gap: float, refact
     """
     Create a .dat file containing the normalized LCA metrics for AMPL and a csv file containing the normalization
     factors
-    :param path: (str) path to results folder
-    :param R: (pd.DataFrame) dataframe containing the LCA results
-    :param f_norm: (float) maximum allowed order of magnitude between the smallest and the largest value LCA metrics
-    within an AoP
-    :param mip_gap: (float) values outside the f_norm threshold will be set to mip_gap / f_norm
-    :param refactor: (float) value of refactor to apply for construction metrics for better convergence
-    :param lcia_method: (str) LCIA method to be used
-    :param impact_abbrev: (pd.DataFrame) dataframe containing the impact categories abbreviations
-    :param biogenic: (boolean) whether biogenic carbon flows impact assessment method should be included or not
+
+    :param path: path to results folder
+    :param R: dataframe containing the LCA results
+    :param f_norm: maximum allowed order of magnitude between the smallest and the largest value LCA metrics
+        within an AoP
+    :param mip_gap: values outside the f_norm threshold will be set to mip_gap / f_norm
+    :param refactor: value of refactor to apply for construction metrics for better convergence
+    :param lcia_method: LCIA method to be used
+    :param impact_abbrev: dataframe containing the impact categories abbreviations
+    :param biogenic: whether biogenic carbon flows impact assessment method should be included or not
     :return: None
     """
     R_constr = R[R['Type'] == 'Construction']

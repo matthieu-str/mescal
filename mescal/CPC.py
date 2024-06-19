@@ -6,12 +6,13 @@ from .utils import write_wurst_database_to_brightway
 def add_CPC_category(db: list[dict], name: str, CPC_category: str, search_type: str, key: str) -> list[dict]:
     """
     Add a CPC category to a set of activities in a wurst database
-    :param db: (list of dict) LCI database
-    :param name: (str) name or part of the name of the product or activity
-    :param CPC_category: (str) CPC category
-    :param search_type: (str) type of search: 'equals' or 'contains'
-    :param key: (str) key to search for the product in the activities
-    :return: (list of dict) updated LCI database
+
+    :param db: LCI database
+    :param name: name or part of the name of the product or activity
+    :param CPC_category: CPC category
+    :param search_type: type of search: 'equals' or 'contains'
+    :param key: key to search for the product in the activities
+    :return: updated LCI database
     """
     if search_type == 'equals':
         act_list = [a for a in wurst.get_many(db, *[wurst.searching.equals(key, name)])]
@@ -36,9 +37,10 @@ def create_new_database_with_CPC_categories(db: list[dict], new_db_name: str,
                                             mapping_product_to_CPC: pd.DataFrame) -> None:
     """
     Create a new database with additional CPC categories
-    :param db: (list of dict) LCI database
-    :param new_db_name: (str) name of the new database
-    :param mapping_product_to_CPC: (pd.DataFrame) mapping between products and CPC categories
+
+    :param db: LCI database
+    :param new_db_name: name of the new database
+    :param mapping_product_to_CPC: mapping between products and CPC categories
     :return: None
     """
     for i in range(len(mapping_product_to_CPC)):
