@@ -109,7 +109,7 @@ def background_search(act: dict, k: int, k_lim: int, amount: float, explore_type
     :param esm_db_name: name of the new LCI database
     :param perform_d_c: list of activities to check for double counting
     :return: list of activities to check for double counting , updated LCI database, dictionary LCI database with
-    (database, code) as key, dictionary LCI database with (name, product, location, database) as key
+        (database, code) as key, dictionary LCI database with (name, product, location, database) as key
     """
 
     if explore_type == 'market':
@@ -648,7 +648,7 @@ def add_technology_specifics(mapping_op: pd.DataFrame, df_tech_specifics: pd.Dat
     :param mapping_op: operation activities, mapping file merged with the model file
     :param df_tech_specifics: dataframe of technology specifics
     :return: updated mapping file, dictionary of background search activities,
-    list of technologies for which the construction phase is not considered
+        list of technologies for which the construction phase is not considered
     """
     # Add a construction input to technologies that have a construction phase
     no_construction_list = list(df_tech_specifics[df_tech_specifics.Specifics == 'No construction'].Name)
