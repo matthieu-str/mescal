@@ -9,8 +9,8 @@ import datetime
 ### project information ###########################################################################
 
 project = "mescal"
-author = "Brightway Developers"
-copyright = datetime.date.today().strftime("%Y") + ' Brightway Developers'
+author = "Matthieu Souttre"
+copyright = datetime.date.today().strftime("%Y") + ' Matthieu Souttre'
 
 ### project configuration #########################################################################
 
