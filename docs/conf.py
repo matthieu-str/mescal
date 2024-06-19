@@ -116,3 +116,5 @@ autoapi_ignore = [
     '*.json',
     '*.data'
 ]
+
+autodoc_typehints = 'both'
