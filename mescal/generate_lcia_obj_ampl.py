@@ -1,9 +1,9 @@
 import pandas as pd
-from .normalization import lcia_methods_short_names
+from .normalization import lcia_methods_short_names, restrict_lcia_metrics
 
 
 def gen_lcia_obj(lcia_method: str, refactor: str, impact_abbrev: pd.DataFrame, biogenic: bool = False,
-                 path: str = 'results') -> None:
+                 path: str = 'results/') -> None:
     """
     Create an AMPL mod file containing everything related to LCA
     :param lcia_method: (str) lcia method to be used, can be 'midpoints', 'endpoints' or 'endpoints_tot'
@@ -19,12 +19,7 @@ def gen_lcia_obj(lcia_method: str, refactor: str, impact_abbrev: pd.DataFrame, b
                              "CCHHLB", "MALB", "MASB"]
         impact_abbrev.drop(impact_abbrev[impact_abbrev.Abbrev.isin(list_biogenic_cat)].index, inplace=True)
 
-    if lcia_method == 'IMPACT World+ Damage 2.0.1 - Total only':
-        impact_abbrev = impact_abbrev[impact_abbrev.apply(lambda x:
-                                                          x.Impact_category[0] == 'IMPACT World+ Damage 2.0.1', axis=1)]
-        impact_abbrev = impact_abbrev[impact_abbrev.apply(lambda x: 'Total' in x.Impact_category[2], axis=1)]
-    else:
-        impact_abbrev = impact_abbrev[impact_abbrev.apply(lambda x: x.Impact_category[0] == lcia_method, axis=1)]
+    impact_abbrev = restrict_lcia_metrics(impact_abbrev, lcia_method)
 
     with open(f'{path}objectives_{lcia_methods_short_names(lcia_method)}.mod', 'w') as f:
 

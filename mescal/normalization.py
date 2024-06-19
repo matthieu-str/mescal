@@ -36,6 +36,29 @@ def lcia_methods_short_names(lcia_method: str) -> str:
         raise ValueError(f"Unknown LCIA method: {lcia_method}")
 
 
+def from_str_to_tuple(df: pd.DataFrame, col: str) -> pd.DataFrame:
+
+    if type(df[col].iloc[0]) is tuple:
+        pass
+    elif type(df[col].iloc[0]) is str:
+        df[col] = df[col].apply(lambda x: ast.literal_eval(x))
+    else:
+        raise ValueError(f"Unknown type for {col}: {type(df[col].iloc[0])}")
+
+    return df
+
+
+def restrict_lcia_metrics(df, lcia_method):
+
+    if lcia_method == 'IMPACT World+ Damage 2.0.1 - Total only':
+        df = df[df.apply(lambda x: x.Impact_category[0] == 'IMPACT World+ Damage 2.0.1', axis=1)]
+        df = df[df.apply(lambda x: 'Total' in x.Impact_category[2], axis=1)]
+    else:
+        df = df[df.apply(lambda x: x.Impact_category[0] == lcia_method, axis=1)]
+
+    return df
+
+
 def normalize_lca_metrics(R: pd.DataFrame, f_norm: float, mip_gap: float, refactor: float, lcia_method: str,
                           impact_abbrev: pd.DataFrame, biogenic: bool = False, path: str = 'results/') -> None:
     """
@@ -64,15 +87,10 @@ def normalize_lca_metrics(R: pd.DataFrame, f_norm: float, mip_gap: float, refact
                              "CCHHLB", "MALB", "MASB"]
         impact_abbrev.drop(impact_abbrev[impact_abbrev.Abbrev.isin(list_biogenic_cat)].index, inplace=True)
 
-    R.Impact_category = R.Impact_category.apply(lambda x: ast.literal_eval(x))
-    impact_abbrev.Impact_category = impact_abbrev.Impact_category.apply(lambda x: ast.literal_eval(x))
+    R = from_str_to_tuple(R, 'Impact_category')
+    impact_abbrev = from_str_to_tuple(impact_abbrev, 'Impact_category')
 
-    if lcia_method == 'IMPACT World+ Damage 2.0.1 - Total only':
-        impact_abbrev = impact_abbrev[impact_abbrev.apply(lambda x:
-                                                          x.Impact_category[0] == 'IMPACT World+ Damage 2.0.1', axis=1)]
-        impact_abbrev = impact_abbrev[impact_abbrev.apply(lambda x: 'Total' in x.Impact_category[2], axis=1)]
-    else:
-        impact_abbrev = impact_abbrev[impact_abbrev.apply(lambda x: x.Impact_category[0] == lcia_method, axis=1)]
+    impact_abbrev = restrict_lcia_metrics(impact_abbrev, lcia_method)
 
     R = pd.merge(R, impact_abbrev, on='Impact_category')
     R['max_AoP'] = R.groupby('AoP')['Value'].transform('max')

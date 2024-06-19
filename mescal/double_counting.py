@@ -672,7 +672,7 @@ def create_esm_database(mapping: pd.DataFrame, model: pd.DataFrame, tech_specifi
                         technology_compositions: pd.DataFrame, mapping_esm_flows_to_CPC_cat: pd.DataFrame,
                         main_database: list[dict], esm_db_name: str, results_path_file: str = 'results/',
                         regionalize_foregrounds: bool = False, mismatch_regions: list[str] = None,
-                        target_region: str = None, locations_ranking: list[str] = None) -> None:
+                        target_region: str = None, locations_ranking: list[str] = None) -> pd.DataFrame:
     """
     Create the ESM database after double counting removal
     :param mapping: (pd.DataFrame) mapping file
@@ -687,7 +687,7 @@ def create_esm_database(mapping: pd.DataFrame, model: pd.DataFrame, tech_specifi
     :param mismatch_regions: (list of str) list of regions to be changed in case of regionalization
     :param target_region: (str) target region in case of regionalization
     :param locations_ranking: (list of str) ranking of the preferred locations in case of regionalization
-    :return: None
+    :return: (pd.DataFrame) mapping file (updated with new codes)
     """
     db_dict_name = database_list_to_dict(main_database, 'name')
     db_dict_code = database_list_to_dict(main_database, 'code')
@@ -770,3 +770,5 @@ def create_esm_database(mapping: pd.DataFrame, model: pd.DataFrame, tech_specifi
     double_counting_removal_amount.to_csv(f"{results_path_file}double_counting_removal.csv")
     double_counting_removal_count.to_csv(f"{results_path_file}double_counting_removal_count.csv")
     df_flows_set_to_zero.to_csv(f"{results_path_file}removed_flows_list.csv", index=False)
+
+    return mapping

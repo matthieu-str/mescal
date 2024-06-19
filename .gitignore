@@ -131,3 +131,4 @@ dmypy.json
 # Exports
 dev/export/
 /dev/energyscope_data/hidden/
+/examples/export/

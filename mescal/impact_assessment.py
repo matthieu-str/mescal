@@ -43,16 +43,6 @@ def compute_impact_scores(esm_db: list[dict], mapping: pd.DataFrame, technology_
 
     esm_db_name = esm_db[0]['database']
     esm_db_dict_code = database_list_to_dict(esm_db, 'code')
-    esm_db_dict_name = database_list_to_dict(esm_db, 'name')
-
-    # Adding current code to the mapping file
-    mapping['New_code'] = mapping.apply(lambda row: get_code(
-        db_dict_name=esm_db_dict_name,
-        product=row['Product'],
-        activity=f"{row['Name']}, {row['Type']}",
-        region=row['Location'],
-        database=esm_db_name
-    ), axis=1)
 
     activities = [esm_db_dict_code[(esm_db_name, mapping['New_code'].iloc[i])] for i in range(len(mapping))]
     activities_bw = {(i['database'], i['code']): i for i in activities}
