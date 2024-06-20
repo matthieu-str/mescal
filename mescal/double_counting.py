@@ -1,6 +1,7 @@
 import copy
 from .regionalization import *
 import ast
+from .modify_inventory import change_carbon_flow
 
 
 def create_new_activity(name: str, act_type: str, current_code: str, new_code: str, database_name: str, db: list[dict],
@@ -757,6 +758,11 @@ def create_esm_database(mapping: pd.DataFrame, model: pd.DataFrame, tech_specifi
     esm_db = [act for act in main_database if act['database'] == esm_db_name]
 
     write_wurst_database_to_brightway(esm_db, esm_db_name)
+
+    if 'DAC_LT, Operation' in [act['name'] for act in esm_db]:
+        change_carbon_flow(db_name=esm_db_name, activity_name='DAC_LT, Operation')
+    if 'DAC_HT, Operation' in [act['name'] for act in esm_db]:
+        change_carbon_flow(db_name=esm_db_name, activity_name='DAC_HT, Operation')
 
     df_flows_set_to_zero = pd.DataFrame(data=flows_set_to_zero,
                                         columns=['Product', 'Activity', 'Location', 'Database', 'Amount', 'Unit',
