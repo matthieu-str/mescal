@@ -19,6 +19,8 @@ __all__ = (
     "compute_impact_scores",
     "normalize_lca_metrics",
     "gen_lcia_obj",
+    "create_or_modify_activity_from_esm_results",
+    "write_wurst_database_to_brightway",
 )
 
 __version__ = "0.0.1"
@@ -31,3 +33,4 @@ from .double_counting import *
 from .impact_assessment import *
 from .normalization import *
 from .generate_lcia_obj_ampl import *
+from .esm_back_to_lca import *
