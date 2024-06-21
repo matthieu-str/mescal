@@ -31,12 +31,14 @@ def regionalize_activity_foreground(act: dict, mismatch_regions: list[str], targ
             techno_act = db_dict_code[(flow['database'], flow['code'])]
             techno_act_name = techno_act['name']
             techno_act_product = techno_act['reference product']
+            techno_act_location = techno_act['location']
             techno_act_database = techno_act['database']
 
             new_location = change_location_activity(
                 esm_tech_name=None,
                 product=techno_act_product,
                 activity=techno_act_name,
+                location=techno_act_location,
                 database=techno_act_database,
                 locations_ranking=locations_ranking,
                 db=db,

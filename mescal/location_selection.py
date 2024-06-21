@@ -2,7 +2,7 @@ import pandas as pd
 import wurst
 
 
-def change_location_activity(esm_tech_name: str or None, product: str, activity: str, database: str,
+def change_location_activity(esm_tech_name: str or None, product: str, activity: str, location: str, database: str,
                              locations_ranking: list[str], db: list[dict], esm_region: str) -> str:
     """
     Changes the location of a process given a ranking of preferred locations
@@ -10,6 +10,7 @@ def change_location_activity(esm_tech_name: str or None, product: str, activity:
     :param esm_tech_name: name of the technology or resource in the energy system model
     :param product: name of the product in the LCI database
     :param activity: name of the activity in the LCI database
+    :param location: initial location of the process
     :param database: name of the database in the brightway project
     :param locations_ranking: list of preferred locations
     :param db: dictionary of the LCI database
@@ -48,7 +49,9 @@ def change_location_activity(esm_tech_name: str or None, product: str, activity:
             if loc in locations:
                 return loc
 
-    raise ValueError(f'No location found in your ranking for {esm_tech_name} - {product} - {activity} - {database}')
+    print(f'No location found in your ranking for {esm_tech_name} - {product} - {activity} - {database}')
+    print(f'Have to keep the initial location: {location}')
+    return location
 
 
 def change_location_mapping_file(df_mapping: pd.DataFrame, locations_ranking: list[str],
@@ -66,6 +69,7 @@ def change_location_mapping_file(df_mapping: pd.DataFrame, locations_ranking: li
         esm_tech_name=row['Name'],
         product=row['Product'],
         activity=row['Activity'],
+        location=row['Location'],
         database=row['Database'],
         locations_ranking=locations_ranking,
         db=database,
