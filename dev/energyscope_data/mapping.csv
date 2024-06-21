@@ -187,7 +187,7 @@ CEMENT_PROD_HP,Operation,"cement, alternative constituents 21-35%","cement produ
 CEMENT_PROD_HP,Construction,cement factory,cement factory construction,CH,/unit,ecoinvent3.8 cut-off
 CO2_METHANOL,Operation,methanol,methanol production,GLO,/kg,ecoinvent3.8 cut-off
 CO2_METHANOL,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,/unit,ecoinvent3.8 cut-off
-CO2_STO,Construction,"liquid storage tank, chemicals, organics","market for liquid storage tank, chemicals, organics",RoW,/unit,ecoinvent3.8 cut-off
+CO2_STO,Construction,"liquid storage tank, chemicals, organics","market for liquid storage tank, chemicals, organics",GLO,/unit,ecoinvent3.8 cut-off
 CO2_TO_DIESEL,Construction,petroleum refinery,petroleum refinery construction,RoW,/unit,ecoinvent3.8 cut-off
 CO2_TO_DIESEL,Operation,"Diesel, synthetic","Diesel production, synthetic, Fischer Tropsch process, hydrogen from electrolysis, energy allocation",RER,/kg,synfuel from electrolysis
 CO2_TO_JETFUELS,Operation,"kerosene, synthetic","kerosene production, from methanol, hydrogen from electrolysis, CO2 from cement plant, energy allocation",RER,/kg,cement CCS-CCU
