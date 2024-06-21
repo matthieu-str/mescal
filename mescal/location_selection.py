@@ -65,6 +65,17 @@ def change_location_mapping_file(df_mapping: pd.DataFrame, locations_ranking: li
     :param esm_region: name of the modeled region in the energy system model
     :return: dataframe with the mapping of the technologies and resources with the new location
     """
+
+    if 'Location' not in df_mapping.columns:
+        for i in range(len(df_mapping)):
+            activity_name = df_mapping.Activity.iloc[i]
+            product_name = df_mapping.Product.iloc[i]
+            location = [a for a in wurst.get_many(database, *[
+                wurst.equals('name', activity_name),
+                wurst.equals('reference product', product_name)
+            ])][0]['location']  # picks one location randomly
+            df_mapping.at[i, 'Location'] = location
+
     df_mapping['Location'] = df_mapping.apply(lambda row: change_location_activity(
         esm_tech_name=row['Name'],
         product=row['Product'],
