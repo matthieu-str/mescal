@@ -98,7 +98,10 @@ def create_complementary_database(df_mapping: pd.DataFrame, premise_db: list[dic
         unlinked_activities, premise_db = relink(name_complement_db, base_db, premise_db)
 
     complement_db = [i for i in premise_db if i['database'] == name_complement_db]
-    write_wurst_database_to_brightway(complement_db, name_complement_db)
+    if len(complement_db) > 0:
+        write_wurst_database_to_brightway(complement_db, name_complement_db)
+    else:
+        print(f"The complementary database did not needed to be created")
 
     tech_premise.reset_index(inplace=True, drop=True)
     tech_premise_adjusted = pd.DataFrame(columns=tech_premise.columns)
