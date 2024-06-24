@@ -314,6 +314,7 @@ def double_counting_removal(df_op: pd.DataFrame, df_constr: pd.DataFrame, esm_db
                             mapping_esm_flows_to_CPC: pd.DataFrame, technology_compositions_dict: dict,
                             db: list[dict], db_dict_code: dict, db_dict_name: dict, N: int,
                             background_search_act: dict, no_construction_list: list[str],
+                            no_background_search_list: list[str],
                             regionalize_foregrounds: bool = False, mismatch_regions: list[str] = None,
                             target_region: str = None, locations_ranking: list[str] = None) \
         -> tuple[list[dict], dict, dict, list[list], dict]:
@@ -333,6 +334,7 @@ def double_counting_removal(df_op: pd.DataFrame, df_constr: pd.DataFrame, esm_db
     :param background_search_act: dictionary of the maximum depth of the tree to explore for specific
         technologies
     :param no_construction_list: list of technologies for which the construction phase is not considered
+    :param no_background_search_list: list of technologies for which the background search should not be performed
     :param regionalize_foregrounds: if True, regionalize the foreground activities
     :param mismatch_regions: list of regions to be changed in case of regionalization
     :param target_region: target region in case of regionalization
@@ -414,19 +416,23 @@ def double_counting_removal(df_op: pd.DataFrame, df_constr: pd.DataFrame, esm_db
                       new_act_op['database'])] = new_act_op
         db_dict_code[(new_act_op['database'], new_act_op['code'])] = new_act_op
 
-        perform_d_c, db, db_dict_code, db_dict_name = background_search(
-            act=new_act_op,
-            k=0,
-            k_lim=10,
-            amount=1,
-            explore_type='market',
-            ESM_inputs='all',
-            db=db,
-            db_dict_code=db_dict_code,
-            db_dict_name=db_dict_name,
-            esm_db_name=esm_db_name,
-            perform_d_c=[]
-        )  # list of activities to perform double counting removal on
+        if tech in no_background_search_list:
+            new_act_op['comment'] = f"Subject to double-counting removal. " + new_act_op.get('comment', '')
+            perform_d_c = [[new_act_op['name'], new_act_op['code'], 1, 0, 'all']]
+        else:
+            perform_d_c, db, db_dict_code, db_dict_name = background_search(
+                act=new_act_op,
+                k=0,
+                k_lim=10,
+                amount=1,
+                explore_type='market',
+                ESM_inputs='all',
+                db=db,
+                db_dict_code=db_dict_code,
+                db_dict_name=db_dict_name,
+                esm_db_name=esm_db_name,
+                perform_d_c=[]
+            )  # list of activities to perform double counting removal on
 
         new_act_op['name'] = f'{tech}, Operation'  # saving name after market identification
         prod_flow = get_production_flow(new_act_op)
@@ -642,7 +648,7 @@ def is_process_activity(row: pd.Series, process_list: list[str]) -> int:
 
 
 def add_technology_specifics(mapping_op: pd.DataFrame, df_tech_specifics: pd.DataFrame) \
-        -> tuple[pd.DataFrame, dict, list[str]]:
+        -> tuple[pd.DataFrame, dict, list[str], list[str]]:
     """
     Add technology-specific inputs to the model file
 
@@ -673,7 +679,9 @@ def add_technology_specifics(mapping_op: pd.DataFrame, df_tech_specifics: pd.Dat
     for tech in activities_background_search:
         background_search_act[tech] = df_tech_specifics[df_tech_specifics.Name == tech].Amount.iloc[0]
 
-    return mapping_op, background_search_act, no_construction_list
+    no_background_search_list = list(df_tech_specifics[df_tech_specifics.Specifics == 'No background search'].Name)
+
+    return mapping_op, background_search_act, no_construction_list, no_background_search_list
 
 
 def create_esm_database(mapping: pd.DataFrame, model: pd.DataFrame, tech_specifics: pd.DataFrame,
@@ -727,7 +735,8 @@ def create_esm_database(mapping: pd.DataFrame, model: pd.DataFrame, tech_specifi
 
     mapping_op = pd.merge(mapping_op, model, on='Name', how='left')
     mapping_op['CONSTRUCTION'] = mapping_op.shape[0] * [0]
-    mapping_op, background_search_act, no_construction_list = add_technology_specifics(mapping_op, tech_specifics)
+    (mapping_op, background_search_act, no_construction_list,
+     no_background_search_list) = add_technology_specifics(mapping_op, tech_specifics)
 
     # Add construction and resource activities to the database (which do not need double counting removal)
     main_database = add_activities_to_database(mapping, 'Construction', main_database, db_dict_name,
@@ -749,6 +758,7 @@ def create_esm_database(mapping: pd.DataFrame, model: pd.DataFrame, tech_specifi
         N=N,
         background_search_act=background_search_act,
         no_construction_list=no_construction_list,
+        no_background_search_list=no_background_search_list,
         regionalize_foregrounds=regionalize_foregrounds,
         mismatch_regions=mismatch_regions,
         target_region=target_region,

@@ -25,6 +25,33 @@ TRAFO_HM,No construction,N/A
 TRAFO_LM,No construction,N/A
 TRAFO_MH,No construction,N/A
 TRAFO_ML,No construction,N/A
+H2_EXP_EH,No construction,N/A
+H2_EXP_HM,No construction,N/A
+H2_EXP_ML,No construction,N/A
+TRAFO_HE,No background search,N/A
+TRAFO_EH,No background search,N/A
+TRAFO_HM,No background search,N/A
+TRAFO_LM,No background search,N/A
+TRAFO_ML,No background search,N/A
+TRAFO_MH,No background search,N/A
+NG_COMP_HE,No background search,N/A
+NG_COMP_LM,No background search,N/A
+NG_COMP_MH,No background search,N/A
+NG_EXP_HM,No background search,N/A
+NG_EXP_EH_COGEN,No background search,N/A
+NG_EXP_EH,No background search,N/A
+NG_EXP_HM_COGEN,No background search,N/A
+NG_EXP_ML_COGEN,No background search,N/A
+NG_EXP_ML,No background search,N/A
+H2_EXP_ML,No background search,N/A
+H2_EXP_HM,No background search,N/A
+H2_EXP_HM_COGEN,No background search,N/A
+H2_EXP_EH,No background search,N/A
+H2_EXP_EH_COGEN,No background search,N/A
+H2_EXP_ML_COGEN,No background search,N/A
+H2_COMP_HE,No background search,N/A
+H2_COMP_MH,No background search,N/A
+H2_COMP_LM,No background search,N/A
 MOB_PUBLIC_SD,Mobility,N/A
 MOB_PRIVATE_SD,Mobility,N/A
 MOB_PUBLIC_MD,Mobility,N/A
