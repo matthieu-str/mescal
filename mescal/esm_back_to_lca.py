@@ -26,18 +26,31 @@ def create_or_modify_activity_from_esm_results(db: list[dict], original_activity
         # thus we remove transformations between these two levels of voltage
         end_use_tech_list.remove('TRAFO_HE')
         end_use_tech_list.remove('TRAFO_EH')
+        # the storage technologies should be removed (production only)
+        end_use_tech_list.remove('STO_ELEC')
+        end_use_tech_list.remove('HYDRO_STORAGE')
     elif flows_list == ['NG_HP', 'NG_EHP']:
         # the high and extra high pressure natural gas are merged in the LCI database,
         # thus we remove transformations between these two levels of pressure
         end_use_tech_list.remove('NG_EXP_EH')
         end_use_tech_list.remove('NG_EXP_EH_COGEN')
         end_use_tech_list.remove('NG_COMP_HE')
+        # the storage technologies should be removed (production only)
+        end_use_tech_list.remove('STO_NG')
     elif flows_list == ['H2_MP', 'H2_EHP']:
         # the medium and extra high pressure hydrogen are merged in the LCI database,
         # thus we remove transformations between these two levels of pressure
         end_use_tech_list.remove('H2_COMP_HE')
         end_use_tech_list.remove('H2_EXP_EH')
         end_use_tech_list.remove('H2_EXP_EH_COGEN')
+        # the storage technologies should be removed (production only)
+        end_use_tech_list.remove('STO_H2')
+    elif flows_list == ['GASOLINE']:
+        # the storage technologies should be removed (production only)
+        end_use_tech_list.remove('STO_GASO')
+    elif flows_list == ['DIESEL']:
+        # the storage technologies should be removed (production only)
+        end_use_tech_list.remove('STO_DIE')
     else:
         pass
 
@@ -50,29 +63,40 @@ def create_or_modify_activity_from_esm_results(db: list[dict], original_activity
     exchanges = []
 
     for tech in end_use_tech_list:
-        print(tech)
         amount = esm_results[esm_results.Name == tech].Production.iloc[0]
         if amount == 0:
             pass
         else:
-            activity_name = mapping[(mapping.Name == tech) & (mapping.Type == 'Operation')].Activity.iloc[0]
-            activity_prod = mapping[(mapping.Name == tech) & (mapping.Type == 'Operation')].Product.iloc[0]
-            activity_database = mapping[(mapping.Name == tech) & (mapping.Type == 'Operation')].Database.iloc[0]
-            activity_location = mapping[(mapping.Name == tech) & (mapping.Type == 'Operation')].Location.iloc[0]
-            activity_unit = db_dict_name[activity_name, activity_prod, activity_location, activity_database]['unit']
-            code = db_dict_name[activity_name, activity_prod, activity_location, activity_database]['code']
-            new_exc = {
-                'amount': amount / total_amount,
-                'code': code,
-                'type': 'technosphere',
-                'name': activity_name,
-                'product': activity_prod,
-                'unit': activity_unit,
-                'location': activity_location,
-                'database': activity_database,
-                'comment': tech,
-            }
-            exchanges.append(new_exc)
+            if tech in list(mapping[(mapping.Type == 'Operation') | (mapping.Type == 'Resource')].Name.unique()):
+                activity_name = mapping[
+                    (mapping.Name == tech) & ((mapping.Type == 'Operation') | (mapping.Type == 'Resource'))
+                                        ].Activity.iloc[0]
+                activity_prod = mapping[
+                    (mapping.Name == tech) & ((mapping.Type == 'Operation') | (mapping.Type == 'Resource'))
+                                        ].Product.iloc[0]
+                activity_database = mapping[
+                    (mapping.Name == tech) & ((mapping.Type == 'Operation') | (mapping.Type == 'Resource'))
+                                            ].Database.iloc[0]
+                activity_location = mapping[
+                    (mapping.Name == tech) & ((mapping.Type == 'Operation') | (mapping.Type == 'Resource'))
+                                            ].Location.iloc[0]
+                activity_unit = db_dict_name[activity_name, activity_prod, activity_location, activity_database]['unit']
+                code = db_dict_name[activity_name, activity_prod, activity_location, activity_database]['code']
+                new_exc = {
+                    'amount': amount / total_amount,
+                    'code': code,
+                    'type': 'technosphere',
+                    'name': activity_name,
+                    'product': activity_prod,
+                    'unit': activity_unit,
+                    'location': activity_location,
+                    'database': activity_database,
+                    'comment': tech,
+                }
+                exchanges.append(new_exc)
+            else:
+                print(f'The technology {tech} is not in the mapping file. '
+                      f'It cannot be considered in the result LCI dataset.')
 
     try:  # Check if the original activity is in the database for the location under study
         original_activity = db_dict_name[
