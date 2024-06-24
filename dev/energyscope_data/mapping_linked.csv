@@ -105,8 +105,8 @@ CAR_DIESEL_MD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Med
 CAR_DIESEL_MD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Medium, EURO-6ab",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 CAR_DIESEL_SD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Medium, EURO-6ab",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 CAR_DIESEL_SD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-CAR_ETOH_E10_ELD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline, Medium, EURO-6ab",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 CAR_ETOH_E10_ELD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+CAR_ETOH_E10_ELD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline, Medium, EURO-6ab",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 CAR_ETOH_E10_LD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline, Medium, EURO-6ab",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 CAR_ETOH_E10_LD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 CAR_ETOH_E10_MD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline, Medium, EURO-6ab",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
@@ -163,8 +163,8 @@ CAR_HY_GASOLINE_SD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoli
 CAR_HY_GASOLINE_SD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline hybrid, Medium, EURO-6ab",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 CAR_PHEV_GASOLINE_ELD,Construction,"Passenger car, EURO-6ab","Passenger car, plugin gasoline hybrid, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 CAR_PHEV_GASOLINE_ELD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, plugin gasoline hybrid, Medium, EURO-6ab",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-CAR_PHEV_GASOLINE_LD,Construction,"Passenger car, EURO-6ab","Passenger car, plugin gasoline hybrid, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 CAR_PHEV_GASOLINE_LD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, plugin gasoline hybrid, Medium, EURO-6ab",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+CAR_PHEV_GASOLINE_LD,Construction,"Passenger car, EURO-6ab","Passenger car, plugin gasoline hybrid, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 CAR_PHEV_GASOLINE_MD,Construction,"Passenger car, EURO-6ab","Passenger car, plugin gasoline hybrid, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 CAR_PHEV_GASOLINE_MD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, plugin gasoline hybrid, Medium, EURO-6ab",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 CAR_PHEV_GASOLINE_SD,Construction,"Passenger car, EURO-6ab","Passenger car, plugin gasoline hybrid, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
@@ -222,8 +222,8 @@ COACH_ETOH_E10_LD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 
 COACH_ETOH_E10_LD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 COACH_ETOH_E10_MD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 COACH_ETOH_E10_MD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-COACH_EV_ELD,Operation,"transport, passenger bus","transport, passenger bus, battery electric - overnight charging, NMC-622 battery, 13m single deck urban bus",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 COACH_EV_ELD,Construction,passenger bus,"passenger bus, battery electric - overnight charging, NMC-622 battery, 13m single deck urban bus",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+COACH_EV_ELD,Operation,"transport, passenger bus","transport, passenger bus, battery electric - overnight charging, NMC-622 battery, 13m single deck urban bus",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 COACH_EV_LD,Operation,"transport, passenger bus","transport, passenger bus, battery electric - overnight charging, NMC-622 battery, 13m single deck urban bus",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 COACH_EV_LD,Construction,passenger bus,"passenger bus, battery electric - overnight charging, NMC-622 battery, 13m single deck urban bus",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 COACH_EV_MD,Operation,"transport, passenger bus","transport, passenger bus, battery electric - overnight charging, NMC-622 battery, 13m single deck urban bus",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
@@ -242,8 +242,8 @@ COACH_GASOLINE_MD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 
 COACH_GASOLINE_MD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 COACH_PROPANE_ELD,Construction,"Passenger bus, EURO-VI","Passenger bus, compressed gas, 13m single deck coach bus, EURO-VI",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 COACH_PROPANE_ELD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, compressed gas, 13m single deck coach bus, EURO-VI",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-COACH_PROPANE_LD,Construction,"Passenger bus, EURO-VI","Passenger bus, compressed gas, 13m single deck coach bus, EURO-VI",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 COACH_PROPANE_LD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, compressed gas, 13m single deck coach bus, EURO-VI",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+COACH_PROPANE_LD,Construction,"Passenger bus, EURO-VI","Passenger bus, compressed gas, 13m single deck coach bus, EURO-VI",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 COACH_PROPANE_MD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, compressed gas, 13m single deck coach bus, EURO-VI",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 COACH_PROPANE_MD,Construction,"Passenger bus, EURO-VI","Passenger bus, compressed gas, 13m single deck coach bus, EURO-VI",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 COAL_GAS_H2,Operation,"hydrogen, gaseous, 30 bar","hydrogen production, gaseous, 30 bar, from hard coal gasification and reforming, at coal gasification plant",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
@@ -264,8 +264,8 @@ COAL_IGCC_CC,Operation,"electricity, high voltage","electricity production, at h
 COAL_IGCC_CC,Construction,hard coal IGCC power plant 450MW,hard coal IGCC power plant 450MW,RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 COAL_US,Operation,"electricity, high voltage","electricity production, at lignite-fired power plant, pulverised",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 COAL_US,Construction,lignite power plant,market for lignite power plant,GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-COAL_US_CC,Operation,"electricity, high voltage","electricity production, at lignite-fired power plant, post, pipeline 200km, storage 1000m",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 COAL_US_CC,Construction,lignite power plant,market for lignite power plant,GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+COAL_US_CC,Operation,"electricity, high voltage","electricity production, at lignite-fired power plant, post, pipeline 200km, storage 1000m",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 CROPS_TO_ETHANOL,Operation,"ethanol, from corn","ethanol production, via fermentation, from corn, energy allocation",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 CROPS_TO_ETHANOL,Construction,ethanol fermentation plant,market for ethanol fermentation plant,GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 CROPS_TO_JETFUELS,Operation,"kerosene, synthetic","kerosene production, synthetic, Fischer Tropsch process, hydrogen from wood gasification, energy allocation",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
@@ -279,8 +279,8 @@ DAC_LT,Operation,"carbon dioxide, captured from atmosphere","carbon dioxide, cap
 DAC_LT_PLANT,Construction,direct air capture system,"direct air capture system, solvent-based, 1MtCO2",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 DAC_LT_PLANT_DECOM,Construction,direct air capture system,"treatment of direct air capture system, solvent-based, 1MtCO2",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 DEC_ADVCOGEN_H2,Construction,"fuel cell, polymer electrolyte membrane, 2kW electrical, future","fuel cell production, polymer electrolyte membrane, 2kW electrical, future",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-DEC_BOILER_GAS,Operation,"heat, central or small-scale, natural gas","heat production, natural gas, at boiler modulating <100kW",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 DEC_BOILER_GAS,Construction,gas boiler,gas boiler production,RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+DEC_BOILER_GAS,Operation,"heat, central or small-scale, natural gas","heat production, natural gas, at boiler modulating <100kW",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 DEC_BOILER_OIL,Operation,"heat, central or small-scale, other than natural gas","heat production, light fuel oil, at boiler 10kW condensing, non-modulating",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 DEC_BOILER_OIL_BOILER,Construction,"oil boiler, 10kW","oil boiler production, 10kW",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 DEC_BOILER_OIL_TANK,Construction,"oil storage, 3000l","market for oil storage, 3000l",GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
@@ -327,8 +327,8 @@ DHN_COGEN_WOOD,Operation,"heat, district or industrial, other than natural gas",
 DHN_COGEN_WOOD_BOILER,Construction,"furnace, wood chips, with silo, 5000kW","furnace production, wood chips, with silo, 5000kW",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 DHN_COGEN_WOOD_DUST,Construction,"dust collector, electrostatic precipitator, for industrial use","market for dust collector, electrostatic precipitator, for industrial use",GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 DHN_COGEN_WOOD_TURBINE,Construction,"heat and power co-generation unit, organic Rankine cycle, 1000kW electrical","market for heat and power co-generation unit, organic Rankine cycle, 1000kW electrical",GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-DHN_DEEP_GEO,Construction,geothermal heat plant,geothermal heat plant construction,CA,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 DHN_DEEP_GEO,Operation,"heat, deep geothermal","heat production, deep geothermal",CA,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+DHN_DEEP_GEO,Construction,geothermal heat plant,geothermal heat plant construction,CA,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 DHN_HP_ELEC,Operation,"heat, central or small-scale, other than natural gas","heat production, at heat pump 30kW, allocation exergy",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 DHN_HP_ELEC,Construction,"heat pump, 30kW","heat pump production, 30kW",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 DHN_TH_STORAGE,Construction,"thermal storage system, solar tower power plant, 20 MW","thermal storage system construction, solar tower power plant, 20 MW",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
@@ -350,10 +350,10 @@ ETHANE_OXIDATION,Construction,"chemical factory, organics","chemical factory con
 ETHANE_OXIDATION,Operation,"acetic acid, without water, in 98% solution state","acetic acid production, product in 98% solution state",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 ETHANE_TO_ETHYLENE,Operation,ethylene,"ethylene production, average",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 ETHANE_TO_ETHYLENE,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-ETHANOL_TO_JETFUELS,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 ETHANOL_TO_JETFUELS,Operation,"kerosene, synthetic","kerosene production, from methanol, hydrogen from coal gasification, energy allocation",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-ETHYLENE_POLYMERIZATION,Operation,ethylene,"ethylene production, average",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+ETHANOL_TO_JETFUELS,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 ETHYLENE_POLYMERIZATION,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+ETHYLENE_POLYMERIZATION,Operation,ethylene,"ethylene production, average",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 FOOD_PROD,Construction,sugar refinery,sugar refinery construction,GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 FOOD_PROD,Operation,"sugar, from sugar beet",beet sugar production,RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 FOOD_PROD_HP,Operation,"sugar, from sugar beet",beet sugar production,RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
@@ -390,8 +390,8 @@ H2_EXP_EH,Operation,"hydrogen, gaseous","market for hydrogen, gaseous",CAZ,ecoin
 H2_EXP_EH_COGEN,Operation,"hydrogen, gaseous","market for hydrogen, gaseous",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 H2_EXP_EH_COGEN,Construction,"air input/output unit, heat and power co-generation unit, 160kW electrical","air input/output unit production, heat and power co-generation unit, 160kW electrical",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 H2_EXP_HM,Operation,"hydrogen, gaseous","market for hydrogen, gaseous",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-H2_EXP_HM_COGEN,Construction,"air input/output unit, heat and power co-generation unit, 160kW electrical","air input/output unit production, heat and power co-generation unit, 160kW electrical",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 H2_EXP_HM_COGEN,Operation,"hydrogen, gaseous","market for hydrogen, gaseous",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+H2_EXP_HM_COGEN,Construction,"air input/output unit, heat and power co-generation unit, 160kW electrical","air input/output unit production, heat and power co-generation unit, 160kW electrical",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 H2_EXP_ML,Operation,"hydrogen, gaseous","market for hydrogen, gaseous",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 H2_EXP_ML_COGEN,Construction,"air input/output unit, heat and power co-generation unit, 160kW electrical","air input/output unit production, heat and power co-generation unit, 160kW electrical",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 H2_EXP_ML_COGEN,Operation,"hydrogen, gaseous","market for hydrogen, gaseous",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
@@ -413,10 +413,10 @@ HYDRO_GAS,Operation,"syngas, RWGS, Production","syngas, RWGS, Production, for Fi
 HYDRO_GAS_CHP,Operation,"syngas, RWGS, Production","syngas, RWGS, Production, for Fischer Tropsch process, hydrogen from wood gasification",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 HYDRO_GAS_CHP_PLANT,Construction,synthetic gas factory,synthetic gas factory construction,RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 HYDRO_GAS_CHP_TURBINE,Construction,"heat and power co-generation unit, organic Rankine cycle, 200kW electrical","heat and power co-generation unit construction, organic Rankine cycle, 200kW electrical",GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-HYDRO_RIVER,Operation,"electricity, high voltage","electricity production, hydro, run-of-river",CA-QC,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 HYDRO_RIVER,Construction,"hydropower plant, run-of-river","hydropower plant construction, run-of-river",CA-QC,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-HYDRO_STORAGE,Construction,"hydropower plant, reservoir","hydropower plant construction, reservoir",CA-QC,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+HYDRO_RIVER,Operation,"electricity, high voltage","electricity production, hydro, run-of-river",CA-QC,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 HYDRO_STORAGE,Operation,"electricity, high voltage","electricity production, hydro, pumped storage",CA-ON,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+HYDRO_STORAGE,Construction,"hydropower plant, reservoir","hydropower plant construction, reservoir",CA-QC,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 IND_BOILER_COAL,Construction,"industrial furnace, coal, 1-10MW","industrial furnace production, coal, 1-10MW",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 IND_BOILER_COAL,Operation,"heat, district or industrial, other than natural gas","heat production, at hard coal industrial furnace 1-10MW",CA-QC,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 IND_BOILER_GAS,Construction,"industrial furnace, natural gas","industrial furnace production, natural gas",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
@@ -426,8 +426,8 @@ IND_BOILER_OIL_PLANT,Construction,"industrial furnace, 1MW, oil","industrial fur
 IND_BOILER_OIL_TANK,Construction,"oil storage, 3000l","market for oil storage, 3000l",GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 IND_BOILER_WASTE,Construction,municipal waste incineration facility,municipal waste incineration facility construction,RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 IND_BOILER_WASTE,Operation,"heat, district or industrial, other than natural gas","heat, from municipal waste incineration to generic market for heat district or industrial, other than natural gas",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-IND_BOILER_WOOD,Construction,"furnace, wood chips, with silo, 1000kW","furnace production, wood chips, with silo, 1000kW",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 IND_BOILER_WOOD,Operation,"heat, district or industrial, other than natural gas","heat production, wood chips from industry, at furnace 1000kW",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+IND_BOILER_WOOD,Construction,"furnace, wood chips, with silo, 1000kW","furnace production, wood chips, with silo, 1000kW",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 IND_COGEN_GAS,Operation,"heat, district or industrial, natural gas","heat and power co-generation, natural gas, 1MW electrical, lean burn",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 IND_COGEN_GAS_CHP,Construction,"heat and power co-generation unit, 1MW electrical, common components for heat+electricity","heat and power co-generation unit construction, 1MW electrical, common components for heat+electricity",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 IND_COGEN_GAS_ELEC,Construction,"heat and power co-generation unit, 1MW electrical, components for electricity only","heat and power co-generation unit construction, 1MW electrical, components for electricity only",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
@@ -442,8 +442,8 @@ IND_COGEN_WOOD_TURBINE,Construction,"heat and power co-generation unit, organic 
 IND_DIRECT_ELEC,Construction,"auxiliary heating unit, electric, 5kW","auxiliary heating unit production, electric, 5kW",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 IND_HP_ELEC,Operation,"heat, air-water heat pump 10kW","heat production, air-water heat pump 10kW",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 IND_HP_ELEC,Construction,"heat pump, brine-water, 10kW","heat pump production, brine-water, 10kW",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-LCV_BIODIESEL_B100_MD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
 LCV_BIODIESEL_B100_MD,Construction,"Light duty truck, EURO-VI","Light duty truck, diesel, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
+LCV_BIODIESEL_B100_MD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
 LCV_BIODIESEL_B100_SD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
 LCV_BIODIESEL_B100_SD,Construction,"Light duty truck, EURO-VI","Light duty truck, diesel, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
 LCV_BIODIESEL_B20_MD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
@@ -454,12 +454,12 @@ LCV_CNG_MD,Construction,"Light duty truck, EURO-VI","Light duty truck, compresse
 LCV_CNG_MD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, compressed gas, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
 LCV_CNG_SD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, compressed gas, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
 LCV_CNG_SD,Construction,"Light duty truck, EURO-VI","Light duty truck, compressed gas, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-LCV_DIESEL_MD,Construction,"Light duty truck, EURO-VI","Light duty truck, diesel, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
 LCV_DIESEL_MD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-LCV_DIESEL_SD,Construction,"Light duty truck, EURO-VI","Light duty truck, diesel, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
+LCV_DIESEL_MD,Construction,"Light duty truck, EURO-VI","Light duty truck, diesel, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
 LCV_DIESEL_SD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-LCV_ETOH_E10_MD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, compressed gas, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
+LCV_DIESEL_SD,Construction,"Light duty truck, EURO-VI","Light duty truck, diesel, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
 LCV_ETOH_E10_MD,Construction,"Light duty truck, EURO-VI","Light duty truck, compressed gas, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
+LCV_ETOH_E10_MD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, compressed gas, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
 LCV_ETOH_E10_SD,Construction,"Light duty truck, EURO-VI","Light duty truck, compressed gas, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
 LCV_ETOH_E10_SD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, compressed gas, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
 LCV_ETOH_E85_MD,Construction,"Light duty truck, EURO-VI","Light duty truck, compressed gas, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
@@ -474,22 +474,22 @@ LCV_FC_CH4_MD,Operation,"transport, freight, lorry","transport, freight, lorry, 
 LCV_FC_CH4_MD,Construction,Light duty truck,"Light duty truck, fuel cell electric, 3.5t gross weight, 2020, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
 LCV_FC_CH4_SD,Construction,Light duty truck,"Light duty truck, fuel cell electric, 3.5t gross weight, 2020, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
 LCV_FC_CH4_SD,Operation,"transport, freight, lorry","transport, freight, lorry, fuel cell electric, 3.5t gross weight, 2020, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-LCV_FC_H2_MD,Operation,"transport, freight, lorry","transport, freight, lorry, fuel cell electric, 3.5t gross weight, 2020, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
 LCV_FC_H2_MD,Construction,Light duty truck,"Light duty truck, fuel cell electric, 3.5t gross weight, 2020, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
+LCV_FC_H2_MD,Operation,"transport, freight, lorry","transport, freight, lorry, fuel cell electric, 3.5t gross weight, 2020, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
 LCV_FC_H2_SD,Construction,Light duty truck,"Light duty truck, fuel cell electric, 3.5t gross weight, 2020, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
 LCV_FC_H2_SD,Operation,"transport, freight, lorry","transport, freight, lorry, fuel cell electric, 3.5t gross weight, 2020, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
 LCV_GASOLINE_MD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
 LCV_GASOLINE_MD,Construction,"Light duty truck, EURO-VI","Light duty truck, diesel, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-LCV_GASOLINE_SD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
 LCV_GASOLINE_SD,Construction,"Light duty truck, EURO-VI","Light duty truck, diesel, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-LCV_PHEV_GASOLINE_MD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, plugin diesel hybrid, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
+LCV_GASOLINE_SD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
 LCV_PHEV_GASOLINE_MD,Construction,"Light duty truck, EURO-VI","Light duty truck, plugin diesel hybrid, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
+LCV_PHEV_GASOLINE_MD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, plugin diesel hybrid, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
 LCV_PHEV_GASOLINE_SD,Construction,"Light duty truck, EURO-VI","Light duty truck, plugin diesel hybrid, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
 LCV_PHEV_GASOLINE_SD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, plugin diesel hybrid, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
 LCV_PROPANE_MD,Construction,"Light duty truck, EURO-VI","Light duty truck, compressed gas, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
 LCV_PROPANE_MD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, compressed gas, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-LCV_PROPANE_SD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, compressed gas, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
 LCV_PROPANE_SD,Construction,"Light duty truck, EURO-VI","Light duty truck, compressed gas, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
+LCV_PROPANE_SD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, compressed gas, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
 LP_H2_GRID,Construction,"pipeline, for hydrogen distribution","distribution pipeline for hydrogen, dedicated hydrogen pipeline",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
 LP_H2_GRID,Operation,"transport, pipeline, long distance, natural gas","transport, pipeline, long distance, natural gas",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 LP_NG_GRID,Construction,"pipeline, natural gas, low pressure distribution network","pipeline construction, natural gas, low pressure distribution network",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
@@ -497,26 +497,26 @@ LP_NG_GRID,Operation,"transport, pipeline, long distance, natural gas","transpor
 LV_GRID,Construction,"distribution network, electricity, low voltage","distribution network construction, electricity, low voltage",CA-QC,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 METATHESIS_PROPYLENE,Operation,propylene,propylene production,RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 METATHESIS_PROPYLENE,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-METHANATION,Construction,synthetic gas factory,synthetic gas factory construction,RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 METHANATION,Operation,"methane, from electrochemical methanation","methane, from electrochemical methanation, with carbon from municipal waste incineration plant",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+METHANATION,Construction,synthetic gas factory,synthetic gas factory construction,RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 METHANE_TO_METHANOL,Operation,methanol,methanol production,GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 METHANE_TO_METHANOL,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 METHANOL_CARBONYLATION,Operation,"acetic acid, without water, in 98% solution state","acetic acid production, product in 98% solution state",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 METHANOL_CARBONYLATION,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 METHANOL_FT,Operation,"methanol, from biomass","methanol production, from synthetic gas",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 METHANOL_FT,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-METHANOL_TO_AROMATICS,Operation,xylene,xylene production,RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 METHANOL_TO_AROMATICS,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-METHANOL_TO_OLEFINS,Operation,n-olefins,n-olefins production,RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+METHANOL_TO_AROMATICS,Operation,xylene,xylene production,RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 METHANOL_TO_OLEFINS,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+METHANOL_TO_OLEFINS,Operation,n-olefins,n-olefins production,RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 MINES_STORAGE,Operation,"carbon dioxide, stored","carbon dioxide compression, transport and storage",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 MP_H2_GRID,Operation,"transport, pipeline, long distance, natural gas","transport, pipeline, long distance, natural gas",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 MP_H2_GRID,Construction,"pipeline, for hydrogen distribution","distribution pipeline for hydrogen, dedicated hydrogen pipeline",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-MP_NG_GRID,Construction,"pipeline, natural gas, low pressure distribution network","pipeline construction, natural gas, low pressure distribution network",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 MP_NG_GRID,Operation,"transport, pipeline, long distance, natural gas","transport, pipeline, long distance, natural gas",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+MP_NG_GRID,Construction,"pipeline, natural gas, low pressure distribution network","pipeline construction, natural gas, low pressure distribution network",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 MV_GRID,Construction,"distribution network, electricity, low voltage","distribution network construction, electricity, low voltage",CA-QC,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-NEW_HYDRO_DAM,Operation,"electricity, high voltage","electricity production, hydro, reservoir, non-alpine region",CA-QC,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 NEW_HYDRO_DAM,Construction,"hydropower plant, reservoir","hydropower plant construction, reservoir",CA-QC,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+NEW_HYDRO_DAM,Operation,"electricity, high voltage","electricity production, hydro, reservoir, non-alpine region",CA-QC,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 NEW_HYDRO_RIVER,Operation,"electricity, high voltage","electricity production, hydro, run-of-river",CA-QC,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 NEW_HYDRO_RIVER,Construction,"hydropower plant, run-of-river","hydropower plant construction, run-of-river",CA-QC,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 NG_COMP_HE,Operation,"natural gas, high pressure","market for natural gas, high pressure",CA-QC,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
@@ -532,15 +532,15 @@ NG_EXP_HM,Operation,"natural gas, high pressure","market for natural gas, high p
 NG_EXP_HM_COGEN,Operation,"natural gas, high pressure","market for natural gas, high pressure",CA-QC,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 NG_EXP_HM_COGEN,Construction,"air input/output unit, heat and power co-generation unit, 160kW electrical","air input/output unit production, heat and power co-generation unit, 160kW electrical",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 NG_EXP_ML,Operation,"natural gas, medium pressure, vehicle grade","market for natural gas, medium pressure, vehicle grade",GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-NG_EXP_ML_COGEN,Operation,"natural gas, medium pressure, vehicle grade","market for natural gas, medium pressure, vehicle grade",GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 NG_EXP_ML_COGEN,Construction,"air input/output unit, heat and power co-generation unit, 160kW electrical","air input/output unit production, heat and power co-generation unit, 160kW electrical",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+NG_EXP_ML_COGEN,Operation,"natural gas, medium pressure, vehicle grade","market for natural gas, medium pressure, vehicle grade",GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 NG_GEN,Operation,"heat, central or small-scale, natural gas","natural gas, burned in micro gas turbine, 100kWe",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 NG_GEN_TANK,Construction,"storage, 10'000 l","market for storage, 10'000 l",GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 NG_GEN_TURBINE,Construction,"micro gas turbine, 100kW electrical","market for micro gas turbine, 100kW electrical",GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-NG_PYROLYSIS_PLASMA,Operation,"hydrogen, gaseous, 100 bar","hydrogen production, gaseous, 100 bar, from methane pyrolysis",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 NG_PYROLYSIS_PLASMA,Construction,"air compressor, screw-type compressor, 4kW","market for air compressor, screw-type compressor, 4kW",GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-NG_PYROLYSIS_THERMAL,Operation,"hydrogen, gaseous, 100 bar","hydrogen production, gaseous, 100 bar, from methane pyrolysis",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+NG_PYROLYSIS_PLASMA,Operation,"hydrogen, gaseous, 100 bar","hydrogen production, gaseous, 100 bar, from methane pyrolysis",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 NG_PYROLYSIS_THERMAL,Construction,"air compressor, screw-type compressor, 4kW","market for air compressor, screw-type compressor, 4kW",GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+NG_PYROLYSIS_THERMAL,Operation,"hydrogen, gaseous, 100 bar","hydrogen production, gaseous, 100 bar, from methane pyrolysis",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 NG_REFORMING,Operation,"hydrogen, gaseous, 25 bar","hydrogen production, steam methane reforming of natural gas, 25 bar",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 NG_REFORMING_PLANT,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 NG_REFORMING_TANK,Construction,"liquid storage tank, chemicals, organics","market for liquid storage tank, chemicals, organics",GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
@@ -557,8 +557,8 @@ PAPER_MAKING,Construction,"paper mill, integrated","paper mill construction, int
 PAPER_MAKING,Operation,"paper, newsprint","paper production, newsprint, recycled",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 PAPER_MAKING_HP,Operation,"paper, newsprint","paper production, newsprint, recycled",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 PAPER_MAKING_HP,Construction,"paper mill, integrated","paper mill construction, integrated",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-PAPER_MAKING_HR,Construction,"paper mill, integrated","paper mill construction, integrated",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 PAPER_MAKING_HR,Operation,"paper, newsprint","paper production, newsprint, recycled",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+PAPER_MAKING_HR,Construction,"paper mill, integrated","paper mill construction, integrated",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 PEMEC_OG,Operation,"hydrogen, gaseous, 30 bar","hydrogen production, gaseous, 30 bar, from PEM electrolysis, from grid electricity",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 PEMEC_OG_PLANT,Construction,"electrolyzer, 1MWe, PEM, Balance of Plant","electrolyzer production, 1MWe, PEM, Balance of Plant",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 PEMEC_OG_PLANT_DECOM,Construction,"used fuel cell balance of plant, 1MWe, PEM","treatment of fuel cell balance of plant, 1MWe, PEM",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
@@ -581,20 +581,20 @@ PLANE_SH_LD,Construction,"aircraft, passenger, medium haul","market for aircraft
 PLANE_SH_LD,Operation,"transport, passenger aircraft, medium haul","transport, passenger aircraft, medium haul",GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 POLYPROPYLENE_PP,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 POLYPROPYLENE_PP,Operation,"polypropylene, granulate","polypropylene production, granulate",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-PV,Operation,"electricity production, photovoltaic, at 1.3 MWp slanted-roof, multi-Si, panel, mounted","electricity production, photovoltaic, at 1.3 MWp slanted-roof, multi-Si, panel, mounted",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 PV,Construction,"photovoltaic slanted-roof installation, 1.3 MWp, multi-Si, panel, mounted, on roof","photovoltaic slanted-roof installation, 1.3 MWp, multi-Si, panel, mounted, on roof",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-PVC_FORMATION,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+PV,Operation,"electricity production, photovoltaic, at 1.3 MWp slanted-roof, multi-Si, panel, mounted","electricity production, photovoltaic, at 1.3 MWp slanted-roof, multi-Si, panel, mounted",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 PVC_FORMATION,Operation,"polyvinylchloride, bulk polymerised","polyvinylchloride production, bulk polymerisation",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-PV_EHV,Construction,"photovoltaic open ground installation, 560 kWp, single-Si, on open ground","photovoltaic open ground installation, 560 kWp, single-Si, on open ground",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+PVC_FORMATION,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 PV_EHV,Operation,"electricity production, photovoltaic, at 560 kWp open ground, single-Si","electricity production, photovoltaic, at 560 kWp open ground, single-Si",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+PV_EHV,Construction,"photovoltaic open ground installation, 560 kWp, single-Si, on open ground","photovoltaic open ground installation, 560 kWp, single-Si, on open ground",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 PYROLYSIS,Operation,light fuel oil,"light fuel oil production, from waste polyethylene",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 PYROLYSIS,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SCHOOLBUS_BIODIESEL_B100_SD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m single deck urban bus, EURO-VI",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SCHOOLBUS_BIODIESEL_B100_SD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m single deck urban bus, EURO-VI",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SCHOOLBUS_BIODIESEL_B20_SD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m single deck urban bus, EURO-VI",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SCHOOLBUS_BIODIESEL_B20_SD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m single deck urban bus, EURO-VI",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-SCHOOLBUS_CNG_SD,Construction,"Passenger bus, EURO-VI","Passenger bus, compressed gas, 13m single deck urban bus, EURO-VI",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SCHOOLBUS_CNG_SD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, compressed gas, 13m single deck urban bus, EURO-VI",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+SCHOOLBUS_CNG_SD,Construction,"Passenger bus, EURO-VI","Passenger bus, compressed gas, 13m single deck urban bus, EURO-VI",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SCHOOLBUS_DIESEL_SD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m single deck urban bus, EURO-VI",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SCHOOLBUS_DIESEL_SD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m single deck urban bus, EURO-VI",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SCHOOLBUS_ETOH_E10_SD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m single deck urban bus, EURO-VI",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
@@ -603,36 +603,36 @@ SCHOOLBUS_EV_SD,Operation,"transport, passenger bus","transport, passenger bus, 
 SCHOOLBUS_EV_SD,Construction,passenger bus,"passenger bus, battery electric - overnight charging, NMC-622 battery, 13m single deck urban bus",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SCHOOLBUS_FC_CH4_SD,Operation,"transport, passenger bus","transport, passenger bus, fuel cell electric, 13m single deck urban bus",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SCHOOLBUS_FC_CH4_SD,Construction,passenger bus,"passenger bus, fuel cell electric, 13m single deck urban bus",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-SCHOOLBUS_GASOLINE_SD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m single deck urban bus, EURO-VI",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SCHOOLBUS_GASOLINE_SD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m single deck urban bus, EURO-VI",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-SCHOOLBUS_HY_DIESEL_SD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel hybrid, 13m single deck urban bus, EURO-VI",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+SCHOOLBUS_GASOLINE_SD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m single deck urban bus, EURO-VI",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SCHOOLBUS_HY_DIESEL_SD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel hybrid, 13m single deck urban bus, EURO-VI",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+SCHOOLBUS_HY_DIESEL_SD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel hybrid, 13m single deck urban bus, EURO-VI",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SCHOOLBUS_PROPANE_SD,Construction,"Passenger bus, EURO-VI","Passenger bus, compressed gas, 13m single deck urban bus, EURO-VI",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SCHOOLBUS_PROPANE_SD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, compressed gas, 13m single deck urban bus, EURO-VI",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-SEMI_LD_BIODIESEL_B100_ELD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 26t gross weight, EURO-VI, long haul",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SEMI_LD_BIODIESEL_B100_ELD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, diesel, 26t gross weight, EURO-VI, long haul",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-SEMI_LD_BIODIESEL_B100_LD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 26t gross weight, EURO-VI, long haul",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+SEMI_LD_BIODIESEL_B100_ELD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 26t gross weight, EURO-VI, long haul",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SEMI_LD_BIODIESEL_B100_LD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, diesel, 26t gross weight, EURO-VI, long haul",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+SEMI_LD_BIODIESEL_B100_LD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 26t gross weight, EURO-VI, long haul",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SEMI_LD_BIODIESEL_B20_ELD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 26t gross weight, EURO-VI, long haul",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SEMI_LD_BIODIESEL_B20_ELD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, diesel, 26t gross weight, EURO-VI, long haul",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-SEMI_LD_BIODIESEL_B20_LD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 26t gross weight, EURO-VI, long haul",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SEMI_LD_BIODIESEL_B20_LD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, diesel, 26t gross weight, EURO-VI, long haul",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+SEMI_LD_BIODIESEL_B20_LD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 26t gross weight, EURO-VI, long haul",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SEMI_LD_CNG_ELD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, compressed gas, 26t gross weight, EURO-VI, long haul",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SEMI_LD_CNG_ELD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, compressed gas, 26t gross weight, EURO-VI, long haul",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-SEMI_LD_CNG_LD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, compressed gas, 26t gross weight, EURO-VI, long haul",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SEMI_LD_CNG_LD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, compressed gas, 26t gross weight, EURO-VI, long haul",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+SEMI_LD_CNG_LD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, compressed gas, 26t gross weight, EURO-VI, long haul",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SEMI_LD_DIESEL_ELD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 26t gross weight, EURO-VI, long haul",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SEMI_LD_DIESEL_ELD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, diesel, 26t gross weight, EURO-VI, long haul",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-SEMI_LD_DIESEL_LD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 26t gross weight, EURO-VI, long haul",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SEMI_LD_DIESEL_LD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, diesel, 26t gross weight, EURO-VI, long haul",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+SEMI_LD_DIESEL_LD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 26t gross weight, EURO-VI, long haul",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SEMI_LD_EV_ELD,Operation,"transport, freight, lorry","transport, freight, lorry, battery electric, NMC-622 battery, 26t gross weight, long haul",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SEMI_LD_EV_ELD,Construction,medium duty truck,"medium duty truck, battery electric, NMC-622 battery, 26t gross weight, long haul",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-SEMI_LD_EV_LD,Construction,medium duty truck,"medium duty truck, battery electric, NMC-622 battery, 26t gross weight, long haul",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SEMI_LD_EV_LD,Operation,"transport, freight, lorry","transport, freight, lorry, battery electric, NMC-622 battery, 26t gross weight, long haul",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-SEMI_LD_FC_CH4_ELD,Construction,medium duty truck,"medium duty truck, fuel cell electric, 26t gross weight, long haul",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+SEMI_LD_EV_LD,Construction,medium duty truck,"medium duty truck, battery electric, NMC-622 battery, 26t gross weight, long haul",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SEMI_LD_FC_CH4_ELD,Operation,"transport, freight, lorry","transport, freight, lorry, fuel cell electric, 26t gross weight, long haul",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-SEMI_LD_FC_CH4_LD,Operation,"transport, freight, lorry","transport, freight, lorry, fuel cell electric, 26t gross weight, long haul",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+SEMI_LD_FC_CH4_ELD,Construction,medium duty truck,"medium duty truck, fuel cell electric, 26t gross weight, long haul",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SEMI_LD_FC_CH4_LD,Construction,medium duty truck,"medium duty truck, fuel cell electric, 26t gross weight, long haul",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+SEMI_LD_FC_CH4_LD,Operation,"transport, freight, lorry","transport, freight, lorry, fuel cell electric, 26t gross weight, long haul",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SEMI_LD_FC_H2_ELD,Construction,medium duty truck,"medium duty truck, fuel cell electric, 26t gross weight, long haul",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SEMI_LD_FC_H2_ELD,Operation,"transport, freight, lorry","transport, freight, lorry, fuel cell electric, 26t gross weight, long haul",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SEMI_LD_FC_H2_LD,Operation,"transport, freight, lorry","transport, freight, lorry, fuel cell electric, 26t gross weight, long haul",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
@@ -653,16 +653,16 @@ SEMI_SD_CNG_MD,Operation,"transport, freight, lorry, EURO-VI","transport, freigh
 SEMI_SD_CNG_MD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, compressed gas, 26t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
 SEMI_SD_DIESEL_MD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 26t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
 SEMI_SD_DIESEL_MD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, diesel, 26t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-SEMI_SD_EV_MD,Construction,Medium duty truck,"Medium duty truck, battery electric, NMC-622 battery, 26t gross weight, 2020, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
 SEMI_SD_EV_MD,Operation,"transport, freight, lorry","transport, freight, lorry, battery electric, NMC-622 battery, 26t gross weight, 2020, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-SEMI_SD_FC_CH4_MD,Operation,"transport, freight, lorry","transport, freight, lorry, fuel cell electric, 26t gross weight, 2020, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
+SEMI_SD_EV_MD,Construction,Medium duty truck,"Medium duty truck, battery electric, NMC-622 battery, 26t gross weight, 2020, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
 SEMI_SD_FC_CH4_MD,Construction,Medium duty truck,"Medium duty truck, fuel cell electric, 26t gross weight, 2020, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
+SEMI_SD_FC_CH4_MD,Operation,"transport, freight, lorry","transport, freight, lorry, fuel cell electric, 26t gross weight, 2020, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
 SEMI_SD_FC_H2_MD,Construction,Medium duty truck,"Medium duty truck, fuel cell electric, 26t gross weight, 2020, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
 SEMI_SD_FC_H2_MD,Operation,"transport, freight, lorry","transport, freight, lorry, fuel cell electric, 26t gross weight, 2020, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
 SEMI_SD_HY_DIESEL_MD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel hybrid, 26t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
 SEMI_SD_HY_DIESEL_MD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, diesel hybrid, 26t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-SEMI_SD_PROPANE_MD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, compressed gas, 26t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
 SEMI_SD_PROPANE_MD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, compressed gas, 26t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
+SEMI_SD_PROPANE_MD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, compressed gas, 26t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
 SMART_PROCESS,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SMART_PROCESS,Operation,styrene,styrene production,RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SMR,Operation,"hydrogen, gaseous, 25 bar","hydrogen production, steam methane reforming of natural gas, 25 bar",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
@@ -671,6 +671,7 @@ SMR_CCS_PLANT,Construction,"chemical factory, organics","chemical factory constr
 SMR_CCS_TANK,Construction,"liquid storage tank, chemicals, organics","market for liquid storage tank, chemicals, organics",GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SMR_PLANT,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SMR_TANK,Construction,"liquid storage tank, chemicals, organics","market for liquid storage tank, chemicals, organics",GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+SNG_NG,Operation,biogas,market for biogas,RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SOEC_ELECTROLYSIS,Operation,"hydrogen, gaseous, 1 bar","hydrogen production, gaseous, 1 bar, from SOEC electrolysis, from grid electricity",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SOEC_ELECTROLYSIS_PLANT,Construction,"electrolyzer, 1MWe, SOEC, Balance of Plant","electrolyzer production, 1MWe, SOEC, Balance of Plant",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SOEC_ELECTROLYSIS_PLANT_DECOM,Construction,"used fuel cell balance of plant, 1MWe, SOEC","treatment of fuel cell balance of plant, 1MWe, SOEC",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
@@ -685,8 +686,8 @@ SOFC,Construction,"fuel cell system, 1 kWe, proton exchange membrane (PEM)","fue
 SOFC_OG,Construction,"fuel cell system, 1 kWe, proton exchange membrane (PEM)","fuel cell system assembly, 1 kWe, proton exchange membrane (PEM)",GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 STEEL_MAKING,Construction,aluminium casting facility,aluminium casting facility construction,RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 STEEL_MAKING,Operation,"steel, chromium steel 18/8","market for steel, chromium steel 18/8",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-STEEL_MAKING_HP,Construction,aluminium casting facility,aluminium casting facility construction,RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 STEEL_MAKING_HP,Operation,"steel, chromium steel 18/8","market for steel, chromium steel 18/8",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+STEEL_MAKING_HP,Construction,aluminium casting facility,aluminium casting facility construction,RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 STEEL_MAKING_HR,Operation,"steel, chromium steel 18/8","market for steel, chromium steel 18/8",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 STEEL_MAKING_HR,Construction,aluminium casting facility,aluminium casting facility construction,RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 STYRENE_POLYMERIZATION,Operation,"polystyrene, expandable","polystyrene production, expandable",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
@@ -699,38 +700,38 @@ SUV_BIODIESEL_B100_MD,Operation,"transport, passenger car, EURO-6ab","transport,
 SUV_BIODIESEL_B100_MD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SUV_BIODIESEL_B100_SD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Large SUV, EURO-6ab",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SUV_BIODIESEL_B100_SD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-SUV_BIODIESEL_B20_ELD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Large SUV, EURO-6ab",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SUV_BIODIESEL_B20_ELD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+SUV_BIODIESEL_B20_ELD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Large SUV, EURO-6ab",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SUV_BIODIESEL_B20_LD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Large SUV, EURO-6ab",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SUV_BIODIESEL_B20_LD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SUV_BIODIESEL_B20_MD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Large SUV, EURO-6ab",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SUV_BIODIESEL_B20_MD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-SUV_BIODIESEL_B20_SD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SUV_BIODIESEL_B20_SD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Large SUV, EURO-6ab",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+SUV_BIODIESEL_B20_SD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SUV_CNG_ELD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, compressed gas, Large SUV, EURO-6ab",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SUV_CNG_ELD,Construction,"Passenger car, EURO-6ab","Passenger car, compressed gas, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SUV_CNG_LD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, compressed gas, Large SUV, EURO-6ab",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SUV_CNG_LD,Construction,"Passenger car, EURO-6ab","Passenger car, compressed gas, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-SUV_CNG_MD,Construction,"Passenger car, EURO-6ab","Passenger car, compressed gas, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SUV_CNG_MD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, compressed gas, Large SUV, EURO-6ab",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-SUV_CNG_SD,Construction,"Passenger car, EURO-6ab","Passenger car, compressed gas, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+SUV_CNG_MD,Construction,"Passenger car, EURO-6ab","Passenger car, compressed gas, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SUV_CNG_SD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, compressed gas, Large SUV, EURO-6ab",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+SUV_CNG_SD,Construction,"Passenger car, EURO-6ab","Passenger car, compressed gas, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SUV_DIESEL_ELD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SUV_DIESEL_ELD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Large SUV, EURO-6ab",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-SUV_DIESEL_LD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SUV_DIESEL_LD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Large SUV, EURO-6ab",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-SUV_DIESEL_MD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+SUV_DIESEL_LD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SUV_DIESEL_MD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Large SUV, EURO-6ab",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+SUV_DIESEL_MD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SUV_DIESEL_SD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Large SUV, EURO-6ab",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SUV_DIESEL_SD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-SUV_ETOH_E10_ELD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SUV_ETOH_E10_ELD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Large SUV, EURO-6ab",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+SUV_ETOH_E10_ELD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SUV_ETOH_E10_LD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Large SUV, EURO-6ab",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SUV_ETOH_E10_LD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SUV_ETOH_E10_MD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Large SUV, EURO-6ab",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SUV_ETOH_E10_MD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-SUV_ETOH_E10_SD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Large SUV, EURO-6ab",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SUV_ETOH_E10_SD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+SUV_ETOH_E10_SD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Large SUV, EURO-6ab",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SUV_ETOH_E85_ELD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Large SUV, EURO-6ab",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SUV_ETOH_E85_ELD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SUV_ETOH_E85_LD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Large SUV, EURO-6ab",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
@@ -741,26 +742,26 @@ SUV_ETOH_E85_SD,Operation,"transport, passenger car, EURO-6ab","transport, passe
 SUV_ETOH_E85_SD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SUV_EV_ELD,Operation,"transport, passenger car","transport, passenger car, battery electric, NMC-622 battery, Large SUV",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SUV_EV_ELD,Construction,passenger car,"passenger car, battery electric, NMC-622 battery, Large SUV",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-SUV_EV_LD,Construction,passenger car,"passenger car, battery electric, NMC-622 battery, Large SUV",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SUV_EV_LD,Operation,"transport, passenger car","transport, passenger car, battery electric, NMC-622 battery, Large SUV",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+SUV_EV_LD,Construction,passenger car,"passenger car, battery electric, NMC-622 battery, Large SUV",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SUV_EV_MD,Construction,passenger car,"passenger car, battery electric, NMC-622 battery, Large SUV",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SUV_EV_MD,Operation,"transport, passenger car","transport, passenger car, battery electric, NMC-622 battery, Large SUV",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-SUV_EV_SD,Operation,"transport, passenger car","transport, passenger car, battery electric, NMC-622 battery, Large SUV",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SUV_EV_SD,Construction,passenger car,"passenger car, battery electric, NMC-622 battery, Large SUV",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+SUV_EV_SD,Operation,"transport, passenger car","transport, passenger car, battery electric, NMC-622 battery, Large SUV",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SUV_FC_CH4_ELD,Construction,passenger car,"passenger car, fuel cell electric, Large SUV",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SUV_FC_CH4_ELD,Operation,"transport, passenger car","transport, passenger car, fuel cell electric, Large SUV",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-SUV_FC_CH4_LD,Construction,passenger car,"passenger car, fuel cell electric, Large SUV",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SUV_FC_CH4_LD,Operation,"transport, passenger car","transport, passenger car, fuel cell electric, Large SUV",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+SUV_FC_CH4_LD,Construction,passenger car,"passenger car, fuel cell electric, Large SUV",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SUV_FC_CH4_MD,Construction,passenger car,"passenger car, fuel cell electric, Large SUV",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SUV_FC_CH4_MD,Operation,"transport, passenger car","transport, passenger car, fuel cell electric, Large SUV",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-SUV_FC_CH4_SD,Construction,passenger car,"passenger car, fuel cell electric, Large SUV",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SUV_FC_CH4_SD,Operation,"transport, passenger car","transport, passenger car, fuel cell electric, Large SUV",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+SUV_FC_CH4_SD,Construction,passenger car,"passenger car, fuel cell electric, Large SUV",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SUV_FC_H2_ELD,Operation,"transport, passenger car","transport, passenger car, fuel cell electric, Large SUV",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SUV_FC_H2_ELD,Construction,passenger car,"passenger car, fuel cell electric, Large SUV",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SUV_FC_H2_LD,Operation,"transport, passenger car","transport, passenger car, fuel cell electric, Large SUV",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SUV_FC_H2_LD,Construction,passenger car,"passenger car, fuel cell electric, Large SUV",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-SUV_FC_H2_MD,Construction,passenger car,"passenger car, fuel cell electric, Large SUV",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SUV_FC_H2_MD,Operation,"transport, passenger car","transport, passenger car, fuel cell electric, Large SUV",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+SUV_FC_H2_MD,Construction,passenger car,"passenger car, fuel cell electric, Large SUV",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SUV_FC_H2_SD,Operation,"transport, passenger car","transport, passenger car, fuel cell electric, Large SUV",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SUV_FC_H2_SD,Construction,passenger car,"passenger car, fuel cell electric, Large SUV",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SUV_GASOLINE_ELD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline, Large SUV, EURO-6ab",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
@@ -775,20 +776,20 @@ SUV_HY_GASOLINE_ELD,Construction,"Passenger car, EURO-6ab","Passenger car, gasol
 SUV_HY_GASOLINE_ELD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline hybrid, Large SUV, EURO-6ab",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SUV_HY_GASOLINE_LD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline hybrid, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SUV_HY_GASOLINE_LD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline hybrid, Large SUV, EURO-6ab",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-SUV_HY_GASOLINE_MD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline hybrid, Large SUV, EURO-6ab",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SUV_HY_GASOLINE_MD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline hybrid, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-SUV_HY_GASOLINE_SD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline hybrid, Large SUV, EURO-6ab",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+SUV_HY_GASOLINE_MD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline hybrid, Large SUV, EURO-6ab",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SUV_HY_GASOLINE_SD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline hybrid, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+SUV_HY_GASOLINE_SD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline hybrid, Large SUV, EURO-6ab",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SUV_PHEV_GASOLINE_ELD,Construction,"Passenger car, EURO-6ab","Passenger car, plugin gasoline hybrid, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SUV_PHEV_GASOLINE_ELD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, plugin gasoline hybrid, Large SUV, EURO-6ab",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SUV_PHEV_GASOLINE_LD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, plugin gasoline hybrid, Large SUV, EURO-6ab",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SUV_PHEV_GASOLINE_LD,Construction,"Passenger car, EURO-6ab","Passenger car, plugin gasoline hybrid, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-SUV_PHEV_GASOLINE_MD,Construction,"Passenger car, EURO-6ab","Passenger car, plugin gasoline hybrid, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SUV_PHEV_GASOLINE_MD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, plugin gasoline hybrid, Large SUV, EURO-6ab",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+SUV_PHEV_GASOLINE_MD,Construction,"Passenger car, EURO-6ab","Passenger car, plugin gasoline hybrid, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SUV_PHEV_GASOLINE_SD,Construction,"Passenger car, EURO-6ab","Passenger car, plugin gasoline hybrid, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SUV_PHEV_GASOLINE_SD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, plugin gasoline hybrid, Large SUV, EURO-6ab",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-SUV_PROPANE_ELD,Construction,"Passenger car, EURO-6ab","Passenger car, compressed gas, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SUV_PROPANE_ELD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, compressed gas, Large SUV, EURO-6ab",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+SUV_PROPANE_ELD,Construction,"Passenger car, EURO-6ab","Passenger car, compressed gas, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SUV_PROPANE_LD,Construction,"Passenger car, EURO-6ab","Passenger car, compressed gas, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SUV_PROPANE_LD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, compressed gas, Large SUV, EURO-6ab",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SUV_PROPANE_MD,Construction,"Passenger car, EURO-6ab","Passenger car, compressed gas, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
@@ -805,8 +806,8 @@ TRAFO_MH,Operation,"electricity, medium voltage","market for electricity, medium
 TRAFO_ML,Operation,"electricity, medium voltage","market for electricity, medium voltage",CA-QC,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 TRAIN_DIESEL_ELD,Operation,"transport, freight train","transport, freight train, diesel",US,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 TRAIN_DIESEL_ELD,Construction,"train, passenger, long-distance","train production, passenger, long-distance",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-TRAIN_DIESEL_LD,Construction,"train, passenger, long-distance","train production, passenger, long-distance",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 TRAIN_DIESEL_LD,Operation,"transport, freight train","transport, freight train, diesel",US,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+TRAIN_DIESEL_LD,Construction,"train, passenger, long-distance","train production, passenger, long-distance",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 TRAIN_FREIGHT_DIESEL_ELD,Operation,"transport, freight train","transport, freight train, diesel",US,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 TRAIN_FREIGHT_DIESEL_ELD_LOC,Construction,locomotive,locomotive production,RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 TRAIN_FREIGHT_DIESEL_ELD_WAG,Construction,goods wagon,goods wagon production,RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
@@ -829,16 +830,16 @@ TRAIN_H2_ELD,Operation,"transport, passenger train","transport, passenger train"
 TRAIN_H2_ELD,Construction,"train, passenger, long-distance","train production, passenger, long-distance",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 TRAIN_H2_LD,Operation,"transport, passenger train","transport, passenger train",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 TRAIN_H2_LD,Construction,"train, passenger, long-distance","train production, passenger, long-distance",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-TRAMWAY_SD,Operation,"transport, tram","transport, tram",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 TRAMWAY_SD,Construction,tram,tram production,RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+TRAMWAY_SD,Operation,"transport, tram","transport, tram",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 TRUCK_LD_BIODIESEL_B100_LD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 18t gross weight, EURO-VI, long haul",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 TRUCK_LD_BIODIESEL_B100_LD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, diesel, 18t gross weight, EURO-VI, long haul",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 TRUCK_LD_BIODIESEL_B20_LD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, diesel, 18t gross weight, EURO-VI, long haul",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 TRUCK_LD_BIODIESEL_B20_LD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 18t gross weight, EURO-VI, long haul",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-TRUCK_LD_CNG_LD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, compressed gas, 18t gross weight, EURO-VI, long haul",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 TRUCK_LD_CNG_LD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, compressed gas, 18t gross weight, EURO-VI, long haul",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-TRUCK_LD_DIESEL_LD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 18t gross weight, EURO-VI, long haul",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+TRUCK_LD_CNG_LD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, compressed gas, 18t gross weight, EURO-VI, long haul",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 TRUCK_LD_DIESEL_LD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, diesel, 18t gross weight, EURO-VI, long haul",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+TRUCK_LD_DIESEL_LD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 18t gross weight, EURO-VI, long haul",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 TRUCK_LD_EV_LD,Operation,"transport, freight, lorry","transport, freight, lorry, battery electric, NMC-622 battery, 18t gross weight, long haul",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 TRUCK_LD_EV_LD,Construction,medium duty truck,"medium duty truck, battery electric, NMC-622 battery, 18t gross weight, long haul",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 TRUCK_LD_FC_CH4_LD,Operation,"transport, freight, lorry","transport, freight, lorry, fuel cell electric, 18t gross weight, long haul",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
@@ -853,10 +854,10 @@ TRUCK_SD_BIODIESEL_B100_SD,Operation,"transport, freight, lorry, EURO-VI","trans
 TRUCK_SD_BIODIESEL_B100_SD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, diesel, 18t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
 TRUCK_SD_BIODIESEL_B20_MD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, diesel, 18t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
 TRUCK_SD_BIODIESEL_B20_MD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 18t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-TRUCK_SD_BIODIESEL_B20_SD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, diesel, 18t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
 TRUCK_SD_BIODIESEL_B20_SD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 18t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-TRUCK_SD_CNG_MD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, compressed gas, 18t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
+TRUCK_SD_BIODIESEL_B20_SD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, diesel, 18t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
 TRUCK_SD_CNG_MD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, compressed gas, 18t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
+TRUCK_SD_CNG_MD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, compressed gas, 18t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
 TRUCK_SD_CNG_SD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, compressed gas, 18t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
 TRUCK_SD_CNG_SD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, compressed gas, 18t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
 TRUCK_SD_DIESEL_MD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, diesel, 18t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
