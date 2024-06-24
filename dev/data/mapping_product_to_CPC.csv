@@ -21,6 +21,7 @@ diesel,33370: Fuel oils n.e.c.,equals,Product
 "diesel, synthetic",33370: Fuel oils n.e.c.,equals,Product
 "diesel, synthetic, vehicle grade",33370: Fuel oils n.e.c.,equals,Product
 direct air capture system,43230: Air or vacuum pumps; air or other gas compressors,equals,Product
+distribution pipeline,53251: Local pipelines,contains,Activity
 electricity production,17100: Electrical energy,contains,Product
 "electricity, high voltage",17100: Electrical energy,equals,Product
 "electricity, low voltage",17100: Electrical energy,equals,Product
@@ -76,6 +77,7 @@ sabatier reaction methanation unit,53269: Other constructions for manufacturing,
 synthetic gas factory,53269: Other constructions for manufacturing,equals,Product
 tank construction,53269: Other constructions for manufacturing,contains,Activity
 tap water,18000: Natural water,contains,Product
+transmission pipeline,53251: Local pipelines,contains,Activity
 "transport, freight, lorry",6511: Road transport services of freight,contains,Product
 "transport, passenger bus",64: Passenger transport services,contains,Product
 "transport, passenger car","64119: Other land transportation services of passengers, n.e.c.",contains,Product
