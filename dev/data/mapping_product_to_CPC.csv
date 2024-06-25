@@ -8,6 +8,7 @@ biodiesel,35491: Biodiesel,contains,Product
 "biomethane, low pressure","12020: Natural gas, liquefied or in the gaseous state",equals,Product
 "biomethane, low pressure, vehicle grade","12020: Natural gas, liquefied or in the gaseous state",equals,Product
 "biomethane, medium pressure, vehicle grade","12020: Natural gas, liquefied or in the gaseous state",equals,Product
+biogas,"17200: Coal gas, water gas, producer gas and similar gases, other than petroleum gases and other gaseous hydrocarbons",equals,Product
 "carbon dioxide, captured",34210b: Carbon dioxide and monoxide,contains,Product
 "carbon dioxide, captured from atmosphere",34210b: Carbon dioxide and monoxide,equals,Product
 "carbon dioxide, in chemical industry",34210b: Carbon dioxide and monoxide,equals,Product

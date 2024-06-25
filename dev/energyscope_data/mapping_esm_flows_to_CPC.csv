@@ -47,7 +47,7 @@ RES_TIDAL,Tidal reserve,[]
 RES_WIND,Wind reserve,[]
 RES_WIND_OFFSHORE,Wind reserve,[]
 RES_WIND_ONSHORE,Wind reserve,[]
-SNG,Synthetic natural gas,"['12020: Natural gas, liquefied or in the gaseous state', '1202: Natural gas, liquefied or in the gaseous state', '120: Crude petroleum and natural gas', '12: Crude petroleum and natural gas']"
+SNG,Synthetic natural gas,"['12020: Natural gas, liquefied or in the gaseous state', '1202: Natural gas, liquefied or in the gaseous state', '120: Crude petroleum and natural gas', '12: Crude petroleum and natural gas', '17200: Coal gas, water gas, producer gas and similar gases, other than petroleum gases and other gaseous hydrocarbons']"
 STYRENE,Styrene,"['3472: Polymers of styrene, in primary forms', '34720: Polymers of styrene, in primary forms']"
 TRANSPORT_FUEL,Possible fuels for transportation means,"['17100: Electrical energy', '1710: Electrical energy', '171: Electrical energy', '33370: Fuel oils n.e.c.', '3337: Fuel oils n.e.c.', '33360: Gas oil', '3336: Gas oil', '12020: Natural gas, liquefied or in the gaseous state', '1202: Natural gas, liquefied or in the gaseous state', '333: Petroleum oils and oils obtained from bituminous materials, other than crude; preparations n.e.c. containing by […]', '33311: Motor gasoline', '69120: Gas distribution through mains (on own account)', '34210: Hydrogen, nitrogen, oxygen, carbon dioxide and rare gases; inorganic oxygen compounds of non-metals n.e.c.', '3334: Kerosenes']"
 URANIUM,Uranium,"['33710: Fuel elements (cartridges), non-irradiated, for nuclear reactors']"
