@@ -1,5 +1,6 @@
 from .location_selection import *
 from .utils import *
+import copy
 
 
 def regionalize_activity_foreground(act: dict, accepted_locations: list[str], target_region: str,
@@ -18,15 +19,16 @@ def regionalize_activity_foreground(act: dict, accepted_locations: list[str], ta
     :return: the regionalized activity
     """
     if act['location'] in accepted_locations:
-        pass
+        new_act = copy.deepcopy(act)
 
     else:
-        act['comment'] = f'This LCI dataset has been adapted to {target_region}. ' + act.get('comment', '')
-        act['location'] = target_region
-        prod_flow = get_production_flow(act)
+        new_act = copy.deepcopy(act)
+        new_act['comment'] = f'This LCI dataset has been adapted to {target_region}. ' + new_act.get('comment', '')
+        new_act['location'] = target_region
+        prod_flow = get_production_flow(new_act)
         prod_flow['location'] = target_region
 
-        technosphere_flows = get_technosphere_flows(act)
+        technosphere_flows = get_technosphere_flows(new_act)
 
         # for each technosphere flow, we choose the best possible location according to the user ranking
         for flow in technosphere_flows:
@@ -52,4 +54,4 @@ def regionalize_activity_foreground(act: dict, accepted_locations: list[str], ta
             flow['code'] = new_techno_act['code']
             flow['location'] = new_techno_act['location']
 
-    return act
+    return new_act
