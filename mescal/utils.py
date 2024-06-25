@@ -223,3 +223,21 @@ def write_wurst_database_to_brightway(db: list[dict], db_name: str) -> None:
     db = wurst_to_brightway2_database(db)
     db = {(i['database'], i['code']): i for i in db}
     bw_database.write(db)
+
+
+def get_downstream_consumers(act: dict, db: list[dict]) -> list[dict]:
+    """
+    Get the downstream consumers of an activity
+
+    :param act: dictionary of the activity
+    :param db: list of activities of the LCI database
+    :return: list of downstream consumers
+    """
+    act_code = act['code']
+    consumers = []
+    for a in db:
+        for exc in get_technosphere_flows(a):
+            if exc['code'] == act_code:
+                consumers.append(a)
+                continue
+    return consumers
