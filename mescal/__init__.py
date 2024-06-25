@@ -21,6 +21,8 @@ __all__ = (
     "gen_lcia_obj",
     "create_or_modify_activity_from_esm_results",
     "write_wurst_database_to_brightway",
+    "create_new_database_with_esm_results",
+    "get_downstream_consumers",
 )
 
 __version__ = "0.0.1"
