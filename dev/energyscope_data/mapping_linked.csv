@@ -932,3 +932,63 @@ WASTE,Resource,municipal solid waste,market for municipal solid waste,CA-QC,ecoi
 WET_BIOMASS,Resource,"wood chips, wet, measured as dry mass","market for wood chips, wet, measured as dry mass",CA-QC,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 WOOD,Resource,"wood chips, dry, measured as dry mass","market for wood chips, dry, measured as dry mass",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 XYLENE,Resource,xylene,market for xylene,RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+ACETIC_ACID,Flow,"acetic acid, without water, in 98% solution state","market for acetic acid, without water, in 98% solution state",GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+ACETONE,Flow,"acetone, liquid","market for acetone, liquid",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+ALUMINUM,Flow,"aluminium, primary, ingot","market for aluminium, primary, ingot",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+BENZENE,Flow,benzene,market for benzene,GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+BIO_DIESEL,Flow,"biodiesel, vehicle grade","biodiesel, from used cooking oil, at fuelling station",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+CEMENT,Flow,"cement, unspecified","market for cement, unspecified",CA-QC,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+CO2_C,Flow,"carbon dioxide, liquid","market for carbon dioxide, liquid",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+COAL,Flow,hard coal,market for hard coal,RNA,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+DIESEL,Flow,"diesel, low-sulfur","market for diesel, low-sulfur",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+ELECTRICITY_EHV,Flow,"electricity, high voltage","market for electricity, high voltage",US-NPCC,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+ELECTRICITY_HV,Flow,"electricity, high voltage","market for electricity, high voltage",US-NPCC,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+ELECTRICITY_LV,Flow,"electricity, low voltage","market for electricity, low voltage",US-NPCC,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+ELECTRICITY_MV,Flow,"electricity, medium voltage","market for electricity, medium voltage",US-NPCC,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+ETHANE,Flow,ethane,market for ethane,GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+ETHANOL,Flow,"ethanol, without water, in 99.7% solution state, from fermentation","market for ethanol, without water, in 99.7% solution state, from fermentation",GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+ETHYLBENZENE,Flow,ethyl benzene,market for ethyl benzene,RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+ETHYLENE,Flow,ethylene,market for ethylene,RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+FOOD,Flow,"sugar, from sugar beet",beet sugar production,RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+GASOLINE,Flow,"petrol, low-sulfur","market for petrol, low-sulfur",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+H2_EHP,Flow,"hydrogen, gaseous","market for hydrogen, gaseous",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+H2_HP,Flow,"hydrogen, gaseous","market for hydrogen, gaseous",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+H2_LP,Flow,"hydrogen, gaseous","market for hydrogen, gaseous",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+H2_MP,Flow,"hydrogen, gaseous","market for hydrogen, gaseous",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+HEAT_HIGH_T,Flow,"heat, district or industrial, other than natural gas","market for heat, district or industrial, other than natural gas",CA-QC,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+HEAT_LOW_T_DECEN,Flow,"heat, central or small-scale, other than natural gas","market for heat, central or small-scale, other than natural gas",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+HEAT_LOW_T_DHN,Flow,"heat, district or industrial, other than natural gas","market for heat, district or industrial, other than natural gas",CA-QC,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+JETFUEL,Flow,kerosene,market for kerosene,RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+LFO,Flow,light fuel oil,market for light fuel oil,RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+LNG,Flow,"natural gas, liquefied","market for natural gas, liquefied",GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+METHANOL,Flow,methanol,market for methanol,GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+MOB_FREIGHT_LCV,Flow,"transport, freight, light commercial vehicle","market for transport, freight, light commercial vehicle",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+MOB_FREIGHT_SEMI,Flow,"transport, freight, lorry, unspecified","market for transport, freight, lorry, unspecified",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+MOB_FREIGHT_TRUCK,Flow,"transport, freight, lorry, unspecified","market for transport, freight, lorry, unspecified",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+MOB_FREIGHT_TRAIN,Flow,"transport, freight train","market for transport, freight train",US,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+MOB_PRIVATE_CAR,Flow,"transport, passenger car","market for transport, passenger car",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+MOB_PRIVATE_SUV,Flow,"transport, passenger car","market for transport, passenger car",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+MOB_PUBLIC_BUS,Flow,"transport, regular bus","market for transport, regular bus",GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+MOB_PUBLIC_COACH,Flow,"transport, passenger coach","market for transport, passenger coach",GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+MOB_PUBLIC_TRAIN,Flow,"transport, passenger train","market for transport, passenger train",GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+NG_EHP,Flow,"natural gas, high pressure","market for natural gas, high pressure",CA-QC,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+NG_HP,Flow,"natural gas, high pressure","market for natural gas, high pressure",CA-QC,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+NG_LP,Flow,"natural gas, low pressure","market for natural gas, low pressure",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+NG_MP,Flow,"natural gas, medium pressure, vehicle grade","natural gas production, medium pressure, vehicle grade",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+PAPER,Flow,"paper, newsprint","paper production, newsprint, recycled",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+PE,Flow,"polyethylene, high density, granulate","market for polyethylene, high density, granulate",GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+PET,Flow,"polyethylene terephthalate, granulate, amorphous","market for polyethylene terephthalate, granulate, amorphous",GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+PHENOL,Flow,phenol,market for phenol,RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+PP,Flow,"polypropylene, granulate","market for polypropylene, granulate",GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+PROPYLENE,Flow,propylene,market for propylene,RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+PS,Flow,"polystyrene, general purpose","market for polystyrene, general purpose",GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+PVC,Flow,"polyvinylchloride, bulk polymerised","market for polyvinylchloride, bulk polymerised",GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+SNG,Flow,biogas,market for biogas,RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+STEEL,Flow,"steel, chromium steel 18/8","market for steel, chromium steel 18/8",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+STYRENE,Flow,styrene,market for styrene,GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+TOLUENE,Flow,"toluene, liquid","market for toluene, liquid",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+URANIUM,Flow,"nuclear fuel element, for pressure water reactor, UO2 4.2% & MOX","market for nuclear fuel element, for pressure water reactor, UO2 4.2% & MOX",GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+WASTE,Flow,municipal solid waste,market for municipal solid waste,CA-QC,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+WET_BIOMASS,Flow,"wood chips, wet, measured as dry mass","market for wood chips, wet, measured as dry mass",CA-QC,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+WOOD,Flow,"wood chips, dry, measured as dry mass","market for wood chips, dry, measured as dry mass",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+XYLENE,Flow,xylene,market for xylene,RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
