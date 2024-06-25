@@ -6,7 +6,7 @@ from .modify_inventory import change_carbon_flow
 
 def create_new_activity(name: str, act_type: str, current_code: str, new_code: str, database_name: str, db: list[dict],
                         db_dict_name: dict, db_dict_code: dict, esm_db_name: str, regionalize_foregrounds: bool,
-                        mismatch_regions: list[str], target_region: str, locations_ranking: list[str]) -> dict:
+                        accepted_locations: list[str], target_region: str, locations_ranking: list[str]) -> dict:
     """
     Create a new LCI dataset for the ESM technology or resource
 
@@ -20,9 +20,9 @@ def create_new_activity(name: str, act_type: str, current_code: str, new_code: s
     :param db_dict_code: dictionary original LCI database with (database, code) as key
     :param esm_db_name: name of the new LCI database
     :param regionalize_foregrounds: (bool) if True, regionalize the foreground activities
-    :param mismatch_regions: list of regions to be changed
-    :param target_region: target region
-    :param locations_ranking: ranking of the locations
+    :param accepted_locations: list of regions to keep in case of regionalization
+    :param target_region: target region in case of regionalization
+    :param locations_ranking: ranking of the locations in case of regionalization
     :return: new LCI dataset for the technology or resource
     """
 
@@ -40,7 +40,7 @@ def create_new_activity(name: str, act_type: str, current_code: str, new_code: s
     if regionalize_foregrounds:
         new_ds = regionalize_activity_foreground(
             act=new_ds,
-            mismatch_regions=mismatch_regions,
+            accepted_locations=accepted_locations,
             target_region=target_region,
             locations_ranking=locations_ranking,
             db=db,
@@ -53,7 +53,7 @@ def create_new_activity(name: str, act_type: str, current_code: str, new_code: s
 
 def add_activities_to_database(mapping: pd.DataFrame, act_type: str, db: list[dict], db_dict_name: dict,
                                db_dict_code: dict, esm_db_name: str, regionalize_foregrounds: bool,
-                               mismatch_regions: list[str], target_region: str,
+                               accepted_locations: list[str], target_region: str,
                                locations_ranking: list[str]) -> list[dict]:
     """
     Add new activities to the LCI database
@@ -65,7 +65,7 @@ def add_activities_to_database(mapping: pd.DataFrame, act_type: str, db: list[di
     :param db_dict_code: dictionary original LCI database with (database, code) as key
     :param esm_db_name: name of the new LCI database
     :param regionalize_foregrounds: if True, regionalize the foreground activities
-    :param mismatch_regions: list of regions to be changed in case of regionalization
+    :param accepted_locations: list of regions to keep in case of regionalization
     :param target_region: target region in case of regionalization
     :param locations_ranking: ranking of the preferred locations in case of regionalization
     :return: updated LCI database
@@ -83,7 +83,7 @@ def add_activities_to_database(mapping: pd.DataFrame, act_type: str, db: list[di
             db_dict_code=db_dict_code,
             esm_db_name=esm_db_name,
             regionalize_foregrounds=regionalize_foregrounds,
-            mismatch_regions=mismatch_regions,
+            accepted_locations=accepted_locations,
             target_region=target_region,
             locations_ranking=locations_ranking
         )
@@ -315,7 +315,7 @@ def double_counting_removal(df_op: pd.DataFrame, df_constr: pd.DataFrame, esm_db
                             db: list[dict], db_dict_code: dict, db_dict_name: dict, N: int,
                             background_search_act: dict, no_construction_list: list[str],
                             no_background_search_list: list[str],
-                            regionalize_foregrounds: bool = False, mismatch_regions: list[str] = None,
+                            regionalize_foregrounds: bool = False, accepted_locations: list[str] = None,
                             target_region: str = None, locations_ranking: list[str] = None) \
         -> tuple[list[dict], dict, dict, list[list], dict]:
     """
@@ -336,7 +336,7 @@ def double_counting_removal(df_op: pd.DataFrame, df_constr: pd.DataFrame, esm_db
     :param no_construction_list: list of technologies for which the construction phase is not considered
     :param no_background_search_list: list of technologies for which the background search should not be performed
     :param regionalize_foregrounds: if True, regionalize the foreground activities
-    :param mismatch_regions: list of regions to be changed in case of regionalization
+    :param accepted_locations: list of regions to keep in case of regionalization
     :param target_region: target region in case of regionalization
     :param locations_ranking: ranking of the preferred locations in case of regionalization
     :return: updated LCI database, dictionary LCI database with (database, code) as key,
@@ -449,7 +449,7 @@ def double_counting_removal(df_op: pd.DataFrame, df_constr: pd.DataFrame, esm_db
             if regionalize_foregrounds:
                 regionalize_activity_foreground(
                     act=new_act_op_d_c,
-                    mismatch_regions=mismatch_regions,
+                    accepted_locations=accepted_locations,
                     target_region=target_region,
                     locations_ranking=locations_ranking,
                     db=db,
@@ -687,7 +687,7 @@ def add_technology_specifics(mapping_op: pd.DataFrame, df_tech_specifics: pd.Dat
 def create_esm_database(mapping: pd.DataFrame, model: pd.DataFrame, tech_specifics: pd.DataFrame,
                         technology_compositions: pd.DataFrame, mapping_esm_flows_to_CPC_cat: pd.DataFrame,
                         main_database: list[dict], esm_db_name: str, results_path_file: str = 'results/',
-                        regionalize_foregrounds: bool = False, mismatch_regions: list[str] = None,
+                        regionalize_foregrounds: bool = False, accepted_locations: list[str] = None,
                         target_region: str = None, locations_ranking: list[str] = None) -> pd.DataFrame:
     """
     Create the ESM database after double counting removal
@@ -701,7 +701,7 @@ def create_esm_database(mapping: pd.DataFrame, model: pd.DataFrame, tech_specifi
     :param esm_db_name: name of the new LCI database
     :param results_path_file: path to the results folder
     :param regionalize_foregrounds: if True, regionalize the foreground activities
-    :param mismatch_regions: list of regions to be changed in case of regionalization
+    :param accepted_locations: list of regions to keep in case of regionalization
     :param target_region: target region in case of regionalization
     :param locations_ranking: ranking of the preferred locations in case of regionalization
     :return: mapping file (updated with new codes)
@@ -740,10 +740,10 @@ def create_esm_database(mapping: pd.DataFrame, model: pd.DataFrame, tech_specifi
 
     # Add construction and resource activities to the database (which do not need double counting removal)
     main_database = add_activities_to_database(mapping, 'Construction', main_database, db_dict_name,
-                                               db_dict_code, esm_db_name, regionalize_foregrounds, mismatch_regions,
+                                               db_dict_code, esm_db_name, regionalize_foregrounds, accepted_locations,
                                                target_region, locations_ranking)
     main_database = add_activities_to_database(mapping, 'Resource', main_database, db_dict_name,
-                                               db_dict_code, esm_db_name, regionalize_foregrounds, mismatch_regions,
+                                               db_dict_code, esm_db_name, regionalize_foregrounds, accepted_locations,
                                                target_region, locations_ranking)
 
     main_database, db_dict_code, db_dict_name, flows_set_to_zero, ei_removal = double_counting_removal(
@@ -760,7 +760,7 @@ def create_esm_database(mapping: pd.DataFrame, model: pd.DataFrame, tech_specifi
         no_construction_list=no_construction_list,
         no_background_search_list=no_background_search_list,
         regionalize_foregrounds=regionalize_foregrounds,
-        mismatch_regions=mismatch_regions,
+        accepted_locations=accepted_locations,
         target_region=target_region,
         locations_ranking=locations_ranking
     )
