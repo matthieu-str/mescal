@@ -51,6 +51,10 @@ TRAFO_HM,No background search,N/A
 TRAFO_LM,No background search,N/A
 TRAFO_MH,No background search,N/A
 TRAFO_ML,No background search,N/A
+IND_DIRECT_ELEC,No background search,N/A
+DEC_DIRECT_ELEC,No background search,N/A
+HT_LT_DEC,No background search,N/A
+HT_LT_DEC,No construction,N/A
 DEEP_SALINE,No construction,N/A
 DIRECT_USAGE,No construction,N/A
 DOGR,No construction,N/A
