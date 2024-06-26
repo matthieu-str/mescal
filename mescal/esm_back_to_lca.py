@@ -127,11 +127,16 @@ def create_or_modify_activity_from_esm_results(db: list[dict], original_activity
     total_amount = 0  # initialize the total amount of production
 
     for tech in end_use_tech_list:
+
         if tech in list(esm_results.Name.unique()):
             amount = esm_results[esm_results.Name == tech].Production.iloc[0]
         else:  # if the technology is not in the ESM results, we assume that its production is null
             amount = 0
-        total_amount += amount
+
+        if tech in list(mapping[(mapping.Type == 'Operation') | (mapping.Type == 'Resource')].Name.unique()):
+            total_amount += amount
+        else:
+            pass  # if the technology is not in the mapping file, we do not consider it in the result LCI dataset
 
     if total_amount == 0:  # no production in the layer
         return db, []
@@ -168,7 +173,7 @@ def create_or_modify_activity_from_esm_results(db: list[dict], original_activity
                         & (unit_conversion.From == activity_unit)
                         & (unit_conversion.To == original_activity_unit)
                         ].Value.iloc[0]
-                    amount *= conversion_factor
+                    amount /= conversion_factor
 
                 code = db_dict_name[activity_name, activity_prod, activity_location, activity_database]['code']
                 new_exc = {
