@@ -172,11 +172,11 @@ def change_database_name(db: list[dict], new_db_name: str) -> list[dict]:
     :param new_db_name: new name of the database
     :return: updated LCI database
     """
-    old_db_name = db[0]['database']
+    old_dbs_name = list(set([act['database'] for act in db]))
     for act in db:
         act['database'] = new_db_name
         for exc in act['exchanges']:
-            if exc['database'] == old_db_name:
+            if exc['database'] in old_dbs_name:
                 exc['database'] = new_db_name
             else:
                 pass
