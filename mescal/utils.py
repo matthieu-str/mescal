@@ -158,6 +158,10 @@ def wurst_to_brightway2_database(db: list[dict]) -> list[dict]:
                 name: {"amount": amount} for name, amount in act["parameters"].items()
             }
 
+        # Correct unit names
+        if act['unit'] == 'ton-kilometer':
+            act['unit'] = 'ton kilometer'
+
         if "categories" in act:
             del act["categories"]
 
@@ -241,3 +245,27 @@ def get_downstream_consumers(act: dict, db: list[dict]) -> list[dict]:
                 consumers.append(a)
                 continue
     return consumers
+
+
+def ecoinvent_unit_convention(unit: str) -> str:
+    """
+    Reformat unit to the ecoinvent convention
+
+    :param unit: unit to reformat
+    :return: ecoinvent unit
+    """
+    unit_dict = {
+        'kg': 'kilogram',
+        'm2': 'square meter',
+        'm3': 'cubic meter',
+        'MJ': 'megajoule',
+        'kWh': 'kilowatt hour',
+        'h': 'hour',
+        'km': 'kilometer',
+        'pkm': 'person kilometer',
+        'tkm': 'ton kilometer',
+    }
+    if unit in unit_dict:
+        return unit_dict[unit]
+    else:
+        return unit
