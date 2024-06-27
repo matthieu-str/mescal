@@ -1,0 +1,9 @@
+﻿Layers,Technologies,Comment
+"['ELECTRICITY_EHV', 'ELECTRICITY_HV']","['TRAFO_HE','TRAFO_EH']","The high and extra high voltage electricity are merged in the LCI database, thus we remove transformations between these two levels of voltage. "
+['ELECTRICITY_LV'],['STO_ELEC'],The storage technologies should be removed (production only).
+"['NG_HP', 'NG_EHP']","['NG_EXP_EH', 'NG_EXP_EH_COGEN', 'NG_COMP_HE', 'STO_NG']","The high and extra high pressure natural gas are merged in the LCI database, thus we remove transformations between these two levels of pressure. The storage technologies should be removed (production only)."
+"['H2_LP', 'H2_MP', 'H2_HP', 'H2_EHP']","['H2_COMP_HE', 'H2_COMP_MH', 'H2_COMP_LM', 'H2_EXP_EH', 'H2_EXP_HM', 'H2_EXP_ML', 'H2_EXP_EH_COGEN', 'H2_EXP_HM_COGEN', 'H2_EXP_ML_COGEN', 'STO_H2']","All pressure levels for hydrogen are merged in the LCI database, thus we remove transformations between these two levels of pressure. The storage technologies should be removed (production only)."
+"['HEAT_HIGH_T', 'HEAT_LOW_T_DHN']",['HT_LT'],The high and low heat production at the DHN level are merged in the LCI database. 
+['GASOLINE'],['STO_GASO'],The storage technologies should be removed (production only).
+['DIESEL'],['STO_DIE'],The storage technologies should be removed (production only).
+['CO2_C'],['STO_CO2'],The storage technologies should be removed (production only).

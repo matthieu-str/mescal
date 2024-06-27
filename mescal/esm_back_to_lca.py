@@ -1,6 +1,3 @@
-import pandas as pd
-
-from .regionalization import *
 from .double_counting import *
 
 
@@ -8,8 +5,8 @@ def create_or_modify_activity_from_esm_results(db: list[dict], original_activity
                                                original_activity_database: str, flows: pd.DataFrame,
                                                model: pd.DataFrame, esm_location: str, esm_results: pd.DataFrame,
                                                mapping: pd.DataFrame, accepted_locations: list[str],
-                                               locations_ranking: list[str],
-                                               unit_conversion: pd.DataFrame) -> tuple[list[dict], list[list[str]]]:
+                                               locations_ranking: list[str], tech_to_remove_layers: pd.DataFrame,
+                                               unit_conversion: pd.DataFrame, new_end_use_types: pd.DataFrame) -> tuple[list[dict], list[list[str]]]:
     """
     Create or modify an activity in the LCI database based on the ESM results
 
@@ -24,7 +21,9 @@ def create_or_modify_activity_from_esm_results(db: list[dict], original_activity
     :param mapping: mapping file between ESM technologies and LCI datasets
     :param accepted_locations: list of accepted locations for the regionalization
     :param locations_ranking: ranking of preferred locations for the regionalization
+    :param tech_to_remove_layers: technologies to remove from the result LCI datasets
     :param unit_conversion: unit conversion factors
+    :param new_end_use_types: adapt end use types to fit the results LCI datasets mapping
     :return: the updated LCI database, list of activities to perform double counting removal
     """
     db_dict_name = database_list_to_dict(db, 'name')
@@ -59,7 +58,8 @@ def create_or_modify_activity_from_esm_results(db: list[dict], original_activity
     unit_conversion['From'] = unit_conversion['From'].apply(ecoinvent_unit_convention)
     unit_conversion['To'] = unit_conversion['To'].apply(ecoinvent_unit_convention)
 
-    model['Flow'] = model.apply(replace_mobility_end_use_type, axis=1)
+    model['Flow'] = model.apply(lambda x: replace_mobility_end_use_type(row=x,
+                                                                        new_end_use_types=new_end_use_types), axis=1)
     model = pd.merge(model, model[model.Amount == 1.0].drop(columns=['Amount']).rename(columns={'Flow': 'Output'}),
                      how='left', on='Name')
 
@@ -79,50 +79,18 @@ def create_or_modify_activity_from_esm_results(db: list[dict], original_activity
         # Case where the only production is the import of resources
         return db, []
 
-    if set(flows_list) == {'ELECTRICITY_EHV', 'ELECTRICITY_HV'}:
-        # the high and extra high voltage electricity are merged in the LCI database,
-        # thus we remove transformations between these two levels of voltage
-        end_use_tech_list.remove('TRAFO_HE')
-        end_use_tech_list.remove('TRAFO_EH')
-    elif flows_list == ['ELECTRICITY_LV']:
-        # the storage technologies should be removed (production only)
-        end_use_tech_list.remove('STO_ELEC')
-    elif set(flows_list) == {'NG_HP', 'NG_EHP'}:
-        # the high and extra high pressure natural gas are merged in the LCI database,
-        # thus we remove transformations between these two levels of pressure
-        end_use_tech_list.remove('NG_EXP_EH')
-        end_use_tech_list.remove('NG_EXP_EH_COGEN')
-        end_use_tech_list.remove('NG_COMP_HE')
-        # the storage technologies should be removed (production only)
-        end_use_tech_list.remove('STO_NG')
-    elif set(flows_list) == {'H2_LP', 'H2_MP', 'H2_HP', 'H2_EHP'}:
-        # all pressure levels for hydrogen are merged in the LCI database,
-        # thus we remove transformations between these two levels of pressure
-        end_use_tech_list.remove('H2_COMP_HE')
-        end_use_tech_list.remove('H2_COMP_MH')
-        end_use_tech_list.remove('H2_COMP_LM')
-        end_use_tech_list.remove('H2_EXP_EH')
-        end_use_tech_list.remove('H2_EXP_HM')
-        end_use_tech_list.remove('H2_EXP_ML')
-        end_use_tech_list.remove('H2_EXP_EH_COGEN')
-        end_use_tech_list.remove('H2_EXP_HM_COGEN')
-        end_use_tech_list.remove('H2_EXP_ML_COGEN')
-        # the storage technologies should be removed (production only)
-        end_use_tech_list.remove('STO_H2')
-    elif set(flows_list) == {'HEAT_HIGH_T', 'HEAT_LOW_T_DHN'}:
-        # the high and low heat production at the DHN level are merged in the LCI database
-        end_use_tech_list.remove('HT_LT')
-    elif flows_list == ['GASOLINE']:
-        # the storage technologies should be removed (production only)
-        end_use_tech_list.remove('STO_GASO')
-    elif flows_list == ['DIESEL']:
-        # the storage technologies should be removed (production only)
-        end_use_tech_list.remove('STO_DIE')
-    elif flows_list == ['CO2_C']:
-        # the storage technologies should be removed (production only)
-        end_use_tech_list.remove('STO_CO2')
-    else:
+    try:
+        tech_to_remove_layers['Layers'] = tech_to_remove_layers['Layers'].apply(ast.literal_eval)
+        tech_to_remove_layers['Technologies'] = tech_to_remove_layers['Technologies'].apply(ast.literal_eval)
+    except ValueError:
         pass
+
+    for i in range(len(tech_to_remove_layers)):
+        if set(flows_list) == set(tech_to_remove_layers.Layers.iloc[i]):
+            for tech in tech_to_remove_layers.Technologies.iloc[i]:
+                end_use_tech_list.remove(tech)
+        else:
+            pass
 
     total_amount = 0  # initialize the total amount of production
 
@@ -234,36 +202,30 @@ def create_or_modify_activity_from_esm_results(db: list[dict], original_activity
     return db, perform_d_c
 
 
-def replace_mobility_end_use_type(row: pd.Series) -> str:
+def replace_mobility_end_use_type(row: pd.Series, new_end_use_types: pd.DataFrame) -> str:
     """
     Reformat the end use type of the mobility technologies
 
     :param row: row of the model dataframe
+    :param new_end_use_types: adapt end use types to fit the results LCI datasets mapping
     :return: updated end use type
     """
-    if ('BUS' in row['Name']) & ('MOB_PUBLIC' in row['Flow']) & (row['Amount'] == 1.0):
-        if 'SCHOOLBUS' in row['Name']:
-            return 'MOB_PUBLIC_SCHOOLBUS'
+
+    for i in range(len(new_end_use_types)):
+        name = new_end_use_types.Name.iloc[i]
+        old_eut = new_end_use_types.Old.iloc[i]
+        new_eut = new_end_use_types.New.iloc[i]
+        search_type = new_end_use_types['Search type'].iloc[i]
+        if search_type == 'contains':
+            if (name in row['Name']) & (old_eut in row['Flow']) & (row['Amount'] == 1.0):
+                return new_eut
+        elif search_type == 'equals':
+            if (name == row['Name']) & (old_eut in row['Flow']) & (row['Amount'] == 1.0):
+                return new_eut
         else:
-            return 'MOB_PUBLIC_BUS'
-    elif ('COACH' in row['Name']) & ('MOB_PUBLIC' in row['Flow']) & (row['Amount'] == 1.0):
-        return 'MOB_PUBLIC_COACH'
-    elif ('TRAIN' in row['Name']) & ('MOB_PUBLIC' in row['Flow']) & (row['Amount'] == 1.0):
-        return 'MOB_PUBLIC_TRAIN'
-    elif ('CAR' in row['Name']) & ('MOB_PRIVATE' in row['Flow']) & (row['Amount'] == 1.0):
-        return 'MOB_PRIVATE_CAR'
-    elif ('SUV' in row['Name']) & ('MOB_PRIVATE' in row['Flow']) & (row['Amount'] == 1.0):
-        return 'MOB_PRIVATE_SUV'
-    elif ('LCV' in row['Name']) & ('MOB_FREIGHT' in row['Flow']) & (row['Amount'] == 1.0):
-        return 'MOB_FREIGHT_LCV'
-    elif ('SEMI' in row['Name']) & ('MOB_FREIGHT' in row['Flow']) & (row['Amount'] == 1.0):
-        return 'MOB_FREIGHT_SEMI'
-    elif ('TRUCK' in row['Name']) & ('MOB_FREIGHT' in row['Flow']) & (row['Amount'] == 1.0):
-        return 'MOB_FREIGHT_TRUCK'
-    elif ('TRAIN' in row['Name']) & ('MOB_FREIGHT' in row['Flow']) & (row['Amount'] == 1.0):
-        return 'MOB_FREIGHT_TRAIN'
-    else:
-        return row['Flow']
+            raise ValueError('The search type should be either "contains" or "equals".')
+
+    return row['Flow']
 
 
 def ecoinvent_unit_convention(unit: str) -> str:
@@ -294,8 +256,9 @@ def create_new_database_with_esm_results(mapping: pd.DataFrame, model: pd.DataFr
                                          esm_results: pd.DataFrame, locations_ranking: list[str],
                                          accepted_locations: list[str], unit_conversion: pd.DataFrame,
                                          db: list[dict], new_db_name: str, tech_specifics: pd.DataFrame,
-                                         technology_compositions: pd.DataFrame,
-                                         mapping_esm_flows_to_CPC_cat: pd.DataFrame) -> None:
+                                         technology_compositions: pd.DataFrame, tech_to_remove_layers: pd.DataFrame,
+                                         mapping_esm_flows_to_CPC_cat: pd.DataFrame,
+                                         new_end_use_types: pd.DataFrame) -> None:
     """
     Create a new database with the ESM results
 
@@ -310,7 +273,9 @@ def create_new_database_with_esm_results(mapping: pd.DataFrame, model: pd.DataFr
     :param new_db_name: name of the new database
     :param tech_specifics: technology-specific information
     :param technology_compositions: technology compositions
+    :param tech_to_remove_layers: technologies to remove from the result LCI datasets
     :param mapping_esm_flows_to_CPC_cat: mapping file between ESM flows and CPC categories
+    :param new_end_use_types: adapt end use types to fit the results LCI datasets mapping
     :return: None
     """
     flows = mapping[mapping.Type == 'Flow']
@@ -343,6 +308,8 @@ def create_new_database_with_esm_results(mapping: pd.DataFrame, model: pd.DataFr
                 accepted_locations=accepted_locations,
                 locations_ranking=locations_ranking,
                 unit_conversion=unit_conversion,
+                tech_to_remove_layers=tech_to_remove_layers,
+                new_end_use_types=new_end_use_types,
             )
 
             already_done.append((original_activity_name,
