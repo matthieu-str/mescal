@@ -340,7 +340,6 @@ def create_new_database_with_esm_results(mapping: pd.DataFrame, model: pd.DataFr
             # Activities of the ESM region
             activities_of_esm_region = [a for a in wurst.get_many(db, *[wurst.equals('location', esm_location)])]
             for act in activities_of_esm_region:
-
                 if act['name'] == original_activity_name + ', from ESM results':
                     pass  # we do not want the new activity to be an input of itself
                 else:
@@ -361,16 +360,19 @@ def create_new_database_with_esm_results(mapping: pd.DataFrame, model: pd.DataFr
                 ]
                 downstream_consumers = get_downstream_consumers(original_activity, db)
                 for act in downstream_consumers:
-                    for exc in get_technosphere_flows(act):
-                        if (
-                                (exc['name'] == original_activity_name)
-                                & (exc['product'] == activity_prod)
-                                & (exc['location'] == esm_location)
-                        ):
-                            exc['code'] = new_activity['code']
-                            exc['location'] = esm_location
-                        else:
-                            pass
+                    if act['name'] == original_activity_name + ', from ESM results':
+                        pass  # we do not want the new activity to be an input of itself
+                    else:
+                        for exc in get_technosphere_flows(act):
+                            if (
+                                    (exc['name'] == original_activity_name)
+                                    & (exc['product'] == activity_prod)
+                                    & (exc['location'] == esm_location)
+                            ):
+                                exc['code'] = new_activity['code']
+                                exc['location'] = esm_location
+                            else:
+                                pass
 
     # Double counting removal of the construction activities
     double_counting_act = pd.DataFrame(data=perform_d_c,
