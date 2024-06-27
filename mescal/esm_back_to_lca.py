@@ -54,6 +54,8 @@ def create_or_modify_activity_from_esm_results(db: list[dict], original_activity
 
     new_code = random_code()
     original_activity_unit = activity['unit']
+    prod_flow = get_production_flow(activity)
+    prod_flow_amount = prod_flow['amount']  # can be -1 if it is a waste activity
 
     unit_conversion['From'] = unit_conversion['From'].apply(ecoinvent_unit_convention)
     unit_conversion['To'] = unit_conversion['To'].apply(ecoinvent_unit_convention)
@@ -75,10 +77,6 @@ def create_or_modify_activity_from_esm_results(db: list[dict], original_activity
         # Case where the layer has no production
         return db, []
 
-    if end_use_tech_list == flows_list:
-        # Case where the only production is the import of resources
-        return db, []
-
     try:
         tech_to_remove_layers['Layers'] = tech_to_remove_layers['Layers'].apply(ast.literal_eval)
         tech_to_remove_layers['Technologies'] = tech_to_remove_layers['Technologies'].apply(ast.literal_eval)
@@ -93,18 +91,24 @@ def create_or_modify_activity_from_esm_results(db: list[dict], original_activity
             pass
 
     total_amount = 0  # initialize the total amount of production
+    check_layers_mapping = False
 
     for tech in end_use_tech_list:
 
         if tech in list(esm_results.Name.unique()):
             amount = esm_results[esm_results.Name == tech].Production.iloc[0]
+
         else:  # if the technology is not in the ESM results, we assume that its production is null
             amount = 0
 
         if tech in list(mapping[(mapping.Type == 'Operation') | (mapping.Type == 'Resource')].Name.unique()):
             total_amount += amount
+            check_layers_mapping = True
         else:
             pass  # if the technology is not in the mapping file, we do not consider it in the result LCI dataset
+
+    if check_layers_mapping is False:
+        raise ValueError(f'The layer {flows_list} does not have any technology in the mapping file.')
 
     if total_amount == 0:  # no production in the layer
         return db, []
@@ -136,12 +140,21 @@ def create_or_modify_activity_from_esm_results(db: list[dict], original_activity
                 activity_unit = db_dict_name[activity_name, activity_prod, activity_location, activity_database]['unit']
 
                 if activity_unit != original_activity_unit:
-                    conversion_factor = unit_conversion[
-                        (unit_conversion.Name.apply(lambda x: x in original_activity_prod))
-                        & (unit_conversion.From == activity_unit)
-                        & (unit_conversion.To == original_activity_unit)
-                        ].Value.iloc[0]
-                    amount /= conversion_factor
+                    try:
+                        conversion_factor = unit_conversion[
+                            (unit_conversion.Name.apply(lambda x: x in original_activity_prod))
+                            & (unit_conversion.From == activity_unit)
+                            & (unit_conversion.To == original_activity_unit)
+                            ].Value.iloc[0]
+                    except IndexError:
+                        raise ValueError(f'The unit conversion factor between {activity_unit} and '
+                                         f'{original_activity_unit} for {original_activity_prod} '
+                                         f'is not in the unit conversion file.')
+                    else:
+                        amount /= conversion_factor
+
+                if prod_flow_amount == -1.0:  # for waste activities
+                    amount *= -1.0
 
                 code = db_dict_name[activity_name, activity_prod, activity_location, activity_database]['code']
                 new_exc = {
@@ -165,7 +178,7 @@ def create_or_modify_activity_from_esm_results(db: list[dict], original_activity
 
     exchanges.append(
         {
-            'amount': 1.0,
+            'amount': prod_flow_amount,
             'code': new_code,
             'type': 'production',
             'name': original_activity_name,
@@ -216,40 +229,19 @@ def replace_mobility_end_use_type(row: pd.Series, new_end_use_types: pd.DataFram
         old_eut = new_end_use_types.Old.iloc[i]
         new_eut = new_end_use_types.New.iloc[i]
         search_type = new_end_use_types['Search type'].iloc[i]
-        if search_type == 'contains':
+        if search_type == 'startswith':
+            if (row['Name'].startswith(name)) & (old_eut in row['Flow']) & (row['Amount'] == 1.0):
+                return new_eut
+        elif search_type == 'contains':
             if (name in row['Name']) & (old_eut in row['Flow']) & (row['Amount'] == 1.0):
                 return new_eut
         elif search_type == 'equals':
             if (name == row['Name']) & (old_eut in row['Flow']) & (row['Amount'] == 1.0):
                 return new_eut
         else:
-            raise ValueError('The search type should be either "contains" or "equals".')
+            raise ValueError('The search type should be either "startswith", "contains" or "equals".')
 
     return row['Flow']
-
-
-def ecoinvent_unit_convention(unit: str) -> str:
-    """
-    Reformat unit to the ecoinvent convention
-
-    :param unit: unit to reformat
-    :return: ecoinvent unit
-    """
-    unit_dict = {
-        'kg': 'kilogram',
-        'm2': 'square meter',
-        'm3': 'cubic meter',
-        'MJ': 'megajoule',
-        'kWh': 'kilowatt hour',
-        'h': 'hour',
-        'km': 'kilometer',
-        'pkm': 'person kilometer',
-        'tkm': 'ton kilometer',
-    }
-    if unit in unit_dict:
-        return unit_dict[unit]
-    else:
-        return unit
 
 
 def create_new_database_with_esm_results(mapping: pd.DataFrame, model: pd.DataFrame, esm_location: str,
