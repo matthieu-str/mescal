@@ -83,7 +83,10 @@ def compute_impact_scores(esm_db: list[dict], mapping: pd.DataFrame, technology_
         R_tech_constr = R_tech_constr / lifetime_lca_code[R_tech_constr.columns]
 
     # Reading the list of subcomponents as a list (and not as a string)
-    technology_compositions.Components = technology_compositions.apply(lambda x: ast.literal_eval(x.Components), axis=1)
+    try:
+        technology_compositions.Components = technology_compositions.Components.apply(ast.literal_eval)
+    except ValueError:
+        pass
 
     # Maximum length of list of subcomponents
     N_subcomp_max = max(len(i) for i in technology_compositions.Components)

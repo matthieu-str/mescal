@@ -365,8 +365,14 @@ def double_counting_removal(df_op: pd.DataFrame, df_constr: pd.DataFrame, esm_db
             ei_removal[tech][res]['amount'] = 0
             ei_removal[tech][res]['count'] = 0
 
+    # readings lists as lists and not strings
+    try:
+        mapping_esm_flows_to_CPC.CPC = mapping_esm_flows_to_CPC.CPC.apply(ast.literal_eval)
+    except ValueError:
+        pass
+
     # inverse mapping dictionary (i.e., from CPC categories to the ESM flows)
-    mapping_esm_flows_to_CPC_dict = {key: ast.literal_eval(value) for key, value in dict(zip(
+    mapping_esm_flows_to_CPC_dict = {key: value for key, value in dict(zip(
         mapping_esm_flows_to_CPC.Flow, mapping_esm_flows_to_CPC.CPC
     )).items()}
     mapping_CPC_to_esm_flows_dict = {}
@@ -725,7 +731,12 @@ def create_esm_database(mapping: pd.DataFrame, model: pd.DataFrame, tech_specifi
     db_dict_name = database_list_to_dict(main_database, 'name')
     db_dict_code = database_list_to_dict(main_database, 'code')
 
-    technology_compositions_dict = {key: ast.literal_eval(value) for key, value in dict(zip(
+    try:
+        technology_compositions.Components = technology_compositions.Components.apply(ast.literal_eval)
+    except ValueError:
+        pass
+
+    technology_compositions_dict = {key: value for key, value in dict(zip(
         technology_compositions.Name, technology_compositions.Components
     )).items()}
 
