@@ -149,8 +149,10 @@ def wurst_to_brightway2_database(db: list[dict]) -> list[dict]:
 
         # Add the input and output keys in exchanges
         for exc in act['exchanges']:
-            exc['input'] = (exc['database'], exc['code'])
-            exc['output'] = (act['database'], act['code'])
+            if 'input' not in exc.keys():
+                exc['input'] = (exc['database'], exc['code'])
+            if 'output' not in exc.keys():
+                exc['output'] = (act['database'], act['code'])
 
         # Restore parameters to Brightway2 format which allows for uncertainty and comments
         if "parameters" in act:
@@ -187,23 +189,26 @@ def change_database_name(db: list[dict], new_db_name: str) -> list[dict]:
     return db
 
 
-def relink_database(db: list[dict], name_old_database: str, name_new_database: str) -> None:
+def relink_database(db: list[dict], name_database_unlink: str, name_database_relink: str,
+                    name_new_db: str = None) -> None:
     """
     Relink a database and write it
 
     :param db: list of activities of the LCI database
-    :param name_old_database: name of the old database
-    :param name_new_database: name of the new database
+    :param name_database_unlink: name of the database to unlink
+    :param name_database_relink: name of the database to relink
+    :param name_new_db: name of the new database, if None, the original database is overwritten
     :return: None
     """
-    db_name = db[0]['database']
+    if name_new_db is None:
+        name_new_db = db[0]['database']
     for act in db:
         for exc in act['exchanges']:
-            if exc['database'] == name_old_database:
-                exc['database'] = name_new_database
+            if exc['database'] == name_database_unlink:
+                exc['database'] = name_database_relink
             else:
                 pass
-    write_wurst_database_to_brightway(db, db_name)
+    write_wurst_database_to_brightway(db, name_new_db)
 
 
 def write_wurst_database_to_brightway(db: list[dict], db_name: str) -> None:
