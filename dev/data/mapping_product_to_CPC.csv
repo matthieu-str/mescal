@@ -1,6 +1,7 @@
 Name,CPC,Search type,Where
 amine-based silica,"35310: Organic surface active agents, except soap",equals,Product
 biodiesel,35491: Biodiesel,contains,Product
+biogas,"17200: Coal gas, water gas, producer gas and similar gases, other than petroleum gases and other gaseous hydrocarbons",equals,Product
 "biomass, used as fuel",31230: Wood in chips or particles,equals,Product
 "biomethane, from biogas upgrading, using amine scrubbing","12020: Natural gas, liquefied or in the gaseous state",equals,Product
 "biomethane, high pressure","12020: Natural gas, liquefied or in the gaseous state",equals,Product
@@ -8,7 +9,6 @@ biodiesel,35491: Biodiesel,contains,Product
 "biomethane, low pressure","12020: Natural gas, liquefied or in the gaseous state",equals,Product
 "biomethane, low pressure, vehicle grade","12020: Natural gas, liquefied or in the gaseous state",equals,Product
 "biomethane, medium pressure, vehicle grade","12020: Natural gas, liquefied or in the gaseous state",equals,Product
-biogas,"17200: Coal gas, water gas, producer gas and similar gases, other than petroleum gases and other gaseous hydrocarbons",equals,Product
 "carbon dioxide, captured",34210b: Carbon dioxide and monoxide,contains,Product
 "carbon dioxide, captured from atmosphere",34210b: Carbon dioxide and monoxide,equals,Product
 "carbon dioxide, in chemical industry",34210b: Carbon dioxide and monoxide,equals,Product
@@ -39,6 +39,7 @@ EV charger,"464: Accumulators, primary cells and primary batteries, and parts th
 "facility, construction",53269: Other constructions for manufacturing,contains,Activity
 farming and supply of,23140: Other cereal grain products (including corn flakes),contains,Product
 forest residue,23140: Other cereal grain products (including corn flakes),equals,Product
+fuel,33370: Fuel oils n.e.c.,equals,Product
 "fuel cell system, 1 kWe, proton exchange membrane (PEM)",46410: Primary cells and primary batteries,equals,Product
 geothermal heat plant,"43913: Refrigerating and freezing equipment and heat pumps, except household type equipment",equals,Product
 hard coal IGCC power plant 450MW,53262: Power plants,equals,Product
@@ -82,6 +83,10 @@ transmission pipeline,53251: Local pipelines,contains,Activity
 "transport, freight, lorry",6511: Road transport services of freight,contains,Product
 "transport, passenger bus",64: Passenger transport services,contains,Product
 "transport, passenger car","64119: Other land transportation services of passengers, n.e.c.",contains,Product
+"transport, truck",6511: Road transport services of freight,equals,Product
+"transport, truck, Euro-6",6511: Road transport services of freight,equals,Product
+truck,49114: Motor vehicles n.e.c. for the transport of goods,equals,Product
+"truck, Euro-6",49114: Motor vehicles n.e.c. for the transport of goods,equals,Product
 unit construction,53269: Other constructions for manufacturing,contains,Activity
 "used fuel cell balance of plant, 1MWe, AEC",46410: Primary cells and primary batteries,equals,Product
 "used fuel cell balance of plant, 1MWe, PEM",46410: Primary cells and primary batteries,equals,Product
