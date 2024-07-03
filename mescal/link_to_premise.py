@@ -19,7 +19,7 @@ def create_complementary_database(df_mapping: pd.DataFrame, premise_db: list[dic
     tech_premise = pd.DataFrame(columns=['Name', 'Type', 'Product', 'Activity', 'Location', 'Database'])
     complement_premise = []
 
-    base_db = concatenate_databases(list(df_mapping.Database.unique()))
+    base_db = concatenate_databases(list(df_mapping.Database.unique()), create_pickle=True)
     base_db_dict_name = database_list_to_dict(base_db, 'name')
 
     premise_db_dict_name = database_list_to_dict(premise_db, 'name')
@@ -42,6 +42,12 @@ def create_complementary_database(df_mapping: pd.DataFrame, premise_db: list[dic
         new_activity = new_activity.replace('-TEMP', '')
         new_product = new_product.replace('EURO-6d', 'EURO-6ab')
         new_activity = new_activity.replace('EURO-6d', 'EURO-6ab')
+
+        # Hydrogen transmission and distribution pipelines
+        new_activity = new_activity.replace('transmission pipeline for hydrogen, dedicated hydrogen pipeline',
+                                            'pipeline, hydrogen, high pressure transmission network')
+        new_activity = new_activity.replace('distribution pipeline for hydrogen, dedicated hydrogen pipeline',
+                                            'pipeline, hydrogen, low pressure distribution network')
 
         try:
             premise_db_dict_name[(new_activity, new_product, region, name_premise_db)]
@@ -95,7 +101,7 @@ def create_complementary_database(df_mapping: pd.DataFrame, premise_db: list[dic
 
     unlinked_activities = [i for i in premise_db if i['database'] == name_complement_db]
     while len(unlinked_activities) > 0:
-        unlinked_activities, premise_db = relink(name_complement_db, base_db, premise_db)
+        unlinked_activities, premise_db = relink(name_complement_db, base_db, premise_db, name_premise_db)
 
     complement_db = [i for i in premise_db if i['database'] == name_complement_db]
     if len(complement_db) > 0:
@@ -122,17 +128,18 @@ def create_complementary_database(df_mapping: pd.DataFrame, premise_db: list[dic
     return tech_premise_adjusted
 
 
-def relink(name_complement_db: str, base_db: list[dict], premise_db: list[dict]) -> tuple[list[dict], list[dict]]:
+def relink(name_complement_db: str, base_db: list[dict], premise_db: list[dict], name_premise_db: str) \
+        -> tuple[list[dict], list[dict]]:
     """
     Relink the activities in the complementary database to the premise database
 
     :param name_complement_db: name of the complementary database
     :param base_db: list of activities in the base database
     :param premise_db: list of activities in the premise database
+    :param name_premise_db: name of the premise database
     :return: list of unlinked flows, updated premise database
     """
 
-    name_premise_db = premise_db[0]['database']
     unlinked_activities = []
     complement_database = [i for i in premise_db if i['database'] == name_complement_db]
     premise_db_dict_name = database_list_to_dict(premise_db, 'name')
@@ -176,6 +183,7 @@ def relink(name_complement_db: str, base_db: list[dict], premise_db: list[dict])
                             prod_flow['database'] = name_complement_db
                             flow['code'] = new_code
                             flow['database'] = name_complement_db
+                            flow['input'] = (name_complement_db, new_code)
                             unlinked_activities.append(new_act)
                             premise_db.append(new_act)
                             premise_db_dict_name[(new_act['name'], new_act['reference product'], new_act['location'],
@@ -184,13 +192,16 @@ def relink(name_complement_db: str, base_db: list[dict], premise_db: list[dict])
                             code = act_premise_lc['code']
                             flow['code'] = code
                             flow['database'] = name_premise_db
+                            flow['input'] = (name_premise_db, code)
                     else:
                         code = act_premise['code']
                         flow['code'] = code
                         flow['database'] = name_premise_db
+                        flow['input'] = (name_premise_db, code)
                 else:
                     code = act_db['code']
                     flow['code'] = code
                     flow['database'] = name_complement_db
+                    flow['input'] = (name_complement_db, code)
 
     return unlinked_activities, premise_db

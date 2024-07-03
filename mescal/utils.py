@@ -151,6 +151,9 @@ def wurst_to_brightway2_database(db: list[dict]) -> list[dict]:
         for exc in act['exchanges']:
             if 'input' not in exc.keys():
                 exc['input'] = (exc['database'], exc['code'])
+            else:  # guaranteeing consistency between input, and database and code
+                exc['database'] = exc['input'][0]
+                exc['code'] = exc['input'][1]
             if 'output' not in exc.keys():
                 exc['output'] = (act['database'], act['code'])
 
