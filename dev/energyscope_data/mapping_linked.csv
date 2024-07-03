@@ -339,7 +339,7 @@ DIE_STO,Construction,"liquid storage tank, chemicals, organics","liquid storage 
 DIRECT_USAGE,Operation,"carbon dioxide, stored","carbon dioxide compression, transport and storage",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 DOGR,Operation,"carbon dioxide, stored","carbon dioxide compression, transport and storage",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 EHP_H2_GRID,Operation,"transport, pipeline, long distance, natural gas","transport, pipeline, long distance, natural gas",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-EHP_H2_GRID,Construction,"pipeline, for hydrogen transmission","transmission pipeline for hydrogen, dedicated hydrogen pipeline",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
+EHP_H2_GRID,Construction,"pipeline, for hydrogen transmission","pipeline, hydrogen, high pressure transmission network",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 EHP_NG_GRID,Operation,"transport, pipeline, long distance, natural gas","transport, pipeline, long distance, natural gas",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 EHP_NG_GRID,Construction,"pipeline, natural gas, high pressure distribution network","pipeline construction, natural gas, high pressure distribution network",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 EHV_GRID,Construction,"transmission network, electricity, high voltage","transmission network construction, electricity, high voltage",CA-QC,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
@@ -403,7 +403,7 @@ H2_NG_CCGT,Construction,"NGCC power plant, 400MWe","market for gas power plant, 
 H2_STO,Construction,"liquid storage tank, chemicals, organics","liquid storage tank production, chemicals, organics",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 H2_STO,Operation,hydrogen storage,geological hydrogen storage,CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 HP_H2_GRID,Operation,"transport, pipeline, long distance, natural gas","transport, pipeline, long distance, natural gas",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-HP_H2_GRID,Construction,"pipeline, for hydrogen transmission","transmission pipeline for hydrogen, dedicated hydrogen pipeline",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
+HP_H2_GRID,Construction,"pipeline, for hydrogen transmission","pipeline, hydrogen, high pressure transmission network",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 HP_NG_GRID,Construction,"pipeline, natural gas, high pressure distribution network","pipeline construction, natural gas, high pressure distribution network",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 HP_NG_GRID,Operation,"transport, pipeline, long distance, natural gas","transport, pipeline, long distance, natural gas",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 HT_LT_DEC,Operation,"heat, district or industrial, other than natural gas","market for heat, district or industrial, other than natural gas",CA-QC,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
@@ -445,56 +445,56 @@ IND_DIRECT_ELEC,Construction,"auxiliary heating unit, electric, 5kW","auxiliary 
 IND_DIRECT_ELEC,Operation,"electricity, high voltage","market for electricity, high voltage",CA-QC,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 IND_HP_ELEC,Operation,"heat, air-water heat pump 10kW","heat production, air-water heat pump 10kW",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 IND_HP_ELEC,Construction,"heat pump, brine-water, 10kW","heat pump production, brine-water, 10kW",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-LCV_BIODIESEL_B100_MD,Construction,"Light duty truck, EURO-VI","Light duty truck, diesel, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-LCV_BIODIESEL_B100_MD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-LCV_BIODIESEL_B100_SD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-LCV_BIODIESEL_B100_SD,Construction,"Light duty truck, EURO-VI","Light duty truck, diesel, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-LCV_BIODIESEL_B20_MD,Construction,"Light duty truck, EURO-VI","Light duty truck, diesel, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-LCV_BIODIESEL_B20_MD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-LCV_BIODIESEL_B20_SD,Construction,"Light duty truck, EURO-VI","Light duty truck, diesel, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-LCV_BIODIESEL_B20_SD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-LCV_CNG_MD,Construction,"Light duty truck, EURO-VI","Light duty truck, compressed gas, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-LCV_CNG_MD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, compressed gas, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-LCV_CNG_SD,Construction,"Light duty truck, EURO-VI","Light duty truck, compressed gas, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-LCV_CNG_SD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, compressed gas, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-LCV_DIESEL_MD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-LCV_DIESEL_MD,Construction,"Light duty truck, EURO-VI","Light duty truck, diesel, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-LCV_DIESEL_SD,Construction,"Light duty truck, EURO-VI","Light duty truck, diesel, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-LCV_DIESEL_SD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-LCV_ETOH_E10_MD,Construction,"Light duty truck, EURO-VI","Light duty truck, compressed gas, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-LCV_ETOH_E10_MD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, compressed gas, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-LCV_ETOH_E10_SD,Construction,"Light duty truck, EURO-VI","Light duty truck, compressed gas, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-LCV_ETOH_E10_SD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, compressed gas, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-LCV_ETOH_E85_MD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, compressed gas, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-LCV_ETOH_E85_MD,Construction,"Light duty truck, EURO-VI","Light duty truck, compressed gas, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-LCV_ETOH_E85_SD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, compressed gas, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-LCV_ETOH_E85_SD,Construction,"Light duty truck, EURO-VI","Light duty truck, compressed gas, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-LCV_EV_MD,Construction,Light duty truck,"Light duty truck, battery electric, NMC-622 battery, 3.5t gross weight, 2020, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-LCV_EV_MD,Operation,"transport, freight, lorry","transport, freight, lorry, battery electric, NMC-622 battery, 3.5t gross weight, 2020, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-LCV_EV_SD,Construction,Light duty truck,"Light duty truck, battery electric, NMC-622 battery, 3.5t gross weight, 2020, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-LCV_EV_SD,Operation,"transport, freight, lorry","transport, freight, lorry, battery electric, NMC-622 battery, 3.5t gross weight, 2020, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-LCV_FC_CH4_MD,Construction,Light duty truck,"Light duty truck, fuel cell electric, 3.5t gross weight, 2020, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-LCV_FC_CH4_MD,Operation,"transport, freight, lorry","transport, freight, lorry, fuel cell electric, 3.5t gross weight, 2020, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-LCV_FC_CH4_SD,Operation,"transport, freight, lorry","transport, freight, lorry, fuel cell electric, 3.5t gross weight, 2020, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-LCV_FC_CH4_SD,Construction,Light duty truck,"Light duty truck, fuel cell electric, 3.5t gross weight, 2020, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-LCV_FC_H2_MD,Construction,Light duty truck,"Light duty truck, fuel cell electric, 3.5t gross weight, 2020, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-LCV_FC_H2_MD,Operation,"transport, freight, lorry","transport, freight, lorry, fuel cell electric, 3.5t gross weight, 2020, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-LCV_FC_H2_SD,Operation,"transport, freight, lorry","transport, freight, lorry, fuel cell electric, 3.5t gross weight, 2020, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-LCV_FC_H2_SD,Construction,Light duty truck,"Light duty truck, fuel cell electric, 3.5t gross weight, 2020, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-LCV_GASOLINE_MD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-LCV_GASOLINE_MD,Construction,"Light duty truck, EURO-VI","Light duty truck, diesel, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-LCV_GASOLINE_SD,Construction,"Light duty truck, EURO-VI","Light duty truck, diesel, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-LCV_GASOLINE_SD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-LCV_PHEV_GASOLINE_MD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, plugin diesel hybrid, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-LCV_PHEV_GASOLINE_MD,Construction,"Light duty truck, EURO-VI","Light duty truck, plugin diesel hybrid, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-LCV_PHEV_GASOLINE_SD,Construction,"Light duty truck, EURO-VI","Light duty truck, plugin diesel hybrid, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-LCV_PHEV_GASOLINE_SD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, plugin diesel hybrid, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-LCV_PROPANE_MD,Construction,"Light duty truck, EURO-VI","Light duty truck, compressed gas, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-LCV_PROPANE_MD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, compressed gas, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-LCV_PROPANE_SD,Construction,"Light duty truck, EURO-VI","Light duty truck, compressed gas, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-LCV_PROPANE_SD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, compressed gas, 3.5t gross weight, 2020, EURO-VI, urban delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
+LCV_BIODIESEL_B100_MD,Construction,"truck, Euro-6","truck, diesel, 3.5t, 2020, Euro-6, urban delivery",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+LCV_BIODIESEL_B100_MD,Operation,"transport, truck, Euro-6","transport, truck, diesel, 3.5t, 2020, Euro-6, urban delivery",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+LCV_BIODIESEL_B100_SD,Operation,"transport, truck, Euro-6","transport, truck, diesel, 3.5t, 2020, Euro-6, urban delivery",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+LCV_BIODIESEL_B100_SD,Construction,"truck, Euro-6","truck, diesel, 3.5t, 2020, Euro-6, urban delivery",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+LCV_BIODIESEL_B20_MD,Construction,"truck, Euro-6","truck, diesel, 3.5t, 2020, Euro-6, urban delivery",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+LCV_BIODIESEL_B20_MD,Operation,"transport, truck, Euro-6","transport, truck, diesel, 3.5t, 2020, Euro-6, urban delivery",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+LCV_BIODIESEL_B20_SD,Construction,"truck, Euro-6","truck, diesel, 3.5t, 2020, Euro-6, urban delivery",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+LCV_BIODIESEL_B20_SD,Operation,"transport, truck, Euro-6","transport, truck, diesel, 3.5t, 2020, Euro-6, urban delivery",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+LCV_CNG_MD,Construction,"truck, Euro-6","truck, compressed gas, 3.5t, 2020, Euro-6, urban delivery",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+LCV_CNG_MD,Operation,"transport, truck, Euro-6","transport, truck, compressed gas, 3.5t, 2020, Euro-6, urban delivery",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+LCV_CNG_SD,Construction,"truck, Euro-6","truck, compressed gas, 3.5t, 2020, Euro-6, urban delivery",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+LCV_CNG_SD,Operation,"transport, truck, Euro-6","transport, truck, compressed gas, 3.5t, 2020, Euro-6, urban delivery",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+LCV_DIESEL_MD,Operation,"transport, truck, Euro-6","transport, truck, diesel, 3.5t, 2020, Euro-6, urban delivery",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+LCV_DIESEL_MD,Construction,"truck, Euro-6","truck, diesel, 3.5t, 2020, Euro-6, urban delivery",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+LCV_DIESEL_SD,Construction,"truck, Euro-6","truck, diesel, 3.5t, 2020, Euro-6, urban delivery",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+LCV_DIESEL_SD,Operation,"transport, truck, Euro-6","transport, truck, diesel, 3.5t, 2020, Euro-6, urban delivery",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+LCV_ETOH_E10_MD,Construction,"truck, Euro-6","truck, compressed gas, 3.5t, 2020, Euro-6, urban delivery",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+LCV_ETOH_E10_MD,Operation,"transport, truck, Euro-6","transport, truck, compressed gas, 3.5t, 2020, Euro-6, urban delivery",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+LCV_ETOH_E10_SD,Construction,"truck, Euro-6","truck, compressed gas, 3.5t, 2020, Euro-6, urban delivery",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+LCV_ETOH_E10_SD,Operation,"transport, truck, Euro-6","transport, truck, compressed gas, 3.5t, 2020, Euro-6, urban delivery",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+LCV_ETOH_E85_MD,Operation,"transport, truck, Euro-6","transport, truck, compressed gas, 3.5t, 2020, Euro-6, urban delivery",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+LCV_ETOH_E85_MD,Construction,"truck, Euro-6","truck, compressed gas, 3.5t, 2020, Euro-6, urban delivery",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+LCV_ETOH_E85_SD,Operation,"transport, truck, Euro-6","transport, truck, compressed gas, 3.5t, 2020, Euro-6, urban delivery",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+LCV_ETOH_E85_SD,Construction,"truck, Euro-6","truck, compressed gas, 3.5t, 2020, Euro-6, urban delivery",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+LCV_EV_MD,Construction,truck,"truck, battery electric, NMC-622 battery, 3.5t, 2020, urban delivery",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+LCV_EV_MD,Operation,"transport, truck","transport, truck, battery electric, NMC-622 battery, 3.5t, 2020, urban delivery",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+LCV_EV_SD,Construction,truck,"truck, battery electric, NMC-622 battery, 3.5t, 2020, urban delivery",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+LCV_EV_SD,Operation,"transport, truck","transport, truck, battery electric, NMC-622 battery, 3.5t, 2020, urban delivery",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+LCV_FC_CH4_MD,Construction,truck,"truck, fuel cell electric, 3.5t, 2020, urban delivery",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+LCV_FC_CH4_MD,Operation,"transport, truck","transport, truck, fuel cell electric, 3.5t, 2020, urban delivery",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+LCV_FC_CH4_SD,Operation,"transport, truck","transport, truck, fuel cell electric, 3.5t, 2020, urban delivery",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+LCV_FC_CH4_SD,Construction,truck,"truck, fuel cell electric, 3.5t, 2020, urban delivery",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+LCV_FC_H2_MD,Construction,truck,"truck, fuel cell electric, 3.5t, 2020, urban delivery",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+LCV_FC_H2_MD,Operation,"transport, truck","transport, truck, fuel cell electric, 3.5t, 2020, urban delivery",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+LCV_FC_H2_SD,Operation,"transport, truck","transport, truck, fuel cell electric, 3.5t, 2020, urban delivery",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+LCV_FC_H2_SD,Construction,truck,"truck, fuel cell electric, 3.5t, 2020, urban delivery",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+LCV_GASOLINE_MD,Operation,"transport, truck, Euro-6","transport, truck, diesel, 3.5t, 2020, Euro-6, urban delivery",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+LCV_GASOLINE_MD,Construction,"truck, Euro-6","truck, diesel, 3.5t, 2020, Euro-6, urban delivery",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+LCV_GASOLINE_SD,Construction,"truck, Euro-6","truck, diesel, 3.5t, 2020, Euro-6, urban delivery",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+LCV_GASOLINE_SD,Operation,"transport, truck, Euro-6","transport, truck, diesel, 3.5t, 2020, Euro-6, urban delivery",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+LCV_PHEV_GASOLINE_MD,Operation,"transport, truck, Euro-6","transport, truck, plugin diesel hybrid, 3.5t, 2020, Euro-6, urban delivery",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+LCV_PHEV_GASOLINE_MD,Construction,"truck, Euro-6","truck, plugin diesel hybrid, 3.5t, 2020, Euro-6, urban delivery",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+LCV_PHEV_GASOLINE_SD,Construction,"truck, Euro-6","truck, plugin diesel hybrid, 3.5t, 2020, Euro-6, urban delivery",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+LCV_PHEV_GASOLINE_SD,Operation,"transport, truck, Euro-6","transport, truck, plugin diesel hybrid, 3.5t, 2020, Euro-6, urban delivery",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+LCV_PROPANE_MD,Construction,"truck, Euro-6","truck, compressed gas, 3.5t, 2020, Euro-6, urban delivery",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+LCV_PROPANE_MD,Operation,"transport, truck, Euro-6","transport, truck, compressed gas, 3.5t, 2020, Euro-6, urban delivery",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+LCV_PROPANE_SD,Construction,"truck, Euro-6","truck, compressed gas, 3.5t, 2020, Euro-6, urban delivery",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+LCV_PROPANE_SD,Operation,"transport, truck, Euro-6","transport, truck, compressed gas, 3.5t, 2020, Euro-6, urban delivery",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
 LP_H2_GRID,Operation,"transport, pipeline, long distance, natural gas","transport, pipeline, long distance, natural gas",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-LP_H2_GRID,Construction,"pipeline, for hydrogen distribution","distribution pipeline for hydrogen, dedicated hydrogen pipeline",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
+LP_H2_GRID,Construction,"pipeline, for hydrogen distribution","pipeline, hydrogen, low pressure distribution network",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 LP_NG_GRID,Construction,"pipeline, natural gas, low pressure distribution network","pipeline construction, natural gas, low pressure distribution network",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 LP_NG_GRID,Operation,"transport, pipeline, long distance, natural gas","transport, pipeline, long distance, natural gas",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 LV_GRID,Construction,"distribution network, electricity, low voltage","distribution network construction, electricity, low voltage",CA-QC,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
@@ -514,7 +514,7 @@ METHANOL_TO_OLEFINS,Operation,n-olefins,n-olefins production,RoW,ecoinvent_cutof
 METHANOL_TO_OLEFINS,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 MINES_STORAGE,Operation,"carbon dioxide, stored","carbon dioxide compression, transport and storage",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 MP_H2_GRID,Operation,"transport, pipeline, long distance, natural gas","transport, pipeline, long distance, natural gas",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-MP_H2_GRID,Construction,"pipeline, for hydrogen distribution","distribution pipeline for hydrogen, dedicated hydrogen pipeline",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
+MP_H2_GRID,Construction,"pipeline, for hydrogen distribution","pipeline, hydrogen, low pressure distribution network",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 MP_NG_GRID,Construction,"pipeline, natural gas, low pressure distribution network","pipeline construction, natural gas, low pressure distribution network",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 MP_NG_GRID,Operation,"transport, pipeline, long distance, natural gas","transport, pipeline, long distance, natural gas",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 MV_GRID,Construction,"distribution network, electricity, low voltage","distribution network construction, electricity, low voltage",CA-QC,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
@@ -648,24 +648,24 @@ SEMI_LH_PROPANE_ELD,Operation,"transport, freight, lorry, EURO-VI","transport, f
 SEMI_LH_PROPANE_ELD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, compressed gas, 26t gross weight, EURO-VI, long haul",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SEMI_LH_PROPANE_LD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, compressed gas, 26t gross weight, EURO-VI, long haul",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SEMI_LH_PROPANE_LD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, compressed gas, 26t gross weight, EURO-VI, long haul",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-SEMI_SH_BIODIESEL_B100_MD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 26t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-SEMI_SH_BIODIESEL_B100_MD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, diesel, 26t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-SEMI_SH_BIODIESEL_B20_MD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, diesel, 26t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-SEMI_SH_BIODIESEL_B20_MD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 26t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-SEMI_SH_CNG_MD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, compressed gas, 26t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-SEMI_SH_CNG_MD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, compressed gas, 26t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-SEMI_SH_DIESEL_MD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 26t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-SEMI_SH_DIESEL_MD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, diesel, 26t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-SEMI_SH_EV_MD,Operation,"transport, freight, lorry","transport, freight, lorry, battery electric, NMC-622 battery, 26t gross weight, 2020, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-SEMI_SH_EV_MD,Construction,Medium duty truck,"Medium duty truck, battery electric, NMC-622 battery, 26t gross weight, 2020, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-SEMI_SH_FC_CH4_MD,Construction,Medium duty truck,"Medium duty truck, fuel cell electric, 26t gross weight, 2020, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-SEMI_SH_FC_CH4_MD,Operation,"transport, freight, lorry","transport, freight, lorry, fuel cell electric, 26t gross weight, 2020, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-SEMI_SH_FC_H2_MD,Construction,Medium duty truck,"Medium duty truck, fuel cell electric, 26t gross weight, 2020, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-SEMI_SH_FC_H2_MD,Operation,"transport, freight, lorry","transport, freight, lorry, fuel cell electric, 26t gross weight, 2020, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-SEMI_SH_HY_DIESEL_MD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel hybrid, 26t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-SEMI_SH_HY_DIESEL_MD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, diesel hybrid, 26t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-SEMI_SH_PROPANE_MD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, compressed gas, 26t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-SEMI_SH_PROPANE_MD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, compressed gas, 26t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
+SEMI_SH_BIODIESEL_B100_MD,Operation,"transport, truck, Euro-6","transport, truck, diesel, 26t, 2020, Euro-6, regional delivery",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+SEMI_SH_BIODIESEL_B100_MD,Construction,"truck, Euro-6","truck, diesel, 26t, 2020, Euro-6, regional delivery",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+SEMI_SH_BIODIESEL_B20_MD,Construction,"truck, Euro-6","truck, diesel, 26t, 2020, Euro-6, regional delivery",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+SEMI_SH_BIODIESEL_B20_MD,Operation,"transport, truck, Euro-6","transport, truck, diesel, 26t, 2020, Euro-6, regional delivery",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+SEMI_SH_CNG_MD,Construction,"truck, Euro-6","truck, compressed gas, 26t, 2020, Euro-6, regional delivery",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+SEMI_SH_CNG_MD,Operation,"transport, truck, Euro-6","transport, truck, compressed gas, 26t, 2020, Euro-6, regional delivery",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+SEMI_SH_DIESEL_MD,Operation,"transport, truck, Euro-6","transport, truck, diesel, 26t, 2020, Euro-6, regional delivery",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+SEMI_SH_DIESEL_MD,Construction,"truck, Euro-6","truck, diesel, 26t, 2020, Euro-6, regional delivery",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+SEMI_SH_EV_MD,Operation,"transport, truck","transport, truck, battery electric, NMC-622 battery, 26t, 2020, regional delivery",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+SEMI_SH_EV_MD,Construction,truck,"truck, battery electric, NMC-622 battery, 26t, 2020, regional delivery",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+SEMI_SH_FC_CH4_MD,Construction,truck,"truck, fuel cell electric, 26t, 2020, regional delivery",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+SEMI_SH_FC_CH4_MD,Operation,"transport, truck","transport, truck, fuel cell electric, 26t, 2020, regional delivery",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+SEMI_SH_FC_H2_MD,Construction,truck,"truck, fuel cell electric, 26t, 2020, regional delivery",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+SEMI_SH_FC_H2_MD,Operation,"transport, truck","transport, truck, fuel cell electric, 26t, 2020, regional delivery",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+SEMI_SH_HY_DIESEL_MD,Operation,"transport, truck, Euro-6","transport, truck, diesel hybrid, 26t, 2020, Euro-6, regional delivery",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+SEMI_SH_HY_DIESEL_MD,Construction,"truck, Euro-6","truck, diesel hybrid, 26t, 2020, Euro-6, regional delivery",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+SEMI_SH_PROPANE_MD,Operation,"transport, truck, Euro-6","transport, truck, compressed gas, 26t, 2020, Euro-6, regional delivery",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+SEMI_SH_PROPANE_MD,Construction,"truck, Euro-6","truck, compressed gas, 26t, 2020, Euro-6, regional delivery",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
 SMART_PROCESS,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SMART_PROCESS,Operation,styrene,styrene production,RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 SMR,Operation,"hydrogen, gaseous, 25 bar","hydrogen production, steam methane reforming of natural gas, 25 bar",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
@@ -851,38 +851,38 @@ TRUCK_LH_HY_DIESEL_LD,Construction,"Medium duty truck, EURO-VI","Medium duty tru
 TRUCK_LH_HY_DIESEL_LD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel hybrid, 18t gross weight, EURO-VI, long haul",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 TRUCK_LH_PROPANE_LD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, compressed gas, 18t gross weight, EURO-VI, long haul",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 TRUCK_LH_PROPANE_LD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, compressed gas, 18t gross weight, EURO-VI, long haul",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-TRUCK_SH_BIODIESEL_B100_MD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 18t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-TRUCK_SH_BIODIESEL_B100_MD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, diesel, 18t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-TRUCK_SH_BIODIESEL_B100_SD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 18t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-TRUCK_SH_BIODIESEL_B100_SD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, diesel, 18t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-TRUCK_SH_BIODIESEL_B20_MD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, diesel, 18t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-TRUCK_SH_BIODIESEL_B20_MD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 18t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-TRUCK_SH_BIODIESEL_B20_SD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 18t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-TRUCK_SH_BIODIESEL_B20_SD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, diesel, 18t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-TRUCK_SH_CNG_MD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, compressed gas, 18t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-TRUCK_SH_CNG_MD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, compressed gas, 18t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-TRUCK_SH_CNG_SD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, compressed gas, 18t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-TRUCK_SH_CNG_SD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, compressed gas, 18t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-TRUCK_SH_DIESEL_MD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, diesel, 18t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-TRUCK_SH_DIESEL_MD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 18t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-TRUCK_SH_DIESEL_SD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, diesel, 18t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-TRUCK_SH_DIESEL_SD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 18t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-TRUCK_SH_EV_MD,Construction,Medium duty truck,"Medium duty truck, battery electric, NMC-622 battery, 18t gross weight, 2020, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-TRUCK_SH_EV_MD,Operation,"transport, freight, lorry","transport, freight, lorry, battery electric, NMC-622 battery, 18t gross weight, 2020, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-TRUCK_SH_EV_SD,Construction,Medium duty truck,"Medium duty truck, battery electric, NMC-622 battery, 18t gross weight, 2020, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-TRUCK_SH_EV_SD,Operation,"transport, freight, lorry","transport, freight, lorry, battery electric, NMC-622 battery, 18t gross weight, 2020, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-TRUCK_SH_FC_CH4_MD,Operation,"transport, freight, lorry","transport, freight, lorry, fuel cell electric, 18t gross weight, 2020, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-TRUCK_SH_FC_CH4_MD,Construction,Medium duty truck,"Medium duty truck, fuel cell electric, 18t gross weight, 2020, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-TRUCK_SH_FC_CH4_SD,Operation,"transport, freight, lorry","transport, freight, lorry, fuel cell electric, 18t gross weight, 2020, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-TRUCK_SH_FC_CH4_SD,Construction,Medium duty truck,"Medium duty truck, fuel cell electric, 18t gross weight, 2020, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-TRUCK_SH_HY_DIESEL_MD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, diesel hybrid, 18t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-TRUCK_SH_HY_DIESEL_MD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel hybrid, 18t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-TRUCK_SH_HY_DIESEL_SD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, diesel hybrid, 18t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-TRUCK_SH_HY_DIESEL_SD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel hybrid, 18t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-TRUCK_SH_PROPANE_MD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, compressed gas, 18t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-TRUCK_SH_PROPANE_MD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, compressed gas, 18t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-TRUCK_SH_PROPANE_SD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, compressed gas, 18t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
-TRUCK_SH_PROPANE_SD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, compressed gas, 18t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_comp_QC_with_CPC
+TRUCK_SH_BIODIESEL_B100_MD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 18t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+TRUCK_SH_BIODIESEL_B100_MD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, diesel, 18t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+TRUCK_SH_BIODIESEL_B100_SD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 18t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+TRUCK_SH_BIODIESEL_B100_SD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, diesel, 18t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+TRUCK_SH_BIODIESEL_B20_MD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, diesel, 18t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+TRUCK_SH_BIODIESEL_B20_MD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 18t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+TRUCK_SH_BIODIESEL_B20_SD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 18t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+TRUCK_SH_BIODIESEL_B20_SD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, diesel, 18t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+TRUCK_SH_CNG_MD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, compressed gas, 18t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+TRUCK_SH_CNG_MD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, compressed gas, 18t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+TRUCK_SH_CNG_SD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, compressed gas, 18t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+TRUCK_SH_CNG_SD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, compressed gas, 18t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+TRUCK_SH_DIESEL_MD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, diesel, 18t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+TRUCK_SH_DIESEL_MD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 18t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+TRUCK_SH_DIESEL_SD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, diesel, 18t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+TRUCK_SH_DIESEL_SD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 18t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+TRUCK_SH_EV_MD,Construction,Medium duty truck,"Medium duty truck, battery electric, NMC-622 battery, 18t gross weight, 2020, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+TRUCK_SH_EV_MD,Operation,"transport, freight, lorry","transport, freight, lorry, battery electric, NMC-622 battery, 18t gross weight, 2020, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+TRUCK_SH_EV_SD,Construction,Medium duty truck,"Medium duty truck, battery electric, NMC-622 battery, 18t gross weight, 2020, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+TRUCK_SH_EV_SD,Operation,"transport, freight, lorry","transport, freight, lorry, battery electric, NMC-622 battery, 18t gross weight, 2020, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+TRUCK_SH_FC_CH4_MD,Operation,"transport, freight, lorry","transport, freight, lorry, fuel cell electric, 18t gross weight, 2020, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+TRUCK_SH_FC_CH4_MD,Construction,Medium duty truck,"Medium duty truck, fuel cell electric, 18t gross weight, 2020, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+TRUCK_SH_FC_CH4_SD,Operation,"transport, freight, lorry","transport, freight, lorry, fuel cell electric, 18t gross weight, 2020, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+TRUCK_SH_FC_CH4_SD,Construction,Medium duty truck,"Medium duty truck, fuel cell electric, 18t gross weight, 2020, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+TRUCK_SH_HY_DIESEL_MD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, diesel hybrid, 18t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+TRUCK_SH_HY_DIESEL_MD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel hybrid, 18t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+TRUCK_SH_HY_DIESEL_SD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, diesel hybrid, 18t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+TRUCK_SH_HY_DIESEL_SD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel hybrid, 18t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+TRUCK_SH_PROPANE_MD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, compressed gas, 18t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+TRUCK_SH_PROPANE_MD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, compressed gas, 18t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+TRUCK_SH_PROPANE_SD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, compressed gas, 18t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
+TRUCK_SH_PROPANE_SD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, compressed gas, 18t gross weight, 2020, EURO-VI, regional delivery",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC_comp
 UNMINEABLE_COAL_SEAM,Operation,"carbon dioxide, stored","carbon dioxide compression, transport and storage",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 WIND_OFFSHORE,Operation,"electricity, high voltage","electricity production, wind, 1-3MW turbine, offshore",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 WIND_OFFSHORE_FIXED,Construction,"wind power plant, 2MW, offshore, fixed parts","market for wind power plant, 2MW, offshore, fixed parts",GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
