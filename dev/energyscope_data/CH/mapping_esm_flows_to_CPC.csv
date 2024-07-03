@@ -1,0 +1,56 @@
+Flow,Description,CPC
+BENZENE,Benzene,"['33100: Coke and semi-coke of coal, of lignite or of peat; retort carbon']"
+BIO_DIESEL,Bio-diesel,['35491: Biodiesel']
+CO2_A,Carbon dioxide (concentrated emissions),['34210b: Carbon dioxide and monoxide']
+CO2_C,Carbon dioxide (captured),['34210b: Carbon dioxide and monoxide']
+CO2_CS,Carbon dioxide (captured & stored),['34210b: Carbon dioxide and monoxide']
+CO2_E,Carbon dioxide (emitted),['34210b: Carbon dioxide and monoxide']
+COAL,Coal,"['11010: Hard coal', '1101: Hard coal', '11030: Brown coal', '1103: Brown coal', '110: Coal and peat', '11: Coal and peat']"
+CONSTRUCTION,Facilities construction,"['53290: Other civil engineering works', '53269: Other constructions for manufacturing', '43410: Furnace burners for liquid fuel, for pulverized solid fuel or for gas; mechanical stokers, mechanical grates, […]', '53241: Long-distance pipelines', '4951: Rail locomotives and locomotive tenders', '49533: Railway or tramway goods vans and wagons, not self-propelled', '49113: Motor cars and other motor vehicles principally designed for the transport of persons (except public-transport[…]', '53262: Power plants']"
+DECOMMISSIONING,"Decommissioning of plant, factory, facility","['43230: Air or vacuum pumps; air or other gas compressors', '46410: Primary cells and primary batteries']"
+DIESEL,Diesel,"['33370: Fuel oils n.e.c.', '3337: Fuel oils n.e.c.', '33360: Gas oil', '3336: Gas oil']"
+DIESEL_S,Diesel,"['33370: Fuel oils n.e.c.', '3337: Fuel oils n.e.c.', '33360: Gas oil', '3336: Gas oil']"
+ELEC_S,Electricity,"['17100: Electrical energy', '1710: Electrical energy', '171: Electrical energy']"
+ELECTRICITY_EHV,Electricity extra high voltage,"['17100: Electrical energy', '1710: Electrical energy', '171: Electrical energy']"
+ELECTRICITY_HV,Electricity high voltage,"['17100: Electrical energy', '1710: Electrical energy', '171: Electrical energy']"
+ELECTRICITY_LV,Electricity low voltage,"['17100: Electrical energy', '1710: Electrical energy', '171: Electrical energy']"
+ELECTRICITY_MV,Electricity medium voltage,"['17100: Electrical energy', '1710: Electrical energy', '171: Electrical energy']"
+ETHANE,Ethane,['34: Basic chemicals']
+ETHANOL,Ethanol,['35491: Biodiesel']
+ETHYLBENZENE,Ethylbenzene,"['34110: Hydrocarbons and their halogenated, sulphonated, nitrated or nitrosated derivatives']"
+ETHYLENE,Ethylene,"['33421: Ethylene, propylene, butylene, butadiene', '3342: Ethylene, propylene, butylene, butadiene and other petroleum gases or gaseous hydrocarbons, except natural gas']"
+GASOLINE,Gasoline,"['33370: Fuel oils n.e.c.', '3337: Fuel oils n.e.c.', '33360: Gas oil', '3336: Gas oil', '33311: Motor gasoline']"
+GASOLINE_S,Gasoline,"['33370: Fuel oils n.e.c.', '3337: Fuel oils n.e.c.', '33360: Gas oil', '3336: Gas oil', '33311: Motor gasoline']"
+H2_EHP,Hydrogen extra high pressure,"['34210: Hydrogen, nitrogen, oxygen, carbon dioxide and rare gases; inorganic oxygen compounds of non-metals n.e.c.', '3421: Hydrogen, nitrogen, oxygen, carbon dioxide and rare gases; inorganic oxygen compounds of non-metals n.e.c.']"
+H2_HP,Hydrogen high pressure,"['34210: Hydrogen, nitrogen, oxygen, carbon dioxide and rare gases; inorganic oxygen compounds of non-metals n.e.c.', '3421: Hydrogen, nitrogen, oxygen, carbon dioxide and rare gases; inorganic oxygen compounds of non-metals n.e.c.']"
+H2_LP,Hydrogen low pressure,"['34210: Hydrogen, nitrogen, oxygen, carbon dioxide and rare gases; inorganic oxygen compounds of non-metals n.e.c.', '3421: Hydrogen, nitrogen, oxygen, carbon dioxide and rare gases; inorganic oxygen compounds of non-metals n.e.c.']"
+H2_MP,Hydrogen medium pressure,"['34210: Hydrogen, nitrogen, oxygen, carbon dioxide and rare gases; inorganic oxygen compounds of non-metals n.e.c.', '3421: Hydrogen, nitrogen, oxygen, carbon dioxide and rare gases; inorganic oxygen compounds of non-metals n.e.c.']"
+H2_S,Hydrogen,"['34210: Hydrogen, nitrogen, oxygen, carbon dioxide and rare gases; inorganic oxygen compounds of non-metals n.e.c.', '3421: Hydrogen, nitrogen, oxygen, carbon dioxide and rare gases; inorganic oxygen compounds of non-metals n.e.c.']"
+HEAT_HIGH_T,High temperature heat,"['17300: Steam and hot water', '1730: Steam and hot water', '173: Steam and hot water ']"
+HEAT_LOW_T_DECEN,Heat low temperature decentralized,"['17300: Steam and hot water', '1730: Steam and hot water', '173: Steam and hot water ']"
+HEAT_LOW_T_DHN,Heat low temperature district heating,"['17300: Steam and hot water', '1730: Steam and hot water', '173: Steam and hot water ']"
+JETFUEL,Jet fuel,['3334: Kerosenes']
+LFO,Light fuel oil,"['33360: Gas oil', '3336: Gas oil', '33370: Fuel oils n.e.c.', '3337: Fuel oils n.e.c.', '33390: Other petroleum oils n.e.c.', '3339: Other petroleum oils n.e.c.']"
+METHANOL,Methanol,"['34139: Other alcohols, phenols, phenol-alcohols, and their halogenated, sulphonated, nitrated or nitrosated derivativ[…]']"
+NG_EHP,Natural gas extra high pressure,"['12020: Natural gas, liquefied or in the gaseous state', '1202: Natural gas, liquefied or in the gaseous state', '120: Crude petroleum and natural gas', '12: Crude petroleum and natural gas', '69120: Gas distribution through mains (on own account)']"
+NG_HP,Natural gas high pressure,"['12020: Natural gas, liquefied or in the gaseous state', '1202: Natural gas, liquefied or in the gaseous state', '120: Crude petroleum and natural gas', '12: Crude petroleum and natural gas', '69120: Gas distribution through mains (on own account)']"
+NG_LP,Natural gas low pressure,"['12020: Natural gas, liquefied or in the gaseous state', '1202: Natural gas, liquefied or in the gaseous state', '120: Crude petroleum and natural gas', '12: Crude petroleum and natural gas', '69120: Gas distribution through mains (on own account)']"
+NG_MP,Natural gas medium pressure,"['12020: Natural gas, liquefied or in the gaseous state', '1202: Natural gas, liquefied or in the gaseous state', '120: Crude petroleum and natural gas', '12: Crude petroleum and natural gas', '69120: Gas distribution through mains (on own account)']"
+NG_S,Natural gas,"['12020: Natural gas, liquefied or in the gaseous state', '1202: Natural gas, liquefied or in the gaseous state', '120: Crude petroleum and natural gas', '12: Crude petroleum and natural gas', '69120: Gas distribution through mains (on own account)']"
+PROCESS_FUEL,Possible fuels for process activities ,"['12020: Natural gas, liquefied or in the gaseous state', '1202: Natural gas, liquefied or in the gaseous state', '12010: Petroleum oils and oils obtained from bituminous minerals, crude', '33360: Gas oil', '3336: Gas oil', '33421: Ethylene, propylene, butylene, butadiene', '33500: Petroleum jelly; paraffin wax, micro- crystalline petroleum wax, slack wax, ozokerite, lignite wax, peat wax, […]', '39270: Waste, parings and scrap of plastics', '33100: Coke and semi-coke of coal, of lignite or of peat; retort carbon', '34139: Other alcohols, phenols, phenol-alcohols, and their halogenated, sulphonated, nitrated or nitrosated derivativ[…]', '34210: Hydrogen, nitrogen, oxygen, carbon dioxide and rare gases; inorganic oxygen compounds of non-metals n.e.c.', '69120: Gas distribution through mains (on own account)', '23140: Other cereal grain products (including corn flakes)', '17200: Coal gas, water gas, producer gas and similar gases, other than petroleum gases and other gaseous hydrocarbons']"
+PROPANE,Propane,"['33410: Propane and butanes, liquefied']"
+PROPYLENE,Propylene,"['33421: Ethylene, propylene, butylene, butadiene', '3342: Ethylene, propylene, butylene, butadiene and other petroleum gases or gaseous hydrocarbons, except natural gas']"
+RES_GEO,Geothermal reserve,[]
+RES_HYDRO,Hydro reserve,[]
+RES_SOLAR,Solar reserve,[]
+RES_TIDAL,Tidal reserve,[]
+RES_WIND,Wind reserve,[]
+RES_WIND_OFFSHORE,Wind reserve,[]
+RES_WIND_ONSHORE,Wind reserve,[]
+SNG,Synthetic natural gas,"['12020: Natural gas, liquefied or in the gaseous state', '1202: Natural gas, liquefied or in the gaseous state', '120: Crude petroleum and natural gas', '12: Crude petroleum and natural gas', '17200: Coal gas, water gas, producer gas and similar gases, other than petroleum gases and other gaseous hydrocarbons']"
+STYRENE,Styrene,"['3472: Polymers of styrene, in primary forms', '34720: Polymers of styrene, in primary forms']"
+TRANSPORT_FUEL,Possible fuels for transportation means,"['17100: Electrical energy', '1710: Electrical energy', '171: Electrical energy', '33370: Fuel oils n.e.c.', '3337: Fuel oils n.e.c.', '33360: Gas oil', '3336: Gas oil', '12020: Natural gas, liquefied or in the gaseous state', '1202: Natural gas, liquefied or in the gaseous state', '333: Petroleum oils and oils obtained from bituminous materials, other than crude; preparations n.e.c. containing by […]', '33311: Motor gasoline', '69120: Gas distribution through mains (on own account)', '34210: Hydrogen, nitrogen, oxygen, carbon dioxide and rare gases; inorganic oxygen compounds of non-metals n.e.c.', '3334: Kerosenes']"
+URANIUM,Uranium,"['33710: Fuel elements (cartridges), non-irradiated, for nuclear reactors']"
+WASTE,Waste,"['39910: Municipal waste', '39990: Other wastes n.e.c.']"
+WET_BIOMASS,Wet biomass,"['34654: Excreta of animals useful for manure/fertilizer and fuel preparation', '01919: Forage products, n.e.c.', '23140: Other cereal grain products (including corn flakes)', '39281: Wood pellets', '31230: Wood in chips or particles', '3928: Sawdust and wood waste and scrap']"
+WOOD,Wood,"['31: Wood in the rough', '3191: Other products of wood', '34510: Wood charcoal', '3451: Wood charcoal', '313: Fuel wood, in logs, in billets, in twigs, in faggots or in similar forms', '39281: Wood pellets', '3131: Fuel wood of coniferous wood', '3132: Fuel wood of non-coniferous wood', '31230: Wood in chips or particles', '01919: Forage products, n.e.c.', '3928: Sawdust and wood waste and scrap']"
