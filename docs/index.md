@@ -14,6 +14,29 @@ Mescal is a specialized package of the [Brightway Software Framework](https://br
 
 Mescal was designed for all researchers and modellers aiming to include life-cycle assessment (LCA) in their work, but who are not necessarily LCA experts. Mescal is usually used within [Jupyter notebooks](https://jupyter.org/).
 
+## Workflow
+
+![workflow of the mescal methodology](pics/workflow.png "workflow")
+
+LCI datasets are taken from ecoinvent and possibly other sources if some of the ESM technologies are not covered in the ecoinvent database, e.g., [_premise_](https://linkinghub.elsevier.com/retrieve/pii/S136403212200226X) additional inventories. These LCI datasets are mapped to the ESM technologies and resources. This is followed by operations of regionalization, databases harmonization, double-counting removal, and life-cycle impact assessment. LCA indicators are then ready to be integrated to the ESM. 
+
+## Requirements
+
+- **Python 3.11**
+- Licence for [ecoinvent 3](https://ecoinvent.org/). The ecoinvent database is not included in this package. You may also check ecoinvent's [GDPR & EULA](https://ecoinvent.org/gdpr-eula/).
+
+## Installation
+
+You can install _mescal_ via [pip] from [PyPI]:
+
+```console
+$ pip install mescal
+```
+
+## Main contributor
+
+- [Matthieu Souttre](https://github.com/matthieu-str)
+
 ```{toctree}
 ---
 hidden:
