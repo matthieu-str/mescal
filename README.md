@@ -19,6 +19,11 @@
 [pre-commit]: https://github.com/pre-commit/pre-commit
 [black]: https://github.com/psf/black
 
+## Requirements
+
+- **Python 3.11**
+- Licence for [ecoinvent 3](https://ecoinvent.org/). The ecoinvent database is not included in this package. You may also check ecoinvent's [GDPR & EULA](https://ecoinvent.org/gdpr-eula/). 
+
 ## Installation
 
 You can install _mescal_ via [pip] from [PyPI]:
@@ -26,6 +31,10 @@ You can install _mescal_ via [pip] from [PyPI]:
 ```console
 $ pip install mescal
 ```
+
+## How to use _mescal_?
+
+You can follow this [example notebook](https://github.com/matthieu-str/mescal/blob/master/examples/tutorial.ipynb) to learn how to use _mescal_.
 
 ## Contributing
 
@@ -56,7 +65,7 @@ please [file an issue][Issue Tracker] along with a detailed description.
 You can build the documentation locally by installing the documentation Conda environment:
 
 ```bash
-conda env create -f docs/environment.yml
+conda env create -f docs/environment.yaml
 ```
 
 activating the environment
