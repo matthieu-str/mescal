@@ -4,13 +4,14 @@ from mescal.utils import *
 
 
 def create_complementary_database(df_mapping: pd.DataFrame, premise_db: list[dict],
-                                  name_complement_db: str) -> pd.DataFrame:
+                                  name_complement_db: str, premise_changes: pd.DataFrame) -> pd.DataFrame:
     """
     Relink the technologies to the premise database
 
     :param df_mapping: dataframe with the mapping of the technologies and resources
     :param premise_db: premise database
     :param name_complement_db: name of the complementary database
+    :param premise_changes: file of the changes in names, products, locations, in premise regarding the mapping
     :return: dataframe with the mapping of the technologies and resources linked to the premise
         database
     """
@@ -43,32 +44,35 @@ def create_complementary_database(df_mapping: pd.DataFrame, premise_db: list[dic
         new_product = new_product.replace('EURO-6d', 'EURO-6ab')
         new_activity = new_activity.replace('EURO-6d', 'EURO-6ab')
 
-        # Hydrogen transmission and distribution pipelines
-        new_activity = new_activity.replace('transmission pipeline for hydrogen, dedicated hydrogen pipeline',
-                                            'pipeline, hydrogen, high pressure transmission network')
-        new_activity = new_activity.replace('distribution pipeline for hydrogen, dedicated hydrogen pipeline',
-                                            'pipeline, hydrogen, low pressure distribution network')
+        new_activity, new_product, new_location = premise_changing_names(
+            activity_name=new_activity,
+            activity_prod=new_product,
+            activity_loc=region,
+            name_premise_db=name_premise_db,
+            premise_db_dict_name=premise_db_dict_name,
+            premise_changes=premise_changes,
+        )
 
         try:
-            premise_db_dict_name[(new_activity, new_product, region, name_premise_db)]
+            premise_db_dict_name[(new_activity, new_product, new_location, name_premise_db)]
 
         except KeyError:
             new_product = new_product[0].lower() + new_product[1:]
             new_activity = new_activity[0].lower() + new_activity[1:]
 
             try:
-                premise_db_dict_name[(new_activity, new_product, region, name_premise_db)]
+                premise_db_dict_name[(new_activity, new_product, new_location, name_premise_db)]
 
             except KeyError:
                 print(f"No inventory in the premise database for {esm_tech_name, act_type}")
                 complement_premise.append((esm_tech_name, act_type))
-                tech_premise.loc[i] = [esm_tech_name, act_type, product, activity, region, database]
+                tech_premise.loc[i] = [esm_tech_name, act_type, product, activity, new_location, database]
 
             else:
-                tech_premise.loc[i] = [esm_tech_name, act_type, new_product, new_activity, region, name_premise_db]
+                tech_premise.loc[i] = [esm_tech_name, act_type, new_product, new_activity, new_location, name_premise_db]
 
         else:
-            tech_premise.loc[i] = [esm_tech_name, act_type, new_product, new_activity, region, name_premise_db]
+            tech_premise.loc[i] = [esm_tech_name, act_type, new_product, new_activity, new_location, name_premise_db]
 
     for i in range(len(complement_premise)):
         esm_tech_name = complement_premise[i][0]

@@ -8,11 +8,12 @@ AL_MAKING,Construction,aluminium casting facility,aluminium casting facility con
 AL_MAKING,Operation,"aluminium, primary, ingot","aluminium production, primary, ingot","IAI Area, EU27 & EFTA",ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 AL_MAKING_HR,Operation,"aluminium, primary, ingot","aluminium production, primary, ingot","IAI Area, EU27 & EFTA",ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 AL_MAKING_HR,Construction,aluminium casting facility,aluminium casting facility construction,RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-AN_DIG,Construction,"anaerobic digestion plant, for biowaste","anaerobic digestion plant construction, for biowaste",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 AN_DIG,Operation,biogas,anaerobic digestion of manure,CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+AN_DIG,Construction,"anaerobic digestion plant, for biowaste","anaerobic digestion plant construction, for biowaste",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 AN_DIG_SI,Operation,biogas,anaerobic digestion of manure,CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 AN_DIG_SI_COGEN,Construction,"heat and power co-generation unit, 160kW electrical, common components for heat+electricity","heat and power co-generation unit construction, 160kW electrical, common components for heat+electricity",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 AN_DIG_SI_PLANT,Construction,"anaerobic digestion plant, for biowaste","anaerobic digestion plant construction, for biowaste",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+BATTERY,Construction,"battery, Li-ion, rechargeable, prismatic","market for battery, Li-ion, rechargeable, prismatic",GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 BIOMASS_ETHANOL,Operation,"ethanol, from forest residue","ethanol production, via fermentation, from forest residue, energy allocation",US,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 BIOMASS_ETHANOL,Construction,ethanol fermentation plant,market for ethanol fermentation plant,GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 BUS_CNG_STOICH,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, compressed gas, 13m double deck urban bus, EURO-VI",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
@@ -73,8 +74,8 @@ CAR_NG_LOCAL,Operation,"transport, passenger car, EURO-6ab","transport, passenge
 CAR_NG_LOCAL,Construction,"Passenger car, EURO-6ab","Passenger car, compressed gas, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 CAR_NG_LONGD,Construction,"Passenger car, EURO-6ab","Passenger car, compressed gas, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 CAR_NG_LONGD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, compressed gas, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-CAR_PHEV_LOCAL,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, plugin gasoline hybrid, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 CAR_PHEV_LOCAL,Construction,"Passenger car, EURO-6ab","Passenger car, plugin gasoline hybrid, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+CAR_PHEV_LOCAL,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, plugin gasoline hybrid, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 CAR_PHEV_LONGD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, plugin gasoline hybrid, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 CAR_PHEV_LONGD,Construction,"Passenger car, EURO-6ab","Passenger car, plugin gasoline hybrid, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 CCGT,Operation,"electricity, high voltage","electricity production, at natural gas-fired combined cycle power plant",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
@@ -83,10 +84,10 @@ CCGT_CC,Operation,"electricity, high voltage","electricity production, at natura
 CCGT_CC,Construction,"NGCC power plant, 400MWe","market for gas power plant, combined cycle, 400MW electrical",GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 CEMENT_PROD,Construction,cement factory,cement factory construction,CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 CEMENT_PROD,Operation,"cement, alternative constituents 21-35%","cement production, alternative constituents 21-35%",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-CEMENT_PROD_HP,Construction,cement factory,cement factory construction,CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 CEMENT_PROD_HP,Operation,"cement, alternative constituents 21-35%","cement production, alternative constituents 21-35%",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-CO2_METHANOL,Operation,methanol,methanol production,GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+CEMENT_PROD_HP,Construction,cement factory,cement factory construction,CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 CO2_METHANOL,Construction,"chemical factory, organics","chemical factory construction, organics",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+CO2_METHANOL,Operation,methanol,methanol production,GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 CO2_STO,Construction,"liquid storage tank, chemicals, organics","market for liquid storage tank, chemicals, organics",GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 CO2_TO_DIESEL,Operation,"diesel, synthetic","diesel production, synthetic, Fischer Tropsch process, hydrogen from electrolysis, energy allocation",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 CO2_TO_DIESEL,Construction,petroleum refinery,petroleum refinery construction,RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
@@ -96,8 +97,8 @@ COACH_CNG_STOICH,Operation,"transport, passenger bus, EURO-VI","transport, passe
 COACH_CNG_STOICH,Construction,"Passenger bus, EURO-VI","Passenger bus, compressed gas, 13m single deck coach bus, EURO-VI",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 COACH_DIESEL,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 COACH_DIESEL,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-COACH_EV,Operation,"transport, passenger bus","transport, passenger bus, battery electric - overnight charging, NMC-622 battery, 13m single deck urban bus",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 COACH_EV,Construction,passenger bus,"passenger bus, battery electric - overnight charging, NMC-622 battery, 13m single deck urban bus",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+COACH_EV,Operation,"transport, passenger bus","transport, passenger bus, battery electric - overnight charging, NMC-622 battery, 13m single deck urban bus",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 COACH_FC_HYBRID_CH4,Construction,passenger bus,"passenger bus, fuel cell electric, 13m single deck coach bus",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 COACH_FC_HYBRID_CH4,Operation,"transport, passenger bus","transport, passenger bus, fuel cell electric, 13m single deck coach bus",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 COACH_FC_HYBRID_H2,Operation,"transport, passenger bus","transport, passenger bus, fuel cell electric, 13m single deck coach bus",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
@@ -185,12 +186,12 @@ DHN_TH_STORAGE,Construction,"thermal storage system, solar tower power plant, 20
 DIE_STO,Construction,"liquid storage tank, chemicals, organics","liquid storage tank production, chemicals, organics",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 DIRECT_USAGE,Operation,"carbon dioxide, stored","carbon dioxide compression, transport and storage",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 DOGR,Operation,"carbon dioxide, stored","carbon dioxide compression, transport and storage",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-EHP_H2_GRID,Construction,"pipeline, for hydrogen transmission","pipeline, hydrogen, high pressure transmission network",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 EHP_H2_GRID,Operation,"transport, pipeline, long distance, natural gas","transport, pipeline, long distance, natural gas",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-EHP_NG_GRID,Operation,"transport, pipeline, long distance, natural gas","transport, pipeline, long distance, natural gas",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+EHP_H2_GRID,Construction,"pipeline, for hydrogen transmission","pipeline, hydrogen, high pressure transmission network",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 EHP_NG_GRID,Construction,"pipeline, natural gas, high pressure distribution network","pipeline construction, natural gas, high pressure distribution network",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+EHP_NG_GRID,Operation,"transport, pipeline, long distance, natural gas","transport, pipeline, long distance, natural gas",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 EHV_GRID,Construction,"transmission network, electricity, high voltage","transmission network construction, electricity, high voltage",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-ELEC_STO,Construction,"battery cell, Li-ion","battery cell production, Li-ion",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+ELEC_STO,Construction,"battery, Li-ion, rechargeable, prismatic","market for battery, Li-ion, rechargeable, prismatic",GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 EOR,Operation,"carbon dioxide, stored","carbon dioxide compression, transport and storage",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 ETHANE_CRACKING,Construction,"chemical factory, organics","chemical factory construction, organics",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 ETHANE_CRACKING,Operation,ethane,natural gas liquids fractionation,GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
@@ -320,7 +321,7 @@ NG_EXP_HM_COGEN,Operation,"natural gas, high pressure","market for natural gas, 
 NG_EXP_ML,Operation,"natural gas, medium pressure, vehicle grade","market for natural gas, medium pressure, vehicle grade",GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 NG_EXP_ML_COGEN,Construction,"air input/output unit, heat and power co-generation unit, 160kW electrical","air input/output unit production, heat and power co-generation unit, 160kW electrical",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 NG_EXP_ML_COGEN,Operation,"natural gas, medium pressure, vehicle grade","market for natural gas, medium pressure, vehicle grade",GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-NG_REFORMING,Operation,"hydrogen, gaseous, 25 bar","hydrogen production, steam methane reforming of natural gas, 25 bar",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+NG_REFORMING,Operation,"hydrogen, gaseous, low pressure","hydrogen production, steam methane reforming",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 NG_REFORMING_PLANT,Construction,"chemical factory, organics","chemical factory construction, organics",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 NG_REFORMING_TANK,Construction,"liquid storage tank, chemicals, organics","market for liquid storage tank, chemicals, organics",GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 NG_STO,Construction,"liquid storage tank, chemicals, organics","liquid storage tank production, chemicals, organics",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC

@@ -3,6 +3,7 @@ import random
 import string
 import wurst
 import bw2data as bd
+import pandas as pd
 from mescal.caching import cache_database, load_db
 
 
@@ -277,3 +278,37 @@ def ecoinvent_unit_convention(unit: str) -> str:
         return unit_dict[unit]
     else:
         return unit
+
+
+def premise_changing_names(activity_name: str, activity_prod: str, activity_loc: str, name_premise_db,
+                           premise_db_dict_name: dict, premise_changes: pd.DataFrame = None) \
+        -> tuple[str, str, str]:
+    """
+    Returns the updated name, product and location in case some changes have occurred in premise
+
+    :param activity_name: name of the LCI dataset
+    :param activity_prod: product of the LCI dataset
+    :param activity_loc: location of the LCI dataset
+    :param name_premise_db: name of the premise database
+    :param premise_db_dict_name: dictionary of the database with (name, product, location, database) as key
+    :param premise_changes: file of the premise name changes impacting the mapping
+    :return: the updated name, product and location of the LCI dataset
+    """
+
+    if (activity_name, activity_prod, activity_loc, name_premise_db) in premise_db_dict_name:
+        return activity_name, activity_prod, activity_loc
+    elif (activity_name, activity_prod, "RoW", name_premise_db) in premise_db_dict_name:
+        return activity_name, activity_prod, "RoW"
+    elif premise_changes is None:
+        return activity_name, activity_prod, activity_loc
+    else:
+        try:
+            activity_name_new, activity_prod_new, activity_loc_new = premise_changes[
+                (premise_changes['Activity - old'] == activity_name)
+                & (premise_changes['Product - old'] == activity_prod)
+                & (premise_changes['Location - old'] == activity_loc)
+                ][['Activity - new', 'Product - new', 'Location - new']].values[0]
+        except IndexError:  # the LCI dataset is not in the premise database
+            return activity_name, activity_prod, activity_loc
+        else:
+            return activity_name_new, activity_prod_new, activity_loc_new
