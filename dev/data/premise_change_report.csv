@@ -1,0 +1,13 @@
+Product - old,Activity - old,Location - old,Product - new,Activity - new,Location - new
+"hydrogen, gaseous, 25 bar","hydrogen production, auto-thermal reforming of natural gas, 25 bar",RER,"hydrogen, gaseous, low pressure","hydrogen production, auto-thermal reforming",RER
+"hydrogen, gaseous, 25 bar","hydrogen production, auto-thermal reforming of natural gas, with CCS (MDEA, 98% eff.), 25 bar",RER,"hydrogen, gaseous, low pressure","hydrogen production, auto-thermal reforming, with CCS",RER
+"hydrogen, gaseous, 25 bar","hydrogen production, auto-thermal reforming, from biomethane, 25 bar",CH,"hydrogen, gaseous, low pressure","hydrogen production, auto-thermal reforming, from biomethane",RER
+"hydrogen, gaseous, 25 bar","hydrogen production, auto-thermal reforming, from biomethane, with CCS (MDEA, 98% eff.), 25 bar",CH,"hydrogen, gaseous, low pressure","hydrogen production, auto-thermal reforming, from biomethane, with CCS",RER
+"hydrogen, gaseous, 26 bar","hydrogen production, steam methane reforming, from biomethane, high and low temperature, 26 bar",CH,"hydrogen, gaseous, low pressure","hydrogen production, steam methane reforming, from biomethane",RER
+"hydrogen, gaseous, 26 bar","hydrogen production, steam methane reforming, from biomethane, high and low temperature, with CCS (MDEA, 98% eff.), 26 bar",CH,"hydrogen, gaseous, low pressure","hydrogen production, steam methane reforming, from biomethane, with CCS",RER
+"hydrogen, gaseous, 30 bar","hydrogen production, gaseous, 30 bar, from hard coal gasification and reforming, at coal gasification plant",RER,"hydrogen, gaseous, low pressure","hydrogen production, coal gasification",RER
+"hydrogen, gaseous, 30 bar","hydrogen production, gaseous, 30 bar, from hard coal gasification and reforming, with CCS, at coal gasification plant",RER,"hydrogen, gaseous, low pressure","hydrogen production, coal gasification, with CCS",RER
+"hydrogen, gaseous, 25 bar","hydrogen production, steam methane reforming of natural gas, 25 bar",CH,"hydrogen, gaseous, low pressure","hydrogen production, steam methane reforming",RER
+"hydrogen, gaseous, 25 bar","hydrogen production, steam methane reforming of natural gas, with CCS (MDEA, 98% eff.), 25 bar",CH,"hydrogen, gaseous, low pressure","hydrogen production, steam methane reforming, with CCS",RER
+"pipeline, for hydrogen transmission","transmission pipeline for hydrogen, dedicated hydrogen pipeline",RER,"pipeline, for hydrogen transmission","pipeline, hydrogen, high pressure transmission network",RER
+"pipeline, for hydrogen distribution","distribution pipeline for hydrogen, dedicated hydrogen pipeline",RER,"pipeline, for hydrogen distribution","pipeline, hydrogen, low pressure distribution network",RER
