@@ -4,7 +4,7 @@ from mescal.utils import *
 
 
 def create_complementary_database(df_mapping: pd.DataFrame, premise_db: list[dict],
-                                  name_complement_db: str, premise_changes: pd.DataFrame) -> pd.DataFrame:
+                                  name_complement_db: str, premise_changes: pd.DataFrame = None) -> pd.DataFrame:
     """
     Relink the technologies to the premise database
 
