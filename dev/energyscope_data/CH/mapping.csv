@@ -8,11 +8,12 @@ AL_MAKING,Construction,aluminium casting facility,aluminium casting facility con
 AL_MAKING,Operation,"aluminium, primary, ingot","aluminium production, primary, ingot","IAI Area, EU27 & EFTA",/kg,ecoinvent3.8 cut-off
 AL_MAKING_HR,Operation,"aluminium, primary, ingot","aluminium production, primary, ingot","IAI Area, EU27 & EFTA",/kg,ecoinvent3.8 cut-off
 AL_MAKING_HR,Construction,aluminium casting facility,aluminium casting facility construction,RER,/unit,ecoinvent3.8 cut-off
-AN_DIG,Construction,"anaerobic digestion plant, for biowaste","anaerobic digestion plant construction, for biowaste",CH,/unit,ecoinvent3.8 cut-off
 AN_DIG,Operation,biogas,anaerobic digestion of manure,RoW,/m3,ecoinvent3.8 cut-off
+AN_DIG,Construction,"anaerobic digestion plant, for biowaste","anaerobic digestion plant construction, for biowaste",CH,/unit,ecoinvent3.8 cut-off
 AN_DIG_SI,Operation,biogas,anaerobic digestion of manure,RoW,/m3,ecoinvent3.8 cut-off
 AN_DIG_SI_COGEN,Construction,"heat and power co-generation unit, 160kW electrical, common components for heat+electricity","heat and power co-generation unit construction, 160kW electrical, common components for heat+electricity",RoW,/unit,ecoinvent3.8 cut-off
 AN_DIG_SI_PLANT,Construction,"anaerobic digestion plant, for biowaste","anaerobic digestion plant construction, for biowaste",CH,/unit,ecoinvent3.8 cut-off
+BATTERY,Construction,"battery, Li-ion, rechargeable, prismatic","market for battery, Li-ion, rechargeable, prismatic",GLO,/kg,ecoinvent3.8 cut-off
 BIOMASS_ETHANOL,Operation,"ethanol, from forest residue","Ethanol production, via fermentation, from forest residue, energy allocation",US,/kg,biofuels
 BIOMASS_ETHANOL,Construction,ethanol fermentation plant,market for ethanol fermentation plant,GLO,/unit,ecoinvent3.8 cut-off
 BUS_CNG_STOICH,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, compressed gas, 13m double deck urban bus, 2020, EURO-VI",RER,/person*km,lci-buses
@@ -73,8 +74,8 @@ CAR_NG_LOCAL,Operation,"transport, passenger car, EURO-6d-TEMP","transport, pass
 CAR_NG_LOCAL,Construction,"Passenger car, EURO-6d","Passenger car, compressed gas, Medium, 2020, EURO-6d",RER,/unit,lci-pass_cars
 CAR_NG_LONGD,Construction,"Passenger car, EURO-6d","Passenger car, compressed gas, Medium, 2020, EURO-6d",RER,/unit,lci-pass_cars
 CAR_NG_LONGD,Operation,"transport, passenger car, EURO-6d-TEMP","transport, passenger car, compressed gas, Medium, 2020, EURO-6d-TEMP",RER,/km,lci-pass_cars
-CAR_PHEV_LOCAL,Operation,"transport, passenger car, EURO-6d-TEMP","transport, passenger car, plugin gasoline hybrid, Medium, 2020, EURO-6d-TEMP",RER,/km,lci-pass_cars
 CAR_PHEV_LOCAL,Construction,"Passenger car, EURO-6d","Passenger car, plugin gasoline hybrid, Medium, 2020, EURO-6d",RER,/unit,lci-pass_cars
+CAR_PHEV_LOCAL,Operation,"transport, passenger car, EURO-6d-TEMP","transport, passenger car, plugin gasoline hybrid, Medium, 2020, EURO-6d-TEMP",RER,/km,lci-pass_cars
 CAR_PHEV_LONGD,Operation,"transport, passenger car, EURO-6d-TEMP","transport, passenger car, plugin gasoline hybrid, Medium, 2020, EURO-6d-TEMP",RER,/km,lci-pass_cars
 CAR_PHEV_LONGD,Construction,"Passenger car, EURO-6d","Passenger car, plugin gasoline hybrid, Medium, 2020, EURO-6d",RER,/unit,lci-pass_cars
 CCGT,Operation,"electricity, high voltage","electricity production, at natural gas-fired combined cycle power plant",RER,/kWh,Carma CCS
@@ -83,10 +84,10 @@ CCGT_CC,Operation,"electricity, high voltage","electricity production, at natura
 CCGT_CC,Construction,"NGCC power plant, 400MWe","market for gas power plant, combined cycle, 400MW electrical",GLO,/unit,Carma CCS
 CEMENT_PROD,Construction,cement factory,cement factory construction,CH,/unit,ecoinvent3.8 cut-off
 CEMENT_PROD,Operation,"cement, alternative constituents 21-35%","cement production, alternative constituents 21-35%",CH,/kg,ecoinvent3.8 cut-off
-CEMENT_PROD_HP,Construction,cement factory,cement factory construction,CH,/unit,ecoinvent3.8 cut-off
 CEMENT_PROD_HP,Operation,"cement, alternative constituents 21-35%","cement production, alternative constituents 21-35%",CH,/kg,ecoinvent3.8 cut-off
-CO2_METHANOL,Operation,methanol,methanol production,GLO,/kg,ecoinvent3.8 cut-off
+CEMENT_PROD_HP,Construction,cement factory,cement factory construction,CH,/unit,ecoinvent3.8 cut-off
 CO2_METHANOL,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,/unit,ecoinvent3.8 cut-off
+CO2_METHANOL,Operation,methanol,methanol production,GLO,/kg,ecoinvent3.8 cut-off
 CO2_STO,Construction,"liquid storage tank, chemicals, organics","market for liquid storage tank, chemicals, organics",GLO,/unit,ecoinvent3.8 cut-off
 CO2_TO_DIESEL,Operation,"Diesel, synthetic","Diesel production, synthetic, Fischer Tropsch process, hydrogen from electrolysis, energy allocation",RER,/kg,synfuel from electrolysis
 CO2_TO_DIESEL,Construction,petroleum refinery,petroleum refinery construction,RoW,/unit,ecoinvent3.8 cut-off
@@ -96,8 +97,8 @@ COACH_CNG_STOICH,Operation,"transport, passenger bus, EURO-VI","transport, passe
 COACH_CNG_STOICH,Construction,"Passenger bus, EURO-VI","Passenger bus, compressed gas, 13m single deck coach bus, 2020, EURO-VI",RER,/unit,lci-buses
 COACH_DIESEL,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m single deck coach bus, 2020, EURO-VI",RER,/person*km,lci-buses
 COACH_DIESEL,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m single deck coach bus, 2020, EURO-VI",RER,/unit,lci-buses
-COACH_EV,Operation,"transport, passenger bus","transport, passenger bus, battery electric - overnight charging, NMC-622 battery, 13m single deck urban bus, 2020",RER,/person*km,lci-buses
 COACH_EV,Construction,Passenger bus,"Passenger bus, battery electric - overnight charging, NMC-622 battery, 13m single deck urban bus, 2020",RER,/unit,lci-buses
+COACH_EV,Operation,"transport, passenger bus","transport, passenger bus, battery electric - overnight charging, NMC-622 battery, 13m single deck urban bus, 2020",RER,/person*km,lci-buses
 COACH_FC_HYBRID_CH4,Construction,Passenger bus,"Passenger bus, fuel cell electric, 13m single deck coach bus, 2020",RER,/unit,lci-buses
 COACH_FC_HYBRID_CH4,Operation,"transport, passenger bus","transport, passenger bus, fuel cell electric, 13m single deck coach bus, 2020",RER,/person*km,lci-buses
 COACH_FC_HYBRID_H2,Operation,"transport, passenger bus","transport, passenger bus, fuel cell electric, 13m single deck coach bus, 2020",RER,/person*km,lci-buses
@@ -185,12 +186,12 @@ DHN_TH_STORAGE,Construction,"thermal storage system, solar tower power plant, 20
 DIE_STO,Construction,"liquid storage tank, chemicals, organics","liquid storage tank production, chemicals, organics",RoW,/unit,ecoinvent3.8 cut-off
 DIRECT_USAGE,Operation,"carbon dioxide, stored","carbon dioxide compression, transport and storage",RER,/kg,direct air capture
 DOGR,Operation,"carbon dioxide, stored","carbon dioxide compression, transport and storage",RER,/kg,direct air capture
-EHP_H2_GRID,Construction,"pipeline, for hydrogen transmission","transmission pipeline for hydrogen, dedicated hydrogen pipeline",RER,/km,hydrogen-distribution
 EHP_H2_GRID,Operation,"transport, pipeline, long distance, natural gas","transport, pipeline, long distance, natural gas",RoW,/metric ton*km,ecoinvent3.8 cut-off
-EHP_NG_GRID,Operation,"transport, pipeline, long distance, natural gas","transport, pipeline, long distance, natural gas",RoW,/metric ton*km,ecoinvent3.8 cut-off
+EHP_H2_GRID,Construction,"pipeline, for hydrogen transmission","transmission pipeline for hydrogen, dedicated hydrogen pipeline",RER,/km,hydrogen-distribution
 EHP_NG_GRID,Construction,"pipeline, natural gas, high pressure distribution network","pipeline construction, natural gas, high pressure distribution network",RoW,/km,ecoinvent3.8 cut-off
+EHP_NG_GRID,Operation,"transport, pipeline, long distance, natural gas","transport, pipeline, long distance, natural gas",RoW,/metric ton*km,ecoinvent3.8 cut-off
 EHV_GRID,Construction,"transmission network, electricity, high voltage","transmission network construction, electricity, high voltage",RoW,/km,ecoinvent3.8 cut-off
-ELEC_STO,Construction,"battery cell, Li-ion","battery cell production, Li-ion",RoW,/kg,ecoinvent3.8 cut-off
+ELEC_STO,Construction,"battery, Li-ion, rechargeable, prismatic","market for battery, Li-ion, rechargeable, prismatic",GLO,/kg,ecoinvent3.8 cut-off
 EOR,Operation,"carbon dioxide, stored","carbon dioxide compression, transport and storage",RER,/kg,direct air capture
 ETHANE_CRACKING,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,/unit,ecoinvent3.8 cut-off
 ETHANE_CRACKING,Operation,ethane,natural gas liquids fractionation,GLO,/kg,ecoinvent3.8 cut-off
