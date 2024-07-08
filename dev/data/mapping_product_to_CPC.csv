@@ -16,6 +16,7 @@ biogas,"17200: Coal gas, water gas, producer gas and similar gases, other than p
 "carbon dioxide, stored",34210b: Carbon dioxide and monoxide,equals,Product
 "carbon monoxide, from RWGS",34210b: Carbon dioxide and monoxide,equals,Product
 "chemical factory, organics",53269: Other constructions for manufacturing,equals,Product
+"compressor, for hydrogen transmission",43230: Air or vacuum pumps; air or other gas compressors,equals,Product
 "construction, hard coal IGCC power plant 450MW",53262: Power plants,equals,Product
 diesel,33370: Fuel oils n.e.c.,equals,Product
 "diesel, low-sulfur",33370: Fuel oils n.e.c.,equals,Product
@@ -24,6 +25,7 @@ diesel,33370: Fuel oils n.e.c.,equals,Product
 direct air capture system,43230: Air or vacuum pumps; air or other gas compressors,equals,Product
 distribution pipeline,53251: Local pipelines,contains,Activity
 electricity production,17100: Electrical energy,contains,Product
+"electricity, from residential heating system",17100: Electrical energy,equals,Product
 "electricity, high voltage",17100: Electrical energy,equals,Product
 "electricity, low voltage",17100: Electrical energy,equals,Product
 "electricity, medium voltage",17100: Electrical energy,equals,Product
