@@ -394,9 +394,12 @@ def create_new_database_with_esm_results(mapping: pd.DataFrame, model: pd.DataFr
     model = model.pivot(index='Name', columns='Flow', values='Amount').reset_index()
     model.fillna(0, inplace=True)
 
-    technology_compositions_dict = {key: ast.literal_eval(value) for key, value in dict(zip(
-        technology_compositions.Name, technology_compositions.Components
-    )).items()}
+    try:
+        technology_compositions_dict = {key: ast.literal_eval(value) for key, value in dict(zip(
+            technology_compositions.Name, technology_compositions.Components
+        )).items()}
+    except ValueError:
+        technology_compositions_dict = dict(zip(technology_compositions.Name, technology_compositions.Components))
 
     double_counting_act = pd.merge(double_counting_act, model, on='Name', how='left')
     double_counting_act['CONSTRUCTION'] = double_counting_act.shape[0] * [0]
