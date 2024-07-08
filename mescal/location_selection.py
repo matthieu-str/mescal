@@ -33,10 +33,10 @@ def change_location_activity(esm_tech_name: str or None, product: str, activity:
         locations.append(act['location'])
 
     # special case of Quebec for electricity imports that should come from the US
-    if (esm_region == 'QC') & (esm_tech_name in ['ELECTRICITY_EHV',
-                                                 'ELECTRICITY_HV',
-                                                 'ELECTRICITY_LV',
-                                                 'ELECTRICITY_MV']):
+    if (esm_region == 'CA-QC') & (esm_tech_name in ['ELECTRICITY_EHV',
+                                                    'ELECTRICITY_HV',
+                                                    'ELECTRICITY_LV',
+                                                    'ELECTRICITY_MV']):
         return 'US-NPCC'
 
     # special case where there is only one location
