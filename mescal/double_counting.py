@@ -474,12 +474,12 @@ def double_counting_removal(df_op: pd.DataFrame, df_constr: pd.DataFrame, esm_db
                 for db_name in db_names_list:
                     if (db_name, new_act_op_d_c_code) in db_dict_code:
                         new_act_op_d_c = db_dict_code[(db_name, new_act_op_d_c_code)]
-                        break
 
             if new_act_op_d_c is None:
                 raise ValueError(f"Activity not found: {new_act_op_d_c_code}")
 
             if regionalize_foregrounds:
+                db.remove(new_act_op_d_c)
                 new_act_op_d_c = regionalize_activity_foreground(
                     act=new_act_op_d_c,
                     accepted_locations=accepted_locations,
@@ -489,6 +489,11 @@ def double_counting_removal(df_op: pd.DataFrame, df_constr: pd.DataFrame, esm_db
                     db_dict_code=db_dict_code,
                     db_dict_name=db_dict_name
                 )
+                db.append(new_act_op_d_c)
+                db_dict_name[(new_act_op_d_c['name'],
+                              new_act_op_d_c['reference product'],
+                              new_act_op_d_c['location'],
+                              new_act_op_d_c['database'])] = new_act_op_d_c
 
             if perform_d_c[id_d_c][4] == 'all':
                 # list of inputs in the ESM (i.e., negative flows in layers_in_out)
