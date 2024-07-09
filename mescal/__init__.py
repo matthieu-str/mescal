@@ -23,6 +23,8 @@ __all__ = (
     "write_wurst_database_to_brightway",
     "create_new_database_with_esm_results",
     "get_downstream_consumers",
+    "change_mapping_year",
+    "test_mapping_file",
 )
 
 __version__ = "0.0.1"

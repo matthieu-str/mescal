@@ -312,3 +312,59 @@ def premise_changing_names(activity_name: str, activity_prod: str, activity_loc:
             return activity_name, activity_prod, activity_loc
         else:
             return activity_name_new, activity_prod_new, activity_loc_new
+
+
+def change_year_in_name(row: pd.Series, year_from: int, year_to: int) -> pd.Series:
+    """
+    Change the year in the name of the activity and database
+
+    :param row: row of the mapping file
+    :param year_from: year of the original mapping file
+    :param year_to: year of the new mapping file
+    :return: updated mapping row
+    """
+    row['Activity'] = row['Activity'].replace(str(year_from), str(year_to))
+    row['Database'] = row['Database'].replace(str(year_from), str(year_to))
+    return row
+
+
+def change_mapping_year(mapping: pd.DataFrame, year_from: int, year_to: int) -> pd.DataFrame:
+    """
+    Change the year in the name of the activities and databases in the mapping file
+
+    :param mapping: mapping file between the LCI database and the ESM database
+    :param year_from: year of the original mapping file
+    :param year_to: year of the new mapping file
+    :return: updated mapping file
+    """
+    if year_from == year_to:
+        print(f'The mapping file is already for the year {year_to}')
+        return mapping
+    else:
+        mapping = mapping.apply(lambda row: change_year_in_name(row, year_from, year_to), axis=1)
+        return mapping
+
+
+def test_mapping_file(mapping: pd.DataFrame, db: list[dict]) -> None:
+    """
+    Test if the mapping file is correctly linked to the database
+
+    :param mapping: mapping file between the LCI database and the ESM database
+    :param db: LCI database
+    :return: prints the missing flows if any
+    """
+    missing_flows = []
+    db_dict_name = database_list_to_dict(db, 'name')
+    for i in range(len(mapping)):
+        act_name = mapping.Activity.iloc[i]
+        act_prod = mapping.Product.iloc[i]
+        act_loc = mapping.Location.iloc[i]
+        act_database = mapping.Database.iloc[i]
+        if (act_name, act_prod, act_loc, act_database) in db_dict_name:
+            pass
+        else:
+            missing_flows.append((act_name, act_prod, act_loc, act_database))
+    if len(missing_flows) > 0:
+        print(f'Some flows could be not found in the database: {missing_flows}')
+    else:
+        print('Mapping successfully linked to the database')
