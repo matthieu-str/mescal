@@ -239,11 +239,11 @@ GASOLINE,Resource,84705.88235,kg,GWh
 GASO_STO,Construction,0.007031779141,unit,GWh
 GEOTHERMAL,Operation,1000000.0,kWh,GWh
 GEOTHERMAL,Construction,181.8181818,unit,GW
-H2_COMP_HE,Construction,3333.333333,unit,GW
+H2_COMP_HE,Construction,36.10108303,unit,GW
 H2_COMP_HE,Operation,30030.03003,kg,GWh
 H2_COMP_LM,Operation,30030.03003,kg,GWh
-H2_COMP_LM,Construction,250000.0,unit,GW
-H2_COMP_MH,Construction,3333.333333,unit,GW
+H2_COMP_LM,Construction,36.10108303,unit,GW
+H2_COMP_MH,Construction,36.10108303,unit,GW
 H2_COMP_MH,Operation,30030.03003,kg,GWh
 H2_EHP,Resource,30030.03003,kg,GWh
 H2_EXP_EH,Operation,30030.03003,kg,GWh
