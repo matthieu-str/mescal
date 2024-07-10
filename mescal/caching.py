@@ -1,7 +1,6 @@
 import pickle
 from pathlib import Path
-
-DIR_DATABASE_CACHE = Path.cwd() / "export" / "cache"
+from .filesystem_constants import DIR_DATABASE_CACHE
 
 
 def cache_database(database: list[dict], database_name: str) -> None:

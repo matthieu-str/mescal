@@ -4,7 +4,8 @@ import string
 import wurst
 import bw2data as bd
 import pandas as pd
-from mescal.caching import cache_database, load_db
+from .caching import cache_database, load_db
+from .filesystem_constants import DIR_DATABASE_CACHE
 
 
 def load_extract_db(db_name: str, create_pickle: bool = False) -> list[dict]:
@@ -17,7 +18,7 @@ def load_extract_db(db_name: str, create_pickle: bool = False) -> list[dict]:
     """
     if db_name not in bd.databases:
         raise ValueError(f"{db_name} is not a registered database")
-    elif os.path.isfile(f'export/cache/{db_name}.pickle'):
+    elif os.path.isfile(DIR_DATABASE_CACHE / f'{db_name}.pickle'):
         db = load_db(db_name)
     else:
         db = wurst.extract_brightway2_databases(db_name, add_identifiers=True)
