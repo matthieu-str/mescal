@@ -25,6 +25,9 @@ __all__ = (
     "get_downstream_consumers",
     "change_mapping_year",
     "test_mapping_file",
+    "change_ecoinvent_version_mapping",
+    "load_concatenated_ecoinvent_change_report",
+    "update_unit_conversion_file",
 )
 
 __version__ = "0.0.1"
@@ -38,3 +41,4 @@ from .impact_assessment import *
 from .normalization import *
 from .generate_lcia_obj_ampl import *
 from .esm_back_to_lca import *
+from .change_ecoinvent_version import *
