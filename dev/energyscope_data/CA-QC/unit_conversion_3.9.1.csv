@@ -615,7 +615,9 @@ OCGT_LARGE,Operation,9000000.0,MJ,GWh
 OCGT_SMALL,Construction,100.0,unit,GW
 OCGT_SMALL,Operation,9000000.0,MJ,GWh
 PAFC,Construction,1000000.0,unit,GW
+PAFC,Operation,1000000.0,kWh,GWh
 PAFC_OG,Construction,1000000.0,unit,GW
+PAFC_OG,Operation,1000000.0,kWh,GWh
 PAPER_MAKING,Construction,20.23369565,unit,kt/h
 PAPER_MAKING,Operation,1000000.0,kg,kt
 PAPER_MAKING_HP,Construction,20.23369565,unit,kt/h
@@ -988,11 +990,11 @@ WOOD,Resource,233766.2338,kg,GWh
 WOOD_METHANOL,Construction,150.672,unit,GW
 WOOD_METHANOL,Operation,180505.4152,kg,GWh
 XYLENE,Resource,87888.47929,kg,GWh
-biogas,Other,1.287,m3,kg
 biogas,Other,0.777,kg,m3
-electricity,Other,3.6,MJ,kWh
+biogas,Other,1.287,m3,kg
 electricity,Other,0.278,kWh,MJ
+electricity,Other,3.6,MJ,kWh
 heat,Other,0.278,kWh,MJ
 heat,Other,3.6,MJ,kWh
-natural gas,Other,0.777,kg,m3
 natural gas,Other,1.287,m3,kg
+natural gas,Other,0.777,kg,m3
