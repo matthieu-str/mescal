@@ -129,7 +129,7 @@ dmypy.json
 .pyre/
 
 # Exports
-dev/export/
 /dev/energyscope_data/CA-QC/hidden/
-/examples/export/
 /examples/results/
+/mescal/export/
+/dev/export/
