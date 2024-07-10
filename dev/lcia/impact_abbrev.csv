@@ -63,3 +63,12 @@ Impact_category,Unit,Abbrev,AoP
 "('IMPACT World+ Footprint 2.0.1', 'Remaining Ecosystem quality damage, fossil and biogenic')",PDF.m2.yr,REQDB,REQDB
 "('IMPACT World+ Footprint 2.0.1', 'Remaining Human health damage')",DALY,RHHD,RHHD
 "('IMPACT World+ Footprint 2.0.1', 'Water scarcity footprint')",m3 world-eq,WSF,WSF
+"('PB LCIA', 'Climate change CO2 concentration')",ppm,CCC,CCC
+"('PB LCIA', 'Climate change energy imbalance')",W/m2,CCI,CCI
+"('PB LCIA', 'Stratospheric ozone depletion')",DU,SOD,SOD
+"('PB LCIA', 'Ocean acidification')",Omega_arag,OA,OA
+"('PB LCIA', 'Biogeochemical flows Nitrogen')",Tg N/year,BFN,BFN
+"('PB LCIA', 'Biogeochemical flows Phosphorus')",Tg P/year,BFP,BFP
+"('PB LCIA', 'Land system change global')",%,LSCG,LSCG
+"('PB LCIA', 'Freshwater use')",km3/year,FU,FU
+"('PB LCIA', 'Change biosphere integrity')",species.year,CBI,CBI
