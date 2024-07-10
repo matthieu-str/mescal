@@ -34,6 +34,8 @@ def lcia_methods_short_names(lcia_method: str) -> str:
         return 'midpoint'
     elif lcia_method == 'IMPACT World+ Footprint 2.0.1':
         return 'footprint'
+    elif lcia_method == 'PB LCIA':
+        return 'pb_lcia'
     else:
         raise ValueError(f"Unknown LCIA method: {lcia_method}")
 
@@ -95,7 +97,7 @@ def normalize_lca_metrics(R: pd.DataFrame, f_norm: float, mip_gap: float, refact
 
     R_op_res = R[R['Type'] != 'Construction']
 
-    R = pd.concat([R_constr, R_op_res])
+    R = pd.concat([R_constr, R_op_res])  # R matrix but with refactor applied to construction metrics
 
     if not biogenic:
         list_biogenic_cat = ["CFB", "REQDB", "m_CCLB", "m_CCSB", "TTEQB", "TTHHB", "CCEQSB", "CCEQLB", "CCHHSB",
