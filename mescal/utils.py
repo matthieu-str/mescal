@@ -345,13 +345,13 @@ def change_mapping_year(mapping: pd.DataFrame, year_from: int, year_to: int) -> 
         return mapping
 
 
-def test_mapping_file(mapping: pd.DataFrame, db: list[dict]) -> None:
+def test_mapping_file(mapping: pd.DataFrame, db: list[dict]) -> list[tuple[str, str, str, str]]:
     """
     Test if the mapping file is correctly linked to the database
 
     :param mapping: mapping file between the LCI database and the ESM database
     :param db: LCI database
-    :return: prints the missing flows if any
+    :return: the list missing flows if any
     """
     missing_flows = []
     db_dict_name = database_list_to_dict(db, 'name')
@@ -368,3 +368,4 @@ def test_mapping_file(mapping: pd.DataFrame, db: list[dict]) -> None:
         print(f'Some flows could be not found in the database: {missing_flows}')
     else:
         print('Mapping successfully linked to the database')
+    return missing_flows
