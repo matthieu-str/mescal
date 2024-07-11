@@ -43,7 +43,7 @@ To learn more, see the [Contributor Guide][Contributor Guide].
 
 ## License
 
-Distributed under the terms of the [Apache 2.0 license][License],
+Distributed under the terms of the [MIT license][License],
 _mescal_ is free and open source software.
 
 ## Issues
