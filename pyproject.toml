@@ -10,7 +10,7 @@ authors = [
 maintainers = [
   { name="Matthieu Souttre", email="matthieu.souttre@polymtl.ca" }
 ]
-description = "Integrate LCA metrics into energy models using brightway, wurst, and premise."
+description = "Coupling Energy System Models with Life Cycle Assessment"
 readme = "README.md"
 dynamic = ["version"]
 # Add here all kinds of additional classifiers as defined under
@@ -27,7 +27,7 @@ classifiers = [
     "Operating System :: OS Independent",
     "Topic :: Scientific/Engineering"
 ]
-requires-python = ">=3.9"
+requires-python = "==3.11"
 dependencies = [
     # dependencies as strings with quotes, e.g. "foo"
     # You can add version requirements like "foo>2.0"
