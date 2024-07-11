@@ -41,4 +41,4 @@ from .impact_assessment import *
 from .normalization import *
 from .generate_lcia_obj_ampl import *
 from .esm_back_to_lca import *
-from .change_ecoinvent_version import *
+from .change_ecoinvent import *
