@@ -30,7 +30,7 @@ __all__ = (
     "update_unit_conversion_file",
 )
 
-__version__ = "0.1.0"
+__version__ = "1.0.0"
 
 from .location_selection import *
 from .utils import *
