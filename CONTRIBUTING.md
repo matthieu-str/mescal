@@ -1,7 +1,7 @@
 # Contributor Guide
 
 Thank you for your interest in improving this project.
-This project is open-source under the [Apache 2.0][License] and
+This project is open-source under the [MIT][License] and
 welcomes contributions in the form of bug reports, feature requests, and pull requests.
 
 Here is a list of important resources for contributors:
@@ -11,10 +11,11 @@ Here is a list of important resources for contributors:
 - [Issue Tracker][Issue Tracker]
 - [Code of Conduct][Code of Conduct]
 
-[License]: https://opensource.org/licenses/Apache-2.0
+[License]: https://opensource.org/license/mit
 [Source Code]: https://github.com/matthieu-str/mescal
 [Documentation]: https://mescal.readthedocs.io/
 [Issue Tracker]: https://github.com/matthieu-str/mescal/issues
+[Code of Conduct]: https://github.com/matthieu-str/mescal/blob/master/CODE_OF_CONDUCT.md
 
 ## How to report a bug
 
