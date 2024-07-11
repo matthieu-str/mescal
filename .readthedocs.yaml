@@ -17,4 +17,8 @@ submodules:
 build:
    os: "ubuntu-lts-latest" # https://docs.readthedocs.io/en/stable/config-file/v2.html#build-os
    tools:
-      python: "mambaforge-latest" # https://docs.readthedocs.io/en/stable/config-file/v2.html#build-tools-python, mamba instead of conda for better build performance
+      python: "3.11"
+
+python:
+   install:
+      - requirements: requirements.txt
