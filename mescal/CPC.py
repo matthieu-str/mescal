@@ -1,6 +1,7 @@
 import wurst
 import pandas as pd
 from .utils import write_wurst_database_to_brightway
+from .filesystem_constants import DATA_DIR
 
 
 def add_CPC_category(db: list[dict], name: str, CPC_category: str, search_type: str, key: str) -> list[dict]:
@@ -34,15 +35,24 @@ def add_CPC_category(db: list[dict], name: str, CPC_category: str, search_type: 
 
 
 def create_new_database_with_CPC_categories(db: list[dict], new_db_name: str,
-                                            mapping_product_to_CPC: pd.DataFrame) -> None:
+                                            mapping_product_to_CPC: pd.DataFrame or str = 'default') -> None:
     """
     Create a new database with additional CPC categories
 
     :param db: LCI database
     :param new_db_name: name of the new database
-    :param mapping_product_to_CPC: mapping between products and CPC categories
+    :param mapping_product_to_CPC: mapping between products and CPC categories, can be a pandas DataFrame or the path
+        towards the csv file
     :return: None
     """
+
+    if mapping_product_to_CPC == 'default':
+        mapping_product_to_CPC = pd.read_csv(DATA_DIR / 'mapping_product_to_CPC.csv')
+    elif type(mapping_product_to_CPC) is str:
+        mapping_product_to_CPC = pd.read_csv(mapping_product_to_CPC)
+    else:
+        pass
+
     for i in range(len(mapping_product_to_CPC)):
         if mapping_product_to_CPC.Where.iloc[i] == 'Product':
             key = 'reference product'
