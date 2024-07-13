@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=68.0"]
+requires = ["setuptools>=68.0", "setuptools-scm>=8.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -13,13 +13,12 @@ maintainers = [
 description = "Coupling Energy System Models with Life Cycle Assessment"
 readme = "README.md"
 dynamic = ["version"]
+license = {file = "LICENSE"}
 # Add here all kinds of additional classifiers as defined under
 # https://pypi.org/classifiers/
 classifiers = [
+    "Intended Audience :: Science/Research",
     "Development Status :: 4 - Beta",
-    "Programming Language :: Python",
-    "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
@@ -27,10 +26,13 @@ classifiers = [
     "Operating System :: OS Independent",
     "Topic :: Scientific/Engineering"
 ]
-requires-python = "==3.11"
+requires-python = ">=3.10"
 dependencies = [
     # dependencies as strings with quotes, e.g. "foo"
     # You can add version requirements like "foo>2.0"
+    "wurst",
+    "pandas",
+    "brightway2",
 ]
 
 [project.urls]

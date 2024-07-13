@@ -22,7 +22,7 @@ LCI datasets are taken from ecoinvent and possibly other sources if some of the 
 
 ## Requirements
 
-- **Python 3.11**
+- **Python 3.10 or more**
 - Licence for [ecoinvent 3](https://ecoinvent.org/). The ecoinvent database is not included in this package. You may also check ecoinvent's [GDPR & EULA](https://ecoinvent.org/gdpr-eula/).
 
 ## Installation

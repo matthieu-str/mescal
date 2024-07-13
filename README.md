@@ -3,7 +3,7 @@
 [![PyPI](https://img.shields.io/pypi/v/mescal.svg)][pypi status]
 [![Status](https://img.shields.io/pypi/status/mescal.svg)][pypi status]
 [![Python Version](https://img.shields.io/pypi/pyversions/mescal)][pypi status]
-[![License](https://img.shields.io/pypi/l/mescal)][license]
+[![License](https://img.shields.io/pypi/l/mescal)][License]
 
 [![Read the documentation at https://mescal.readthedocs.io/](https://img.shields.io/readthedocs/mescal/latest.svg?label=Read%20the%20Docs)][read the docs]
 [![Tests](https://github.com/matthieu-str/mescal/actions/workflows/python-test.yml/badge.svg)][tests]
@@ -21,7 +21,7 @@
 
 ## Requirements
 
-- **Python 3.11**
+- **Python 3.10 or more** 
 - Licence for [ecoinvent 3](https://ecoinvent.org/). The ecoinvent database is not included in this package. You may also check ecoinvent's [GDPR & EULA](https://ecoinvent.org/gdpr-eula/). 
 
 ## Installation
