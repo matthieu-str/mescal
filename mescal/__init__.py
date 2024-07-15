@@ -6,7 +6,7 @@ __all__ = (
     "change_location_mapping_file",
     "load_extract_db",
     "relink_database",
-    "concatenate_databases",
+    "load_multiple_databases",
     "create_complementary_database",
     "create_new_database_with_CPC_categories",
     "get_technosphere_flows",
@@ -28,6 +28,7 @@ __all__ = (
     "change_ecoinvent_version_mapping",
     "load_concatenated_ecoinvent_change_report",
     "update_unit_conversion_file",
+    "merge_databases",
 )
 
 __version__ = "1.0.1"

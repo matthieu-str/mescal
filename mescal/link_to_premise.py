@@ -1,4 +1,3 @@
-import pandas as pd
 import copy
 from mescal.utils import *
 
@@ -20,7 +19,7 @@ def create_complementary_database(df_mapping: pd.DataFrame, premise_db: list[dic
     tech_premise = pd.DataFrame(columns=['Name', 'Type', 'Product', 'Activity', 'Location', 'Database'])
     complement_premise = []
 
-    base_db = concatenate_databases(list(df_mapping.Database.unique()), create_pickle=True)
+    base_db = load_multiple_databases(list(df_mapping.Database.unique()), create_pickle=True)
     base_db_dict_name = database_list_to_dict(base_db, 'name')
 
     premise_db_dict_name = database_list_to_dict(premise_db, 'name')
@@ -69,7 +68,8 @@ def create_complementary_database(df_mapping: pd.DataFrame, premise_db: list[dic
                 tech_premise.loc[i] = [esm_tech_name, act_type, product, activity, new_location, database]
 
             else:
-                tech_premise.loc[i] = [esm_tech_name, act_type, new_product, new_activity, new_location, name_premise_db]
+                tech_premise.loc[i] = [esm_tech_name, act_type, new_product, new_activity, new_location,
+                                       name_premise_db]
 
         else:
             tech_premise.loc[i] = [esm_tech_name, act_type, new_product, new_activity, new_location, name_premise_db]
