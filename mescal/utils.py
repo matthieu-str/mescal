@@ -49,7 +49,7 @@ def load_multiple_databases(database_list: list[str], create_pickle: bool = Fals
 
 
 def merge_databases(database_list: list[str], new_db_name: str, main_ecoinvent_db_name: str,
-                    old_main_db_names: list[str] or None = None, output: str = 'return') -> list[dict]:
+                    old_main_db_names: list[str] or None = None, output: str = 'return') -> list[dict] or None:
     """
     Merge multiple LCI databases in one database. The list of databases should contain one main database (e.g., an
     ecoinvent or premise database) towards which all other databases will be relinked.
@@ -60,7 +60,7 @@ def merge_databases(database_list: list[str], new_db_name: str, main_ecoinvent_d
     :param old_main_db_names: other main databases that are not in the list of databases, thus the list of databases
         will be unlinked from those
     :param output: 'return' to return the merged database, 'write' to write it, 'both' to do both
-    :return: the newly created database
+    :return: the newly created database or None if output is 'write'
     """
     merged_db = []
     main_ecoinvent_db = load_extract_db(main_ecoinvent_db_name)
@@ -262,7 +262,7 @@ def relink_database(db: list[dict], name_database_unlink: str, name_database_rel
     :param output: 'write' to write the new database, 'return' to return it, or 'both' to do both
     :param db_relink: list of activities of the database to relink to. If None, the database will be loaded using
         name_database_relink
-    :return: None
+    :return: the new database or None if output is 'write'
     """
     if db_relink is None:
         db_relink = load_extract_db(name_database_relink)
