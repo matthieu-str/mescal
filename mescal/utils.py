@@ -27,7 +27,7 @@ def load_extract_db(db_name: str, create_pickle: bool = False) -> list[dict]:
     return db
 
 
-def concatenate_databases(database_list: list[str], create_pickle: bool = False) -> list[dict]:
+def load_multiple_databases(database_list: list[str], create_pickle: bool = False) -> list[dict]:
     """
     Concatenates databases in a list of dictionaries (including dependencies)
 
@@ -46,6 +46,55 @@ def concatenate_databases(database_list: list[str], create_pickle: bool = False)
             else:
                 pass
     return db
+
+
+def merge_databases(database_list: list[str], new_db_name: str, main_ecoinvent_db_name: str,
+                    old_main_db_names: list[str] or None = None, output: str = 'return') -> list[dict]:
+    """
+    Merge multiple LCI databases in one database. The list of databases should contain one main database (e.g., an
+    ecoinvent or premise database) towards which all other databases will be relinked.
+
+    :param database_list: list of LCI databases to merge
+    :param new_db_name: name of the new merged database
+    :param main_ecoinvent_db_name: name of the main database, e.g., ecoinvent or premise database
+    :param old_main_db_names: other main databases that are not in the list of databases, thus the list of databases
+        will be unlinked from those
+    :param output: 'return' to return the merged database, 'write' to write it, 'both' to do both
+    :return: the newly created database
+    """
+    merged_db = []
+    main_ecoinvent_db = load_extract_db(main_ecoinvent_db_name)
+
+    for db_name in database_list:
+        if db_name != main_ecoinvent_db_name:
+            db = load_extract_db(db_name)
+            for old_db_name in old_main_db_names:
+                db = relink_database(db=db,
+                                     name_database_unlink=old_db_name,
+                                     name_database_relink=main_ecoinvent_db_name,
+                                     output='return',
+                                     db_relink=main_ecoinvent_db)
+        else:
+            db = main_ecoinvent_db
+        merged_db += db
+
+    # Verification that the merged database has no dependencies apart from biosphere databases
+    dependencies = list(set([a['exchanges'][i]['database'] for a in merged_db for i in range(len(a['exchanges']))]))
+    for dep_db_name in dependencies:
+        if 'biosphere' in dep_db_name:
+            pass
+        elif dep_db_name not in database_list:
+            raise ValueError(f"Database {dep_db_name} is not in the list of databases to merge")
+
+    if output == 'write':
+        write_wurst_database_to_brightway(merged_db, new_db_name)
+    elif output == 'return':
+        return merged_db
+    elif output == 'both':
+        write_wurst_database_to_brightway(merged_db, new_db_name)
+        return merged_db
+    else:
+        raise ValueError('The output argument must be either "return", "write" or "both"')
 
 
 def database_list_to_dict(database_list: list[dict], key: str) -> dict:
@@ -189,31 +238,60 @@ def change_database_name(db: list[dict], new_db_name: str) -> list[dict]:
         for exc in act['exchanges']:
             if exc['database'] in old_dbs_name:
                 exc['database'] = new_db_name
+            if 'input' in exc.keys():
+                if exc['input'][0] in old_dbs_name:
+                    exc['input'] = (new_db_name, exc['input'][1])
+            if 'output' in exc.keys():
+                if exc['output'][0] in old_dbs_name:
+                    exc['output'] = (new_db_name, exc['output'][1])
             else:
                 pass
     return db
 
 
 def relink_database(db: list[dict], name_database_unlink: str, name_database_relink: str,
-                    name_new_db: str = None) -> None:
+                    name_new_db: str = None, output: str = 'write', db_relink: list[dict] or None = None) \
+        -> None or list[dict]:
     """
-    Relink a database and write it
+    Relink a database based on activity codes and write/return it
 
     :param db: list of activities of the LCI database
     :param name_database_unlink: name of the database to unlink
     :param name_database_relink: name of the database to relink
     :param name_new_db: name of the new database, if None, the original database is overwritten
+    :param output: 'write' to write the new database, 'return' to return it, or 'both' to do both
+    :param db_relink: list of activities of the database to relink to. If None, the database will be loaded using
+        name_database_relink
     :return: None
     """
+    if db_relink is None:
+        db_relink = load_extract_db(name_database_relink)
+    db_relink_dict_code = database_list_to_dict(db_relink, 'code')
+
     if name_new_db is None:
         name_new_db = db[0]['database']
     for act in db:
         for exc in act['exchanges']:
             if exc['database'] == name_database_unlink:
-                exc['database'] = name_database_relink
-            else:
-                pass
-    write_wurst_database_to_brightway(db, name_new_db)
+                if (name_database_relink, exc['code']) in db_relink_dict_code:
+                    exc['database'] = name_database_relink
+                else:
+                    raise ValueError(f"Flow {exc['code']} not found in database {name_database_relink}")
+            if 'input' in exc.keys():
+                if exc['input'][0] == name_database_unlink:
+                    if (name_database_relink, exc['input'][1]) in db_relink_dict_code:
+                        exc['input'] = (name_database_relink, exc['input'][1])
+                    else:
+                        raise ValueError(f"Flow {exc['input'][1]} not found in database {name_database_relink}")
+    if output == 'write':
+        write_wurst_database_to_brightway(db, name_new_db)
+    elif output == 'return':
+        return db
+    elif output == 'both':
+        write_wurst_database_to_brightway(db, name_new_db)
+        return db
+    else:
+        raise ValueError('Output must be either "write", "return" or "both"')
 
 
 def write_wurst_database_to_brightway(db: list[dict], db_name: str) -> None:
@@ -230,7 +308,8 @@ def write_wurst_database_to_brightway(db: list[dict], db_name: str) -> None:
         pass
     bw_database = bd.Database(db_name)
     bw_database.register()
-    if db[0]['database'] != db_name:
+    old_db_names = list(set([act['database'] for act in db]))
+    if (len(old_db_names) > 1) | (old_db_names[0] != db_name):
         db = change_database_name(db, db_name)
     else:
         pass
