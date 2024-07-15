@@ -40,7 +40,7 @@ def load_multiple_databases(database_list: list[str], create_pickle: bool = Fals
         db += load_extract_db(db_name, create_pickle)
         dependencies = list(set([a['exchanges'][i]['database'] for a in db for i in range(len(a['exchanges']))]))
         for dep_db_name in dependencies:
-            if (dep_db_name not in database_list) & (dep_db_name != 'biosphere3'):
+            if (dep_db_name not in database_list) & ('biosphere' not in dep_db_name):
                 db += load_extract_db(dep_db_name, create_pickle)
                 database_list.append(dep_db_name)
             else:
