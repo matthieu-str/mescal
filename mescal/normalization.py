@@ -34,6 +34,14 @@ def lcia_methods_short_names(lcia_method: str) -> str:
         return 'midpoint'
     elif lcia_method == 'IMPACT World+ Footprint 2.0.1':
         return 'footprint'
+    if lcia_method == 'IMPACT World+ Damage 2.0.1_regionalized':
+        return 'endpoint_reg'
+    elif lcia_method == 'IMPACT World+ Damage 2.0.1_regionalized - Total only':
+        return 'endpoint_tot_reg'
+    elif lcia_method == 'IMPACT World+ Midpoint 2.0.1_regionalized':
+        return 'midpoint_reg'
+    elif lcia_method == 'IMPACT World+ Footprint 2.0.1_regionalized':
+        return 'footprint_reg'
     elif lcia_method == 'PB LCIA':
         return 'pb_lcia'
     else:
@@ -66,8 +74,9 @@ def restrict_lcia_metrics(df: pd.DataFrame, lcia_method: str) -> pd.DataFrame:
     :param lcia_method: LCIA method to be used
     :return: dataframe containing the LCA metrics for the specified LCIA method
     """
-    if lcia_method == 'IMPACT World+ Damage 2.0.1 - Total only':
-        df = df[df.apply(lambda x: x.Impact_category[0] == 'IMPACT World+ Damage 2.0.1', axis=1)]
+    if 'Total only' in lcia_method:
+        method_name = lcia_method.split(' - ')[0]
+        df = df[df.apply(lambda x: x.Impact_category[0] == method_name, axis=1)]
         df = df[df.apply(lambda x: 'Total' in x.Impact_category[2], axis=1)]
     else:
         df = df[df.apply(lambda x: x.Impact_category[0] == lcia_method, axis=1)]
