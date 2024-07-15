@@ -34,18 +34,9 @@ def create_complementary_database(df_mapping: pd.DataFrame, premise_db: list[dic
         region = df_mapping.Location.iloc[i]
         database = df_mapping.Database.iloc[i]
 
-        # Remove year
-        new_activity = activity.replace(', 2020', '')
-
-        # Cars and SUVs inventories
-        new_product = product.replace('-TEMP', '')
-        new_activity = new_activity.replace('-TEMP', '')
-        new_product = new_product.replace('EURO-6d', 'EURO-6ab')
-        new_activity = new_activity.replace('EURO-6d', 'EURO-6ab')
-
         new_activity, new_product, new_location = premise_changing_names(
-            activity_name=new_activity,
-            activity_prod=new_product,
+            activity_name=activity,
+            activity_prod=product,
             activity_loc=region,
             name_premise_db=name_premise_db,
             premise_db_dict_name=premise_db_dict_name,
