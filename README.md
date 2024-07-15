@@ -8,6 +8,7 @@
 [![Read the documentation at https://mescal.readthedocs.io/](https://img.shields.io/readthedocs/mescal/latest.svg?label=Read%20the%20Docs)][read the docs]
 [![Tests](https://github.com/matthieu-str/mescal/actions/workflows/python-test.yml/badge.svg)][tests]
 [![Codecov](https://codecov.io/gh/matthieu-str/mescal/branch/main/graph/badge.svg)][codecov]
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.12738456.svg)](https://doi.org/10.5281/zenodo.12738456)
 
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)][pre-commit]
 [![Black](https://img.shields.io/badge/code%20style-black-000000.svg)][black]
@@ -18,6 +19,23 @@
 [codecov]: https://app.codecov.io/gh/matthieu-str/mescal
 [pre-commit]: https://github.com/pre-commit/pre-commit
 [black]: https://github.com/psf/black
+
+## What is Mescal?
+
+Mescal is a Python package for the creation and management of life-cycle inventory databases and metrics derived from life-cycle assessment, to be integrated in decision-making tools such as energy system models.
+
+Mescal is a specialized package of the [Brightway Software Framework](https://brightway.dev/), mainly relying on the [bw2calc](https://github.com/brightway-lca/brightway2-calc) and [wurst](https://github.com/polca/wurst) Python packages.
+
+Mescal was designed for all researchers and modellers aiming to include life-cycle assessment (LCA) in their work, but who are not necessarily LCA experts. Mescal is usually used within [Jupyter notebooks](https://jupyter.org/).
+
+
+![workflow of the mescal methodology](docs/pics/workflow.png "workflow")
+
+LCI datasets are taken from ecoinvent and possibly other sources if some of the ESM technologies are not covered in the ecoinvent database, e.g., [_premise_](https://linkinghub.elsevier.com/retrieve/pii/S136403212200226X) additional inventories. These LCI datasets are mapped to the ESM technologies and resources. This is followed by operations of regionalization, databases harmonization, double-counting removal, and life-cycle impact assessment. LCA indicators are then ready to be integrated to the ESM.
+
+## How to use _mescal_?
+
+You can follow this [example notebook](https://github.com/matthieu-str/mescal/blob/master/examples/tutorial.ipynb) to learn how to use _mescal_.
 
 ## Requirements
 
@@ -31,10 +49,6 @@ You can install _mescal_ via [pip] from [PyPI]:
 ```console
 $ pip install mescal
 ```
-
-## How to use _mescal_?
-
-You can follow this [example notebook](https://github.com/matthieu-str/mescal/blob/master/examples/tutorial.ipynb) to learn how to use _mescal_.
 
 ## Contributing
 
