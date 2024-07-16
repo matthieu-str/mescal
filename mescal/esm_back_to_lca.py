@@ -6,7 +6,8 @@ def create_or_modify_activity_from_esm_results(db: list[dict], original_activity
                                                model: pd.DataFrame, esm_location: str, esm_results: pd.DataFrame,
                                                mapping: pd.DataFrame, accepted_locations: list[str],
                                                locations_ranking: list[str], tech_to_remove_layers: pd.DataFrame,
-                                               unit_conversion: pd.DataFrame, new_end_use_types: pd.DataFrame) -> tuple[list[dict], list[list[str]]]:
+                                               unit_conversion: pd.DataFrame, new_end_use_types: pd.DataFrame) \
+        -> tuple[list[dict], list[list[str]]]:
     """
     Create or modify an activity in the LCI database based on the ESM results
 
@@ -143,8 +144,8 @@ def create_or_modify_activity_from_esm_results(db: list[dict], original_activity
                     try:
                         conversion_factor = unit_conversion[
                             (unit_conversion.Name.apply(lambda x: x in original_activity_prod))
-                            & (unit_conversion.From == activity_unit)
-                            & (unit_conversion.To == original_activity_unit)
+                            & (unit_conversion.ESM == activity_unit)
+                            & (unit_conversion.LCA == original_activity_unit)
                             ].Value.iloc[0]
                     except IndexError:
                         raise ValueError(f'The unit conversion factor between {activity_unit} and '
@@ -152,6 +153,8 @@ def create_or_modify_activity_from_esm_results(db: list[dict], original_activity
                                          f'is not in the unit conversion file.')
                     else:
                         amount /= conversion_factor
+                else:
+                    conversion_factor = 1.0
 
                 if prod_flow_amount == -1.0:  # for waste activities
                     amount *= -1.0
@@ -166,7 +169,7 @@ def create_or_modify_activity_from_esm_results(db: list[dict], original_activity
                     'unit': activity_unit,
                     'location': activity_location,
                     'database': activity_database,
-                    'comment': tech,
+                    'comment': f'{tech}, {conversion_factor}',
                 }
                 exchanges.append(new_exc)
                 if tech in list(mapping[mapping.Type == 'Operation'].Name.unique()):
