@@ -345,19 +345,26 @@ def ecoinvent_unit_convention(unit: str) -> str:
     """
     unit_dict = {
         'kg': 'kilogram',
+        'kg/h': 'kilogram per hour',
         'm2': 'square meter',
         'm3': 'cubic meter',
         'MJ': 'megajoule',
         'kWh': 'kilowatt hour',
+        'kW': 'kilowatt',
         'h': 'hour',
         'km': 'kilometer',
         'pkm': 'person kilometer',
+        'pkm/h': 'person kilometer per hour',
         'tkm': 'ton kilometer',
+        'tkm/h': 'ton kilometer per hour',
+        'u': 'unit',
     }
     if unit in unit_dict:
         return unit_dict[unit]
-    else:
+    elif unit in [unit_dict[u] for u in unit_dict]:
         return unit
+    else:
+        raise ValueError(f"Unmapped unit {unit}")
 
 
 def premise_changing_names(activity_name: str, activity_prod: str, activity_loc: str, name_premise_db,
