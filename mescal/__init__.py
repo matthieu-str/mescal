@@ -29,6 +29,7 @@ __all__ = (
     "load_concatenated_ecoinvent_change_report",
     "update_unit_conversion_file",
     "merge_databases",
+    "ecoinvent_unit_convention",
 )
 
 __version__ = "1.0.1"
