@@ -16,68 +16,68 @@ AN_DIG_SI_PLANT,Construction,"anaerobic digestion plant, for biowaste","anaerobi
 BATTERY,Construction,"battery, Li-ion, rechargeable, prismatic","market for battery, Li-ion, rechargeable, prismatic",GLO,/kg,ecoinvent3.8 cut-off
 BIOMASS_ETHANOL,Operation,"ethanol, from forest residue","Ethanol production, via fermentation, from forest residue, energy allocation",US,/kg,biofuels
 BIOMASS_ETHANOL,Construction,ethanol fermentation plant,market for ethanol fermentation plant,GLO,/unit,ecoinvent3.8 cut-off
-BUS_CNG_STOICH,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, compressed gas, 13m double deck urban bus, 2020, EURO-VI",RER,/person*km,lci-buses
-BUS_CNG_STOICH,Construction,"Passenger bus, EURO-VI","Passenger bus, compressed gas, 13m double deck urban bus, 2020, EURO-VI",RER,/unit,lci-buses
-BUS_DIESEL,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m double deck urban bus, 2020, EURO-VI",RER,/person*km,lci-buses
-BUS_DIESEL,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m double deck urban bus, 2020, EURO-VI",RER,/unit,lci-buses
-BUS_EV,Operation,"transport, passenger bus","transport, passenger bus, battery electric - overnight charging, NMC-622 battery, 13m double deck urban bus, 2020",RER,/person*km,lci-buses
-BUS_EV,Construction,Passenger bus,"Passenger bus, battery electric - overnight charging, NMC-622 battery, 13m double deck urban bus, 2020",RER,/unit,lci-buses
-BUS_FC_HYBRID_CH4,Construction,Passenger bus,"Passenger bus, fuel cell electric, 13m double deck urban bus, 2020",RER,/unit,lci-buses
-BUS_FC_HYBRID_CH4,Operation,"transport, passenger bus","transport, passenger bus, fuel cell electric, 13m double deck urban bus, 2020",RER,/person*km,lci-buses
-BUS_FC_HYBRID_H2,Operation,"transport, passenger bus","transport, passenger bus, fuel cell electric, 13m double deck urban bus, 2020",RER,/person*km,lci-buses
-BUS_FC_HYBRID_H2,Construction,Passenger bus,"Passenger bus, fuel cell electric, 13m double deck urban bus, 2020",RER,/unit,lci-buses
-BUS_HY_DIESEL,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel hybrid, 13m double deck urban bus, 2020, EURO-VI",RER,/person*km,lci-buses
-BUS_HY_DIESEL,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel hybrid, 13m double deck urban bus, 2020, EURO-VI",RER,/unit,lci-buses
-CAR_BEV_LOWRANGE,Operation,"transport, passenger car","transport, passenger car, battery electric, NMC-622 battery, Small, 2020",RER,/km,lci-pass_cars
-CAR_BEV_LOWRANGE,Construction,Passenger car,"Passenger car, battery electric, NMC-622 battery, Small, 2020",RER,/unit,lci-pass_cars
-CAR_BEV_MEDRANGE_LOCAL,Operation,"transport, passenger car","transport, passenger car, battery electric, NMC-622 battery, Medium, 2020",RER,/km,lci-pass_cars
-CAR_BEV_MEDRANGE_LOCAL,Construction,Passenger car,"Passenger car, battery electric, NMC-622 battery, Medium, 2020",RER,/unit,lci-pass_cars
-CAR_BEV_MEDRANGE_LONGD,Operation,"transport, passenger car","transport, passenger car, battery electric, NMC-622 battery, Medium, 2020",RER,/km,lci-pass_cars
-CAR_BEV_MEDRANGE_LONGD,Construction,Passenger car,"Passenger car, battery electric, NMC-622 battery, Medium, 2020",RER,/unit,lci-pass_cars
-CAR_DIESEL_LOCAL,Construction,"Passenger car, EURO-6d","Passenger car, diesel, Medium, 2020, EURO-6d",RER,/unit,lci-pass_cars
-CAR_DIESEL_LOCAL,Operation,"transport, passenger car, EURO-6d-TEMP","transport, passenger car, diesel, Medium, 2020, EURO-6d-TEMP",RER,/km,lci-pass_cars
-CAR_DIESEL_LONGD,Operation,"transport, passenger car, EURO-6d-TEMP","transport, passenger car, diesel, Medium, 2020, EURO-6d-TEMP",RER,/km,lci-pass_cars
-CAR_DIESEL_LONGD,Construction,"Passenger car, EURO-6d","Passenger car, diesel, Medium, 2020, EURO-6d",RER,/unit,lci-pass_cars
-CAR_DME_D10_LOCAL,Operation,"transport, passenger car, EURO-6d-TEMP","transport, passenger car, diesel, Medium, 2020, EURO-6d-TEMP",RER,/km,lci-pass_cars
-CAR_DME_D10_LOCAL,Construction,"Passenger car, EURO-6d","Passenger car, diesel, Medium, 2020, EURO-6d",RER,/unit,lci-pass_cars
-CAR_DME_D10_LONGD,Operation,"transport, passenger car, EURO-6d-TEMP","transport, passenger car, diesel, Medium, 2020, EURO-6d-TEMP",RER,/km,lci-pass_cars
-CAR_DME_D10_LONGD,Construction,"Passenger car, EURO-6d","Passenger car, diesel, Medium, 2020, EURO-6d",RER,/unit,lci-pass_cars
-CAR_ETOH_E10_LOCAL,Operation,"transport, passenger car, EURO-6d-TEMP","transport, passenger car, gasoline, Medium, 2020, EURO-6d-TEMP",RER,/km,lci-pass_cars
-CAR_ETOH_E10_LOCAL,Construction,"Passenger car, EURO-6d","Passenger car, gasoline, Medium, 2020, EURO-6d",RER,/unit,lci-pass_cars
-CAR_ETOH_E10_LONGD,Operation,"transport, passenger car, EURO-6d-TEMP","transport, passenger car, gasoline, Medium, 2020, EURO-6d-TEMP",RER,/km,lci-pass_cars
-CAR_ETOH_E10_LONGD,Construction,"Passenger car, EURO-6d","Passenger car, gasoline, Medium, 2020, EURO-6d",RER,/unit,lci-pass_cars
-CAR_ETOH_E85_LOCAL,Construction,"Passenger car, EURO-6d","Passenger car, gasoline, Medium, 2020, EURO-6d",RER,/unit,lci-pass_cars
-CAR_ETOH_E85_LOCAL,Operation,"transport, passenger car, EURO-6d-TEMP","transport, passenger car, gasoline, Medium, 2020, EURO-6d-TEMP",RER,/km,lci-pass_cars
-CAR_ETOH_E85_LONGD,Construction,"Passenger car, EURO-6d","Passenger car, gasoline, Medium, 2020, EURO-6d",RER,/unit,lci-pass_cars
-CAR_ETOH_E85_LONGD,Operation,"transport, passenger car, EURO-6d-TEMP","transport, passenger car, gasoline, Medium, 2020, EURO-6d-TEMP",RER,/km,lci-pass_cars
-CAR_FC_CH4_LOCAL,Operation,"transport, passenger car","transport, passenger car, fuel cell electric, Medium, 2020",RER,/km,lci-pass_cars
-CAR_FC_CH4_LOCAL,Construction,Passenger car,"Passenger car, fuel cell electric, Medium, 2020",RER,/unit,lci-pass_cars
-CAR_FC_CH4_LONGD,Operation,"transport, passenger car","transport, passenger car, fuel cell electric, Medium, 2020",RER,/km,lci-pass_cars
-CAR_FC_CH4_LONGD,Construction,Passenger car,"Passenger car, fuel cell electric, Medium, 2020",RER,/unit,lci-pass_cars
-CAR_FC_H2_LOCAL,Operation,"transport, passenger car","transport, passenger car, fuel cell electric, Medium, 2020",RER,/km,lci-pass_cars
-CAR_FC_H2_LOCAL,Construction,Passenger car,"Passenger car, fuel cell electric, Medium, 2020",RER,/unit,lci-pass_cars
-CAR_FC_H2_LONGD,Operation,"transport, passenger car","transport, passenger car, fuel cell electric, Medium, 2020",RER,/km,lci-pass_cars
-CAR_FC_H2_LONGD,Construction,Passenger car,"Passenger car, fuel cell electric, Medium, 2020",RER,/unit,lci-pass_cars
-CAR_GASOLINE_LOCAL,Operation,"transport, passenger car, EURO-6d-TEMP","transport, passenger car, gasoline, Medium, 2020, EURO-6d-TEMP",RER,/km,lci-pass_cars
-CAR_GASOLINE_LOCAL,Construction,"Passenger car, EURO-6d","Passenger car, gasoline, Medium, 2020, EURO-6d",RER,/unit,lci-pass_cars
-CAR_GASOLINE_LONGD,Construction,"Passenger car, EURO-6d","Passenger car, gasoline, Medium, 2020, EURO-6d",RER,/unit,lci-pass_cars
-CAR_GASOLINE_LONGD,Operation,"transport, passenger car, EURO-6d-TEMP","transport, passenger car, gasoline, Medium, 2020, EURO-6d-TEMP",RER,/km,lci-pass_cars
-CAR_HEV_LOCAL,Operation,"transport, passenger car, EURO-6d-TEMP","transport, passenger car, diesel hybrid, Medium, 2020, EURO-6d-TEMP",RER,/km,lci-pass_cars
-CAR_HEV_LOCAL,Construction,"Passenger car, EURO-6d","Passenger car, diesel hybrid, Medium, 2020, EURO-6d",RER,/unit,lci-pass_cars
-CAR_HEV_LONGD,Operation,"transport, passenger car, EURO-6d-TEMP","transport, passenger car, diesel hybrid, Medium, 2020, EURO-6d-TEMP",RER,/km,lci-pass_cars
-CAR_HEV_LONGD,Construction,"Passenger car, EURO-6d","Passenger car, diesel hybrid, Medium, 2020, EURO-6d",RER,/unit,lci-pass_cars
-CAR_MEOH_LOCAL,Operation,"transport, passenger car, EURO-6d-TEMP","transport, passenger car, gasoline, Medium, 2020, EURO-6d-TEMP",RER,/km,lci-pass_cars
-CAR_MEOH_LOCAL,Construction,"Passenger car, EURO-6d","Passenger car, gasoline, Medium, 2020, EURO-6d",RER,/unit,lci-pass_cars
-CAR_MEOH_LONGD,Operation,"transport, passenger car, EURO-6d-TEMP","transport, passenger car, gasoline, Medium, 2020, EURO-6d-TEMP",RER,/km,lci-pass_cars
-CAR_MEOH_LONGD,Construction,"Passenger car, EURO-6d","Passenger car, gasoline, Medium, 2020, EURO-6d",RER,/unit,lci-pass_cars
-CAR_NG_LOCAL,Operation,"transport, passenger car, EURO-6d-TEMP","transport, passenger car, compressed gas, Medium, 2020, EURO-6d-TEMP",RER,/km,lci-pass_cars
-CAR_NG_LOCAL,Construction,"Passenger car, EURO-6d","Passenger car, compressed gas, Medium, 2020, EURO-6d",RER,/unit,lci-pass_cars
-CAR_NG_LONGD,Construction,"Passenger car, EURO-6d","Passenger car, compressed gas, Medium, 2020, EURO-6d",RER,/unit,lci-pass_cars
-CAR_NG_LONGD,Operation,"transport, passenger car, EURO-6d-TEMP","transport, passenger car, compressed gas, Medium, 2020, EURO-6d-TEMP",RER,/km,lci-pass_cars
-CAR_PHEV_LOCAL,Operation,"transport, passenger car, EURO-6d-TEMP","transport, passenger car, plugin gasoline hybrid, Medium, 2020, EURO-6d-TEMP",RER,/km,lci-pass_cars
-CAR_PHEV_LOCAL,Construction,"Passenger car, EURO-6d","Passenger car, plugin gasoline hybrid, Medium, 2020, EURO-6d",RER,/unit,lci-pass_cars
-CAR_PHEV_LONGD,Operation,"transport, passenger car, EURO-6d-TEMP","transport, passenger car, plugin gasoline hybrid, Medium, 2020, EURO-6d-TEMP",RER,/km,lci-pass_cars
-CAR_PHEV_LONGD,Construction,"Passenger car, EURO-6d","Passenger car, plugin gasoline hybrid, Medium, 2020, EURO-6d",RER,/unit,lci-pass_cars
+BUS_CNG_STOICH,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, compressed gas, 13m double deck urban bus, EURO-VI",RER,/person*km,lci-buses
+BUS_CNG_STOICH,Construction,"Passenger bus, EURO-VI","Passenger bus, compressed gas, 13m double deck urban bus, EURO-VI",RER,/unit,lci-buses
+BUS_DIESEL,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m double deck urban bus, EURO-VI",RER,/person*km,lci-buses
+BUS_DIESEL,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m double deck urban bus, EURO-VI",RER,/unit,lci-buses
+BUS_EV,Operation,"transport, passenger bus","transport, passenger bus, battery electric - overnight charging, NMC-622 battery, 13m double deck urban bus",RER,/person*km,lci-buses
+BUS_EV,Construction,Passenger bus,"Passenger bus, battery electric - overnight charging, NMC-622 battery, 13m double deck urban bus",RER,/unit,lci-buses
+BUS_FC_HYBRID_CH4,Construction,Passenger bus,"Passenger bus, fuel cell electric, 13m double deck urban bus",RER,/unit,lci-buses
+BUS_FC_HYBRID_CH4,Operation,"transport, passenger bus","transport, passenger bus, fuel cell electric, 13m double deck urban bus",RER,/person*km,lci-buses
+BUS_FC_HYBRID_H2,Operation,"transport, passenger bus","transport, passenger bus, fuel cell electric, 13m double deck urban bus",RER,/person*km,lci-buses
+BUS_FC_HYBRID_H2,Construction,Passenger bus,"Passenger bus, fuel cell electric, 13m double deck urban bus",RER,/unit,lci-buses
+BUS_HY_DIESEL,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel hybrid, 13m double deck urban bus, EURO-VI",RER,/person*km,lci-buses
+BUS_HY_DIESEL,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel hybrid, 13m double deck urban bus, EURO-VI",RER,/unit,lci-buses
+CAR_BEV_LOWRANGE,Operation,"transport, passenger car","transport, passenger car, battery electric, NMC-622 battery, Small",RER,/km,lci-pass_cars
+CAR_BEV_LOWRANGE,Construction,Passenger car,"Passenger car, battery electric, NMC-622 battery, Small",RER,/unit,lci-pass_cars
+CAR_BEV_MEDRANGE_LOCAL,Operation,"transport, passenger car","transport, passenger car, battery electric, NMC-622 battery, Medium",RER,/km,lci-pass_cars
+CAR_BEV_MEDRANGE_LOCAL,Construction,Passenger car,"Passenger car, battery electric, NMC-622 battery, Medium",RER,/unit,lci-pass_cars
+CAR_BEV_MEDRANGE_LONGD,Operation,"transport, passenger car","transport, passenger car, battery electric, NMC-622 battery, Medium",RER,/km,lci-pass_cars
+CAR_BEV_MEDRANGE_LONGD,Construction,Passenger car,"Passenger car, battery electric, NMC-622 battery, Medium",RER,/unit,lci-pass_cars
+CAR_DIESEL_LOCAL,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Medium, EURO-6ab",RER,/unit,lci-pass_cars
+CAR_DIESEL_LOCAL,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Medium, EURO-6ab",RER,/km,lci-pass_cars
+CAR_DIESEL_LONGD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Medium, EURO-6ab",RER,/km,lci-pass_cars
+CAR_DIESEL_LONGD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Medium, EURO-6ab",RER,/unit,lci-pass_cars
+CAR_DME_D10_LOCAL,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Medium, EURO-6ab",RER,/km,lci-pass_cars
+CAR_DME_D10_LOCAL,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Medium, EURO-6ab",RER,/unit,lci-pass_cars
+CAR_DME_D10_LONGD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Medium, EURO-6ab",RER,/km,lci-pass_cars
+CAR_DME_D10_LONGD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Medium, EURO-6ab",RER,/unit,lci-pass_cars
+CAR_ETOH_E10_LOCAL,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline, Medium, EURO-6ab",RER,/km,lci-pass_cars
+CAR_ETOH_E10_LOCAL,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline, Medium, EURO-6ab",RER,/unit,lci-pass_cars
+CAR_ETOH_E10_LONGD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline, Medium, EURO-6ab",RER,/km,lci-pass_cars
+CAR_ETOH_E10_LONGD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline, Medium, EURO-6ab",RER,/unit,lci-pass_cars
+CAR_ETOH_E85_LOCAL,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline, Medium, EURO-6ab",RER,/unit,lci-pass_cars
+CAR_ETOH_E85_LOCAL,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline, Medium, EURO-6ab",RER,/km,lci-pass_cars
+CAR_ETOH_E85_LONGD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline, Medium, EURO-6ab",RER,/unit,lci-pass_cars
+CAR_ETOH_E85_LONGD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline, Medium, EURO-6ab",RER,/km,lci-pass_cars
+CAR_FC_CH4_LOCAL,Operation,"transport, passenger car","transport, passenger car, fuel cell electric, Medium",RER,/km,lci-pass_cars
+CAR_FC_CH4_LOCAL,Construction,Passenger car,"Passenger car, fuel cell electric, Medium",RER,/unit,lci-pass_cars
+CAR_FC_CH4_LONGD,Operation,"transport, passenger car","transport, passenger car, fuel cell electric, Medium",RER,/km,lci-pass_cars
+CAR_FC_CH4_LONGD,Construction,Passenger car,"Passenger car, fuel cell electric, Medium",RER,/unit,lci-pass_cars
+CAR_FC_H2_LOCAL,Operation,"transport, passenger car","transport, passenger car, fuel cell electric, Medium",RER,/km,lci-pass_cars
+CAR_FC_H2_LOCAL,Construction,Passenger car,"Passenger car, fuel cell electric, Medium",RER,/unit,lci-pass_cars
+CAR_FC_H2_LONGD,Operation,"transport, passenger car","transport, passenger car, fuel cell electric, Medium",RER,/km,lci-pass_cars
+CAR_FC_H2_LONGD,Construction,Passenger car,"Passenger car, fuel cell electric, Medium",RER,/unit,lci-pass_cars
+CAR_GASOLINE_LOCAL,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline, Medium, EURO-6ab",RER,/km,lci-pass_cars
+CAR_GASOLINE_LOCAL,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline, Medium, EURO-6ab",RER,/unit,lci-pass_cars
+CAR_GASOLINE_LONGD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline, Medium, EURO-6ab",RER,/unit,lci-pass_cars
+CAR_GASOLINE_LONGD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline, Medium, EURO-6ab",RER,/km,lci-pass_cars
+CAR_HEV_LOCAL,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel hybrid, Medium, EURO-6ab",RER,/km,lci-pass_cars
+CAR_HEV_LOCAL,Construction,"Passenger car, EURO-6ab","Passenger car, diesel hybrid, Medium, EURO-6ab",RER,/unit,lci-pass_cars
+CAR_HEV_LONGD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel hybrid, Medium, EURO-6ab",RER,/km,lci-pass_cars
+CAR_HEV_LONGD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel hybrid, Medium, EURO-6ab",RER,/unit,lci-pass_cars
+CAR_MEOH_LOCAL,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline, Medium, EURO-6ab",RER,/km,lci-pass_cars
+CAR_MEOH_LOCAL,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline, Medium, EURO-6ab",RER,/unit,lci-pass_cars
+CAR_MEOH_LONGD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline, Medium, EURO-6ab",RER,/km,lci-pass_cars
+CAR_MEOH_LONGD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline, Medium, EURO-6ab",RER,/unit,lci-pass_cars
+CAR_NG_LOCAL,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, compressed gas, Medium, EURO-6ab",RER,/km,lci-pass_cars
+CAR_NG_LOCAL,Construction,"Passenger car, EURO-6ab","Passenger car, compressed gas, Medium, EURO-6ab",RER,/unit,lci-pass_cars
+CAR_NG_LONGD,Construction,"Passenger car, EURO-6ab","Passenger car, compressed gas, Medium, EURO-6ab",RER,/unit,lci-pass_cars
+CAR_NG_LONGD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, compressed gas, Medium, EURO-6ab",RER,/km,lci-pass_cars
+CAR_PHEV_LOCAL,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, plugin gasoline hybrid, Medium, EURO-6ab",RER,/km,lci-pass_cars
+CAR_PHEV_LOCAL,Construction,"Passenger car, EURO-6ab","Passenger car, plugin gasoline hybrid, Medium, EURO-6ab",RER,/unit,lci-pass_cars
+CAR_PHEV_LONGD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, plugin gasoline hybrid, Medium, EURO-6ab",RER,/km,lci-pass_cars
+CAR_PHEV_LONGD,Construction,"Passenger car, EURO-6ab","Passenger car, plugin gasoline hybrid, Medium, EURO-6ab",RER,/unit,lci-pass_cars
 CCGT,Operation,"electricity, high voltage","electricity production, at natural gas-fired combined cycle power plant",RER,/kWh,Carma CCS
 CCGT,Construction,"NGCC power plant, 400MWe","market for gas power plant, combined cycle, 400MW electrical",GLO,/unit,Carma CCS
 CCGT_CC,Operation,"electricity, high voltage","electricity production, at natural gas-fired combined cycle power plant, post, pipeline 200km, storage 1000m",RER,/kWh,Carma CCS
@@ -93,18 +93,18 @@ CO2_TO_DIESEL,Operation,"Diesel, synthetic","Diesel production, synthetic, Fisch
 CO2_TO_DIESEL,Construction,petroleum refinery,petroleum refinery construction,RoW,/unit,ecoinvent3.8 cut-off
 CO2_TO_JETFUELS,Operation,"kerosene, synthetic","kerosene production, from methanol, hydrogen from electrolysis, CO2 from cement plant, energy allocation",RER,/kg,cement CCS-CCU
 CO2_TO_JETFUELS,Construction,petroleum refinery,petroleum refinery construction,RER,/unit,ecoinvent3.8 cut-off
-COACH_CNG_STOICH,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, compressed gas, 13m single deck coach bus, 2020, EURO-VI",RER,/person*km,lci-buses
-COACH_CNG_STOICH,Construction,"Passenger bus, EURO-VI","Passenger bus, compressed gas, 13m single deck coach bus, 2020, EURO-VI",RER,/unit,lci-buses
-COACH_DIESEL,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m single deck coach bus, 2020, EURO-VI",RER,/unit,lci-buses
-COACH_DIESEL,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m single deck coach bus, 2020, EURO-VI",RER,/person*km,lci-buses
-COACH_EV,Construction,Passenger bus,"Passenger bus, battery electric - overnight charging, NMC-622 battery, 13m single deck urban bus, 2020",RER,/unit,lci-buses
-COACH_EV,Operation,"transport, passenger bus","transport, passenger bus, battery electric - overnight charging, NMC-622 battery, 13m single deck urban bus, 2020",RER,/person*km,lci-buses
-COACH_FC_HYBRID_CH4,Operation,"transport, passenger bus","transport, passenger bus, fuel cell electric, 13m single deck coach bus, 2020",RER,/person*km,lci-buses
-COACH_FC_HYBRID_CH4,Construction,Passenger bus,"Passenger bus, fuel cell electric, 13m single deck coach bus, 2020",RER,/unit,lci-buses
-COACH_FC_HYBRID_H2,Operation,"transport, passenger bus","transport, passenger bus, fuel cell electric, 13m single deck coach bus, 2020",RER,/person*km,lci-buses
-COACH_FC_HYBRID_H2,Construction,Passenger bus,"Passenger bus, fuel cell electric, 13m single deck coach bus, 2020",RER,/unit,lci-buses
-COACH_HY_DIESEL,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel hybrid, 13m single deck coach bus, 2020, EURO-VI",RER,/person*km,lci-buses
-COACH_HY_DIESEL,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel hybrid, 13m single deck coach bus, 2020, EURO-VI",RER,/unit,lci-buses
+COACH_CNG_STOICH,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, compressed gas, 13m single deck coach bus, EURO-VI",RER,/person*km,lci-buses
+COACH_CNG_STOICH,Construction,"Passenger bus, EURO-VI","Passenger bus, compressed gas, 13m single deck coach bus, EURO-VI",RER,/unit,lci-buses
+COACH_DIESEL,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,/unit,lci-buses
+COACH_DIESEL,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,/person*km,lci-buses
+COACH_EV,Construction,Passenger bus,"Passenger bus, battery electric - overnight charging, NMC-622 battery, 13m single deck urban bus",RER,/unit,lci-buses
+COACH_EV,Operation,"transport, passenger bus","transport, passenger bus, battery electric - overnight charging, NMC-622 battery, 13m single deck urban bus",RER,/person*km,lci-buses
+COACH_FC_HYBRID_CH4,Operation,"transport, passenger bus","transport, passenger bus, fuel cell electric, 13m single deck coach bus",RER,/person*km,lci-buses
+COACH_FC_HYBRID_CH4,Construction,Passenger bus,"Passenger bus, fuel cell electric, 13m single deck coach bus",RER,/unit,lci-buses
+COACH_FC_HYBRID_H2,Operation,"transport, passenger bus","transport, passenger bus, fuel cell electric, 13m single deck coach bus",RER,/person*km,lci-buses
+COACH_FC_HYBRID_H2,Construction,Passenger bus,"Passenger bus, fuel cell electric, 13m single deck coach bus",RER,/unit,lci-buses
+COACH_HY_DIESEL,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel hybrid, 13m single deck coach bus, EURO-VI",RER,/person*km,lci-buses
+COACH_HY_DIESEL,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel hybrid, 13m single deck coach bus, EURO-VI",RER,/unit,lci-buses
 COAL_IGCC,Operation,"electricity, high voltage","electricity production, at hard coal-fired IGCC power plant",RER,/kWh,Carma CCS
 COAL_IGCC,Construction,Hard coal IGCC power plant 450MW,Hard coal IGCC power plant 450MW,RER,/unit,Carma CCS
 COAL_IGCC_CC,Operation,"electricity, high voltage","electricity production, at hard coal-fired IGCC power plant, pre, pipeline 200km, storage 1000m",RER,/kWh,Carma CCS
@@ -386,14 +386,14 @@ TRAIN_NG,Construction,"train, passenger, long-distance","train production, passe
 TRAIN_NG,Operation,"transport, freight train","transport, freight train, diesel",RoW,/metric ton*km,ecoinvent3.8 cut-off
 TRAMWAY,Construction,tram,tram production,RoW,/unit,ecoinvent3.8 cut-off
 TRAMWAY,Operation,"transport, tram","transport, tram",RoW,/person*km,ecoinvent3.8 cut-off
-TRUCK,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 26t gross weight, 2020, EURO-VI, long haul",RER,/metric ton*km,lci-long_haul_trucks
-TRUCK,Construction,"Medium duty truck, EURO-VI","Medium duty truck, diesel, 26t gross weight, 2020, EURO-VI, long haul",RER,/unit,lci-long_haul_trucks
-TRUCK_EV,Operation,"transport, freight, lorry","transport, freight, lorry, battery electric, NMC-622 battery, 26t gross weight, 2020, long haul",RER,/metric ton*km,lci-long_haul_trucks
-TRUCK_EV,Construction,Medium duty truck,"Medium duty truck, battery electric, NMC-622 battery, 26t gross weight, 2020, long haul",RER,/unit,lci-long_haul_trucks
-TRUCK_FC,Operation,"transport, freight, lorry","transport, freight, lorry, fuel cell electric, 26t gross weight, 2020, long haul",RER,/metric ton*km,lci-long_haul_trucks
-TRUCK_FC,Construction,Medium duty truck,"Medium duty truck, fuel cell electric, 26t gross weight, 2020, long haul",RER,/unit,lci-long_haul_trucks
-TRUCK_SNG,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, compressed gas, 26t gross weight, 2020, EURO-VI, long haul",RER,/metric ton*km,lci-long_haul_trucks
-TRUCK_SNG,Construction,"Medium duty truck, EURO-VI","Medium duty truck, compressed gas, 26t gross weight, 2020, EURO-VI, long haul",RER,/unit,lci-long_haul_trucks
+TRUCK,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 26t gross weight, EURO-VI, long haul",RER,/metric ton*km,lci-long_haul_trucks
+TRUCK,Construction,"Medium duty truck, EURO-VI","Medium duty truck, diesel, 26t gross weight, EURO-VI, long haul",RER,/unit,lci-long_haul_trucks
+TRUCK_EV,Operation,"transport, freight, lorry","transport, freight, lorry, battery electric, NMC-622 battery, 26t gross weight, long haul",RER,/metric ton*km,lci-long_haul_trucks
+TRUCK_EV,Construction,Medium duty truck,"Medium duty truck, battery electric, NMC-622 battery, 26t gross weight, long haul",RER,/unit,lci-long_haul_trucks
+TRUCK_FC,Operation,"transport, freight, lorry","transport, freight, lorry, fuel cell electric, 26t gross weight, long haul",RER,/metric ton*km,lci-long_haul_trucks
+TRUCK_FC,Construction,Medium duty truck,"Medium duty truck, fuel cell electric, 26t gross weight, long haul",RER,/unit,lci-long_haul_trucks
+TRUCK_SNG,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, compressed gas, 26t gross weight, EURO-VI, long haul",RER,/metric ton*km,lci-long_haul_trucks
+TRUCK_SNG,Construction,"Medium duty truck, EURO-VI","Medium duty truck, compressed gas, 26t gross weight, EURO-VI, long haul",RER,/unit,lci-long_haul_trucks
 WIND,Construction,"wind turbine, 2MW, onshore","wind turbine construction, 2MW, onshore",GLO,/unit,ecoinvent3.8 cut-off
 WIND,Operation,"electricity, high voltage","electricity production, wind, 1-3MW turbine, onshore",RoW,/kWh,ecoinvent3.8 cut-off
 WOOD_METHANOL,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,/unit,ecoinvent3.8 cut-off
