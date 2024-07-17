@@ -19,7 +19,7 @@ def create_complementary_database(df_mapping: pd.DataFrame, premise_db: list[dic
     tech_premise = pd.DataFrame(columns=['Name', 'Type', 'Product', 'Activity', 'Location', 'Database'])
     complement_premise = []
 
-    base_db = load_multiple_databases(list(df_mapping.Database.unique()), create_pickle=True)
+    base_db = load_multiple_databases(list(df_mapping.Database.unique()))
     base_db_dict_name = database_list_to_dict(base_db, 'name')
 
     premise_db_dict_name = database_list_to_dict(premise_db, 'name')
