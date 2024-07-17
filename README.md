@@ -3,8 +3,8 @@
 [![PyPI](https://img.shields.io/pypi/v/mescal.svg)][pypi status]
 [![Status](https://img.shields.io/pypi/status/mescal.svg)][pypi status]
 [![Python Version](https://img.shields.io/pypi/pyversions/mescal)][pypi status]
-[![License](https://img.shields.io/pypi/l/mescal)][License]
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)][License]
 [![Read the documentation at https://mescal.readthedocs.io/](https://img.shields.io/readthedocs/mescal/latest.svg?label=Read%20the%20Docs)][read the docs]
 [![Tests](https://github.com/matthieu-str/mescal/actions/workflows/python-test.yml/badge.svg)][tests]
 [![Codecov](https://codecov.io/gh/matthieu-str/mescal/branch/main/graph/badge.svg)][codecov]
@@ -69,7 +69,7 @@ please [file an issue][Issue Tracker] along with a detailed description.
 <!-- github-only -->
 
 [command-line reference]: https://mescal.readthedocs.io/en/latest/usage.html
-[License]: https://github.com/matthieu-str/mescal/blob/main/LICENSE
+[License]: https://opensource.org/licenses/MIT
 [Contributor Guide]: https://github.com/matthieu-str/mescal/blob/main/CONTRIBUTING.md
 [Issue Tracker]: https://github.com/matthieu-str/mescal/issues
 
