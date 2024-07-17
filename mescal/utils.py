@@ -345,6 +345,7 @@ def ecoinvent_unit_convention(unit: str) -> str:
     """
     unit_dict = {
         'kg': 'kilogram',
+        'kg*day': 'kilogram day',
         'kg/h': 'kilogram per hour',
         'm2': 'square meter',
         'm3': 'cubic meter',
@@ -353,9 +354,12 @@ def ecoinvent_unit_convention(unit: str) -> str:
         'kW': 'kilowatt',
         'h': 'hour',
         'km': 'kilometer',
+        'km*year': 'kilometer-year',
         'pkm': 'person kilometer',
+        'person*km': 'person kilometer',
         'pkm/h': 'person kilometer per hour',
         'tkm': 'ton kilometer',
+        'metric ton*km': 'ton kilometer',
         'tkm/h': 'ton kilometer per hour',
         'u': 'unit',
     }
