@@ -21,7 +21,6 @@ BATTERY,Construction,8.771929824999999,kilogram,kilowatt hour
 BENZENE,Resource,0.08470588235,kilogram,kilowatt hour
 BIOMASS_ETHANOL,Operation,0.1347708895,kilogram,kilowatt hour
 BIOMASS_ETHANOL,Construction,1.128122192e-05,unit,kilowatt
-BIO_DIESEL,Resource,0.09523809524,kilogram,kilowatt hour
 BUS_CNG_STOICH,Construction,0.0027796153850000002,unit,person kilometer per hour
 BUS_CNG_STOICH,Operation,1.0,person kilometer,person kilometer
 BUS_DIESEL,Operation,1.0,person kilometer,person kilometer
@@ -388,7 +387,6 @@ PHENOL,Resource,0.11093990760000001,kilogram,kilowatt hour
 POLYPROPYLENE_PP,Operation,1.0,kilogram,kilogram
 POLYPROPYLENE_PP,Construction,0.000150672,unit,kilogram per hour
 PP,Resource,1.0,kilogram,kilogram
-PROPANE,Resource,0.07758620690000001,kilogram,kilowatt hour
 PROPYLENE,Resource,0.07860433634,kilogram,kilowatt hour
 PS,Resource,1.0,kilogram,kilogram
 PV,Construction,0.0007692307692,unit,kilowatt

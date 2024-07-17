@@ -46,8 +46,8 @@ CAR_ETOH_E10_LOCAL,Operation,"transport, passenger car, EURO-6ab","transport, pa
 CAR_ETOH_E10_LOCAL,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline, Medium, EURO-6ab",RER,/unit,lci-pass_cars
 CAR_ETOH_E10_LONGD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline, Medium, EURO-6ab",RER,/km,lci-pass_cars
 CAR_ETOH_E10_LONGD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline, Medium, EURO-6ab",RER,/unit,lci-pass_cars
-CAR_ETOH_E85_LOCAL,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline, Medium, EURO-6ab",RER,/unit,lci-pass_cars
 CAR_ETOH_E85_LOCAL,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline, Medium, EURO-6ab",RER,/km,lci-pass_cars
+CAR_ETOH_E85_LOCAL,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline, Medium, EURO-6ab",RER,/unit,lci-pass_cars
 CAR_ETOH_E85_LONGD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline, Medium, EURO-6ab",RER,/unit,lci-pass_cars
 CAR_ETOH_E85_LONGD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline, Medium, EURO-6ab",RER,/km,lci-pass_cars
 CAR_FC_CH4_LOCAL,Operation,"transport, passenger car","transport, passenger car, fuel cell electric, Medium",RER,/km,lci-pass_cars
@@ -74,20 +74,20 @@ CAR_NG_LOCAL,Operation,"transport, passenger car, EURO-6ab","transport, passenge
 CAR_NG_LOCAL,Construction,"Passenger car, EURO-6ab","Passenger car, compressed gas, Medium, EURO-6ab",RER,/unit,lci-pass_cars
 CAR_NG_LONGD,Construction,"Passenger car, EURO-6ab","Passenger car, compressed gas, Medium, EURO-6ab",RER,/unit,lci-pass_cars
 CAR_NG_LONGD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, compressed gas, Medium, EURO-6ab",RER,/km,lci-pass_cars
-CAR_PHEV_LOCAL,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, plugin gasoline hybrid, Medium, EURO-6ab",RER,/km,lci-pass_cars
 CAR_PHEV_LOCAL,Construction,"Passenger car, EURO-6ab","Passenger car, plugin gasoline hybrid, Medium, EURO-6ab",RER,/unit,lci-pass_cars
+CAR_PHEV_LOCAL,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, plugin gasoline hybrid, Medium, EURO-6ab",RER,/km,lci-pass_cars
 CAR_PHEV_LONGD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, plugin gasoline hybrid, Medium, EURO-6ab",RER,/km,lci-pass_cars
 CAR_PHEV_LONGD,Construction,"Passenger car, EURO-6ab","Passenger car, plugin gasoline hybrid, Medium, EURO-6ab",RER,/unit,lci-pass_cars
 CCGT,Operation,"electricity, high voltage","electricity production, at natural gas-fired combined cycle power plant",RER,/kWh,Carma CCS
 CCGT,Construction,"NGCC power plant, 400MWe","market for gas power plant, combined cycle, 400MW electrical",GLO,/unit,Carma CCS
 CCGT_CC,Operation,"electricity, high voltage","electricity production, at natural gas-fired combined cycle power plant, post, pipeline 200km, storage 1000m",RER,/kWh,Carma CCS
 CCGT_CC,Construction,"NGCC power plant, 400MWe","market for gas power plant, combined cycle, 400MW electrical",GLO,/unit,Carma CCS
-CEMENT_PROD,Operation,"cement, alternative constituents 21-35%","cement production, alternative constituents 21-35%",CH,/kg,ecoinvent3.8 cut-off
 CEMENT_PROD,Construction,cement factory,cement factory construction,CH,/unit,ecoinvent3.8 cut-off
-CEMENT_PROD_HP,Construction,cement factory,cement factory construction,CH,/unit,ecoinvent3.8 cut-off
+CEMENT_PROD,Operation,"cement, alternative constituents 21-35%","cement production, alternative constituents 21-35%",CH,/kg,ecoinvent3.8 cut-off
 CEMENT_PROD_HP,Operation,"cement, alternative constituents 21-35%","cement production, alternative constituents 21-35%",CH,/kg,ecoinvent3.8 cut-off
-CO2_METHANOL,Operation,methanol,methanol production,GLO,/kg,ecoinvent3.8 cut-off
+CEMENT_PROD_HP,Construction,cement factory,cement factory construction,CH,/unit,ecoinvent3.8 cut-off
 CO2_METHANOL,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,/unit,ecoinvent3.8 cut-off
+CO2_METHANOL,Operation,methanol,methanol production,GLO,/kg,ecoinvent3.8 cut-off
 CO2_STO,Construction,"liquid storage tank, chemicals, organics","market for liquid storage tank, chemicals, organics",GLO,/unit,ecoinvent3.8 cut-off
 CO2_TO_DIESEL,Operation,"Diesel, synthetic","Diesel production, synthetic, Fischer Tropsch process, hydrogen from electrolysis, energy allocation",RER,/kg,synfuel from electrolysis
 CO2_TO_DIESEL,Construction,petroleum refinery,petroleum refinery construction,RoW,/unit,ecoinvent3.8 cut-off
@@ -95,12 +95,12 @@ CO2_TO_JETFUELS,Operation,"kerosene, synthetic","kerosene production, from metha
 CO2_TO_JETFUELS,Construction,petroleum refinery,petroleum refinery construction,RER,/unit,ecoinvent3.8 cut-off
 COACH_CNG_STOICH,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, compressed gas, 13m single deck coach bus, EURO-VI",RER,/person*km,lci-buses
 COACH_CNG_STOICH,Construction,"Passenger bus, EURO-VI","Passenger bus, compressed gas, 13m single deck coach bus, EURO-VI",RER,/unit,lci-buses
-COACH_DIESEL,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,/unit,lci-buses
 COACH_DIESEL,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,/person*km,lci-buses
+COACH_DIESEL,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,/unit,lci-buses
 COACH_EV,Construction,Passenger bus,"Passenger bus, battery electric - overnight charging, NMC-622 battery, 13m single deck urban bus",RER,/unit,lci-buses
 COACH_EV,Operation,"transport, passenger bus","transport, passenger bus, battery electric - overnight charging, NMC-622 battery, 13m single deck urban bus",RER,/person*km,lci-buses
-COACH_FC_HYBRID_CH4,Operation,"transport, passenger bus","transport, passenger bus, fuel cell electric, 13m single deck coach bus",RER,/person*km,lci-buses
 COACH_FC_HYBRID_CH4,Construction,Passenger bus,"Passenger bus, fuel cell electric, 13m single deck coach bus",RER,/unit,lci-buses
+COACH_FC_HYBRID_CH4,Operation,"transport, passenger bus","transport, passenger bus, fuel cell electric, 13m single deck coach bus",RER,/person*km,lci-buses
 COACH_FC_HYBRID_H2,Operation,"transport, passenger bus","transport, passenger bus, fuel cell electric, 13m single deck coach bus",RER,/person*km,lci-buses
 COACH_FC_HYBRID_H2,Construction,Passenger bus,"Passenger bus, fuel cell electric, 13m single deck coach bus",RER,/unit,lci-buses
 COACH_HY_DIESEL,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel hybrid, 13m single deck coach bus, EURO-VI",RER,/person*km,lci-buses
@@ -109,10 +109,10 @@ COAL_IGCC,Operation,"electricity, high voltage","electricity production, at hard
 COAL_IGCC,Construction,Hard coal IGCC power plant 450MW,Hard coal IGCC power plant 450MW,RER,/unit,Carma CCS
 COAL_IGCC_CC,Operation,"electricity, high voltage","electricity production, at hard coal-fired IGCC power plant, pre, pipeline 200km, storage 1000m",RER,/kWh,Carma CCS
 COAL_IGCC_CC,Construction,Hard coal IGCC power plant 450MW,Hard coal IGCC power plant 450MW,RER,/unit,Carma CCS
-COAL_US,Construction,lignite power plant,market for lignite power plant,GLO,/unit,ecoinvent3.8 cut-off
 COAL_US,Operation,"electricity, high voltage","electricity production, at lignite-fired power plant, pulverised",RER,/kWh,Carma CCS
-COAL_US_CC,Operation,"electricity, high voltage","electricity production, at lignite-fired power plant, post, pipeline 200km, storage 1000m",RER,/kWh,Carma CCS
+COAL_US,Construction,lignite power plant,market for lignite power plant,GLO,/unit,ecoinvent3.8 cut-off
 COAL_US_CC,Construction,lignite power plant,market for lignite power plant,GLO,/unit,ecoinvent3.8 cut-off
+COAL_US_CC,Operation,"electricity, high voltage","electricity production, at lignite-fired power plant, post, pipeline 200km, storage 1000m",RER,/kWh,Carma CCS
 COMMUTER_RAIL_DIESEL,Operation,"transport, passenger train","transport, passenger train",RoW,/person*km,ecoinvent3.8 cut-off
 COMMUTER_RAIL_DIESEL,Construction,"train, passenger, regional","train production, passenger, regional",CH,/unit,ecoinvent3.8 cut-off
 COMMUTER_RAIL_ELEC,Construction,"train, passenger, regional","train production, passenger, regional",CH,/unit,ecoinvent3.8 cut-off
@@ -121,8 +121,8 @@ CROPS_TO_ETHANOL,Operation,"ethanol, from corn","Ethanol production, via ferment
 CROPS_TO_ETHANOL,Construction,ethanol fermentation plant,market for ethanol fermentation plant,GLO,/unit,ecoinvent3.8 cut-off
 CROPS_TO_JETFUELS,Construction,petroleum refinery,petroleum refinery construction,RoW,/unit,ecoinvent3.8 cut-off
 CROPS_TO_JETFUELS,Operation,"kerosene, synthetic","kerosene production, synthetic, Fischer Tropsch process, hydrogen from wood gasification, energy allocation",RER,/kg,synfuel from wood gasification
-CUMENE_PROCESS,Operation,cumene,cumene production,RoW,/kg,ecoinvent3.8 cut-off
 CUMENE_PROCESS,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,/unit,ecoinvent3.8 cut-off
+CUMENE_PROCESS,Operation,cumene,cumene production,RoW,/kg,ecoinvent3.8 cut-off
 DAC_HT,Operation,"carbon dioxide, captured from atmosphere","carbon dioxide, captured from atmosphere, with a sorbent-based direct air capture system, 100ktCO2",RER,/kg,direct air capture
 DAC_HT_PLANT,Construction,direct air capture system,"direct air capture system, sorbent-based, 100ktCO2",RER,/unit,direct air capture
 DAC_HT_PLANT_DECOM,Construction,direct air capture system,"treatment of direct air capture system, sorbent-based, 100ktCO2",RER,/unit,direct air capture
@@ -150,8 +150,8 @@ DEC_COGEN_WOOD_BOILER,Construction,"furnace, wood chips, hardwood storage area, 
 DEC_COGEN_WOOD_TURBINE,Construction,"heat and power co-generation unit, organic Rankine cycle, 200kW electrical","heat and power co-generation unit construction, organic Rankine cycle, 200kW electrical",GLO,/unit,ecoinvent3.8 cut-off
 DEC_DEEP_GEO,Operation,"heat, deep geothermal","heat production, deep geothermal",GLO,/MJ,geothermal
 DEC_DEEP_GEO,Construction,geothermal heat plant,geothermal heat plant construction,GLO,/unit,geothermal
-DEC_DIRECT_ELEC,Construction,"auxiliary heating unit, electric, 5kW","auxiliary heating unit production, electric, 5kW",RoW,/unit,ecoinvent3.8 cut-off
 DEC_DIRECT_ELEC,Operation,"electricity, low voltage","market for electricity, low voltage",CH,/kWh,ecoinvent3.8 cut-off
+DEC_DIRECT_ELEC,Construction,"auxiliary heating unit, electric, 5kW","auxiliary heating unit production, electric, 5kW",RoW,/unit,ecoinvent3.8 cut-off
 DEC_HP_ELEC,Construction,"heat pump, brine-water, 10kW","heat pump production, brine-water, 10kW",RoW,/unit,ecoinvent3.8 cut-off
 DEC_HP_ELEC,Operation,"heat, air-water heat pump 10kW","heat production, air-water heat pump 10kW",RoW,/MJ,ecoinvent3.8 cut-off
 DEC_SOLAR,Construction,"flat plate solar collector, Cu absorber","flat plate solar collector production, Cu absorber",RoW,/m2,ecoinvent3.8 cut-off
@@ -159,8 +159,8 @@ DEC_THHP_GAS,Operation,"heat, future","heat production, natural gas, at diffusio
 DEC_THHP_GAS_HEX,Construction,"borehole heat exchanger, 150m","borehole heat exchanger production, 150m",CH,/unit,ecoinvent3.8 cut-off
 DEC_THHP_GAS_HP,Construction,"heat pump, diffusion absorption, 4kW, future","heat pump production, diffusion absorption, 4kW, future",RoW,/unit,ecoinvent3.8 cut-off
 DEC_TH_STORAGE,Construction,"thermal storage system, solar tower power plant, 20 MW","thermal storage system construction, solar tower power plant, 20 MW",RoW,/unit,ecoinvent3.8 cut-off
-DHN_BOILER_GAS,Construction,"industrial furnace, natural gas","market for industrial furnace, natural gas",GLO,/unit,ecoinvent3.8 cut-off
 DHN_BOILER_GAS,Operation,"heat, district or industrial, natural gas","heat production, natural gas, at boiler modulating >100kW",RoW,/MJ,ecoinvent3.8 cut-off
+DHN_BOILER_GAS,Construction,"industrial furnace, natural gas","market for industrial furnace, natural gas",GLO,/unit,ecoinvent3.8 cut-off
 DHN_BOILER_OIL,Operation,"heat, district or industrial, other than natural gas","heat production, light fuel oil, at industrial furnace 1MW",CH,/MJ,ecoinvent3.8 cut-off
 DHN_BOILER_OIL_BOILER,Construction,"industrial furnace, 1MW, oil","industrial furnace production, 1MW, oil",CH,/unit,ecoinvent3.8 cut-off
 DHN_BOILER_OIL_TANK,Construction,"oil storage, 3000l","oil storage production, 3000l",CH,/unit,ecoinvent3.8 cut-off
@@ -197,18 +197,18 @@ ETHANE_OXIDATION,Construction,"chemical factory, organics","chemical factory con
 ETHANE_OXIDATION,Operation,"acetic acid, without water, in 98% solution state","acetic acid production, product in 98% solution state",RoW,/kg,ecoinvent3.8 cut-off
 ETHANE_TO_ETHYLENE,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,/unit,ecoinvent3.8 cut-off
 ETHANE_TO_ETHYLENE,Operation,ethylene,"ethylene production, average",RoW,/kg,ecoinvent3.8 cut-off
-ETHANOL_TO_JETFUELS,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,/unit,ecoinvent3.8 cut-off
 ETHANOL_TO_JETFUELS,Operation,"kerosene, synthetic","kerosene production, from methanol, hydrogen from coal gasification, energy allocation",RER,/kg,Methanol-based fuels from coal
-ETHYLENE_POLYMERIZATION,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,/unit,ecoinvent3.8 cut-off
+ETHANOL_TO_JETFUELS,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,/unit,ecoinvent3.8 cut-off
 ETHYLENE_POLYMERIZATION,Operation,ethylene,"ethylene production, average",RoW,/kg,ecoinvent3.8 cut-off
+ETHYLENE_POLYMERIZATION,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,/unit,ecoinvent3.8 cut-off
 FOOD_PROD,Construction,sugar refinery,sugar refinery construction,GLO,/unit,ecoinvent3.8 cut-off
 FOOD_PROD,Operation,"sugar, from sugar beet",beet sugar production,RoW,/kg,ecoinvent3.8 cut-off
 FOOD_PROD_HP,Construction,sugar refinery,sugar refinery construction,GLO,/unit,ecoinvent3.8 cut-off
 FOOD_PROD_HP,Operation,"sugar, from sugar beet",beet sugar production,RoW,/kg,ecoinvent3.8 cut-off
 FOOD_PROD_HR,Construction,sugar refinery,sugar refinery construction,GLO,/unit,ecoinvent3.8 cut-off
 FOOD_PROD_HR,Operation,"sugar, from sugar beet",beet sugar production,RoW,/kg,ecoinvent3.8 cut-off
-FT,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,/unit,ecoinvent3.8 cut-off
 FT,Operation,"diesel, synthetic, vehicle grade","diesel production, synthetic, from Fischer Tropsch process, hydrogen from wood gasification, energy allocation, at fuelling station",RER,/kg,synfuel from wood gasification
+FT,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,/unit,ecoinvent3.8 cut-off
 GASIFICATION_H2,Operation,"hydrogen, gaseous, 25 bar","hydrogen production, gaseous, 25 bar, from heatpipe reformer gasification of woody biomass, at gasification plant",RER,/kg,Hydrogen from woody biomass gasification
 GASIFICATION_H2_PLANT,Construction,synthetic gas factory,synthetic gas factory construction,CH,/unit,ecoinvent3.8 cut-off
 GASIFICATION_H2_TANK,Construction,"liquid storage tank, chemicals, organics","market for liquid storage tank, chemicals, organics",GLO,/unit,ecoinvent3.8 cut-off
@@ -220,21 +220,21 @@ GEOTHERMAL,Operation,"electricity, high voltage","electricity production, deep g
 GEOTHERMAL,Construction,"geothermal power plant, 5.5MWel",geothermal power plant construction,CH,/unit,ecoinvent3.8 cut-off
 H2_COMP_HE,Construction,"compressor, for hydrogen transmission",compressor assembly for transmission hydrogen pipeline,RER,unit,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
 H2_COMP_HE,Operation,"hydrogen, gaseous","market for hydrogen, gaseous",GLO,/kg,ecoinvent3.8 cut-off
-H2_COMP_LM,Operation,"hydrogen, gaseous","market for hydrogen, gaseous",GLO,/kg,ecoinvent3.8 cut-off
 H2_COMP_LM,Construction,"compressor, for hydrogen transmission",compressor assembly for transmission hydrogen pipeline,RER,unit,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
+H2_COMP_LM,Operation,"hydrogen, gaseous","market for hydrogen, gaseous",GLO,/kg,ecoinvent3.8 cut-off
 H2_COMP_MH,Construction,"compressor, for hydrogen transmission",compressor assembly for transmission hydrogen pipeline,RER,unit,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
 H2_COMP_MH,Operation,"hydrogen, gaseous","market for hydrogen, gaseous",GLO,/kg,ecoinvent3.8 cut-off
 H2_EXP_EH,Operation,"hydrogen, gaseous","market for hydrogen, gaseous",GLO,/kg,ecoinvent3.8 cut-off
-H2_EXP_EH_COGEN,Construction,"air input/output unit, heat and power co-generation unit, 160kW electrical","air input/output unit production, heat and power co-generation unit, 160kW electrical",RoW,/unit,ecoinvent3.8 cut-off
 H2_EXP_EH_COGEN,Operation,"hydrogen, gaseous","market for hydrogen, gaseous",GLO,/kg,ecoinvent3.8 cut-off
+H2_EXP_EH_COGEN,Construction,"air input/output unit, heat and power co-generation unit, 160kW electrical","air input/output unit production, heat and power co-generation unit, 160kW electrical",RoW,/unit,ecoinvent3.8 cut-off
 H2_EXP_HM,Operation,"hydrogen, gaseous","market for hydrogen, gaseous",GLO,/kg,ecoinvent3.8 cut-off
 H2_EXP_HM_COGEN,Construction,"air input/output unit, heat and power co-generation unit, 160kW electrical","air input/output unit production, heat and power co-generation unit, 160kW electrical",RoW,/unit,ecoinvent3.8 cut-off
 H2_EXP_HM_COGEN,Operation,"hydrogen, gaseous","market for hydrogen, gaseous",GLO,/kg,ecoinvent3.8 cut-off
 H2_EXP_ML,Operation,"hydrogen, gaseous","market for hydrogen, gaseous",GLO,/kg,ecoinvent3.8 cut-off
-H2_EXP_ML_COGEN,Operation,"hydrogen, gaseous","market for hydrogen, gaseous",GLO,/kg,ecoinvent3.8 cut-off
 H2_EXP_ML_COGEN,Construction,"air input/output unit, heat and power co-generation unit, 160kW electrical","air input/output unit production, heat and power co-generation unit, 160kW electrical",RoW,/unit,ecoinvent3.8 cut-off
-H2_STO,Operation,hydrogen storage,geological hydrogen storage,RER,/kg,hydrogen-distribution
+H2_EXP_ML_COGEN,Operation,"hydrogen, gaseous","market for hydrogen, gaseous",GLO,/kg,ecoinvent3.8 cut-off
 H2_STO,Construction,"liquid storage tank, chemicals, organics","liquid storage tank production, chemicals, organics",RoW,/unit,ecoinvent3.8 cut-off
+H2_STO,Operation,hydrogen storage,geological hydrogen storage,RER,/kg,hydrogen-distribution
 HP_H2_GRID,Construction,"pipeline, for hydrogen transmission","transmission pipeline for hydrogen, dedicated hydrogen pipeline",RER,/km,hydrogen-distribution
 HP_NG_GRID,Construction,"pipeline, natural gas, high pressure distribution network","pipeline construction, natural gas, high pressure distribution network",RoW,/km,ecoinvent3.8 cut-off
 HT_LT_DEC,Operation,"heat, district or industrial, other than natural gas","market for heat, district or industrial, other than natural gas",CH,/MJ,ecoinvent3.8 cut-off
@@ -248,8 +248,8 @@ HYDRO_GAS_CHP_PLANT,Construction,synthetic gas factory,synthetic gas factory con
 HYDRO_GAS_CHP_TURBINE,Construction,"heat and power co-generation unit, organic Rankine cycle, 200kW electrical","heat and power co-generation unit construction, organic Rankine cycle, 200kW electrical",GLO,/unit,ecoinvent3.8 cut-off
 HYDRO_RIVER,Construction,"hydropower plant, run-of-river","hydropower plant construction, run-of-river",CH,/unit,ecoinvent3.8 cut-off
 HYDRO_RIVER,Operation,"electricity, high voltage","electricity production, hydro, run-of-river",CH,/kWh,ecoinvent3.8 cut-off
-IND_BOILER_COAL,Construction,"industrial furnace, coal, 1-10MW","industrial furnace production, coal, 1-10MW",RoW,/unit,ecoinvent3.8 cut-off
 IND_BOILER_COAL,Operation,"heat, district or industrial, other than natural gas","heat production, at hard coal industrial furnace 1-10MW",RoW,/MJ,ecoinvent3.8 cut-off
+IND_BOILER_COAL,Construction,"industrial furnace, coal, 1-10MW","industrial furnace production, coal, 1-10MW",RoW,/unit,ecoinvent3.8 cut-off
 IND_BOILER_GAS,Operation,"heat, district or industrial, natural gas","heat production, natural gas, at industrial furnace >100kW",RoW,/MJ,ecoinvent3.8 cut-off
 IND_BOILER_GAS,Construction,"industrial furnace, natural gas","industrial furnace production, natural gas",RoW,/unit,ecoinvent3.8 cut-off
 IND_BOILER_OIL,Operation,"heat, district or industrial, other than natural gas","heat production, heavy fuel oil, at industrial furnace 1MW",CH,/MJ,ecoinvent3.8 cut-off
@@ -257,8 +257,8 @@ IND_BOILER_OIL_PLANT,Construction,"industrial furnace, 1MW, oil","industrial fur
 IND_BOILER_OIL_TANK,Construction,"oil storage, 3000l","market for oil storage, 3000l",GLO,/unit,ecoinvent3.8 cut-off
 IND_BOILER_WASTE,Operation,"heat, district or industrial, other than natural gas","heat, from municipal waste incineration to generic market for heat district or industrial, other than natural gas",CH,/MJ,ecoinvent3.8 cut-off
 IND_BOILER_WASTE,Construction,municipal waste incineration facility,municipal waste incineration facility construction,RoW,/unit,ecoinvent3.8 cut-off
-IND_BOILER_WOOD,Operation,"heat, district or industrial, other than natural gas","heat production, wood chips from industry, at furnace 1000kW",RoW,/MJ,ecoinvent3.8 cut-off
 IND_BOILER_WOOD,Construction,"furnace, wood chips, with silo, 1000kW","furnace production, wood chips, with silo, 1000kW",RoW,/unit,ecoinvent3.8 cut-off
+IND_BOILER_WOOD,Operation,"heat, district or industrial, other than natural gas","heat production, wood chips from industry, at furnace 1000kW",RoW,/MJ,ecoinvent3.8 cut-off
 IND_COGEN_GAS,Operation,"heat, district or industrial, natural gas","heat and power co-generation, natural gas, 1MW electrical, lean burn",CH,/MJ,ecoinvent3.8 cut-off
 IND_COGEN_GAS_CHP,Construction,"heat and power co-generation unit, 1MW electrical, common components for heat+electricity","heat and power co-generation unit construction, 1MW electrical, common components for heat+electricity",RER,/unit,ecoinvent3.8 cut-off
 IND_COGEN_GAS_ELEC,Construction,"heat and power co-generation unit, 1MW electrical, components for electricity only","heat and power co-generation unit construction, 1MW electrical, components for electricity only",RER,/unit,ecoinvent3.8 cut-off
@@ -270,8 +270,8 @@ IND_COGEN_WOOD,Operation,"heat, district or industrial, other than natural gas",
 IND_COGEN_WOOD_DUST,Construction,"dust collector, electrostatic precipitator, for industrial use","market for dust collector, electrostatic precipitator, for industrial use",GLO,/unit,ecoinvent3.8 cut-off
 IND_COGEN_WOOD_PLANT,Construction,"furnace, wood chips, with silo, 5000kW","furnace production, wood chips, with silo, 5000kW",CH,/unit,ecoinvent3.8 cut-off
 IND_COGEN_WOOD_TURBINE,Construction,"heat and power co-generation unit, organic Rankine cycle, 1000kW electrical","market for heat and power co-generation unit, organic Rankine cycle, 1000kW electrical",GLO,/unit,ecoinvent3.8 cut-off
-IND_DIRECT_ELEC,Operation,"electricity, high voltage","market for electricity, high voltage",CH,/kWh,ecoinvent3.8 cut-off
 IND_DIRECT_ELEC,Construction,"auxiliary heating unit, electric, 5kW","auxiliary heating unit production, electric, 5kW",RoW,/unit,ecoinvent3.8 cut-off
+IND_DIRECT_ELEC,Operation,"electricity, high voltage","market for electricity, high voltage",CH,/kWh,ecoinvent3.8 cut-off
 IND_HP_ELEC,Operation,"heat, air-water heat pump 10kW","heat production, air-water heat pump 10kW",RoW,/MJ,ecoinvent3.8 cut-off
 IND_HP_ELEC,Construction,"heat pump, brine-water, 10kW","heat pump production, brine-water, 10kW",RoW,/unit,ecoinvent3.8 cut-off
 LP_H2_GRID,Construction,"pipeline, for hydrogen distribution","distribution pipeline for hydrogen, dedicated hydrogen pipeline",RER,/km,hydrogen-distribution
@@ -281,12 +281,12 @@ METATHESIS_PROPYLENE,Construction,"chemical factory, organics","chemical factory
 METATHESIS_PROPYLENE,Operation,propylene,propylene production,RoW,/kg,ecoinvent3.8 cut-off
 METHANATION,Operation,"methane, from electrochemical methanation","methane, from electrochemical methanation, with carbon from municipal waste incineration plant",RER,/kg,syngas
 METHANATION,Construction,synthetic gas factory,synthetic gas factory construction,CH,/unit,ecoinvent3.8 cut-off
-METHANE_TO_METHANOL,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,/unit,ecoinvent3.8 cut-off
 METHANE_TO_METHANOL,Operation,methanol,methanol production,GLO,/kg,ecoinvent3.8 cut-off
+METHANE_TO_METHANOL,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,/unit,ecoinvent3.8 cut-off
 METHANOL_CARBONYLATION,Operation,"acetic acid, without water, in 98% solution state","acetic acid production, product in 98% solution state",RoW,/kg,ecoinvent3.8 cut-off
 METHANOL_CARBONYLATION,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,/unit,ecoinvent3.8 cut-off
-METHANOL_FT,Operation,"methanol, from biomass","methanol production, from synthetic gas",CH,/kg,ecoinvent3.8 cut-off
 METHANOL_FT,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,/unit,ecoinvent3.8 cut-off
+METHANOL_FT,Operation,"methanol, from biomass","methanol production, from synthetic gas",CH,/kg,ecoinvent3.8 cut-off
 METHANOL_TO_AROMATICS,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,/unit,ecoinvent3.8 cut-off
 METHANOL_TO_AROMATICS,Operation,xylene,xylene production,RER,/kg,ecoinvent3.8 cut-off
 METHANOL_TO_OLEFINS,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,/unit,ecoinvent3.8 cut-off
@@ -296,8 +296,8 @@ MP_NG_GRID,Construction,"pipeline, natural gas, low pressure distribution networ
 MV_GRID,Construction,"distribution network, electricity, low voltage","distribution network construction, electricity, low voltage",RoW,/km,ecoinvent3.8 cut-off
 NEW_HYDRO_DAM,Operation,"electricity, high voltage","electricity production, hydro, reservoir, alpine region",RoW,/kWh,ecoinvent3.8 cut-off
 NEW_HYDRO_DAM,Construction,"hydropower plant, reservoir, alpine region","hydropower plant construction, reservoir, alpine region",RoW,/unit,ecoinvent3.8 cut-off
-NEW_HYDRO_RIVER,Operation,"electricity, high voltage","electricity production, hydro, run-of-river",RoW,/kWh,ecoinvent3.8 cut-off
 NEW_HYDRO_RIVER,Construction,"hydropower plant, run-of-river","hydropower plant construction, run-of-river",RoW,/unit,ecoinvent3.8 cut-off
+NEW_HYDRO_RIVER,Operation,"electricity, high voltage","electricity production, hydro, run-of-river",RoW,/kWh,ecoinvent3.8 cut-off
 NG_COMP_HE,Construction,"air compressor, screw-type compressor, 300kW","air compressor production, screw-type compressor, 300kW",RoW,/unit,ecoinvent3.8 cut-off
 NG_COMP_HE,Operation,"natural gas, high pressure","market for natural gas, high pressure",CH,/m3,ecoinvent3.8 cut-off
 NG_COMP_LM,Construction,"air compressor, screw-type compressor, 4kW","air compressor production, screw-type compressor, 4kW",RoW,/unit,ecoinvent3.8 cut-off
@@ -308,8 +308,8 @@ NG_EXP_EH,Operation,"natural gas, high pressure","market for natural gas, high p
 NG_EXP_EH_COGEN,Construction,"air input/output unit, heat and power co-generation unit, 160kW electrical","air input/output unit production, heat and power co-generation unit, 160kW electrical",RoW,/unit,ecoinvent3.8 cut-off
 NG_EXP_EH_COGEN,Operation,"natural gas, high pressure","market for natural gas, high pressure",CH,/m3,ecoinvent3.8 cut-off
 NG_EXP_HM,Operation,"natural gas, high pressure","market for natural gas, high pressure",CH,/m3,ecoinvent3.8 cut-off
-NG_EXP_HM_COGEN,Operation,"natural gas, high pressure","market for natural gas, high pressure",CH,/m3,ecoinvent3.8 cut-off
 NG_EXP_HM_COGEN,Construction,"air input/output unit, heat and power co-generation unit, 160kW electrical","air input/output unit production, heat and power co-generation unit, 160kW electrical",RoW,/unit,ecoinvent3.8 cut-off
+NG_EXP_HM_COGEN,Operation,"natural gas, high pressure","market for natural gas, high pressure",CH,/m3,ecoinvent3.8 cut-off
 NG_EXP_ML,Operation,"natural gas, medium pressure, vehicle grade","market for natural gas, medium pressure, vehicle grade",GLO,/m3,ecoinvent3.8 cut-off
 NG_EXP_ML_COGEN,Construction,"air input/output unit, heat and power co-generation unit, 160kW electrical","air input/output unit production, heat and power co-generation unit, 160kW electrical",RoW,/unit,ecoinvent3.8 cut-off
 NG_EXP_ML_COGEN,Operation,"natural gas, medium pressure, vehicle grade","market for natural gas, medium pressure, vehicle grade",GLO,/m3,ecoinvent3.8 cut-off
@@ -321,8 +321,8 @@ NUCLEAR,Construction,"nuclear power plant, pressure water reactor, 1000MW","nucl
 NUCLEAR,Operation,"electricity, high voltage","electricity production, nuclear, pressure water reactor",RoW,/kWh,ecoinvent3.8 cut-off
 PAPER_MAKING,Operation,"paper, newsprint","paper production, newsprint, recycled",RoW,/kg,ecoinvent3.8 cut-off
 PAPER_MAKING,Construction,"paper mill, integrated","paper mill construction, integrated",RoW,/unit,ecoinvent3.8 cut-off
-PAPER_MAKING_HP,Construction,"paper mill, integrated","paper mill construction, integrated",RoW,/unit,ecoinvent3.8 cut-off
 PAPER_MAKING_HP,Operation,"paper, newsprint","paper production, newsprint, recycled",RoW,/kg,ecoinvent3.8 cut-off
+PAPER_MAKING_HP,Construction,"paper mill, integrated","paper mill construction, integrated",RoW,/unit,ecoinvent3.8 cut-off
 PAPER_MAKING_HR,Operation,"paper, newsprint","paper production, newsprint, recycled",RoW,/kg,ecoinvent3.8 cut-off
 PAPER_MAKING_HR,Construction,"paper mill, integrated","paper mill construction, integrated",RoW,/unit,ecoinvent3.8 cut-off
 PEM_ELECTROLYSIS,Operation,"hydrogen, gaseous, 30 bar","hydrogen production, gaseous, 30 bar, from PEM electrolysis, from grid electricity",RER,/kg,h2_electrolysis
@@ -332,18 +332,18 @@ PEM_ELECTROLYSIS_STACK,Construction,"electrolyzer, 1MWe, PEM, Stack","electrolyz
 PEM_ELECTROLYSIS_STACK_DECOM,Construction,"used fuel cell stack, 1MWe, PEM","treatment of fuel cell stack, 1MWe, PEM",RER,/unit,h2_electrolysis
 PET_FORMATION,Operation,"polyethylene, linear low density, granulate","polyethylene production, linear low density, granulate",RoW,/kg,ecoinvent3.8 cut-off
 PET_FORMATION,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,/unit,ecoinvent3.8 cut-off
-POLYPROPYLENE_PP,Operation,"polypropylene, granulate","polypropylene production, granulate",RoW,/kg,ecoinvent3.8 cut-off
 POLYPROPYLENE_PP,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,/unit,ecoinvent3.8 cut-off
-PV,Construction,"photovoltaic slanted-roof installation, 1.3 MWp, multi-Si, panel, mounted, on roof","photovoltaic slanted-roof installation, 1.3 MWp, multi-Si, panel, mounted, on roof",CH,/unit,PV
+POLYPROPYLENE_PP,Operation,"polypropylene, granulate","polypropylene production, granulate",RoW,/kg,ecoinvent3.8 cut-off
 PV,Operation,"electricity production, photovoltaic, at 1.3 MWp slanted-roof, multi-Si, panel, mounted","electricity production, photovoltaic, at 1.3 MWp slanted-roof, multi-Si, panel, mounted",CH,/kWh,PV
+PV,Construction,"photovoltaic slanted-roof installation, 1.3 MWp, multi-Si, panel, mounted, on roof","photovoltaic slanted-roof installation, 1.3 MWp, multi-Si, panel, mounted, on roof",CH,/unit,PV
 PVC_FORMATION,Operation,"polyvinylchloride, bulk polymerised","polyvinylchloride production, bulk polymerisation",RoW,/kg,ecoinvent3.8 cut-off
 PVC_FORMATION,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,/unit,ecoinvent3.8 cut-off
 PV_EHV,Operation,"electricity production, photovoltaic, at 560 kWp open ground, single-Si","electricity production, photovoltaic, at 560 kWp open ground, single-Si",CH,/kWh,PV
 PV_EHV,Construction,"photovoltaic open ground installation, 560 kWp, single-Si, on open ground","photovoltaic open ground installation, 560 kWp, single-Si, on open ground",CH,/unit,PV
 PYROLYSIS,Operation,light fuel oil,"light fuel oil production, from waste polyethylene",CH,/kg,ecoinvent3.8 cut-off
 PYROLYSIS,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,/unit,ecoinvent3.8 cut-off
-SMART_PROCESS,Operation,styrene,styrene production,RoW,/kg,ecoinvent3.8 cut-off
 SMART_PROCESS,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,/unit,ecoinvent3.8 cut-off
+SMART_PROCESS,Operation,styrene,styrene production,RoW,/kg,ecoinvent3.8 cut-off
 SNG_NG,Operation,biogas,market for biogas,RoW,/m3,ecoinvent3.8 cut-off
 SOEC_ELECTROLYSIS,Operation,"hydrogen, gaseous, 1 bar","hydrogen production, gaseous, 1 bar, from SOEC electrolysis, from grid electricity",CH,/kg,h2_electrolysis
 SOEC_ELECTROLYSIS_PLANT,Construction,"electrolyzer, 1MWe, SOEC, Balance of Plant","electrolyzer production, 1MWe, SOEC, Balance of Plant",RER,/unit,h2_electrolysis
@@ -356,8 +356,8 @@ STEEL_MAKING_HP,Construction,aluminium casting facility,aluminium casting facili
 STEEL_MAKING_HP,Operation,"steel, chromium steel 18/8","market for steel, chromium steel 18/8",GLO,/kg,ecoinvent3.8 cut-off
 STEEL_MAKING_HR,Operation,"steel, chromium steel 18/8","market for steel, chromium steel 18/8",GLO,/kg,ecoinvent3.8 cut-off
 STEEL_MAKING_HR,Construction,aluminium casting facility,aluminium casting facility construction,RoW,/unit,ecoinvent3.8 cut-off
-STYRENE_POLYMERIZATION,Operation,"polystyrene, expandable","polystyrene production, expandable",RoW,/kg,ecoinvent3.8 cut-off
 STYRENE_POLYMERIZATION,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,/unit,ecoinvent3.8 cut-off
+STYRENE_POLYMERIZATION,Operation,"polystyrene, expandable","polystyrene production, expandable",RoW,/kg,ecoinvent3.8 cut-off
 TRAFO_EH,Operation,"electricity, high voltage","market for electricity, high voltage",CH,/kWh,ecoinvent3.8 cut-off
 TRAFO_HE,Operation,"electricity, high voltage","market for electricity, high voltage",CH,/kWh,ecoinvent3.8 cut-off
 TRAFO_HM,Operation,"electricity, high voltage","market for electricity, high voltage",CH,/kWh,ecoinvent3.8 cut-off
@@ -400,7 +400,6 @@ WOOD_METHANOL,Construction,"chemical factory, organics","chemical factory constr
 WOOD_METHANOL,Operation,"methanol, unpurified","methanol synthesis, from wood, with CCS",RER,/kg,Methanol-based fuels from wood
 ACETIC_ACID,Resource,"acetic acid, without water, in 98% solution state","market for acetic acid, without water, in 98% solution state",GLO,/kg,ecoinvent3.8 cut-off
 ACETONE,Resource,"acetone, liquid","market for acetone, liquid",RoW,/kg,ecoinvent3.8 cut-off
-BIO_DIESEL,Resource,"biodiesel, vehicle grade","Biodiesel, from used cooking oil, at fuelling station",RER,/kg,biofuels
 BENZENE,Resource,benzene,market for benzene,GLO,/kg,ecoinvent3.8 cut-off
 COAL,Resource,hard coal,market for hard coal,RNA,/kg,ecoinvent3.8 cut-off
 DIESEL,Resource,"diesel, low-sulfur","market for diesel, low-sulfur",RoW,/kg,ecoinvent3.8 cut-off
@@ -429,7 +428,6 @@ PE,Resource,"polyethylene, high density, granulate","market for polyethylene, hi
 PET,Resource,"polyethylene terephthalate, granulate, amorphous","market for polyethylene terephthalate, granulate, amorphous",GLO,/kg,ecoinvent3.8 cut-off
 PHENOL,Resource,phenol,market for phenol,RoW,/kg,ecoinvent3.8 cut-off
 PP,Resource,"polypropylene, granulate","market for polypropylene, granulate",GLO,/kg,ecoinvent3.8 cut-off
-PROPANE,Resource,propane,market for propane,GLO,/kg,ecoinvent3.8 cut-off
 PROPYLENE,Resource,propylene,market for propylene,RoW,/kg,ecoinvent3.8 cut-off
 PS,Resource,"polystyrene, general purpose","market for polystyrene, general purpose",GLO,/kg,ecoinvent3.8 cut-off
 PVC,Resource,"polyvinylchloride, bulk polymerised","market for polyvinylchloride, bulk polymerised",GLO,/kg,ecoinvent3.8 cut-off
@@ -447,7 +445,6 @@ ACETIC_ACID,Flow,"acetic acid, without water, in 98% solution state","market for
 ACETONE,Flow,"acetone, liquid","market for acetone, liquid",RER,/kg,ecoinvent3.8 cut-off
 ALUMINUM,Flow,"aluminium, primary, ingot","market for aluminium, primary, ingot","IAI Area, EU27 & EFTA",/kg,ecoinvent3.8 cut-off
 BENZENE,Flow,benzene,market for benzene,GLO,/kg,ecoinvent3.8 cut-off
-BIO_DIESEL,Flow,"biodiesel, vehicle grade","Biodiesel, from used cooking oil, at fuelling station",RER,/kg,biofuels
 CEMENT,Flow,"cement, unspecified","market for cement, unspecified",CH,/kg,ecoinvent3.8 cut-off
 CO2_C,Flow,"carbon dioxide, liquid","market for carbon dioxide, liquid",RER,/kg,ecoinvent3.8 cut-off
 COAL,Flow,hard coal,market for hard coal,RoW,/kg,ecoinvent3.8 cut-off

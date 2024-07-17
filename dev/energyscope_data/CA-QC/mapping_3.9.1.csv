@@ -1,13 +1,6 @@
 Name,Type,Product,Activity,Location,Database
-AEC_OG,Operation,"hydrogen, gaseous, 20 bar","hydrogen production, gaseous, 20 bar, from AEC electrolysis, from grid electricity",CH,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
-AEC_OG_PLANT,Construction,"electrolyzer, 1MWe, AEC, Balance of Plant","electrolyzer production, 1MWe, AEC, Balance of Plant",RER,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
-AEC_OG_PLANT_DECOM,Construction,"used fuel cell balance of plant, 1MWe, AEC","treatment of fuel cell balance of plant, 1MWe, AEC",RER,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
-AEC_OG_STACK,Construction,"electrolyzer, 1MWe, AEC, Stack","electrolyzer production, 1MWe, AEC, Stack",RER,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
-AEC_OG_STACK_DECOM,Construction,"used fuel cell stack, 1MWe, AEC","treatment of fuel cell stack, 1MWe, AEC",RER,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
 AFC,Construction,"fuel cell system, 1 kWe, proton exchange membrane (PEM)","fuel cell system assembly, 1 kWe, proton exchange membrane (PEM)",GLO,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
 AFC,Operation,"electricity, from residential heating system","electricity, residential, by conversion of hydrogen using fuel cell, PEM, allocated by exergy, distributed by pipeline, produced by Electrolysis, PEM using electricity from grid",CH,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
-AFC_OG,Construction,"fuel cell system, 1 kWe, proton exchange membrane (PEM)","fuel cell system assembly, 1 kWe, proton exchange membrane (PEM)",GLO,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
-AFC_OG,Operation,"electricity, from residential heating system","electricity, residential, by conversion of hydrogen using fuel cell, PEM, allocated by exergy, distributed by pipeline, produced by Electrolysis, PEM using electricity from grid",CH,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
 ALKALINE_ELECTROLYSIS,Operation,"hydrogen, gaseous, 20 bar","hydrogen production, gaseous, 20 bar, from AEC electrolysis, from grid electricity",CH,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
 ALKALINE_ELECTROLYSIS_PLANT,Construction,"electrolyzer, 1MWe, AEC, Balance of Plant","electrolyzer production, 1MWe, AEC, Balance of Plant",RER,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
 ALKALINE_ELECTROLYSIS_PLANT_DECOM,Construction,"used fuel cell balance of plant, 1MWe, AEC","treatment of fuel cell balance of plant, 1MWe, AEC",RER,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
@@ -341,8 +334,6 @@ DIE_STO,Construction,"liquid storage tank, chemicals, organics","liquid storage 
 DIRECT_USAGE,Operation,"carbon dioxide, stored","carbon dioxide compression, transport and storage",CAZ,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
 DOGR,Operation,"carbon dioxide, stored","carbon dioxide compression, transport and storage",CAZ,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
 EHP_H2_GRID,Construction,"pipeline, for hydrogen transmission","pipeline, hydrogen, high pressure transmission network",RER,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
-EHP_H2_GRID,Operation,"transport, pipeline, long distance, natural gas","transport, pipeline, long distance, natural gas",RoW,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
-EHP_NG_GRID,Operation,"transport, pipeline, long distance, natural gas","transport, pipeline, long distance, natural gas",RoW,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
 EHP_NG_GRID,Construction,"pipeline, natural gas, high pressure distribution network","pipeline construction, natural gas, high pressure distribution network",RoW,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
 EHV_GRID,Construction,"transmission network, electricity, high voltage","transmission network construction, electricity, high voltage",CA-QC,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
 ELEC_STO,Construction,"battery, Li-ion, LiMn2O4, rechargeable, prismatic","market for battery, Li-ion, LiMn2O4, rechargeable, prismatic",GLO,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
@@ -376,14 +367,6 @@ GEOTHERMAL,Operation,"electricity, high voltage","electricity production, deep g
 GEOTHERMAL,Construction,"geothermal power plant, 5.5MWel",geothermal power plant construction,RoW,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
 H2_CCGT,Operation,"electricity, high voltage","electricity production, from hydrogen-fired one gigawatt gas turbine",CAZ,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
 H2_CCGT,Construction,"gas power plant, combined cycle, 400MW electrical","gas power plant construction, combined cycle, 400MW electrical",RoW,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
-H2_COMP_100,Operation,"hydrogen, gaseous","market for hydrogen, gaseous",CAZ,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
-H2_COMP_100,Construction,"compressor, for hydrogen transmission",compressor assembly for transmission hydrogen pipeline,RER,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
-H2_COMP_100_350,Operation,"hydrogen, gaseous","market for hydrogen, gaseous",CAZ,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
-H2_COMP_100_350,Construction,"compressor, for hydrogen transmission",compressor assembly for transmission hydrogen pipeline,RER,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
-H2_COMP_200,Operation,"hydrogen, gaseous","market for hydrogen, gaseous",CAZ,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
-H2_COMP_200,Construction,"compressor, for hydrogen transmission",compressor assembly for transmission hydrogen pipeline,RER,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
-H2_COMP_200_350,Operation,"hydrogen, gaseous","market for hydrogen, gaseous",CAZ,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
-H2_COMP_200_350,Construction,"compressor, for hydrogen transmission",compressor assembly for transmission hydrogen pipeline,RER,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
 H2_COMP_HE,Operation,"hydrogen, gaseous","market for hydrogen, gaseous",CAZ,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
 H2_COMP_HE,Construction,"compressor, for hydrogen transmission",compressor assembly for transmission hydrogen pipeline,RER,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
 H2_COMP_LM,Operation,"hydrogen, gaseous","market for hydrogen, gaseous",CAZ,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
@@ -406,9 +389,7 @@ H2_NG_CCGT,Construction,"NGCC power plant, 400MWe","market for gas power plant, 
 H2_STO,Operation,hydrogen storage,geological hydrogen storage,CAZ,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
 H2_STO,Construction,"liquid storage tank, chemicals, organics","liquid storage tank production, chemicals, organics",RoW,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
 HP_H2_GRID,Construction,"pipeline, for hydrogen transmission","pipeline, hydrogen, high pressure transmission network",RER,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
-HP_H2_GRID,Operation,"transport, pipeline, long distance, natural gas","transport, pipeline, long distance, natural gas",RoW,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
 HP_NG_GRID,Construction,"pipeline, natural gas, high pressure distribution network","pipeline construction, natural gas, high pressure distribution network",RoW,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
-HP_NG_GRID,Operation,"transport, pipeline, long distance, natural gas","transport, pipeline, long distance, natural gas",RoW,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
 HT_LT_DEC,Operation,"heat, district or industrial, other than natural gas","market for heat, district or industrial, other than natural gas",CA-QC,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
 HV_GRID,Construction,"transmission network, electricity, high voltage","transmission network construction, electricity, high voltage",CA-QC,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
 HYDRO_DAM,Construction,"hydropower plant, reservoir","hydropower plant construction, reservoir",CA-QC,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
@@ -497,8 +478,6 @@ LCV_PROPANE_MD,Construction,"truck, Euro-6","truck, compressed gas, 3.5t, 2020, 
 LCV_PROPANE_SD,Operation,"transport, truck, Euro-6","transport, truck, compressed gas, 3.5t, 2020, Euro-6, urban delivery",CH,urban delivery_truck
 LCV_PROPANE_SD,Construction,"truck, Euro-6","truck, compressed gas, 3.5t, 2020, Euro-6, urban delivery",CH,urban delivery_truck
 LP_H2_GRID,Construction,"pipeline, for hydrogen distribution","pipeline, hydrogen, low pressure distribution network",RER,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
-LP_H2_GRID,Operation,"transport, pipeline, long distance, natural gas","transport, pipeline, long distance, natural gas",RoW,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
-LP_NG_GRID,Operation,"transport, pipeline, long distance, natural gas","transport, pipeline, long distance, natural gas",RoW,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
 LP_NG_GRID,Construction,"pipeline, natural gas, low pressure distribution network","pipeline construction, natural gas, low pressure distribution network",RoW,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
 LV_GRID,Construction,"distribution network, electricity, low voltage","distribution network construction, electricity, low voltage",CA-QC,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
 METATHESIS_PROPYLENE,Operation,propylene,propylene production,RoW,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
@@ -517,9 +496,7 @@ METHANOL_TO_OLEFINS,Construction,"chemical factory, organics","chemical factory 
 METHANOL_TO_OLEFINS,Operation,n-olefins,n-olefins production,RoW,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
 MINES_STORAGE,Operation,"carbon dioxide, stored","carbon dioxide compression, transport and storage",CAZ,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
 MP_H2_GRID,Construction,"pipeline, for hydrogen distribution","pipeline, hydrogen, low pressure distribution network",RER,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
-MP_H2_GRID,Operation,"transport, pipeline, long distance, natural gas","transport, pipeline, long distance, natural gas",RoW,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
 MP_NG_GRID,Construction,"pipeline, natural gas, low pressure distribution network","pipeline construction, natural gas, low pressure distribution network",RoW,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
-MP_NG_GRID,Operation,"transport, pipeline, long distance, natural gas","transport, pipeline, long distance, natural gas",RoW,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
 MV_GRID,Construction,"distribution network, electricity, low voltage","distribution network construction, electricity, low voltage",CA-QC,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
 NEW_HYDRO_DAM,Operation,"electricity, high voltage","electricity production, hydro, reservoir, non-alpine region",CA-QC,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
 NEW_HYDRO_DAM,Construction,"hydropower plant, reservoir","hydropower plant construction, reservoir",CA-QC,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
@@ -559,21 +536,13 @@ OCGT_SMALL,Operation,"natural gas, burned in gas turbine","natural gas, burned i
 OCGT_SMALL,Construction,"gas turbine, 10MW electrical","market for gas turbine, 10MW electrical",GLO,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
 PAFC,Construction,"fuel cell system, 1 kWe, proton exchange membrane (PEM)","fuel cell system assembly, 1 kWe, proton exchange membrane (PEM)",GLO,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
 PAFC,Operation,"electricity, from residential heating system","electricity, residential, by conversion of hydrogen using fuel cell, PEM, allocated by exergy, distributed by pipeline, produced by Electrolysis, PEM using electricity from grid",CH,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
-PAFC_OG,Construction,"fuel cell system, 1 kWe, proton exchange membrane (PEM)","fuel cell system assembly, 1 kWe, proton exchange membrane (PEM)",GLO,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
-PAFC_OG,Operation,"electricity, from residential heating system","electricity, residential, by conversion of hydrogen using fuel cell, PEM, allocated by exergy, distributed by pipeline, produced by Electrolysis, PEM using electricity from grid",CH,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
 PAPER_MAKING,Operation,"paper, newsprint","paper production, newsprint, recycled",RoW,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
 PAPER_MAKING,Construction,"paper mill, integrated","paper mill construction, integrated",RoW,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
 PAPER_MAKING_HP,Operation,"paper, newsprint","paper production, newsprint, recycled",RoW,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
 PAPER_MAKING_HP,Construction,"paper mill, integrated","paper mill construction, integrated",RoW,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
 PAPER_MAKING_HR,Operation,"paper, newsprint","paper production, newsprint, recycled",RoW,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
 PAPER_MAKING_HR,Construction,"paper mill, integrated","paper mill construction, integrated",RoW,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
-PEMEC_OG,Operation,"hydrogen, gaseous, 30 bar","hydrogen production, gaseous, 30 bar, from PEM electrolysis, from grid electricity",CAZ,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
-PEMEC_OG_PLANT,Construction,"electrolyzer, 1MWe, PEM, Balance of Plant","electrolyzer production, 1MWe, PEM, Balance of Plant",RER,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
-PEMEC_OG_PLANT_DECOM,Construction,"used fuel cell balance of plant, 1MWe, PEM","treatment of fuel cell balance of plant, 1MWe, PEM",RER,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
-PEMEC_OG_STACK,Construction,"electrolyzer, 1MWe, PEM, Stack","electrolyzer production, 1MWe, PEM, Stack",RER,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
-PEMEC_OG_STACK_DECOM,Construction,"used fuel cell stack, 1MWe, PEM","treatment of fuel cell stack, 1MWe, PEM",RER,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
 PEMFC,Construction,"fuel cell system, 1 kWe, proton exchange membrane (PEM)","fuel cell system assembly, 1 kWe, proton exchange membrane (PEM)",GLO,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
-PEMFC_OG,Construction,"fuel cell system, 1 kWe, proton exchange membrane (PEM)","fuel cell system assembly, 1 kWe, proton exchange membrane (PEM)",GLO,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
 PEM_ELECTROLYSIS,Operation,"hydrogen, gaseous, 30 bar","hydrogen production, gaseous, 30 bar, from PEM electrolysis, from grid electricity",CAZ,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
 PEM_ELECTROLYSIS_PLANT,Construction,"electrolyzer, 1MWe, PEM, Balance of Plant","electrolyzer production, 1MWe, PEM, Balance of Plant",RER,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
 PEM_ELECTROLYSIS_PLANT_DECOM,Construction,"used fuel cell balance of plant, 1MWe, PEM","treatment of fuel cell balance of plant, 1MWe, PEM",RER,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
@@ -685,15 +654,8 @@ SOEC_ELECTROLYSIS_PLANT,Construction,"electrolyzer, 1MWe, SOEC, Balance of Plant
 SOEC_ELECTROLYSIS_PLANT_DECOM,Construction,"used fuel cell balance of plant, 1MWe, SOEC","treatment of fuel cell balance of plant, 1MWe, SOEC",RER,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
 SOEC_ELECTROLYSIS_STACK,Construction,"electrolyzer, 1MWe, SOEC, Stack","electrolyzer production, 1MWe, SOEC, Stack",RER,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
 SOEC_ELECTROLYSIS_STACK_DECOM,Construction,"used fuel cell stack, 1MWe, SOEC","treatment of fuel cell stack, 1MWe, SOEC",RER,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
-SOEC_OG,Operation,"hydrogen, gaseous, 1 bar","hydrogen production, gaseous, 1 bar, from SOEC electrolysis, from grid electricity",CH,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
-SOEC_OG_PLANT,Construction,"electrolyzer, 1MWe, SOEC, Balance of Plant","electrolyzer production, 1MWe, SOEC, Balance of Plant",RER,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
-SOEC_OG_PLANT_DECOM,Construction,"used fuel cell balance of plant, 1MWe, SOEC","treatment of fuel cell balance of plant, 1MWe, SOEC",RER,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
-SOEC_OG_STACK,Construction,"electrolyzer, 1MWe, SOEC, Stack","electrolyzer production, 1MWe, SOEC, Stack",RER,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
-SOEC_OG_STACK_DECOM,Construction,"used fuel cell stack, 1MWe, SOEC","treatment of fuel cell stack, 1MWe, SOEC",RER,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
 SOFC,Construction,"fuel cell system, 1 kWe, proton exchange membrane (PEM)","fuel cell system assembly, 1 kWe, proton exchange membrane (PEM)",GLO,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
 SOFC,Operation,"electricity, from residential heating system","electricity, residential, by conversion of hydrogen using fuel cell, PEM, allocated by exergy, distributed by pipeline, produced by Electrolysis, PEM using electricity from grid",CH,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
-SOFC_OG,Construction,"fuel cell system, 1 kWe, proton exchange membrane (PEM)","fuel cell system assembly, 1 kWe, proton exchange membrane (PEM)",GLO,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
-SOFC_OG,Operation,"electricity, from residential heating system","electricity, residential, by conversion of hydrogen using fuel cell, PEM, allocated by exergy, distributed by pipeline, produced by Electrolysis, PEM using electricity from grid",CH,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
 STEEL_MAKING,Operation,"steel, chromium steel 18/8","market for steel, chromium steel 18/8",CAZ,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
 STEEL_MAKING,Construction,aluminium casting facility,aluminium casting facility construction,RoW,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC
 STEEL_MAKING_HP,Construction,aluminium casting facility,aluminium casting facility construction,RoW,ecoinvent_cutoff_3.9.1_remind_SSP2-Base_2020_with_CPC

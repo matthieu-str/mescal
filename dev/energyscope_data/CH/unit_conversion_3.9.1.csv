@@ -1,483 +1,481 @@
-Name,Type,LCA,ESM,Value
-ACETIC_ACID,Resource,kilogram,kilowatt hour,0.2474226804
-ACETONE,Resource,kilogram,kilowatt hour,0.1216545012
-ALKALINE_ELECTROLYSIS,Construction,unit,kilowatt,0.001555555556
-ALKALINE_ELECTROLYSIS,Operation,kilogram,kilowatt hour,0.03003003003
-ALKALINE_ELECTROLYSIS_PLANT,Construction,unit,unit,1.0
-ALKALINE_ELECTROLYSIS_PLANT_DECOM,Construction,unit,unit,-1.0
-ALKALINE_ELECTROLYSIS_STACK,Construction,unit,unit,1.0
-ALKALINE_ELECTROLYSIS_STACK_DECOM,Construction,unit,unit,-1.0
-AL_MAKING,Construction,unit,kilogram per hour,5.727692308e-05
-AL_MAKING,Operation,kilogram,kilogram,1.0
-AL_MAKING_HR,Construction,unit,kilogram per hour,5.727692308e-05
-AL_MAKING_HR,Operation,kilogram,kilogram,1.0
-AN_DIG,Construction,unit,kilowatt,0.001096172924
-AN_DIG,Operation,cubic meter,kilowatt hour,0.1004782766
-AN_DIG_SI,Construction,unit,kilowatt,1e-06
-AN_DIG_SI,Operation,cubic meter,kilowatt hour,0.2511956915
-AN_DIG_SI_COGEN,Construction,unit,unit,6250.0
-AN_DIG_SI_PLANT,Construction,unit,unit,2528.974649
-BATTERY,Construction,kilogram,kilowatt hour,8.771929824999999
-BENZENE,Resource,kilogram,kilowatt hour,0.08470588235
-BIOMASS_ETHANOL,Construction,unit,kilowatt,1.128122192e-05
-BIOMASS_ETHANOL,Operation,kilogram,kilowatt hour,0.1347708895
-BIO_DIESEL,Resource,kilogram,kilowatt hour,0.09523809524
-BUS_CNG_STOICH,Construction,unit,person kilometer per hour,0.002779615385
-BUS_CNG_STOICH,Operation,person kilometer,person kilometer,1.0
-BUS_DIESEL,Construction,unit,person kilometer per hour,0.002779615385
-BUS_DIESEL,Operation,person kilometer,person kilometer,1.0
-BUS_EV,Construction,unit,person kilometer per hour,0.002779615385
-BUS_EV,Operation,person kilometer,person kilometer,1.0
-BUS_FC_HYBRID_CH4,Construction,unit,person kilometer per hour,0.002779615385
-BUS_FC_HYBRID_CH4,Operation,person kilometer,person kilometer,1.0
-BUS_FC_HYBRID_H2,Construction,unit,person kilometer per hour,0.002779615385
-BUS_FC_HYBRID_H2,Operation,person kilometer,person kilometer,1.0
-BUS_HY_DIESEL,Construction,unit,person kilometer per hour,0.002779615385
-BUS_HY_DIESEL,Operation,person kilometer,person kilometer,1.0
-CAR_BEV_LOWRANGE,Construction,unit,person kilometer per hour,0.03918947368
-CAR_BEV_LOWRANGE,Operation,kilometer,person kilometer,0.6666666667
-CAR_BEV_MEDRANGE_LOCAL,Construction,unit,person kilometer per hour,0.03918947368
-CAR_BEV_MEDRANGE_LOCAL,Operation,kilometer,person kilometer,0.6666666667
-CAR_BEV_MEDRANGE_LONGD,Construction,unit,person kilometer per hour,0.03918947368
-CAR_BEV_MEDRANGE_LONGD,Operation,kilometer,person kilometer,0.6666666667
-CAR_DIESEL_LOCAL,Construction,unit,person kilometer per hour,0.03918947368
-CAR_DIESEL_LOCAL,Operation,kilometer,person kilometer,0.6666666667
-CAR_DIESEL_LONGD,Construction,unit,person kilometer per hour,0.03918947368
-CAR_DIESEL_LONGD,Operation,kilometer,person kilometer,0.6666666667
-CAR_DME_D10_LOCAL,Construction,unit,person kilometer per hour,0.03918947368
-CAR_DME_D10_LOCAL,Operation,kilometer,person kilometer,0.6666666667
-CAR_DME_D10_LONGD,Construction,unit,person kilometer per hour,0.03918947368
-CAR_DME_D10_LONGD,Operation,kilometer,person kilometer,0.6666666667
-CAR_ETOH_E10_LOCAL,Construction,unit,person kilometer per hour,0.03918947368
-CAR_ETOH_E10_LOCAL,Operation,kilometer,person kilometer,0.6666666667
-CAR_ETOH_E10_LONGD,Construction,unit,person kilometer per hour,0.03918947368
-CAR_ETOH_E10_LONGD,Operation,kilometer,person kilometer,0.6666666667
-CAR_ETOH_E85_LOCAL,Construction,unit,person kilometer per hour,0.03918947368
-CAR_ETOH_E85_LOCAL,Operation,kilometer,person kilometer,0.6666666667
-CAR_ETOH_E85_LONGD,Construction,unit,person kilometer per hour,0.03918947368
-CAR_ETOH_E85_LONGD,Operation,kilometer,person kilometer,0.6666666667
-CAR_FC_CH4_LOCAL,Construction,unit,person kilometer per hour,0.03918947368
-CAR_FC_CH4_LOCAL,Operation,kilometer,person kilometer,0.6666666667
-CAR_FC_CH4_LONGD,Construction,unit,person kilometer per hour,0.03918947368
-CAR_FC_CH4_LONGD,Operation,kilometer,person kilometer,0.6666666667
-CAR_FC_H2_LOCAL,Construction,unit,person kilometer per hour,0.03918947368
-CAR_FC_H2_LOCAL,Operation,kilometer,person kilometer,0.6666666667
-CAR_FC_H2_LONGD,Construction,unit,person kilometer per hour,0.03918947368
-CAR_FC_H2_LONGD,Operation,kilometer,person kilometer,0.6666666667
-CAR_GASOLINE_LOCAL,Construction,unit,person kilometer per hour,0.03918947368
-CAR_GASOLINE_LOCAL,Operation,kilometer,person kilometer,0.6666666667
-CAR_GASOLINE_LONGD,Construction,unit,person kilometer per hour,0.03918947368
-CAR_GASOLINE_LONGD,Operation,kilometer,person kilometer,0.6666666667
-CAR_HEV_LOCAL,Construction,unit,person kilometer per hour,0.03918947368
-CAR_HEV_LOCAL,Operation,kilometer,person kilometer,0.6666666667
-CAR_HEV_LONGD,Construction,unit,person kilometer per hour,0.03918947368
-CAR_HEV_LONGD,Operation,kilometer,person kilometer,0.6666666667
-CAR_MEOH_LOCAL,Construction,unit,person kilometer per hour,0.03918947368
-CAR_MEOH_LOCAL,Operation,kilometer,person kilometer,0.6666666667
-CAR_MEOH_LONGD,Construction,unit,person kilometer per hour,0.03918947368
-CAR_MEOH_LONGD,Operation,kilometer,person kilometer,0.6666666667
-CAR_NG_LOCAL,Construction,unit,person kilometer per hour,0.03918947368
-CAR_NG_LOCAL,Operation,kilometer,person kilometer,0.6666666667
-CAR_NG_LONGD,Construction,unit,person kilometer per hour,0.03918947368
-CAR_NG_LONGD,Operation,kilometer,person kilometer,0.6666666667
-CAR_PHEV_LOCAL,Construction,unit,person kilometer per hour,0.03918947368
-CAR_PHEV_LOCAL,Operation,kilometer,person kilometer,0.6666666667
-CAR_PHEV_LONGD,Construction,unit,person kilometer per hour,0.03918947368
-CAR_PHEV_LONGD,Operation,kilometer,person kilometer,0.6666666667
-CCGT,Construction,unit,kilowatt,2.5e-06
-CCGT,Operation,kilowatt hour,kilowatt hour,1.0
-CCGT_CC,Construction,unit,kilowatt,2.5e-06
-CCGT_CC,Operation,kilowatt hour,kilowatt hour,1.0
-CEMENT_PROD,Construction,unit,kilogram per hour,2.19e-05
-CEMENT_PROD,Operation,kilogram,kilogram,1.0
-CEMENT_PROD_HP,Construction,unit,kilogram per hour,2.19e-05
-CEMENT_PROD_HP,Operation,kilogram,kilogram,1.0
-CO2_METHANOL,Construction,unit,kilogram per hour,0.000150672
-CO2_METHANOL,Operation,kilogram,kilogram,1.0
-CO2_STO,Construction,unit,kilogram,7.554695998999999e-08
-CO2_TO_DIESEL,Construction,unit,kilowatt,1.4704857599999998e-07
-CO2_TO_DIESEL,Operation,kilogram,kilowatt hour,0.08453085376
-CO2_TO_JETFUELS,Construction,unit,kilowatt,1.900367872e-07
-CO2_TO_JETFUELS,Operation,kilogram,kilowatt hour,0.08372093023
-COACH_CNG_STOICH,Construction,unit,person kilometer per hour,0.00301125
-COACH_CNG_STOICH,Operation,person kilometer,person kilometer,1.0
-COACH_DIESEL,Construction,unit,person kilometer per hour,0.00301125
-COACH_DIESEL,Operation,person kilometer,person kilometer,1.0
-COACH_EV,Construction,unit,person kilometer per hour,0.00301125
-COACH_EV,Operation,person kilometer,person kilometer,1.0
-COACH_FC_HYBRID_CH4,Construction,unit,person kilometer per hour,0.00301125
-COACH_FC_HYBRID_CH4,Operation,person kilometer,person kilometer,1.0
-COACH_FC_HYBRID_H2,Construction,unit,person kilometer per hour,0.00301125
-COACH_FC_HYBRID_H2,Operation,person kilometer,person kilometer,1.0
-COACH_HY_DIESEL,Construction,unit,person kilometer per hour,0.00301125
-COACH_HY_DIESEL,Operation,person kilometer,person kilometer,1.0
-COAL,Resource,kilogram,kilowatt hour,0.1289860265
-COAL_IGCC,Construction,unit,kilowatt,2.222222222e-06
-COAL_IGCC,Operation,kilowatt hour,kilowatt hour,1.0
-COAL_IGCC_CC,Construction,unit,kilowatt,2.222222222e-06
-COAL_IGCC_CC,Operation,kilowatt hour,kilowatt hour,1.0
-COAL_US,Construction,unit,kilowatt,2.631578947e-06
-COAL_US,Operation,kilowatt hour,kilowatt hour,1.0
-COAL_US_CC,Construction,unit,kilowatt,2.631578947e-06
-COAL_US_CC,Operation,kilowatt hour,kilowatt hour,1.0
-COMMUTER_RAIL_DIESEL,Construction,unit,person kilometer per hour,0.000438
-COMMUTER_RAIL_DIESEL,Operation,person kilometer,person kilometer,1.0
-COMMUTER_RAIL_ELEC,Construction,unit,person kilometer per hour,0.000438
-COMMUTER_RAIL_ELEC,Operation,person kilometer,person kilometer,1.0
-CROPS_TO_ETHANOL,Construction,unit,kilowatt,1.128122192e-05
-CROPS_TO_ETHANOL,Operation,kilogram,kilowatt hour,0.1347708895
-CROPS_TO_JETFUELS,Construction,unit,kilowatt,2.571194326e-05
-CROPS_TO_JETFUELS,Operation,kilogram,kilowatt hour,0.08372093023
-CUMENE_PROCESS,Construction,unit,kilowatt,1.316008443e-05
-CUMENE_PROCESS,Operation,kilogram,kilowatt hour,0.08734260135
-DAC_HT,Construction,unit,kilogram per hour,7.445999999999999e-05
-DAC_HT,Operation,kilogram,kilogram,1.0
-DAC_HT_PLANT,Construction,unit,unit,1.0
-DAC_HT_PLANT_DECOM,Construction,unit,unit,-1.0
-DAC_LT,Construction,unit,kilogram per hour,7.445999999999999e-06
-DAC_LT,Operation,kilogram,kilogram,1.0
-DAC_LT_PLANT,Construction,unit,unit,1.0
-DAC_LT_PLANT_DECOM,Construction,unit,unit,-1.0
-DEC_ADVCOGEN_H2,Construction,unit,kilowatt,0.5
-DEC_BOILER_GAS,Construction,unit,kilowatt,0.1
-DEC_BOILER_GAS,Operation,megajoule,kilowatt hour,3.6
-DEC_BOILER_OIL,Construction,unit,kilowatt,0.1
-DEC_BOILER_OIL,Operation,megajoule,kilowatt hour,3.6
-DEC_BOILER_OIL_BOILER,Construction,unit,unit,1.0
-DEC_BOILER_OIL_TANK,Construction,unit,unit,0.6666666667
-DEC_BOILER_WOOD,Construction,unit,kilowatt,0.02
-DEC_BOILER_WOOD,Operation,megajoule,kilowatt hour,3.6
-DEC_COGEN_GAS,Construction,unit,kilowatt,0.0192
-DEC_COGEN_GAS,Operation,megajoule,kilowatt hour,15.80333626
-DEC_COGEN_GAS_CHP,Construction,unit,unit,1.0
-DEC_COGEN_GAS_ELEC,Construction,unit,unit,1.0
-DEC_COGEN_GAS_HEAT,Construction,unit,unit,1.0
-DEC_COGEN_OIL,Construction,unit,kilowatt,0.00455
-DEC_COGEN_OIL,Operation,megajoule,kilowatt hour,3.6
-DEC_COGEN_OIL_BOILER,Construction,unit,unit,100.0
-DEC_COGEN_OIL_TANK,Construction,unit,unit,0.6666666667
-DEC_COGEN_OIL_TURBINE,Construction,unit,unit,1.0
-DEC_COGEN_WOOD,Construction,unit,kilowatt,0.0017
-DEC_COGEN_WOOD,Operation,megajoule,kilowatt hour,3.6
-DEC_COGEN_WOOD_BOILER,Construction,unit,unit,20.0
-DEC_COGEN_WOOD_TURBINE,Construction,unit,unit,1.0
-DEC_DEEP_GEO,Construction,unit,kilowatt,1.807525287e-05
-DEC_DEEP_GEO,Operation,megajoule,kilowatt hour,3.6
-DEC_DIRECT_ELEC,Construction,unit,kilowatt,0.2
-DEC_DIRECT_ELEC,Operation,kilowatt hour,kilowatt hour,1.0
-DEC_HP_ELEC,Construction,unit,kilowatt,0.1
-DEC_HP_ELEC,Operation,megajoule,kilowatt hour,3.6
-DEC_SOLAR,Construction,square meter,kilowatt,1.428571429
-DEC_THHP_GAS,Construction,unit,kilowatt,0.25
-DEC_THHP_GAS,Operation,megajoule,kilowatt hour,3.6
-DEC_THHP_GAS_HEX,Construction,unit,unit,0.106655574
-DEC_THHP_GAS_HP,Construction,unit,unit,1.0
-DEC_TH_STORAGE,Construction,unit,kilowatt,5e-05
-DHN_BOILER_GAS,Construction,unit,kilowatt,0.010417
-DHN_BOILER_GAS,Operation,megajoule,kilowatt hour,3.6
-DHN_BOILER_OIL,Construction,unit,kilowatt,0.0010525999999999
-DHN_BOILER_OIL,Operation,megajoule,kilowatt hour,3.6
-DHN_BOILER_OIL_BOILER,Construction,unit,unit,1.0
-DHN_BOILER_OIL_TANK,Construction,unit,unit,13.33321333
-DHN_BOILER_WOOD,Construction,unit,kilowatt,0.001
-DHN_BOILER_WOOD,Operation,megajoule,kilowatt hour,3.6
-DHN_BOILER_WOOD_BOILER,Construction,unit,unit,1.0
-DHN_BOILER_WOOD_DUST,Construction,unit,unit,1.0
-DHN_COGEN_GAS,Construction,unit,kilowatt,0.00125
-DHN_COGEN_GAS,Operation,megajoule,kilowatt hour,22.00488998
-DHN_COGEN_GAS_CHP,Construction,unit,unit,1.0
-DHN_COGEN_GAS_ELEC,Construction,unit,unit,1.0
-DHN_COGEN_GAS_HEAT,Construction,unit,unit,1.0
-DHN_COGEN_WASTE,Construction,unit,kilowatt,0.0022
-DHN_COGEN_WASTE,Operation,megajoule,kilowatt hour,3.6
-DHN_COGEN_WASTE_BOILER,Construction,unit,unit,0.04818496518
-DHN_COGEN_WASTE_TURBINE,Construction,unit,unit,1.0
-DHN_COGEN_WOOD,Construction,unit,kilowatt,0.0003333166675
-DHN_COGEN_WOOD,Operation,megajoule,kilowatt hour,10.6729914
-DHN_COGEN_WOOD_BOILER,Construction,unit,unit,1.0
-DHN_COGEN_WOOD_DUST,Construction,unit,unit,1.0
-DHN_COGEN_WOOD_TURBINE,Construction,unit,unit,1.0
-DHN_DEEP_GEO,Construction,unit,kilowatt,1.807525287e-05
-DHN_DEEP_GEO,Operation,megajoule,kilowatt hour,3.6
-DHN_HP_ELEC,Construction,unit,kilowatt,0.03333333333
-DHN_HP_ELEC,Operation,megajoule,kilowatt hour,3.6
-DHN_TH_STORAGE,Construction,unit,kilowatt,5e-05
-DIESEL,Resource,kilogram,kilowatt hour,0.08453085376
-DIE_STO,Construction,unit,kilowatt hour,6.244891679e-09
-DIRECT_USAGE,Operation,kilogram,kilogram,1.0
-DOGR,Operation,kilogram,kilogram,1.0
-EHP_H2_GRID,Construction,kilometer,kilowatt,1.387283237e-05
-EHP_NG_GRID,Construction,kilometer,kilowatt,3.517915309e-06
-EHV_GRID,Construction,kilometer,kilowatt,7.82e-05
-ELECTRICITY_EHV,Resource,kilowatt hour,kilowatt hour,1.0
-ELECTRICITY_HV,Resource,kilowatt hour,kilowatt hour,1.0
-ELECTRICITY_LV,Resource,kilowatt hour,kilowatt hour,1.0
-ELECTRICITY_MV,Resource,kilowatt hour,kilowatt hour,1.0
-ELEC_STO,Construction,kilogram,kilowatt hour,8.771929824999999
-EOR,Operation,kilogram,kilogram,1.0
-ETHANE,Resource,kilogram,kilowatt hour,0.07530120482
-ETHANE_CRACKING,Construction,unit,kilowatt,1.078689868e-05
-ETHANE_CRACKING,Operation,kilogram,kilowatt hour,0.07159192602
-ETHANE_OXIDATION,Construction,unit,kilowatt,3.72796701e-05
-ETHANE_OXIDATION,Operation,kilogram,kilowatt hour,0.2474226804
-ETHANE_TO_ETHYLENE,Construction,unit,kilowatt,1.078689868e-05
-ETHANE_TO_ETHYLENE,Operation,kilogram,kilowatt hour,0.07159192602
-ETHANOL,Resource,kilogram,kilowatt hour,0.1139962001
-ETHANOL_TO_JETFUELS,Construction,unit,kilowatt,1.26144e-05
-ETHANOL_TO_JETFUELS,Operation,kilogram,kilowatt hour,0.08372093023
-ETHYLBENZENE,Resource,kilogram,kilowatt hour,0.08793785725
-ETHYLENE,Resource,kilogram,kilowatt hour,0.07159192602
-ETHYLENE_POLYMERIZATION,Construction,unit,kilogram per hour,0.000150672
-ETHYLENE_POLYMERIZATION,Operation,kilogram,kilogram,1.0
-FOOD_PROD,Construction,unit,kilogram per hour,3.723e-05
-FOOD_PROD,Operation,kilogram,kilogram,1.0
-FOOD_PROD_HP,Construction,unit,kilogram per hour,3.723e-05
-FOOD_PROD_HP,Operation,kilogram,kilogram,1.0
-FOOD_PROD_HR,Construction,unit,kilogram per hour,3.723e-05
-FOOD_PROD_HR,Operation,kilogram,kilogram,1.0
-FT,Construction,unit,kilowatt,1.27364328e-05
-FT,Operation,kilogram,kilowatt hour,0.08453085376
-GASIFICATION_H2,Construction,unit,kilowatt,0.0002
-GASIFICATION_H2,Operation,kilogram,kilowatt hour,0.03003003003
-GASIFICATION_H2_PLANT,Construction,unit,unit,1.0
-GASIFICATION_H2_TANK,Construction,unit,unit,4.760896956
-GASIFICATION_SNG,Construction,unit,kilowatt,0.0002
-GASIFICATION_SNG,Operation,kilogram,kilowatt hour,0.1506276151
-GASIFICATION_SNG_PLANT,Construction,unit,unit,1.0
-GASIFICATION_SNG_TANK,Construction,unit,unit,4.760896956
-GASOLINE,Resource,kilogram,kilowatt hour,0.08470588235
-GASO_STO,Construction,unit,kilowatt hour,7.031779141e-09
-GEOTHERMAL,Construction,unit,kilowatt,0.0001818181817999
-GEOTHERMAL,Operation,kilowatt hour,kilowatt hour,1.0
-H2_COMP_HE,Construction,unit,kilowatt,3.610108303e-05
-H2_COMP_HE,Operation,kilogram,kilowatt hour,0.03003003003
-H2_COMP_LM,Construction,unit,kilowatt,3.610108303e-05
-H2_COMP_LM,Operation,kilogram,kilowatt hour,0.03003003003
-H2_COMP_MH,Construction,unit,kilowatt,3.610108303e-05
-H2_COMP_MH,Operation,kilogram,kilowatt hour,0.03003003003
-H2_EHP,Resource,kilogram,kilowatt hour,0.03003003003
-H2_EXP_EH,Operation,kilogram,kilowatt hour,0.03003003003
-H2_EXP_EH_COGEN,Construction,unit,kilowatt,0.00625
-H2_EXP_EH_COGEN,Operation,kilogram,kilowatt hour,0.03003003003
-H2_EXP_HM,Operation,kilogram,kilowatt hour,0.03003003003
-H2_EXP_HM_COGEN,Construction,unit,kilowatt,0.00625
-H2_EXP_HM_COGEN,Operation,kilogram,kilowatt hour,0.03003003003
-H2_EXP_ML,Operation,kilogram,kilowatt hour,0.03003003003
-H2_EXP_ML_COGEN,Construction,unit,kilowatt,0.00625
-H2_EXP_ML_COGEN,Operation,kilogram,kilowatt hour,0.03003003003
-H2_HP,Resource,kilogram,kilowatt hour,0.03003003003
-H2_LP,Resource,kilogram,kilowatt hour,0.03003003003
-H2_MP,Resource,kilogram,kilowatt hour,0.03003003003
-H2_STO,Construction,unit,kilowatt hour,2.085418752e-05
-H2_STO,Operation,kilogram,kilowatt hour,0.03003003003
-HP_H2_GRID,Construction,kilometer,kilowatt,5.202312139e-06
-HP_NG_GRID,Construction,kilometer,kilowatt,1.319218241e-06
-HT_LT_DEC,Operation,megajoule,kilowatt hour,3.6
-HV_GRID,Construction,kilometer,kilowatt,2.3e-05
-HYDRO_DAM,Construction,unit,kilowatt,1.095290252e-07
-HYDRO_DAM,Operation,kilowatt hour,kilowatt hour,1.0
-HYDRO_GAS,Construction,unit,kilowatt,0.0002
-HYDRO_GAS,Operation,kilogram,kilowatt hour,0.1506276151
-HYDRO_GAS_CHP,Construction,unit,kilowatt,0.005
-HYDRO_GAS_CHP,Operation,kilogram,kilowatt hour,0.3765690377
-HYDRO_GAS_CHP_PLANT,Construction,unit,unit,0.2
-HYDRO_GAS_CHP_TURBINE,Construction,unit,unit,1.0
-HYDRO_RIVER,Construction,unit,kilowatt,2.738207182e-07
-HYDRO_RIVER,Operation,kilowatt hour,kilowatt hour,1.0
-IND_BOILER_COAL,Construction,unit,kilowatt,0.001
-IND_BOILER_COAL,Operation,megajoule,kilowatt hour,3.6
-IND_BOILER_GAS,Construction,unit,kilowatt,0.01
-IND_BOILER_GAS,Operation,megajoule,kilowatt hour,3.6
-IND_BOILER_OIL,Construction,unit,kilowatt,0.001
-IND_BOILER_OIL,Operation,megajoule,kilowatt hour,3.6
-IND_BOILER_OIL_PLANT,Construction,unit,unit,1.0
-IND_BOILER_OIL_TANK,Construction,unit,unit,13.33321333
-IND_BOILER_WASTE,Construction,unit,kilowatt,2.802618364e-05
-IND_BOILER_WASTE,Operation,megajoule,kilowatt hour,3.6
-IND_BOILER_WOOD,Construction,unit,kilowatt,0.001
-IND_BOILER_WOOD,Operation,megajoule,kilowatt hour,3.6
-IND_COGEN_GAS,Construction,unit,kilowatt,0.000956
-IND_COGEN_GAS,Operation,megajoule,kilowatt hour,22.00488998
-IND_COGEN_GAS_CHP,Construction,unit,unit,1.0
-IND_COGEN_GAS_ELEC,Construction,unit,unit,1.0
-IND_COGEN_GAS_HEAT,Construction,unit,unit,1.0
-IND_COGEN_WASTE,Construction,unit,kilowatt,0.001
-IND_COGEN_WASTE,Operation,megajoule,kilowatt hour,3.6
-IND_COGEN_WASTE_PLANT,Construction,unit,unit,0.02646917344
-IND_COGEN_WASTE_TURBINE,Construction,unit,unit,1.0
-IND_COGEN_WOOD,Construction,unit,kilowatt,0.0003333166675
-IND_COGEN_WOOD,Operation,megajoule,kilowatt hour,10.6729914
-IND_COGEN_WOOD_DUST,Construction,unit,unit,1.0
-IND_COGEN_WOOD_PLANT,Construction,unit,unit,1.0
-IND_COGEN_WOOD_TURBINE,Construction,unit,unit,1.0
-IND_DIRECT_ELEC,Construction,unit,kilowatt,0.2
-IND_DIRECT_ELEC,Operation,kilowatt hour,kilowatt hour,1.0
-IND_HP_ELEC,Construction,unit,kilowatt,0.1
-IND_HP_ELEC,Operation,megajoule,kilowatt hour,3.6
-JETFUEL,Resource,kilogram,kilowatt hour,0.08372093023
-LFO,Resource,kilogram,kilowatt hour,0.08450704225
-LNG,Resource,cubic meter,kilowatt hour,0.09230769231
-LP_H2_GRID,Construction,kilometer,kilowatt,0.00055
-LP_NG_GRID,Construction,kilometer,kilowatt,0.0002588235294
-LV_GRID,Construction,kilometer,kilowatt,0.0002
-METATHESIS_PROPYLENE,Construction,unit,kilowatt,1.078689868e-05
-METATHESIS_PROPYLENE,Operation,kilogram,kilowatt hour,0.07159192602
-METHANATION,Construction,unit,kilowatt,0.0002
-METHANATION,Operation,kilogram,kilowatt hour,0.07633587786
-METHANE_TO_METHANOL,Construction,unit,kilowatt,2.719711191e-05
-METHANE_TO_METHANOL,Operation,kilogram,kilowatt hour,0.1805054152
-METHANOL,Resource,kilogram,kilowatt hour,0.1805054152
-METHANOL_CARBONYLATION,Construction,unit,kilowatt,3.72796701e-05
-METHANOL_CARBONYLATION,Operation,kilogram,kilowatt hour,0.2474226804
-METHANOL_FT,Construction,unit,kilowatt,2.719711191e-05
-METHANOL_FT,Operation,kilogram,kilowatt hour,0.1805054152
-METHANOL_TO_AROMATICS,Construction,unit,kilowatt,1.296629933e-05
-METHANOL_TO_AROMATICS,Operation,kilogram,kilowatt hour,0.0860564626
-METHANOL_TO_OLEFINS,Construction,unit,kilowatt,1.078689868e-05
-METHANOL_TO_OLEFINS,Operation,kilogram,kilowatt hour,0.07159192602
-MP_H2_GRID,Construction,kilometer,kilowatt,0.066
-MP_NG_GRID,Construction,kilometer,kilowatt,0.03105882353
-MV_GRID,Construction,kilometer,kilowatt,0.02
-NEW_HYDRO_DAM,Construction,unit,kilowatt,1.095290252e-07
-NEW_HYDRO_DAM,Operation,kilowatt hour,kilowatt hour,1.0
-NEW_HYDRO_RIVER,Construction,unit,kilowatt,2.738207182e-07
-NEW_HYDRO_RIVER,Operation,kilowatt hour,kilowatt hour,1.0
-NG_COMP_HE,Construction,unit,kilowatt,0.003333333333
-NG_COMP_HE,Operation,cubic meter,kilowatt hour,0.09230769231
-NG_COMP_LM,Construction,unit,kilowatt,0.25
-NG_COMP_LM,Operation,cubic meter,kilowatt hour,0.09230769231
-NG_COMP_MH,Construction,unit,kilowatt,0.003333333333
-NG_COMP_MH,Operation,cubic meter,kilowatt hour,0.07741935484
-NG_EHP,Resource,cubic meter,kilowatt hour,0.09230769231
-NG_EXP_EH,Operation,cubic meter,kilowatt hour,0.09230769231
-NG_EXP_EH_COGEN,Construction,unit,kilowatt,0.00625
-NG_EXP_EH_COGEN,Operation,cubic meter,kilowatt hour,0.09230769231
-NG_EXP_HM,Operation,cubic meter,kilowatt hour,0.09230769231
-NG_EXP_HM_COGEN,Construction,unit,kilowatt,0.00625
-NG_EXP_HM_COGEN,Operation,cubic meter,kilowatt hour,0.09230769231
-NG_EXP_ML,Operation,kilogram,kilowatt hour,0.07741935484
-NG_EXP_ML_COGEN,Construction,unit,kilowatt,0.00625
-NG_EXP_ML_COGEN,Operation,cubic meter,kilowatt hour,0.07741935484
-NG_HP,Resource,cubic meter,kilowatt hour,0.09824437305
-NG_LP,Resource,cubic meter,kilowatt hour,0.09824437305
-NG_MP,Resource,kilogram,kilowatt hour,0.07741935484
-NG_REFORMING,Construction,unit,kilowatt,4.524684685e-06
-NG_REFORMING,Operation,kilogram,kilowatt hour,0.03003003003
-NG_REFORMING_PLANT,Construction,unit,unit,1.0
-NG_REFORMING_TANK,Construction,unit,unit,4.760896956
-NG_STO,Construction,unit,kilowatt hour,6.140273316e-06
-NUCLEAR,Construction,unit,kilowatt,1e-06
-NUCLEAR,Operation,kilowatt hour,kilowatt hour,1.0
-PAPER_MAKING,Construction,unit,kilogram per hour,2.023369565e-05
-PAPER_MAKING,Operation,kilogram,kilogram,1.0
-PAPER_MAKING_HP,Construction,unit,kilogram per hour,2.023369565e-05
-PAPER_MAKING_HP,Operation,kilogram,kilogram,1.0
-PAPER_MAKING_HR,Construction,unit,kilogram per hour,2.023369565e-05
-PAPER_MAKING_HR,Operation,kilogram,kilogram,1.0
-PE,Resource,kilogram,kilogram,1.0
-PEM_ELECTROLYSIS,Construction,unit,kilowatt,0.0016216216219999
-PEM_ELECTROLYSIS,Operation,kilogram,kilowatt hour,0.03003003003
-PEM_ELECTROLYSIS_PLANT,Construction,unit,unit,1.0
-PEM_ELECTROLYSIS_PLANT_DECOM,Construction,unit,unit,-1.0
-PEM_ELECTROLYSIS_STACK,Construction,unit,unit,1.0
-PEM_ELECTROLYSIS_STACK_DECOM,Construction,unit,unit,-1.0
-PET,Resource,kilogram,kilogram,1.0
-PET_FORMATION,Construction,unit,kilogram per hour,0.000150672
-PET_FORMATION,Operation,kilogram,kilogram,1.0
-PHENOL,Resource,kilogram,kilowatt hour,0.1109399076
-POLYPROPYLENE_PP,Construction,unit,kilogram per hour,0.000150672
-POLYPROPYLENE_PP,Operation,kilogram,kilogram,1.0
-PP,Resource,kilogram,kilogram,1.0
-PROPANE,Resource,kilogram,kilowatt hour,0.0775862069
-PROPYLENE,Resource,kilogram,kilowatt hour,0.07860433634
-PS,Resource,kilogram,kilogram,1.0
-PV,Construction,unit,kilowatt,0.0007692307692
-PV,Operation,kilowatt hour,kilowatt hour,1.0
-PVC,Resource,kilogram,kilogram,1.0
-PVC_FORMATION,Construction,unit,kilogram per hour,0.000150672
-PVC_FORMATION,Operation,kilogram,kilogram,1.0
-PV_EHV,Construction,unit,kilowatt,0.0017857142859999
-PV_EHV,Operation,kilowatt hour,kilowatt hour,1.0
-PYROLYSIS,Construction,unit,kilowatt,1.320212766e-05
-PYROLYSIS,Operation,kilogram,kilowatt hour,0.08865248227
-SMART_PROCESS,Construction,unit,kilogram per hour,0.000150672
-SMART_PROCESS,Operation,kilogram,kilogram,1.0
-SNG,Resource,cubic meter,kilowatt hour,0.09824437305
-SNG_NG,Operation,cubic meter,kilowatt hour,0.09824437305
-SOEC_ELECTROLYSIS,Construction,unit,kilowatt,0.00127027027
-SOEC_ELECTROLYSIS,Operation,kilogram,kilowatt hour,0.03003003003
-SOEC_ELECTROLYSIS_PLANT,Construction,unit,unit,1.0
-SOEC_ELECTROLYSIS_PLANT_DECOM,Construction,unit,unit,-1.0
-SOEC_ELECTROLYSIS_STACK,Construction,unit,unit,1.0
-SOEC_ELECTROLYSIS_STACK_DECOM,Construction,unit,unit,-1.0
-STEEL_MAKING,Construction,unit,kilogram per hour,5.727692308e-05
-STEEL_MAKING,Operation,kilogram,kilogram,1.0
-STEEL_MAKING_HP,Construction,unit,kilogram per hour,5.727692308e-05
-STEEL_MAKING_HP,Operation,kilogram,kilogram,1.0
-STEEL_MAKING_HR,Construction,unit,kilogram per hour,5.727692308e-05
-STEEL_MAKING_HR,Operation,kilogram,kilogram,1.0
-STYRENE,Resource,kilogram,kilogram,1.0
-STYRENE_POLYMERIZATION,Construction,unit,kilogram per hour,0.000150672
-STYRENE_POLYMERIZATION,Operation,kilogram,kilogram,1.0
-TOLUENE,Resource,kilogram,kilowatt hour,0.08484562809
-TRAFO_EH,Operation,kilowatt hour,kilowatt hour,1.0
-TRAFO_HE,Operation,kilowatt hour,kilowatt hour,1.0
-TRAFO_HM,Operation,kilowatt hour,kilowatt hour,1.0
-TRAFO_LM,Operation,kilowatt hour,kilowatt hour,1.0
-TRAFO_MH,Operation,kilowatt hour,kilowatt hour,1.0
-TRAFO_ML,Operation,kilowatt hour,kilowatt hour,1.0
-TRAIN_DIESEL,Construction,unit,person kilometer per hour,1.404664723e-05
-TRAIN_DIESEL,Operation,person kilometer,person kilometer,1.0
-TRAIN_ELEC,Construction,unit,person kilometer per hour,1.404664723e-05
-TRAIN_ELEC,Operation,person kilometer,person kilometer,1.0
-TRAIN_FREIGHT,Construction,unit,ton kilometer per hour,2.400576923e-05
-TRAIN_FREIGHT,Operation,ton kilometer,ton kilometer,1.0
-TRAIN_FREIGHT_DIESEL,Construction,unit,ton kilometer per hour,2.400576923e-05
-TRAIN_FREIGHT_DIESEL,Operation,ton kilometer,ton kilometer,1.0
-TRAIN_FREIGHT_DIESEL_LOC,Construction,unit,unit,2.0
-TRAIN_FREIGHT_DIESEL_WAG,Construction,unit,unit,20.0
-TRAIN_FREIGHT_H2,Construction,unit,ton kilometer per hour,2.400576923e-05
-TRAIN_FREIGHT_H2,Operation,ton kilometer,ton kilometer,1.0
-TRAIN_FREIGHT_H2_LOC,Construction,unit,unit,2.0
-TRAIN_FREIGHT_H2_WAG,Construction,unit,unit,20.0
-TRAIN_FREIGHT_LOC,Construction,unit,unit,2.0
-TRAIN_FREIGHT_NG,Construction,unit,ton kilometer per hour,2.400576923e-05
-TRAIN_FREIGHT_NG,Operation,ton kilometer,ton kilometer,1.0
-TRAIN_FREIGHT_NG_LOC,Construction,unit,unit,2.0
-TRAIN_FREIGHT_NG_WAG,Construction,unit,unit,20.0
-TRAIN_FREIGHT_WAG,Construction,unit,unit,20.0
-TRAIN_H2,Construction,unit,person kilometer per hour,1.404664723e-05
-TRAIN_H2,Operation,person kilometer,person kilometer,1.0
-TRAIN_NG,Construction,unit,person kilometer per hour,1.404664723e-05
-TRAIN_NG,Operation,person kilometer,person kilometer,1.0
-TRAMWAY,Construction,unit,person kilometer per hour,0.003919309262
-TRAMWAY,Operation,person kilometer,person kilometer,1.0
-TRUCK,Construction,unit,ton kilometer per hour,0.001572336593
-TRUCK,Operation,ton kilometer,ton kilometer,1.0
-TRUCK_EV,Construction,unit,ton kilometer per hour,0.001572336593
-TRUCK_EV,Operation,ton kilometer,ton kilometer,1.0
-TRUCK_FC,Construction,unit,ton kilometer per hour,0.001572336593
-TRUCK_FC,Operation,ton kilometer,ton kilometer,1.0
-TRUCK_SNG,Construction,unit,ton kilometer per hour,0.001572336593
-TRUCK_SNG,Operation,ton kilometer,ton kilometer,1.0
-URANIUM,Resource,kilogram,kilowatt hour,9.230769231e-07
-WASTE,Resource,kilogram,kilowatt hour,-0.2914979757
-WASTE_BIO,Resource,kilogram,kilowatt hour,-0.6225519442
-WASTE_FOS,Resource,kilogram,kilowatt hour,-1.467590705
-WET_BIOMASS,Resource,kilogram,kilowatt hour,0.434835125
-WIND,Construction,unit,kilowatt,0.0005
-WIND,Operation,kilowatt hour,kilowatt hour,1.0
-WOOD,Resource,kilogram,kilowatt hour,0.2337662338
-WOOD_METHANOL,Construction,unit,kilowatt,0.000150672
-WOOD_METHANOL,Operation,kilogram,kilowatt hour,0.1805054152
-XYLENE,Resource,kilogram,kilowatt hour,0.08788847929
-biogas,Other,kilogram,cubic meter,0.777
-biogas,Other,cubic meter,kilogram,1.287
-electricity,Other,kilowatt hour,megajoule,0.278
-electricity,Other,megajoule,kilowatt hour,3.6
-heat,Other,kilowatt hour,megajoule,0.278
-heat,Other,megajoule,kilowatt hour,3.6
-natural gas,Other,cubic meter,kilogram,1.287
-natural gas,Other,kilogram,cubic meter,0.777
-syngas,Other,cubic meter,kilogram,2.128
-syngas,Other,kilogram,cubic meter,0.47
+Name,Type,Value,LCA,ESM
+ACETIC_ACID,Resource,0.2474226804,kilogram,kilowatt hour
+ACETONE,Resource,0.1216545012,kilogram,kilowatt hour
+ALKALINE_ELECTROLYSIS,Construction,0.001555555556,unit,kilowatt
+ALKALINE_ELECTROLYSIS,Operation,0.03003003003,kilogram,kilowatt hour
+ALKALINE_ELECTROLYSIS_PLANT,Construction,1.0,unit,unit
+ALKALINE_ELECTROLYSIS_PLANT_DECOM,Construction,-1.0,unit,unit
+ALKALINE_ELECTROLYSIS_STACK,Construction,1.0,unit,unit
+ALKALINE_ELECTROLYSIS_STACK_DECOM,Construction,-1.0,unit,unit
+AL_MAKING,Construction,5.727692308e-05,unit,kilogram per hour
+AL_MAKING,Operation,1.0,kilogram,kilogram
+AL_MAKING_HR,Construction,5.727692308e-05,unit,kilogram per hour
+AL_MAKING_HR,Operation,1.0,kilogram,kilogram
+AN_DIG,Construction,0.001096172924,unit,kilowatt
+AN_DIG,Operation,0.1004782766,cubic meter,kilowatt hour
+AN_DIG_SI,Construction,1e-06,unit,kilowatt
+AN_DIG_SI,Operation,0.2511956915,cubic meter,kilowatt hour
+AN_DIG_SI_COGEN,Construction,6250.0,unit,unit
+AN_DIG_SI_PLANT,Construction,2528.974649,unit,unit
+BATTERY,Construction,8.771929824999999,kilogram,kilowatt hour
+BENZENE,Resource,0.08470588235,kilogram,kilowatt hour
+BIOMASS_ETHANOL,Construction,1.128122192e-05,unit,kilowatt
+BIOMASS_ETHANOL,Operation,0.1347708895,kilogram,kilowatt hour
+BUS_CNG_STOICH,Construction,0.002779615385,unit,person kilometer per hour
+BUS_CNG_STOICH,Operation,1.0,person kilometer,person kilometer
+BUS_DIESEL,Construction,0.002779615385,unit,person kilometer per hour
+BUS_DIESEL,Operation,1.0,person kilometer,person kilometer
+BUS_EV,Construction,0.002779615385,unit,person kilometer per hour
+BUS_EV,Operation,1.0,person kilometer,person kilometer
+BUS_FC_HYBRID_CH4,Construction,0.002779615385,unit,person kilometer per hour
+BUS_FC_HYBRID_CH4,Operation,1.0,person kilometer,person kilometer
+BUS_FC_HYBRID_H2,Construction,0.002779615385,unit,person kilometer per hour
+BUS_FC_HYBRID_H2,Operation,1.0,person kilometer,person kilometer
+BUS_HY_DIESEL,Construction,0.002779615385,unit,person kilometer per hour
+BUS_HY_DIESEL,Operation,1.0,person kilometer,person kilometer
+CAR_BEV_LOWRANGE,Construction,0.03918947368,unit,person kilometer per hour
+CAR_BEV_LOWRANGE,Operation,0.6666666667,kilometer,person kilometer
+CAR_BEV_MEDRANGE_LOCAL,Construction,0.03918947368,unit,person kilometer per hour
+CAR_BEV_MEDRANGE_LOCAL,Operation,0.6666666667,kilometer,person kilometer
+CAR_BEV_MEDRANGE_LONGD,Construction,0.03918947368,unit,person kilometer per hour
+CAR_BEV_MEDRANGE_LONGD,Operation,0.6666666667,kilometer,person kilometer
+CAR_DIESEL_LOCAL,Construction,0.03918947368,unit,person kilometer per hour
+CAR_DIESEL_LOCAL,Operation,0.6666666667,kilometer,person kilometer
+CAR_DIESEL_LONGD,Construction,0.03918947368,unit,person kilometer per hour
+CAR_DIESEL_LONGD,Operation,0.6666666667,kilometer,person kilometer
+CAR_DME_D10_LOCAL,Construction,0.03918947368,unit,person kilometer per hour
+CAR_DME_D10_LOCAL,Operation,0.6666666667,kilometer,person kilometer
+CAR_DME_D10_LONGD,Construction,0.03918947368,unit,person kilometer per hour
+CAR_DME_D10_LONGD,Operation,0.6666666667,kilometer,person kilometer
+CAR_ETOH_E10_LOCAL,Construction,0.03918947368,unit,person kilometer per hour
+CAR_ETOH_E10_LOCAL,Operation,0.6666666667,kilometer,person kilometer
+CAR_ETOH_E10_LONGD,Construction,0.03918947368,unit,person kilometer per hour
+CAR_ETOH_E10_LONGD,Operation,0.6666666667,kilometer,person kilometer
+CAR_ETOH_E85_LOCAL,Construction,0.03918947368,unit,person kilometer per hour
+CAR_ETOH_E85_LOCAL,Operation,0.6666666667,kilometer,person kilometer
+CAR_ETOH_E85_LONGD,Construction,0.03918947368,unit,person kilometer per hour
+CAR_ETOH_E85_LONGD,Operation,0.6666666667,kilometer,person kilometer
+CAR_FC_CH4_LOCAL,Construction,0.03918947368,unit,person kilometer per hour
+CAR_FC_CH4_LOCAL,Operation,0.6666666667,kilometer,person kilometer
+CAR_FC_CH4_LONGD,Construction,0.03918947368,unit,person kilometer per hour
+CAR_FC_CH4_LONGD,Operation,0.6666666667,kilometer,person kilometer
+CAR_FC_H2_LOCAL,Construction,0.03918947368,unit,person kilometer per hour
+CAR_FC_H2_LOCAL,Operation,0.6666666667,kilometer,person kilometer
+CAR_FC_H2_LONGD,Construction,0.03918947368,unit,person kilometer per hour
+CAR_FC_H2_LONGD,Operation,0.6666666667,kilometer,person kilometer
+CAR_GASOLINE_LOCAL,Construction,0.03918947368,unit,person kilometer per hour
+CAR_GASOLINE_LOCAL,Operation,0.6666666667,kilometer,person kilometer
+CAR_GASOLINE_LONGD,Construction,0.03918947368,unit,person kilometer per hour
+CAR_GASOLINE_LONGD,Operation,0.6666666667,kilometer,person kilometer
+CAR_HEV_LOCAL,Construction,0.03918947368,unit,person kilometer per hour
+CAR_HEV_LOCAL,Operation,0.6666666667,kilometer,person kilometer
+CAR_HEV_LONGD,Construction,0.03918947368,unit,person kilometer per hour
+CAR_HEV_LONGD,Operation,0.6666666667,kilometer,person kilometer
+CAR_MEOH_LOCAL,Construction,0.03918947368,unit,person kilometer per hour
+CAR_MEOH_LOCAL,Operation,0.6666666667,kilometer,person kilometer
+CAR_MEOH_LONGD,Construction,0.03918947368,unit,person kilometer per hour
+CAR_MEOH_LONGD,Operation,0.6666666667,kilometer,person kilometer
+CAR_NG_LOCAL,Construction,0.03918947368,unit,person kilometer per hour
+CAR_NG_LOCAL,Operation,0.6666666667,kilometer,person kilometer
+CAR_NG_LONGD,Construction,0.03918947368,unit,person kilometer per hour
+CAR_NG_LONGD,Operation,0.6666666667,kilometer,person kilometer
+CAR_PHEV_LOCAL,Construction,0.03918947368,unit,person kilometer per hour
+CAR_PHEV_LOCAL,Operation,0.6666666667,kilometer,person kilometer
+CAR_PHEV_LONGD,Construction,0.03918947368,unit,person kilometer per hour
+CAR_PHEV_LONGD,Operation,0.6666666667,kilometer,person kilometer
+CCGT,Construction,2.5e-06,unit,kilowatt
+CCGT,Operation,1.0,kilowatt hour,kilowatt hour
+CCGT_CC,Construction,2.5e-06,unit,kilowatt
+CCGT_CC,Operation,1.0,kilowatt hour,kilowatt hour
+CEMENT_PROD,Construction,2.19e-05,unit,kilogram per hour
+CEMENT_PROD,Operation,1.0,kilogram,kilogram
+CEMENT_PROD_HP,Construction,2.19e-05,unit,kilogram per hour
+CEMENT_PROD_HP,Operation,1.0,kilogram,kilogram
+CO2_METHANOL,Construction,0.000150672,unit,kilogram per hour
+CO2_METHANOL,Operation,1.0,kilogram,kilogram
+CO2_STO,Construction,7.554695998999999e-08,unit,kilogram
+CO2_TO_DIESEL,Construction,1.4704857599999998e-07,unit,kilowatt
+CO2_TO_DIESEL,Operation,0.08453085376,kilogram,kilowatt hour
+CO2_TO_JETFUELS,Construction,1.900367872e-07,unit,kilowatt
+CO2_TO_JETFUELS,Operation,0.08372093023,kilogram,kilowatt hour
+COACH_CNG_STOICH,Construction,0.00301125,unit,person kilometer per hour
+COACH_CNG_STOICH,Operation,1.0,person kilometer,person kilometer
+COACH_DIESEL,Construction,0.00301125,unit,person kilometer per hour
+COACH_DIESEL,Operation,1.0,person kilometer,person kilometer
+COACH_EV,Construction,0.00301125,unit,person kilometer per hour
+COACH_EV,Operation,1.0,person kilometer,person kilometer
+COACH_FC_HYBRID_CH4,Construction,0.00301125,unit,person kilometer per hour
+COACH_FC_HYBRID_CH4,Operation,1.0,person kilometer,person kilometer
+COACH_FC_HYBRID_H2,Construction,0.00301125,unit,person kilometer per hour
+COACH_FC_HYBRID_H2,Operation,1.0,person kilometer,person kilometer
+COACH_HY_DIESEL,Construction,0.00301125,unit,person kilometer per hour
+COACH_HY_DIESEL,Operation,1.0,person kilometer,person kilometer
+COAL,Resource,0.1289860265,kilogram,kilowatt hour
+COAL_IGCC,Construction,2.222222222e-06,unit,kilowatt
+COAL_IGCC,Operation,1.0,kilowatt hour,kilowatt hour
+COAL_IGCC_CC,Construction,2.222222222e-06,unit,kilowatt
+COAL_IGCC_CC,Operation,1.0,kilowatt hour,kilowatt hour
+COAL_US,Construction,2.631578947e-06,unit,kilowatt
+COAL_US,Operation,1.0,kilowatt hour,kilowatt hour
+COAL_US_CC,Construction,2.631578947e-06,unit,kilowatt
+COAL_US_CC,Operation,1.0,kilowatt hour,kilowatt hour
+COMMUTER_RAIL_DIESEL,Construction,0.000438,unit,person kilometer per hour
+COMMUTER_RAIL_DIESEL,Operation,1.0,person kilometer,person kilometer
+COMMUTER_RAIL_ELEC,Construction,0.000438,unit,person kilometer per hour
+COMMUTER_RAIL_ELEC,Operation,1.0,person kilometer,person kilometer
+CROPS_TO_ETHANOL,Construction,1.128122192e-05,unit,kilowatt
+CROPS_TO_ETHANOL,Operation,0.1347708895,kilogram,kilowatt hour
+CROPS_TO_JETFUELS,Construction,2.571194326e-05,unit,kilowatt
+CROPS_TO_JETFUELS,Operation,0.08372093023,kilogram,kilowatt hour
+CUMENE_PROCESS,Construction,1.316008443e-05,unit,kilowatt
+CUMENE_PROCESS,Operation,0.08734260135,kilogram,kilowatt hour
+DAC_HT,Construction,7.445999999999999e-05,unit,kilogram per hour
+DAC_HT,Operation,1.0,kilogram,kilogram
+DAC_HT_PLANT,Construction,1.0,unit,unit
+DAC_HT_PLANT_DECOM,Construction,-1.0,unit,unit
+DAC_LT,Construction,7.445999999999999e-06,unit,kilogram per hour
+DAC_LT,Operation,1.0,kilogram,kilogram
+DAC_LT_PLANT,Construction,1.0,unit,unit
+DAC_LT_PLANT_DECOM,Construction,-1.0,unit,unit
+DEC_ADVCOGEN_H2,Construction,0.5,unit,kilowatt
+DEC_BOILER_GAS,Construction,0.1,unit,kilowatt
+DEC_BOILER_GAS,Operation,3.6,megajoule,kilowatt hour
+DEC_BOILER_OIL,Construction,0.1,unit,kilowatt
+DEC_BOILER_OIL,Operation,3.6,megajoule,kilowatt hour
+DEC_BOILER_OIL_BOILER,Construction,1.0,unit,unit
+DEC_BOILER_OIL_TANK,Construction,0.6666666667,unit,unit
+DEC_BOILER_WOOD,Construction,0.02,unit,kilowatt
+DEC_BOILER_WOOD,Operation,3.6,megajoule,kilowatt hour
+DEC_COGEN_GAS,Construction,0.0192,unit,kilowatt
+DEC_COGEN_GAS,Operation,15.80333626,megajoule,kilowatt hour
+DEC_COGEN_GAS_CHP,Construction,1.0,unit,unit
+DEC_COGEN_GAS_ELEC,Construction,1.0,unit,unit
+DEC_COGEN_GAS_HEAT,Construction,1.0,unit,unit
+DEC_COGEN_OIL,Construction,0.00455,unit,kilowatt
+DEC_COGEN_OIL,Operation,3.6,megajoule,kilowatt hour
+DEC_COGEN_OIL_BOILER,Construction,100.0,unit,unit
+DEC_COGEN_OIL_TANK,Construction,0.6666666667,unit,unit
+DEC_COGEN_OIL_TURBINE,Construction,1.0,unit,unit
+DEC_COGEN_WOOD,Construction,0.0017,unit,kilowatt
+DEC_COGEN_WOOD,Operation,3.6,megajoule,kilowatt hour
+DEC_COGEN_WOOD_BOILER,Construction,20.0,unit,unit
+DEC_COGEN_WOOD_TURBINE,Construction,1.0,unit,unit
+DEC_DEEP_GEO,Construction,1.807525287e-05,unit,kilowatt
+DEC_DEEP_GEO,Operation,3.6,megajoule,kilowatt hour
+DEC_DIRECT_ELEC,Construction,0.2,unit,kilowatt
+DEC_DIRECT_ELEC,Operation,1.0,kilowatt hour,kilowatt hour
+DEC_HP_ELEC,Construction,0.1,unit,kilowatt
+DEC_HP_ELEC,Operation,3.6,megajoule,kilowatt hour
+DEC_SOLAR,Construction,1.428571429,square meter,kilowatt
+DEC_THHP_GAS,Construction,0.25,unit,kilowatt
+DEC_THHP_GAS,Operation,3.6,megajoule,kilowatt hour
+DEC_THHP_GAS_HEX,Construction,0.106655574,unit,unit
+DEC_THHP_GAS_HP,Construction,1.0,unit,unit
+DEC_TH_STORAGE,Construction,5e-05,unit,kilowatt
+DHN_BOILER_GAS,Construction,0.010417,unit,kilowatt
+DHN_BOILER_GAS,Operation,3.6,megajoule,kilowatt hour
+DHN_BOILER_OIL,Construction,0.0010525999999999,unit,kilowatt
+DHN_BOILER_OIL,Operation,3.6,megajoule,kilowatt hour
+DHN_BOILER_OIL_BOILER,Construction,1.0,unit,unit
+DHN_BOILER_OIL_TANK,Construction,13.33321333,unit,unit
+DHN_BOILER_WOOD,Construction,0.001,unit,kilowatt
+DHN_BOILER_WOOD,Operation,3.6,megajoule,kilowatt hour
+DHN_BOILER_WOOD_BOILER,Construction,1.0,unit,unit
+DHN_BOILER_WOOD_DUST,Construction,1.0,unit,unit
+DHN_COGEN_GAS,Construction,0.00125,unit,kilowatt
+DHN_COGEN_GAS,Operation,22.00488998,megajoule,kilowatt hour
+DHN_COGEN_GAS_CHP,Construction,1.0,unit,unit
+DHN_COGEN_GAS_ELEC,Construction,1.0,unit,unit
+DHN_COGEN_GAS_HEAT,Construction,1.0,unit,unit
+DHN_COGEN_WASTE,Construction,0.0022,unit,kilowatt
+DHN_COGEN_WASTE,Operation,3.6,megajoule,kilowatt hour
+DHN_COGEN_WASTE_BOILER,Construction,0.04818496518,unit,unit
+DHN_COGEN_WASTE_TURBINE,Construction,1.0,unit,unit
+DHN_COGEN_WOOD,Construction,0.0003333166675,unit,kilowatt
+DHN_COGEN_WOOD,Operation,10.6729914,megajoule,kilowatt hour
+DHN_COGEN_WOOD_BOILER,Construction,1.0,unit,unit
+DHN_COGEN_WOOD_DUST,Construction,1.0,unit,unit
+DHN_COGEN_WOOD_TURBINE,Construction,1.0,unit,unit
+DHN_DEEP_GEO,Construction,1.807525287e-05,unit,kilowatt
+DHN_DEEP_GEO,Operation,3.6,megajoule,kilowatt hour
+DHN_HP_ELEC,Construction,0.03333333333,unit,kilowatt
+DHN_HP_ELEC,Operation,3.6,megajoule,kilowatt hour
+DHN_TH_STORAGE,Construction,5e-05,unit,kilowatt
+DIESEL,Resource,0.08453085376,kilogram,kilowatt hour
+DIE_STO,Construction,6.244891679e-09,unit,kilowatt hour
+DIRECT_USAGE,Operation,1.0,kilogram,kilogram
+DOGR,Operation,1.0,kilogram,kilogram
+EHP_H2_GRID,Construction,1.387283237e-05,kilometer,kilowatt
+EHP_NG_GRID,Construction,3.517915309e-06,kilometer,kilowatt
+EHV_GRID,Construction,7.82e-05,kilometer,kilowatt
+ELECTRICITY_EHV,Resource,1.0,kilowatt hour,kilowatt hour
+ELECTRICITY_HV,Resource,1.0,kilowatt hour,kilowatt hour
+ELECTRICITY_LV,Resource,1.0,kilowatt hour,kilowatt hour
+ELECTRICITY_MV,Resource,1.0,kilowatt hour,kilowatt hour
+ELEC_STO,Construction,8.771929824999999,kilogram,kilowatt hour
+EOR,Operation,1.0,kilogram,kilogram
+ETHANE,Resource,0.07530120482,kilogram,kilowatt hour
+ETHANE_CRACKING,Construction,1.078689868e-05,unit,kilowatt
+ETHANE_CRACKING,Operation,0.07159192602,kilogram,kilowatt hour
+ETHANE_OXIDATION,Construction,3.72796701e-05,unit,kilowatt
+ETHANE_OXIDATION,Operation,0.2474226804,kilogram,kilowatt hour
+ETHANE_TO_ETHYLENE,Construction,1.078689868e-05,unit,kilowatt
+ETHANE_TO_ETHYLENE,Operation,0.07159192602,kilogram,kilowatt hour
+ETHANOL,Resource,0.1139962001,kilogram,kilowatt hour
+ETHANOL_TO_JETFUELS,Construction,1.26144e-05,unit,kilowatt
+ETHANOL_TO_JETFUELS,Operation,0.08372093023,kilogram,kilowatt hour
+ETHYLBENZENE,Resource,0.08793785725,kilogram,kilowatt hour
+ETHYLENE,Resource,0.07159192602,kilogram,kilowatt hour
+ETHYLENE_POLYMERIZATION,Construction,0.000150672,unit,kilogram per hour
+ETHYLENE_POLYMERIZATION,Operation,1.0,kilogram,kilogram
+FOOD_PROD,Construction,3.723e-05,unit,kilogram per hour
+FOOD_PROD,Operation,1.0,kilogram,kilogram
+FOOD_PROD_HP,Construction,3.723e-05,unit,kilogram per hour
+FOOD_PROD_HP,Operation,1.0,kilogram,kilogram
+FOOD_PROD_HR,Construction,3.723e-05,unit,kilogram per hour
+FOOD_PROD_HR,Operation,1.0,kilogram,kilogram
+FT,Construction,1.27364328e-05,unit,kilowatt
+FT,Operation,0.08453085376,kilogram,kilowatt hour
+GASIFICATION_H2,Construction,0.0002,unit,kilowatt
+GASIFICATION_H2,Operation,0.03003003003,kilogram,kilowatt hour
+GASIFICATION_H2_PLANT,Construction,1.0,unit,unit
+GASIFICATION_H2_TANK,Construction,4.760896956,unit,unit
+GASIFICATION_SNG,Construction,0.0002,unit,kilowatt
+GASIFICATION_SNG,Operation,0.1506276151,kilogram,kilowatt hour
+GASIFICATION_SNG_PLANT,Construction,1.0,unit,unit
+GASIFICATION_SNG_TANK,Construction,4.760896956,unit,unit
+GASOLINE,Resource,0.08470588235,kilogram,kilowatt hour
+GASO_STO,Construction,7.031779141e-09,unit,kilowatt hour
+GEOTHERMAL,Construction,0.0001818181817999,unit,kilowatt
+GEOTHERMAL,Operation,1.0,kilowatt hour,kilowatt hour
+H2_COMP_HE,Construction,3.610108303e-05,unit,kilowatt
+H2_COMP_HE,Operation,0.03003003003,kilogram,kilowatt hour
+H2_COMP_LM,Construction,3.610108303e-05,unit,kilowatt
+H2_COMP_LM,Operation,0.03003003003,kilogram,kilowatt hour
+H2_COMP_MH,Construction,3.610108303e-05,unit,kilowatt
+H2_COMP_MH,Operation,0.03003003003,kilogram,kilowatt hour
+H2_EHP,Resource,0.03003003003,kilogram,kilowatt hour
+H2_EXP_EH,Operation,0.03003003003,kilogram,kilowatt hour
+H2_EXP_EH_COGEN,Construction,0.00625,unit,kilowatt
+H2_EXP_EH_COGEN,Operation,0.03003003003,kilogram,kilowatt hour
+H2_EXP_HM,Operation,0.03003003003,kilogram,kilowatt hour
+H2_EXP_HM_COGEN,Construction,0.00625,unit,kilowatt
+H2_EXP_HM_COGEN,Operation,0.03003003003,kilogram,kilowatt hour
+H2_EXP_ML,Operation,0.03003003003,kilogram,kilowatt hour
+H2_EXP_ML_COGEN,Construction,0.00625,unit,kilowatt
+H2_EXP_ML_COGEN,Operation,0.03003003003,kilogram,kilowatt hour
+H2_HP,Resource,0.03003003003,kilogram,kilowatt hour
+H2_LP,Resource,0.03003003003,kilogram,kilowatt hour
+H2_MP,Resource,0.03003003003,kilogram,kilowatt hour
+H2_STO,Construction,2.085418752e-05,unit,kilowatt hour
+H2_STO,Operation,0.03003003003,kilogram,kilowatt hour
+HP_H2_GRID,Construction,5.202312139e-06,kilometer,kilowatt
+HP_NG_GRID,Construction,1.319218241e-06,kilometer,kilowatt
+HT_LT_DEC,Operation,3.6,megajoule,kilowatt hour
+HV_GRID,Construction,2.3e-05,kilometer,kilowatt
+HYDRO_DAM,Construction,1.095290252e-07,unit,kilowatt
+HYDRO_DAM,Operation,1.0,kilowatt hour,kilowatt hour
+HYDRO_GAS,Construction,0.0002,unit,kilowatt
+HYDRO_GAS,Operation,0.1506276151,kilogram,kilowatt hour
+HYDRO_GAS_CHP,Construction,0.005,unit,kilowatt
+HYDRO_GAS_CHP,Operation,0.3765690377,kilogram,kilowatt hour
+HYDRO_GAS_CHP_PLANT,Construction,0.2,unit,unit
+HYDRO_GAS_CHP_TURBINE,Construction,1.0,unit,unit
+HYDRO_RIVER,Construction,2.738207182e-07,unit,kilowatt
+HYDRO_RIVER,Operation,1.0,kilowatt hour,kilowatt hour
+IND_BOILER_COAL,Construction,0.001,unit,kilowatt
+IND_BOILER_COAL,Operation,3.6,megajoule,kilowatt hour
+IND_BOILER_GAS,Construction,0.01,unit,kilowatt
+IND_BOILER_GAS,Operation,3.6,megajoule,kilowatt hour
+IND_BOILER_OIL,Construction,0.001,unit,kilowatt
+IND_BOILER_OIL,Operation,3.6,megajoule,kilowatt hour
+IND_BOILER_OIL_PLANT,Construction,1.0,unit,unit
+IND_BOILER_OIL_TANK,Construction,13.33321333,unit,unit
+IND_BOILER_WASTE,Construction,2.802618364e-05,unit,kilowatt
+IND_BOILER_WASTE,Operation,3.6,megajoule,kilowatt hour
+IND_BOILER_WOOD,Construction,0.001,unit,kilowatt
+IND_BOILER_WOOD,Operation,3.6,megajoule,kilowatt hour
+IND_COGEN_GAS,Construction,0.000956,unit,kilowatt
+IND_COGEN_GAS,Operation,22.00488998,megajoule,kilowatt hour
+IND_COGEN_GAS_CHP,Construction,1.0,unit,unit
+IND_COGEN_GAS_ELEC,Construction,1.0,unit,unit
+IND_COGEN_GAS_HEAT,Construction,1.0,unit,unit
+IND_COGEN_WASTE,Construction,0.001,unit,kilowatt
+IND_COGEN_WASTE,Operation,3.6,megajoule,kilowatt hour
+IND_COGEN_WASTE_PLANT,Construction,0.02646917344,unit,unit
+IND_COGEN_WASTE_TURBINE,Construction,1.0,unit,unit
+IND_COGEN_WOOD,Construction,0.0003333166675,unit,kilowatt
+IND_COGEN_WOOD,Operation,10.6729914,megajoule,kilowatt hour
+IND_COGEN_WOOD_DUST,Construction,1.0,unit,unit
+IND_COGEN_WOOD_PLANT,Construction,1.0,unit,unit
+IND_COGEN_WOOD_TURBINE,Construction,1.0,unit,unit
+IND_DIRECT_ELEC,Construction,0.2,unit,kilowatt
+IND_DIRECT_ELEC,Operation,1.0,kilowatt hour,kilowatt hour
+IND_HP_ELEC,Construction,0.1,unit,kilowatt
+IND_HP_ELEC,Operation,3.6,megajoule,kilowatt hour
+JETFUEL,Resource,0.08372093023,kilogram,kilowatt hour
+LFO,Resource,0.08450704225,kilogram,kilowatt hour
+LNG,Resource,0.09230769231,cubic meter,kilowatt hour
+LP_H2_GRID,Construction,0.00055,kilometer,kilowatt
+LP_NG_GRID,Construction,0.0002588235294,kilometer,kilowatt
+LV_GRID,Construction,0.0002,kilometer,kilowatt
+METATHESIS_PROPYLENE,Construction,1.078689868e-05,unit,kilowatt
+METATHESIS_PROPYLENE,Operation,0.07159192602,kilogram,kilowatt hour
+METHANATION,Construction,0.0002,unit,kilowatt
+METHANATION,Operation,0.07633587786,kilogram,kilowatt hour
+METHANE_TO_METHANOL,Construction,2.719711191e-05,unit,kilowatt
+METHANE_TO_METHANOL,Operation,0.1805054152,kilogram,kilowatt hour
+METHANOL,Resource,0.1805054152,kilogram,kilowatt hour
+METHANOL_CARBONYLATION,Construction,3.72796701e-05,unit,kilowatt
+METHANOL_CARBONYLATION,Operation,0.2474226804,kilogram,kilowatt hour
+METHANOL_FT,Construction,2.719711191e-05,unit,kilowatt
+METHANOL_FT,Operation,0.1805054152,kilogram,kilowatt hour
+METHANOL_TO_AROMATICS,Construction,1.296629933e-05,unit,kilowatt
+METHANOL_TO_AROMATICS,Operation,0.0860564626,kilogram,kilowatt hour
+METHANOL_TO_OLEFINS,Construction,1.078689868e-05,unit,kilowatt
+METHANOL_TO_OLEFINS,Operation,0.07159192602,kilogram,kilowatt hour
+MP_H2_GRID,Construction,0.066,kilometer,kilowatt
+MP_NG_GRID,Construction,0.03105882353,kilometer,kilowatt
+MV_GRID,Construction,0.02,kilometer,kilowatt
+NEW_HYDRO_DAM,Construction,1.095290252e-07,unit,kilowatt
+NEW_HYDRO_DAM,Operation,1.0,kilowatt hour,kilowatt hour
+NEW_HYDRO_RIVER,Construction,2.738207182e-07,unit,kilowatt
+NEW_HYDRO_RIVER,Operation,1.0,kilowatt hour,kilowatt hour
+NG_COMP_HE,Construction,0.003333333333,unit,kilowatt
+NG_COMP_HE,Operation,0.09230769231,cubic meter,kilowatt hour
+NG_COMP_LM,Construction,0.25,unit,kilowatt
+NG_COMP_LM,Operation,0.09230769231,cubic meter,kilowatt hour
+NG_COMP_MH,Construction,0.003333333333,unit,kilowatt
+NG_COMP_MH,Operation,0.07741935484,cubic meter,kilowatt hour
+NG_EHP,Resource,0.09230769231,cubic meter,kilowatt hour
+NG_EXP_EH,Operation,0.09230769231,cubic meter,kilowatt hour
+NG_EXP_EH_COGEN,Construction,0.00625,unit,kilowatt
+NG_EXP_EH_COGEN,Operation,0.09230769231,cubic meter,kilowatt hour
+NG_EXP_HM,Operation,0.09230769231,cubic meter,kilowatt hour
+NG_EXP_HM_COGEN,Construction,0.00625,unit,kilowatt
+NG_EXP_HM_COGEN,Operation,0.09230769231,cubic meter,kilowatt hour
+NG_EXP_ML,Operation,0.07741935484,kilogram,kilowatt hour
+NG_EXP_ML_COGEN,Construction,0.00625,unit,kilowatt
+NG_EXP_ML_COGEN,Operation,0.07741935484,cubic meter,kilowatt hour
+NG_HP,Resource,0.09824437305,cubic meter,kilowatt hour
+NG_LP,Resource,0.09824437305,cubic meter,kilowatt hour
+NG_MP,Resource,0.07741935484,kilogram,kilowatt hour
+NG_REFORMING,Construction,4.524684685e-06,unit,kilowatt
+NG_REFORMING,Operation,0.03003003003,kilogram,kilowatt hour
+NG_REFORMING_PLANT,Construction,1.0,unit,unit
+NG_REFORMING_TANK,Construction,4.760896956,unit,unit
+NG_STO,Construction,6.140273316e-06,unit,kilowatt hour
+NUCLEAR,Construction,1e-06,unit,kilowatt
+NUCLEAR,Operation,1.0,kilowatt hour,kilowatt hour
+PAPER_MAKING,Construction,2.023369565e-05,unit,kilogram per hour
+PAPER_MAKING,Operation,1.0,kilogram,kilogram
+PAPER_MAKING_HP,Construction,2.023369565e-05,unit,kilogram per hour
+PAPER_MAKING_HP,Operation,1.0,kilogram,kilogram
+PAPER_MAKING_HR,Construction,2.023369565e-05,unit,kilogram per hour
+PAPER_MAKING_HR,Operation,1.0,kilogram,kilogram
+PE,Resource,1.0,kilogram,kilogram
+PEM_ELECTROLYSIS,Construction,0.0016216216219999,unit,kilowatt
+PEM_ELECTROLYSIS,Operation,0.03003003003,kilogram,kilowatt hour
+PEM_ELECTROLYSIS_PLANT,Construction,1.0,unit,unit
+PEM_ELECTROLYSIS_PLANT_DECOM,Construction,-1.0,unit,unit
+PEM_ELECTROLYSIS_STACK,Construction,1.0,unit,unit
+PEM_ELECTROLYSIS_STACK_DECOM,Construction,-1.0,unit,unit
+PET,Resource,1.0,kilogram,kilogram
+PET_FORMATION,Construction,0.000150672,unit,kilogram per hour
+PET_FORMATION,Operation,1.0,kilogram,kilogram
+PHENOL,Resource,0.1109399076,kilogram,kilowatt hour
+POLYPROPYLENE_PP,Construction,0.000150672,unit,kilogram per hour
+POLYPROPYLENE_PP,Operation,1.0,kilogram,kilogram
+PP,Resource,1.0,kilogram,kilogram
+PROPYLENE,Resource,0.07860433634,kilogram,kilowatt hour
+PS,Resource,1.0,kilogram,kilogram
+PV,Construction,0.0007692307692,unit,kilowatt
+PV,Operation,1.0,kilowatt hour,kilowatt hour
+PVC,Resource,1.0,kilogram,kilogram
+PVC_FORMATION,Construction,0.000150672,unit,kilogram per hour
+PVC_FORMATION,Operation,1.0,kilogram,kilogram
+PV_EHV,Construction,0.0017857142859999,unit,kilowatt
+PV_EHV,Operation,1.0,kilowatt hour,kilowatt hour
+PYROLYSIS,Construction,1.320212766e-05,unit,kilowatt
+PYROLYSIS,Operation,0.08865248227,kilogram,kilowatt hour
+SMART_PROCESS,Construction,0.000150672,unit,kilogram per hour
+SMART_PROCESS,Operation,1.0,kilogram,kilogram
+SNG,Resource,0.09824437305,cubic meter,kilowatt hour
+SNG_NG,Operation,0.09824437305,cubic meter,kilowatt hour
+SOEC_ELECTROLYSIS,Construction,0.00127027027,unit,kilowatt
+SOEC_ELECTROLYSIS,Operation,0.03003003003,kilogram,kilowatt hour
+SOEC_ELECTROLYSIS_PLANT,Construction,1.0,unit,unit
+SOEC_ELECTROLYSIS_PLANT_DECOM,Construction,-1.0,unit,unit
+SOEC_ELECTROLYSIS_STACK,Construction,1.0,unit,unit
+SOEC_ELECTROLYSIS_STACK_DECOM,Construction,-1.0,unit,unit
+STEEL_MAKING,Construction,5.727692308e-05,unit,kilogram per hour
+STEEL_MAKING,Operation,1.0,kilogram,kilogram
+STEEL_MAKING_HP,Construction,5.727692308e-05,unit,kilogram per hour
+STEEL_MAKING_HP,Operation,1.0,kilogram,kilogram
+STEEL_MAKING_HR,Construction,5.727692308e-05,unit,kilogram per hour
+STEEL_MAKING_HR,Operation,1.0,kilogram,kilogram
+STYRENE,Resource,1.0,kilogram,kilogram
+STYRENE_POLYMERIZATION,Construction,0.000150672,unit,kilogram per hour
+STYRENE_POLYMERIZATION,Operation,1.0,kilogram,kilogram
+TOLUENE,Resource,0.08484562809,kilogram,kilowatt hour
+TRAFO_EH,Operation,1.0,kilowatt hour,kilowatt hour
+TRAFO_HE,Operation,1.0,kilowatt hour,kilowatt hour
+TRAFO_HM,Operation,1.0,kilowatt hour,kilowatt hour
+TRAFO_LM,Operation,1.0,kilowatt hour,kilowatt hour
+TRAFO_MH,Operation,1.0,kilowatt hour,kilowatt hour
+TRAFO_ML,Operation,1.0,kilowatt hour,kilowatt hour
+TRAIN_DIESEL,Construction,1.404664723e-05,unit,person kilometer per hour
+TRAIN_DIESEL,Operation,1.0,person kilometer,person kilometer
+TRAIN_ELEC,Construction,1.404664723e-05,unit,person kilometer per hour
+TRAIN_ELEC,Operation,1.0,person kilometer,person kilometer
+TRAIN_FREIGHT,Construction,2.400576923e-05,unit,ton kilometer per hour
+TRAIN_FREIGHT,Operation,1.0,ton kilometer,ton kilometer
+TRAIN_FREIGHT_DIESEL,Construction,2.400576923e-05,unit,ton kilometer per hour
+TRAIN_FREIGHT_DIESEL,Operation,1.0,ton kilometer,ton kilometer
+TRAIN_FREIGHT_DIESEL_LOC,Construction,2.0,unit,unit
+TRAIN_FREIGHT_DIESEL_WAG,Construction,20.0,unit,unit
+TRAIN_FREIGHT_H2,Construction,2.400576923e-05,unit,ton kilometer per hour
+TRAIN_FREIGHT_H2,Operation,1.0,ton kilometer,ton kilometer
+TRAIN_FREIGHT_H2_LOC,Construction,2.0,unit,unit
+TRAIN_FREIGHT_H2_WAG,Construction,20.0,unit,unit
+TRAIN_FREIGHT_LOC,Construction,2.0,unit,unit
+TRAIN_FREIGHT_NG,Construction,2.400576923e-05,unit,ton kilometer per hour
+TRAIN_FREIGHT_NG,Operation,1.0,ton kilometer,ton kilometer
+TRAIN_FREIGHT_NG_LOC,Construction,2.0,unit,unit
+TRAIN_FREIGHT_NG_WAG,Construction,20.0,unit,unit
+TRAIN_FREIGHT_WAG,Construction,20.0,unit,unit
+TRAIN_H2,Construction,1.404664723e-05,unit,person kilometer per hour
+TRAIN_H2,Operation,1.0,person kilometer,person kilometer
+TRAIN_NG,Construction,1.404664723e-05,unit,person kilometer per hour
+TRAIN_NG,Operation,1.0,person kilometer,person kilometer
+TRAMWAY,Construction,0.003919309262,unit,person kilometer per hour
+TRAMWAY,Operation,1.0,person kilometer,person kilometer
+TRUCK,Construction,0.001572336593,unit,ton kilometer per hour
+TRUCK,Operation,1.0,ton kilometer,ton kilometer
+TRUCK_EV,Construction,0.001572336593,unit,ton kilometer per hour
+TRUCK_EV,Operation,1.0,ton kilometer,ton kilometer
+TRUCK_FC,Construction,0.001572336593,unit,ton kilometer per hour
+TRUCK_FC,Operation,1.0,ton kilometer,ton kilometer
+TRUCK_SNG,Construction,0.001572336593,unit,ton kilometer per hour
+TRUCK_SNG,Operation,1.0,ton kilometer,ton kilometer
+URANIUM,Resource,9.230769231e-07,kilogram,kilowatt hour
+WASTE,Resource,-0.2914979757,kilogram,kilowatt hour
+WASTE_BIO,Resource,-0.6225519442,kilogram,kilowatt hour
+WASTE_FOS,Resource,-1.467590705,kilogram,kilowatt hour
+WET_BIOMASS,Resource,0.434835125,kilogram,kilowatt hour
+WIND,Construction,0.0005,unit,kilowatt
+WIND,Operation,1.0,kilowatt hour,kilowatt hour
+WOOD,Resource,0.2337662338,kilogram,kilowatt hour
+WOOD_METHANOL,Construction,0.000150672,unit,kilowatt
+WOOD_METHANOL,Operation,0.1805054152,kilogram,kilowatt hour
+XYLENE,Resource,0.08788847929,kilogram,kilowatt hour
+biogas,Other,0.777,kilogram,cubic meter
+biogas,Other,1.287,cubic meter,kilogram
+electricity,Other,0.278,kilowatt hour,megajoule
+electricity,Other,3.6,megajoule,kilowatt hour
+heat,Other,0.278,kilowatt hour,megajoule
+heat,Other,3.6,megajoule,kilowatt hour
+natural gas,Other,1.287,cubic meter,kilogram
+natural gas,Other,0.777,kilogram,cubic meter
+syngas,Other,2.128,cubic meter,kilogram
+syngas,Other,0.47,kilogram,cubic meter
