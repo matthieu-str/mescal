@@ -1,4 +1,5 @@
 import pandas as pd
+from .utils import ecoinvent_unit_convention
 from .filesystem_constants import DATA_DIR
 
 
@@ -166,6 +167,10 @@ def update_mapping_file(mapping: pd.DataFrame, change_report: pd.DataFrame, unit
                 ][['Activity Name - new', 'Reference Product - new', 'Geography - new', 'Unit', 'Unit - new',
                    'Deleted']].iloc[0]
 
+            # Switch to ecoinvent database standard unit convention
+            unit = ecoinvent_unit_convention(unit)
+            unit_new = ecoinvent_unit_convention(unit_new)
+
             if unit != unit_new:
                 print(f"WARNING: unit changed for {activity_prod} - {activity_name} - {activity_geo}")
                 unit_to_change.append(
@@ -256,7 +261,7 @@ def update_unit_conversion_file(unit_conversion: pd.DataFrame, unit_changes: lis
         unit_esm, unit_lca = unit_conversion[
             (unit_conversion.Name == unit_changes[i][0][0])
             & (unit_conversion.Type == unit_changes[i][0][1])
-            ][['From', 'To']].values[0]
+            ][['ESM', 'LCA']].values[0]
 
         if unit_lca != unit_changes[i][2]:
             raise ValueError(f'LCA unit for {unit_changes[i][0][0]} - {unit_changes[i][0][1]} '
