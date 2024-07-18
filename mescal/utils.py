@@ -97,19 +97,25 @@ def merge_databases(database_list: list[str], new_db_name: str, main_ecoinvent_d
         raise ValueError('The output argument must be either "return", "write" or "both"')
 
 
-def database_list_to_dict(database_list: list[dict], key: str) -> dict:
+def database_list_to_dict(database_list: list[dict], key: str, database_type: str = 'technosphere') -> dict:
     """
     Converts a list of dictionaries into a dictionary with the (database, code) tuple or the (name, product, location,
     database) tuple as key.
 
-    :param database_list: LCI database
+    :param database_list: LCI database as a list of dictionaries
     :param key: 'code' or 'name'
+    :param database_type: 'technosphere' or 'biosphere'
     :return: LCI database as a dictionary
     """
     if key == 'code':
         db_dict = {(a['database'], a['code']): a for a in database_list}
     elif key == 'name':
-        db_dict = {(a['name'], a['reference product'], a['location'], a['database']): a for a in database_list}
+        if database_type == 'technosphere':
+            db_dict = {(a['name'], a['reference product'], a['location'], a['database']): a for a in database_list}
+        elif database_type == 'biosphere':
+            db_dict = {(a['name'], a['categories'], a['database']): a for a in database_list}
+        else:
+            raise ValueError('Database type must be either "technosphere" or "biosphere"')
     else:
         raise ValueError('Key must be either "code" or "name"')
 

@@ -5,7 +5,9 @@ from .modify_inventory import change_carbon_flow
 
 def create_new_activity(name: str, act_type: str, current_code: str, new_code: str, database_name: str, db: list[dict],
                         db_dict_name: dict, db_dict_code: dict, esm_db_name: str, regionalize_foregrounds: bool,
-                        accepted_locations: list[str], target_region: str, locations_ranking: list[str]) -> dict:
+                        accepted_locations: list[str], target_region: str, locations_ranking: list[str],
+                        regionalized_database: bool = False, regionalized_biosphere_db: list[dict] = None,
+                        db_dict_name_reg_biosphere: dict = None) -> dict:
     """
     Create a new LCI dataset for the ESM technology or resource
 
@@ -18,10 +20,14 @@ def create_new_activity(name: str, act_type: str, current_code: str, new_code: s
     :param db_dict_name: dictionary original LCI database with (name, product, location, database) as key
     :param db_dict_code: dictionary original LCI database with (database, code) as key
     :param esm_db_name: name of the new LCI database
-    :param regionalize_foregrounds: (bool) if True, regionalize the foreground activities
+    :param regionalize_foregrounds: if True, regionalize the foreground activities
     :param accepted_locations: list of regions to keep in case of regionalization
     :param target_region: target region in case of regionalization
     :param locations_ranking: ranking of the locations in case of regionalization
+    :param regionalized_database: if True, the database db has regionalized elementary flows
+    :param regionalized_biosphere_db: list of flows in the regionalized biosphere database
+    :param db_dict_name_reg_biosphere: dictionary of the regionalized biosphere database with
+        (name, categories, database) as key
     :return: new LCI dataset for the technology or resource
     """
 
@@ -44,7 +50,10 @@ def create_new_activity(name: str, act_type: str, current_code: str, new_code: s
             locations_ranking=locations_ranking,
             db=db,
             db_dict_code=db_dict_code,
-            db_dict_name=db_dict_name
+            db_dict_name=db_dict_name,
+            regionalized_database=regionalized_database,
+            regionalized_biosphere_db=regionalized_biosphere_db,
+            db_dict_name_reg_biosphere=db_dict_name_reg_biosphere,
         )
 
     return new_ds
@@ -53,7 +62,9 @@ def create_new_activity(name: str, act_type: str, current_code: str, new_code: s
 def add_activities_to_database(mapping: pd.DataFrame, act_type: str, db: list[dict], db_dict_name: dict,
                                db_dict_code: dict, esm_db_name: str, regionalize_foregrounds: bool,
                                accepted_locations: list[str], target_region: str,
-                               locations_ranking: list[str]) -> list[dict]:
+                               locations_ranking: list[str], regionalized_database: bool = False,
+                               regionalized_biosphere_db: list[dict] = None, db_dict_name_reg_biosphere: dict = None) \
+        -> list[dict]:
     """
     Add new activities to the LCI database
 
@@ -67,6 +78,10 @@ def add_activities_to_database(mapping: pd.DataFrame, act_type: str, db: list[di
     :param accepted_locations: list of regions to keep in case of regionalization
     :param target_region: target region in case of regionalization
     :param locations_ranking: ranking of the preferred locations in case of regionalization
+    :param regionalized_database: if True, the database db has regionalized elementary flows
+    :param regionalized_biosphere_db: list of flows in the regionalized biosphere database
+    :param db_dict_name_reg_biosphere: dictionary of the regionalized biosphere database with
+        (name, categories, database) as key
     :return: updated LCI database
     """
     mapping_type = mapping[mapping['Type'] == act_type]
@@ -84,7 +99,10 @@ def add_activities_to_database(mapping: pd.DataFrame, act_type: str, db: list[di
             regionalize_foregrounds=regionalize_foregrounds,
             accepted_locations=accepted_locations,
             target_region=target_region,
-            locations_ranking=locations_ranking
+            locations_ranking=locations_ranking,
+            regionalized_database=regionalized_database,
+            regionalized_biosphere_db=regionalized_biosphere_db,
+            db_dict_name_reg_biosphere=db_dict_name_reg_biosphere,
         )
         db.append(ds)
     return db
@@ -325,7 +343,9 @@ def double_counting_removal(df_op: pd.DataFrame, df_constr: pd.DataFrame, esm_db
                             no_background_search_list: list[str], ESM_inputs: list[str] or str = 'all',
                             regionalize_foregrounds: bool = False, accepted_locations: list[str] = None,
                             target_region: str = None, locations_ranking: list[str] = None,
-                            create_new_db: bool = True) -> tuple[list[dict], dict, dict, list[list], dict]:
+                            create_new_db: bool = True, regionalized_database: bool = False,
+                            regionalized_biosphere_db: list[dict] = None, db_dict_name_reg_biosphere: dict = None) \
+        -> tuple[list[dict], dict, dict, list[list], dict]:
     """
     Remove double counting in the ESM database and write it in the brightway project
 
@@ -349,6 +369,10 @@ def double_counting_removal(df_op: pd.DataFrame, df_constr: pd.DataFrame, esm_db
     :param target_region: target region in case of regionalization
     :param locations_ranking: ranking of the preferred locations in case of regionalization
     :param create_new_db: if True, create a new database
+    :param regionalized_database: if True, the database db has regionalized elementary flows
+    :param regionalized_biosphere_db: list of flows in the regionalized biosphere database
+    :param db_dict_name_reg_biosphere: dictionary of the regionalized biosphere database with
+        (name, categories, database) as key
     :return: updated LCI database, dictionary LCI database with (database, code) as key,
         dictionary LCI database with (name, product, location, database) as key, list of removed flows,
         dictionary of removed quantities
@@ -382,7 +406,7 @@ def double_counting_removal(df_op: pd.DataFrame, df_constr: pd.DataFrame, esm_db
 
     for i in range(len(df_op)):
         tech = df_op['Name'].iloc[i]  # name of ES technology
-        print(tech)
+        # print(tech)
 
         # Initialization of the list of construction activities and corresponding CPC categories
         act_constr_list = []
@@ -487,7 +511,10 @@ def double_counting_removal(df_op: pd.DataFrame, df_constr: pd.DataFrame, esm_db
                     locations_ranking=locations_ranking,
                     db=db,
                     db_dict_code=db_dict_code,
-                    db_dict_name=db_dict_name
+                    db_dict_name=db_dict_name,
+                    regionalized_database=regionalized_database,
+                    regionalized_biosphere_db=regionalized_biosphere_db,
+                    db_dict_name_reg_biosphere=db_dict_name_reg_biosphere,
                 )
                 db.append(new_act_op_d_c)
                 db_dict_name[(new_act_op_d_c['name'],
@@ -727,7 +754,9 @@ def create_esm_database(mapping: pd.DataFrame, model: pd.DataFrame, tech_specifi
                         technology_compositions: pd.DataFrame, mapping_esm_flows_to_CPC_cat: pd.DataFrame,
                         main_database: list[dict], esm_db_name: str, results_path_file: str = 'results/',
                         regionalize_foregrounds: bool = False, accepted_locations: list[str] = None,
-                        target_region: str = None, locations_ranking: list[str] = None) -> pd.DataFrame:
+                        target_region: str = None, locations_ranking: list[str] = None,
+                        regionalized_database: bool = False, regionalized_biosphere_db: list[dict] = None) \
+        -> pd.DataFrame:
     """
     Create the ESM database after double counting removal
 
@@ -743,10 +772,17 @@ def create_esm_database(mapping: pd.DataFrame, model: pd.DataFrame, tech_specifi
     :param accepted_locations: list of regions to keep in case of regionalization
     :param target_region: target region in case of regionalization
     :param locations_ranking: ranking of the preferred locations in case of regionalization
+    :param regionalized_database: if True, the main database has regionalized elementary flows
+    :param regionalized_biosphere_db: list of flows in the regionalized biosphere database
     :return: mapping file (updated with new codes)
     """
-    db_dict_name = database_list_to_dict(main_database, 'name')
-    db_dict_code = database_list_to_dict(main_database, 'code')
+    db_dict_name = database_list_to_dict(main_database, 'name', 'technosphere')
+    db_dict_code = database_list_to_dict(main_database, 'code', 'technosphere')
+
+    if regionalize_foregrounds & regionalized_database:
+        db_dict_name_reg_biosphere = database_list_to_dict(regionalized_biosphere_db, 'name', 'biosphere')
+    else:
+        db_dict_name_reg_biosphere = None
 
     try:
         technology_compositions.Components = technology_compositions.Components.apply(ast.literal_eval)
@@ -783,12 +819,34 @@ def create_esm_database(mapping: pd.DataFrame, model: pd.DataFrame, tech_specifi
      no_background_search_list) = add_technology_specifics(mapping_op, tech_specifics)
 
     # Add construction and resource activities to the database (which do not need double counting removal)
-    main_database = add_activities_to_database(mapping, 'Construction', main_database, db_dict_name,
-                                               db_dict_code, esm_db_name, regionalize_foregrounds, accepted_locations,
-                                               target_region, locations_ranking)
-    main_database = add_activities_to_database(mapping, 'Resource', main_database, db_dict_name,
-                                               db_dict_code, esm_db_name, regionalize_foregrounds, accepted_locations,
-                                               target_region, locations_ranking)
+    main_database = add_activities_to_database(mapping=mapping,
+                                               act_type='Construction',
+                                               db=main_database,
+                                               db_dict_name=db_dict_name,
+                                               db_dict_code=db_dict_code,
+                                               esm_db_name=esm_db_name,
+                                               regionalize_foregrounds=regionalize_foregrounds,
+                                               accepted_locations=accepted_locations,
+                                               target_region=target_region,
+                                               locations_ranking=locations_ranking,
+                                               regionalized_database=regionalized_database,
+                                               regionalized_biosphere_db=regionalized_biosphere_db,
+                                               db_dict_name_reg_biosphere=db_dict_name_reg_biosphere,
+                                               )
+    main_database = add_activities_to_database(mapping=mapping,
+                                               act_type='Resource',
+                                               db=main_database,
+                                               db_dict_name=db_dict_name,
+                                               db_dict_code=db_dict_code,
+                                               esm_db_name=esm_db_name,
+                                               regionalize_foregrounds=regionalize_foregrounds,
+                                               accepted_locations=accepted_locations,
+                                               target_region=target_region,
+                                               locations_ranking=locations_ranking,
+                                               regionalized_database=regionalized_database,
+                                               regionalized_biosphere_db=regionalized_biosphere_db,
+                                               db_dict_name_reg_biosphere=db_dict_name_reg_biosphere,
+                                               )
 
     main_database, db_dict_code, db_dict_name, flows_set_to_zero, ei_removal = double_counting_removal(
         df_op=mapping_op,
@@ -807,7 +865,10 @@ def create_esm_database(mapping: pd.DataFrame, model: pd.DataFrame, tech_specifi
         regionalize_foregrounds=regionalize_foregrounds,
         accepted_locations=accepted_locations,
         target_region=target_region,
-        locations_ranking=locations_ranking
+        locations_ranking=locations_ranking,
+        regionalized_database=regionalized_database,
+        regionalized_biosphere_db=regionalized_biosphere_db,
+        db_dict_name_reg_biosphere=db_dict_name_reg_biosphere,
     )
 
     esm_db = [act for act in main_database if act['database'] == esm_db_name]
