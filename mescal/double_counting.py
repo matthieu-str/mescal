@@ -750,13 +750,13 @@ def add_technology_specifics(mapping_op: pd.DataFrame, df_tech_specifics: pd.Dat
     return mapping_op, background_search_act, no_construction_list, no_background_search_list
 
 
-def create_esm_database(mapping: pd.DataFrame, model: pd.DataFrame, tech_specifics: pd.DataFrame,
-                        technology_compositions: pd.DataFrame, mapping_esm_flows_to_CPC_cat: pd.DataFrame,
-                        main_database: list[dict], esm_db_name: str, results_path_file: str = 'results/',
+def create_esm_database(mapping: pd.DataFrame, model: pd.DataFrame, mapping_esm_flows_to_CPC_cat: pd.DataFrame,
+                        main_database: list[dict], esm_db_name: str, technology_compositions: pd.DataFrame = None,
+                        results_path_file: str = 'results/', tech_specifics: pd.DataFrame = None,
                         regionalize_foregrounds: bool = False, accepted_locations: list[str] = None,
                         target_region: str = None, locations_ranking: list[str] = None,
-                        regionalized_database: bool = False, regionalized_biosphere_db: list[dict] = None) \
-        -> pd.DataFrame:
+                        regionalized_database: bool = False, regionalized_biosphere_db: list[dict] = None,
+                        write_database: bool = True, return_obj: str = 'mapping') -> pd.DataFrame | list[dict]:
     """
     Create the ESM database after double counting removal
 
@@ -774,10 +774,19 @@ def create_esm_database(mapping: pd.DataFrame, model: pd.DataFrame, tech_specifi
     :param locations_ranking: ranking of the preferred locations in case of regionalization
     :param regionalized_database: if True, the main database has regionalized elementary flows
     :param regionalized_biosphere_db: list of flows in the regionalized biosphere database
+    :param write_database: if True, write the esm database to the brightway project and saves double-counting report
+        files
+    :param return_obj: if 'mapping', return the mapping file as a pd.DataFrame, if 'database', return the ESM database
+        as a list of dictionaries
     :return: mapping file (updated with new codes)
     """
     db_dict_name = database_list_to_dict(main_database, 'name', 'technosphere')
     db_dict_code = database_list_to_dict(main_database, 'code', 'technosphere')
+
+    if tech_specifics is None:
+        tech_specifics = pd.DataFrame(columns=['Name', 'Specifics', 'Amount'])
+    if technology_compositions is None:
+        technology_compositions = pd.DataFrame(columns=['Name', 'Components'])
 
     if regionalize_foregrounds & regionalized_database:
         db_dict_name_reg_biosphere = database_list_to_dict(regionalized_biosphere_db, 'name', 'biosphere')
@@ -872,33 +881,38 @@ def create_esm_database(mapping: pd.DataFrame, model: pd.DataFrame, tech_specifi
     )
 
     esm_db = [act for act in main_database if act['database'] == esm_db_name]
+    if write_database:
+        write_wurst_database_to_brightway(esm_db, esm_db_name)
 
-    write_wurst_database_to_brightway(esm_db, esm_db_name)
+        if 'DAC_LT, Operation' in [act['name'] for act in esm_db]:
+            change_carbon_flow(db_name=esm_db_name, activity_name='DAC_LT, Operation')
+        if 'DAC_HT, Operation' in [act['name'] for act in esm_db]:
+            change_carbon_flow(db_name=esm_db_name, activity_name='DAC_HT, Operation')
 
-    if 'DAC_LT, Operation' in [act['name'] for act in esm_db]:
-        change_carbon_flow(db_name=esm_db_name, activity_name='DAC_LT, Operation')
-    if 'DAC_HT, Operation' in [act['name'] for act in esm_db]:
-        change_carbon_flow(db_name=esm_db_name, activity_name='DAC_HT, Operation')
+        df_flows_set_to_zero = pd.DataFrame(data=flows_set_to_zero,
+                                            columns=['Product', 'Activity', 'Location', 'Database', 'Amount', 'Unit',
+                                                     'Removed flow product', 'Removed flow activity',
+                                                     'Removed flows location'])
+        df_flows_set_to_zero.drop_duplicates(inplace=True)
 
-    df_flows_set_to_zero = pd.DataFrame(data=flows_set_to_zero,
-                                        columns=['Product', 'Activity', 'Location', 'Database', 'Amount', 'Unit',
-                                                 'Removed flow product', 'Removed flow activity',
-                                                 'Removed flows location'])
-    df_flows_set_to_zero.drop_duplicates(inplace=True)
+        ei_removal_amount = {}
+        ei_removal_count = {}
+        for tech in list(mapping_op.Name):
+            ei_removal_amount[tech] = {}
+            ei_removal_count[tech] = {}
+            for res in list(mapping_op.iloc[:, N:].columns):
+                ei_removal_amount[tech][res] = ei_removal[tech][res]['amount']
+                ei_removal_count[tech][res] = ei_removal[tech][res]['count']
 
-    ei_removal_amount = {}
-    ei_removal_count = {}
-    for tech in list(mapping_op.Name):
-        ei_removal_amount[tech] = {}
-        ei_removal_count[tech] = {}
-        for res in list(mapping_op.iloc[:, N:].columns):
-            ei_removal_amount[tech][res] = ei_removal[tech][res]['amount']
-            ei_removal_count[tech][res] = ei_removal[tech][res]['count']
+        double_counting_removal_amount = pd.DataFrame.from_dict(ei_removal_amount, orient='index')
+        double_counting_removal_count = pd.DataFrame.from_dict(ei_removal_count, orient='index')
+        double_counting_removal_amount.to_csv(f"{results_path_file}double_counting_removal.csv")
+        double_counting_removal_count.to_csv(f"{results_path_file}double_counting_removal_count.csv")
+        df_flows_set_to_zero.to_csv(f"{results_path_file}removed_flows_list.csv", index=False)
 
-    double_counting_removal_amount = pd.DataFrame.from_dict(ei_removal_amount, orient='index')
-    double_counting_removal_count = pd.DataFrame.from_dict(ei_removal_count, orient='index')
-    double_counting_removal_amount.to_csv(f"{results_path_file}double_counting_removal.csv")
-    double_counting_removal_count.to_csv(f"{results_path_file}double_counting_removal_count.csv")
-    df_flows_set_to_zero.to_csv(f"{results_path_file}removed_flows_list.csv", index=False)
-
-    return mapping
+    if return_obj == 'mapping':
+        return mapping
+    elif return_obj == 'database':
+        return esm_db
+    else:
+        raise ValueError("return_obj must be 'mapping' or 'database'")
