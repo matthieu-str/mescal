@@ -58,8 +58,8 @@ def create_or_modify_activity_from_esm_results(db: list[dict], original_activity
     prod_flow = get_production_flow(activity)
     prod_flow_amount = prod_flow['amount']  # can be -1 if it is a waste activity
 
-    unit_conversion['From'] = unit_conversion['From'].apply(ecoinvent_unit_convention)
-    unit_conversion['To'] = unit_conversion['To'].apply(ecoinvent_unit_convention)
+    unit_conversion['LCA'] = unit_conversion['LCA'].apply(ecoinvent_unit_convention)
+    unit_conversion['ESM'] = unit_conversion['ESM'].apply(ecoinvent_unit_convention)
 
     model['Flow'] = model.apply(lambda x: replace_mobility_end_use_type(row=x,
                                                                         new_end_use_types=new_end_use_types), axis=1)
@@ -126,18 +126,10 @@ def create_or_modify_activity_from_esm_results(db: list[dict], original_activity
             pass
         else:
             if tech in list(mapping[(mapping.Type == 'Operation') | (mapping.Type == 'Resource')].Name.unique()):
-                activity_name = mapping[
+                activity_name, activity_prod, activity_database, activity_location = mapping[
                     (mapping.Name == tech) & ((mapping.Type == 'Operation') | (mapping.Type == 'Resource'))
-                                        ].Activity.iloc[0]
-                activity_prod = mapping[
-                    (mapping.Name == tech) & ((mapping.Type == 'Operation') | (mapping.Type == 'Resource'))
-                                        ].Product.iloc[0]
-                activity_database = mapping[
-                    (mapping.Name == tech) & ((mapping.Type == 'Operation') | (mapping.Type == 'Resource'))
-                                            ].Database.iloc[0]
-                activity_location = mapping[
-                    (mapping.Name == tech) & ((mapping.Type == 'Operation') | (mapping.Type == 'Resource'))
-                                            ].Location.iloc[0]
+                ][['Activity', 'Product', 'Database', 'Location']].values[0]
+
                 activity_unit = db_dict_name[activity_name, activity_prod, activity_location, activity_database]['unit']
 
                 if activity_unit != original_activity_unit:
@@ -250,10 +242,12 @@ def replace_mobility_end_use_type(row: pd.Series, new_end_use_types: pd.DataFram
 def create_new_database_with_esm_results(mapping: pd.DataFrame, model: pd.DataFrame, esm_location: str,
                                          esm_results: pd.DataFrame, locations_ranking: list[str],
                                          accepted_locations: list[str], unit_conversion: pd.DataFrame,
-                                         db: list[dict], new_db_name: str, tech_specifics: pd.DataFrame,
-                                         technology_compositions: pd.DataFrame, tech_to_remove_layers: pd.DataFrame,
-                                         mapping_esm_flows_to_CPC_cat: pd.DataFrame,
-                                         new_end_use_types: pd.DataFrame) -> None:
+                                         db: list[dict], mapping_esm_flows_to_CPC_cat: pd.DataFrame,
+                                         new_end_use_types: pd.DataFrame = None, new_db_name: str = 'default',
+                                         tech_specifics: pd.DataFrame = None,
+                                         technology_compositions: pd.DataFrame = None,
+                                         tech_to_remove_layers: pd.DataFrame = None, write_database: bool = True,
+                                         return_obj: str = None) -> None | list[dict]:
     """
     Create a new database with the ESM results
 
@@ -265,16 +259,30 @@ def create_new_database_with_esm_results(mapping: pd.DataFrame, model: pd.DataFr
     :param accepted_locations: list of accepted locations for the regionalization
     :param unit_conversion: unit conversion factors
     :param db: list of activities in the LCI database
-    :param new_db_name: name of the new database
+    :param new_db_name: name of the new database. By default, it is the name of the original database with
+        '_with_ESM_results'
     :param tech_specifics: technology-specific information
     :param technology_compositions: technology compositions
     :param tech_to_remove_layers: technologies to remove from the result LCI datasets
     :param mapping_esm_flows_to_CPC_cat: mapping file between ESM flows and CPC categories
     :param new_end_use_types: adapt end use types to fit the results LCI datasets mapping
-    :return: None
+    :param write_database: if True, write the new database in the brightway2 project
+    :param return_obj: if 'database', return the new database, else does not return anything
+    :return: None or the new database as a list of dictionaries if 'return_obj' is 'database
     """
+
+    if tech_specifics is None:
+        tech_specifics = pd.DataFrame(columns=['Name', 'Specifics', 'Amount'])
+    if technology_compositions is None:
+        technology_compositions = pd.DataFrame(columns=['Name', 'Components'])
+    if tech_to_remove_layers is None:
+        tech_to_remove_layers = pd.DataFrame(columns=['Layers', 'Technologies'])
+    if new_end_use_types is None:
+        new_end_use_types = pd.DataFrame(columns=['Name', 'Search type', 'Old', 'New'])
+    if new_db_name == 'default':
+        new_db_name = f"{db[0]['database']}_with_ESM_results"
+
     flows = mapping[mapping.Type == 'Flow']
-    N = mapping.shape[1]
 
     already_done = []
     perform_d_c = []
@@ -397,6 +405,8 @@ def create_new_database_with_esm_results(mapping: pd.DataFrame, model: pd.DataFr
     model = model.pivot(index='Name', columns='Flow', values='Amount').reset_index()
     model.fillna(0, inplace=True)
 
+    N = double_counting_act.shape[1]
+
     try:
         technology_compositions_dict = {key: ast.literal_eval(value) for key, value in dict(zip(
             technology_compositions.Name, technology_compositions.Components
@@ -426,4 +436,8 @@ def create_new_database_with_esm_results(mapping: pd.DataFrame, model: pd.DataFr
         create_new_db=False,
     )
 
-    write_wurst_database_to_brightway(db, new_db_name)
+    if write_database:
+        write_wurst_database_to_brightway(db, new_db_name)
+    if return_obj == 'database':
+        db = change_database_name(db, new_db_name)
+        return db
