@@ -758,7 +758,10 @@ def create_esm_database(mapping: pd.DataFrame, model: pd.DataFrame, mapping_esm_
                         regionalized_database: bool = False, regionalized_biosphere_db: list[dict] = None,
                         write_database: bool = True, return_obj: str = 'mapping') -> pd.DataFrame | list[dict]:
     """
-    Create the ESM database after double counting removal
+    Create the ESM database after double counting removal. Three csv files summarizing the double-counting removal
+    process are automatically saved in the results' folder: double_counting_removal.csv (amount of removed flows),
+    double_counting_removal_count.csv (number of flows set to zero), and removed_flows_list.csv (specific activities in
+    which the flows were removed).
 
     :param mapping: mapping file
     :param model: model file
@@ -778,7 +781,8 @@ def create_esm_database(mapping: pd.DataFrame, model: pd.DataFrame, mapping_esm_
         files
     :param return_obj: if 'mapping', return the mapping file as a pd.DataFrame, if 'database', return the ESM database
         as a list of dictionaries
-    :return: mapping file (updated with new codes)
+    :return: mapping file (updated with new codes) or the ESM database as a list of dictionaries, depending on the
+        'return_obj' parameter. Three csv files are also automatically saved in the results' folder.
     """
     db_dict_name = database_list_to_dict(main_database, 'name', 'technosphere')
     db_dict_code = database_list_to_dict(main_database, 'code', 'technosphere')
@@ -906,8 +910,31 @@ def create_esm_database(mapping: pd.DataFrame, model: pd.DataFrame, mapping_esm_
 
         double_counting_removal_amount = pd.DataFrame.from_dict(ei_removal_amount, orient='index')
         double_counting_removal_count = pd.DataFrame.from_dict(ei_removal_count, orient='index')
-        double_counting_removal_amount.to_csv(f"{results_path_file}double_counting_removal.csv")
-        double_counting_removal_count.to_csv(f"{results_path_file}double_counting_removal_count.csv")
+
+        double_counting_removal_amount.reset_index(inplace=True)
+        double_counting_removal_amount = double_counting_removal_amount.melt(
+            id_vars=['index'],
+            value_vars=double_counting_removal_amount.columns[1:]
+        )
+        double_counting_removal_amount.rename(columns={'index': 'Name', 'variable': 'Flow', 'value': 'Amount'},
+                                              inplace=True)
+        double_counting_removal_amount.drop(
+            double_counting_removal_amount[double_counting_removal_amount.Amount == 0].index, inplace=True
+        )
+
+        double_counting_removal_count.reset_index(inplace=True)
+        double_counting_removal_count = double_counting_removal_count.melt(
+            id_vars=['index'],
+            value_vars=double_counting_removal_count.columns[1:]
+        )
+        double_counting_removal_count.rename(columns={'index': 'Name', 'variable': 'Flow', 'value': 'Amount'},
+                                             inplace=True)
+        double_counting_removal_count.drop(
+            double_counting_removal_count[double_counting_removal_count.Amount == 0].index, inplace=True
+        )
+
+        double_counting_removal_amount.to_csv(f"{results_path_file}double_counting_removal.csv", index=False)
+        double_counting_removal_count.to_csv(f"{results_path_file}double_counting_removal_count.csv", index=False)
         df_flows_set_to_zero.to_csv(f"{results_path_file}removed_flows_list.csv", index=False)
 
     if return_obj == 'mapping':
