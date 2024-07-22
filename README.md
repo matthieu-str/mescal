@@ -7,8 +7,8 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)][License]
 [![Read the documentation at https://mescal.readthedocs.io/](https://img.shields.io/readthedocs/mescal/latest.svg?label=Read%20the%20Docs)][read the docs]
 [![Tests](https://github.com/matthieu-str/mescal/actions/workflows/python-test.yml/badge.svg)][tests]
-[![Codecov](https://codecov.io/gh/matthieu-str/mescal/branch/main/graph/badge.svg)][codecov]
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.12738456.svg)](https://doi.org/10.5281/zenodo.12738456)
+[![Codecov](https://codecov.io/gh/matthieu-str/mescal/graph/badge.svg?token=7VUAW95C24)][codecov]
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.12738456.svg)][doi]
 
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)][pre-commit]
 [![Black](https://img.shields.io/badge/code%20style-black-000000.svg)][black]
@@ -16,9 +16,10 @@
 [pypi status]: https://pypi.org/project/mescal/
 [read the docs]: https://mescal.readthedocs.io/
 [tests]: https://github.com/matthieu-str/mescal/actions?workflow=Tests
-[codecov]: https://app.codecov.io/gh/matthieu-str/mescal
+[codecov]: https://codecov.io/gh/matthieu-str/mescal
 [pre-commit]: https://github.com/pre-commit/pre-commit
 [black]: https://github.com/psf/black
+[doi]: https://doi.org/10.5281/zenodo.12738456
 
 ## What is Mescal?
 
