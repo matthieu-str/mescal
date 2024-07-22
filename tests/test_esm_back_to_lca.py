@@ -401,6 +401,8 @@ def test_create_new_database_with_esm_results():
         "market for heat, from ESM results", "heat", "CH", 'ecoinvent-3.9.1-cutoff_with_ESM_results'
     ]
     new_act_technosphere_flows = get_technosphere_flows(new_act)
+
+    # Test the entries of the new dataset
     assert len(new_act_technosphere_flows) == 2  # single and double-stage HPs flows
     assert (((new_act_technosphere_flows[0]['name'] == 'market for heat production by heat pump')
             & (new_act_technosphere_flows[1]['name'] == "heat production by double-stage heat pump"))
@@ -412,3 +414,20 @@ def test_create_new_database_with_esm_results():
     else:
         assert new_act_technosphere_flows[1]['amount'] == 10 / (10 + 25)
         assert new_act_technosphere_flows[0]['amount'] == 25 / (10 + 25)
+
+    # Test that double-counting removal on the construction flows has been done
+    hp_act = new_db_dict_name[
+        "market for heat production by heat pump", "heat", "CH", 'ecoinvent-3.9.1-cutoff_with_ESM_results'
+    ]
+    hp_act_technosphere_flows = get_technosphere_flows(hp_act)
+    for exc in hp_act_technosphere_flows:
+        if exc['name'] == 'heat pump production':
+            assert exc['amount'] == 0
+
+    double_stage_hp_act = new_db_dict_name[
+        "heat production by double-stage heat pump", "heat", "CH", 'ecoinvent-3.9.1-cutoff_with_ESM_results'
+    ]
+    double_stage_hp_act_technosphere_flows = get_technosphere_flows(double_stage_hp_act)
+    for exc in double_stage_hp_act_technosphere_flows:
+        if exc['name'] == 'double-stage heat pump production':
+            assert exc['amount'] == 0
