@@ -41,15 +41,11 @@ def change_location_activity(activity: str, location: str, database: str, locati
 
     ds = [a for a in wurst.searching.get_many(db, *act_filter)]
 
-    print(ds)
-
     for act in ds:
         if activity_type == 'technosphere':
             locations.append(act['location'])
         elif activity_type == 'biosphere':
             locations.append(act['name'].split(', ')[-1])
-
-    print(locations)
 
     # special case of Quebec for electricity imports that should come from the US
     if (esm_region == 'CA-QC') & (esm_tech_name in ['ELECTRICITY_EHV',
