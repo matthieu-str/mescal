@@ -154,8 +154,10 @@ def update_mapping_file(mapping: pd.DataFrame, change_report: pd.DataFrame, unit
         tech_type = mapping['Type'].iloc[i]
         database = mapping['Database'].iloc[i]
 
-        # REMIND regions are not in the change report
-        if activity_geo in ['CAZ', 'CHA', 'NEU', 'EUR', 'IND', 'JPN', 'LAM', 'MEA', 'OAS', 'REF', 'SSA', 'USA']:
+        # REMIND and IMAGE regions are not in the change report
+        if activity_geo in ['CAZ', 'CHA', 'NEU', 'EUR', 'IND', 'JPN', 'LAM', 'MEA', 'OAS', 'REF', 'SSA', 'USA',
+                            'RSAM', 'RCAM', 'INDO', 'RSAF', 'CEU', 'SAF', 'INDIA', 'BRA', 'STAN', 'WAF', 'CHN', 'NAF',
+                            'UKR', 'RSAS', 'RUS', 'SEAS', 'KOR', 'JAP', 'EAF', 'TUR', 'CAN', 'MEX', 'WEU']:
             activity_geo = 'RoW'
 
         if [activity_prod, activity_name, activity_geo] in changed_activities:
