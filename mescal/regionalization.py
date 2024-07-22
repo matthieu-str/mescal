@@ -64,12 +64,10 @@ def regionalize_activity_foreground(act: dict, accepted_locations: list[str], ta
 
         if regionalized_database:
             biosphere_flows = get_biosphere_flows(new_act)
-            print(biosphere_flows)
             for flow in biosphere_flows:
                 if flow['database'] == 'biosphere3_regionalized_flows':  # if the biosphere flow is regionalized
                     current_loc = flow['name'].split(', ')[-1]
                     generic_name = ', '.join(flow['name'].split(', ')[:-1])
-                    print(flow['categories'], generic_name)
                     new_location = change_location_activity(
                         activity=generic_name,
                         categories=flow['categories'],
