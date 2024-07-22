@@ -151,7 +151,7 @@ DEC_COGEN_GAS,Operation,15.80333626,megajoule,kilowatt hour
 DEC_COGEN_GAS_CHP,Construction,1.0,unit,unit
 DEC_COGEN_GAS_ELEC,Construction,1.0,unit,unit
 DEC_COGEN_GAS_HEAT,Construction,1.0,unit,unit
-DEC_COGEN_OIL,Construction,0.00455,unit,kilowatt
+DEC_COGEN_OIL,Construction,0.004535,unit,kilowatt
 DEC_COGEN_OIL,Operation,3.6,megajoule,kilowatt hour
 DEC_COGEN_OIL_BOILER,Construction,100.0,unit,unit
 DEC_COGEN_OIL_TANK,Construction,0.6666666667,unit,unit
@@ -267,8 +267,7 @@ H2_EXP_ML_COGEN,Operation,0.03003003003,kilogram,kilowatt hour
 H2_HP,Resource,0.03003003003,kilogram,kilowatt hour
 H2_LP,Resource,0.03003003003,kilogram,kilowatt hour
 H2_MP,Resource,0.03003003003,kilogram,kilowatt hour
-H2_STO,Construction,2.085418752e-05,unit,kilowatt hour
-H2_STO,Operation,0.03003003003,kilogram,kilowatt hour
+H2_STO,Construction,0.03003003003,kilogram,kilowatt hour
 HP_H2_GRID,Construction,5.202312139e-06,kilometer,kilowatt
 HP_NG_GRID,Construction,1.319218241e-06,kilometer,kilowatt
 HT_LT_DEC,Operation,3.6,megajoule,kilowatt hour
@@ -426,7 +425,7 @@ TRAFO_MH,Operation,1.0,kilowatt hour,kilowatt hour
 TRAFO_ML,Operation,1.0,kilowatt hour,kilowatt hour
 TRAIN_DIESEL,Construction,1.404664723e-05,unit,person kilometer per hour
 TRAIN_DIESEL,Operation,1.0,person kilometer,person kilometer
-TRAIN_ELEC,Construction,1.404664723e-05,unit,person kilometer per hour
+TRAIN_ELEC,Construction,1.755830904e-05,unit,person kilometer per hour
 TRAIN_ELEC,Operation,1.0,person kilometer,person kilometer
 TRAIN_FREIGHT,Construction,2.400576923e-05,unit,ton kilometer per hour
 TRAIN_FREIGHT,Operation,1.0,ton kilometer,ton kilometer

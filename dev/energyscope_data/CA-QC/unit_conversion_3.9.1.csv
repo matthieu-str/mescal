@@ -310,7 +310,7 @@ DEC_COGEN_GAS,Operation,15.80333626,megajoule,kilowatt hour
 DEC_COGEN_GAS_CHP,Construction,1.0,unit,unit
 DEC_COGEN_GAS_ELEC,Construction,1.0,unit,unit
 DEC_COGEN_GAS_HEAT,Construction,1.0,unit,unit
-DEC_COGEN_OIL,Construction,0.00455,unit,kilowatt
+DEC_COGEN_OIL,Construction,0.004535,unit,kilowatt
 DEC_COGEN_OIL,Operation,3.6,megajoule,kilowatt hour
 DEC_COGEN_OIL_BOILER,Construction,100.0,unit,unit
 DEC_COGEN_OIL_TANK,Construction,0.6666666667,unit,unit
@@ -435,8 +435,7 @@ H2_LP,Resource,0.03003003003,kilogram,kilowatt hour
 H2_MP,Resource,0.03003003003,kilogram,kilowatt hour
 H2_NG_CCGT,Construction,2.5e-06,unit,kilowatt
 H2_NG_CCGT,Operation,1.0,kilowatt hour,kilowatt hour
-H2_STO,Construction,2.085418752e-05,unit,kilowatt hour
-H2_STO,Operation,0.03003003003,kilogram,kilowatt hour
+H2_STO,Construction,0.03003003003,kilogram,kilowatt hour
 HP_H2_GRID,Construction,5.202312139e-06,kilometer,kilowatt
 HP_NG_GRID,Construction,1.319218241e-06,kilometer,kilowatt
 HT_LT_DEC,Operation,3.6,megajoule,kilowatt hour
@@ -732,7 +731,7 @@ SOEC_ELECTROLYSIS_PLANT,Construction,1.0,unit,unit
 SOEC_ELECTROLYSIS_PLANT_DECOM,Construction,-1.0,unit,unit
 SOEC_ELECTROLYSIS_STACK,Construction,1.0,unit,unit
 SOEC_ELECTROLYSIS_STACK_DECOM,Construction,-1.0,unit,unit
-SOFC,Construction,1.0,unit,kilowatt
+SOFC,Construction,0.008,unit,kilowatt
 SOFC,Operation,1.0,kilowatt hour,kilowatt hour
 STEEL_MAKING,Construction,5.727692308e-05,unit,kilogram per hour
 STEEL_MAKING,Operation,1.0,kilogram,kilogram
