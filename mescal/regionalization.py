@@ -30,6 +30,8 @@ def regionalize_activity_foreground(act: dict, accepted_locations: list[str], ta
 
     else:
         new_act = copy.deepcopy(act)
+        new_act_name = new_act['name']
+        new_act_product = new_act['reference product']
         new_act['comment'] = f'This LCI dataset has been adapted to {target_region}. ' + new_act.get('comment', '')
         new_act['location'] = target_region
         prod_flow = get_production_flow(new_act)
@@ -44,6 +46,13 @@ def regionalize_activity_foreground(act: dict, accepted_locations: list[str], ta
             techno_act_product = techno_act['reference product']
             techno_act_location = techno_act['location']
             techno_act_database = techno_act['database']
+
+            # if a flow is the same as the product (e.g., markets) we do not change the location to avoid infinite loops
+            if (techno_act_name == new_act_name) & (techno_act_product == new_act_product):
+                continue
+
+            if techno_act_location in accepted_locations:
+                continue
 
             new_location = change_location_activity(
                 product=techno_act_product,
@@ -61,12 +70,15 @@ def regionalize_activity_foreground(act: dict, accepted_locations: list[str], ta
             flow['code'] = new_techno_act['code']
             flow['location'] = new_techno_act['location']
             flow['input'] = (new_techno_act['database'], new_techno_act['code'])
+            flow['comment'] = f'Changed from {techno_act_location} to {new_location}' + flow.get('comment', '')
 
         if regionalized_database:
             biosphere_flows = get_biosphere_flows(new_act)
             for flow in biosphere_flows:
                 if flow['database'] == 'biosphere3_regionalized_flows':  # if the biosphere flow is regionalized
                     current_loc = flow['name'].split(', ')[-1]
+                    if current_loc in accepted_locations:
+                        continue
                     generic_name = ', '.join(flow['name'].split(', ')[:-1])
                     new_location = change_location_activity(
                         activity=generic_name,
@@ -86,5 +98,6 @@ def regionalize_activity_foreground(act: dict, accepted_locations: list[str], ta
                     flow['name'] = new_biosphere_act['name']
                     flow['code'] = new_biosphere_act['code']
                     flow['input'] = (new_biosphere_act['database'], new_biosphere_act['code'])
+                    flow['comment'] = f'Changed from {current_loc} to {new_location}' + flow.get('comment', '')
 
     return new_act
