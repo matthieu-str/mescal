@@ -1,11 +1,11 @@
 Name,Specifics,Amount
 CO2_TO_DIESEL,Background search,2
 CO2_TO_JETFUELS,Background search,0
-CROPS_TO_JETFUELS,Background search,2
+CROPS_TO_JETFUELS,Background search,4
 FT,Background search,3
-GASIFICATION_SNG,Background search,1
-HYDRO_GAS,Background search,1
-HYDRO_GAS_CHP,Background search,1
+GASIFICATION_SNG,Background search,2
+HYDRO_GAS,Background search,2
+HYDRO_GAS_CHP,Background search,2
 AEC_OG,Decommissioning,N/A
 ALKALINE_ELECTROLYSIS,Decommissioning,N/A
 DAC_HT,Decommissioning,N/A
