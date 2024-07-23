@@ -244,6 +244,7 @@ def background_search(act: dict, k: int, k_lim: int, amount: float, explore_type
                                     # Modify the flow between the activity and its inventory
                                     flow['database'] = esm_db_name
                                     flow['code'] = new_code
+                                    flow['input'] = (esm_db_name, new_code)
                                 else:
                                     new_act = techno_act
 
@@ -298,6 +299,7 @@ def background_search(act: dict, k: int, k_lim: int, amount: float, explore_type
                                     # Modify the flow between the activity and its inventory and save it
                                     flow['database'] = esm_db_name
                                     flow['code'] = new_code
+                                    flow['input'] = (esm_db_name, new_code)
                                 else:
                                     new_act = techno_act
 
@@ -591,16 +593,21 @@ def double_counting_removal(df_op: pd.DataFrame, df_constr: pd.DataFrame, esm_db
                 act_flow = db_dict_code[(database, code)]
                 res_categories = mapping_CPC_to_esm_flows_dict.get(dict(act_flow['classifications']).get('CPC', ''), '')
 
-                flows_set_to_zero.append([new_act_op_d_c['reference product'],  # activity in which the flow is removed
-                                          new_act_op_d_c['name'],
-                                          new_act_op_d_c['location'],
-                                          new_act_op_d_c['database'],
-                                          old_amount, flow['unit'],  # quantity and unit
-                                          act_flow['reference product'],  # removed flow
-                                          act_flow['name'],
-                                          act_flow['location']
-                                          ]
-                                         )
+                flows_set_to_zero.append([
+                    tech,
+                    new_act_op_d_c['reference product'],  # activity in which the flow is removed
+                    new_act_op_d_c['name'],
+                    new_act_op_d_c['location'],
+                    new_act_op_d_c['database'],
+                    new_act_op_d_c['code'],
+                    old_amount, flow['unit'],  # quantity and unit
+                    act_flow['reference product'],  # removed flow
+                    act_flow['name'],
+                    act_flow['location'],
+                    act_flow['database'],
+                    act_flow['code'],
+                ])
+
                 if create_new_db:
                     if 'OWN_CONSTRUCTION' in res_categories:
                         # replace construction flow input by the one added before in the ESM database
@@ -894,9 +901,11 @@ def create_esm_database(mapping: pd.DataFrame, model: pd.DataFrame, mapping_esm_
             change_carbon_flow(db_name=esm_db_name, activity_name='DAC_HT, Operation')
 
         df_flows_set_to_zero = pd.DataFrame(data=flows_set_to_zero,
-                                            columns=['Product', 'Activity', 'Location', 'Database', 'Amount', 'Unit',
-                                                     'Removed flow product', 'Removed flow activity',
-                                                     'Removed flows location'])
+                                            columns=[
+                                                'Name', 'Product', 'Activity', 'Location', 'Database', 'Code', 'Amount',
+                                                'Unit', 'Removed flow product', 'Removed flow activity',
+                                                'Removed flow location', 'Removed flow database', 'Removed flow code'
+                                            ])
         df_flows_set_to_zero.drop_duplicates(inplace=True)
 
         ei_removal_amount = {}
