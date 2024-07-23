@@ -19,8 +19,8 @@ ETHANE,Ethane,['34: Basic chemicals']
 ETHANOL,Ethanol,['35491: Biodiesel']
 ETHYLBENZENE,Ethylbenzene,"['34110: Hydrocarbons and their halogenated, sulphonated, nitrated or nitrosated derivatives']"
 ETHYLENE,Ethylene,"['33421: Ethylene, propylene, butylene, butadiene', '3342: Ethylene, propylene, butylene, butadiene and other petroleum gases or gaseous hydrocarbons, except natural gas']"
-GASOLINE,Gasoline,"['33370: Fuel oils n.e.c.', '3337: Fuel oils n.e.c.', '33360: Gas oil', '3336: Gas oil', '33311: Motor gasoline']"
-GASOLINE_S,Gasoline,"['33370: Fuel oils n.e.c.', '3337: Fuel oils n.e.c.', '33360: Gas oil', '3336: Gas oil', '33311: Motor gasoline']"
+GASOLINE,Gasoline,"['33370: Fuel oils n.e.c.', '3337: Fuel oils n.e.c.', '33360: Gas oil', '3336: Gas oil', '33311: Motor gasoline', '333: Petroleum oils and oils obtained from bituminous materials, other than crude; preparations n.e.c. containing by […]']"
+GASOLINE_S,Gasoline,"['33370: Fuel oils n.e.c.', '3337: Fuel oils n.e.c.', '33360: Gas oil', '3336: Gas oil', '33311: Motor gasoline', '333: Petroleum oils and oils obtained from bituminous materials, other than crude; preparations n.e.c. containing by […]']"
 H2_EHP,Hydrogen extra high pressure,"['34210: Hydrogen, nitrogen, oxygen, carbon dioxide and rare gases; inorganic oxygen compounds of non-metals n.e.c.', '3421: Hydrogen, nitrogen, oxygen, carbon dioxide and rare gases; inorganic oxygen compounds of non-metals n.e.c.']"
 H2_HP,Hydrogen high pressure,"['34210: Hydrogen, nitrogen, oxygen, carbon dioxide and rare gases; inorganic oxygen compounds of non-metals n.e.c.', '3421: Hydrogen, nitrogen, oxygen, carbon dioxide and rare gases; inorganic oxygen compounds of non-metals n.e.c.']"
 H2_LP,Hydrogen low pressure,"['34210: Hydrogen, nitrogen, oxygen, carbon dioxide and rare gases; inorganic oxygen compounds of non-metals n.e.c.', '3421: Hydrogen, nitrogen, oxygen, carbon dioxide and rare gases; inorganic oxygen compounds of non-metals n.e.c.']"
