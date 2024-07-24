@@ -278,6 +278,7 @@ def background_search(act: dict, k: int, k_lim: int, amount: float, explore_type
                     if (
                             (flow['amount'] > 0)
                             & (flow['unit'] not in ['unit', 'megajoule', 'kilowatt hour', 'ton kilometer'])
+                            & (flow['product'] not in ['tap water'])
                     ):
                         # we do not consider construction, transport and energy flows (we typically target fuel flows
                         # in kg or m3) as well as negative flows
