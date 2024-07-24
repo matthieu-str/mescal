@@ -281,7 +281,8 @@ def update_unit_conversion_file(unit_conversion: pd.DataFrame, unit_changes: lis
                                                        ].index)
 
             # add new row
-            unit_conversion.loc[len(unit_conversion)] = [unit_changes[i][0][0], unit_changes[i][0][1], new_value,
-                                                         unit_changes[i][3], unit_esm]
+            unit_conversion.loc[unit_conversion.index.max() + 1] = [
+                unit_changes[i][0][0], unit_changes[i][0][1], new_value, unit_changes[i][3], unit_esm
+            ]
 
     return unit_conversion
