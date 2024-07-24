@@ -1,6 +1,6 @@
 Flow,Description,CPC
 BENZENE,Benzene,"['33100: Coke and semi-coke of coal, of lignite or of peat; retort carbon']"
-BIO_DIESEL,Bio-diesel,['35491: Biodiesel']
+BIO_DIESEL,Bio-diesel,"['35491: Biodiesel', '33370: Fuel oils n.e.c.', '3337: Fuel oils n.e.c.', '33360: Gas oil', '3336: Gas oil']"
 CO2_A,Carbon dioxide (concentrated emissions),['34210b: Carbon dioxide and monoxide']
 CO2_C,Carbon dioxide (captured),['34210b: Carbon dioxide and monoxide']
 CO2_CS,Carbon dioxide (captured & stored),['34210b: Carbon dioxide and monoxide']
