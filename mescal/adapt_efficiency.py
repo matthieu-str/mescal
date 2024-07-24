@@ -11,8 +11,13 @@ def compute_efficiency_esm(row: pd.Series, model: pd.DataFrame) -> float:
     :param model: input and output flows of the ESM model
     :return: efficiency of the process
     """
-    input_amount = model[(model.Name == row.Name) & (model.Flow == row.Flow)].Amount.values[0]
-    return -1.0 / input_amount  # had negative sign as it is an input
+    try:
+        input_amount = model[(model.Name == row.Name) & (model.Flow == row.Flow)].Amount.values[0]
+    except IndexError:
+        raise ValueError(f'The model has no technology {row.Name}, or the technology {row.Name} has no {row.Name} '
+                         f'input flow.')
+    else:
+        return -1.0 / input_amount  # had negative sign as it is an input
 
 
 def get_lca_input_quantity(row: pd.Series, double_counting_removal: pd.DataFrame) -> float:
@@ -64,7 +69,7 @@ def get_lca_input_flow_unit_or_product(row: pd.Series, output_type: str, mapping
 
     if output_type == 'unit':
         if len(set(unit_list)) > 1:
-            raise ValueError(f'Several units possible for the same type of flow in {row.Name}: {set(unit_list)}')
+            raise ValueError(f'Several units possible for flow {row.Flow} in {row.Name}: {set(unit_list)}')
         elif len(set(unit_list)) == 0:
             print(f'No flow found for type {row.Flow} in {row.Name}. This technology will thus be removed.')
             return None
@@ -101,15 +106,15 @@ def adapt_biosphere_flows_to_efficiency_difference(act: dict, efficiency_ratio: 
             pass
         else:
             exc['amount'] *= efficiency_ratio
-            act['comment'] = (f'Biosphere flows amounts have been multiplied by {efficiency_ratio} to correct the '
-                              f'efficiency difference between ESM and LCA.' + act.get('comment', ''))
+            exc['comment'] = (f'EF multiplied by {efficiency_ratio} (efficiency).' + act.get('comment', ''))
     return act
 
 
 def correct_esm_and_lca_efficiency_differences(db: list[dict], model: pd.DataFrame, efficiency: pd.DataFrame,
                                                mapping_esm_flows_to_CPC: pd.DataFrame, removed_flows: pd.DataFrame,
-                                               unit_conversion: pd.DataFrame, double_counting_removal: pd.DataFrame) \
-        -> list[dict]:
+                                               unit_conversion: pd.DataFrame, double_counting_removal: pd.DataFrame,
+                                               output_type: str = 'database') \
+        -> list[dict] | pd.DataFrame | tuple[list[dict], pd.DataFrame]:
     """
     Correct the efficiency differences between ESM and LCA for the technologies in the database
 
@@ -120,6 +125,9 @@ def correct_esm_and_lca_efficiency_differences(db: list[dict], model: pd.DataFra
     :param removed_flows: dataframe containing the name and amount of removed flows during double counting removal
     :param unit_conversion: dataframe containing the conversion factors between different units
     :param double_counting_removal: dataframe containing the scaled amounts removed during double counting removal
+    :param output_type: can be either 'database', 'dataframe', or 'both'. If 'database', the corrected LCI database is
+        returned. If 'dataframe', the efficiency dataframe is returned. If 'both', both are returned
+        (database, dataframe).
     :return: the corrected LCI database
     """
     db_dict_name = database_list_to_dict(db, 'name')
@@ -148,6 +156,14 @@ def correct_esm_and_lca_efficiency_differences(db: list[dict], model: pd.DataFra
     )
     efficiency.drop(columns=['Name_to_remove', 'LCA'], inplace=True)
     efficiency.rename(columns={'Value': 'Input conversion factor'}, inplace=True)
+
+    missing_units = efficiency[efficiency['Input conversion factor'].isna()][
+        ['LCA input product', 'LCA input unit']].values.tolist()
+    missing_units = [tuple(x) + ('kilowatt hour',) for x in set(tuple(x) for x in missing_units)]
+    if len(missing_units) > 0:
+        raise ValueError(f'No conversion factor found for the following units (product, unit from, unit to): '
+                         f'{missing_units}')
+
     efficiency['LCA efficiency'] = efficiency['Input conversion factor'] / (
             efficiency['Output conversion factor'] * efficiency['LCA input quantity'])
 
@@ -171,4 +187,9 @@ def correct_esm_and_lca_efficiency_differences(db: list[dict], model: pd.DataFra
             efficiency_ratio = efficiency['LCA efficiency'].iloc[i] / efficiency['ESM efficiency'].iloc[i]
             act = adapt_biosphere_flows_to_efficiency_difference(act, efficiency_ratio)
 
-    return db
+    if output_type == 'dataframe':
+        return efficiency
+    elif output_type == 'database':
+        return db
+    elif output_type == 'both':
+        return db, efficiency
