@@ -1,6 +1,7 @@
 from .regionalization import *
 import ast
 from .modify_inventory import change_carbon_flow
+from .adapt_efficiency import correct_esm_and_lca_efficiency_differences
 
 
 def create_new_activity(name: str, act_type: str, current_code: str, new_code: str, database_name: str, db: list[dict],
@@ -763,7 +764,8 @@ def create_esm_database(mapping: pd.DataFrame, model: pd.DataFrame, mapping_esm_
                         regionalize_foregrounds: bool = False, accepted_locations: list[str] = None,
                         target_region: str = None, locations_ranking: list[str] = None,
                         regionalized_database: bool = False, regionalized_biosphere_db: list[dict] = None,
-                        write_database: bool = True, return_obj: str = 'mapping') -> pd.DataFrame | list[dict]:
+                        write_database: bool = True, return_obj: str = 'mapping', efficiency: pd.DataFrame = None,
+                        unit_conversion: pd.DataFrame = None) -> pd.DataFrame | list[dict]:
     """
     Create the ESM database after double counting removal. Three csv files summarizing the double-counting removal
     process are automatically saved in the results' folder: double_counting_removal.csv (amount of removed flows),
@@ -788,6 +790,9 @@ def create_esm_database(mapping: pd.DataFrame, model: pd.DataFrame, mapping_esm_
         files
     :param return_obj: if 'mapping', return the mapping file as a pd.DataFrame, if 'database', return the ESM database
         as a list of dictionaries
+    :param efficiency: file containing the ESM (Name, Flow) couples to correct regarding efficiency differences between
+        the ESM and LCI database
+    :param unit_conversion: file containing unit conversion factors
     :return: mapping file (updated with new codes) or the ESM database as a list of dictionaries, depending on the
         'return_obj' parameter. Three csv files are also automatically saved in the results' folder.
     """
@@ -809,6 +814,9 @@ def create_esm_database(mapping: pd.DataFrame, model: pd.DataFrame, mapping_esm_
     except ValueError:
         pass
 
+    if (efficiency is not None) & (unit_conversion is None):
+        raise ValueError('Unit conversion file is needed for efficiency differences correction. Please provide it.')
+
     technology_compositions_dict = {key: value for key, value in dict(zip(
         technology_compositions.Name, technology_compositions.Components
     )).items()}
@@ -825,15 +833,15 @@ def create_esm_database(mapping: pd.DataFrame, model: pd.DataFrame, mapping_esm_
     # Creating a new code for each activity to be added
     mapping['New_code'] = mapping.apply(lambda row: random_code(), axis=1)
 
-    model = model.pivot(index='Name', columns='Flow', values='Amount').reset_index()
-    model.fillna(0, inplace=True)
+    model_pivot = model.pivot(index='Name', columns='Flow', values='Amount').reset_index()
+    model_pivot.fillna(0, inplace=True)
 
     N = mapping.shape[1]
 
     mapping_op = mapping[mapping['Type'] == 'Operation']
     mapping_constr = mapping[mapping['Type'] == 'Construction']
 
-    mapping_op = pd.merge(mapping_op, model, on='Name', how='left')
+    mapping_op = pd.merge(mapping_op, model_pivot, on='Name', how='left')
     mapping_op['CONSTRUCTION'] = mapping_op.shape[0] * [0]
     (mapping_op, background_search_act, no_construction_list,
      no_background_search_list) = add_technology_specifics(mapping_op, tech_specifics)
@@ -891,14 +899,7 @@ def create_esm_database(mapping: pd.DataFrame, model: pd.DataFrame, mapping_esm_
         db_dict_name_reg_biosphere=db_dict_name_reg_biosphere,
     )
 
-    esm_db = [act for act in main_database if act['database'] == esm_db_name]
     if write_database:
-        write_wurst_database_to_brightway(esm_db, esm_db_name)
-
-        if 'DAC_LT, Operation' in [act['name'] for act in esm_db]:
-            change_carbon_flow(db_name=esm_db_name, activity_name='DAC_LT, Operation')
-        if 'DAC_HT, Operation' in [act['name'] for act in esm_db]:
-            change_carbon_flow(db_name=esm_db_name, activity_name='DAC_HT, Operation')
 
         df_flows_set_to_zero = pd.DataFrame(data=flows_set_to_zero,
                                             columns=[
@@ -942,13 +943,33 @@ def create_esm_database(mapping: pd.DataFrame, model: pd.DataFrame, mapping_esm_
             double_counting_removal_count[double_counting_removal_count.Amount == 0].index, inplace=True
         )
 
+        if efficiency is not None:
+            main_database = correct_esm_and_lca_efficiency_differences(
+                db=main_database,
+                model=model,
+                efficiency=efficiency,
+                mapping_esm_flows_to_CPC=mapping_esm_flows_to_CPC_cat,
+                removed_flows=df_flows_set_to_zero,
+                unit_conversion=unit_conversion,
+                double_counting_removal=double_counting_removal_amount,
+            )
+
         double_counting_removal_amount.to_csv(f"{results_path_file}double_counting_removal.csv", index=False)
         double_counting_removal_count.to_csv(f"{results_path_file}double_counting_removal_count.csv", index=False)
         df_flows_set_to_zero.to_csv(f"{results_path_file}removed_flows_list.csv", index=False)
 
+        esm_db = [act for act in main_database if act['database'] == esm_db_name]
+        write_wurst_database_to_brightway(esm_db, esm_db_name)
+
+        # Change carbon flow of DAC from biogenic to fossil
+        if 'DAC_LT, Operation' in [act['name'] for act in esm_db]:
+            change_carbon_flow(db_name=esm_db_name, activity_name='DAC_LT, Operation')
+        if 'DAC_HT, Operation' in [act['name'] for act in esm_db]:
+            change_carbon_flow(db_name=esm_db_name, activity_name='DAC_HT, Operation')
+
     if return_obj == 'mapping':
         return mapping
     elif return_obj == 'database':
-        return esm_db
+        return [act for act in main_database if act['database'] == esm_db_name]
     else:
         raise ValueError("return_obj must be 'mapping' or 'database'")

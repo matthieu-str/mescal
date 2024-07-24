@@ -30,6 +30,7 @@ __all__ = (
     "update_unit_conversion_file",
     "merge_databases",
     "ecoinvent_unit_convention",
+    "correct_esm_and_lca_efficiency_differences",
 )
 
 __version__ = "1.0.1"
@@ -44,3 +45,4 @@ from .normalization import *
 from .generate_lcia_obj_ampl import *
 from .esm_back_to_lca import *
 from .change_ecoinvent import *
+from .adapt_efficiency import *
