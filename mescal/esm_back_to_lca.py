@@ -133,18 +133,27 @@ def create_or_modify_activity_from_esm_results(db: list[dict], original_activity
                 activity_unit = db_dict_name[activity_name, activity_prod, activity_location, activity_database]['unit']
 
                 if activity_unit != original_activity_unit:
-                    try:
+                    if original_activity_prod.split(',')[0] == 'transport':
                         conversion_factor = unit_conversion[
-                            (unit_conversion.Name.apply(lambda x: x in original_activity_prod))
-                            & (unit_conversion.ESM == activity_unit)
-                            & (unit_conversion.LCA == original_activity_unit)
-                            ].Value.iloc[0]
-                    except IndexError:
-                        raise ValueError(f'The unit conversion factor between {activity_unit} and '
-                                         f'{original_activity_unit} for {original_activity_prod} '
-                                         f'is not in the unit conversion file.')
+                            (unit_conversion.Name == tech)
+                            & (unit_conversion.ESM == original_activity_unit)
+                            & (unit_conversion.LCA == activity_unit)
+                            ].Value.values
                     else:
-                        amount /= conversion_factor
+                        conversion_factor = unit_conversion[
+                            (unit_conversion.Name == original_activity_prod.split(',')[0])
+                            & (unit_conversion.ESM == original_activity_unit)
+                            & (unit_conversion.LCA == activity_unit)
+                            ].Value.values
+                    if len(list(set(conversion_factor))) == 0:
+                        raise ValueError(f'The unit conversion factor between {activity_unit} and '
+                                         f'{original_activity_unit} for {original_activity_prod.split(",")[0]} '
+                                         f'is not in the unit conversion file.')
+                    elif len(list(set(conversion_factor))) > 1:
+                        raise ValueError(f'Multiple possible conversion factors between {activity_unit} and '
+                                         f'{original_activity_unit} for {original_activity_prod.split(",")[0]}')
+                    else:
+                        amount *= conversion_factor[0]
                 else:
                     conversion_factor = 1.0
 
@@ -260,7 +269,7 @@ def create_new_database_with_esm_results(mapping: pd.DataFrame, model: pd.DataFr
     :param unit_conversion: unit conversion factors
     :param db: list of activities in the LCI database
     :param new_db_name: name of the new database. By default, it is the name of the original database with
-        '_with_ESM_results'
+        '_with_ESM_results_for_{esm_location}'
     :param tech_specifics: technology-specific information
     :param technology_compositions: technology compositions
     :param tech_to_remove_layers: technologies to remove from the result LCI datasets
@@ -280,7 +289,7 @@ def create_new_database_with_esm_results(mapping: pd.DataFrame, model: pd.DataFr
     if new_end_use_types is None:
         new_end_use_types = pd.DataFrame(columns=['Name', 'Search type', 'Old', 'New'])
     if new_db_name == 'default':
-        new_db_name = f"{db[0]['database']}_with_ESM_results"
+        new_db_name = f"{db[0]['database']}_with_ESM_results_for_{esm_location}"
 
     flows = mapping[mapping.Type == 'Flow']
 
