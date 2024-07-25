@@ -398,7 +398,7 @@ def test_create_new_database_with_esm_results():
 
     new_db_dict_name = database_list_to_dict(new_db, "name")
     new_act = new_db_dict_name[
-        "market for heat, from ESM results", "heat", "CH", 'ecoinvent-3.9.1-cutoff_with_ESM_results'
+        "market for heat, from ESM results", "heat", "CH", 'ecoinvent-3.9.1-cutoff_with_ESM_results_for_CH'
     ]
     new_act_technosphere_flows = get_technosphere_flows(new_act)
 
@@ -417,7 +417,7 @@ def test_create_new_database_with_esm_results():
 
     # Test that double-counting removal on the construction flows has been done
     hp_act = new_db_dict_name[
-        "market for heat production by heat pump", "heat", "CH", 'ecoinvent-3.9.1-cutoff_with_ESM_results'
+        "market for heat production by heat pump", "heat", "CH", 'ecoinvent-3.9.1-cutoff_with_ESM_results_for_CH'
     ]
     hp_act_technosphere_flows = get_technosphere_flows(hp_act)
     for exc in hp_act_technosphere_flows:
@@ -425,7 +425,7 @@ def test_create_new_database_with_esm_results():
             assert exc['amount'] == 0
 
     double_stage_hp_act = new_db_dict_name[
-        "heat production by double-stage heat pump", "heat", "CH", 'ecoinvent-3.9.1-cutoff_with_ESM_results'
+        "heat production by double-stage heat pump", "heat", "CH", 'ecoinvent-3.9.1-cutoff_with_ESM_results_for_CH'
     ]
     double_stage_hp_act_technosphere_flows = get_technosphere_flows(double_stage_hp_act)
     for exc in double_stage_hp_act_technosphere_flows:
