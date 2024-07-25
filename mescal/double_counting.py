@@ -589,7 +589,7 @@ def double_counting_removal(df_op: pd.DataFrame, df_constr: pd.DataFrame, esm_db
 
                 # Keep track of the amount in the original activity as a comment
                 old_amount = flow['amount']
-                flow['comment'] = f'Original amount: {old_amount}'
+                flow['comment'] = f'Original amount: {old_amount}.' + flow.get('comment', '')
                 database = flow['database']
                 code = flow['code']
                 act_flow = db_dict_code[(database, code)]
