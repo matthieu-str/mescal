@@ -84,7 +84,7 @@ def restrict_lcia_metrics(df: pd.DataFrame, lcia_method: str) -> pd.DataFrame:
     return df
 
 
-def normalize_lca_metrics(R: pd.DataFrame, f_norm: float, mip_gap: float, refactor: float, lcia_method: str,
+def normalize_lca_metrics(R: pd.DataFrame, mip_gap: float, refactor: float, lcia_method: str,
                           impact_abbrev: pd.DataFrame, biogenic: bool = False, path: str = 'results/') -> None:
     """
     Create a .dat file containing the normalized LCA metrics for AMPL and a csv file containing the normalization
@@ -92,9 +92,7 @@ def normalize_lca_metrics(R: pd.DataFrame, f_norm: float, mip_gap: float, refact
 
     :param path: path to results folder
     :param R: dataframe containing the LCA results
-    :param f_norm: maximum allowed order of magnitude between the smallest and the largest value LCA metrics
-        within an AoP
-    :param mip_gap: values outside the f_norm threshold will be set to mip_gap / f_norm
+    :param mip_gap: values lowed than the MIP gap (in absolute value) are set to 0
     :param refactor: value of refactor to apply for construction metrics for better convergence
     :param lcia_method: LCIA method to be used
     :param impact_abbrev: dataframe containing the impact categories abbreviations
@@ -121,7 +119,7 @@ def normalize_lca_metrics(R: pd.DataFrame, f_norm: float, mip_gap: float, refact
     R = pd.merge(R, impact_abbrev, on='Impact_category')
     R['max_AoP'] = R.groupby('AoP')['Value'].transform('max')
     R['Value_norm'] = R['Value'] / R['max_AoP']
-    R['Value_norm'] = R['Value_norm'].apply(lambda x: x if x > mip_gap else mip_gap / f_norm)
+    R['Value_norm'] = R['Value_norm'].apply(lambda x: x if abs(x) > mip_gap else 0)
 
     with open(f'{path}techs_lcia_{lcia_methods_short_names(lcia_method)}.dat', 'w') as f:
         f.write(f"set INDICATORS := {' '.join(R['Abbrev'].unique())};\n")
