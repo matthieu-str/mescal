@@ -956,10 +956,28 @@ WOOD_METHANOL,Construction,0.000150672,unit,kilowatt
 WOOD_METHANOL,Operation,0.1805054152,kilogram,kilowatt hour
 XYLENE,Resource,0.08788847929,kilogram,kilowatt hour
 biogas,Other,0.777,kilogram,cubic meter
-biogas,Other,1.287,cubic meter,kilogram
+biogas,Other,1.29,cubic meter,kilogram
+biomass,Other,0.234,kilogram,kilowatt hour
+diesel,Other,0.0845,kilogram,kilowatt hour
 electricity,Other,0.278,kilowatt hour,megajoule
 electricity,Other,3.6,megajoule,kilowatt hour
+hard coal,Other,0.116,kilogram,kilowatt hour
 heat,Other,0.278,kilowatt hour,megajoule
 heat,Other,3.6,megajoule,kilowatt hour
-natural gas,Other,1.287,cubic meter,kilogram
+heavy fuel oil,Other,0.0923,kilogram,kilowatt hour
+hydrogen,Other,0.03,kilogram,kilowatt hour
+kerosene,Other,0.0838,kilogram,kilowatt hour
+light fuel oil,Other,0.0887,kilogram,kilowatt hour
+lignite,Other,0.271,kilogram,kilowatt hour
+manure,Other,0.253,kilogram,kilowatt hour
 natural gas,Other,0.777,kilogram,cubic meter
+natural gas,Other,1.29,cubic meter,kilogram
+natural gas,Other,0.0982,cubic meter,kilowatt hour
+natural gas,Other,0.0763,kilogram,kilowatt hour
+nuclear fuel element,Other,9.23e-07,kilogram,kilowatt hour
+petrol,Other,0.0829,kilogram,kilowatt hour
+syngas,Other,0.47,kilogram,cubic meter
+syngas,Other,2.13,cubic meter,kilogram
+waste wood,Other,0.234,kilogram,kilowatt hour
+wood ash mixture,Other,0.234,kilogram,kilowatt hour
+wood chips,Other,0.234,kilogram,kilowatt hour

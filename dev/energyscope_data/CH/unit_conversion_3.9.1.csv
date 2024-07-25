@@ -479,16 +479,18 @@ heat,Other,0.278,kilowatt hour,megajoule
 heat,Other,3.6,megajoule,kilowatt hour
 heavy fuel oil,Other,0.0923,kilogram,kilowatt hour
 hydrogen,Other,0.03,kilogram,kilowatt hour
+kerosene,Other,0.0838,kilogram,kilowatt hour
 light fuel oil,Other,0.0887,kilogram,kilowatt hour
 lignite,Other,0.271,kilogram,kilowatt hour
 manure,Other,0.253,kilogram,kilowatt hour
+natural gas,Other,1.29,cubic meter,kilogram
 natural gas,Other,0.0763,kilogram,kilowatt hour
 natural gas,Other,0.0982,cubic meter,kilowatt hour
-natural gas,Other,1.29,cubic meter,kilogram
 natural gas,Other,0.777,kilogram,cubic meter
 nuclear fuel element,Other,9.23e-07,kilogram,kilowatt hour
 petrol,Other,0.0829,kilogram,kilowatt hour
 syngas,Other,0.47,kilogram,cubic meter
 syngas,Other,2.13,cubic meter,kilogram
+waste wood,Other,0.234,kilogram,kilowatt hour
 wood ash mixture,Other,0.234,kilogram,kilowatt hour
 wood chips,Other,0.234,kilogram,kilowatt hour
