@@ -64,7 +64,18 @@ def get_lca_input_flow_unit_or_product(row: pd.Series, output_type: str, mapping
         if 'classifications' in act_exc:
             if 'CPC' in dict(act_exc['classifications']):
                 if dict(act_exc['classifications'])['CPC'] in CPC_list:
-                    name_list.append(act_exc['reference product'].split(',')[0])
+                    # in carculator, the 'fuel' product may be diesel, NG or H2
+                    if act_exc['reference product'] == 'fuel':
+                        if 'cng' in act_exc['name']:
+                            name_list.append('natural gas')
+                        elif 'diesel' in act_exc['name']:
+                            name_list.append('diesel')
+                        elif 'hydrogen' in act_exc['name']:
+                            name_list.append('hydrogen')
+                        else:
+                            raise ValueError(f'Unknown fuel type for flow {row.Flow} in {row.Name}')
+                    else:
+                        name_list.append(act_exc['reference product'].split(',')[0])
                     unit_list.append(act_exc['unit'])
 
     if output_type == 'unit':
