@@ -55,8 +55,9 @@ jobs:
           pip install .[testing] # install the package and the testing deps
 
       - name: Test with pytest
+        # removed lcia test: can only be run locally as it needs the ecoinvent database
         run: |
-          pytest
+          pytest -k 'not compute_impact_score'
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v4
