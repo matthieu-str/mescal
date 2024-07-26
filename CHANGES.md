@@ -9,17 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - regionalization of biosphere flows in the `regionalize_activity_foreground` function, and added conditions to prevent the regionalization when unnecessary
-- correction of efficiency differences between the ESM and LCI databases (scale direct emissions consequently) in the `correct_esm_and_lca_efficiency_differences` function
+- correction of efficiency differences between the ESM and LCI databases (scale direct emissions accordingly) in the `correct_esm_and_lca_efficiency_differences` function
 - possibility to return the database instead of writing it (or both) in the `create_esm_database` and `create_new_database_with_esm_results` functions
 
 ### Changed 
 - `concatenate_database` function renamed `load_multiple_databases` to avoid confusion with new `merge_databases` function
 - `unit_conversion.csv` file has its columns `From` and `To` renamed `ESM` and `LCA` for better clarity
 - Reformatted and added new information to the double-counting removal output csv files
-
-### Removed
-
-
 
 ## [1.0.1] - 2024-07-13
 
