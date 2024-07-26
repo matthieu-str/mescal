@@ -2,11 +2,10 @@ import pandas as pd
 import bw2data as bd
 import pytest
 from mescal.impact_assessment import compute_impact_scores
-from mescal.utils import load_extract_db, write_wurst_database_to_brightway
+from mescal.utils import write_wurst_database_to_brightway
 
 # Load ecoinvent
 bd.projects.set_current('ecoinvent3.9.1')
-ecoinvent_database = load_extract_db('ecoinvent-3.9.1-cutoff')
 
 dummy_esm_db = [
     {
