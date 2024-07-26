@@ -4,9 +4,6 @@ import pytest
 from mescal.impact_assessment import compute_impact_scores
 from mescal.utils import write_wurst_database_to_brightway
 
-# Load ecoinvent
-bd.projects.set_current('ecoinvent3.9.1')
-
 dummy_esm_db = [
     {
         "name": "TRAIN_FREIGHT_DIESEL_LOC, Construction",
@@ -70,8 +67,6 @@ dummy_esm_db = [
     }
 ]
 
-write_wurst_database_to_brightway(dummy_esm_db, 'dummy_esm_db')
-
 mapping = [
     ['TRAIN_FREIGHT_DIESEL_LOC', 'Construction', 'locomotive', 'locomotive production', 'RER',
      'ecoinvent-3.9.1-cutoff', '00001'],
@@ -105,6 +100,10 @@ lifetime = pd.DataFrame(lifetime, columns=['Name', 'ESM', 'LCA'])
 
 @pytest.mark.tags("requires_ecoinvent")
 def test_compute_impact_score():
+
+    bd.projects.set_current('ecoinvent3.9.1')
+    write_wurst_database_to_brightway(dummy_esm_db, 'dummy_esm_db')
+
     R = compute_impact_scores(
         esm_db=dummy_esm_db,
         mapping=mapping,
