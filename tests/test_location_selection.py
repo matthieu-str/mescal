@@ -1,4 +1,5 @@
 from mescal.location_selection import change_location_activity
+import pytest
 
 dummy_db = [
     {
@@ -52,6 +53,7 @@ dummy_reg_biosphere_db = [
 ]
 
 
+@pytest.mark.tags("workflow")
 def test_change_location_activity():
     updated_location = change_location_activity(
         activity="market for electricity, low voltage",
@@ -66,6 +68,7 @@ def test_change_location_activity():
     assert updated_location == "FR"
 
 
+@pytest.mark.tags("workflow")
 def test_change_location_activity_biosphere():
     updated_location = change_location_activity(
         activity="Water",

@@ -1,4 +1,5 @@
 import pandas as pd
+import pytest
 from mescal.adapt_efficiency import correct_esm_and_lca_efficiency_differences
 from mescal.utils import database_list_to_dict, get_biosphere_flows
 
@@ -249,6 +250,7 @@ double_counting_removal = pd.DataFrame(double_counting_removal, columns=['Name',
 unit_conversion = pd.DataFrame(unit_conversion, columns=['Name', 'Type', 'Value', 'LCA', 'ESM'])
 
 
+@pytest.mark.tags("workflow")
 def test_correct_esm_and_lca_efficiency_differences():
     updated_db = correct_esm_and_lca_efficiency_differences(
         db=dummy_db,

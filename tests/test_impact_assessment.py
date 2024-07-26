@@ -1,7 +1,6 @@
 import pandas as pd
 import bw2data as bd
 import pytest
-
 from mescal.impact_assessment import compute_impact_scores
 from mescal.utils import load_extract_db, write_wurst_database_to_brightway
 

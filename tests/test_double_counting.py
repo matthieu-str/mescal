@@ -1,4 +1,5 @@
 import pandas as pd
+import pytest
 from mescal.utils import database_list_to_dict, get_technosphere_flows
 from mescal.double_counting import create_esm_database
 
@@ -169,6 +170,7 @@ mapping_esm_flows_to_CPC = pd.DataFrame(mapping_esm_flows_to_CPC, columns=['Flow
 model = pd.DataFrame(model, columns=['Name', 'Flow', 'Amount'])
 
 
+@pytest.mark.tags("workflow")
 def test_create_esm_database():
 
     esm_db = create_esm_database(

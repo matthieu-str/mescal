@@ -1,4 +1,5 @@
 import pandas as pd
+import pytest
 from mescal.esm_back_to_lca import create_new_database_with_esm_results
 from mescal.utils import database_list_to_dict, get_technosphere_flows
 
@@ -380,6 +381,7 @@ esm_results = pd.DataFrame(esm_results, columns=['Name', 'Production'])
 unit_conversion = pd.DataFrame(unit_conversion, columns=['Name', 'Type', 'Value', 'LCA', 'ESM'])
 
 
+@pytest.mark.tags("workflow")
 def test_create_new_database_with_esm_results():
 
     new_db = create_new_database_with_esm_results(

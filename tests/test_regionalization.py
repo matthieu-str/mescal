@@ -1,6 +1,7 @@
 from mescal.utils import database_list_to_dict
 from mescal.regionalization import regionalize_activity_foreground
 import copy
+import pytest
 
 dummy_db = [
     {
@@ -95,6 +96,7 @@ dummy_reg_biosphere_db = [
 ]
 
 
+@pytest.mark.tags("workflow")
 def test_regionalize_activity_foreground():
     act = copy.deepcopy(dummy_db[0])
     regionalized_act = regionalize_activity_foreground(
