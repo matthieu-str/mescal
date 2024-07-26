@@ -33,7 +33,7 @@ __all__ = (
     "correct_esm_and_lca_efficiency_differences",
 )
 
-__version__ = "1.0.1"
+__version__ = "1.0.2"
 
 from .location_selection import *
 from .utils import *
