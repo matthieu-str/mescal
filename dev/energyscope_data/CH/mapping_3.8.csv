@@ -130,6 +130,7 @@ DAC_LT,Operation,"carbon dioxide, captured from atmosphere","carbon dioxide, cap
 DAC_LT_PLANT,Construction,direct air capture system,"direct air capture system, solvent-based, 1MtCO2",RER,/unit,direct air capture
 DAC_LT_PLANT_DECOM,Construction,direct air capture system,"treatment of direct air capture system, solvent-based, 1MtCO2",RER,/unit,direct air capture
 DEC_ADVCOGEN_H2,Construction,"fuel cell, polymer electrolyte membrane, 2kW electrical, future","fuel cell production, polymer electrolyte membrane, 2kW electrical, future",RoW,/unit,ecoinvent3.8 cut-off
+DEC_ADVCOGEN_H2,Operation,"electricity, from residential heating system","electricity, residential, by conversion of hydrogen using fuel cell, PEM, allocated by exergy, distributed by pipeline, produced by Electrolysis, PEM using electricity from grid",CH,/kWh,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
 DEC_BOILER_GAS,Operation,"heat, central or small-scale, natural gas","heat production, natural gas, at boiler modulating <100kW",RoW,/MJ,ecoinvent3.8 cut-off
 DEC_BOILER_GAS,Construction,gas boiler,gas boiler production,RoW,/unit,ecoinvent3.8 cut-off
 DEC_BOILER_OIL,Operation,"heat, central or small-scale, other than natural gas","heat production, light fuel oil, at boiler 10kW condensing, non-modulating",RoW,/MJ,ecoinvent3.8 cut-off
@@ -148,8 +149,8 @@ DEC_COGEN_OIL_TURBINE,Construction,"heat and power co-generation unit, organic R
 DEC_COGEN_WOOD,Operation,"heat, central or small-scale, other than natural gas","heat production, wood chips from industry, at furnace 50kW, state-of-the-art 2014",RoW,/MJ,ecoinvent3.8 cut-off
 DEC_COGEN_WOOD_BOILER,Construction,"furnace, wood chips, hardwood storage area, 50kW","furnace production, wood chips, hardwood storage area, 50kW",RoW,/unit,ecoinvent3.8 cut-off
 DEC_COGEN_WOOD_TURBINE,Construction,"heat and power co-generation unit, organic Rankine cycle, 200kW electrical","heat and power co-generation unit construction, organic Rankine cycle, 200kW electrical",GLO,/unit,ecoinvent3.8 cut-off
-DEC_DEEP_GEO,Operation,"heat, deep geothermal","heat production, deep geothermal",GLO,/MJ,geothermal
 DEC_DEEP_GEO,Construction,geothermal heat plant,geothermal heat plant construction,GLO,/unit,geothermal
+DEC_DEEP_GEO,Operation,"heat, deep geothermal","heat production, deep geothermal",GLO,/MJ,geothermal
 DEC_DIRECT_ELEC,Operation,"electricity, low voltage","market for electricity, low voltage",CH,/kWh,ecoinvent3.8 cut-off
 DEC_DIRECT_ELEC,Construction,"auxiliary heating unit, electric, 5kW","auxiliary heating unit production, electric, 5kW",RoW,/unit,ecoinvent3.8 cut-off
 DEC_HP_ELEC,Construction,"heat pump, brine-water, 10kW","heat pump production, brine-water, 10kW",RoW,/unit,ecoinvent3.8 cut-off
