@@ -6,19 +6,19 @@ Modellers should provide a mapping between the technologies and resources in the
 
 ![mapping between esm technologies and lci datasets](../pics/mapping.png "mapping")
 
-## Regionalization
+## Regionalization and spatialization
 
-LCI datasets can be regionalized to match the location of the ESM. For instance, if a LCI dataset does not exist for the region of interest, a new LCI dataset can be copied and adapted from an existing one (by changing the list of providers) as a proxy. If you are using a regionalized LCI database (i.e., with region-specific elementary flows), biosphere flows will be regionalized following the same procedure.
-
-## Harmonization
-
-Harmonization is the process of ensuring that the LCI datasets are consistent with the ESM. It mainly consists of unit conversion and assumptions alignement. For instance, lifetime and efficiency differences between the ESM and LCI databases can be automatically corrected. 
+LCI datasets can be regionalized to match the location of the ESM. For instance, if a LCI dataset does not exist for the region of interest, a new LCI dataset can be copied and adapted from an existing one (by changing the list of providers) as a proxy. If you are using a spatialized LCI database (i.e., with region-specific elementary flows), biosphere flows will be regionalized following the same procedure.
 
 ## Double-counting removal
 
 Double-counting occurs regarding the flows that are explicitly modelled in the ESM, e.g., energy flows (electricity, heat, fuels, etc.). Such flows should be set to zero in the LCI datasets in order to avoid an overestimation of the impacts. The double-counting removal algorithm is as follows:
 
 ![flowchart of the double-counting removal algorithm](../pics/double_counting_flowchart.png "double_counting_removal")
+
+## Harmonization
+
+Harmonization is the process of ensuring that the LCI datasets are consistent with the ESM. It mainly consists of unit conversion and assumptions alignement. For instance, lifetime and efficiency differences between the ESM and LCI databases can be automatically corrected. 
 
 ## Life-cycle impact assessment
 
