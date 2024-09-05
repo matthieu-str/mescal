@@ -208,7 +208,7 @@ model = [
     ['CAR_GASOLINE', 'CONSTRUCTION', -1],
 ]
 
-efficiency = [['CAR_GASOLINE', 'GASOLINE']]
+efficiency = [['CAR_GASOLINE', "['GASOLINE']"]]
 
 mapping_esm_flows_to_CPC = [['GASOLINE', ['10: Petroleum products']]]
 

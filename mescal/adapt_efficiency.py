@@ -1,5 +1,6 @@
 from .utils import database_list_to_dict, get_biosphere_flows
 import pandas as pd
+import ast
 
 
 def compute_efficiency_esm(row: pd.Series, model: pd.DataFrame) -> float:
@@ -11,13 +12,15 @@ def compute_efficiency_esm(row: pd.Series, model: pd.DataFrame) -> float:
     :param model: input and output flows of the ESM model
     :return: efficiency of the process
     """
-    try:
-        input_amount = model[(model.Name == row.Name) & (model.Flow == row.Flow)].Amount.values[0]
-    except IndexError:
-        raise ValueError(f'The model has no technology {row.Name}, or the technology {row.Name} has no {row.Name} '
-                         f'input flow.')
-    else:
-        return -1.0 / input_amount  # had negative sign as it is an input
+    flows_list = row.Flow
+    input_amount = 0
+    for flow in flows_list:
+        try:
+            input_amount += model[(model.Name == row.Name) & (model.Flow == flow)].Amount.values[0]
+        except IndexError:
+            raise ValueError(f'The model has no technology {row.Name}, or the technology {row.Name} has no {flow} '
+                             f'input flow.')
+    return -1.0 / input_amount  # had negative sign as it is an input
 
 
 def get_lca_input_quantity(row: pd.Series, double_counting_removal: pd.DataFrame) -> float:
@@ -29,12 +32,15 @@ def get_lca_input_quantity(row: pd.Series, double_counting_removal: pd.DataFrame
     :param double_counting_removal: dataframe containing the scaled amounts removed during double counting removal
     :return: quantity of the flow removed
     """
-    try:
-        amount = double_counting_removal[(double_counting_removal.Name == row.Name)
-                                         & (double_counting_removal.Flow == row.Flow)].Amount.values[0]
-    except IndexError:
-        print(f'No flow of type {row.Flow} has been removed in {row.Name}. This technology will thus be removed.')
-        return 0
+    amount = 0
+    flows_list = row.Flow
+    for flow in flows_list:
+        try:
+            amount += double_counting_removal[(double_counting_removal.Name == row.Name)
+                                              & (double_counting_removal.Flow == flow)].Amount.values[0]
+        except IndexError:
+            print(f'No flow of type {flow} has been removed in {row.Name}. This technology will thus be removed.')
+            return 0
     else:
         return amount
 
@@ -54,7 +60,10 @@ def get_lca_input_flow_unit_or_product(row: pd.Series, output_type: str, mapping
     """
     unit_list = []
     name_list = []
-    CPC_list = mapping_esm_flows_to_CPC[mapping_esm_flows_to_CPC['Flow'] == row.Flow]['CPC'].values[0]
+    CPC_list = []
+    flows_list = row.Flow
+    for flow in flows_list:
+        CPC_list += mapping_esm_flows_to_CPC[mapping_esm_flows_to_CPC['Flow'] == flow]['CPC'].values[0]
     df_removed_flows = removed_flows[removed_flows.Name == row.Name]
 
     for i in range(len(df_removed_flows)):
@@ -143,6 +152,11 @@ def correct_esm_and_lca_efficiency_differences(db: list[dict], model: pd.DataFra
     """
     db_dict_name = database_list_to_dict(db, 'name')
 
+    try:
+        efficiency.Flow = efficiency.Flow.apply(ast.literal_eval)
+    except ValueError:
+        pass
+
     efficiency['ESM efficiency'] = efficiency.apply(compute_efficiency_esm, axis=1, model=model)
     efficiency['LCA input unit'] = efficiency.apply(get_lca_input_flow_unit_or_product, axis=1, output_type='unit',
                                                     mapping_esm_flows_to_CPC=mapping_esm_flows_to_CPC,
@@ -179,10 +193,16 @@ def correct_esm_and_lca_efficiency_differences(db: list[dict], model: pd.DataFra
             efficiency['Output conversion factor'] * efficiency['LCA input quantity'])
 
     for i in range(len(efficiency)):
+
         act_to_adapt_list = []
-        tech, flow = efficiency[['Name', 'Flow']].iloc[i]
-        CPC_list = mapping_esm_flows_to_CPC[mapping_esm_flows_to_CPC['Flow'] == flow]['CPC'].values[0]
-        df_removed_flows = removed_flows[removed_flows.Name == tech]
+        tech = efficiency['Name'].iloc[i]
+        flows_list = efficiency['Flow'].iloc[i]
+
+        CPC_list = []  # list of CPC categories corresponding to the fuel flow(s) of the technology
+        for flow in flows_list:
+            CPC_list += mapping_esm_flows_to_CPC[mapping_esm_flows_to_CPC['Flow'] == flow]['CPC'].values[0]
+
+        df_removed_flows = removed_flows[removed_flows.Name == tech]  # flows removed during double counting removal
         for j in range(len(df_removed_flows)):
             (main_act_name, main_act_prod, main_act_loc, main_act_database, removed_act_name, removed_act_prod,
              removed_act_loc, removed_act_database) = df_removed_flows[
@@ -192,8 +212,15 @@ def correct_esm_and_lca_efficiency_differences(db: list[dict], model: pd.DataFra
             if 'classifications' in act_exc:
                 if 'CPC' in dict(act_exc['classifications']):
                     if dict(act_exc['classifications'])['CPC'] in CPC_list:
+                        # if this flow (that was removed during double counting removal) is a fuel flow of the
+                        # technology, the biosphere flows the activity will be adjusted
                         act_to_adapt = db_dict_name[main_act_name, main_act_prod, main_act_loc, main_act_database]
                         act_to_adapt_list.append(act_to_adapt)
+
+        if len(act_to_adapt_list) == 0:
+            print(f'No flow of type {flows_list} found for {tech}. The efficiency of this technology cannot be '
+                  f'adjusted.')
+
         for act in act_to_adapt_list:
             efficiency_ratio = efficiency['LCA efficiency'].iloc[i] / efficiency['ESM efficiency'].iloc[i]
             act = adapt_biosphere_flows_to_efficiency_difference(act, efficiency_ratio)
