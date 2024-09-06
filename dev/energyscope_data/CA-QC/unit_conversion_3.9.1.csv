@@ -196,7 +196,7 @@ CEMENT_PROD,Construction,2.19e-05,unit,kilogram per hour
 CEMENT_PROD,Operation,1.0,kilogram,kilogram
 CEMENT_PROD_HP,Construction,2.19e-05,unit,kilogram per hour
 CEMENT_PROD_HP,Operation,1.0,kilogram,kilogram
-CO2_METHANOL,Construction,0.000150672,unit,kilogram per hour
+CO2_METHANOL,Construction,7.644444444e-06,unit,kilogram per hour
 CO2_METHANOL,Operation,1.0,kilogram,kilogram
 CO2_STO,Construction,7.554695998999999e-08,unit,kilogram
 CO2_TO_DIESEL,Construction,1.4704857599999998e-07,unit,kilowatt
@@ -541,12 +541,12 @@ METATHESIS_PROPYLENE,Construction,1.078689868e-05,unit,kilowatt
 METATHESIS_PROPYLENE,Operation,0.07159192602,kilogram,kilowatt hour
 METHANATION,Construction,0.0002,unit,kilowatt
 METHANATION,Operation,0.07633587786,kilogram,kilowatt hour
-METHANE_TO_METHANOL,Construction,2.719711191e-05,unit,kilowatt
+METHANE_TO_METHANOL,Construction,7.644444444e-06,unit,kilowatt
 METHANE_TO_METHANOL,Operation,0.1805054152,kilogram,kilowatt hour
 METHANOL,Resource,0.1805054152,kilogram,kilowatt hour
 METHANOL_CARBONYLATION,Construction,3.72796701e-05,unit,kilowatt
 METHANOL_CARBONYLATION,Operation,0.2474226804,kilogram,kilowatt hour
-METHANOL_FT,Construction,2.719711191e-05,unit,kilowatt
+METHANOL_FT,Construction,7.644444444e-06,unit,kilowatt
 METHANOL_FT,Operation,0.1805054152,kilogram,kilowatt hour
 METHANOL_TO_AROMATICS,Construction,1.296629933e-05,unit,kilowatt
 METHANOL_TO_AROMATICS,Operation,0.0860564626,kilogram,kilowatt hour
@@ -953,7 +953,7 @@ WIND_ONSHORE,Operation,1.0,kilowatt hour,kilowatt hour
 WIND_ONSHORE_CONNECTION,Construction,1.0,unit,unit
 WIND_ONSHORE_TURBINE,Construction,1.0,unit,unit
 WOOD,Resource,0.2337662338,kilogram,kilowatt hour
-WOOD_METHANOL,Construction,0.000150672,unit,kilowatt
+WOOD_METHANOL,Construction,7.644444444e-06,unit,kilowatt
 WOOD_METHANOL,Operation,0.1805054152,kilogram,kilowatt hour
 XYLENE,Resource,0.08788847929,kilogram,kilowatt hour
 biogas,Other,0.777,kilogram,cubic meter

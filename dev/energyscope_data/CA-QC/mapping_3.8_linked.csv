@@ -181,7 +181,7 @@ CEMENT_PROD,Construction,cement factory,cement factory construction,RoW,ecoinven
 CEMENT_PROD_HP,Construction,cement factory,cement factory construction,RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 CEMENT_PROD_HP,Operation,"cement, alternative constituents 21-35%","cement production, alternative constituents 21-35%",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 CO2_METHANOL,Operation,methanol,methanol production,GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-CO2_METHANOL,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+CO2_METHANOL,Construction,methanol factory,methanol factory construction,GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 CO2_STO,Construction,"liquid storage tank, chemicals, organics","market for liquid storage tank, chemicals, organics",GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 CO2_TO_DIESEL,Operation,"diesel, synthetic","diesel production, synthetic, Fischer Tropsch process, hydrogen from electrolysis, energy allocation",CAZ,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 CO2_TO_DIESEL,Construction,petroleum refinery,petroleum refinery construction,RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
@@ -485,10 +485,10 @@ METATHESIS_PROPYLENE,Construction,"chemical factory, organics","chemical factory
 METHANATION,Construction,synthetic gas factory,synthetic gas factory construction,RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 METHANATION,Operation,"methane, from electrochemical methanation","methane, from electrochemical methanation, with carbon from municipal waste incineration plant",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 METHANE_TO_METHANOL,Operation,methanol,methanol production,GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-METHANE_TO_METHANOL,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+METHANE_TO_METHANOL,Construction,methanol factory,methanol factory construction,GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 METHANOL_CARBONYLATION,Operation,"acetic acid, without water, in 98% solution state","acetic acid production, product in 98% solution state",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 METHANOL_CARBONYLATION,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-METHANOL_FT,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+METHANOL_FT,Construction,methanol factory,methanol factory construction,GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 METHANOL_FT,Operation,"methanol, from biomass","methanol production, from synthetic gas",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 METHANOL_TO_AROMATICS,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 METHANOL_TO_AROMATICS,Operation,xylene,xylene production,RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
@@ -860,7 +860,7 @@ WIND_ONSHORE,Operation,"electricity, high voltage","electricity production, wind
 WIND_ONSHORE_CONNECTION,Construction,"wind turbine network connection, 2MW, onshore","wind turbine network connection construction, 2MW, onshore",CA-QC,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 WIND_ONSHORE_TURBINE,Construction,"wind turbine, 2MW, onshore","wind turbine construction, 2MW, onshore",GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 WOOD_METHANOL,Operation,"methanol, unpurified","methanol synthesis, from wood, with CCS",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-WOOD_METHANOL,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+WOOD_METHANOL,Construction,methanol factory,methanol factory construction,GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 ACETIC_ACID,Resource,"acetic acid, without water, in 98% solution state","market for acetic acid, without water, in 98% solution state",GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 ACETONE,Resource,"acetone, liquid","market for acetone, liquid",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 BIO_DIESEL,Resource,"biodiesel, vehicle grade","biodiesel, from used cooking oil, at fuelling station",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC

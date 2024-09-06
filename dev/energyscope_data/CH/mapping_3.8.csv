@@ -86,7 +86,7 @@ CEMENT_PROD,Construction,cement factory,cement factory construction,CH,/unit,eco
 CEMENT_PROD,Operation,"cement, alternative constituents 21-35%","cement production, alternative constituents 21-35%",CH,/kg,ecoinvent3.8 cut-off
 CEMENT_PROD_HP,Operation,"cement, alternative constituents 21-35%","cement production, alternative constituents 21-35%",CH,/kg,ecoinvent3.8 cut-off
 CEMENT_PROD_HP,Construction,cement factory,cement factory construction,CH,/unit,ecoinvent3.8 cut-off
-CO2_METHANOL,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,/unit,ecoinvent3.8 cut-off
+CO2_METHANOL,Construction,methanol factory,methanol factory construction,GLO,/unit,ecoinvent3.8 cut-off
 CO2_METHANOL,Operation,methanol,methanol production,GLO,/kg,ecoinvent3.8 cut-off
 CO2_STO,Construction,"liquid storage tank, chemicals, organics","market for liquid storage tank, chemicals, organics",GLO,/unit,ecoinvent3.8 cut-off
 CO2_TO_DIESEL,Operation,"Diesel, synthetic","Diesel production, synthetic, Fischer Tropsch process, hydrogen from electrolysis, energy allocation",RER,/kg,synfuel from electrolysis
@@ -282,11 +282,11 @@ METATHESIS_PROPYLENE,Operation,propylene,propylene production,RoW,/kg,ecoinvent3
 METHANATION,Operation,"methane, from electrochemical methanation","methane, from electrochemical methanation, with carbon from municipal waste incineration plant",RER,/kg,syngas
 METHANATION,Construction,synthetic gas factory,synthetic gas factory construction,CH,/unit,ecoinvent3.8 cut-off
 METHANE_TO_METHANOL,Operation,methanol,methanol production,GLO,/kg,ecoinvent3.8 cut-off
-METHANE_TO_METHANOL,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,/unit,ecoinvent3.8 cut-off
+METHANE_TO_METHANOL,Construction,methanol factory,methanol factory construction,GLO,/unit,ecoinvent3.8 cut-off
 METHANOL_CARBONYLATION,Operation,"acetic acid, without water, in 98% solution state","acetic acid production, product in 98% solution state",RoW,/kg,ecoinvent3.8 cut-off
 METHANOL_CARBONYLATION,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,/unit,ecoinvent3.8 cut-off
 METHANOL_FT,Operation,"methanol, from biomass","methanol production, from synthetic gas",CH,/kg,ecoinvent3.8 cut-off
-METHANOL_FT,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,/unit,ecoinvent3.8 cut-off
+METHANOL_FT,Construction,methanol factory,methanol factory construction,GLO,/unit,ecoinvent3.8 cut-off
 METHANOL_TO_AROMATICS,Operation,xylene,xylene production,RER,/kg,ecoinvent3.8 cut-off
 METHANOL_TO_AROMATICS,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,/unit,ecoinvent3.8 cut-off
 METHANOL_TO_OLEFINS,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,/unit,ecoinvent3.8 cut-off
@@ -396,7 +396,7 @@ TRUCK_SNG,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lo
 TRUCK_SNG,Construction,"Medium duty truck, EURO-VI","Medium duty truck, compressed gas, 26t gross weight, EURO-VI, long haul",RER,/unit,lci-long_haul_trucks
 WIND,Construction,"wind turbine, 2MW, onshore","wind turbine construction, 2MW, onshore",GLO,/unit,ecoinvent3.8 cut-off
 WIND,Operation,"electricity, high voltage","electricity production, wind, 1-3MW turbine, onshore",RoW,/kWh,ecoinvent3.8 cut-off
-WOOD_METHANOL,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,/unit,ecoinvent3.8 cut-off
+WOOD_METHANOL,Construction,methanol factory,methanol factory construction,GLO,/unit,ecoinvent3.8 cut-off
 WOOD_METHANOL,Operation,"methanol, unpurified","methanol synthesis, from wood, with CCS",RER,/kg,Methanol-based fuels from wood
 ACETIC_ACID,Resource,"acetic acid, without water, in 98% solution state","market for acetic acid, without water, in 98% solution state",GLO,/kg,ecoinvent3.8 cut-off
 ACETONE,Resource,"acetone, liquid","market for acetone, liquid",RoW,/kg,ecoinvent3.8 cut-off

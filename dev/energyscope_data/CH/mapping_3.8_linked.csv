@@ -86,7 +86,7 @@ CEMENT_PROD,Construction,cement factory,cement factory construction,CH,ecoinvent
 CEMENT_PROD,Operation,"cement, alternative constituents 21-35%","cement production, alternative constituents 21-35%",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 CEMENT_PROD_HP,Operation,"cement, alternative constituents 21-35%","cement production, alternative constituents 21-35%",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 CEMENT_PROD_HP,Construction,cement factory,cement factory construction,CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-CO2_METHANOL,Construction,"chemical factory, organics","chemical factory construction, organics",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+CO2_METHANOL,Construction,methanol factory,methanol factory construction,GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 CO2_METHANOL,Operation,methanol,methanol production,GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 CO2_STO,Construction,"liquid storage tank, chemicals, organics","market for liquid storage tank, chemicals, organics",GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 CO2_TO_DIESEL,Operation,"diesel, synthetic","diesel production, synthetic, Fischer Tropsch process, hydrogen from electrolysis, energy allocation",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
@@ -282,11 +282,11 @@ METATHESIS_PROPYLENE,Operation,propylene,propylene production,RER,ecoinvent_cuto
 METHANATION,Operation,"methane, from electrochemical methanation","methane, from electrochemical methanation, with carbon from municipal waste incineration plant",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 METHANATION,Construction,synthetic gas factory,synthetic gas factory construction,CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 METHANE_TO_METHANOL,Operation,methanol,methanol production,GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-METHANE_TO_METHANOL,Construction,"chemical factory, organics","chemical factory construction, organics",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+METHANE_TO_METHANOL,Construction,methanol factory,methanol factory construction,GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 METHANOL_CARBONYLATION,Operation,"acetic acid, without water, in 98% solution state","acetic acid production, product in 98% solution state",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 METHANOL_CARBONYLATION,Construction,"chemical factory, organics","chemical factory construction, organics",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 METHANOL_FT,Operation,"methanol, from biomass","methanol production, from synthetic gas",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-METHANOL_FT,Construction,"chemical factory, organics","chemical factory construction, organics",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+METHANOL_FT,Construction,methanol factory,methanol factory construction,GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 METHANOL_TO_AROMATICS,Operation,xylene,xylene production,RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 METHANOL_TO_AROMATICS,Construction,"chemical factory, organics","chemical factory construction, organics",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 METHANOL_TO_OLEFINS,Construction,"chemical factory, organics","chemical factory construction, organics",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
@@ -396,7 +396,7 @@ TRUCK_SNG,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lo
 TRUCK_SNG,Construction,"Medium duty truck, EURO-VI","Medium duty truck, compressed gas, 26t gross weight, EURO-VI, long haul",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 WIND,Construction,"wind turbine, 2MW, onshore","wind turbine construction, 2MW, onshore",GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 WIND,Operation,"electricity, high voltage","electricity production, wind, 1-3MW turbine, onshore",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
-WOOD_METHANOL,Construction,"chemical factory, organics","chemical factory construction, organics",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
+WOOD_METHANOL,Construction,methanol factory,methanol factory construction,GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 WOOD_METHANOL,Operation,"methanol, unpurified","methanol synthesis, from wood, with CCS",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 ACETIC_ACID,Resource,"acetic acid, without water, in 98% solution state","market for acetic acid, without water, in 98% solution state",GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
 ACETONE,Resource,"acetone, liquid","market for acetone, liquid",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020_with_CPC
