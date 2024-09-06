@@ -7,9 +7,9 @@ def create_or_modify_activity_from_esm_results(db: list[dict], original_activity
                                                mapping: pd.DataFrame, accepted_locations: list[str],
                                                locations_ranking: list[str], tech_to_remove_layers: pd.DataFrame,
                                                unit_conversion: pd.DataFrame, new_end_use_types: pd.DataFrame,
-                                               regionalized_database: bool = False,
-                                               regionalized_biosphere_db: list[dict] = None,
-                                               db_dict_name_reg_biosphere: dict = None) \
+                                               spatialized_database: bool = False,
+                                               spatialized_biosphere_db: list[dict] = None,
+                                               db_dict_name_spa_biosphere: dict = None) \
         -> tuple[list[dict], list[list[str]]]:
     """
     Create or modify an activity in the LCI database based on the ESM results
@@ -28,9 +28,9 @@ def create_or_modify_activity_from_esm_results(db: list[dict], original_activity
     :param tech_to_remove_layers: technologies to remove from the result LCI datasets
     :param unit_conversion: unit conversion factors
     :param new_end_use_types: adapt end use types to fit the results LCI datasets mapping
-    :param regionalized_database: if True, the main database has regionalized elementary flows
-    :param regionalized_biosphere_db: list of flows in the regionalized biosphere database
-    :param db_dict_name_reg_biosphere: dictionary of the regionalized biosphere database with
+    :param spatialized_database: if True, the main database has spatialized elementary flows
+    :param spatialized_biosphere_db: list of flows in the spatialized biosphere database
+    :param db_dict_name_spa_biosphere: dictionary of the spatialized biosphere database with
         (name, product, location, database) as key
     :return: the updated LCI database, list of activities to perform double counting removal
     """
@@ -58,9 +58,9 @@ def create_or_modify_activity_from_esm_results(db: list[dict], original_activity
             db=db,
             db_dict_code=database_list_to_dict(db, 'code'),
             db_dict_name=database_list_to_dict(db, 'name'),
-            regionalized_database=regionalized_database,
-            regionalized_biosphere_db=regionalized_biosphere_db,
-            db_dict_name_reg_biosphere=db_dict_name_reg_biosphere,
+            spatialized_database=spatialized_database,
+            spatialized_biosphere_db=spatialized_biosphere_db,
+            db_dict_name_spa_biosphere=db_dict_name_spa_biosphere,
         )
 
     new_code = random_code()
@@ -267,8 +267,8 @@ def create_new_database_with_esm_results(mapping: pd.DataFrame, model: pd.DataFr
                                          tech_specifics: pd.DataFrame = None,
                                          technology_compositions: pd.DataFrame = None,
                                          tech_to_remove_layers: pd.DataFrame = None, write_database: bool = True,
-                                         return_obj: str = None, regionalized_database: bool = False,
-                                         regionalized_biosphere_db: list[dict] = None) -> None | list[dict]:
+                                         return_obj: str = None, spatialized_database: bool = False,
+                                         spatialized_biosphere_db: list[dict] = None) -> None | list[dict]:
     """
     Create a new database with the ESM results
 
@@ -289,8 +289,8 @@ def create_new_database_with_esm_results(mapping: pd.DataFrame, model: pd.DataFr
     :param new_end_use_types: adapt end use types to fit the results LCI datasets mapping
     :param write_database: if True, write the new database in the brightway2 project
     :param return_obj: if 'database', return the new database, else does not return anything
-    :param regionalized_database: if True, the main database has regionalized elementary flows
-    :param regionalized_biosphere_db: list of flows in the regionalized biosphere database
+    :param spatialized_database: if True, the main database has spatialized elementary flows
+    :param spatialized_biosphere_db: list of flows in the spatialized biosphere database
     :return: None or the new database as a list of dictionaries if 'return_obj' is 'database
     """
 
@@ -302,10 +302,10 @@ def create_new_database_with_esm_results(mapping: pd.DataFrame, model: pd.DataFr
         tech_to_remove_layers = pd.DataFrame(columns=['Layers', 'Technologies'])
     if new_end_use_types is None:
         new_end_use_types = pd.DataFrame(columns=['Name', 'Search type', 'Old', 'New'])
-    if regionalized_database:
-        db_dict_name_reg_biosphere = database_list_to_dict(regionalized_biosphere_db, 'name', 'biosphere')
+    if spatialized_database:
+        db_dict_name_spa_biosphere = database_list_to_dict(spatialized_biosphere_db, 'name', 'biosphere')
     else:
-        db_dict_name_reg_biosphere = None
+        db_dict_name_spa_biosphere = None
 
     if new_db_name == 'default':
         new_db_name = f"{db[0]['database']}_with_ESM_results_for_{esm_location}"
@@ -341,9 +341,9 @@ def create_new_database_with_esm_results(mapping: pd.DataFrame, model: pd.DataFr
                 unit_conversion=unit_conversion,
                 tech_to_remove_layers=tech_to_remove_layers,
                 new_end_use_types=new_end_use_types,
-                regionalized_database=regionalized_database,
-                regionalized_biosphere_db=regionalized_biosphere_db,
-                db_dict_name_reg_biosphere=db_dict_name_reg_biosphere,
+                spatialized_database=spatialized_database,
+                spatialized_biosphere_db=spatialized_biosphere_db,
+                db_dict_name_spa_biosphere=db_dict_name_spa_biosphere,
             )
 
             already_done.append((original_activity_name,

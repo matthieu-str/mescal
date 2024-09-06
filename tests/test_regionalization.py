@@ -107,9 +107,9 @@ def test_regionalize_activity_foreground():
         db=dummy_db,
         db_dict_name=database_list_to_dict(dummy_db, 'name', 'technosphere'),
         db_dict_code=database_list_to_dict(dummy_db, 'code', 'technosphere'),
-        regionalized_database=True,
-        regionalized_biosphere_db=dummy_reg_biosphere_db,
-        db_dict_name_reg_biosphere=database_list_to_dict(dummy_reg_biosphere_db, 'name', 'biosphere'),
+        spatialized_database=True,
+        spatialized_biosphere_db=dummy_reg_biosphere_db,
+        db_dict_name_spa_biosphere=database_list_to_dict(dummy_reg_biosphere_db, 'name', 'biosphere'),
     )
 
     for exc in regionalized_act['exchanges']:

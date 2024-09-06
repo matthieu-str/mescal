@@ -5,9 +5,9 @@ import copy
 
 def regionalize_activity_foreground(act: dict, accepted_locations: list[str], target_region: str,
                                     locations_ranking: list[str], db: list[dict], db_dict_code: dict,
-                                    db_dict_name: dict, regionalized_database: bool = False,
-                                    regionalized_biosphere_db: list[dict] = None,
-                                    db_dict_name_reg_biosphere: dict = None) -> dict:
+                                    db_dict_name: dict, spatialized_database: bool = False,
+                                    spatialized_biosphere_db: list[dict] = None,
+                                    db_dict_name_spa_biosphere: dict = None) -> dict:
     """
     Regionalize a foreground activity according to the user ranking of locations
 
@@ -18,10 +18,10 @@ def regionalize_activity_foreground(act: dict, accepted_locations: list[str], ta
     :param db: list of activities in the LCI database
     :param db_dict_code: dictionary of the LCI database with (database, code) as key
     :param db_dict_name: dictionary of the LCI database with (name, product, location, database) as key
-    :param regionalized_database: if True, the activity belongs to a regionalized database (with regionalized
+    :param spatialized_database: if True, the activity belongs to a spatialized database (with spatialized
         elementary flows)
-    :param regionalized_biosphere_db: list of flows in the regionalized biosphere database
-    :param db_dict_name_reg_biosphere: dictionary of the regionalized biosphere database with
+    :param spatialized_biosphere_db: list of flows in the spatialized biosphere database
+    :param db_dict_name_spa_biosphere: dictionary of the spatialized biosphere database with
         (name, product, location, database) as key
     :return: the regionalized activity
     """
@@ -72,7 +72,7 @@ def regionalize_activity_foreground(act: dict, accepted_locations: list[str], ta
             flow['input'] = (new_techno_act['database'], new_techno_act['code'])
             flow['comment'] = f'Changed from {techno_act_location} to {new_location}' + flow.get('comment', '')
 
-        if regionalized_database:
+        if spatialized_database:
             biosphere_flows = get_biosphere_flows(new_act)
             for flow in biosphere_flows:
                 if flow['database'] == 'biosphere3_regionalized_flows':  # if the biosphere flow is regionalized
@@ -86,13 +86,13 @@ def regionalize_activity_foreground(act: dict, accepted_locations: list[str], ta
                         location=current_loc,
                         database=flow['database'],
                         locations_ranking=locations_ranking,
-                        db=regionalized_biosphere_db,
+                        db=spatialized_biosphere_db,
                         esm_region=target_region,
                         activity_type='biosphere',
                     )  # best possible location according to the user ranking
 
                     new_flow_name = f"{generic_name}, {new_location}"
-                    new_biosphere_act = db_dict_name_reg_biosphere[(new_flow_name,
+                    new_biosphere_act = db_dict_name_spa_biosphere[(new_flow_name,
                                                                     flow['categories'],
                                                                     flow['database'])]
                     flow['name'] = new_biosphere_act['name']
