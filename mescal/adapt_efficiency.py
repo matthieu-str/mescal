@@ -39,14 +39,14 @@ def get_lca_input_quantity(row: pd.Series, double_counting_removal: pd.DataFrame
             amount += double_counting_removal[(double_counting_removal.Name == row.Name)
                                               & (double_counting_removal.Flow == flow)].Amount.values[0]
         except IndexError:
-            print(f'No flow of type {flow} has been removed in {row.Name}. This technology will thus be removed.')
-            return 0
+            print(f'No flow of type {flow} has been removed in {row.Name}.')
+            amount += 0
     else:
         return amount
 
 
 def get_lca_input_flow_unit_or_product(row: pd.Series, output_type: str, mapping_esm_flows_to_CPC: pd.DataFrame,
-                                       db_dict_name: dict, removed_flows: pd.DataFrame) -> str | None:
+                                       db_dict_code: dict, removed_flows: pd.DataFrame) -> str | None:
     """
     Retrieve the unit or product of the flow removed from the double counting removal report
 
@@ -54,7 +54,7 @@ def get_lca_input_flow_unit_or_product(row: pd.Series, output_type: str, mapping
         difference
     :param output_type: can be either 'unit' or 'product'
     :param mapping_esm_flows_to_CPC: dataframe containing the mapping between ESM flows and CPC categories
-    :param db_dict_name: LCI database as a dictionary with (name, product, location, database) as keys
+    :param db_dict_code: LCI database as a dictionary with (database, code) as keys
     :param removed_flows: dataframe containing the name and amount of removed flows during double counting removal
     :return: the unit or product of the flow removed for the ESM (technology, flow) couple
     """
@@ -67,9 +67,9 @@ def get_lca_input_flow_unit_or_product(row: pd.Series, output_type: str, mapping
     df_removed_flows = removed_flows[removed_flows.Name == row.Name]
 
     for i in range(len(df_removed_flows)):
-        removed_act_name, removed_act_prod, removed_act_loc, removed_act_database = df_removed_flows[
-            ['Removed flow activity', 'Removed flow product', 'Removed flow location', 'Removed flow database']].iloc[i]
-        act_exc = db_dict_name[removed_act_name, removed_act_prod, removed_act_loc, removed_act_database]
+        removed_act_database, removed_act_code = df_removed_flows[
+            ['Removed flow database', 'Removed flow code']].iloc[i]
+        act_exc = db_dict_code[removed_act_database, removed_act_code]
         if 'classifications' in act_exc:
             if 'CPC' in dict(act_exc['classifications']):
                 if dict(act_exc['classifications'])['CPC'] in CPC_list:
@@ -91,7 +91,8 @@ def get_lca_input_flow_unit_or_product(row: pd.Series, output_type: str, mapping
         if len(set(unit_list)) > 1:
             raise ValueError(f'Several units possible for flow {row.Flow} in {row.Name}: {set(unit_list)}')
         elif len(set(unit_list)) == 0:
-            print(f'No flow found for type {row.Flow} in {row.Name}. This technology will thus be removed.')
+            print(f'No flow found for type(s) {row.Flow} in {row.Name}. The efficiency of this technology cannot be '
+                  f'adjusted.')
             return None
         else:
             return list(set(unit_list))[0]
@@ -103,7 +104,8 @@ def get_lca_input_flow_unit_or_product(row: pd.Series, output_type: str, mapping
                 f'Kept the first one.')
             return list(set(name_list))[0]
         elif len(set(name_list)) == 0:
-            print(f'No flow found for type {row.Flow} in {row.Name}. This technology will thus be removed.')
+            print(f'No flow found for type(s) {row.Flow} in {row.Name}. The efficiency of this technology cannot be '
+                  f'adjusted.')
             return None
         else:
             return list(set(name_list))[0]
@@ -112,12 +114,13 @@ def get_lca_input_flow_unit_or_product(row: pd.Series, output_type: str, mapping
         raise ValueError(f'output_type must be either "unit" or "product"')
 
 
-def adapt_biosphere_flows_to_efficiency_difference(act: dict, efficiency_ratio: float) -> dict:
+def adapt_biosphere_flows_to_efficiency_difference(act: dict, efficiency_ratio: float, tech: str) -> dict:
     """
     Adapt the biosphere flows of an activity to correct the efficiency difference between ESM and LCA
 
     :param act: LCI dataset to adapt
     :param efficiency_ratio: ratio between the LCA and ESM efficiencies
+    :param tech: name of the technology
     :return: the adapted LCI dataset
     """
     for exc in get_biosphere_flows(act):
@@ -126,7 +129,7 @@ def adapt_biosphere_flows_to_efficiency_difference(act: dict, efficiency_ratio: 
             pass
         else:
             exc['amount'] *= efficiency_ratio
-            exc['comment'] = (f'EF multiplied by {efficiency_ratio} (efficiency).' + act.get('comment', ''))
+            exc['comment'] = (f'{tech}: EF multiplied by {efficiency_ratio} (efficiency). ' + exc.get('comment', ''))
     return act
 
 
@@ -142,7 +145,7 @@ def correct_esm_and_lca_efficiency_differences(db: list[dict], model: pd.DataFra
     :param model: model file containing the input and output flows of the ESM model
     :param efficiency: file containing the ESM (Name, Flow) couples to correct
     :param mapping_esm_flows_to_CPC: mapping between ESM flows and CPC categories
-    :param removed_flows: dataframe containing the name and amount of removed flows during double counting removal
+    :param removed_flows: dataframe containing the name, code and amount of removed flows during double counting removal
     :param unit_conversion: dataframe containing the conversion factors between different units
     :param double_counting_removal: dataframe containing the scaled amounts removed during double counting removal
     :param output_type: can be either 'database', 'dataframe', or 'both'. If 'database', the corrected LCI database is
@@ -150,7 +153,7 @@ def correct_esm_and_lca_efficiency_differences(db: list[dict], model: pd.DataFra
         (database, dataframe).
     :return: the corrected LCI database
     """
-    db_dict_name = database_list_to_dict(db, 'name')
+    db_dict_code = database_list_to_dict(db, 'code')
 
     try:
         efficiency.Flow = efficiency.Flow.apply(ast.literal_eval)
@@ -160,12 +163,12 @@ def correct_esm_and_lca_efficiency_differences(db: list[dict], model: pd.DataFra
     efficiency['ESM efficiency'] = efficiency.apply(compute_efficiency_esm, axis=1, model=model)
     efficiency['LCA input unit'] = efficiency.apply(get_lca_input_flow_unit_or_product, axis=1, output_type='unit',
                                                     mapping_esm_flows_to_CPC=mapping_esm_flows_to_CPC,
-                                                    db_dict_name=db_dict_name, removed_flows=removed_flows)
+                                                    db_dict_code=db_dict_code, removed_flows=removed_flows)
     efficiency.drop(efficiency[efficiency['LCA input unit'].isnull()].index, inplace=True)
     efficiency['LCA input product'] = efficiency.apply(get_lca_input_flow_unit_or_product, axis=1,
                                                        output_type='product',
                                                        mapping_esm_flows_to_CPC=mapping_esm_flows_to_CPC,
-                                                       db_dict_name=db_dict_name, removed_flows=removed_flows)
+                                                       db_dict_code=db_dict_code, removed_flows=removed_flows)
     efficiency.drop(efficiency[efficiency['LCA input product'].isnull()].index, inplace=True)
     efficiency['LCA input quantity'] = efficiency.apply(get_lca_input_quantity, axis=1,
                                                         double_counting_removal=double_counting_removal)
@@ -204,26 +207,24 @@ def correct_esm_and_lca_efficiency_differences(db: list[dict], model: pd.DataFra
 
         df_removed_flows = removed_flows[removed_flows.Name == tech]  # flows removed during double counting removal
         for j in range(len(df_removed_flows)):
-            (main_act_name, main_act_prod, main_act_loc, main_act_database, removed_act_name, removed_act_prod,
-             removed_act_loc, removed_act_database) = df_removed_flows[
-                ['Activity', 'Product', 'Location', 'Database', 'Removed flow activity', 'Removed flow product',
-                 'Removed flow location', 'Removed flow database']].iloc[j]
-            act_exc = db_dict_name[removed_act_name, removed_act_prod, removed_act_loc, removed_act_database]
+            (main_act_database, main_act_code, removed_act_database, removed_act_code) = df_removed_flows[
+                ['Database', 'Code', 'Removed flow database', 'Removed flow code']].iloc[j]
+            act_exc = db_dict_code[removed_act_database, removed_act_code]
             if 'classifications' in act_exc:
                 if 'CPC' in dict(act_exc['classifications']):
                     if dict(act_exc['classifications'])['CPC'] in CPC_list:
                         # if this flow (that was removed during double counting removal) is a fuel flow of the
                         # technology, the biosphere flows the activity will be adjusted
-                        act_to_adapt = db_dict_name[main_act_name, main_act_prod, main_act_loc, main_act_database]
+                        act_to_adapt = db_dict_code[main_act_database, main_act_code]
                         act_to_adapt_list.append(act_to_adapt)
 
         if len(act_to_adapt_list) == 0:
-            print(f'No flow of type {flows_list} found for {tech}. The efficiency of this technology cannot be '
+            print(f'No flow of type(s) {flows_list} found for {tech}. The efficiency of this technology cannot be '
                   f'adjusted.')
 
         for act in act_to_adapt_list:
             efficiency_ratio = efficiency['LCA efficiency'].iloc[i] / efficiency['ESM efficiency'].iloc[i]
-            act = adapt_biosphere_flows_to_efficiency_difference(act, efficiency_ratio)
+            act = adapt_biosphere_flows_to_efficiency_difference(act, efficiency_ratio, tech)
 
     if output_type == 'dataframe':
         return efficiency
