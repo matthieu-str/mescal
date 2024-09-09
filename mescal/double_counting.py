@@ -1,6 +1,6 @@
 from .regionalization import *
 import ast
-from .modify_inventory import change_carbon_flow
+from .modify_inventory import change_dac_biogenic_carbon_flow
 from .adapt_efficiency import correct_esm_and_lca_efficiency_differences
 
 
@@ -963,10 +963,10 @@ def create_esm_database(mapping: pd.DataFrame, model: pd.DataFrame, mapping_esm_
         write_wurst_database_to_brightway(esm_db, esm_db_name)
 
         # Change carbon flow of DAC from biogenic to fossil
-        if 'DAC_LT, Operation' in [act['name'] for act in esm_db]:
-            change_carbon_flow(db_name=esm_db_name, activity_name='DAC_LT, Operation')
-        if 'DAC_HT, Operation' in [act['name'] for act in esm_db]:
-            change_carbon_flow(db_name=esm_db_name, activity_name='DAC_HT, Operation')
+        dac_technologies = list(tech_specifics[tech_specifics.Specifics == 'DAC'].Name)
+        for tech in dac_technologies:
+            if f'{tech}, Operation' in [act['name'] for act in esm_db]:
+                change_dac_biogenic_carbon_flow(db_name=esm_db_name, activity_name=f'{tech}, Operation')
 
     if return_obj == 'mapping':
         return mapping
