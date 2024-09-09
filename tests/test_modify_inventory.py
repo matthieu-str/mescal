@@ -81,6 +81,24 @@ dummy_esm_db = [
                 "amount": 0.20,
                 "type": "biosphere",
                 "unit": "kilogram",
+            },
+            {
+                "name": "Carbon dioxide, fossil",
+                "categories": ('air', 'urban air close to ground'),
+                "database": "biosphere3",
+                "input": ('biosphere3', 'f9749677-9c9f-4678-ab55-c607dfdc2cb9'),
+                "amount": 0.30,
+                "type": "biosphere",
+                "unit": "kilogram",
+            },
+            {
+                "name": "Carbon monoxide, fossil",
+                "categories": ("air",),
+                "database": "biosphere3",
+                "input": ('biosphere3', 'ba2f3f82-c93a-47a5-822a-37ec97495275'),
+                "amount": 0.10,
+                "type": "biosphere",
+                "unit": "kilogram",
             }
         ],
     }
@@ -114,16 +132,34 @@ def test_change_carbon_flow():
 
     biosphere_flows_car = [i for i in act_car.biosphere()]
 
-    assert len(biosphere_flows_car) == 2
-    if biosphere_flows_car[0].as_dict()['name'] == 'Carbon dioxide, fossil':
-        assert biosphere_flows_car[0].as_dict()['amount'] == 0.20 * (1 - 0.80)
-        assert biosphere_flows_car[1].as_dict()['name'] == 'Carbon dioxide, non-fossil'
-        assert biosphere_flows_car[1].as_dict()['input'] == ('biosphere3', 'eba59fd6-f37e-41dc-9ca3-c7ea22d602c7')
-        assert biosphere_flows_car[1].as_dict()['amount'] == 0.20 * 0.80
-    else:
-        assert biosphere_flows_car[1].as_dict()['name'] == 'Carbon dioxide, fossil'
-        assert biosphere_flows_car[1].as_dict()['amount'] == 0.20 * (1 - 0.80)
-        assert biosphere_flows_car[0].as_dict()['name'] == 'Carbon dioxide, non-fossil'
-        assert biosphere_flows_car[0].as_dict()['input'] == ('biosphere3', 'eba59fd6-f37e-41dc-9ca3-c7ea22d602c7')
-        assert biosphere_flows_car[0].as_dict()['amount'] == 0.20 * 0.80
+    assert len(biosphere_flows_car) == 6
+
+    carbon_dio_fossil_air = [i for i in biosphere_flows_car if
+                             (i.as_dict()['name'] == 'Carbon dioxide, fossil')
+                             & (i.as_dict()['categories'] == ('air',))][0]
+    carbon_dio_non_fossil_air = [i for i in biosphere_flows_car if
+                                 (i.as_dict()['name'] == 'Carbon dioxide, non-fossil')
+                                 & (i.as_dict()['categories'] == ('air',))][0]
+    carbon_dio_fossil_urban = [i for i in biosphere_flows_car if
+                               (i.as_dict()['name'] == 'Carbon dioxide, fossil')
+                               & (i.as_dict()['categories'] == ('air', 'urban air close to ground'))][0]
+    carbon_dio_non_fossil_urban = [i for i in biosphere_flows_car if
+                                   (i.as_dict()['name'] == 'Carbon dioxide, non-fossil')
+                                   & (i.as_dict()['categories'] == ('air', 'urban air close to ground'))][0]
+    carbon_mono_fossil = [i for i in biosphere_flows_car if i.as_dict()['name'] == 'Carbon monoxide, fossil'][0]
+    carbon_mono_non_fossil = [i for i in biosphere_flows_car if i.as_dict()['name'] == 'Carbon monoxide, non-fossil'][0]
+
+    assert carbon_dio_fossil_air.as_dict()['amount'] == 0.20 * (1 - 0.80)
+    assert carbon_dio_non_fossil_air.as_dict()['amount'] == 0.20 * 0.80
+    assert carbon_dio_fossil_urban.as_dict()['amount'] == 0.30 * (1 - 0.80)
+    assert carbon_dio_non_fossil_urban.as_dict()['amount'] == 0.30 * 0.80
+    assert carbon_mono_fossil.as_dict()['amount'] == 0.10 * (1 - 0.80)
+    assert carbon_mono_non_fossil.as_dict()['amount'] == 0.10 * 0.80
+
+    assert carbon_dio_fossil_air.as_dict()['input'] == ('biosphere3', '349b29d1-3e58-4c66-98b9-9d1a076efd2e')
+    assert carbon_dio_non_fossil_air.as_dict()['input'] == ('biosphere3', 'eba59fd6-f37e-41dc-9ca3-c7ea22d602c7')
+    assert carbon_dio_fossil_urban.as_dict()['input'] == ('biosphere3', 'f9749677-9c9f-4678-ab55-c607dfdc2cb9')
+    assert carbon_dio_non_fossil_urban.as_dict()['input'] == ('biosphere3', '73ed05cc-9727-4abf-9516-4b5c0fe54a16')
+    assert carbon_mono_fossil.as_dict()['input'] == ('biosphere3', 'ba2f3f82-c93a-47a5-822a-37ec97495275')
+    assert carbon_mono_non_fossil.as_dict()['input'] == ('biosphere3', '2cb2333c-1599-46cf-8435-3dffce627524')
 
