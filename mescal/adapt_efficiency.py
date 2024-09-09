@@ -129,7 +129,11 @@ def adapt_biosphere_flows_to_efficiency_difference(act: dict, efficiency_ratio: 
             pass
         else:
             exc['amount'] *= efficiency_ratio
-            exc['comment'] = (f'{tech}: EF multiplied by {efficiency_ratio} (efficiency). ' + exc.get('comment', ''))
+            exc['comment'] = (f'{tech}: EF multiplied by {round(efficiency_ratio, 4)} (efficiency). '
+                              + exc.get('comment', ''))
+
+    act['comment'] = (f'Biosphere flows adjusted by a factor {round(efficiency_ratio, 4)} to correct efficiency '
+                      f'difference between ESM and LCA. ' + act.get('comment', ''))
     return act
 
 

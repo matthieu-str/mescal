@@ -45,7 +45,6 @@ def change_dac_biogenic_carbon_flow(db_name: str, activity_name: str) -> None:
         leak_flow.as_dict()['comment'] = (f"Modified from {old_name_leak} to Carbon dioxide, fossil. "
                                           + uptake_flow.as_dict().get('comment', ""))
         leak_flow.save()
-
         act.save()
 
     elif len(biosphere_flows) == 1:  # only capture
@@ -94,17 +93,22 @@ def change_fossil_carbon_flows_of_biofuels(db_name: str, activity_name: str, bio
             # change the amount of the fossil flow
             total_amount = bf.as_dict()['amount']
             bf.as_dict()['amount'] *= (1 - biogenic_ratio)
-            bf['comment'] = f"Multiplied by (1 - biogenic ratio): {round(1-biogenic_ratio, 3)}" + bf.get('comment', "")
+            bf['comment'] = (f"Multiplied by (1 - biogenic ratio): {round(1-biogenic_ratio, 3)}. "
+                             + bf.get('comment', ""))
             bf.save()
 
             # add a new non-fossil elementary flow to the activity
             new_biosphere_exc = act.new_exchange(
                 input=new_biosphere_act,
                 name=new_biosphere_act['name'],
+                categories=new_biosphere_act['categories'],
                 amount=total_amount * biogenic_ratio,
                 type='biosphere',
             )
             new_biosphere_exc['comment'] = (f"Added flow: biogenic part of {bf.as_dict()['name']} with biogenic ratio "
-                                            f"of {round(biogenic_ratio, 3)}") + new_biosphere_exc.get('comment', "")
+                                            f"of {round(biogenic_ratio, 3)}. ") + new_biosphere_exc.get('comment', "")
             new_biosphere_exc.save()
-            act.save()
+
+    act.as_dict()['comment'] = (f"Modified fossil carbon flows to non-fossil carbon flows. Biogenic ratio: "
+                                f"{round(biogenic_ratio, 3)}. ") + act.get('comment', "")
+    act.save()
