@@ -1,6 +1,6 @@
 from .regionalization import *
 import ast
-from .modify_inventory import change_dac_biogenic_carbon_flow
+from .modify_inventory import change_dac_biogenic_carbon_flow, change_fossil_carbon_flows_of_biofuels
 from .adapt_efficiency import correct_esm_and_lca_efficiency_differences
 
 
@@ -967,6 +967,16 @@ def create_esm_database(mapping: pd.DataFrame, model: pd.DataFrame, mapping_esm_
         for tech in dac_technologies:
             if f'{tech}, Operation' in [act['name'] for act in esm_db]:
                 change_dac_biogenic_carbon_flow(db_name=esm_db_name, activity_name=f'{tech}, Operation')
+
+        # Change carbon flows of biofuel mobility technologies
+        biofuel_mob_tech = tech_specifics[tech_specifics.Specifics == 'Biofuel'][['Name', 'Amount']].values.tolist()
+        for tech, biogenic_ratio in biofuel_mob_tech:
+            if f'{tech}, Operation' in [act['name'] for act in esm_db]:
+                change_fossil_carbon_flows_of_biofuels(
+                    db_name=esm_db_name,
+                    activity_name=f'{tech}, Operation',
+                    biogenic_ratio=biogenic_ratio
+                )
 
     if return_obj == 'mapping':
         return mapping
