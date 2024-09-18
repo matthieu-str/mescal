@@ -85,7 +85,8 @@ def restrict_lcia_metrics(df: pd.DataFrame, lcia_method: str) -> pd.DataFrame:
 
 
 def normalize_lca_metrics(R: pd.DataFrame, mip_gap: float, refactor: float, lcia_method: str,
-                          impact_abbrev: pd.DataFrame, biogenic: bool = False, path: str = 'results/') -> None:
+                          impact_abbrev: pd.DataFrame, biogenic: bool = False, path: str = 'results/',
+                          metadata: dict = None) -> None:
     """
     Create a .dat file containing the normalized LCA metrics for AMPL and a csv file containing the normalization
     factors
@@ -97,8 +98,14 @@ def normalize_lca_metrics(R: pd.DataFrame, mip_gap: float, refactor: float, lcia
     :param lcia_method: LCIA method to be used
     :param impact_abbrev: dataframe containing the impact categories abbreviations
     :param biogenic: whether biogenic carbon flows impact assessment method should be included or not
+    :param metadata: dictionary containing the metadata. Can contain keys 'ecoinvent_version, 'year', 'spatialized',
+        'regionalized', 'iam', 'ssp_rcp'.
     :return: None
     """
+
+    if metadata is None:
+        metadata = {}
+
     R_constr = R[R['Type'] == 'Construction']
     R_constr['Value'] *= refactor
 
@@ -122,8 +129,25 @@ def normalize_lca_metrics(R: pd.DataFrame, mip_gap: float, refactor: float, lcia
     R['Value_norm'] = R['Value_norm'].apply(lambda x: x if abs(x) > mip_gap else 0)
 
     with open(f'{path}techs_lcia_{lcia_methods_short_names(lcia_method)}.dat', 'w') as f:
+
+        # Write metadata at the beginning of the file
+        if 'ecoinvent_version' in metadata:
+            f.write(f"# Ecoinvent version: {metadata['ecoinvent_version']}\n")
+        if 'spatialized' in metadata:
+            f.write(f"# Spatialized database: {metadata['spatialized']}\n")
+        if 'regionalized' in metadata:
+            f.write(f"# Regionalized database: {metadata['regionalized']}\n")
+        if 'year' in metadata:
+            f.write(f"# Selected year in premise: {metadata['year']}\n")
+        if 'iam' in metadata:
+            f.write(f"# Selected IAM in premise: {metadata['iam']}\n")
+        if 'ssp_rcp' in metadata:
+            f.write(f"# Selected SSP-RCP scenario in premise: {metadata['ssp_rcp']}\n")
+
+        # Set of LCA indicators
         f.write(f"set INDICATORS := {' '.join(R['Abbrev'].unique())};\n")
         for i in range(len(R)):
+            # Declaring the LCIA parameters
             f.write(f"let lcia_{tech_type(R.Type.iloc[i])}['{R.Abbrev.iloc[i]}','{R.Name.iloc[i]}'] := "
                     f"{R.Value_norm.iloc[i]}; #{R.Unit.iloc[i]} (normalized)\n")
 
