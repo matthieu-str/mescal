@@ -48,15 +48,15 @@ def load_multiple_databases(database_list: list[str], create_pickle: bool = Fals
     return db
 
 
-def merge_databases(database_list: list[str], new_db_name: str, main_ecoinvent_db_name: str,
+def merge_databases(database_list: list[str], main_ecoinvent_db_name: str, new_db_name: str = None,
                     old_main_db_names: list[str] or None = None, output: str = 'return') -> list[dict] or None:
     """
     Merge multiple LCI databases in one database. The list of databases should contain one main database (e.g., an
     ecoinvent or premise database) towards which all other databases will be relinked.
 
     :param database_list: list of LCI databases to merge
-    :param new_db_name: name of the new merged database
     :param main_ecoinvent_db_name: name of the main database, e.g., ecoinvent or premise database
+    :param new_db_name: name of the new merged database. Only used if output is 'write' or 'both'.
     :param old_main_db_names: other main databases that are not in the list of databases, thus the list of databases
         will be unlinked from those
     :param output: 'return' to return the merged database, 'write' to write it, 'both' to do both
@@ -87,10 +87,14 @@ def merge_databases(database_list: list[str], new_db_name: str, main_ecoinvent_d
             raise ValueError(f"Database {dep_db_name} is not in the list of databases to merge")
 
     if output == 'write':
+        if new_db_name is None:
+            raise ValueError('The "new_db_name" argument must be provided if output is "write"')
         write_wurst_database_to_brightway(merged_db, new_db_name)
     elif output == 'return':
         return merged_db
     elif output == 'both':
+        if new_db_name is None:
+            raise ValueError('The "new_db_name" argument must be provided if output is "both"')
         write_wurst_database_to_brightway(merged_db, new_db_name)
         return merged_db
     else:
