@@ -34,16 +34,20 @@ def add_CPC_category(db: list[dict], name: str, CPC_category: str, search_type: 
     return db
 
 
-def create_new_database_with_CPC_categories(db: list[dict], new_db_name: str,
-                                            mapping_product_to_CPC: pd.DataFrame or str = 'default') -> None:
+def create_new_database_with_CPC_categories(db: list[dict], new_db_name: str = None,
+                                            mapping_product_to_CPC: pd.DataFrame or str = 'default',
+                                            output: str = 'write') -> None | list[dict]:
     """
     Create a new database with additional CPC categories
 
     :param db: LCI database
-    :param new_db_name: name of the new database
+    :param new_db_name: name of the new database. Only used if output is 'write' or 'both'.
     :param mapping_product_to_CPC: mapping between products and CPC categories, can be a pandas DataFrame or the path
         towards the csv file
-    :return: None
+    :param output: can be 'write', 'return' or 'both'. If 'write', the new database is written to the brightway project.
+        If 'return', the new database is returned as a list of dictionary. If 'both', the new database is written to the
+        brightway project and returned as a list of dictionary. Default is 'write'.
+    :return: None (if output is 'write') or the new database (if output is 'return' or 'both')
     """
 
     if mapping_product_to_CPC == 'default':
@@ -65,4 +69,16 @@ def create_new_database_with_CPC_categories(db: list[dict], new_db_name: str,
         search_type = mapping_product_to_CPC["Search type"].iloc[i]
         db = add_CPC_category(db, name, CPC_category, search_type, key)
 
-    write_wurst_database_to_brightway(db, new_db_name)
+    if output == 'return':
+        return db
+    elif output == 'write':
+        if new_db_name is None:
+            raise ValueError('The "new_db_name" argument must be provided if output is "write"')
+        write_wurst_database_to_brightway(db, new_db_name)
+    elif output == 'both':
+        if new_db_name is None:
+            raise ValueError('The "new_db_name" argument must be provided if output is "both"')
+        write_wurst_database_to_brightway(db, new_db_name)
+        return db
+    else:
+        raise ValueError('The "output" argument must be either "write", "return" or "both"')
