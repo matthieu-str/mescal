@@ -1,9 +1,9 @@
 import pandas as pd
-from .normalization import lcia_methods_short_names, restrict_lcia_metrics
+from .normalization import restrict_lcia_metrics
 
 
 def gen_lcia_obj(lcia_method: str, refactor: str, impact_abbrev: pd.DataFrame, biogenic: bool = False,
-                 path: str = 'results/') -> None:
+                 path: str = 'results/', metadata: dict = None) -> None:
     """
     Create an AMPL mod file containing everything related to LCA
 
@@ -12,8 +12,12 @@ def gen_lcia_obj(lcia_method: str, refactor: str, impact_abbrev: pd.DataFrame, b
     :param impact_abbrev: dataframe containing the impact abbreviations
     :param biogenic: whether biogenic carbon flows impact assessment method should be included or not
     :param path: path to EnergyScope AMPL folder
+    :param metadata: dictionary containing the metadata.
     :return: None
     """
+
+    if metadata is None:
+        metadata = {}
 
     if not biogenic:
         list_biogenic_cat = ["CFB", "REQDB", "m_CCLB", "m_CCSB", "TTEQB", "TTHHB", "CCEQSB", "CCEQLB", "CCHHSB",
@@ -22,7 +26,12 @@ def gen_lcia_obj(lcia_method: str, refactor: str, impact_abbrev: pd.DataFrame, b
 
     impact_abbrev = restrict_lcia_metrics(impact_abbrev, lcia_method)
 
-    with open(f'{path}objectives_{lcia_methods_short_names(lcia_method)}.mod', 'w') as f:
+    with open(f'{path}objectives.mod', 'w') as f:
+
+        # Write metadata at the beginning of the file
+        if 'lcia_method' in metadata:
+            f.write(f'# LCIA method: {metadata["lcia_method"]}\n')
+        f.write('\n')
 
         # Set of LCA indicators
         f.write('set INDICATORS;\n\n')
