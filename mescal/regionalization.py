@@ -73,9 +73,10 @@ def regionalize_activity_foreground(act: dict, accepted_locations: list[str], ta
             flow['comment'] = f'Changed from {techno_act_location} to {new_location}' + flow.get('comment', '')
 
         if spatialized_database:
+            spatialized_biosphere_db_name = [i for i in spatialized_biosphere_db][0]['database']
             biosphere_flows = get_biosphere_flows(new_act)
             for flow in biosphere_flows:
-                if flow['database'] == 'biosphere3_regionalized_flows':  # if the biosphere flow is regionalized
+                if flow['database'] == spatialized_biosphere_db_name:  # if the biosphere flow is regionalized
                     current_loc = flow['name'].split(', ')[-1]
                     if current_loc in accepted_locations:
                         continue
