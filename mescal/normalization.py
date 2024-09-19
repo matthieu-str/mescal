@@ -99,7 +99,7 @@ def normalize_lca_metrics(R: pd.DataFrame, mip_gap: float, refactor: float, lcia
     :param impact_abbrev: dataframe containing the impact categories abbreviations
     :param biogenic: whether biogenic carbon flows impact assessment method should be included or not
     :param metadata: dictionary containing the metadata. Can contain keys 'ecoinvent_version, 'year', 'spatialized',
-        'regionalized', 'iam', 'ssp_rcp'.
+        'regionalized', 'iam', 'ssp_rcp', 'lcia_method'.
     :return: None
     """
 
@@ -128,7 +128,7 @@ def normalize_lca_metrics(R: pd.DataFrame, mip_gap: float, refactor: float, lcia
     R['Value_norm'] = R['Value'] / R['max_AoP']
     R['Value_norm'] = R['Value_norm'].apply(lambda x: x if abs(x) > mip_gap else 0)
 
-    with open(f'{path}techs_lcia_{lcia_methods_short_names(lcia_method)}.dat', 'w') as f:
+    with open(f'{path}techs_lcia.dat', 'w') as f:
 
         # Write metadata at the beginning of the file
         if 'ecoinvent_version' in metadata:
@@ -143,13 +143,16 @@ def normalize_lca_metrics(R: pd.DataFrame, mip_gap: float, refactor: float, lcia
             f.write(f"# Selected IAM in premise: {metadata['iam']}\n")
         if 'ssp_rcp' in metadata:
             f.write(f"# Selected SSP-RCP scenario in premise: {metadata['ssp_rcp']}\n")
+        if 'lcia_method' in metadata:
+            f.write(f"# LCIA method: {metadata['lcia_method']}\n")
+        f.write("\n")
 
         # Set of LCA indicators
-        f.write(f"set INDICATORS := {' '.join(R['Abbrev'].unique())};\n")
+        f.write(f"set INDICATORS := {' '.join(R['Abbrev'].unique())};\n\n")
         for i in range(len(R)):
             # Declaring the LCIA parameters
             f.write(f"let lcia_{tech_type(R.Type.iloc[i])}['{R.Abbrev.iloc[i]}','{R.Name.iloc[i]}'] := "
-                    f"{R.Value_norm.iloc[i]}; #{R.Unit.iloc[i]} (normalized)\n")
+                    f"{R.Value_norm.iloc[i]}; # normalized {R.Unit.iloc[i]}\n")
 
-    R[['AoP', 'max_AoP']].drop_duplicates().to_csv(f'{path}res_lcia_max_{lcia_methods_short_names(lcia_method)}.csv',
-                                                   index=False)  # to come back to the original values
+    # To come back to the original values, we save the maximum value of each AoP
+    R[['AoP', 'max_AoP']].drop_duplicates().to_csv(f'{path}res_lcia_max.csv', index=False)
