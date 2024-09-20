@@ -20,20 +20,20 @@ BUS_CNG_STOICH,Operation,"transport, passenger bus, EURO-VI","transport, passeng
 BUS_CNG_STOICH,Construction,"Passenger bus, EURO-VI","Passenger bus, compressed gas, 13m double deck urban bus, EURO-VI",RER,/unit,lci-buses
 BUS_DIESEL,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m double deck urban bus, EURO-VI",RER,/person*km,lci-buses
 BUS_DIESEL,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m double deck urban bus, EURO-VI",RER,/unit,lci-buses
-BUS_EV,Operation,"transport, passenger bus","transport, passenger bus, battery electric - overnight charging, NMC-622 battery, 13m double deck urban bus",RER,/person*km,lci-buses
-BUS_EV,Construction,Passenger bus,"Passenger bus, battery electric - overnight charging, NMC-622 battery, 13m double deck urban bus",RER,/unit,lci-buses
+BUS_EV,Operation,"transport, passenger bus","transport, passenger bus, battery electric - overnight charging, 13m double deck urban bus",RER,/person*km,lci-buses
+BUS_EV,Construction,Passenger bus,"Passenger bus, battery electric - overnight charging, 13m double deck urban bus",RER,/unit,lci-buses
 BUS_FC_HYBRID_CH4,Construction,Passenger bus,"Passenger bus, fuel cell electric, 13m double deck urban bus",RER,/unit,lci-buses
 BUS_FC_HYBRID_CH4,Operation,"transport, passenger bus","transport, passenger bus, fuel cell electric, 13m double deck urban bus",RER,/person*km,lci-buses
 BUS_FC_HYBRID_H2,Operation,"transport, passenger bus","transport, passenger bus, fuel cell electric, 13m double deck urban bus",RER,/person*km,lci-buses
 BUS_FC_HYBRID_H2,Construction,Passenger bus,"Passenger bus, fuel cell electric, 13m double deck urban bus",RER,/unit,lci-buses
 BUS_HY_DIESEL,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel hybrid, 13m double deck urban bus, EURO-VI",RER,/person*km,lci-buses
 BUS_HY_DIESEL,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel hybrid, 13m double deck urban bus, EURO-VI",RER,/unit,lci-buses
-CAR_BEV_LOWRANGE,Operation,"transport, passenger car","transport, passenger car, battery electric, NMC-622 battery, Small",RER,/km,lci-pass_cars
-CAR_BEV_LOWRANGE,Construction,Passenger car,"Passenger car, battery electric, NMC-622 battery, Small",RER,/unit,lci-pass_cars
-CAR_BEV_MEDRANGE_LOCAL,Operation,"transport, passenger car","transport, passenger car, battery electric, NMC-622 battery, Medium",RER,/km,lci-pass_cars
-CAR_BEV_MEDRANGE_LOCAL,Construction,Passenger car,"Passenger car, battery electric, NMC-622 battery, Medium",RER,/unit,lci-pass_cars
-CAR_BEV_MEDRANGE_LONGD,Operation,"transport, passenger car","transport, passenger car, battery electric, NMC-622 battery, Medium",RER,/km,lci-pass_cars
-CAR_BEV_MEDRANGE_LONGD,Construction,Passenger car,"Passenger car, battery electric, NMC-622 battery, Medium",RER,/unit,lci-pass_cars
+CAR_BEV_LOWRANGE,Operation,"transport, passenger car","transport, passenger car, battery electric, Small",RER,/km,lci-pass_cars
+CAR_BEV_LOWRANGE,Construction,Passenger car,"Passenger car, battery electric, Small",RER,/unit,lci-pass_cars
+CAR_BEV_MEDRANGE_LOCAL,Operation,"transport, passenger car","transport, passenger car, battery electric, Medium",RER,/km,lci-pass_cars
+CAR_BEV_MEDRANGE_LOCAL,Construction,Passenger car,"Passenger car, battery electric, Medium",RER,/unit,lci-pass_cars
+CAR_BEV_MEDRANGE_LONGD,Operation,"transport, passenger car","transport, passenger car, battery electric, Medium",RER,/km,lci-pass_cars
+CAR_BEV_MEDRANGE_LONGD,Construction,Passenger car,"Passenger car, battery electric, Medium",RER,/unit,lci-pass_cars
 CAR_DIESEL_LOCAL,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Medium, EURO-6ab",RER,/unit,lci-pass_cars
 CAR_DIESEL_LOCAL,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Medium, EURO-6ab",RER,/km,lci-pass_cars
 CAR_DIESEL_LONGD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Medium, EURO-6ab",RER,/km,lci-pass_cars
@@ -97,8 +97,8 @@ COACH_CNG_STOICH,Operation,"transport, passenger bus, EURO-VI","transport, passe
 COACH_CNG_STOICH,Construction,"Passenger bus, EURO-VI","Passenger bus, compressed gas, 13m single deck coach bus, EURO-VI",RER,/unit,lci-buses
 COACH_DIESEL,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,/person*km,lci-buses
 COACH_DIESEL,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,/unit,lci-buses
-COACH_EV,Operation,"transport, passenger bus","transport, passenger bus, battery electric - overnight charging, NMC-622 battery, 13m single deck urban bus",RER,/person*km,lci-buses
-COACH_EV,Construction,Passenger bus,"Passenger bus, battery electric - overnight charging, NMC-622 battery, 13m single deck urban bus",RER,/unit,lci-buses
+COACH_EV,Operation,"transport, passenger bus","transport, passenger bus, battery electric - overnight charging, 13m single deck urban bus",RER,/person*km,lci-buses
+COACH_EV,Construction,Passenger bus,"Passenger bus, battery electric - overnight charging, 13m single deck urban bus",RER,/unit,lci-buses
 COACH_FC_HYBRID_CH4,Construction,Passenger bus,"Passenger bus, fuel cell electric, 13m single deck coach bus",RER,/unit,lci-buses
 COACH_FC_HYBRID_CH4,Operation,"transport, passenger bus","transport, passenger bus, fuel cell electric, 13m single deck coach bus",RER,/person*km,lci-buses
 COACH_FC_HYBRID_H2,Operation,"transport, passenger bus","transport, passenger bus, fuel cell electric, 13m single deck coach bus",RER,/person*km,lci-buses
@@ -388,8 +388,8 @@ TRAMWAY,Operation,"transport, tram","transport, tram",RoW,/person*km,ecoinvent3.
 TRAMWAY,Construction,tram,tram production,RoW,/unit,ecoinvent3.8 cut-off
 TRUCK,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 26t gross weight, EURO-VI, long haul",RER,/metric ton*km,lci-long_haul_trucks
 TRUCK,Construction,"Medium duty truck, EURO-VI","Medium duty truck, diesel, 26t gross weight, EURO-VI, long haul",RER,/unit,lci-long_haul_trucks
-TRUCK_EV,Operation,"transport, freight, lorry","transport, freight, lorry, battery electric, NMC-622 battery, 26t gross weight, long haul",RER,/metric ton*km,lci-long_haul_trucks
-TRUCK_EV,Construction,Medium duty truck,"Medium duty truck, battery electric, NMC-622 battery, 26t gross weight, long haul",RER,/unit,lci-long_haul_trucks
+TRUCK_EV,Operation,"transport, freight, lorry","transport, freight, lorry, battery electric, 26t gross weight, long haul",RER,/metric ton*km,lci-long_haul_trucks
+TRUCK_EV,Construction,Medium duty truck,"Medium duty truck, battery electric, 26t gross weight, long haul",RER,/unit,lci-long_haul_trucks
 TRUCK_FC,Operation,"transport, freight, lorry","transport, freight, lorry, fuel cell electric, 26t gross weight, long haul",RER,/metric ton*km,lci-long_haul_trucks
 TRUCK_FC,Construction,Medium duty truck,"Medium duty truck, fuel cell electric, 26t gross weight, long haul",RER,/unit,lci-long_haul_trucks
 TRUCK_SNG,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, compressed gas, 26t gross weight, EURO-VI, long haul",RER,/metric ton*km,lci-long_haul_trucks
