@@ -31,6 +31,7 @@ __all__ = (
     "merge_databases",
     "ecoinvent_unit_convention",
     "correct_esm_and_lca_efficiency_differences",
+    "remove_quebec_flow_in_global_heat_market",
 )
 
 __version__ = "1.0.2"
@@ -46,3 +47,4 @@ from .generate_lcia_obj_ampl import *
 from .esm_back_to_lca import *
 from .change_ecoinvent import *
 from .adapt_efficiency import *
+from .modify_inventory import *
