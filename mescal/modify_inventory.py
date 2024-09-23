@@ -1,17 +1,24 @@
 import bw2data as bd
 
 
-def change_dac_biogenic_carbon_flow(db_name: str, activity_name: str) -> None:
+def change_dac_biogenic_carbon_flow(db_name: str, activity_name: str = None, activity_code: str = None) -> None:
     """
     Change the biogenic carbon flow of premise DAC technologies to a fossil carbon flow
 
     :param db_name: name of the LCI database
-    :param activity_name: name of the activity to be changed
+    :param activity_name: name of the activity to be changed (to use only if the name of the activity is unique in the
+        database)
+    :param activity_code: code of the activity to be changed
     :return: None (changes are saved in the database)
     """
-    act = [i for i in bd.Database(db_name).search(activity_name, limit=1000) if (
-        (activity_name == i.as_dict()['name'])
-    )][0]
+    if activity_name is not None:
+        act = [i for i in bd.Database(db_name).search(activity_name, limit=1000) if (
+            (activity_name == i.as_dict()['name'])
+        )][0]
+    elif activity_code is not None:
+        act = bd.Database(db_name).get(activity_code)
+    else:
+        raise ValueError("Either 'activity_name' or 'activity_code' should be provided")
 
     biosphere_flows = [i for i in act.biosphere()]
 
@@ -65,18 +72,25 @@ def change_dac_biogenic_carbon_flow(db_name: str, activity_name: str) -> None:
                          f"but is {len(biosphere_flows)}")
 
 
-def change_fossil_carbon_flows_of_biofuels(db_name: str, activity_name: str, biogenic_ratio: float) -> None:
+def change_fossil_carbon_flows_of_biofuels(db_name: str, activity_name: str = None, activity_code:str = None,
+                                           biogenic_ratio: float = 1) -> None:
     """
 
     :param db_name: name of the LCI database
-    :param activity_name: name of the activity to be changed
-    :param biogenic_ratio: fraction of biogenic carbon in the biofuel
+    :param activity_name: name of the activity to be changed (to use only if the name of the activity is unique in the
+        database)
+    :param activity_code: code of the activity to be changed
+    :param biogenic_ratio: fraction of biogenic carbon in the biofuel. Default is 1 (100% biogenic).
     :return: None (changes are saved in the database)
     """
-
-    act = [i for i in bd.Database(db_name).search(activity_name, limit=1000) if (
-        (activity_name == i.as_dict()['name'])
-    )][0]
+    if activity_name is not None:
+        act = [i for i in bd.Database(db_name).search(activity_name, limit=1000) if (
+            (activity_name == i.as_dict()['name'])
+        )][0]
+    elif activity_code is not None:
+        act = bd.Database(db_name).get(activity_code)
+    else:
+        raise ValueError("Either 'activity_name' or 'activity_code' should be provided")
 
     biosphere_flows = [i for i in act.biosphere()]
 
@@ -111,4 +125,46 @@ def change_fossil_carbon_flows_of_biofuels(db_name: str, activity_name: str, bio
 
     act.as_dict()['comment'] = (f"Modified fossil carbon flows to non-fossil carbon flows. Biogenic ratio: "
                                 f"{round(biogenic_ratio, 3)}. ") + act.get('comment', "")
+    act.save()
+
+
+def remove_quebec_flow_in_global_heat_market(db_name: str, activity_name: str = None, activity_code: str = None) \
+        -> None:
+    """
+    Remove the Quebec heat flow in the global heat market activity
+
+    :param db_name: name of the LCI database
+    :param activity_name: name of the activity to be changed (to use only if the name of the activity is unique in the
+        database)
+    :param activity_code: code of the activity to be changed
+    :return: None (changes are saved in the database)
+    """
+    if activity_name is not None:
+        act = [i for i in bd.Database(db_name).search(activity_name, limit=1000) if (
+            (activity_name == i.as_dict()['name'])
+            & (i.as_dict()['location'] == 'GLO')
+        )][0]
+    elif activity_code is not None:
+        act = bd.Database(db_name).get(activity_code)
+    else:
+        raise ValueError("Either 'activity_name' or 'activity_code' should be provided")
+
+    # Delete the exchange and save the amount
+    amount = 0
+    for exc in act.technosphere():
+        if exc['location'] == 'CA-QC':
+            amount = exc['amount']
+            exc.delete()
+
+    if amount == 0:
+        raise ValueError("No exchange with location 'CA-QC' found")
+
+    # Add the deleted amount in the RoW exchange
+    for exc in act.technosphere():
+        if exc['location'] == 'RoW':
+            exc['amount'] += amount
+            exc['comment'] = (f"Added the amount of the Quebec exchange to the RoW exchange ({amount}). "
+                              + exc.get('comment', ""))
+            exc.save()
+
     act.save()
