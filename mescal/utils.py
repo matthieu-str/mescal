@@ -49,7 +49,8 @@ def load_multiple_databases(database_list: list[str], create_pickle: bool = Fals
 
 
 def merge_databases(database_list: list[str], main_ecoinvent_db_name: str, new_db_name: str = None,
-                    old_main_db_names: list[str] or None = None, output: str = 'return') -> list[dict] or None:
+                    old_main_db_names: list[str] or None = None, output: str = 'return',
+                    check_duplicates: bool = False) -> list[dict] or None:
     """
     Merge multiple LCI databases in one database. The list of databases should contain one main database (e.g., an
     ecoinvent or premise database) towards which all other databases will be relinked.
@@ -60,6 +61,8 @@ def merge_databases(database_list: list[str], main_ecoinvent_db_name: str, new_d
     :param old_main_db_names: other main databases that are not in the list of databases, thus the list of databases
         will be unlinked from those
     :param output: 'return' to return the merged database, 'write' to write it, 'both' to do both
+    :param check_duplicates: if True, check for duplicates in terms of (product, name, location) and remove them
+        from exchanges and from the database
     :return: the newly created database or None if output is 'write'
     """
     merged_db = []
@@ -78,10 +81,49 @@ def merge_databases(database_list: list[str], main_ecoinvent_db_name: str, new_d
             db = main_ecoinvent_db
         merged_db += db
 
+    # Checking for duplicates in terms of (product, name, location)
+    if check_duplicates:
+        db_dict_name = database_list_to_dict(merged_db, 'name')
+        db_dict_name_count = {k[:3]: 0 for k in db_dict_name.keys()}
+
+        for act in merged_db:  # counting the number of occurrences of each activity
+            db_dict_name_count[(act['name'], act['reference product'], act['location'])] += 1
+
+        for k, v in db_dict_name_count.items():
+            if v > 1:  # duplicates are removed from exchanges and from the database
+
+                ref_act = None
+                for db_name in database_list:
+                    key = (k[0], k[1], k[2], db_name)
+                    if key in db_dict_name:
+                        ref_act = db_dict_name[key]  # one of the duplicates is kept
+
+                for act in merged_db:
+                    if (
+                            (act['name'] == ref_act['name'])
+                            & (act['reference product'] == ref_act['reference product'])
+                            & (act['location'] == ref_act['location'])
+                    ):  # if we find a duplicate
+                        if act['code'] != ref_act['code']:  # it is removed if its code is not the same as the reference
+                            merged_db.remove(act)
+                    else:  # for other activities, we update the exchanges
+
+                        for exc in get_technosphere_flows(act):
+                            if (
+                                    (exc['name'] == ref_act['name'])
+                                    & (exc['product'] == ref_act['reference product'])
+                                    & (exc['location'] == ref_act['location'])
+                            ):  # if we find a duplicate in the exchanges, its code is updated with the reference
+                                exc['code'] = ref_act['code']
+                                exc['database'] = ref_act['database']
+                                exc['input'] = (ref_act['database'], ref_act['code'])
+
     # Verification that the merged database has no dependencies apart from biosphere databases
     dependencies = list(set([a['exchanges'][i]['database'] for a in merged_db for i in range(len(a['exchanges']))]))
     for dep_db_name in dependencies:
         if 'biosphere' in dep_db_name:
+            pass
+        elif main_ecoinvent_db_name in dep_db_name:
             pass
         elif dep_db_name not in database_list:
             raise ValueError(f"Database {dep_db_name} is not in the list of databases to merge")
