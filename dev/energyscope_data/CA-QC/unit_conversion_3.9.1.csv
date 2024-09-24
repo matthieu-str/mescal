@@ -47,8 +47,6 @@ BIOGAS_SMR_CCS_PLANT,Construction,1.0,unit,unit
 BIOGAS_SMR_CCS_TANK,Construction,4.760896956,unit,unit
 BIOGAS_SMR_PLANT,Construction,1.0,unit,unit
 BIOGAS_SMR_TANK,Construction,4.760896956,unit,unit
-BIOMASS_ETHANOL,Construction,1.128122192e-05,unit,kilowatt
-BIOMASS_ETHANOL,Operation,0.1347708895,kilogram,kilowatt hour
 BIOMASS_GAS_EF_H2,Construction,0.0002,unit,kilowatt
 BIOMASS_GAS_EF_H2,Operation,0.03003003003,kilogram,kilowatt hour
 BIOMASS_GAS_EF_H2_CCS,Construction,0.0002,unit,kilowatt
@@ -320,8 +318,6 @@ DEC_COGEN_WOOD,Construction,0.0017,unit,kilowatt
 DEC_COGEN_WOOD,Operation,3.6,megajoule,kilowatt hour
 DEC_COGEN_WOOD_BOILER,Construction,20.0,unit,unit
 DEC_COGEN_WOOD_TURBINE,Construction,1.0,unit,unit
-DEC_DEEP_GEO,Construction,1.807525287e-05,unit,kilowatt
-DEC_DEEP_GEO,Operation,3.6,megajoule,kilowatt hour
 DEC_DIRECT_ELEC,Construction,0.2,unit,kilowatt
 DEC_DIRECT_ELEC,Operation,1.0,kilowatt hour,kilowatt hour
 DEC_HP_ELEC,Construction,0.1,unit,kilowatt
@@ -363,8 +359,6 @@ DHN_HP_ELEC,Construction,0.03333333333,unit,kilowatt
 DHN_HP_ELEC,Operation,3.6,megajoule,kilowatt hour
 DHN_TH_STORAGE,Construction,5e-05,unit,kilowatt
 DIESEL,Resource,0.08453085376,kilogram,kilowatt hour
-DIESEL_GEN,Construction,0.0001,unit,kilowatt
-DIESEL_GEN,Operation,3.6,megajoule,kilowatt hour
 DIE_STO,Construction,6.244891679e-09,unit,kilowatt hour
 DIRECT_USAGE,Operation,1.0,kilogram,kilogram
 DOGR,Operation,1.0,kilogram,kilogram
@@ -430,8 +424,6 @@ H2_EXP_ML,Operation,0.03003003003,kilogram,kilowatt hour
 H2_EXP_ML_COGEN,Construction,0.00625,unit,kilowatt
 H2_EXP_ML_COGEN,Operation,0.03003003003,kilogram,kilowatt hour
 H2_HP,Resource,0.03003003003,kilogram,kilowatt hour
-H2_Haber_Bosch,Construction,2.916232258e-05,unit,kilowatt
-H2_Haber_Bosch,Operation,0.1935483871,kilogram,kilowatt hour
 H2_LP,Resource,0.03003003003,kilogram,kilowatt hour
 H2_MP,Resource,0.03003003003,kilogram,kilowatt hour
 H2_NG_CCGT,Construction,2.5e-06,unit,kilowatt
@@ -576,10 +568,6 @@ NG_EXP_HM_COGEN,Operation,0.09230769231,cubic meter,kilowatt hour
 NG_EXP_ML,Operation,0.07741935484,kilogram,kilowatt hour
 NG_EXP_ML_COGEN,Construction,0.00625,unit,kilowatt
 NG_EXP_ML_COGEN,Operation,0.07741935484,cubic meter,kilowatt hour
-NG_GEN,Construction,0.01,unit,kilowatt
-NG_GEN,Operation,3.6,megajoule,kilowatt hour
-NG_GEN_TANK,Construction,0.4145728643,unit,unit
-NG_GEN_TURBINE,Construction,1.0,unit,unit
 NG_HP,Resource,0.09824437305,cubic meter,kilowatt hour
 NG_LP,Resource,0.09824437305,cubic meter,kilowatt hour
 NG_MP,Resource,0.07741935484,kilogram,kilowatt hour
@@ -636,8 +624,6 @@ PV,Operation,1.0,kilowatt hour,kilowatt hour
 PVC,Resource,1.0,kilogram,kilogram
 PVC_FORMATION,Construction,0.000150672,unit,kilogram per hour
 PVC_FORMATION,Operation,1.0,kilogram,kilogram
-PV_EHV,Construction,0.0017857142859999,unit,kilowatt
-PV_EHV,Operation,1.0,kilowatt hour,kilowatt hour
 PYROLYSIS,Construction,1.320212766e-05,unit,kilowatt
 PYROLYSIS,Operation,0.08865248227,kilogram,kilowatt hour
 SCHOOLBUS_BIODIESEL_B100_SD,Construction,0.002306489362,unit,person kilometer per hour

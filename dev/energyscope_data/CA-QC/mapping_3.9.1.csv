@@ -36,8 +36,6 @@ BIOGAS_SMR_CCS_PLANT,Construction,"chemical factory, organics","chemical factory
 BIOGAS_SMR_CCS_TANK,Construction,"liquid storage tank, chemicals, organics","market for liquid storage tank, chemicals, organics",GLO,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2020
 BIOGAS_SMR_PLANT,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2020
 BIOGAS_SMR_TANK,Construction,"liquid storage tank, chemicals, organics","market for liquid storage tank, chemicals, organics",GLO,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2020
-BIOMASS_ETHANOL,Construction,ethanol fermentation plant,market for ethanol fermentation plant,GLO,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2020
-BIOMASS_ETHANOL,Operation,"ethanol, from forest residue","ethanol production, via fermentation, from forest residue, energy allocation",US,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2020
 BIOMASS_GAS_EF_H2,Operation,"hydrogen, gaseous, 25 bar","hydrogen production, gaseous, 25 bar, from gasification of woody biomass in entrained flow gasifier, at gasification plant",RER,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2020
 BIOMASS_GAS_EF_H2_CCS,Operation,"hydrogen, gaseous, 25 bar","hydrogen production, gaseous, 25 bar, from gasification of woody biomass in entrained flow gasifier, with CCS, at gasification plant",RER,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2020
 BIOMASS_GAS_EF_H2_CCS_PLANT,Construction,synthetic gas factory,synthetic gas factory construction,RoW,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2020
@@ -293,8 +291,6 @@ DEC_COGEN_OIL_TURBINE,Construction,"heat and power co-generation unit, organic R
 DEC_COGEN_WOOD,Operation,"heat, central or small-scale, other than natural gas","heat production, wood chips from industry, at furnace 50kW, state-of-the-art 2014",RoW,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2020
 DEC_COGEN_WOOD_BOILER,Construction,"furnace, wood chips, hardwood storage area, 50kW","furnace production, wood chips, hardwood storage area, 50kW",RoW,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2020
 DEC_COGEN_WOOD_TURBINE,Construction,"heat and power co-generation unit, organic Rankine cycle, 200kW electrical","heat and power co-generation unit construction, organic Rankine cycle, 200kW electrical",GLO,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2020
-DEC_DEEP_GEO,Operation,"heat, deep geothermal","heat production, deep geothermal",CA,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2020
-DEC_DEEP_GEO,Construction,geothermal heat plant,geothermal heat plant construction,CA,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2020
 DEC_DIRECT_ELEC,Operation,"electricity, low voltage","market for electricity, low voltage",CA-QC,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2020
 DEC_DIRECT_ELEC,Construction,"auxiliary heating unit, electric, 5kW","auxiliary heating unit production, electric, 5kW",RoW,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2020
 DEC_HP_ELEC,Operation,"heat, air-water heat pump 10kW","heat production, air-water heat pump 10kW",RoW,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2020
@@ -329,8 +325,6 @@ DHN_DEEP_GEO,Construction,geothermal heat plant,geothermal heat plant constructi
 DHN_HP_ELEC,Operation,"heat, central or small-scale, other than natural gas","heat production, at heat pump 30kW, allocation exergy",RoW,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2020
 DHN_HP_ELEC,Construction,"heat pump, 30kW","heat pump production, 30kW",RoW,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2020
 DHN_TH_STORAGE,Construction,"thermal storage system, solar tower power plant, 20 MW","thermal storage system construction, solar tower power plant, 20 MW",RoW,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2020
-DIESEL_GEN,Operation,"diesel, burned in diesel-electric generating set, 10MW","diesel, burned in diesel-electric generating set, 10MW",GLO,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2020
-DIESEL_GEN,Construction,"diesel-electric generating set, 10MW","market for diesel-electric generating set, 10MW",GLO,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2020
 DIE_STO,Construction,"liquid storage tank, chemicals, organics","liquid storage tank production, chemicals, organics",RoW,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2020
 DIRECT_USAGE,Operation,"carbon dioxide, stored","carbon dioxide compression, transport and storage",RER,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2020
 DOGR,Operation,"carbon dioxide, stored","carbon dioxide compression, transport and storage",RER,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2020
@@ -383,8 +377,6 @@ H2_EXP_HM_COGEN,Operation,"hydrogen, gaseous","market for hydrogen, gaseous",GLO
 H2_EXP_ML,Operation,"hydrogen, gaseous","market for hydrogen, gaseous",GLO,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2020
 H2_EXP_ML_COGEN,Operation,"hydrogen, gaseous","market for hydrogen, gaseous",GLO,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2020
 H2_EXP_ML_COGEN,Construction,"air input/output unit, heat and power co-generation unit, 160kW electrical","air input/output unit production, heat and power co-generation unit, 160kW electrical",RoW,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2020
-H2_Haber_Bosch,Construction,"chemical factory, organics","market for chemical factory, organics",GLO,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2020
-H2_Haber_Bosch,Operation,"ammonia, anhydrous, liquid","ammonia production, steam reforming, liquid",RNA,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2020
 H2_NG_CCGT,Operation,"electricity, high voltage","electricity production, at natural gas-fired combined cycle power plant",RER,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2020
 H2_NG_CCGT,Construction,"NGCC power plant, 400MWe","market for gas power plant, combined cycle, 400MW electrical",GLO,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2020
 H2_STO,Construction,high pressure hydrogen storage tank,high pressure hydrogen storage tank,GLO,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2020
@@ -517,9 +509,6 @@ NG_EXP_HM_COGEN,Operation,"natural gas, high pressure","market for natural gas, 
 NG_EXP_ML,Operation,"natural gas, medium pressure, vehicle grade","market for natural gas, medium pressure, vehicle grade",GLO,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2020
 NG_EXP_ML_COGEN,Construction,"air input/output unit, heat and power co-generation unit, 160kW electrical","air input/output unit production, heat and power co-generation unit, 160kW electrical",RoW,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2020
 NG_EXP_ML_COGEN,Operation,"natural gas, medium pressure, vehicle grade","market for natural gas, medium pressure, vehicle grade",GLO,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2020
-NG_GEN,Operation,"heat, central or small-scale, natural gas","natural gas, burned in micro gas turbine, 100kWe",RoW,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2020
-NG_GEN_TANK,Construction,"storage, 10'000 l","market for storage, 10'000 l",GLO,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2020
-NG_GEN_TURBINE,Construction,"micro gas turbine, 100kW electrical","market for micro gas turbine, 100kW electrical",GLO,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2020
 NG_PYROLYSIS_PLASMA,Operation,"hydrogen, gaseous, 100 bar","hydrogen production, gaseous, 100 bar, from methane pyrolysis",RER,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2020
 NG_PYROLYSIS_PLASMA,Construction,"air compressor, screw-type compressor, 4kW","market for air compressor, screw-type compressor, 4kW",GLO,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2020
 NG_PYROLYSIS_THERMAL,Operation,"hydrogen, gaseous, 100 bar","hydrogen production, gaseous, 100 bar, from methane pyrolysis",RER,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2020
@@ -562,8 +551,6 @@ PV,Operation,"electricity production, photovoltaic, at 1.3 MWp slanted-roof, mul
 PV,Construction,"photovoltaic slanted-roof installation, 1.3 MWp, multi-Si, panel, mounted, on roof","photovoltaic slanted-roof installation, 1.3 MWp, multi-Si, panel, mounted, on roof",CH,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2020
 PVC_FORMATION,Operation,"polyvinylchloride, bulk polymerised","polyvinylchloride production, bulk polymerisation",RoW,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2020
 PVC_FORMATION,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2020
-PV_EHV,Operation,"electricity production, photovoltaic, at 560 kWp open ground, single-Si","electricity production, photovoltaic, at 560 kWp open ground, single-Si",CH,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2020
-PV_EHV,Construction,"photovoltaic open ground installation, 560 kWp, single-Si, on open ground","photovoltaic open ground installation, 560 kWp, single-Si, on open ground",CH,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2020
 PYROLYSIS,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2020
 PYROLYSIS,Operation,light fuel oil,"light fuel oil production, from waste polyethylene",CH,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2020
 SCHOOLBUS_BIODIESEL_B100_SD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m single deck urban bus, EURO-VI",RER,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2020
