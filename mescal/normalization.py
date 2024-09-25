@@ -84,9 +84,8 @@ def restrict_lcia_metrics(df: pd.DataFrame, lcia_method: str) -> pd.DataFrame:
     return df
 
 
-def normalize_lca_metrics(R: pd.DataFrame, mip_gap: float, refactor: float, lcia_method: str,
-                          impact_abbrev: pd.DataFrame, biogenic: bool = False, path: str = 'results/',
-                          metadata: dict = None) -> None:
+def normalize_lca_metrics(R: pd.DataFrame, mip_gap: float, lcia_method: str, impact_abbrev: pd.DataFrame,
+                          biogenic: bool = False, path: str = 'results/', metadata: dict = None) -> None:
     """
     Create a .dat file containing the normalized LCA metrics for AMPL and a csv file containing the normalization
     factors
@@ -94,7 +93,6 @@ def normalize_lca_metrics(R: pd.DataFrame, mip_gap: float, refactor: float, lcia
     :param path: path to results folder
     :param R: dataframe containing the LCA results
     :param mip_gap: values lowed than the MIP gap (in absolute value) are set to 0
-    :param refactor: value of refactor to apply for construction metrics for better convergence
     :param lcia_method: LCIA method to be used
     :param impact_abbrev: dataframe containing the impact categories abbreviations
     :param biogenic: whether biogenic carbon flows impact assessment method should be included or not
@@ -102,16 +100,8 @@ def normalize_lca_metrics(R: pd.DataFrame, mip_gap: float, refactor: float, lcia
         'regionalized', 'iam', 'ssp_rcp', 'lcia_method'.
     :return: None
     """
-
     if metadata is None:
         metadata = {}
-
-    R_constr = R[R['Type'] == 'Construction']
-    R_constr['Value'] *= refactor
-
-    R_op_res = R[R['Type'] != 'Construction']
-
-    R = pd.concat([R_constr, R_op_res])  # R matrix but with refactor applied to construction metrics
 
     if not biogenic:
         list_biogenic_cat = ["CFB", "REQDB", "m_CCLB", "m_CCSB", "TTEQB", "TTHHB", "CCEQSB", "CCEQLB", "CCHHSB",
@@ -124,9 +114,22 @@ def normalize_lca_metrics(R: pd.DataFrame, mip_gap: float, refactor: float, lcia
     impact_abbrev = restrict_lcia_metrics(impact_abbrev, lcia_method)
 
     R = pd.merge(R, impact_abbrev, on='Impact_category')
-    R['max_AoP'] = R.groupby('AoP')['Value'].transform('max')
-    R['Value_norm'] = R['Value'] / R['max_AoP']
-    R['Value_norm'] = R['Value_norm'].apply(lambda x: x if abs(x) > mip_gap else 0)
+
+    refactor = {}
+    R_scaled = R[R['Type'] != 'Construction']
+    for impact_category in R['Abbrev'].unique():
+        # Scale the construction metrics to be at the same order of magnitude as the operation and resource metrics
+        lcia_op_max = R[((R['Type'] == 'Operation') |
+                         (R['Type'] == 'Resource')) & (R['Abbrev'] == impact_category)]['Value'].max()
+        lcia_constr_max = R[(R['Type'] == 'Construction') & (R['Abbrev'] == impact_category)]['Value'].max()
+        refactor[impact_category] = lcia_op_max / lcia_constr_max
+        R_constr_imp = R[(R['Type'] == 'Construction') & (R['Abbrev'] == impact_category)]
+        R_constr_imp['Value'] *= refactor[impact_category]
+        R_scaled = pd.concat([R_scaled, R_constr_imp])  # R matrix but with refactor applied to construction metrics
+
+    R_scaled['max_AoP'] = R_scaled.groupby('AoP')['Value'].transform('max')
+    R_scaled['Value_norm'] = R_scaled['Value'] / R_scaled['max_AoP']
+    R_scaled['Value_norm'] = R_scaled['Value_norm'].apply(lambda x: x if abs(x) > mip_gap else 0)
 
     with open(f'{path}techs_lcia.dat', 'w') as f:
 
@@ -148,11 +151,19 @@ def normalize_lca_metrics(R: pd.DataFrame, mip_gap: float, refactor: float, lcia
         f.write("\n")
 
         # Set of LCA indicators
-        f.write(f"set INDICATORS := {' '.join(R['Abbrev'].unique())};\n\n")
-        for i in range(len(R)):
+        f.write(f"set INDICATORS := {' '.join(R_scaled['Abbrev'].unique())};\n\n")
+
+        # Declare the refactor parameters values
+        f.write('# Parameters to set the operation and infrastructure indicators at the same order of magnitude\n')
+        for impact_category in R_scaled['Abbrev'].unique():
+            f.write(f"let refactor['{impact_category}'] := {refactor[impact_category]};\n")
+        f.write('\n')
+
+        # Declare the LCA indicators values
+        for i in range(len(R_scaled)):
             # Declaring the LCIA parameters
-            f.write(f"let lcia_{tech_type(R.Type.iloc[i])}['{R.Abbrev.iloc[i]}','{R.Name.iloc[i]}'] := "
-                    f"{R.Value_norm.iloc[i]}; # normalized {R.Unit.iloc[i]}\n")
+            f.write(f"let lcia_{tech_type(R_scaled.Type.iloc[i])}['{R_scaled.Abbrev.iloc[i]}','{R_scaled.Name.iloc[i]}'] "
+                    f":= {R_scaled.Value_norm.iloc[i]}; # normalized {R_scaled.Unit.iloc[i]}\n")
 
     # To come back to the original values, we save the maximum value of each AoP
-    R[['AoP', 'max_AoP']].drop_duplicates().to_csv(f'{path}res_lcia_max.csv', index=False)
+    R_scaled[['AoP', 'max_AoP']].drop_duplicates().to_csv(f'{path}res_lcia_max.csv', index=False)
