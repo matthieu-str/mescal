@@ -4,7 +4,8 @@ import wurst
 
 def change_location_activity(activity: str, location: str, database: str, locations_ranking: list[str], db: list[dict],
                              esm_region: str, esm_tech_name: str = None,  product: str = None,
-                             categories: tuple = None, activity_type: str = 'technosphere') -> str:
+                             categories: tuple = None, activity_type: str = 'technosphere',
+                             imports_exports: list[str] = None) -> str:
     """
     Changes the location of a process given a ranking of preferred locations
 
@@ -18,9 +19,12 @@ def change_location_activity(activity: str, location: str, database: str, locati
     :param esm_region: name of the modeled region in the energy system model
     :param activity_type: type of activity, can be 'technosphere' or 'biosphere'
     :param categories: name of the categories in the LCI database for biosphere flows
+    :param imports_exports: list of technologies that are imports or exports
     :return: the highest available location within the ranking, or the initial location is any of the list's
         locations is available
     """
+    if imports_exports is None:
+        imports_exports = []
 
     locations = []
 
@@ -47,12 +51,9 @@ def change_location_activity(activity: str, location: str, database: str, locati
         elif activity_type == 'biosphere':
             locations.append(act['name'].split(', ')[-1])
 
-    # special case of Quebec for electricity imports that should come from the US
-    if (esm_region == 'CA-QC') & (esm_tech_name in ['ELECTRICITY_EHV',
-                                                    'ELECTRICITY_HV',
-                                                    'ELECTRICITY_LV',
-                                                    'ELECTRICITY_MV']):
-        return 'US-NPCC'
+    # Imports and exports are special cases for which we keep the initial location
+    if esm_tech_name in imports_exports:
+        return location
 
     # special case where there is only one location
     elif len(locations) == 1:
@@ -73,7 +74,8 @@ def change_location_activity(activity: str, location: str, database: str, locati
 
 
 def change_location_mapping_file(df_mapping: pd.DataFrame, locations_ranking: list[str],
-                                 database: list[dict], esm_region: str) -> pd.DataFrame:
+                                 database: list[dict], esm_region: str, tech_specifics: pd.DataFrame = None) \
+        -> pd.DataFrame:
     """
     Changes the location of a process given a mapping file
 
@@ -81,8 +83,12 @@ def change_location_mapping_file(df_mapping: pd.DataFrame, locations_ranking: li
     :param locations_ranking: list of preferred locations by order of preference
     :param database: dictionary of the LCI database
     :param esm_region: name of the modeled region in the energy system model
+    :param tech_specifics: dataframe with the technology specifics, useful regarding exports in this function
     :return: dataframe with the mapping of the technologies and resources with the new location
     """
+    if tech_specifics is None:
+        tech_specifics = pd.DataFrame(columns=['Name', 'Specifics', 'Amount'])
+    imports_exports = list(tech_specifics[tech_specifics.Specifics == 'Import/Export']['Name'].unique())
 
     if 'Location' not in df_mapping.columns:
         for i in range(len(df_mapping)):
@@ -102,7 +108,8 @@ def change_location_mapping_file(df_mapping: pd.DataFrame, locations_ranking: li
         database=row['Database'],
         locations_ranking=locations_ranking,
         db=database,
-        esm_region=esm_region
+        esm_region=esm_region,
+        imports_exports=imports_exports,
     ), axis=1)
 
     return df_mapping
