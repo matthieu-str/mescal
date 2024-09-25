@@ -5,7 +5,7 @@ import copy
 
 def regionalize_activity_foreground(act: dict, accepted_locations: list[str], target_region: str,
                                     locations_ranking: list[str], db: list[dict], db_dict_code: dict,
-                                    db_dict_name: dict, spatialized_database: bool = False,
+                                    db_dict_name: dict, import_exports: list[str], spatialized_database: bool = False,
                                     spatialized_biosphere_db: list[dict] = None,
                                     db_dict_name_spa_biosphere: dict = None) -> dict:
     """
@@ -18,6 +18,7 @@ def regionalize_activity_foreground(act: dict, accepted_locations: list[str], ta
     :param db: list of activities in the LCI database
     :param db_dict_code: dictionary of the LCI database with (database, code) as key
     :param db_dict_name: dictionary of the LCI database with (name, product, location, database) as key
+    :param import_exports: list of technologies that are imports or exports
     :param spatialized_database: if True, the activity belongs to a spatialized database (with spatialized
         elementary flows)
     :param spatialized_biosphere_db: list of flows in the spatialized biosphere database
@@ -26,6 +27,9 @@ def regionalize_activity_foreground(act: dict, accepted_locations: list[str], ta
     :return: the regionalized activity
     """
     if act['location'] in accepted_locations:
+        new_act = copy.deepcopy(act)
+
+    elif act['location'] in import_exports:  # Imports and exports are special cases for which we do not regionalize
         new_act = copy.deepcopy(act)
 
     else:

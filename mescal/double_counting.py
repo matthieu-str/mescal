@@ -7,8 +7,8 @@ from .adapt_efficiency import correct_esm_and_lca_efficiency_differences
 def create_new_activity(name: str, act_type: str, current_code: str, new_code: str, database_name: str, db: list[dict],
                         db_dict_name: dict, db_dict_code: dict, esm_db_name: str, regionalize_foregrounds: bool,
                         accepted_locations: list[str], target_region: str, locations_ranking: list[str],
-                        spatialized_database: bool = False, spatialized_biosphere_db: list[dict] = None,
-                        db_dict_name_spa_biosphere: dict = None) -> dict:
+                        import_export_list: list[str], spatialized_database: bool = False,
+                        spatialized_biosphere_db: list[dict] = None, db_dict_name_spa_biosphere: dict = None) -> dict:
     """
     Create a new LCI dataset for the ESM technology or resource
 
@@ -25,6 +25,7 @@ def create_new_activity(name: str, act_type: str, current_code: str, new_code: s
     :param accepted_locations: list of regions to keep in case of regionalization
     :param target_region: target region in case of regionalization
     :param locations_ranking: ranking of the locations in case of regionalization
+    :param import_export_list: list of technologies that are imports or exports
     :param spatialized_database: if True, the database db has spatialized elementary flows
     :param spatialized_biosphere_db: list of flows in the spatialized biosphere database
     :param db_dict_name_spa_biosphere: dictionary of the spatialized biosphere database with
@@ -52,6 +53,7 @@ def create_new_activity(name: str, act_type: str, current_code: str, new_code: s
             db=db,
             db_dict_code=db_dict_code,
             db_dict_name=db_dict_name,
+            import_exports=import_export_list,
             spatialized_database=spatialized_database,
             spatialized_biosphere_db=spatialized_biosphere_db,
             db_dict_name_spa_biosphere=db_dict_name_spa_biosphere,
@@ -63,9 +65,9 @@ def create_new_activity(name: str, act_type: str, current_code: str, new_code: s
 def add_activities_to_database(mapping: pd.DataFrame, act_type: str, db: list[dict], db_dict_name: dict,
                                db_dict_code: dict, esm_db_name: str, regionalize_foregrounds: bool,
                                accepted_locations: list[str], target_region: str,
-                               locations_ranking: list[str], spatialized_database: bool = False,
-                               spatialized_biosphere_db: list[dict] = None, db_dict_name_spa_biosphere: dict = None) \
-        -> list[dict]:
+                               locations_ranking: list[str], import_export_list: list[str],
+                               spatialized_database: bool = False, spatialized_biosphere_db: list[dict] = None,
+                               db_dict_name_spa_biosphere: dict = None) -> list[dict]:
     """
     Add new activities to the LCI database
 
@@ -79,6 +81,7 @@ def add_activities_to_database(mapping: pd.DataFrame, act_type: str, db: list[di
     :param accepted_locations: list of regions to keep in case of regionalization
     :param target_region: target region in case of regionalization
     :param locations_ranking: ranking of the preferred locations in case of regionalization
+    :param import_export_list: list of technologies that are imports or exports
     :param spatialized_database: if True, the database db has spatialized elementary flows
     :param spatialized_biosphere_db: list of flows in the spatialized biosphere database
     :param db_dict_name_spa_biosphere: dictionary of the spatialized biosphere database with
@@ -99,6 +102,7 @@ def add_activities_to_database(mapping: pd.DataFrame, act_type: str, db: list[di
             esm_db_name=esm_db_name,
             regionalize_foregrounds=regionalize_foregrounds,
             accepted_locations=accepted_locations,
+            import_export_list=import_export_list,
             target_region=target_region,
             locations_ranking=locations_ranking,
             spatialized_database=spatialized_database,
@@ -343,7 +347,7 @@ def background_search(act: dict, k: int, k_lim: int, amount: float, explore_type
 def double_counting_removal(df_op: pd.DataFrame, df_constr: pd.DataFrame, esm_db_name: str or None,
                             mapping_esm_flows_to_CPC: pd.DataFrame, technology_compositions_dict: dict,
                             db: list[dict], db_dict_code: dict, db_dict_name: dict, N: int,
-                            background_search_act: dict, no_construction_list: list[str],
+                            background_search_act: dict, no_construction_list: list[str], import_export_list: list[str],
                             no_background_search_list: list[str], ESM_inputs: list[str] or str = 'all',
                             regionalize_foregrounds: bool = False, accepted_locations: list[str] = None,
                             target_region: str = None, locations_ranking: list[str] = None,
@@ -366,6 +370,7 @@ def double_counting_removal(df_op: pd.DataFrame, df_constr: pd.DataFrame, esm_db
     :param background_search_act: dictionary of the maximum depth of the tree to explore for specific
         technologies
     :param no_construction_list: list of technologies for which the construction phase is not considered
+    :param import_export_list: list of technologies that are imports or exports
     :param no_background_search_list: list of technologies for which the background search should not be performed
     :param ESM_inputs: list of the ESM flows to perform double counting removal on
     :param regionalize_foregrounds: if True, regionalize the foreground activities
@@ -516,6 +521,7 @@ def double_counting_removal(df_op: pd.DataFrame, df_constr: pd.DataFrame, esm_db
                     db=db,
                     db_dict_code=db_dict_code,
                     db_dict_name=db_dict_name,
+                    import_exports=import_export_list,
                     spatialized_database=spatialized_database,
                     spatialized_biosphere_db=spatialized_biosphere_db,
                     db_dict_name_spa_biosphere=db_dict_name_spa_biosphere,
@@ -723,14 +729,15 @@ def is_process_activity(row: pd.Series, process_list: list[str]) -> int:
 
 
 def add_technology_specifics(mapping_op: pd.DataFrame, df_tech_specifics: pd.DataFrame) \
-        -> tuple[pd.DataFrame, dict, list[str], list[str]]:
+        -> tuple[pd.DataFrame, dict, list[str], list[str], list[str]]:
     """
     Add technology-specific inputs to the model file
 
     :param mapping_op: operation activities, mapping file merged with the model file
     :param df_tech_specifics: dataframe of technology specifics
     :return: updated mapping file, dictionary of background search activities,
-        list of technologies for which the construction phase is not considered
+        list of technologies for which the construction phase is not considered, list of technologies for which no
+        background search is need, list of technologies that are import or export
     """
     # Add a construction input to technologies that have a construction phase
     no_construction_list = list(df_tech_specifics[df_tech_specifics.Specifics == 'No construction'].Name)
@@ -756,7 +763,9 @@ def add_technology_specifics(mapping_op: pd.DataFrame, df_tech_specifics: pd.Dat
 
     no_background_search_list = list(df_tech_specifics[df_tech_specifics.Specifics == 'No background search'].Name)
 
-    return mapping_op, background_search_act, no_construction_list, no_background_search_list
+    import_export_list = list(df_tech_specifics[df_tech_specifics.Specifics == 'Import/Export'].Name)
+
+    return mapping_op, background_search_act, no_construction_list, no_background_search_list, import_export_list
 
 
 def create_esm_database(mapping: pd.DataFrame, model: pd.DataFrame, mapping_esm_flows_to_CPC_cat: pd.DataFrame,
@@ -845,7 +854,7 @@ def create_esm_database(mapping: pd.DataFrame, model: pd.DataFrame, mapping_esm_
     mapping_op = pd.merge(mapping_op, model_pivot, on='Name', how='left')
     mapping_op['CONSTRUCTION'] = mapping_op.shape[0] * [0]
     (mapping_op, background_search_act, no_construction_list,
-     no_background_search_list) = add_technology_specifics(mapping_op, tech_specifics)
+     no_background_search_list, import_export_list) = add_technology_specifics(mapping_op, tech_specifics)
 
     # Add construction and resource activities to the database (which do not need double counting removal)
     main_database = add_activities_to_database(mapping=mapping,
@@ -861,6 +870,7 @@ def create_esm_database(mapping: pd.DataFrame, model: pd.DataFrame, mapping_esm_
                                                spatialized_database=spatialized_database,
                                                spatialized_biosphere_db=spatialized_biosphere_db,
                                                db_dict_name_spa_biosphere=db_dict_name_spa_biosphere,
+                                               import_export_list=import_export_list,
                                                )
     main_database = add_activities_to_database(mapping=mapping,
                                                act_type='Resource',
@@ -875,6 +885,7 @@ def create_esm_database(mapping: pd.DataFrame, model: pd.DataFrame, mapping_esm_
                                                spatialized_database=spatialized_database,
                                                spatialized_biosphere_db=spatialized_biosphere_db,
                                                db_dict_name_spa_biosphere=db_dict_name_spa_biosphere,
+                                               import_export_list=import_export_list
                                                )
 
     main_database, db_dict_code, db_dict_name, flows_set_to_zero, ei_removal = double_counting_removal(
@@ -890,6 +901,7 @@ def create_esm_database(mapping: pd.DataFrame, model: pd.DataFrame, mapping_esm_
         background_search_act=background_search_act,
         no_construction_list=no_construction_list,
         no_background_search_list=no_background_search_list,
+        import_export_list=import_export_list,
         ESM_inputs='all',
         regionalize_foregrounds=regionalize_foregrounds,
         accepted_locations=accepted_locations,
