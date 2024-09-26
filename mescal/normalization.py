@@ -85,7 +85,8 @@ def restrict_lcia_metrics(df: pd.DataFrame, lcia_method: str) -> pd.DataFrame:
 
 
 def normalize_lca_metrics(R: pd.DataFrame, mip_gap: float, lcia_method: str, impact_abbrev: pd.DataFrame,
-                          biogenic: bool = False, path: str = 'results/', metadata: dict = None) -> None:
+                          biogenic: bool = False, path: str = 'results/', metadata: dict = None,
+                          output: str = 'write') -> None | tuple[pd.DataFrame, dict]:
     """
     Create a .dat file containing the normalized LCA metrics for AMPL and a csv file containing the normalization
     factors
@@ -98,7 +99,9 @@ def normalize_lca_metrics(R: pd.DataFrame, mip_gap: float, lcia_method: str, imp
     :param biogenic: whether biogenic carbon flows impact assessment method should be included or not
     :param metadata: dictionary containing the metadata. Can contain keys 'ecoinvent_version, 'year', 'spatialized',
         'regionalized', 'iam', 'ssp_rcp', 'lcia_method'.
-    :return: None
+    :param output: if 'write', writes the .dat file in 'path', if 'return', normalizes pandas dataframe, if 'both' does
+        both operations.
+    :return: None or the normalized pandas dataframe and the refactor dictionary (depending on the value of 'output')
     """
     if metadata is None:
         metadata = {}
@@ -131,39 +134,50 @@ def normalize_lca_metrics(R: pd.DataFrame, mip_gap: float, lcia_method: str, imp
     R_scaled['Value_norm'] = R_scaled['Value'] / R_scaled['max_AoP']
     R_scaled['Value_norm'] = R_scaled['Value_norm'].apply(lambda x: x if abs(x) > mip_gap else 0)
 
-    with open(f'{path}techs_lcia.dat', 'w') as f:
+    if (output == 'write') | (output == 'both'):
 
-        # Write metadata at the beginning of the file
-        if 'ecoinvent_version' in metadata:
-            f.write(f"# Ecoinvent version: {metadata['ecoinvent_version']}\n")
-        if 'spatialized' in metadata:
-            f.write(f"# Spatialized database: {metadata['spatialized']}\n")
-        if 'regionalized' in metadata:
-            f.write(f"# Regionalized database: {metadata['regionalized']}\n")
-        if 'year' in metadata:
-            f.write(f"# Selected year in premise: {metadata['year']}\n")
-        if 'iam' in metadata:
-            f.write(f"# Selected IAM in premise: {metadata['iam']}\n")
-        if 'ssp_rcp' in metadata:
-            f.write(f"# Selected SSP-RCP scenario in premise: {metadata['ssp_rcp']}\n")
-        if 'lcia_method' in metadata:
-            f.write(f"# LCIA method: {metadata['lcia_method']}\n")
-        f.write("\n")
+        with open(f'{path}techs_lcia.dat', 'w') as f:
 
-        # Set of LCA indicators
-        f.write(f"set INDICATORS := {' '.join(R_scaled['Abbrev'].unique())};\n\n")
+            # Write metadata at the beginning of the file
+            if 'ecoinvent_version' in metadata:
+                f.write(f"# Ecoinvent version: {metadata['ecoinvent_version']}\n")
+            if 'spatialized' in metadata:
+                f.write(f"# Spatialized database: {metadata['spatialized']}\n")
+            if 'regionalized' in metadata:
+                f.write(f"# Regionalized database: {metadata['regionalized']}\n")
+            if 'year' in metadata:
+                f.write(f"# Selected year in premise: {metadata['year']}\n")
+            if 'iam' in metadata:
+                f.write(f"# Selected IAM in premise: {metadata['iam']}\n")
+            if 'ssp_rcp' in metadata:
+                f.write(f"# Selected SSP-RCP scenario in premise: {metadata['ssp_rcp']}\n")
+            if 'lcia_method' in metadata:
+                f.write(f"# LCIA method: {metadata['lcia_method']}\n")
+            f.write("\n")
 
-        # Declare the refactor parameters values
-        f.write('# Parameters to set the operation and infrastructure indicators at the same order of magnitude\n')
-        for impact_category in R_scaled['Abbrev'].unique():
-            f.write(f"let refactor['{impact_category}'] := {refactor[impact_category]};\n")
-        f.write('\n')
+            # Set of LCA indicators
+            f.write(f"set INDICATORS := {' '.join(R_scaled['Abbrev'].unique())};\n\n")
 
-        # Declare the LCA indicators values
-        for i in range(len(R_scaled)):
-            # Declaring the LCIA parameters
-            f.write(f"let lcia_{tech_type(R_scaled.Type.iloc[i])}['{R_scaled.Abbrev.iloc[i]}','{R_scaled.Name.iloc[i]}'] "
-                    f":= {R_scaled.Value_norm.iloc[i]}; # normalized {R_scaled.Unit.iloc[i]}\n")
+            # Declare the refactor parameters values
+            f.write('# Parameters to set the operation and infrastructure indicators at the same order of magnitude\n')
+            for impact_category in R_scaled['Abbrev'].unique():
+                f.write(f"let refactor['{impact_category}'] := {refactor[impact_category]};\n")
+            f.write('\n')
 
-    # To come back to the original values, we save the maximum value of each AoP
-    R_scaled[['AoP', 'max_AoP']].drop_duplicates().to_csv(f'{path}res_lcia_max.csv', index=False)
+            # Declare the LCA indicators values
+            for i in range(len(R_scaled)):
+                # Declaring the LCIA parameters
+                f.write(f"let lcia_{tech_type(R_scaled.Type.iloc[i])}['{R_scaled.Abbrev.iloc[i]}','{R_scaled.Name.iloc[i]}'] "
+                        f":= {R_scaled.Value_norm.iloc[i]}; # normalized {R_scaled.Unit.iloc[i]}\n")
+
+        # To come back to the original values, we save the maximum value of each AoP
+        R_scaled[['AoP', 'max_AoP']].drop_duplicates().to_csv(f'{path}res_lcia_max.csv', index=False)
+
+        if output == 'both':
+            return R_scaled, refactor
+
+    elif output == 'return':
+        return R_scaled, refactor
+
+    else:
+        raise ValueError(f"The output parameter must be either 'write', 'return' or 'both'")
