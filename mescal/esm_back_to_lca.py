@@ -7,7 +7,7 @@ def create_or_modify_activity_from_esm_results(db: list[dict], original_activity
                                                mapping: pd.DataFrame, accepted_locations: list[str],
                                                locations_ranking: list[str], tech_to_remove_layers: pd.DataFrame,
                                                unit_conversion: pd.DataFrame, new_end_use_types: pd.DataFrame,
-                                               spatialized_database: bool = False,
+                                               import_exports_list: list[str], spatialized_database: bool = False,
                                                spatialized_biosphere_db: list[dict] = None,
                                                db_dict_name_spa_biosphere: dict = None) \
         -> tuple[list[dict], list[list[str]]]:
@@ -28,6 +28,7 @@ def create_or_modify_activity_from_esm_results(db: list[dict], original_activity
     :param tech_to_remove_layers: technologies to remove from the result LCI datasets
     :param unit_conversion: unit conversion factors
     :param new_end_use_types: adapt end use types to fit the results LCI datasets mapping
+    :param import_exports_list: list of technologies that are imports or exports
     :param spatialized_database: if True, the main database has spatialized elementary flows
     :param spatialized_biosphere_db: list of flows in the spatialized biosphere database
     :param db_dict_name_spa_biosphere: dictionary of the spatialized biosphere database with
@@ -61,6 +62,7 @@ def create_or_modify_activity_from_esm_results(db: list[dict], original_activity
             spatialized_database=spatialized_database,
             spatialized_biosphere_db=spatialized_biosphere_db,
             db_dict_name_spa_biosphere=db_dict_name_spa_biosphere,
+            import_exports=import_exports_list,
         )
 
     new_code = random_code()
@@ -315,6 +317,8 @@ def create_new_database_with_esm_results(mapping: pd.DataFrame, model: pd.DataFr
     already_done = []
     perform_d_c = []
 
+    import_export_list = list(tech_specifics[tech_specifics.Specifics == 'Import/Export']['Name'].unique())
+
     # Create the new LCI datasets from the ESM results
     for i in range(len(flows)):
 
@@ -344,6 +348,7 @@ def create_new_database_with_esm_results(mapping: pd.DataFrame, model: pd.DataFr
                 spatialized_database=spatialized_database,
                 spatialized_biosphere_db=spatialized_biosphere_db,
                 db_dict_name_spa_biosphere=db_dict_name_spa_biosphere,
+                import_exports_list=import_export_list,
             )
 
             already_done.append((original_activity_name,
@@ -448,7 +453,7 @@ def create_new_database_with_esm_results(mapping: pd.DataFrame, model: pd.DataFr
     double_counting_act = pd.merge(double_counting_act, model, on='Name', how='left')
     double_counting_act['CONSTRUCTION'] = double_counting_act.shape[0] * [0]
     (double_counting_act, background_search_act, no_construction_list,
-     no_background_search_list) = add_technology_specifics(double_counting_act, tech_specifics)
+     no_background_search_list, import_export) = add_technology_specifics(double_counting_act, tech_specifics)
 
     db, db_dict_code, db_dict_name, flows_set_to_zero, ei_removal = double_counting_removal(
         df_op=double_counting_act,
@@ -465,6 +470,7 @@ def create_new_database_with_esm_results(mapping: pd.DataFrame, model: pd.DataFr
         no_background_search_list=no_background_search_list,
         ESM_inputs=['OWN_CONSTRUCTION', 'CONSTRUCTION'],
         create_new_db=False,
+        import_export_list=import_export,
     )
 
     if write_database:
