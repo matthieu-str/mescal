@@ -14,8 +14,6 @@ AN_DIG_SI,Operation,biogas,anaerobic digestion of manure,RoW,/m3,ecoinvent3.8 cu
 AN_DIG_SI_COGEN,Construction,"heat and power co-generation unit, 160kW electrical, common components for heat+electricity","heat and power co-generation unit construction, 160kW electrical, common components for heat+electricity",RoW,/unit,ecoinvent3.8 cut-off
 AN_DIG_SI_PLANT,Construction,"anaerobic digestion plant, for biowaste","anaerobic digestion plant construction, for biowaste",CH,/unit,ecoinvent3.8 cut-off
 BATTERY,Construction,"battery, Li-ion, rechargeable, prismatic","market for battery, Li-ion, rechargeable, prismatic",GLO,/kg,ecoinvent3.8 cut-off
-BIOMASS_ETHANOL,Operation,"ethanol, from forest residue","Ethanol production, via fermentation, from forest residue, energy allocation",US,/kg,biofuels
-BIOMASS_ETHANOL,Construction,ethanol fermentation plant,market for ethanol fermentation plant,GLO,/unit,ecoinvent3.8 cut-off
 BUS_CNG_STOICH,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, compressed gas, 13m double deck urban bus, EURO-VI",RER,/person*km,lci-buses
 BUS_CNG_STOICH,Construction,"Passenger bus, EURO-VI","Passenger bus, compressed gas, 13m double deck urban bus, EURO-VI",RER,/unit,lci-buses
 BUS_DIESEL,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m double deck urban bus, EURO-VI",RER,/person*km,lci-buses
@@ -149,8 +147,6 @@ DEC_COGEN_OIL_TURBINE,Construction,"heat and power co-generation unit, organic R
 DEC_COGEN_WOOD,Operation,"heat, central or small-scale, other than natural gas","heat production, wood chips from industry, at furnace 50kW, state-of-the-art 2014",RoW,/MJ,ecoinvent3.8 cut-off
 DEC_COGEN_WOOD_BOILER,Construction,"furnace, wood chips, hardwood storage area, 50kW","furnace production, wood chips, hardwood storage area, 50kW",RoW,/unit,ecoinvent3.8 cut-off
 DEC_COGEN_WOOD_TURBINE,Construction,"heat and power co-generation unit, organic Rankine cycle, 200kW electrical","heat and power co-generation unit construction, organic Rankine cycle, 200kW electrical",GLO,/unit,ecoinvent3.8 cut-off
-DEC_DEEP_GEO,Construction,geothermal heat plant,geothermal heat plant construction,GLO,/unit,geothermal
-DEC_DEEP_GEO,Operation,"heat, deep geothermal","heat production, deep geothermal",GLO,/MJ,geothermal
 DEC_DIRECT_ELEC,Operation,"electricity, low voltage","market for electricity, low voltage",CH,/kWh,ecoinvent3.8 cut-off
 DEC_DIRECT_ELEC,Construction,"auxiliary heating unit, electric, 5kW","auxiliary heating unit production, electric, 5kW",RoW,/unit,ecoinvent3.8 cut-off
 DEC_HP_ELEC,Construction,"heat pump, brine-water, 10kW","heat pump production, brine-water, 10kW",RoW,/unit,ecoinvent3.8 cut-off
@@ -338,8 +334,6 @@ PV,Construction,"photovoltaic slanted-roof installation, 1.3 MWp, multi-Si, pane
 PV,Operation,"electricity production, photovoltaic, at 1.3 MWp slanted-roof, multi-Si, panel, mounted","electricity production, photovoltaic, at 1.3 MWp slanted-roof, multi-Si, panel, mounted",CH,/kWh,PV
 PVC_FORMATION,Operation,"polyvinylchloride, bulk polymerised","polyvinylchloride production, bulk polymerisation",RoW,/kg,ecoinvent3.8 cut-off
 PVC_FORMATION,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,/unit,ecoinvent3.8 cut-off
-PV_EHV,Operation,"electricity production, photovoltaic, at 560 kWp open ground, single-Si","electricity production, photovoltaic, at 560 kWp open ground, single-Si",CH,/kWh,PV
-PV_EHV,Construction,"photovoltaic open ground installation, 560 kWp, single-Si, on open ground","photovoltaic open ground installation, 560 kWp, single-Si, on open ground",CH,/unit,PV
 PYROLYSIS,Operation,light fuel oil,"light fuel oil production, from waste polyethylene",CH,/kg,ecoinvent3.8 cut-off
 PYROLYSIS,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,/unit,ecoinvent3.8 cut-off
 SMART_PROCESS,Operation,styrene,styrene production,RoW,/kg,ecoinvent3.8 cut-off
@@ -401,12 +395,10 @@ WOOD_METHANOL,Operation,"methanol, unpurified","methanol synthesis, from wood, w
 ACETIC_ACID,Resource,"acetic acid, without water, in 98% solution state","market for acetic acid, without water, in 98% solution state",GLO,/kg,ecoinvent3.8 cut-off
 ACETONE,Resource,"acetone, liquid","market for acetone, liquid",RoW,/kg,ecoinvent3.8 cut-off
 BENZENE,Resource,benzene,market for benzene,GLO,/kg,ecoinvent3.8 cut-off
-COAL,Resource,hard coal,market for hard coal,RNA,/kg,ecoinvent3.8 cut-off
+COAL,Resource,hard coal,market for hard coal,RoW,/kg,ecoinvent3.8 cut-off
 DIESEL,Resource,"diesel, low-sulfur","market for diesel, low-sulfur",RoW,/kg,ecoinvent3.8 cut-off
-ELECTRICITY_EHV,Resource,"electricity, high voltage","market for electricity, high voltage",US-NPCC,/kWh,ecoinvent3.8 cut-off
-ELECTRICITY_HV,Resource,"electricity, high voltage","market for electricity, high voltage",US-NPCC,/kWh,ecoinvent3.8 cut-off
-ELECTRICITY_LV,Resource,"electricity, low voltage","market for electricity, low voltage",US-NPCC,/kWh,ecoinvent3.8 cut-off
-ELECTRICITY_MV,Resource,"electricity, medium voltage","market for electricity, medium voltage",US-NPCC,/kWh,ecoinvent3.8 cut-off
+ELEC_EXPORT,Resource,"electricity, high voltage","market group for electricity, high voltage",EUR,/kWh,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
+ELECTRICITY_EHV,Resource,"electricity, high voltage","market group for electricity, high voltage",EUR,/kWh,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
 ETHANE,Resource,ethane,market for ethane,GLO,/kg,ecoinvent3.8 cut-off
 ETHANOL,Resource,"ethanol, without water, in 99.7% solution state, from fermentation","market for ethanol, without water, in 99.7% solution state, from fermentation",GLO,/kg,ecoinvent3.8 cut-off
 ETHYLBENZENE,Resource,ethyl benzene,market for ethyl benzene,RoW,/kg,ecoinvent3.8 cut-off
@@ -420,8 +412,8 @@ JETFUEL,Resource,kerosene,market for kerosene,RoW,/kg,ecoinvent3.8 cut-off
 LFO,Resource,light fuel oil,market for light fuel oil,RoW,/kg,ecoinvent3.8 cut-off
 LNG,Resource,"natural gas, liquefied","market for natural gas, liquefied",GLO,/m3,ecoinvent3.8 cut-off
 METHANOL,Resource,methanol,market for methanol,GLO,/kg,ecoinvent3.8 cut-off
-NG_EHP,Resource,"natural gas, high pressure","market for natural gas, high pressure",CA-QC,/m3,ecoinvent3.8 cut-off
-NG_HP,Resource,"natural gas, high pressure","market for natural gas, high pressure",CA-QC,/m3,ecoinvent3.8 cut-off
+NG_EHP,Resource,"natural gas, high pressure","market for natural gas, high pressure",CH,/m3,ecoinvent3.8 cut-off
+NG_HP,Resource,"natural gas, high pressure","market for natural gas, high pressure",CH,/m3,ecoinvent3.8 cut-off
 NG_LP,Resource,"natural gas, low pressure","market for natural gas, low pressure",RoW,/m3,ecoinvent3.8 cut-off
 NG_MP,Resource,"natural gas, medium pressure, vehicle grade","natural gas production, medium pressure, vehicle grade",RoW,/kg,ecoinvent3.8 cut-off
 PE,Resource,"polyethylene, high density, granulate","market for polyethylene, high density, granulate",GLO,/kg,ecoinvent3.8 cut-off

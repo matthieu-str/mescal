@@ -14,8 +14,6 @@ AN_DIG_SI,Operation,biogas,anaerobic digestion of manure,CH,ecoinvent_cutoff_3.8
 AN_DIG_SI_COGEN,Construction,"heat and power co-generation unit, 160kW electrical, common components for heat+electricity","heat and power co-generation unit construction, 160kW electrical, common components for heat+electricity",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
 AN_DIG_SI_PLANT,Construction,"anaerobic digestion plant, for biowaste","anaerobic digestion plant construction, for biowaste",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
 BATTERY,Construction,"battery, Li-ion, rechargeable, prismatic","market for battery, Li-ion, rechargeable, prismatic",GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
-BIOMASS_ETHANOL,Operation,"ethanol, from forest residue","ethanol production, via fermentation, from forest residue, energy allocation",US,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
-BIOMASS_ETHANOL,Construction,ethanol fermentation plant,market for ethanol fermentation plant,GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
 BUS_CNG_STOICH,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, compressed gas, 13m double deck urban bus, EURO-VI",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
 BUS_CNG_STOICH,Construction,"Passenger bus, EURO-VI","Passenger bus, compressed gas, 13m double deck urban bus, EURO-VI",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
 BUS_DIESEL,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m double deck urban bus, EURO-VI",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
@@ -149,8 +147,6 @@ DEC_COGEN_OIL_TURBINE,Construction,"heat and power co-generation unit, organic R
 DEC_COGEN_WOOD,Operation,"heat, central or small-scale, other than natural gas","heat production, wood chips from industry, at furnace 50kW, state-of-the-art 2014",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
 DEC_COGEN_WOOD_BOILER,Construction,"furnace, wood chips, hardwood storage area, 50kW","furnace production, wood chips, hardwood storage area, 50kW",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
 DEC_COGEN_WOOD_TURBINE,Construction,"heat and power co-generation unit, organic Rankine cycle, 200kW electrical","heat and power co-generation unit construction, organic Rankine cycle, 200kW electrical",GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
-DEC_DEEP_GEO,Construction,geothermal heat plant,geothermal heat plant construction,RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
-DEC_DEEP_GEO,Operation,"heat, deep geothermal","heat production, deep geothermal",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
 DEC_DIRECT_ELEC,Operation,"electricity, low voltage","market for electricity, low voltage",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
 DEC_DIRECT_ELEC,Construction,"auxiliary heating unit, electric, 5kW","auxiliary heating unit production, electric, 5kW",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
 DEC_HP_ELEC,Construction,"heat pump, brine-water, 10kW","heat pump production, brine-water, 10kW",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
@@ -338,8 +334,6 @@ PV,Construction,"photovoltaic slanted-roof installation, 1.3 MWp, multi-Si, pane
 PV,Operation,"electricity production, photovoltaic, at 1.3 MWp slanted-roof, multi-Si, panel, mounted","electricity production, photovoltaic, at 1.3 MWp slanted-roof, multi-Si, panel, mounted",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
 PVC_FORMATION,Operation,"polyvinylchloride, bulk polymerised","polyvinylchloride production, bulk polymerisation",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
 PVC_FORMATION,Construction,"chemical factory, organics","chemical factory construction, organics",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
-PV_EHV,Operation,"electricity production, photovoltaic, at 560 kWp open ground, single-Si","electricity production, photovoltaic, at 560 kWp open ground, single-Si",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
-PV_EHV,Construction,"photovoltaic open ground installation, 560 kWp, single-Si, on open ground","photovoltaic open ground installation, 560 kWp, single-Si, on open ground",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
 PYROLYSIS,Operation,light fuel oil,"light fuel oil production, from waste polyethylene",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
 PYROLYSIS,Construction,"chemical factory, organics","chemical factory construction, organics",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
 SMART_PROCESS,Operation,styrene,styrene production,RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
@@ -403,10 +397,8 @@ ACETONE,Resource,"acetone, liquid","market for acetone, liquid",RER,ecoinvent_cu
 BENZENE,Resource,benzene,market for benzene,GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
 COAL,Resource,hard coal,market for hard coal,RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
 DIESEL,Resource,"diesel, low-sulfur","market for diesel, low-sulfur",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
-ELECTRICITY_EHV,Resource,"electricity, high voltage","market for electricity, high voltage",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
-ELECTRICITY_HV,Resource,"electricity, high voltage","market for electricity, high voltage",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
-ELECTRICITY_LV,Resource,"electricity, low voltage","market for electricity, low voltage",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
-ELECTRICITY_MV,Resource,"electricity, medium voltage","market for electricity, medium voltage",CH,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
+ELEC_EXPORT,Resource,"electricity, high voltage","market group for electricity, high voltage",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
+ELECTRICITY_EHV,Resource,"electricity, high voltage","market group for electricity, high voltage",RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
 ETHANE,Resource,ethane,market for ethane,GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
 ETHANOL,Resource,"ethanol, without water, in 99.7% solution state, from fermentation","market for ethanol, without water, in 99.7% solution state, from fermentation",GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
 ETHYLBENZENE,Resource,ethyl benzene,market for ethyl benzene,RER,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020

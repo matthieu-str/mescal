@@ -854,10 +854,8 @@ BIO_DIESEL,Resource,"biodiesel, vehicle grade","Biodiesel, from used cooking oil
 BENZENE,Resource,benzene,market for benzene,GLO,/kg,ecoinvent3.8 cut-off
 COAL,Resource,hard coal,market for hard coal,RNA,/kg,ecoinvent3.8 cut-off
 DIESEL,Resource,"diesel, low-sulfur","market for diesel, low-sulfur",RoW,/kg,ecoinvent3.8 cut-off
-ELECTRICITY_EHV,Resource,"electricity, high voltage","market for electricity, high voltage",US-NPCC,/kWh,ecoinvent3.8 cut-off
-ELECTRICITY_HV,Resource,"electricity, high voltage","market for electricity, high voltage",US-NPCC,/kWh,ecoinvent3.8 cut-off
-ELECTRICITY_LV,Resource,"electricity, low voltage","market for electricity, low voltage",US-NPCC,/kWh,ecoinvent3.8 cut-off
-ELECTRICITY_MV,Resource,"electricity, medium voltage","market for electricity, medium voltage",US-NPCC,/kWh,ecoinvent3.8 cut-off
+ELEC_EXPORT,Resource,"electricity, high voltage","market for electricity, high voltage",US-NPCC,/kWh,ecoinvent3.8 cut-off
+ELECTRICITY_EHV,Resource,"electricity, high voltage","electricity production, hydro, reservoir, non-alpine region",CA-QC,/kWh,ecoinvent3.8 cut-off
 ETHANE,Resource,ethane,market for ethane,GLO,/kg,ecoinvent3.8 cut-off
 ETHANOL,Resource,"ethanol, without water, in 99.7% solution state, from fermentation","market for ethanol, without water, in 99.7% solution state, from fermentation",GLO,/kg,ecoinvent3.8 cut-off
 ETHYLBENZENE,Resource,ethyl benzene,market for ethyl benzene,RoW,/kg,ecoinvent3.8 cut-off
@@ -902,10 +900,10 @@ CEMENT,Flow,"cement, unspecified","market for cement, unspecified",CA-QC,/kg,eco
 CO2_C,Flow,"carbon dioxide, liquid","market for carbon dioxide, liquid",RoW,/kg,ecoinvent3.8 cut-off
 COAL,Flow,hard coal,market for hard coal,RNA,/kg,ecoinvent3.8 cut-off
 DIESEL,Flow,"diesel, low-sulfur","market for diesel, low-sulfur",RoW,/kg,ecoinvent3.8 cut-off
-ELECTRICITY_EHV,Flow,"electricity, high voltage","market for electricity, high voltage",US-NPCC,/kWh,ecoinvent3.8 cut-off
-ELECTRICITY_HV,Flow,"electricity, high voltage","market for electricity, high voltage",US-NPCC,/kWh,ecoinvent3.8 cut-off
-ELECTRICITY_LV,Flow,"electricity, low voltage","market for electricity, low voltage",US-NPCC,/kWh,ecoinvent3.8 cut-off
-ELECTRICITY_MV,Flow,"electricity, medium voltage","market for electricity, medium voltage",US-NPCC,/kWh,ecoinvent3.8 cut-off
+ELECTRICITY_EHV,Flow,"electricity, high voltage","market for electricity, high voltage",CA-QC,/kWh,ecoinvent3.8 cut-off
+ELECTRICITY_HV,Flow,"electricity, high voltage","market for electricity, high voltage",CA-QC,/kWh,ecoinvent3.8 cut-off
+ELECTRICITY_LV,Flow,"electricity, low voltage","market for electricity, low voltage",CA-QC,/kWh,ecoinvent3.8 cut-off
+ELECTRICITY_MV,Flow,"electricity, medium voltage","market for electricity, medium voltage",CA-QC,/kWh,ecoinvent3.8 cut-off
 ETHANE,Flow,ethane,market for ethane,GLO,/kg,ecoinvent3.8 cut-off
 ETHANOL,Flow,"ethanol, without water, in 99.7% solution state, from fermentation","market for ethanol, without water, in 99.7% solution state, from fermentation",GLO,/kg,ecoinvent3.8 cut-off
 ETHYLBENZENE,Flow,ethyl benzene,market for ethyl benzene,RoW,/kg,ecoinvent3.8 cut-off

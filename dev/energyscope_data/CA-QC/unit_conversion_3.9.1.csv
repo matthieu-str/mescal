@@ -366,9 +366,7 @@ EHP_H2_GRID,Construction,1.387283237e-05,kilometer,kilowatt
 EHP_NG_GRID,Construction,3.517915309e-06,kilometer,kilowatt
 EHV_GRID,Construction,7.82e-05,kilometer,kilowatt
 ELECTRICITY_EHV,Resource,1.0,kilowatt hour,kilowatt hour
-ELECTRICITY_HV,Resource,1.0,kilowatt hour,kilowatt hour
-ELECTRICITY_LV,Resource,1.0,kilowatt hour,kilowatt hour
-ELECTRICITY_MV,Resource,1.0,kilowatt hour,kilowatt hour
+ELEC_EXPORT,Resource,-1.0,kilowatt hour,kilowatt hour
 ELEC_STO,Construction,8.771929824999999,kilogram,kilowatt hour
 EOR,Operation,1.0,kilogram,kilogram
 ETHANE,Resource,0.07530120482,kilogram,kilowatt hour

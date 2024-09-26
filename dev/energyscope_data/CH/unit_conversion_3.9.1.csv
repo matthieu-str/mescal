@@ -19,8 +19,6 @@ AN_DIG_SI_COGEN,Construction,6250.0,unit,unit
 AN_DIG_SI_PLANT,Construction,2528.974649,unit,unit
 BATTERY,Construction,8.771929824999999,kilogram,kilowatt hour
 BENZENE,Resource,0.08470588235,kilogram,kilowatt hour
-BIOMASS_ETHANOL,Construction,1.128122192e-05,unit,kilowatt
-BIOMASS_ETHANOL,Operation,0.1347708895,kilogram,kilowatt hour
 BUS_CNG_STOICH,Construction,0.002779615385,unit,person kilometer per hour
 BUS_CNG_STOICH,Operation,1.0,person kilometer,person kilometer
 BUS_DIESEL,Construction,0.002779615385,unit,person kilometer per hour
@@ -161,8 +159,6 @@ DEC_COGEN_WOOD,Construction,0.0017,unit,kilowatt
 DEC_COGEN_WOOD,Operation,3.6,megajoule,kilowatt hour
 DEC_COGEN_WOOD_BOILER,Construction,20.0,unit,unit
 DEC_COGEN_WOOD_TURBINE,Construction,1.0,unit,unit
-DEC_DEEP_GEO,Construction,1.807525287e-05,unit,kilowatt
-DEC_DEEP_GEO,Operation,3.6,megajoule,kilowatt hour
 DEC_DIRECT_ELEC,Construction,0.2,unit,kilowatt
 DEC_DIRECT_ELEC,Operation,1.0,kilowatt hour,kilowatt hour
 DEC_HP_ELEC,Construction,0.1,unit,kilowatt
@@ -210,9 +206,7 @@ EHP_H2_GRID,Construction,1.387283237e-05,kilometer,kilowatt
 EHP_NG_GRID,Construction,3.517915309e-06,kilometer,kilowatt
 EHV_GRID,Construction,7.82e-05,kilometer,kilowatt
 ELECTRICITY_EHV,Resource,1.0,kilowatt hour,kilowatt hour
-ELECTRICITY_HV,Resource,1.0,kilowatt hour,kilowatt hour
-ELECTRICITY_LV,Resource,1.0,kilowatt hour,kilowatt hour
-ELECTRICITY_MV,Resource,1.0,kilowatt hour,kilowatt hour
+ELEC_EXPORT,Resource,-1.0,kilowatt hour,kilowatt hour
 ELEC_STO,Construction,8.771929824999999,kilogram,kilowatt hour
 EOR,Operation,1.0,kilogram,kilogram
 ETHANE,Resource,0.07530120482,kilogram,kilowatt hour
@@ -394,8 +388,6 @@ PV,Operation,1.0,kilowatt hour,kilowatt hour
 PVC,Resource,1.0,kilogram,kilogram
 PVC_FORMATION,Construction,0.000150672,unit,kilogram per hour
 PVC_FORMATION,Operation,1.0,kilogram,kilogram
-PV_EHV,Construction,0.0017857142859999,unit,kilowatt
-PV_EHV,Operation,1.0,kilowatt hour,kilowatt hour
 PYROLYSIS,Construction,1.320212766e-05,unit,kilowatt
 PYROLYSIS,Operation,0.08865248227,kilogram,kilowatt hour
 SMART_PROCESS,Construction,0.000150672,unit,kilogram per hour
@@ -469,8 +461,8 @@ WOOD,Resource,0.2337662338,kilogram,kilowatt hour
 WOOD_METHANOL,Construction,7.644444444e-06,unit,kilowatt
 WOOD_METHANOL,Operation,0.1805054152,kilogram,kilowatt hour
 XYLENE,Resource,0.08788847929,kilogram,kilowatt hour
-biogas,Other,0.777,kilogram,cubic meter
 biogas,Other,1.29,cubic meter,kilogram
+biogas,Other,0.777,kilogram,cubic meter
 biomass,Other,0.234,kilogram,kilowatt hour
 diesel,Other,0.0845,kilogram,kilowatt hour
 electricity,Other,0.278,kilowatt hour,megajoule
@@ -484,10 +476,10 @@ kerosene,Other,0.0838,kilogram,kilowatt hour
 light fuel oil,Other,0.0887,kilogram,kilowatt hour
 lignite,Other,0.271,kilogram,kilowatt hour
 manure,Other,0.253,kilogram,kilowatt hour
-natural gas,Other,1.29,cubic meter,kilogram
-natural gas,Other,0.0763,kilogram,kilowatt hour
-natural gas,Other,0.0982,cubic meter,kilowatt hour
 natural gas,Other,0.777,kilogram,cubic meter
+natural gas,Other,1.29,cubic meter,kilogram
+natural gas,Other,0.0982,cubic meter,kilowatt hour
+natural gas,Other,0.0763,kilogram,kilowatt hour
 nuclear fuel element,Other,9.23e-07,kilogram,kilowatt hour
 petrol,Other,0.0829,kilogram,kilowatt hour
 syngas,Other,0.47,kilogram,cubic meter
