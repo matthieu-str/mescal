@@ -110,6 +110,7 @@ def test_regionalize_activity_foreground():
         spatialized_database=True,
         spatialized_biosphere_db=dummy_reg_biosphere_db,
         db_dict_name_spa_biosphere=database_list_to_dict(dummy_reg_biosphere_db, 'name', 'biosphere'),
+        import_exports=[],
     )
 
     for exc in regionalized_act['exchanges']:

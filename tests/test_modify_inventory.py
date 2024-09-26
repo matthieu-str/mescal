@@ -124,7 +124,10 @@ def test_change_carbon_flow():
     assert biosphere_flows[0].as_dict()['input'] == ('biosphere3', '349b29d1-3e58-4c66-98b9-9d1a076efd2e')
     assert biosphere_flows[0].as_dict()['amount'] == -1.0
 
-    change_fossil_carbon_flows_of_biofuels("dummy_esm_db_dac", "CAR_BIODIESEL, Operation", 0.80)
+    change_fossil_carbon_flows_of_biofuels(db_name="dummy_esm_db_dac",
+                                           activity_name="CAR_BIODIESEL, Operation",
+                                           activity_code="00002",
+                                           biogenic_ratio=0.80)
 
     act_car = [i for i in bd.Database("dummy_esm_db_dac").search("CAR_BIODIESEL, Operation", limit=1000) if (
         ("CAR_BIODIESEL, Operation" == i.as_dict()['name'])
