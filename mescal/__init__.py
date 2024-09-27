@@ -34,7 +34,7 @@ __all__ = (
     "remove_quebec_flow_in_global_heat_market",
 )
 
-__version__ = "1.0.2"
+__version__ = "1.0.3"
 
 from .location_selection import *
 from .utils import *
