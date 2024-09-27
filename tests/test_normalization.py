@@ -20,9 +20,13 @@ R = [
     [('IMPACT World+ Damage 2.0.1_regionalized', 'Human health', 'Total human health'), '00001', 20, 'BUS_EV',
      'Construction'],
 ]
+impact_abbrev = [
+    [('IMPACT World+ Damage 2.0.1_regionalized', 'Ecosystem quality', 'Total ecosystem quality'), 'PDF.m2.yr', 'TTEQ', 'EQ'],
+    [('IMPACT World+ Damage 2.0.1_regionalized', 'Human health', 'Total human health'), 'DALY', 'TTHH', 'HH'],
+]
 
 R = pd.DataFrame(R, columns=['Impact_category', 'New_code', 'Value', 'Name', 'Type'])
-impact_abbrev = pd.read_csv('../dev/lcia/impact_abbrev.csv')
+impact_abbrev = pd.DataFrame(impact_abbrev, columns=['Impact_category', 'Unit', 'Abbrev', 'AoP'])
 
 
 @pytest.mark.tags("workflow")
