@@ -1,4 +1,4 @@
-# mescal
+# _mescal_
 
 [![PyPI](https://img.shields.io/pypi/v/mescal.svg)][pypi status]
 [![Status](https://img.shields.io/pypi/status/mescal.svg)][pypi status]
@@ -21,13 +21,13 @@
 [black]: https://github.com/psf/black
 [doi]: https://zenodo.org/doi/10.5281/zenodo.12727521
 
-## What is Mescal?
+## What is _mescal_?
 
-Mescal is a Python package for the creation and management of life-cycle inventory databases and metrics derived from life-cycle assessment, to be integrated in decision-making tools such as energy system models.
+_mescal_ is a Python package for the creation and management of life-cycle inventory databases and metrics derived from life-cycle assessment, to be integrated in decision-making tools such as energy system models.
 
-Mescal is a specialized package of the [Brightway Software Framework](https://brightway.dev/), mainly relying on the [bw2calc](https://github.com/brightway-lca/brightway2-calc) and [wurst](https://github.com/polca/wurst) Python packages.
+_mescal_ is a specialized package of the [Brightway Software Framework](https://brightway.dev/), mainly relying on the [bw2calc](https://github.com/brightway-lca/brightway2-calc) and [wurst](https://github.com/polca/wurst) Python packages.
 
-Mescal was designed for all researchers and modellers aiming to include life-cycle assessment (LCA) in their work, but who are not necessarily LCA experts. Mescal is usually used within [Jupyter notebooks](https://jupyter.org/).
+_mescal_ was designed for all researchers and modellers aiming to include life-cycle assessment (LCA) in their work, but who are not necessarily LCA experts. Mescal is usually used within [Jupyter notebooks](https://jupyter.org/).
 
 
 ![workflow of the mescal methodology](docs/pics/workflow.png "workflow")
