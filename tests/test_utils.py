@@ -1,3 +1,4 @@
+import pandas as pd
 from mescal.utils import Database, Dataset
 import bw2data as bd
 import pytest
@@ -211,6 +212,13 @@ dummy_esm_db_2 = [
     }
 ]
 
+mapping_product_to_CPC = [
+    ['locomotive', '0001: Locomotives', 'equals', 'Product'],
+    ['goods wagon', '0002: Railway or tramway goods', 'equals', 'Product'],
+]
+
+mapping_product_to_CPC = pd.DataFrame(data=mapping_product_to_CPC, columns=['Name', 'CPC', 'Search type', 'Where'])
+
 
 @pytest.mark.tags("requires_ecoinvent")
 def test_database():
@@ -239,6 +247,20 @@ def test_database():
     dependencies = new_db.dependencies()
     assert 'ecoinvent-3.9.1-cutoff' not in dependencies
     assert 'ecoinvent_cutoff_3.9.1_image_SSP2-Base_2020' in dependencies
+
+
+@pytest.mark.tags("workflow")
+def test_CPC():
+    db = Database(db_as_list=dummy_esm_db)
+    db.add_CPC_categories(
+        mapping_product_to_CPC=mapping_product_to_CPC,
+    )
+    if db.db_as_list[0]['name'] == 'TRAIN_FREIGHT_DIESEL_LOC, Construction':
+        assert dict(db.db_as_list[0]['classifications'])['CPC'] == '0001: Locomotives'
+        assert dict(db.db_as_list[1]['classifications'])['CPC'] == '0002: Railway or tramway goods'
+    else:
+        assert dict(db.db_as_list[0]['classifications'])['CPC'] == '0002: Railway or tramway goods'
+        assert dict(db.db_as_list[1]['classifications'])['CPC'] == '0001: Locomotives'
 
 
 @pytest.mark.tags("workflow")
