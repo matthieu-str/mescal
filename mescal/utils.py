@@ -77,19 +77,26 @@ class Dataset:
 
 class Database:
 
-    def __init__(self, db_names: str | list[str] = None, db_as_list: list[dict] = None) -> None:
+    def __init__(
+            self,
+            db_names: str | list[str] = None,
+            db_as_list: list[dict] = None,
+            create_pickle: bool = False
+    ) -> None:
         """
         Initialize the database
 
         :param db_names: Name of the LCI database(s). Should be a string for a single database or a list of strings for
             several databases.
+        :param db_as_list: List of dictionaries of the LCI database.
+        :param create_pickle: if True, create a pickle file to store the database. Only used if db_names is provided.
         """
         if db_as_list is not None:
             self.db_as_list = db_as_list
             self.db_names = list(set([i['database'] for i in db_as_list]))
         elif db_names is not None:
             self.db_names = db_names
-            self.db_as_list = self.load()
+            self.db_as_list = self.load(create_pickle)
         else:
             raise ValueError('Database name or list of dictionaries must be provided')
 
