@@ -298,3 +298,10 @@ def test_dataset():
     assert len(ds.get_technosphere_flows()) == 1
     assert ds.get_technosphere_flows()[0]['name'] == 'B'
     assert len(ds.get_biosphere_flows()) == 2
+
+
+def test_add_databases():
+    db1 = Database(db_as_list=dummy_esm_db)
+    db2 = Database(db_as_list=dummy_esm_db_2)
+    db = db1 + db2
+    assert len(db.db_as_list) == 4

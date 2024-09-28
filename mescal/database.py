@@ -118,6 +118,9 @@ class Database:
         self.db_names = list(set([i[0] for i in db_dict_code.keys()]))
         self.db_as_list = list(db_dict_code.values())
 
+    def __add__(self, other):
+        return Database(db_as_list=self.db_as_list + other.db_as_list)
+
     def load(self, create_pickle: bool = False) -> list[dict]:
         """
         Load or extract a single database
