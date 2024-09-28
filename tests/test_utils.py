@@ -1,0 +1,249 @@
+from mescal.utils import Database, Dataset
+import bw2data as bd
+import pytest
+
+dummy_ds = {
+    'name': 'dummy activity',
+    'reference product': 'dummy product',
+    'unit': 'kg',
+    'location': 'GLO',
+    'database': 'dummy database',
+    'code': '00000',
+    'exchanges': [
+        {
+            'name': 'A',
+            'amount': 1,
+            'unit': 'kg',
+            'type': 'production',
+            'location': 'GLO',
+            'code': '00A',
+        },
+        {
+            'name': 'B',
+            'amount': 2,
+            'unit': 'kg',
+            'type': 'technosphere',
+            'location': 'GLO',
+            'code': '00B',
+        },
+        {
+            'name': 'C',
+            'amount': 3,
+            'unit': 'kg',
+            'type': 'biosphere',
+            'location': 'GLO',
+            'categories': ('C',),
+            'code': '00C',
+        },
+        {
+            'name': 'D',
+            'amount': 4,
+            'unit': 'kg',
+            'type': 'biosphere',
+            'location': 'GLO',
+            'categories': ('D',),
+            'code': '00D',
+        },
+    ],
+}
+
+dummy_esm_db = [
+    {
+        "name": "TRAIN_FREIGHT_DIESEL_LOC, Construction",
+        "reference product": "locomotive",
+        "location": "RER",
+        "database": "dummy_esm_db",
+        "unit": "unit",
+        "code": "00001",
+        "exchanges": [
+            {
+                "name": "TRAIN_FREIGHT_DIESEL_LOC, Construction",
+                "product": "locomotive",
+                "location": "RER",
+                "database": "dummy_esm_db",
+                "type": "production",
+                "amount": 1,
+                "unit": "unit",
+                "code": "00001"
+            },
+            {
+                "name": "locomotive production",
+                "product": "locomotive",
+                "location": "RER",
+                "database": "ecoinvent-3.9.1-cutoff",
+                "type": "technosphere",
+                "amount": 1,
+                "unit": "unit",
+                "code": '54c4d94036d1e4d8e930bbe55332f066',
+            }
+        ],
+    },
+    {
+        "name": "TRAIN_FREIGHT_DIESEL_WAG, Construction",
+        "reference product": "goods wagon",
+        "location": "RER",
+        "database": "dummy_esm_db",
+        "unit": "unit",
+        "code": "00002",
+        "exchanges": [
+            {
+                "name": "TRAIN_FREIGHT_DIESEL_WAG, Construction",
+                "product": "goods wagon",
+                "location": "RER",
+                "database": "dummy_esm_db",
+                "type": "production",
+                "amount": 1,
+                "unit": "unit",
+                "code": "00002"
+            },
+            {
+                "name": "goods wagon production",
+                "product": "goods wagon",
+                "location": "RER",
+                "database": "ecoinvent-3.9.1-cutoff",
+                "type": "technosphere",
+                "amount": 1,
+                "unit": "unit",
+                "code": '4b775f75ed40167082fd41f85e19e978',
+            }
+        ],
+    }
+]
+
+dummy_esm_db_2 = [
+    {
+        "name": "DAC_LT, Operation",
+        "reference product": "carbon dioxide, captured from atmosphere",
+        "location": "GLO",
+        "database": "dummy_esm_db_dac",
+        "unit": "kilogram",
+        "code": "00003",
+        "exchanges": [
+            {
+                "name": "DAC_LT, Operation",
+                "product": "carbon dioxide, captured from atmosphere",
+                "location": "GLO",
+                "database": "dummy_esm_db_dac",
+                "type": "production",
+                "amount": 1,
+                "unit": "kg",
+                "code": "00001"
+            },
+            {
+                "name": "heat production, natural gas, at industrial furnace >100kW",
+                "product": "heat, district or industrial, natural gas",
+                "location": "RoW",
+                "database": "ecoinvent-3.9.1-cutoff",
+                "type": "technosphere",
+                "amount": 5.4,
+                "unit": "megajoule",
+                "code": "586243df1b3c97d5fea56c408f3fcdef",
+                "input": ("ecoinvent-3.9.1-cutoff", "586243df1b3c97d5fea56c408f3fcdef")
+            },
+            {
+                "name": "Carbon dioxide, non-fossil",
+                "categories": ("natural resource", "in air"),
+                "database": "biosphere3",
+                "input": ("biosphere3", "eba59fd6-f37e-41dc-9ca3-c7ea22d602c7"),
+                "amount": 1,
+                "type": "biosphere",
+                "unit": "kilogram",
+            }
+        ],
+    },
+    {
+        "name": "CAR_BIODIESEL, Operation",
+        "reference product": "transport, passenger car",
+        "location": "GLO",
+        "database": "dummy_esm_db_dac",
+        "unit": "kilometer",
+        "code": "00004",
+        "exchanges": [
+            {
+                "name": "CAR_BIODIESEL, Operation",
+                "product": "transport, passenger car",
+                "location": "GLO",
+                "database": "dummy_esm_db_dac",
+                "type": "production",
+                "amount": 1,
+                "unit": "km",
+                "code": "00002"
+            },
+            {
+                "name": "market for passenger car, diesel",
+                "product": "passenger car, diesel",
+                "location": "GLO",
+                "database": "ecoinvent-3.9.1-cutoff",
+                "type": "technosphere",
+                "amount": 5e-6,
+                "unit": "unit",
+                "code": "94ce79023f7075e5579a8e2984d5059e",
+                "input": ('ecoinvent-3.9.1-cutoff', '94ce79023f7075e5579a8e2984d5059e')
+            },
+            {
+                "name": "Carbon dioxide, fossil",
+                "categories": ("air",),
+                "database": "biosphere3",
+                "input": ("biosphere3", "349b29d1-3e58-4c66-98b9-9d1a076efd2e"),
+                "amount": 0.20,
+                "type": "biosphere",
+                "unit": "kilogram",
+            },
+            {
+                "name": "Carbon dioxide, fossil",
+                "categories": ('air', 'urban air close to ground'),
+                "database": "biosphere3",
+                "input": ('biosphere3', 'f9749677-9c9f-4678-ab55-c607dfdc2cb9'),
+                "amount": 0.30,
+                "type": "biosphere",
+                "unit": "kilogram",
+            },
+            {
+                "name": "Carbon monoxide, fossil",
+                "categories": ("air",),
+                "database": "biosphere3",
+                "input": ('biosphere3', 'ba2f3f82-c93a-47a5-822a-37ec97495275'),
+                "amount": 0.10,
+                "type": "biosphere",
+                "unit": "kilogram",
+            }
+        ],
+    }
+]
+
+
+@pytest.mark.tags("requires_ecoinvent")
+def test_database():
+    bd.projects.set_current('ecoinvent3.9.1')
+    db = Database(db_names="ecoinvent-3.9.1-cutoff")
+
+    # test loading
+    assert len(db.db_as_list) == 21238
+    assert db.db_as_list[0]['database'] == 'ecoinvent-3.9.1-cutoff'
+
+    multiple_dbs = Database(db_names=["ecoinvent-3.9.1-cutoff", "long haul_truck"])
+    assert len(multiple_dbs.db_as_list) == 21238 + 893
+    assert set([x['database'] for x in multiple_dbs.db_as_list]) == {'ecoinvent-3.9.1-cutoff', 'long haul_truck'}
+
+    new_db = Database(db_as_list=dummy_esm_db+dummy_esm_db_2)
+    new_db.relink(  # test the relink method
+        name_database_unlink='ecoinvent-3.9.1-cutoff',
+        name_database_relink='ecoinvent_cutoff_3.9.1_image_SSP2-Base_2020',
+        name_new_db='new_dummy_esm_db',  # testing the change_name method
+        write=True,  # testing the write_to_brightway method
+    )
+
+    new_db = Database(db_names='new_dummy_esm_db')
+    assert len(new_db.db_as_list) == 4
+    assert new_db.db_as_list[0]['database'] == 'new_dummy_esm_db'
+    dependencies = new_db.dependencies()
+    assert 'ecoinvent-3.9.1-cutoff' not in dependencies
+    assert 'ecoinvent_cutoff_3.9.1_image_SSP2-Base_2020' in dependencies
+
+
+@pytest.mark.tags("workflow")
+def test_dataset():
+    ds = Dataset(dummy_ds)
+    assert len(ds.get_technosphere_flows()) == 1
+    assert ds.get_technosphere_flows()[0]['name'] == 'B'
+    assert len(ds.get_biosphere_flows()) == 2
