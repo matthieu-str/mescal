@@ -4,9 +4,11 @@ __all__ = (
     "__version__",
     # Add functions and variables you want exposed in `mescal.` namespace here
 
-    # utils.py
+    # database.py
     "Database",
     "Dataset",
+
+    # utils.py
     "random_code",
     "ecoinvent_unit_convention",
     "change_mapping_year",
@@ -29,10 +31,10 @@ __all__ = (
 
 __version__ = "1.0.3"
 
-from .utils import *
+from .database import Database, Dataset
+from .utils import random_code, ecoinvent_unit_convention, change_mapping_year
 # from .location_selection import *
 # from .link_to_premise import *
-# from .CPC import *
 # from .double_counting import *
 # from .impact_assessment import *
 # from .normalization import *
