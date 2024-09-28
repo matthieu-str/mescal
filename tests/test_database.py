@@ -1,5 +1,5 @@
 import pandas as pd
-from mescal.utils import Database, Dataset
+from mescal.database import Database, Dataset
 import bw2data as bd
 import pytest
 
@@ -128,7 +128,7 @@ dummy_esm_db_2 = [
                 "type": "production",
                 "amount": 1,
                 "unit": "kg",
-                "code": "00001"
+                "code": "00003"
             },
             {
                 "name": "heat production, natural gas, at industrial furnace >100kW",
@@ -168,7 +168,7 @@ dummy_esm_db_2 = [
                 "type": "production",
                 "amount": 1,
                 "unit": "km",
-                "code": "00002"
+                "code": "00004"
             },
             {
                 "name": "market for passenger car, diesel",
@@ -212,11 +212,18 @@ dummy_esm_db_2 = [
     }
 ]
 
+mapping = [
+    ['Tech 1', 'Operation', 'carbon dioxide, captured from atmosphere', 'DAC_LT, Operation', 'GLO', 'dummy_esm_db_dac'],
+    ['Tech 2', 'Operation', 'transport, passenger car', 'CAR_BIODIESEL, Operation', 'GLO', 'dummy_esm_db_dac'],
+    ['Tech 3', 'Construction', 'locomotive', 'TRAIN_FREIGHT_DIESEL_LOC, Construction', 'RER', 'dummy_esm_db'],
+]
+
 mapping_product_to_CPC = [
     ['locomotive', '0001: Locomotives', 'equals', 'Product'],
     ['goods wagon', '0002: Railway or tramway goods', 'equals', 'Product'],
 ]
 
+mapping = pd.DataFrame(data=mapping, columns=['Name', 'Type', 'Product', 'Activity', 'Location', 'Database'])
 mapping_product_to_CPC = pd.DataFrame(data=mapping_product_to_CPC, columns=['Name', 'CPC', 'Search type', 'Where'])
 
 
@@ -261,6 +268,28 @@ def test_CPC():
     else:
         assert dict(db.db_as_list[0]['classifications'])['CPC'] == '0002: Railway or tramway goods'
         assert dict(db.db_as_list[1]['classifications'])['CPC'] == '0001: Locomotives'
+
+
+@pytest.mark.tags("requires_ecoinvent")
+def test_complementary_database():
+    bd.projects.set_current('ecoinvent3.9.1')
+    db = Database(db_as_list=dummy_esm_db)
+    db.write_to_brightway('dummy_esm_db')
+    db2 = Database(db_as_list=dummy_esm_db_2)
+    db2.write_to_brightway('dummy_esm_db_dac')
+
+    main_db = Database(db_names='ecoinvent-3.9.1-cutoff')
+    main_db.create_complementary_database(
+        df_mapping=mapping,
+        main_db_name='ecoinvent-3.9.1-cutoff',
+        complement_db_name='dummy_complement_db',
+    )
+
+    complement_db = Database(db_names='dummy_complement_db')
+    assert len(complement_db.db_as_list) == 3
+    assert complement_db.db_as_list[0]['database'] == 'dummy_complement_db'
+    assert set([i['name'] for i in complement_db.db_as_list]) == {'DAC_LT, Operation', 'CAR_BIODIESEL, Operation',
+                                                                  'TRAIN_FREIGHT_DIESEL_LOC, Construction'}
 
 
 @pytest.mark.tags("workflow")
