@@ -1,108 +1,197 @@
-from .location_selection import *
-from .utils import *
 import copy
+from .database import Database, Dataset
+import wurst
+import pandas as pd
 
-
-def regionalize_activity_foreground(act: dict, accepted_locations: list[str], target_region: str,
-                                    locations_ranking: list[str], db: list[dict], db_dict_code: dict,
-                                    db_dict_name: dict, import_exports: list[str], spatialized_database: bool = False,
-                                    spatialized_biosphere_db: list[dict] = None,
-                                    db_dict_name_spa_biosphere: dict = None) -> dict:
+def regionalize_activity_foreground(
+        self,
+        act: dict,
+) -> dict:
     """
     Regionalize a foreground activity according to the user ranking of locations
 
     :param act: activity to regionalize
-    :param accepted_locations: list of locations that are sufficient for the user
-    :param target_region: region to which the activity should be regionalized
-    :param locations_ranking: list of preferred locations
-    :param db: list of activities in the LCI database
-    :param db_dict_code: dictionary of the LCI database with (database, code) as key
-    :param db_dict_name: dictionary of the LCI database with (name, product, location, database) as key
-    :param import_exports: list of technologies that are imports or exports
-    :param spatialized_database: if True, the activity belongs to a spatialized database (with spatialized
-        elementary flows)
-    :param spatialized_biosphere_db: list of flows in the spatialized biosphere database
-    :param db_dict_name_spa_biosphere: dictionary of the spatialized biosphere database with
-        (name, product, location, database) as key
     :return: the regionalized activity
     """
-    if act['location'] in accepted_locations:
+    if act['location'] in self.accepted_locations:
         new_act = copy.deepcopy(act)
 
-    elif act['location'] in import_exports:  # Imports and exports are special cases for which we do not regionalize
+    # Imports and exports are special cases for which we do not regionalize
+    elif act['location'] in self.import_export_list:
         new_act = copy.deepcopy(act)
 
     else:
         new_act = copy.deepcopy(act)
         new_act_name = new_act['name']
         new_act_product = new_act['reference product']
-        new_act['comment'] = f'This LCI dataset has been adapted to {target_region}. ' + new_act.get('comment', '')
-        new_act['location'] = target_region
-        prod_flow = get_production_flow(new_act)
-        prod_flow['location'] = target_region
+        new_act['comment'] = f'This LCI dataset has been adapted to {self.target_region}. ' + new_act.get('comment', '')
+        new_act['location'] = self.target_region
+        prod_flow = Dataset(new_act).get_production_flow()
+        prod_flow['location'] = self.target_region
 
-        technosphere_flows = get_technosphere_flows(new_act)
+        technosphere_flows = Dataset(new_act).get_technosphere_flows()
 
         # for each technosphere flow, we choose the best possible location according to the user ranking
         for flow in technosphere_flows:
-            techno_act = db_dict_code[(flow['database'], flow['code'])]
+            techno_act = self.main_database.db_as_dict_code[(flow['database'], flow['code'])]
             techno_act_name = techno_act['name']
             techno_act_product = techno_act['reference product']
             techno_act_location = techno_act['location']
             techno_act_database = techno_act['database']
 
-            # if a flow is the same as the product (e.g., markets) we do not change the location to avoid infinite loops
+            # if a flow is the same as the product (e.g., markets) we do not change the location to avoid
+            # infinite loops
             if (techno_act_name == new_act_name) & (techno_act_product == new_act_product):
                 continue
 
-            if techno_act_location in accepted_locations:
+            if techno_act_location in self.accepted_locations:
                 continue
 
-            new_location = change_location_activity(
+            new_location = self.change_location_activity(
                 product=techno_act_product,
                 activity=techno_act_name,
                 location=techno_act_location,
                 database=techno_act_database,
-                locations_ranking=locations_ranking,
-                db=db,
-                esm_region=target_region,
+                technosphere_or_biosphere_db=self.main_database,
                 activity_type='technosphere',
             )  # best possible location according to the user ranking
 
-            new_techno_act = db_dict_name[(techno_act_name, techno_act_product, new_location, techno_act_database)]
+            new_techno_act = self.main_database.db_as_dict_name[
+                (techno_act_name, techno_act_product, new_location, techno_act_database)
+            ]
             flow['database'] = new_techno_act['database']
             flow['code'] = new_techno_act['code']
             flow['location'] = new_techno_act['location']
             flow['input'] = (new_techno_act['database'], new_techno_act['code'])
             flow['comment'] = f'Changed from {techno_act_location} to {new_location}' + flow.get('comment', '')
 
-        if spatialized_database:
-            spatialized_biosphere_db_name = [i for i in spatialized_biosphere_db][0]['database']
-            biosphere_flows = get_biosphere_flows(new_act)
+        if self.spatialized_database:
+            spatialized_biosphere_db_name = [i for i in self.spatialized_biosphere_db.db_as_list][0]['database']
+            biosphere_flows = Dataset(new_act).get_biosphere_flows()
             for flow in biosphere_flows:
                 if flow['database'] == spatialized_biosphere_db_name:  # if the biosphere flow is regionalized
                     current_loc = flow['name'].split(', ')[-1]
-                    if current_loc in accepted_locations:
+                    if current_loc in self.accepted_locations:
                         continue
                     generic_name = ', '.join(flow['name'].split(', ')[:-1])
-                    new_location = change_location_activity(
+                    new_location = self.change_location_activity(
                         activity=generic_name,
                         categories=flow['categories'],
                         location=current_loc,
                         database=flow['database'],
-                        locations_ranking=locations_ranking,
-                        db=spatialized_biosphere_db,
-                        esm_region=target_region,
+                        technosphere_or_biosphere_db=self.spatialized_biosphere_db,
                         activity_type='biosphere',
                     )  # best possible location according to the user ranking
 
                     new_flow_name = f"{generic_name}, {new_location}"
-                    new_biosphere_act = db_dict_name_spa_biosphere[(new_flow_name,
-                                                                    flow['categories'],
-                                                                    flow['database'])]
+                    new_biosphere_act = self.spatialized_biosphere_db.list_to_dict(
+                        key='name',
+                        database_type='biosphere'
+                    )[(new_flow_name, flow['categories'], flow['database'])]
+
                     flow['name'] = new_biosphere_act['name']
                     flow['code'] = new_biosphere_act['code']
                     flow['input'] = (new_biosphere_act['database'], new_biosphere_act['code'])
                     flow['comment'] = f'Changed from {current_loc} to {new_location}' + flow.get('comment', '')
 
     return new_act
+
+def change_location_activity(
+        self,
+        activity: str,
+        location: str,
+        database: str,
+        technosphere_or_biosphere_db: Database,
+        esm_tech_name: str = None,
+        product: str = None,
+        categories: tuple = None,
+        activity_type: str = 'technosphere',
+) -> str:
+    """
+    Changes the location of a process given a ranking of preferred locations
+
+    :param esm_tech_name: name of the technology or resource in the energy system model
+    :param product: name of the product in the LCI database for technosphere flows
+    :param activity: name of the activity in the LCI database
+    :param location: initial location of the process
+    :param database: name of the database in the brightway project
+    :param activity_type: type of activity, can be 'technosphere' or 'biosphere'
+    :param categories: name of the categories in the LCI database for biosphere flows
+    :param technosphere_or_biosphere_db: LCI database
+    :return: the highest available location within the ranking, or the initial location is any of the list's
+        locations is available
+    """
+
+    locations = []
+
+    if activity_type == 'technosphere':
+        act_filter = [
+            wurst.searching.equals("name", activity),
+            wurst.searching.equals("reference product", product),
+            wurst.searching.equals("database", database)
+        ]
+    elif activity_type == 'biosphere':
+        act_filter = [
+            wurst.searching.startswith("name", activity),
+            wurst.searching.equals("categories", categories),
+            wurst.searching.equals("database", database)
+        ]
+    else:
+        raise ValueError("Activity type must be either 'technosphere' or 'biosphere'")
+
+    ds = [a for a in wurst.searching.get_many(technosphere_or_biosphere_db.db_as_list, *act_filter)]
+
+    for act in ds:
+        if activity_type == 'technosphere':
+            locations.append(act['location'])
+        elif activity_type == 'biosphere':
+            locations.append(act['name'].split(', ')[-1])
+
+    # Imports and exports are special cases for which we keep the initial location
+    if esm_tech_name in self.import_export_list:
+        return location
+
+    # special case where there is only one location
+    elif len(locations) == 1:
+        return locations[0]
+
+    # normal case where we follow the ranking
+    else:
+        for loc in self.locations_ranking:
+            if loc in locations:
+                return loc
+
+    if activity_type == 'technosphere':
+        print(f'No location found in your ranking for {product} - {activity} - {database}')
+    elif activity_type == 'biosphere':
+        print(f'No location found in your ranking for {activity} - {categories} - {database}')
+    print(f'Have to keep the initial location: {location}')
+    return location
+
+def change_location_mapping_file(self) -> pd.DataFrame:
+    """
+    Changes the location of a process given a mapping file
+
+    :return: dataframe with the mapping of the technologies and resources with the new location
+    """
+
+    if 'Location' not in self.mapping.columns:
+        for i in range(len(self.mapping)):
+            activity_name = self.mapping.Activity.iloc[i]
+            product_name = self.mapping.Product.iloc[i]
+            location = [a for a in wurst.get_many(self.main_database, *[
+                wurst.equals('name', activity_name),
+                wurst.equals('reference product', product_name)
+            ])][0]['location']  # picks one location randomly
+            self.mapping.at[i, 'Location'] = location
+
+    self.mapping['Location'] = self.mapping.apply(lambda row: self.change_location_activity(
+        esm_tech_name=row['Name'],
+        product=row['Product'],
+        activity=row['Activity'],
+        location=row['Location'],
+        database=row['Database'],
+        technosphere_or_biosphere_db=self.main_database,
+    ), axis=1)
+
+    return self.mapping
