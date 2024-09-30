@@ -403,6 +403,20 @@ class Database:
         db = {(i['database'], i['code']): i for i in self.db_as_list}
         bw_database.write(db)
 
+    def delete(self) -> None:
+        """
+        Delete a database from Brightway
+
+        :return: None
+        """
+        if len(self.db_names) > 1:
+            raise ValueError('Only one database can be deleted at a time')
+        else:
+            if self.db_names[0] in list(bd.databases):
+                del bd.databases[self.db_names[0]]
+            else:
+                raise ValueError(f"{self.db_names[0]} is not a registered database")
+
     def get_code(self, product, activity, location, database) -> str or None:
         """
         Get the code of an activity
