@@ -1,7 +1,11 @@
 import bw2data as bd
 
 
-def change_dac_biogenic_carbon_flow(db_name: str, activity_name: str = None, activity_code: str = None) -> None:
+def change_dac_biogenic_carbon_flow(
+        db_name: str,
+        activity_name: str = None,
+        activity_code: str = None
+) -> None:
     """
     Change the biogenic carbon flow of premise DAC technologies to a fossil carbon flow
 
@@ -72,8 +76,12 @@ def change_dac_biogenic_carbon_flow(db_name: str, activity_name: str = None, act
                          f"but is {len(biosphere_flows)}")
 
 
-def change_fossil_carbon_flows_of_biofuels(db_name: str, activity_name: str = None, activity_code:str = None,
-                                           biogenic_ratio: float = 1) -> None:
+def change_fossil_carbon_flows_of_biofuels(
+        db_name: str,
+        activity_name: str = None,
+        activity_code: str = None,
+        biogenic_ratio: float = 1
+) -> None:
     """
 
     :param db_name: name of the LCI database
@@ -128,8 +136,11 @@ def change_fossil_carbon_flows_of_biofuels(db_name: str, activity_name: str = No
     act.save()
 
 
-def remove_quebec_flow_in_global_heat_market(db_name: str, activity_name: str = None, activity_code: str = None) \
-        -> None:
+def remove_quebec_flow_in_global_heat_market(
+        db_name: str,
+        activity_name: str = None,
+        activity_code: str = None
+) -> None:
     """
     Remove the Quebec heat flow in the global heat market activity
 
