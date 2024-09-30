@@ -22,7 +22,7 @@ def compute_impact_scores(
     esm_db_dict_code = esm_db.db_as_dict_code
 
     activities = [esm_db_dict_code[(self.esm_db_name, self.mapping['New_code'].iloc[i])] for i in
-                  range(len(self.mapping))]
+                  range(len(self.mapping[self.mapping.Type != 'Flow']))]
     activities_bw = {(i['database'], i['code']): i for i in activities}
     impact_categories = self.get_impact_categories(methods)
     bd.calculation_setups['impact_scores'] = {
