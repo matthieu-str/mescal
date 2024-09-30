@@ -1,6 +1,7 @@
 import pandas as pd
 import ast
 import copy
+from pathlib import Path
 from .modify_inventory import change_dac_biogenic_carbon_flow, change_fossil_carbon_flows_of_biofuels
 from .database import Database, Dataset
 from .utils import random_code
@@ -152,13 +153,13 @@ class ESM:
 
     def create_esm_database(
             self,
-            return_obj: str = 'mapping',
+            return_database: bool = False,
             write_database: bool = True,
     ) -> pd.DataFrame | Database:
         """
         Create the ESM database
 
-        :param return_obj: if 'mapping', return the mapping file; if 'database', return the ESM database
+        :param return_database: if True, return the ESM database
         :param write_database: if True, write the ESM database to Brightway2
         :return: the mapping file or the ESM database
         """
@@ -246,6 +247,8 @@ class ESM:
                     double_counting_removal=double_counting_removal_amount,
                 )
 
+            Path(self.results_path_file).mkdir(parents=True, exist_ok=True)  # Create the folder if it does not exist
+
             double_counting_removal_amount.to_csv(f"{self.results_path_file}double_counting_removal.csv", index=False)
             double_counting_removal_count.to_csv(f"{self.results_path_file}double_counting_removal_count.csv",
                                                  index=False)
@@ -275,13 +278,9 @@ class ESM:
                         biogenic_ratio=biogenic_ratio
                     )
 
-        if return_obj == 'mapping':
-            return self.mapping
-        elif return_obj == 'database':
+        if return_database:
             return Database(
                 db_as_list=[act for act in self.main_database.db_as_list if act['database'] == self.esm_db_name])
-        else:
-            raise ValueError("return_obj must be 'mapping' or 'database'")
 
     @staticmethod
     def add_technology_specifics(
@@ -367,7 +366,7 @@ class ESM:
         prod_flow['database'] = self.esm_db_name
 
         if self.regionalize_foregrounds:
-            new_act = self.regionalize_activity_foreground(self, act=new_act)
+            new_act = self.regionalize_activity_foreground(act=new_act)
 
         return new_act
 
