@@ -22,6 +22,9 @@ class Dataset:
         self.location = act['location']
         self.database = act['database']
 
+    def __repr__(self) -> str:
+        return f"Dataset({self.product}, {self.activity}, {self.location}, {self.database})"
+
     def get_technosphere_flows(self) -> list[dict]:
         """
         Get the technosphere flows of an activity
@@ -100,6 +103,9 @@ class Database:
         else:
             raise ValueError('Database name or list of dictionaries must be provided')
 
+    def __repr__(self) -> str:
+        return f"Database({self.db_names}) contains {len(self.db_as_list)} activities"
+
     @property
     def db_as_dict_name(self) -> dict:
         return self.list_to_dict(key='name')
@@ -120,6 +126,9 @@ class Database:
 
     def __add__(self, other):
         return Database(db_as_list=self.db_as_list + other.db_as_list)
+
+    def __sub__(self, other):
+        return Database(db_as_list=[i for i in self.db_as_list if i not in other.db_as_list])
 
     from .CPC import add_product_or_activity_CPC_category, add_CPC_categories
 
