@@ -3,6 +3,7 @@ from .database import Database, Dataset
 import wurst
 import pandas as pd
 
+
 def regionalize_activity_foreground(
         self,
         act: dict,
@@ -24,10 +25,10 @@ def regionalize_activity_foreground(
         new_act = copy.deepcopy(act)
         new_act_name = new_act['name']
         new_act_product = new_act['reference product']
-        new_act['comment'] = f'This LCI dataset has been adapted to {self.target_region}. ' + new_act.get('comment', '')
-        new_act['location'] = self.target_region
+        new_act['comment'] = f'This LCI dataset has been adapted to {self.esm_location}. ' + new_act.get('comment', '')
+        new_act['location'] = self.esm_location
         prod_flow = Dataset(new_act).get_production_flow()
-        prod_flow['location'] = self.target_region
+        prod_flow['location'] = self.esm_location
 
         technosphere_flows = Dataset(new_act).get_technosphere_flows()
 
@@ -95,6 +96,7 @@ def regionalize_activity_foreground(
                     flow['comment'] = f'Changed from {current_loc} to {new_location}' + flow.get('comment', '')
 
     return new_act
+
 
 def change_location_activity(
         self,
@@ -167,6 +169,7 @@ def change_location_activity(
         print(f'No location found in your ranking for {activity} - {categories} - {database}')
     print(f'Have to keep the initial location: {location}')
     return location
+
 
 def change_location_mapping_file(self) -> pd.DataFrame:
     """
