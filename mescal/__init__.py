@@ -4,8 +4,8 @@ __all__ = (
     "__version__",
     # Add functions and variables you want exposed in `mescal.` namespace here
 
-    # esm_database.py
-    "ESMDatabase",
+    # esm.py
+    "ESM",
 
     # database.py
     "Database",
@@ -35,7 +35,7 @@ __all__ = (
 __version__ = "1.0.3"
 
 from .database import Database, Dataset
-from esm_database import ESMDatabase
+from .esm import ESM
 from .utils import random_code, ecoinvent_unit_convention, change_mapping_year
 # from .location_selection import *
 # from .link_to_premise import *

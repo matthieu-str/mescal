@@ -6,7 +6,7 @@ from .database import Database, Dataset
 from .utils import random_code
 
 
-class ESMDatabase:
+class ESM:
     """
     Create the ESM database after double counting removal. Three csv files summarizing the double-counting removal
         process are automatically saved in the results' folder: double_counting_removal.csv (amount of removed flows),
@@ -122,11 +122,11 @@ class ESMDatabase:
     def import_export_list(self):
         return list(self.tech_specifics[self.tech_specifics.Specifics == 'Import/Export'].Name)
 
-    @property
-    def technology_compositions_dict(self):
-        return {key: value for key, value in dict(zip(
-            self.technology_compositions.Name, self.technology_compositions.Components
-        )).items()}
+    # @property
+    # def technology_compositions_dict(self):
+    #     return {key: value for key, value in dict(zip(
+    #         self.technology_compositions.Name, self.technology_compositions.Components
+    #     )).items()}
 
     # Import methods from other files
     from .regionalization import regionalize_activity_foreground, change_location_activity, change_location_mapping_file
@@ -186,18 +186,19 @@ class ESMDatabase:
         self.main_database = self.add_activities_to_database(act_type='Construction')
         self.main_database = self.add_activities_to_database(act_type='Resource')
 
-        flows_set_to_zero, ei_removal = self.double_counting_removal(self, df_op=self.mapping_op, N=N, ESM_inputs='all')
+        flows_set_to_zero, ei_removal = self.double_counting_removal(df_op=self.mapping_op, N=N, ESM_inputs='all')
 
         if write_database:
 
-            df_flows_set_to_zero = pd.DataFrame(data=flows_set_to_zero,
-                                                columns=[
-                                                    'Name', 'Product', 'Activity', 'Location', 'Database', 'Code',
-                                                    'Amount',
-                                                    'Unit', 'Removed flow product', 'Removed flow activity',
-                                                    'Removed flow location', 'Removed flow database',
-                                                    'Removed flow code'
-                                                ])
+            df_flows_set_to_zero = pd.DataFrame(
+                data=flows_set_to_zero,
+                columns=[
+                    'Name', 'Product', 'Activity', 'Location', 'Database', 'Code',
+                    'Amount',
+                    'Unit', 'Removed flow product', 'Removed flow activity',
+                    'Removed flow location', 'Removed flow database',
+                    'Removed flow code'
+                ])
             df_flows_set_to_zero.drop_duplicates(inplace=True)
 
             ei_removal_amount = {}
@@ -236,7 +237,6 @@ class ESMDatabase:
 
             if self.efficiency is not None:
                 self.correct_esm_and_lca_efficiency_differences(
-                    self,
                     removed_flows=df_flows_set_to_zero,
                     double_counting_removal=double_counting_removal_amount,
                 )
@@ -273,7 +273,8 @@ class ESMDatabase:
         if return_obj == 'mapping':
             return self.mapping
         elif return_obj == 'database':
-            return Database(db_names=self.esm_db_name)
+            return Database(
+                db_as_list=[act for act in self.main_database.db_as_list if act['database'] == self.esm_db_name])
         else:
             raise ValueError("return_obj must be 'mapping' or 'database'")
 
