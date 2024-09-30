@@ -31,9 +31,11 @@ def create_new_database_with_esm_results(
         new_end_use_types = pd.DataFrame(columns=['Name', 'Search type', 'Old', 'New'])
 
     if new_db_name is None:
-        if len(self.main_database.db_names) > 1:
+        if isinstance(self.main_database.db_names, list) & (len(self.main_database.db_names) > 1):
             raise ValueError('The main database should contain only one database.')
-        new_db_name = f"{self.main_database.db_names[0]}_with_ESM_results_for_{self.esm_location}"
+        elif isinstance(self.main_database.db_names, list) & (len(self.main_database.db_names) == 1):
+            self.main_database.db_names = self.main_database.db_names[0]
+        new_db_name = f"{self.main_database.db_names}_with_ESM_results_for_{self.esm_location}"
 
     flows = self.mapping[self.mapping.Type == 'Flow']
 
@@ -207,16 +209,13 @@ def create_or_modify_activity_from_esm_results(
 
     # If not, we take a similar activity with another location and regionalize its foreground
     else:
-        activity = [a for a in wurst.get_many(self.main_database, *[
+        activity = [a for a in wurst.get_many(self.main_database.db_as_list, *[
             wurst.equals('name', original_activity_name),
             wurst.equals('reference product', original_activity_prod),
             wurst.equals('database', original_activity_database)
         ])][0]
 
-        activity = self.regionalize_activity_foreground(
-            self,
-            act=activity,
-        )
+        activity = self.regionalize_activity_foreground(act=activity)
 
     new_code = random_code()
     original_activity_unit = activity['unit']
