@@ -150,7 +150,7 @@ def background_search(
                                     new_act = techno_act
 
                                 if k < k_lim:  # we continue until maximum depth is reached:
-                                    perform_d_c, db, db_dict_code, db_dict_name = self.background_search(
+                                    perform_d_c = self.background_search(
                                         act=new_act,
                                         k=k + 1,
                                         k_lim=k_lim,
@@ -202,7 +202,7 @@ def background_search(
                                     new_act = techno_act
 
                                 if k < k_lim:  # we continue until maximum depth is reached:
-                                    perform_d_c, db, db_dict_code, db_dict_name = self.background_search(
+                                    perform_d_c = self.background_search(
                                         act=new_act,
                                         k=k+1,
                                         k_lim=k_lim,
@@ -253,12 +253,16 @@ def double_counting_removal(
 
     # Initializing the dict of removed quantities
     ei_removal = {}
-    for tech in list(self.mapping_op.Name):
+    for tech in list(df_op.Name):
         ei_removal[tech] = {}
-        for res in list(self.mapping_op.iloc[:, N:].columns):
+        for res in list(df_op.iloc[:, N:].columns):
             ei_removal[tech][res] = {}
             ei_removal[tech][res]['amount'] = 0
             ei_removal[tech][res]['count'] = 0
+
+    technology_compositions_dict = {key: value for key, value in dict(zip(
+            self.technology_compositions.Name, self.technology_compositions.Components
+        )).items()}
 
     # readings lists as lists and not strings
     try:
@@ -275,8 +279,8 @@ def double_counting_removal(
         for x in v:
             mapping_CPC_to_esm_flows_dict.setdefault(x, []).append(k)
 
-    for i in range(len(self.mapping_op)):
-        tech = self.mapping_op['Name'].iloc[i]  # name of ES technology
+    for i in range(len(df_op)):
+        tech = df_op['Name'].iloc[i]  # name of ES technology
         # print(tech)
 
         # Initialization of the list of construction activities and corresponding CPC categories
@@ -289,11 +293,11 @@ def double_counting_removal(
             pass
 
         else:
-            if tech not in self.technology_compositions_dict.keys():  # if the technology is a composition
+            if tech not in technology_compositions_dict.keys():  # if the technology is not a composition
                 # simple technologies are seen as compositions of one technology
-                self.technology_compositions_dict[tech] = [tech]
+                technology_compositions_dict[tech] = [tech]
 
-            for sub_comp in self.technology_compositions_dict[tech]:  # looping over the subcomponents of the composition
+            for sub_comp in technology_compositions_dict[tech]:  # looping over the subcomponents of the composition
 
                 database_constr = self.mapping_constr[self.mapping_constr.Name == sub_comp]['Database'].iloc[0]
                 current_code_constr = self.mapping_constr[self.mapping_constr.Name == sub_comp]['Current_code'].iloc[0]
@@ -306,15 +310,15 @@ def double_counting_removal(
                 mapping_CPC_to_esm_flows_dict[CPC_constr] = ['OWN_CONSTRUCTION']
 
         # Operation activity
-        database_op = self.mapping_op['Database'].iloc[i]  # LCA database of the operation technology
-        current_code_op = self.mapping_op['Current_code'].iloc[i]  # code in ecoinvent
+        database_op = df_op['Database'].iloc[i]  # LCA database of the operation technology
+        current_code_op = df_op['Current_code'].iloc[i]  # code in ecoinvent
 
         # identification of the activity in ecoinvent database
         act_op = self.main_database.db_as_dict_code[(database_op, current_code_op)]
 
         if create_new_db:
             # Copy the activity and change the database (no new activity in original ecoinvent database)
-            new_code = self.mapping_op['New_code'].iloc[i]  # new code defined previously
+            new_code = df_op['New_code'].iloc[i]  # new code defined previously
             new_act_op = copy.deepcopy(act_op)
             new_act_op['code'] = new_code
             new_act_op['database'] = self.esm_db_name
@@ -381,7 +385,7 @@ def double_counting_removal(
 
             if perform_d_c[id_d_c][4] == 'all':
                 # list of inputs in the ESM (i.e., negative flows in layers_in_out)
-                ES_inputs = list(self.mapping_op.iloc[:, N:].iloc[i][self.mapping_op.iloc[:, N:].iloc[i] < 0].index)
+                ES_inputs = list(df_op.iloc[:, N:].iloc[i][df_op.iloc[:, N:].iloc[i] < 0].index)
             else:
                 ES_inputs = perform_d_c[id_d_c][4]
 
@@ -467,7 +471,7 @@ def double_counting_removal(
                     if 'OWN_CONSTRUCTION' in res_categories:
                         # replace construction flow input by the one added before in the ESM database
                         # (for validation purposes)
-                        for idx, sub_comp in enumerate(self.technology_compositions_dict[tech]):
+                        for idx, sub_comp in enumerate(technology_compositions_dict[tech]):
                             if code == act_constr_list[idx]['code']:
                                 new_code_constr = self.mapping_constr[self.mapping_constr.Name == sub_comp].New_code.iloc[0]
                                 flow['database'], flow['code'] = self.esm_db_name, new_code_constr
