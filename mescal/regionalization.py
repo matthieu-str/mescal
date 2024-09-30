@@ -14,6 +14,10 @@ def regionalize_activity_foreground(
     :param act: activity to regionalize
     :return: the regionalized activity
     """
+
+    db_dict_code = self.main_database.db_as_dict_code
+    db_dict_name = self.main_database.db_as_dict_name
+
     if act['location'] in self.accepted_locations:
         new_act = copy.deepcopy(act)
 
@@ -34,7 +38,7 @@ def regionalize_activity_foreground(
 
         # for each technosphere flow, we choose the best possible location according to the user ranking
         for flow in technosphere_flows:
-            techno_act = self.main_database.db_as_dict_code[(flow['database'], flow['code'])]
+            techno_act = db_dict_code[(flow['database'], flow['code'])]
             techno_act_name = techno_act['name']
             techno_act_product = techno_act['reference product']
             techno_act_location = techno_act['location']
@@ -57,7 +61,7 @@ def regionalize_activity_foreground(
                 activity_type='technosphere',
             )  # best possible location according to the user ranking
 
-            new_techno_act = self.main_database.db_as_dict_name[
+            new_techno_act = db_dict_name[
                 (techno_act_name, techno_act_product, new_location, techno_act_database)
             ]
             flow['database'] = new_techno_act['database']
@@ -171,11 +175,11 @@ def change_location_activity(
     return location
 
 
-def change_location_mapping_file(self) -> pd.DataFrame:
+def change_location_mapping_file(self) -> None:
     """
     Changes the location of a process given a mapping file
 
-    :return: dataframe with the mapping of the technologies and resources with the new location
+    :return: None
     """
 
     if 'Location' not in self.mapping.columns:
@@ -196,5 +200,3 @@ def change_location_mapping_file(self) -> pd.DataFrame:
         database=row['Database'],
         technosphere_or_biosphere_db=self.main_database,
     ), axis=1)
-
-    return self.mapping
