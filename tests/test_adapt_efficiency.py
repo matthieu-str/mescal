@@ -1,7 +1,7 @@
 import pandas as pd
 import pytest
-from mescal.adapt_efficiency import correct_esm_and_lca_efficiency_differences
-from mescal.utils import database_list_to_dict, get_biosphere_flows
+from mescal.esm import ESM
+from mescal.database import Database, Dataset
 
 # LCI database after double-counting correction
 dummy_db = [
@@ -502,21 +502,36 @@ unit_conversion = pd.DataFrame(unit_conversion, columns=['Name', 'Type', 'Value'
 
 @pytest.mark.tags("workflow")
 def test_correct_esm_and_lca_efficiency_differences():
-    updated_db = correct_esm_and_lca_efficiency_differences(
-        db=dummy_db,
+
+    esm = ESM(
+        mapping=pd.DataFrame(),
         model=model,
-        efficiency=efficiency,
-        mapping_esm_flows_to_CPC=mapping_esm_flows_to_CPC,
-        removed_flows=removed_flows,
         unit_conversion=unit_conversion,
+        mapping_esm_flows_to_CPC_cat=mapping_esm_flows_to_CPC,
+        esm_db_name="esm_db",
+        main_database=Database(db_as_list=dummy_db),
+        efficiency=efficiency,
+    )
+
+    esm.correct_esm_and_lca_efficiency_differences(
+        removed_flows=removed_flows,
         double_counting_removal=double_counting_removal,
     )
 
-    updated_db_dict_code = database_list_to_dict(updated_db, 'code')
+    # updated_db = correct_esm_and_lca_efficiency_differences(
+    #     db=dummy_db,
+    #     model=model,
+    #     efficiency=efficiency,
+    #     mapping_esm_flows_to_CPC=mapping_esm_flows_to_CPC,
+    #     removed_flows=removed_flows,
+    #     unit_conversion=unit_conversion,
+    #     double_counting_removal=double_counting_removal,
+    # )
+    updated_db_dict_code = esm.main_database.db_as_dict_code
     efficiency_ratio = (1 / (0.05 * 0.4 + 0.04 * 0.6) * 0.0829 / 0.667) / (1 / 0.4)
 
     act_type_I = updated_db_dict_code['dummy_db', '00001']
-    for bf in get_biosphere_flows(act_type_I):
+    for bf in Dataset(act_type_I).get_biosphere_flows():
         if bf['name'] == 'Carbon monoxide, fossil':
             assert round(bf['amount'], 6) == round(0.05 * efficiency_ratio, 6)
         elif bf['name'] == 'Carbon dioxide, fossil':
@@ -525,7 +540,7 @@ def test_correct_esm_and_lca_efficiency_differences():
             assert bf['amount'] == 10
 
     act_type_II = updated_db_dict_code['dummy_db', '00006']
-    for bf in get_biosphere_flows(act_type_II):
+    for bf in Dataset(act_type_II).get_biosphere_flows():
         if bf['name'] == 'Carbon monoxide, fossil':
             assert round(bf['amount'], 6) == round(0.04 * efficiency_ratio, 6)
         elif bf['name'] == 'Carbon dioxide, fossil':
@@ -534,7 +549,7 @@ def test_correct_esm_and_lca_efficiency_differences():
             assert bf['amount'] == 15
 
     act = updated_db_dict_code['dummy_db', '00001A']
-    for bf in get_biosphere_flows(act):
+    for bf in Dataset(act).get_biosphere_flows():
         if bf['name'] == 'Carbon monoxide, fossil':
             assert bf['amount'] == 0.05
         elif bf['name'] == 'Carbon dioxide, fossil':
@@ -544,7 +559,7 @@ def test_correct_esm_and_lca_efficiency_differences():
 
     act = updated_db_dict_code['dummy_db', '00001B']
     efficiency_ratio = (1 / 0.06 * 0.075 / 0.667) / (1 / 0.5)
-    for bf in get_biosphere_flows(act):
+    for bf in Dataset(act).get_biosphere_flows():
         if bf['name'] == 'Carbon monoxide, fossil':
             assert round(bf['amount'], 6) == round(0.05 * efficiency_ratio, 6)
         elif bf['name'] == 'Carbon dioxide, fossil':

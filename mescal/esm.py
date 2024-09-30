@@ -18,6 +18,7 @@ class ESM:
             self,
             mapping: pd.DataFrame,
             model: pd.DataFrame,
+            unit_conversion: pd.DataFrame,
             mapping_esm_flows_to_CPC_cat: pd.DataFrame,
             main_database: Database,
             esm_db_name: str,
@@ -31,7 +32,6 @@ class ESM:
             spatialized_database: bool = False,
             spatialized_biosphere_db: Database = None,
             efficiency: pd.DataFrame = None,
-            unit_conversion: pd.DataFrame = None,
             lifetime: pd.DataFrame = None,
     ):
         """
@@ -39,6 +39,7 @@ class ESM:
 
         :param mapping: mapping file
         :param model: model file
+        :param unit_conversion: file containing unit conversion factors
         :param tech_specifics: technology specifics
         :param technology_compositions: technology compositions
         :param mapping_esm_flows_to_CPC_cat: mapping file between the ESM flows and the CPC categories
@@ -53,15 +54,14 @@ class ESM:
         :param spatialized_biosphere_db: list of flows in the spatialized biosphere database
         :param efficiency: file containing the ESM (Name, Flow) couples to correct regarding efficiency differences between
             the ESM and LCI database
-        :param unit_conversion: file containing unit conversion factors
         :param lifetime: file containing the lifetime of the technologies
         :return: mapping file (updated with new codes) or the ESM database as a list of dictionaries, depending on the
             'return_obj' parameter. Three csv files are also automatically saved in the results' folder.
         """
         self.mapping = mapping
         self.model = model
-        self.tech_specifics = tech_specifics
-        self.technology_compositions = technology_compositions
+        self.tech_specifics = tech_specifics if tech_specifics is not None else pd.DataFrame(columns=['Name', 'Specifics', 'Amount'])
+        self.technology_compositions = technology_compositions if technology_compositions is not None else pd.DataFrame(columns=['Name', 'Components'])
         self.mapping_esm_flows_to_CPC_cat = mapping_esm_flows_to_CPC_cat
         self.main_database = main_database
         self.esm_db_name = esm_db_name
@@ -72,9 +72,9 @@ class ESM:
         self.locations_ranking = locations_ranking
         self.spatialized_database = spatialized_database
         self.spatialized_biosphere_db = spatialized_biosphere_db
-        self.efficiency = efficiency
+        self.efficiency = efficiency if efficiency is not None else pd.DataFrame(columns=['Name', 'Flow'])
         self.unit_conversion = unit_conversion
-        self.lifetime = lifetime
+        self.lifetime = lifetime if lifetime is not None else pd.DataFrame(columns=['Name', 'ESM', 'LCA'])
 
     def __repr__(self):
         n_tech = self.mapping[(self.mapping['Type'] == 'Construction') | (self.mapping['Type'] == 'Operation')].shape[0]
@@ -88,7 +88,7 @@ class ESM:
         model_pivot.fillna(0, inplace=True)
         mapping_op = pd.merge(mapping_op, model_pivot, on='Name', how='left')
         mapping_op['CONSTRUCTION'] = mapping_op.shape[0] * [0]
-        mapping_op = add_technology_specifics(mapping_op, self.tech_specifics)
+        mapping_op = self.add_technology_specifics(mapping_op, self.tech_specifics)
         return mapping_op
 
     @property
@@ -142,6 +142,13 @@ class ESM:
     )
     adapt_biosphere_flows_to_efficiency_difference = staticmethod(adapt_biosphere_flows_to_efficiency_difference)
     get_lca_input_quantity = staticmethod(get_lca_input_quantity)
+    from .esm_back_to_lca import (create_new_database_with_esm_results, create_or_modify_activity_from_esm_results,
+                                  replace_mobility_end_use_type)
+    replace_mobility_end_use_type = staticmethod(replace_mobility_end_use_type)
+    from .normalization import normalize_lca_metrics
+    normalize_lca_metrics = staticmethod(normalize_lca_metrics)
+    from .generate_lcia_obj_ampl import generate_mod_file_ampl
+    generate_mod_file_ampl = staticmethod(generate_mod_file_ampl)
 
     def create_esm_database(
             self,
@@ -156,8 +163,6 @@ class ESM:
         :return: the mapping file or the ESM database
         """
 
-        if self.tech_specifics is None:
-            self.tech_specifics = pd.DataFrame(columns=['Name', 'Specifics', 'Amount'])
         if self.technology_compositions is None:
             self.technology_compositions = pd.DataFrame(columns=['Name', 'Components'])
 
@@ -278,6 +283,37 @@ class ESM:
         else:
             raise ValueError("return_obj must be 'mapping' or 'database'")
 
+    @staticmethod
+    def add_technology_specifics(
+            mapping_op: pd.DataFrame,
+            df_tech_specifics: pd.DataFrame
+    ) -> pd.DataFrame:
+        """
+        Add technology-specific inputs to the model file
+
+        :param mapping_op: operation activities, mapping file merged with the model file
+        :param df_tech_specifics: dataframe of technology specifics
+        :return: updated mapping file
+        """
+        # Add a construction input to technologies that have a construction phase
+        no_construction_list = list(df_tech_specifics[df_tech_specifics.Specifics == 'No construction'].Name)
+        mapping_op['OWN_CONSTRUCTION'] = mapping_op.apply(lambda row: has_construction(row, no_construction_list),
+                                                          axis=1)
+
+        # Add a decommissioning input to technologies that have a decommissioning phase outside their construction phase
+        decom_list = list(df_tech_specifics[df_tech_specifics.Specifics == 'Decommissioning'].Name)
+        mapping_op['DECOMMISSIONING'] = mapping_op.apply(lambda row: has_decommissioning(row, decom_list), axis=1)
+
+        # Add a fuel input to mobility technologies (due to possible mismatch)
+        mobility_list = list(df_tech_specifics[df_tech_specifics.Specifics == 'Mobility'].Name)
+        mapping_op['TRANSPORT_FUEL'] = mapping_op.apply(lambda row: is_transport(row, mobility_list), axis=1)
+
+        # Add a fuel input to process activities that could have a mismatch
+        process_list = list(df_tech_specifics[df_tech_specifics.Specifics == 'Process'].Name)
+        mapping_op['PROCESS_FUEL'] = mapping_op.apply(lambda row: is_process_activity(row, process_list), axis=1)
+
+        return mapping_op
+
     def add_activities_to_database(
             self,
             act_type: str,
@@ -392,33 +428,3 @@ def is_process_activity(row: pd.Series, process_list: list[str]) -> int:
         return -1
     else:
         return 0
-
-
-def add_technology_specifics(
-        mapping_op: pd.DataFrame,
-        df_tech_specifics: pd.DataFrame
-) -> pd.DataFrame:
-    """
-    Add technology-specific inputs to the model file
-
-    :param mapping_op: operation activities, mapping file merged with the model file
-    :param df_tech_specifics: dataframe of technology specifics
-    :return: updated mapping file
-    """
-    # Add a construction input to technologies that have a construction phase
-    no_construction_list = list(df_tech_specifics[df_tech_specifics.Specifics == 'No construction'].Name)
-    mapping_op['OWN_CONSTRUCTION'] = mapping_op.apply(lambda row: has_construction(row, no_construction_list), axis=1)
-
-    # Add a decommissioning input to technologies that have a decommissioning phase outside their construction phase
-    decom_list = list(df_tech_specifics[df_tech_specifics.Specifics == 'Decommissioning'].Name)
-    mapping_op['DECOMMISSIONING'] = mapping_op.apply(lambda row: has_decommissioning(row, decom_list), axis=1)
-
-    # Add a fuel input to mobility technologies (due to possible mismatch)
-    mobility_list = list(df_tech_specifics[df_tech_specifics.Specifics == 'Mobility'].Name)
-    mapping_op['TRANSPORT_FUEL'] = mapping_op.apply(lambda row: is_transport(row, mobility_list), axis=1)
-
-    # Add a fuel input to process activities that could have a mismatch
-    process_list = list(df_tech_specifics[df_tech_specifics.Specifics == 'Process'].Name)
-    mapping_op['PROCESS_FUEL'] = mapping_op.apply(lambda row: is_process_activity(row, process_list), axis=1)
-
-    return mapping_op

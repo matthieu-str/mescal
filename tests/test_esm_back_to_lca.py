@@ -1,7 +1,7 @@
 import pandas as pd
 import pytest
-from mescal.esm_back_to_lca import create_new_database_with_esm_results
-from mescal.utils import database_list_to_dict, get_technosphere_flows
+from mescal.esm import ESM
+from mescal.database import Database, Dataset
 
 dummy_db = [
     {
@@ -384,25 +384,29 @@ unit_conversion = pd.DataFrame(unit_conversion, columns=['Name', 'Type', 'Value'
 @pytest.mark.tags("workflow")
 def test_create_new_database_with_esm_results():
 
-    new_db = create_new_database_with_esm_results(
-        write_database=False,
-        return_obj='database',
+    esm = ESM(
         mapping=mapping,
-        mapping_esm_flows_to_CPC_cat=mapping_esm_flows_to_CPC,
         model=model,
-        db=dummy_db,
-        esm_location='CH',
-        esm_results=esm_results,
         unit_conversion=unit_conversion,
-        locations_ranking=['CH', 'RER', 'GLO'],
-        accepted_locations=['CH'],
+        mapping_esm_flows_to_CPC_cat=mapping_esm_flows_to_CPC,
+        esm_db_name="esm_db",
+        esm_location="CH",
+        locations_ranking=["CH", "RER", "GLO"],
+        accepted_locations=["CH"],
+        main_database=Database(db_as_list=dummy_db),
     )
 
-    new_db_dict_name = database_list_to_dict(new_db, "name")
+    esm.create_new_database_with_esm_results(
+        esm_results=esm_results,
+        write_database=False,
+    )
+
+    new_db_dict_name = esm.main_database.db_as_dict_name
+
     new_act = new_db_dict_name[
         "market for heat, from ESM results", "heat", "CH", 'ecoinvent-3.9.1-cutoff_with_ESM_results_for_CH'
     ]
-    new_act_technosphere_flows = get_technosphere_flows(new_act)
+    new_act_technosphere_flows = Dataset(new_act).get_technosphere_flows()
 
     # Test the entries of the new dataset
     assert len(new_act_technosphere_flows) == 2  # single and double-stage HPs flows
@@ -421,7 +425,7 @@ def test_create_new_database_with_esm_results():
     hp_act = new_db_dict_name[
         "market for heat production by heat pump", "heat", "CH", 'ecoinvent-3.9.1-cutoff_with_ESM_results_for_CH'
     ]
-    hp_act_technosphere_flows = get_technosphere_flows(hp_act)
+    hp_act_technosphere_flows = Dataset(hp_act).get_technosphere_flows()
     for exc in hp_act_technosphere_flows:
         if exc['name'] == 'heat pump production':
             assert exc['amount'] == 0
@@ -429,7 +433,7 @@ def test_create_new_database_with_esm_results():
     double_stage_hp_act = new_db_dict_name[
         "heat production by double-stage heat pump", "heat", "CH", 'ecoinvent-3.9.1-cutoff_with_ESM_results_for_CH'
     ]
-    double_stage_hp_act_technosphere_flows = get_technosphere_flows(double_stage_hp_act)
+    double_stage_hp_act_technosphere_flows = Dataset(double_stage_hp_act).get_technosphere_flows()
     for exc in double_stage_hp_act_technosphere_flows:
         if exc['name'] == 'double-stage heat pump production':
             assert exc['amount'] == 0

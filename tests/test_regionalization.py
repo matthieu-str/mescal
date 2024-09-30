@@ -1,7 +1,8 @@
-from mescal.utils import database_list_to_dict
-from mescal.regionalization import regionalize_activity_foreground
+from mescal.esm import ESM
+from mescal.database import Database
 import copy
 import pytest
+import pandas as pd
 
 dummy_db = [
     {
@@ -99,19 +100,22 @@ dummy_reg_biosphere_db = [
 @pytest.mark.tags("workflow")
 def test_regionalize_activity_foreground():
     act = copy.deepcopy(dummy_db[0])
-    regionalized_act = regionalize_activity_foreground(
-        act=act,
-        target_region='FR',
+
+    esm = ESM(
+        mapping=pd.DataFrame(),
+        model=pd.DataFrame(),
+        unit_conversion=pd.DataFrame(),
+        mapping_esm_flows_to_CPC_cat=pd.DataFrame(),
+        esm_db_name="esm_db",
         locations_ranking=['FR', 'RER', 'GLO', 'RoW'],
         accepted_locations=['FR'],
-        db=dummy_db,
-        db_dict_name=database_list_to_dict(dummy_db, 'name', 'technosphere'),
-        db_dict_code=database_list_to_dict(dummy_db, 'code', 'technosphere'),
+        esm_location="FR",
         spatialized_database=True,
-        spatialized_biosphere_db=dummy_reg_biosphere_db,
-        db_dict_name_spa_biosphere=database_list_to_dict(dummy_reg_biosphere_db, 'name', 'biosphere'),
-        import_exports=[],
+        spatialized_biosphere_db=Database(db_as_list=dummy_reg_biosphere_db),
+        main_database=Database(db_as_list=dummy_db),
     )
+
+    regionalized_act = esm.regionalize_activity_foreground(act=act)
 
     for exc in regionalized_act['exchanges']:
         if exc['type'] == 'technosphere':

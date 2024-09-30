@@ -1,18 +1,18 @@
-from .double_counting import *
-from .database import Database, Dataset
+from .database import Dataset
 from .utils import random_code, ecoinvent_unit_convention
 import wurst
+import pandas as pd
+import ast
 
 
 def create_new_database_with_esm_results(
         self,
         esm_results: pd.DataFrame,
         new_end_use_types: pd.DataFrame = None,
-        new_db_name: str = 'default',
+        new_db_name: str = None,
         tech_to_remove_layers: pd.DataFrame = None,
         write_database: bool = True,
-        return_database: bool = False,
-) -> None | Database:
+) -> None:
     """
     Create a new database with the ESM results
 
@@ -22,8 +22,7 @@ def create_new_database_with_esm_results(
     :param tech_to_remove_layers: technologies to remove from the result LCI datasets
     :param new_end_use_types: adapt end use types to fit the results LCI datasets mapping
     :param write_database: if True, write the new database in the brightway2 project
-    :param return_database: if True, return the new database
-    :return: None or the new database
+    :return: None
     """
 
     if tech_to_remove_layers is None:
@@ -31,8 +30,10 @@ def create_new_database_with_esm_results(
     if new_end_use_types is None:
         new_end_use_types = pd.DataFrame(columns=['Name', 'Search type', 'Old', 'New'])
 
-    if new_db_name == 'default':
-        new_db_name = f"{self.main_database.db_names}_with_ESM_results_for_{self.esm_location}"
+    if new_db_name is None:
+        if len(self.main_database.db_names) > 1:
+            raise ValueError('The main database should contain only one database.')
+        new_db_name = f"{self.main_database.db_names[0]}_with_ESM_results_for_{self.esm_location}"
 
     flows = self.mapping[self.mapping.Type == 'Flow']
 
@@ -55,7 +56,7 @@ def create_new_database_with_esm_results(
             pass
 
         else:
-            db, new_perform_d_c = self.create_or_modify_activity_from_esm_results(
+            new_perform_d_c = self.create_or_modify_activity_from_esm_results(
                 original_activity_prod=original_activity_prod,
                 original_activity_name=original_activity_name,
                 original_activity_database=original_activity_database,
@@ -98,7 +99,7 @@ def create_new_database_with_esm_results(
             ]
 
             # Activities of the ESM region
-            activities_of_esm_region = [a for a in wurst.get_many(self.main_database,
+            activities_of_esm_region = [a for a in wurst.get_many(self.main_database.db_as_list,
                                                                   *[wurst.equals('location', self.esm_location)])]
             for act in activities_of_esm_region:
                 if act['name'] == original_activity_name + ', from ESM results':
@@ -119,10 +120,7 @@ def create_new_database_with_esm_results(
                 original_activity = db_dict_name[
                     original_activity_name, activity_prod, self.esm_location, activity_database
                 ]
-                downstream_consumers = Dataset.get_downstream_consumers(
-                    original_activity,
-                    self.main_database.db_as_list
-                )
+                downstream_consumers = Dataset(original_activity).get_downstream_consumers(self.main_database.db_as_list)
                 for act in downstream_consumers:
                     if act['name'] == original_activity_name + ', from ESM results':
                         pass  # we do not want the new activity to be an input of itself
@@ -162,9 +160,9 @@ def create_new_database_with_esm_results(
 
     double_counting_act = pd.merge(double_counting_act, model, on='Name', how='left')
     double_counting_act['CONSTRUCTION'] = double_counting_act.shape[0] * [0]
+    double_counting_act = self.add_technology_specifics(double_counting_act, self.tech_specifics)
 
     flows_set_to_zero, ei_removal = self.double_counting_removal(
-        self,
         df_op=double_counting_act,
         N=N,
         ESM_inputs=['OWN_CONSTRUCTION', 'CONSTRUCTION'],
@@ -173,9 +171,8 @@ def create_new_database_with_esm_results(
 
     if write_database:
         self.main_database.write_to_brightway(new_db_name)
-    if return_database:
+    else:
         self.main_database.change_name(new_db_name)
-        return self.main_database
 
 
 def create_or_modify_activity_from_esm_results(
@@ -354,7 +351,8 @@ def create_or_modify_activity_from_esm_results(
                 if tech in list(self.mapping[self.mapping.Type == 'Operation'].Name.unique()):
                     # we only perform double counting removal for the operation activities
                     perform_d_c.append(
-                        [tech, activity_prod, activity_name, activity_location, activity_database, code])
+                        [tech, activity_prod, activity_name, activity_location, activity_database, code]
+                    )
             else:
                 print(f'The technology {tech} is not in the mapping file. '
                       f'It cannot be considered in the result LCI dataset.')

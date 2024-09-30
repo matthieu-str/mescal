@@ -1,4 +1,6 @@
-from mescal.location_selection import change_location_activity
+import pandas as pd
+from mescal.database import Database
+from mescal.esm import ESM
 import pytest
 
 dummy_db = [
@@ -55,29 +57,49 @@ dummy_reg_biosphere_db = [
 
 @pytest.mark.tags("workflow")
 def test_change_location_activity():
-    updated_location = change_location_activity(
+    esm = ESM(
+        mapping=pd.DataFrame(),
+        model=pd.DataFrame(),
+        unit_conversion=pd.DataFrame(),
+        mapping_esm_flows_to_CPC_cat=pd.DataFrame(),
+        esm_db_name="esm_db",
+        locations_ranking=["FR", "RER", "RoW"],
+        main_database=Database(db_as_list=dummy_db),
+        esm_location="FR",
+    )
+
+    updated_location = esm.change_location_activity(
         activity="market for electricity, low voltage",
         product="electricity, low voltage",
         location="DE",
         database="ecoinvent-3.9.1-cutoff",
-        locations_ranking=["FR", "RER", "RoW"],
-        db=dummy_db,
-        esm_region="FR",
+        technosphere_or_biosphere_db=esm.main_database,
         activity_type="technosphere",
     )
+
     assert updated_location == "FR"
 
 
 @pytest.mark.tags("workflow")
 def test_change_location_activity_biosphere():
-    updated_location = change_location_activity(
+    esm = ESM(
+        mapping=pd.DataFrame(),
+        model=pd.DataFrame(),
+        unit_conversion=pd.DataFrame(),
+        mapping_esm_flows_to_CPC_cat=pd.DataFrame(),
+        esm_db_name="esm_db",
+        locations_ranking=["FR", "RER", "RoW"],
+        main_database=Database(db_as_list=dummy_db),
+        esm_location="FR",
+    )
+
+    updated_location = esm.change_location_activity(
         activity="Water",
         categories=('water',),
         location="GLO",
         database="biosphere3_regionalized_flows",
-        locations_ranking=["RER", "CH"],
-        db=dummy_reg_biosphere_db,
-        esm_region="RER",
+        technosphere_or_biosphere_db=Database(db_as_list=dummy_reg_biosphere_db),
         activity_type="biosphere",
     )
+
     assert updated_location == "RER"

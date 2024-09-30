@@ -1,8 +1,8 @@
 import pandas as pd
 import bw2data as bd
 import pytest
-from mescal.impact_assessment import compute_impact_scores
-from mescal.utils import write_wurst_database_to_brightway
+from mescal.esm import ESM
+from mescal.database import Database
 
 dummy_esm_db = [
     {
@@ -102,14 +102,20 @@ lifetime = pd.DataFrame(lifetime, columns=['Name', 'ESM', 'LCA'])
 def test_compute_impact_score():
 
     bd.projects.set_current('ecoinvent3.9.1')
-    write_wurst_database_to_brightway(dummy_esm_db, 'dummy_esm_db')
+    Database(db_as_list=dummy_esm_db).write_to_brightway('dummy_esm_db')
 
-    R = compute_impact_scores(
-        esm_db=dummy_esm_db,
+    esm = ESM(
         mapping=mapping,
         technology_compositions=technology_compositions,
         unit_conversion=unit_conversion,
         lifetime=lifetime,
+        main_database=Database('ecoinvent-3.9.1-cutoff'),
+        esm_db_name='dummy_esm_db',
+        model=pd.DataFrame(),
+        mapping_esm_flows_to_CPC_cat=pd.DataFrame(),
+    )
+
+    R = esm.compute_impact_scores(
         methods=methods,
     )
 

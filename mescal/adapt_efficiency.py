@@ -26,14 +26,11 @@ def correct_esm_and_lca_efficiency_differences(
     self.efficiency['ESM efficiency'] = self.efficiency.apply(
         self.compute_efficiency_esm,
         axis=1,
-        model=self.model
     )
     self.efficiency['LCA input unit'] = self.efficiency.apply(
         self.get_lca_input_flow_unit_or_product,
         axis=1,
         output_type='unit',
-        mapping_esm_flows_to_CPC=self.mapping_esm_flows_to_CPC_cat,
-        db_dict_code=db_dict_code,
         removed_flows=removed_flows
     )
     self.efficiency.drop(self.efficiency[self.efficiency['LCA input unit'].isnull()].index, inplace=True)
@@ -41,8 +38,6 @@ def correct_esm_and_lca_efficiency_differences(
         self.get_lca_input_flow_unit_or_product,
         axis=1,
         output_type='product',
-        mapping_esm_flows_to_CPC=self.mapping_esm_flows_to_CPC_cat,
-        db_dict_code=db_dict_code,
         removed_flows=removed_flows
     )
     self.efficiency.drop(self.efficiency[self.efficiency['LCA input product'].isnull()].index, inplace=True)
@@ -111,7 +106,7 @@ def correct_esm_and_lca_efficiency_differences(
                   f'adjusted.')
 
         for act in act_to_adapt_list:
-            efficiency_ratio = self.efficiency['LCA self.efficiency'].iloc[i] / self.efficiency['ESM efficiency'].iloc[
+            efficiency_ratio = self.efficiency['LCA efficiency'].iloc[i] / self.efficiency['ESM efficiency'].iloc[
                 i]
             act = self.adapt_biosphere_flows_to_efficiency_difference(act, efficiency_ratio, tech)
 
