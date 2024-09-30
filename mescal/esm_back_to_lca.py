@@ -1,82 +1,244 @@
 from .double_counting import *
+from .database import Database, Dataset
+from .utils import random_code, ecoinvent_unit_convention
+import wurst
 
 
-def create_or_modify_activity_from_esm_results(db: list[dict], original_activity_prod: str, original_activity_name: str,
-                                               original_activity_database: str, flows: pd.DataFrame,
-                                               model: pd.DataFrame, esm_location: str, esm_results: pd.DataFrame,
-                                               mapping: pd.DataFrame, accepted_locations: list[str],
-                                               locations_ranking: list[str], tech_to_remove_layers: pd.DataFrame,
-                                               unit_conversion: pd.DataFrame, new_end_use_types: pd.DataFrame,
-                                               import_exports_list: list[str], spatialized_database: bool = False,
-                                               spatialized_biosphere_db: list[dict] = None,
-                                               db_dict_name_spa_biosphere: dict = None) \
-        -> tuple[list[dict], list[list[str]]]:
+def create_new_database_with_esm_results(
+        self,
+        esm_results: pd.DataFrame,
+        new_end_use_types: pd.DataFrame = None,
+        new_db_name: str = 'default',
+        tech_to_remove_layers: pd.DataFrame = None,
+        write_database: bool = True,
+        return_database: bool = False,
+) -> None | Database:
+    """
+    Create a new database with the ESM results
+
+    :param esm_results: results of the ESM in terms of annual production
+    :param new_db_name: name of the new database. By default, it is the name of the original database with
+        '_with_ESM_results_for_{esm_location}'
+    :param tech_to_remove_layers: technologies to remove from the result LCI datasets
+    :param new_end_use_types: adapt end use types to fit the results LCI datasets mapping
+    :param write_database: if True, write the new database in the brightway2 project
+    :param return_database: if True, return the new database
+    :return: None or the new database
+    """
+
+    if tech_to_remove_layers is None:
+        tech_to_remove_layers = pd.DataFrame(columns=['Layers', 'Technologies'])
+    if new_end_use_types is None:
+        new_end_use_types = pd.DataFrame(columns=['Name', 'Search type', 'Old', 'New'])
+
+    if new_db_name == 'default':
+        new_db_name = f"{self.main_database.db_names}_with_ESM_results_for_{self.esm_location}"
+
+    flows = self.mapping[self.mapping.Type == 'Flow']
+
+    already_done = []
+    perform_d_c = []
+
+    # Create the new LCI datasets from the ESM results
+    for i in range(len(flows)):
+
+        original_activity_prod = flows.Product.iloc[i]
+        original_activity_name = flows.Activity.iloc[i]
+        original_activity_database = flows.Database.iloc[i]
+
+        if (
+                original_activity_name,
+                original_activity_prod,
+                self.esm_location,
+                original_activity_database
+        ) in already_done:
+            pass
+
+        else:
+            db, new_perform_d_c = self.create_or_modify_activity_from_esm_results(
+                original_activity_prod=original_activity_prod,
+                original_activity_name=original_activity_name,
+                original_activity_database=original_activity_database,
+                flows=flows,
+                esm_results=esm_results,
+                tech_to_remove_layers=tech_to_remove_layers,
+                new_end_use_types=new_end_use_types,
+            )
+
+            already_done.append((original_activity_name,
+                                 original_activity_prod,
+                                 self.esm_location,
+                                 original_activity_database))
+
+            perform_d_c += new_perform_d_c
+
+    db_dict_name = self.main_database.db_as_dict_name
+
+    # Plugging the new activity in the database
+    for i in range(len(flows)):
+
+        original_activity_name = flows.Activity.iloc[i]
+        activity_prod = flows.Product.iloc[i]
+        activity_database = flows.Database.iloc[i]
+
+        if (
+                original_activity_name + ', from ESM results',
+                activity_prod,
+                self.esm_location,
+                activity_database
+        ) in db_dict_name:
+            # if not, it means that the activity has not been created in the previous step
+            # (e.g., no production, trivial results)
+
+            new_activity = db_dict_name[
+                original_activity_name + ', from ESM results',
+                activity_prod,
+                self.esm_location,
+                activity_database
+            ]
+
+            # Activities of the ESM region
+            activities_of_esm_region = [a for a in wurst.get_many(self.main_database,
+                                                                  *[wurst.equals('location', self.esm_location)])]
+            for act in activities_of_esm_region:
+                if act['name'] == original_activity_name + ', from ESM results':
+                    pass  # we do not want the new activity to be an input of itself
+                else:
+                    for exc in Dataset(act).get_technosphere_flows():
+                        if (
+                                (exc['name'] == original_activity_name)
+                                & (exc['product'] == activity_prod)
+                        ):
+                            exc['code'] = new_activity['code']
+                            exc['location'] = self.esm_location
+                        else:
+                            pass
+
+            # Downstream activities of the original activity, if it exists for the ESM location
+            if (original_activity_name, activity_prod, self.esm_location, activity_database) in db_dict_name:
+                original_activity = db_dict_name[
+                    original_activity_name, activity_prod, self.esm_location, activity_database
+                ]
+                downstream_consumers = Dataset.get_downstream_consumers(
+                    original_activity,
+                    self.main_database.db_as_list
+                )
+                for act in downstream_consumers:
+                    if act['name'] == original_activity_name + ', from ESM results':
+                        pass  # we do not want the new activity to be an input of itself
+                    else:
+                        for exc in Dataset(act).get_technosphere_flows():
+                            if (
+                                    (exc['name'] == original_activity_name)
+                                    & (exc['product'] == activity_prod)
+                                    & (exc['location'] == self.esm_location)
+                            ):
+                                exc['code'] = new_activity['code']
+                                exc['location'] = self.esm_location
+                            else:
+                                pass
+
+    # Double counting removal of the construction activities
+    double_counting_act = pd.DataFrame(
+        data=perform_d_c,
+        columns=['Name', 'Product', 'Activity', 'Location', 'Database', 'Current_code']
+    )
+
+    # Adding current code to the mapping file
+    self.mapping['Current_code'] = self.mapping.apply(lambda row: self.main_database.get_code(
+        product=row['Product'],
+        activity=row['Activity'],
+        location=row['Location'],
+        database=row['Database']
+    ), axis=1)
+
+    # self.mapping['New_code'] = self.mapping.apply(lambda row: random_code(), axis=1)
+    # double_counting_act['New_code'] = double_counting_act.apply(lambda row: random_code(), axis=1)
+
+    model = self.model.pivot(index='Name', columns='Flow', values='Amount').reset_index()
+    model.fillna(0, inplace=True)
+
+    N = double_counting_act.shape[1]
+
+    double_counting_act = pd.merge(double_counting_act, model, on='Name', how='left')
+    double_counting_act['CONSTRUCTION'] = double_counting_act.shape[0] * [0]
+
+    flows_set_to_zero, ei_removal = self.double_counting_removal(
+        self,
+        df_op=double_counting_act,
+        N=N,
+        ESM_inputs=['OWN_CONSTRUCTION', 'CONSTRUCTION'],
+        create_new_db=False,
+    )
+
+    if write_database:
+        self.main_database.write_to_brightway(new_db_name)
+    if return_database:
+        self.main_database.change_name(new_db_name)
+        return self.main_database
+
+
+def create_or_modify_activity_from_esm_results(
+        self,
+        original_activity_prod: str,
+        original_activity_name: str,
+        original_activity_database: str,
+        flows: pd.DataFrame,
+        esm_results: pd.DataFrame,
+        tech_to_remove_layers: pd.DataFrame,
+        new_end_use_types: pd.DataFrame,
+) -> list[list[str]]:
     """
     Create or modify an activity in the LCI database based on the ESM results
 
-    :param db: list of activities in the LCI database
     :param original_activity_prod: reference product of the original activity
     :param original_activity_name: name of the original activity
     :param original_activity_database: database of the original activity
     :param flows: mapping file between energy flows and LCI datasets
-    :param model: inputs and outputs of the ESM technologies
-    :param esm_location: ecoinvent location under study in the ESM
     :param esm_results: file of the ESM results in terms of annual production
-    :param mapping: mapping file between ESM technologies and LCI datasets
-    :param accepted_locations: list of accepted locations for the regionalization
-    :param locations_ranking: ranking of preferred locations for the regionalization
     :param tech_to_remove_layers: technologies to remove from the result LCI datasets
-    :param unit_conversion: unit conversion factors
     :param new_end_use_types: adapt end use types to fit the results LCI datasets mapping
-    :param import_exports_list: list of technologies that are imports or exports
-    :param spatialized_database: if True, the main database has spatialized elementary flows
-    :param spatialized_biosphere_db: list of flows in the spatialized biosphere database
-    :param db_dict_name_spa_biosphere: dictionary of the spatialized biosphere database with
-        (name, product, location, database) as key
-    :return: the updated LCI database, list of activities to perform double counting removal
+    :return: list of activities to perform double counting removal
     """
-    db_dict_name = database_list_to_dict(db, 'name')
+    db_dict_name = self.main_database.db_as_dict_name
 
     # Check if the original activity is in the database for the location under study
-    if (original_activity_name, original_activity_prod, esm_location, original_activity_database) in db_dict_name:
+    if (original_activity_name, original_activity_prod, self.esm_location, original_activity_database) in db_dict_name:
         activity = db_dict_name[
-            original_activity_name, original_activity_prod, esm_location, original_activity_database
+            original_activity_name, original_activity_prod, self.esm_location, original_activity_database
         ]
 
     # If not, we take a similar activity with another location and regionalize its foreground
     else:
-        activity = [a for a in wurst.get_many(db, *[
+        activity = [a for a in wurst.get_many(self.main_database, *[
             wurst.equals('name', original_activity_name),
             wurst.equals('reference product', original_activity_prod),
             wurst.equals('database', original_activity_database)
         ])][0]
 
-        activity = regionalize_activity_foreground(
+        activity = self.regionalize_activity_foreground(
+            self,
             act=activity,
-            accepted_locations=accepted_locations,
-            target_region=esm_location,
-            locations_ranking=locations_ranking,
-            db=db,
-            db_dict_code=database_list_to_dict(db, 'code'),
-            db_dict_name=database_list_to_dict(db, 'name'),
-            spatialized_database=spatialized_database,
-            spatialized_biosphere_db=spatialized_biosphere_db,
-            db_dict_name_spa_biosphere=db_dict_name_spa_biosphere,
-            import_exports=import_exports_list,
         )
 
     new_code = random_code()
     original_activity_unit = activity['unit']
-    prod_flow = get_production_flow(activity)
+    prod_flow = Dataset(activity).get_production_flow()
     prod_flow_amount = prod_flow['amount']  # can be -1 if it is a waste activity
 
-    unit_conversion['LCA'] = unit_conversion['LCA'].apply(ecoinvent_unit_convention)
-    unit_conversion['ESM'] = unit_conversion['ESM'].apply(ecoinvent_unit_convention)
+    self.unit_conversion['LCA'] = self.unit_conversion['LCA'].apply(ecoinvent_unit_convention)
+    self.unit_conversion['ESM'] = self.unit_conversion['ESM'].apply(ecoinvent_unit_convention)
 
-    model['Flow'] = model.apply(lambda x: replace_mobility_end_use_type(row=x,
-                                                                        new_end_use_types=new_end_use_types), axis=1)
-    model = pd.merge(model, model[model.Amount == 1.0].drop(columns=['Amount']).rename(columns={'Flow': 'Output'}),
-                     how='left', on='Name')
+    self.model['Flow'] = self.model.apply(lambda x: replace_mobility_end_use_type(
+        row=x,
+        new_end_use_types=new_end_use_types
+    ), axis=1)
+    model = pd.merge(
+        left=self.model,
+        right=self.model[self.model.Amount == 1.0].drop(columns=['Amount']).rename(columns={'Flow': 'Output'}),
+        how='left',
+        on='Name'
+    )
 
     act_to_flows_dict = {(flows['Product'].iloc[i], flows['Activity'].iloc[i]): list(
         flows[(flows['Product'] == flows['Product'].iloc[i])
@@ -88,7 +250,7 @@ def create_or_modify_activity_from_esm_results(db: list[dict], original_activity
 
     if len(end_use_tech_list) == 0:
         # Case where the layer has no production
-        return db, []
+        return []
 
     try:
         tech_to_remove_layers['Layers'] = tech_to_remove_layers['Layers'].apply(ast.literal_eval)
@@ -114,7 +276,8 @@ def create_or_modify_activity_from_esm_results(db: list[dict], original_activity
         else:  # if the technology is not in the ESM results, we assume that its production is null
             amount = 0
 
-        if tech in list(mapping[(mapping.Type == 'Operation') | (mapping.Type == 'Resource')].Name.unique()):
+        if tech in list(
+                self.mapping[(self.mapping.Type == 'Operation') | (self.mapping.Type == 'Resource')].Name.unique()):
             total_amount += amount
             check_layers_mapping = True
         else:
@@ -124,7 +287,7 @@ def create_or_modify_activity_from_esm_results(db: list[dict], original_activity
         raise ValueError(f'The layer {flows_list} does not have any technology in the mapping file.')
 
     if total_amount == 0:  # no production in the layer
-        return db, []
+        return []
 
     exchanges = []
     perform_d_c = []
@@ -137,25 +300,28 @@ def create_or_modify_activity_from_esm_results(db: list[dict], original_activity
         if amount == 0:
             pass
         else:
-            if tech in list(mapping[(mapping.Type == 'Operation') | (mapping.Type == 'Resource')].Name.unique()):
-                activity_name, activity_prod, activity_database, activity_location = mapping[
-                    (mapping.Name == tech) & ((mapping.Type == 'Operation') | (mapping.Type == 'Resource'))
-                ][['Activity', 'Product', 'Database', 'Location']].values[0]
+            if tech in list(
+                    self.mapping[(self.mapping.Type == 'Operation') | (self.mapping.Type == 'Resource')].Name.unique()):
+                activity_name, activity_prod, activity_database, activity_location = self.mapping[
+                    (self.mapping.Name == tech) & (
+                                (self.mapping.Type == 'Operation') | (self.mapping.Type == 'Resource'))
+                    ][['Activity', 'Product', 'Database', 'Location']].values[0]
 
-                activity_unit = db_dict_name[activity_name, activity_prod, activity_location, activity_database]['unit']
+                activity_unit = db_dict_name[activity_name, activity_prod, activity_location, activity_database][
+                    'unit']
 
                 if activity_unit != original_activity_unit:
                     if original_activity_prod.split(',')[0] == 'transport':
-                        conversion_factor = unit_conversion[
-                            (unit_conversion.Name == tech)
-                            & (unit_conversion.ESM == original_activity_unit)
-                            & (unit_conversion.LCA == activity_unit)
+                        conversion_factor = self.unit_conversion[
+                            (self.unit_conversion.Name == tech)
+                            & (self.unit_conversion.ESM == original_activity_unit)
+                            & (self.unit_conversion.LCA == activity_unit)
                             ].Value.values
                     else:
-                        conversion_factor = unit_conversion[
-                            (unit_conversion.Name == original_activity_prod.split(',')[0])
-                            & (unit_conversion.ESM == original_activity_unit)
-                            & (unit_conversion.LCA == activity_unit)
+                        conversion_factor = self.unit_conversion[
+                            (self.unit_conversion.Name == original_activity_prod.split(',')[0])
+                            & (self.unit_conversion.ESM == original_activity_unit)
+                            & (self.unit_conversion.LCA == activity_unit)
                             ].Value.values
                     if len(list(set(conversion_factor))) == 0:
                         raise ValueError(f'The unit conversion factor between {activity_unit} and '
@@ -185,9 +351,10 @@ def create_or_modify_activity_from_esm_results(db: list[dict], original_activity
                     'comment': f'{tech}, {conversion_factor}',
                 }
                 exchanges.append(new_exc)
-                if tech in list(mapping[mapping.Type == 'Operation'].Name.unique()):
+                if tech in list(self.mapping[self.mapping.Type == 'Operation'].Name.unique()):
                     # we only perform double counting removal for the operation activities
-                    perform_d_c.append([tech, activity_prod, activity_name, activity_location, activity_database, code])
+                    perform_d_c.append(
+                        [tech, activity_prod, activity_name, activity_location, activity_database, code])
             else:
                 print(f'The technology {tech} is not in the mapping file. '
                       f'It cannot be considered in the result LCI dataset.')
@@ -200,7 +367,7 @@ def create_or_modify_activity_from_esm_results(db: list[dict], original_activity
             'name': original_activity_name,
             'product': original_activity_prod,
             'unit': original_activity_unit,
-            'location': esm_location,
+            'location': self.esm_location,
             'database': original_activity_database,
         }
     )
@@ -215,21 +382,21 @@ def create_or_modify_activity_from_esm_results(db: list[dict], original_activity
     new_activity = {
         'database': original_activity_database,
         'name': original_activity_name + ', from ESM results',
-        'location': esm_location,
+        'location': self.esm_location,
         'unit': original_activity_unit,
         'reference product': original_activity_prod,
         'code': new_code,
         'classifications': activity['classifications'],
-        'comment': f'Activity derived from the ESM results in the layers {flows_list} for {esm_location}. '
+        'comment': f'Activity derived from the ESM results in the layers {flows_list} for {self.esm_location}. '
                    + activity['comment'],
         'parameters': activity.get('parameters', {}),
         'categories': activity.get('categories', None),
         'exchanges': exchanges,
     }
 
-    db.append(new_activity)
+    self.main_database.db_as_list.append(new_activity)
 
-    return db, perform_d_c
+    return perform_d_c
 
 
 def replace_mobility_end_use_type(row: pd.Series, new_end_use_types: pd.DataFrame) -> str:
@@ -259,222 +426,3 @@ def replace_mobility_end_use_type(row: pd.Series, new_end_use_types: pd.DataFram
             raise ValueError('The search type should be either "startswith", "contains" or "equals".')
 
     return row['Flow']
-
-
-def create_new_database_with_esm_results(mapping: pd.DataFrame, model: pd.DataFrame, esm_location: str,
-                                         esm_results: pd.DataFrame, locations_ranking: list[str],
-                                         accepted_locations: list[str], unit_conversion: pd.DataFrame,
-                                         db: list[dict], mapping_esm_flows_to_CPC_cat: pd.DataFrame,
-                                         new_end_use_types: pd.DataFrame = None, new_db_name: str = 'default',
-                                         tech_specifics: pd.DataFrame = None,
-                                         technology_compositions: pd.DataFrame = None,
-                                         tech_to_remove_layers: pd.DataFrame = None, write_database: bool = True,
-                                         return_obj: str = None, spatialized_database: bool = False,
-                                         spatialized_biosphere_db: list[dict] = None) -> None | list[dict]:
-    """
-    Create a new database with the ESM results
-
-    :param mapping: mapping file between ESM technologies and LCI datasets
-    :param model: inputs and outputs of the ESM technologies
-    :param esm_location: location under study in the ESM
-    :param esm_results: results of the ESM in terms of annual production
-    :param locations_ranking: ranking of preferred locations for the regionalization
-    :param accepted_locations: list of accepted locations for the regionalization
-    :param unit_conversion: unit conversion factors
-    :param db: list of activities in the LCI database
-    :param new_db_name: name of the new database. By default, it is the name of the original database with
-        '_with_ESM_results_for_{esm_location}'
-    :param tech_specifics: technology-specific information
-    :param technology_compositions: technology compositions
-    :param tech_to_remove_layers: technologies to remove from the result LCI datasets
-    :param mapping_esm_flows_to_CPC_cat: mapping file between ESM flows and CPC categories
-    :param new_end_use_types: adapt end use types to fit the results LCI datasets mapping
-    :param write_database: if True, write the new database in the brightway2 project
-    :param return_obj: if 'database', return the new database, else does not return anything
-    :param spatialized_database: if True, the main database has spatialized elementary flows
-    :param spatialized_biosphere_db: list of flows in the spatialized biosphere database
-    :return: None or the new database as a list of dictionaries if 'return_obj' is 'database
-    """
-
-    if tech_specifics is None:
-        tech_specifics = pd.DataFrame(columns=['Name', 'Specifics', 'Amount'])
-    if technology_compositions is None:
-        technology_compositions = pd.DataFrame(columns=['Name', 'Components'])
-    if tech_to_remove_layers is None:
-        tech_to_remove_layers = pd.DataFrame(columns=['Layers', 'Technologies'])
-    if new_end_use_types is None:
-        new_end_use_types = pd.DataFrame(columns=['Name', 'Search type', 'Old', 'New'])
-    if spatialized_database:
-        db_dict_name_spa_biosphere = database_list_to_dict(spatialized_biosphere_db, 'name', 'biosphere')
-    else:
-        db_dict_name_spa_biosphere = None
-
-    if new_db_name == 'default':
-        new_db_name = f"{db[0]['database']}_with_ESM_results_for_{esm_location}"
-
-    flows = mapping[mapping.Type == 'Flow']
-
-    already_done = []
-    perform_d_c = []
-
-    import_export_list = list(tech_specifics[tech_specifics.Specifics == 'Import/Export']['Name'].unique())
-
-    # Create the new LCI datasets from the ESM results
-    for i in range(len(flows)):
-
-        original_activity_prod = flows.Product.iloc[i]
-        original_activity_name = flows.Activity.iloc[i]
-        original_activity_database = flows.Database.iloc[i]
-
-        if (original_activity_name, original_activity_prod, esm_location, original_activity_database) in already_done:
-            pass
-
-        else:
-            db, new_perform_d_c = create_or_modify_activity_from_esm_results(
-                db=db,
-                original_activity_prod=original_activity_prod,
-                original_activity_name=original_activity_name,
-                original_activity_database=original_activity_database,
-                model=model,
-                flows=flows,
-                esm_location=esm_location,
-                esm_results=esm_results,
-                mapping=mapping,
-                accepted_locations=accepted_locations,
-                locations_ranking=locations_ranking,
-                unit_conversion=unit_conversion,
-                tech_to_remove_layers=tech_to_remove_layers,
-                new_end_use_types=new_end_use_types,
-                spatialized_database=spatialized_database,
-                spatialized_biosphere_db=spatialized_biosphere_db,
-                db_dict_name_spa_biosphere=db_dict_name_spa_biosphere,
-                import_exports_list=import_export_list,
-            )
-
-            already_done.append((original_activity_name,
-                                 original_activity_prod,
-                                 esm_location,
-                                 original_activity_database))
-
-            perform_d_c += new_perform_d_c
-
-    db_dict_name = database_list_to_dict(db, 'name')
-    db_dict_code = database_list_to_dict(db, 'code')
-
-    # Plugging the new activity in the database
-    for i in range(len(flows)):
-
-        original_activity_name = flows.Activity.iloc[i]
-        activity_prod = flows.Product.iloc[i]
-        activity_database = flows.Database.iloc[i]
-
-        if (
-                original_activity_name + ', from ESM results',
-                activity_prod,
-                esm_location,
-                activity_database
-        ) in db_dict_name:
-            # if not, it means that the activity has not been created in the previous step
-            # (e.g., no production, trivial results)
-
-            new_activity = db_dict_name[
-                original_activity_name + ', from ESM results',
-                activity_prod,
-                esm_location,
-                activity_database
-            ]
-
-            # Activities of the ESM region
-            activities_of_esm_region = [a for a in wurst.get_many(db, *[wurst.equals('location', esm_location)])]
-            for act in activities_of_esm_region:
-                if act['name'] == original_activity_name + ', from ESM results':
-                    pass  # we do not want the new activity to be an input of itself
-                else:
-                    for exc in get_technosphere_flows(act):
-                        if (
-                                (exc['name'] == original_activity_name)
-                                & (exc['product'] == activity_prod)
-                        ):
-                            exc['code'] = new_activity['code']
-                            exc['location'] = esm_location
-                        else:
-                            pass
-
-            # Downstream activities of the original activity, if it exists for the ESM location
-            if (original_activity_name, activity_prod, esm_location, activity_database) in db_dict_name:
-                original_activity = db_dict_name[
-                    original_activity_name, activity_prod, esm_location, activity_database
-                ]
-                downstream_consumers = get_downstream_consumers(original_activity, db)
-                for act in downstream_consumers:
-                    if act['name'] == original_activity_name + ', from ESM results':
-                        pass  # we do not want the new activity to be an input of itself
-                    else:
-                        for exc in get_technosphere_flows(act):
-                            if (
-                                    (exc['name'] == original_activity_name)
-                                    & (exc['product'] == activity_prod)
-                                    & (exc['location'] == esm_location)
-                            ):
-                                exc['code'] = new_activity['code']
-                                exc['location'] = esm_location
-                            else:
-                                pass
-
-    # Double counting removal of the construction activities
-    double_counting_act = pd.DataFrame(data=perform_d_c,
-                                       columns=['Name', 'Product', 'Activity', 'Location', 'Database', 'Current_code'])
-
-    # Adding current code to the mapping file
-    mapping['Current_code'] = mapping.apply(lambda row: get_code(
-        db_dict_name=db_dict_name,
-        product=row['Product'],
-        activity=row['Activity'],
-        region=row['Location'],
-        database=row['Database']
-    ), axis=1)
-
-    # mapping['New_code'] = mapping.apply(lambda row: random_code(), axis=1)
-    # double_counting_act['New_code'] = double_counting_act.apply(lambda row: random_code(), axis=1)
-    mapping_constr = mapping[mapping.Type == 'Construction']
-
-    model = model.pivot(index='Name', columns='Flow', values='Amount').reset_index()
-    model.fillna(0, inplace=True)
-
-    N = double_counting_act.shape[1]
-
-    try:
-        technology_compositions_dict = {key: ast.literal_eval(value) for key, value in dict(zip(
-            technology_compositions.Name, technology_compositions.Components
-        )).items()}
-    except ValueError:
-        technology_compositions_dict = dict(zip(technology_compositions.Name, technology_compositions.Components))
-
-    double_counting_act = pd.merge(double_counting_act, model, on='Name', how='left')
-    double_counting_act['CONSTRUCTION'] = double_counting_act.shape[0] * [0]
-    (double_counting_act, background_search_act, no_construction_list,
-     no_background_search_list, import_export) = add_technology_specifics(double_counting_act, tech_specifics)
-
-    db, db_dict_code, db_dict_name, flows_set_to_zero, ei_removal = double_counting_removal(
-        df_op=double_counting_act,
-        df_constr=mapping_constr,
-        esm_db_name=db[0]['database'],
-        mapping_esm_flows_to_CPC=mapping_esm_flows_to_CPC_cat,
-        technology_compositions_dict=technology_compositions_dict,
-        db=db,
-        db_dict_code=db_dict_code,
-        db_dict_name=db_dict_name,
-        N=N,
-        background_search_act=background_search_act,
-        no_construction_list=no_construction_list,
-        no_background_search_list=no_background_search_list,
-        ESM_inputs=['OWN_CONSTRUCTION', 'CONSTRUCTION'],
-        create_new_db=False,
-        import_export_list=import_export,
-    )
-
-    if write_database:
-        write_wurst_database_to_brightway(db, new_db_name)
-    if return_obj == 'database':
-        db = change_database_name(db, new_db_name)
-        return db
