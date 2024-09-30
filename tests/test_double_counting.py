@@ -1,7 +1,7 @@
 import pandas as pd
 import pytest
-from mescal.utils import database_list_to_dict, get_technosphere_flows
-from mescal.double_counting import create_esm_database
+from mescal.database import Database, Dataset
+from mescal.esm import ESM
 
 dummy_db = [
     {
@@ -173,26 +173,29 @@ model = pd.DataFrame(model, columns=['Name', 'Flow', 'Amount'])
 @pytest.mark.tags("workflow")
 def test_create_esm_database():
 
-    esm_db = create_esm_database(
+    esm = ESM(
         mapping=mapping,
         model=model,
         mapping_esm_flows_to_CPC_cat=mapping_esm_flows_to_CPC,
         esm_db_name='esm_db_name',
-        main_database=dummy_db,
+        main_database=Database(db_as_list=dummy_db)
+    )
+
+    esm_db = esm.create_esm_database(
         write_database=False,
         return_obj='database',
     )
 
-    esm_db_dict_name = database_list_to_dict(esm_db, "name")
+    esm_db_dict_name = esm_db.db_as_dict_name
     act_op = esm_db_dict_name["HEAT_PUMP, Operation", "heat", "CH", 'esm_db_name']
-    act_op_technosphere = get_technosphere_flows(act_op)
+    act_op_technosphere = Dataset(act_op).get_technosphere_flows()
 
     assert ((act_op_technosphere[0]['amount'] == 1)  # this exchange has to be kept
             & (act_op_technosphere[0]['database'] == 'esm_db_name'))
     # this activity should be copied in the ESM database
 
     act = esm_db_dict_name['heat production by heat pump', 'heat', 'CH', 'esm_db_name']
-    act_technosphere = get_technosphere_flows(act)
+    act_technosphere = Dataset(act).get_technosphere_flows()
 
     for exc in act_technosphere:
         if exc['name'] == 'market for electricity, low voltage':
