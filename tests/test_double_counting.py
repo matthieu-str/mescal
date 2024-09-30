@@ -178,12 +178,13 @@ def test_create_esm_database():
         model=model,
         mapping_esm_flows_to_CPC_cat=mapping_esm_flows_to_CPC,
         esm_db_name='esm_db_name',
-        main_database=Database(db_as_list=dummy_db)
+        main_database=Database(db_as_list=dummy_db),
+        unit_conversion=pd.DataFrame(),
     )
 
     esm_db = esm.create_esm_database(
         write_database=False,
-        return_obj='database',
+        return_database=True,
     )
 
     esm_db_dict_name = esm_db.db_as_dict_name
