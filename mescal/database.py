@@ -146,8 +146,10 @@ class Database:
                 raise ValueError(f"{self.db_names} is not a registered database")
             elif os.path.isfile(DIR_DATABASE_CACHE / f'{self.db_names}.pickle'):
                 db = load_db(self.db_names)
+                print(f"Loaded {self.db_names} from pickle!")
             else:
                 db = wurst.extract_brightway2_databases(self.db_names, add_identifiers=True)
+                print(f"Loaded {self.db_names} from brightway!")
                 if create_pickle:
                     cache_database(db, self.db_names)
         else:
@@ -161,17 +163,21 @@ class Database:
         :param create_pickle: if True, create a pickle file to store the database
         :return: list of dictionaries of the concatenated databases
         """
-        db = []
-        for name in self.db_names:
-            db += Database(name).load(create_pickle)
-            dependencies = list(set([a['exchanges'][i]['database'] for a in db for i in range(len(a['exchanges']))]))
-            for dep_db_name in dependencies:
-                if (dep_db_name not in self.db_names) & ('biosphere' not in dep_db_name):
-                    db += Database(dep_db_name).load(create_pickle)
-                    self.db_names.append(dep_db_name)
-                else:
-                    pass
-        return db
+        db = Database(db_as_list=[])
+        loaded_databases = set()
+        db_names_copy = copy.deepcopy(self.db_names)
+        for name in db_names_copy:
+            if name not in loaded_databases:
+                db += Database(name)  # .load(create_pickle)
+                loaded_databases.add(name)
+                dependencies = list(set([a['exchanges'][i]['database'] for a in db.db_as_list for i in range(len(a['exchanges']))]))
+                for dep_db_name in dependencies:
+                    if (dep_db_name not in self.db_names) & ('biosphere' not in dep_db_name):
+                        if dep_db_name not in loaded_databases:
+                            db += Database(dep_db_name)  # .load(create_pickle)
+                            loaded_databases.add(dep_db_name)
+                        self.db_names.append(dep_db_name)
+        return db.db_as_list
 
     def merge(
             self,
@@ -443,13 +449,14 @@ class Database:
         :param mapping: mapping file between the LCI database and the ESM database
         :return: the list missing flows if any
         """
+        db_dict_name = self.db_as_dict_name
         missing_flows = []
         for i in range(len(mapping)):
             act_name = mapping.Activity.iloc[i]
             act_prod = mapping.Product.iloc[i]
             act_loc = mapping.Location.iloc[i]
             act_database = mapping.Database.iloc[i]
-            if (act_name, act_prod, act_loc, act_database) in self.db_as_dict_name:
+            if (act_name, act_prod, act_loc, act_database) in db_dict_name:
                 pass
             else:
                 missing_flows.append((act_name, act_prod, act_loc, act_database))
@@ -473,7 +480,8 @@ class Database:
             df_mapping: pd.DataFrame,
             main_db_name: str = None,
             complement_db_name: str = None,
-            premise_changes: pd.DataFrame = None
+            premise_changes: pd.DataFrame = None,
+            write_database: bool = True,
     ) -> pd.DataFrame:
         """
         Create a new database containing all activities that tare not provided in your main database
@@ -482,11 +490,12 @@ class Database:
         :param main_db_name: name of the main LCI database
         :param complement_db_name: name of the complementary LCI database
         :param premise_changes: file of the changes in names, products, locations, in premise regarding the mapping
+        :param write_database: if True, write the complementary database to Brightway
         :return: dataframe with the mapping of the technologies and resources linked to the premise
             database
         """
 
-        if len(self.db_names) == 1:
+        if (isinstance(self.db_names, str)) | (isinstance(self.db_names, list) & (len(self.db_names) == 1)):
             premise_db = self
             premise_db_list = premise_db.db_as_list
             premise_db_dict_name = premise_db.db_as_dict_name
@@ -495,7 +504,7 @@ class Database:
             base_db = Database(db_names=list(df_mapping.Database.unique()))
             base_db_dict_name = base_db.db_as_dict_name
 
-        else:
+        elif isinstance(self.db_names, list) & (len(self.db_names) > 1):
             premise_db = Database(db_as_list=[act for act in self.db_as_list if act['database'] == main_db_name])
             premise_db_list = premise_db.db_as_list
             premise_db_dict_name = premise_db.db_as_dict_name
@@ -509,6 +518,9 @@ class Database:
             else:
                 base_db = self
                 base_db_dict_name = base_db.db_as_dict_name
+
+        else:
+            raise ValueError('Database name or list of names must be provided')
 
         tech_premise = pd.DataFrame(columns=['Name', 'Type', 'Product', 'Activity', 'Location', 'Database'])
         complement_premise = []
@@ -593,7 +605,7 @@ class Database:
                 name_premise_db=name_premise_db)
 
         complement_db = [i for i in premise_db_list if i['database'] == complement_db_name]
-        if len(complement_db) > 0:
+        if (len(complement_db) > 0) & (write_database == True):
             Database(db_as_list=complement_db).write_to_brightway(complement_db_name)
         else:
             print(f"The complementary database did not have to be created")
