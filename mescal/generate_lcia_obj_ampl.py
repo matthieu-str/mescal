@@ -1,9 +1,15 @@
 import pandas as pd
 from .normalization import restrict_lcia_metrics
+from pathlib import Path
 
 
-def gen_lcia_obj(lcia_method: str, impact_abbrev: pd.DataFrame, biogenic: bool = False,
-                 path: str = 'results/', metadata: dict = None) -> None:
+def generate_mod_file_ampl(
+        lcia_method: str,
+        impact_abbrev: pd.DataFrame,
+        biogenic: bool = False,
+        path: str = 'results/',
+        metadata: dict = None
+) -> None:
     """
     Create an AMPL mod file containing everything related to LCA
 
@@ -24,6 +30,8 @@ def gen_lcia_obj(lcia_method: str, impact_abbrev: pd.DataFrame, biogenic: bool =
         impact_abbrev.drop(impact_abbrev[impact_abbrev.Abbrev.isin(list_biogenic_cat)].index, inplace=True)
 
     impact_abbrev = restrict_lcia_metrics(impact_abbrev, lcia_method)
+
+    Path(path).mkdir(parents=True, exist_ok=True)  # Create the folder if it does not exist
 
     with open(f'{path}objectives.mod', 'w') as f:
 

@@ -1,5 +1,6 @@
 import pandas as pd
 import ast
+from pathlib import Path
 
 
 def tech_type(tech: str) -> str:
@@ -66,7 +67,10 @@ def from_str_to_tuple(df: pd.DataFrame, col: str) -> pd.DataFrame:
     return df
 
 
-def restrict_lcia_metrics(df: pd.DataFrame, lcia_method: str) -> pd.DataFrame:
+def restrict_lcia_metrics(
+        df: pd.DataFrame,
+        lcia_method: str
+) -> pd.DataFrame:
     """
     Restrict the dataframe to the LCIA method specified
 
@@ -84,9 +88,16 @@ def restrict_lcia_metrics(df: pd.DataFrame, lcia_method: str) -> pd.DataFrame:
     return df
 
 
-def normalize_lca_metrics(R: pd.DataFrame, mip_gap: float, lcia_method: str, impact_abbrev: pd.DataFrame,
-                          biogenic: bool = False, path: str = 'results/', metadata: dict = None,
-                          output: str = 'write') -> None | tuple[pd.DataFrame, dict]:
+def normalize_lca_metrics(
+        R: pd.DataFrame,
+        mip_gap: float,
+        lcia_method: str,
+        impact_abbrev: pd.DataFrame,
+        biogenic: bool = False,
+        path: str = 'results/',
+        metadata: dict = None,
+        output: str = 'write'
+) -> None | tuple[pd.DataFrame, dict]:
     """
     Create a .dat file containing the normalized LCA metrics for AMPL and a csv file containing the normalization
     factors
@@ -135,6 +146,8 @@ def normalize_lca_metrics(R: pd.DataFrame, mip_gap: float, lcia_method: str, imp
     R_scaled['Value_norm'] = R_scaled['Value_norm'].apply(lambda x: x if abs(x) > mip_gap else 0)
 
     if (output == 'write') | (output == 'both'):
+
+        Path(path).mkdir(parents=True, exist_ok=True)  # Create the folder if it does not exist
 
         with open(f'{path}techs_lcia.dat', 'w') as f:
 
