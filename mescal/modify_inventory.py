@@ -179,3 +179,37 @@ def remove_quebec_flow_in_global_heat_market(
             exc.save()
 
     act.save()
+
+
+def change_direct_emissions_by_factor(
+        db_name: str,
+        activity_name: str = None,
+        activity_code: str = None,
+        factor: float = 1
+) -> None:
+    """
+    Change the direct emissions of an activity by a factor
+
+    :param db_name: name of the LCI database
+    :param activity_name: name of the activity to be changed (to use only if the name of the activity is unique in the
+        database)
+    :param activity_code: code of the activity to be changed
+    :param factor: factor by which the direct emissions are multiplied
+    :return: None (changes are saved in the database)
+    """
+    if activity_name is not None:
+        act = [i for i in bd.Database(db_name).search(activity_name, limit=1000) if (
+            (activity_name == i.as_dict()['name'])
+        )][0]
+    elif activity_code is not None:
+        act = bd.Database(db_name).get(activity_code)
+    else:
+        raise ValueError("Either 'activity_name' or 'activity_code' should be provided")
+
+    for exc in act.technosphere():
+        if exc['type'] == 'emission':
+            exc['amount'] *= factor
+            exc['comment'] = f"Multiplied by factor: {factor}. " + exc.get('comment', "")
+            exc.save()
+
+    act.save()
