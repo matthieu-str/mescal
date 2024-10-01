@@ -16,77 +16,82 @@ def correct_esm_and_lca_efficiency_differences(
     :param double_counting_removal: dataframe containing the scaled amounts removed during double counting removal
     :return: None
     """
+
+    # Store frequently accessed instance variables in local variables inside a method if they don't need to be modified
     db_dict_code = self.main_database.db_as_dict_code
+    efficiency = self.efficiency
+    unit_conversion = self.unit_conversion
+    mapping_esm_flows_to_CPC_cat = self.mapping_esm_flows_to_CPC_cat
 
     try:
-        self.efficiency.Flow = self.efficiency.Flow.apply(ast.literal_eval)
+        efficiency.Flow = efficiency.Flow.apply(ast.literal_eval)
     except ValueError:
         pass
 
-    self.efficiency['ESM efficiency'] = self.efficiency.apply(
+    efficiency['ESM efficiency'] = efficiency.apply(
         self.compute_efficiency_esm,
         axis=1,
     )
-    self.efficiency['LCA input unit'] = self.efficiency.apply(
+    efficiency['LCA input unit'] = efficiency.apply(
         self.get_lca_input_flow_unit_or_product,
         axis=1,
         output_type='unit',
         removed_flows=removed_flows
     )
-    self.efficiency.drop(self.efficiency[self.efficiency['LCA input unit'].isnull()].index, inplace=True)
-    self.efficiency['LCA input product'] = self.efficiency.apply(
+    efficiency.drop(efficiency[efficiency['LCA input unit'].isnull()].index, inplace=True)
+    efficiency['LCA input product'] = efficiency.apply(
         self.get_lca_input_flow_unit_or_product,
         axis=1,
         output_type='product',
         removed_flows=removed_flows
     )
-    self.efficiency.drop(self.efficiency[self.efficiency['LCA input product'].isnull()].index, inplace=True)
-    self.efficiency['LCA input quantity'] = self.efficiency.apply(
+    efficiency.drop(efficiency[efficiency['LCA input product'].isnull()].index, inplace=True)
+    efficiency['LCA input quantity'] = efficiency.apply(
         self.get_lca_input_quantity,
         axis=1,
         double_counting_removal=double_counting_removal
     )
-    self.efficiency.drop(self.efficiency[self.efficiency['LCA input quantity'] == 0].index, inplace=True)
-    self.efficiency = self.efficiency.merge(
-        right=self.unit_conversion[self.unit_conversion.Type == 'Operation'][['Name', 'Value', 'LCA', 'ESM']],
+    efficiency.drop(efficiency[efficiency['LCA input quantity'] == 0].index, inplace=True)
+    efficiency = efficiency.merge(
+        right=unit_conversion[unit_conversion.Type == 'Operation'][['Name', 'Value', 'LCA', 'ESM']],
         how='left',
         on='Name'
     )
-    self.efficiency.rename(
+    efficiency.rename(
         columns={'Value': 'Output conversion factor', 'LCA': 'LCA output unit', 'ESM': 'ESM output unit'},
         inplace=True)
-    self.efficiency = self.efficiency.merge(
-        right=self.unit_conversion[(self.unit_conversion.Type == 'Other')
-                                   & (self.unit_conversion.ESM == 'kilowatt hour')
-                                   ][['Name', 'Value', 'LCA']],
+    efficiency = efficiency.merge(
+        right=unit_conversion[
+            (unit_conversion.Type == 'Other')
+            & (unit_conversion.ESM == 'kilowatt hour')
+            ][['Name', 'Value', 'LCA']],
         how='left',
         left_on=['LCA input product', 'LCA input unit'],
         right_on=['Name', 'LCA'],
         suffixes=('', '_to_remove')
     )
-    self.efficiency.drop(columns=['Name_to_remove', 'LCA'], inplace=True)
-    self.efficiency.rename(columns={'Value': 'Input conversion factor'}, inplace=True)
+    efficiency.drop(columns=['Name_to_remove', 'LCA'], inplace=True)
+    efficiency.rename(columns={'Value': 'Input conversion factor'}, inplace=True)
 
-    missing_units = self.efficiency[self.efficiency['Input conversion factor'].isna()][
+    missing_units = efficiency[efficiency['Input conversion factor'].isna()][
         ['LCA input product', 'LCA input unit']].values.tolist()
     missing_units = [tuple(x) + ('kilowatt hour',) for x in set(tuple(x) for x in missing_units)]
     if len(missing_units) > 0:
         raise ValueError(f'No conversion factor found for the following units (product, unit from, unit to): '
                          f'{missing_units}')
 
-    self.efficiency['LCA efficiency'] = self.efficiency['Input conversion factor'] / (
-            self.efficiency['Output conversion factor'] * self.efficiency['LCA input quantity'])
+    efficiency['LCA efficiency'] = efficiency['Input conversion factor'] / (
+            efficiency['Output conversion factor'] * efficiency['LCA input quantity'])
 
-    for i in range(len(self.efficiency)):
+    for i in range(len(efficiency)):
 
         act_to_adapt_list = []
-        tech = self.efficiency['Name'].iloc[i]
-        flows_list = self.efficiency['Flow'].iloc[i]
+        tech = efficiency['Name'].iloc[i]
+        flows_list = efficiency['Flow'].iloc[i]
 
         CPC_list = []  # list of CPC categories corresponding to the fuel flow(s) of the technology
         for flow in flows_list:
-            CPC_list += \
-            self.mapping_esm_flows_to_CPC_cat[self.mapping_esm_flows_to_CPC_cat['Flow'] == flow]['CPC'].values[0]
+            CPC_list += mapping_esm_flows_to_CPC_cat[mapping_esm_flows_to_CPC_cat['Flow'] == flow]['CPC'].values[0]
 
         df_removed_flows = removed_flows[removed_flows.Name == tech]  # flows removed during double counting removal
         for j in range(len(df_removed_flows)):
@@ -106,8 +111,7 @@ def correct_esm_and_lca_efficiency_differences(
                   f'adjusted.')
 
         for act in act_to_adapt_list:
-            efficiency_ratio = self.efficiency['LCA efficiency'].iloc[i] / self.efficiency['ESM efficiency'].iloc[
-                i]
+            efficiency_ratio = efficiency['LCA efficiency'].iloc[i] / efficiency['ESM efficiency'].iloc[i]
             act = self.adapt_biosphere_flows_to_efficiency_difference(act, efficiency_ratio, tech)
 
 
@@ -122,11 +126,15 @@ def compute_efficiency_esm(
         difference
     :return: efficiency of the process
     """
+    # Store frequently accessed instance variables in local variables inside a method if they don't need to be modified
+    model = self.model
+
     flows_list = row.Flow
     input_amount = 0
+
     for flow in flows_list:
         try:
-            input_amount += self.model[(self.model.Name == row.Name) & (self.model.Flow == flow)].Amount.values[0]
+            input_amount += model[(model.Name == row.Name) & (model.Flow == flow)].Amount.values[0]
         except IndexError:
             raise ValueError(f'The model has no technology {row.Name}, or the technology {row.Name} has no {flow} '
                              f'input flow.')
@@ -149,14 +157,18 @@ def get_lca_input_flow_unit_or_product(
     :return: the unit or product of the flow removed for the ESM (technology, flow) couple
     """
 
+    # Store frequently accessed instance variables in local variables inside a method if they don't need to be modified
     db_dict_code = self.main_database.db_as_dict_code
+    mapping_esm_flows_to_CPC_cat = self.mapping_esm_flows_to_CPC_cat
+
     unit_list = []
     name_list = []
     CPC_list = []
+
     flows_list = row.Flow
+
     for flow in flows_list:
-        CPC_list += self.mapping_esm_flows_to_CPC_cat[self.mapping_esm_flows_to_CPC_cat['Flow'] == flow]['CPC'].values[
-            0]
+        CPC_list += mapping_esm_flows_to_CPC_cat[mapping_esm_flows_to_CPC_cat['Flow'] == flow]['CPC'].values[0]
     df_removed_flows = removed_flows[removed_flows.Name == row.Name]
 
     for i in range(len(df_removed_flows)):
