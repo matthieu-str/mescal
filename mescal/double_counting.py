@@ -47,6 +47,8 @@ def background_search(
         raise ValueError(f'No CPC category in the activity ({act["database"]}, {act["code"]})')
 
     db_dict_code = self.main_database.db_as_dict_code
+    db_dict_name = self.main_database.db_as_dict_name
+
     technosphere_flows = Dataset(act).get_technosphere_flows()  # technosphere flows of the activity
     technosphere_flows_act = [db_dict_code[(flow['database'], flow['code'])] for flow in
                               technosphere_flows]  # activities corresponding to technosphere flows inputs
@@ -138,9 +140,13 @@ def background_search(
                                     prod_flow['code'] = new_code
                                     prod_flow['database'] = self.esm_db_name
                                     self.main_database.db_as_list.append(new_act)
-                                    # db_dict_name[(new_act['name'], new_act['reference product'], new_act['location'],
-                                    #               new_act['database'])] = new_act
-                                    # db_dict_code[(new_act['database'], new_act['code'])] = new_act
+                                    self.main_database.db_as_dict_name[(
+                                        new_act['name'],
+                                        new_act['reference product'],
+                                        new_act['location'],
+                                        new_act['database']
+                                    )] = new_act
+                                    self.main_database.db_as_dict_code[(new_act['database'], new_act['code'])] = new_act
 
                                     # Modify the flow between the activity and its inventory
                                     flow['database'] = self.esm_db_name
@@ -190,9 +196,13 @@ def background_search(
                                     prod_flow['code'] = new_code
                                     prod_flow['database'] = self.esm_db_name
                                     self.main_database.db_as_list.append(new_act)
-                                    # db_dict_name[(new_act['name'], new_act['reference product'], new_act['location'],
-                                    #               new_act['database'])] = new_act
-                                    # db_dict_code[(new_act['database'], new_act['code'])] = new_act
+                                    self.main_database.db_as_dict_name[(
+                                        new_act['name'],
+                                        new_act['reference product'],
+                                        new_act['location'],
+                                        new_act['database']
+                                    )] = new_act
+                                    self.main_database.db_as_dict_code[(new_act['database'], new_act['code'])] = new_act
 
                                     # Modify the flow between the activity and its inventory and save it
                                     flow['database'] = self.esm_db_name
@@ -248,6 +258,10 @@ def double_counting_removal(
     :param create_new_db: if True, create a new database
     :return: list of removed flows, dictionary of removed quantities
     """
+
+    db_dict_code = self.main_database.db_as_dict_code
+    db_dict_name = self.main_database.db_as_dict_name
+
     # Initializing list of removed flows
     flows_set_to_zero = []
 
@@ -260,15 +274,20 @@ def double_counting_removal(
             ei_removal[tech][res]['amount'] = 0
             ei_removal[tech][res]['count'] = 0
 
-    technology_compositions_dict = {key: value for key, value in dict(zip(
-            self.technology_compositions.Name, self.technology_compositions.Components
-        )).items()}
-
     # readings lists as lists and not strings
+    try:
+        self.technology_compositions.Components = self.technology_compositions.Components.apply(ast.literal_eval)
+    except ValueError:
+        pass
+
     try:
         self.mapping_esm_flows_to_CPC_cat.CPC = self.mapping_esm_flows_to_CPC_cat.CPC.apply(ast.literal_eval)
     except ValueError:
         pass
+
+    technology_compositions_dict = {key: value for key, value in dict(zip(
+            self.technology_compositions.Name, self.technology_compositions.Components
+        )).items()}
 
     # inverse mapping dictionary (i.e., from CPC categories to the ESM flows)
     mapping_esm_flows_to_CPC_dict = {key: value for key, value in dict(zip(
@@ -298,11 +317,10 @@ def double_counting_removal(
                 technology_compositions_dict[tech] = [tech]
 
             for sub_comp in technology_compositions_dict[tech]:  # looping over the subcomponents of the composition
-
                 database_constr = self.mapping_constr[self.mapping_constr.Name == sub_comp]['Database'].iloc[0]
                 current_code_constr = self.mapping_constr[self.mapping_constr.Name == sub_comp]['Current_code'].iloc[0]
 
-                act_constr = self.main_database.db_as_dict_code[(database_constr, current_code_constr)]
+                act_constr = db_dict_code[(database_constr, current_code_constr)]
                 act_constr_list.append(act_constr)
                 CPC_constr = dict(act_constr['classifications'])['CPC']
                 CPC_constr_list.append(CPC_constr)
@@ -314,7 +332,7 @@ def double_counting_removal(
         current_code_op = df_op['Current_code'].iloc[i]  # code in ecoinvent
 
         # identification of the activity in ecoinvent database
-        act_op = self.main_database.db_as_dict_code[(database_op, current_code_op)]
+        act_op = db_dict_code[(database_op, current_code_op)]
 
         if create_new_db:
             # Copy the activity and change the database (no new activity in original ecoinvent database)
@@ -326,11 +344,11 @@ def double_counting_removal(
             prod_flow['code'] = new_code
             prod_flow['database'] = self.esm_db_name
             self.main_database.db_as_list.append(new_act_op)
-            # self.main_database.db_as_dict_name[
-            #     (new_act_op['name'], new_act_op['reference product'],
-            #      new_act_op['location'], new_act_op['database'])
-            # ] = new_act_op
-            # self.main_database.db_as_dict_code[(new_act_op['database'], new_act_op['code'])] = new_act_op
+            self.main_database.db_as_dict_name[
+                (new_act_op['name'], new_act_op['reference product'],
+                 new_act_op['location'], new_act_op['database'])
+            ] = new_act_op
+            self.main_database.db_as_dict_code[(new_act_op['database'], new_act_op['code'])] = new_act_op
         else:
             new_act_op = act_op
 
@@ -348,6 +366,9 @@ def double_counting_removal(
                 perform_d_c=[],
                 create_new_db=create_new_db,
             )  # list of activities to perform double counting removal on
+
+        # db_dict_code = self.main_database.db_as_dict_code
+        # db_dict_name = self.main_database.db_as_dict_name
 
         if create_new_db:
             new_act_op['name'] = f'{tech}, Operation'  # saving name after market identification
@@ -376,7 +397,7 @@ def double_counting_removal(
 
             if self.regionalize_foregrounds:
                 self.main_database.db_as_list.remove(new_act_op_d_c)
-                new_act_op_d_c = self.regionalize_activity_foreground(self, act=new_act_op_d_c)
+                new_act_op_d_c = self.regionalize_activity_foreground(act=new_act_op_d_c)
                 self.main_database.db_as_list.append(new_act_op_d_c)
                 self.main_database.db_as_dict_name[
                     (new_act_op_d_c['name'], new_act_op_d_c['reference product'],
@@ -404,7 +425,7 @@ def double_counting_removal(
 
                 database = exc['database']
                 code = exc['code']
-                act_flow = self.main_database.db_as_dict_code[(database, code)]
+                act_flow = db_dict_code[(database, code)]
 
                 if 'classifications' in list(act_flow.keys()):
                     if 'CPC' in dict(act_flow['classifications']).keys():
@@ -449,7 +470,7 @@ def double_counting_removal(
                 flow['comment'] = f'Original amount: {old_amount}.' + flow.get('comment', '')
                 database = flow['database']
                 code = flow['code']
-                act_flow = self.main_database.db_as_dict_code[(database, code)]
+                act_flow = db_dict_code[(database, code)]
                 res_categories = mapping_CPC_to_esm_flows_dict.get(dict(act_flow['classifications']).get('CPC', ''), '')
 
                 flows_set_to_zero.append([
