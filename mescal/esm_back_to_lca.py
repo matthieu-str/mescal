@@ -25,6 +25,12 @@ def create_new_database_with_esm_results(
     :return: None
     """
 
+    # Store frequently accessed instance variables in local variables inside a method
+    mapping = self.mapping
+    esm_location = self.esm_location
+
+    self.regionalize_foregrounds = False  # we want to keep the original foregrounds
+
     if tech_to_remove_layers is None:
         tech_to_remove_layers = pd.DataFrame(columns=['Layers', 'Technologies'])
     if new_end_use_types is None:
@@ -35,9 +41,9 @@ def create_new_database_with_esm_results(
             raise ValueError('The main database should contain only one database.')
         elif isinstance(self.main_database.db_names, list) & (len(self.main_database.db_names) == 1):
             self.main_database.db_names = self.main_database.db_names[0]
-        new_db_name = f"{self.main_database.db_names}_with_ESM_results_for_{self.esm_location}"
+        new_db_name = f"{self.main_database.db_names}_with_ESM_results_for_{esm_location}"
 
-    flows = self.mapping[self.mapping.Type == 'Flow']
+    flows = mapping[mapping.Type == 'Flow']
 
     already_done = []
     perform_d_c = []
@@ -52,7 +58,7 @@ def create_new_database_with_esm_results(
         if (
                 original_activity_name,
                 original_activity_prod,
-                self.esm_location,
+                esm_location,
                 original_activity_database
         ) in already_done:
             pass
@@ -70,11 +76,13 @@ def create_new_database_with_esm_results(
 
             already_done.append((original_activity_name,
                                  original_activity_prod,
-                                 self.esm_location,
+                                 esm_location,
                                  original_activity_database))
 
             perform_d_c += new_perform_d_c
 
+    # Store frequently accessed instance variables in local variables inside a method
+    db_as_list = self.main_database.db_as_list
     db_dict_name = self.main_database.db_as_dict_name
 
     # Plugging the new activity in the database
@@ -87,7 +95,7 @@ def create_new_database_with_esm_results(
         if (
                 original_activity_name + ', from ESM results',
                 activity_prod,
-                self.esm_location,
+                esm_location,
                 activity_database
         ) in db_dict_name:
             # if not, it means that the activity has not been created in the previous step
@@ -96,13 +104,13 @@ def create_new_database_with_esm_results(
             new_activity = db_dict_name[
                 original_activity_name + ', from ESM results',
                 activity_prod,
-                self.esm_location,
+                esm_location,
                 activity_database
             ]
 
             # Activities of the ESM region
-            activities_of_esm_region = [a for a in wurst.get_many(self.main_database.db_as_list,
-                                                                  *[wurst.equals('location', self.esm_location)])]
+            activities_of_esm_region = [a for a in wurst.get_many(db_as_list,
+                                                                  *[wurst.equals('location', esm_location)])]
             for act in activities_of_esm_region:
                 if act['name'] == original_activity_name + ', from ESM results':
                     pass  # we do not want the new activity to be an input of itself
@@ -113,16 +121,16 @@ def create_new_database_with_esm_results(
                                 & (exc['product'] == activity_prod)
                         ):
                             exc['code'] = new_activity['code']
-                            exc['location'] = self.esm_location
+                            exc['location'] = esm_location
                         else:
                             pass
 
             # Downstream activities of the original activity, if it exists for the ESM location
-            if (original_activity_name, activity_prod, self.esm_location, activity_database) in db_dict_name:
+            if (original_activity_name, activity_prod, esm_location, activity_database) in db_dict_name:
                 original_activity = db_dict_name[
-                    original_activity_name, activity_prod, self.esm_location, activity_database
+                    original_activity_name, activity_prod, esm_location, activity_database
                 ]
-                downstream_consumers = Dataset(original_activity).get_downstream_consumers(self.main_database.db_as_list)
+                downstream_consumers = Dataset(original_activity).get_downstream_consumers(db_as_list)
                 for act in downstream_consumers:
                     if act['name'] == original_activity_name + ', from ESM results':
                         pass  # we do not want the new activity to be an input of itself
@@ -131,10 +139,10 @@ def create_new_database_with_esm_results(
                             if (
                                     (exc['name'] == original_activity_name)
                                     & (exc['product'] == activity_prod)
-                                    & (exc['location'] == self.esm_location)
+                                    & (exc['location'] == esm_location)
                             ):
                                 exc['code'] = new_activity['code']
-                                exc['location'] = self.esm_location
+                                exc['location'] = esm_location
                             else:
                                 pass
 
@@ -145,15 +153,12 @@ def create_new_database_with_esm_results(
     )
 
     # Adding current code to the mapping file
-    self.mapping['Current_code'] = self.mapping.apply(lambda row: self.main_database.get_code(
+    mapping['Current_code'] = mapping.apply(lambda row: self.main_database.get_code(
         product=row['Product'],
         activity=row['Activity'],
         location=row['Location'],
         database=row['Database']
     ), axis=1)
-
-    # self.mapping['New_code'] = self.mapping.apply(lambda row: random_code(), axis=1)
-    # double_counting_act['New_code'] = double_counting_act.apply(lambda row: random_code(), axis=1)
 
     model = self.model.pivot(index='Name', columns='Flow', values='Amount').reset_index()
     model.fillna(0, inplace=True)
@@ -164,12 +169,19 @@ def create_new_database_with_esm_results(
     double_counting_act['CONSTRUCTION'] = double_counting_act.shape[0] * [0]
     double_counting_act = self.add_technology_specifics(double_counting_act, self.tech_specifics)
 
+    # Injecting local variables into the instance variables
+    self.mapping = mapping
+    self.main_database.db_as_list = db_as_list
+
     flows_set_to_zero, ei_removal = self.double_counting_removal(
         df_op=double_counting_act,
         N=N,
         ESM_inputs=['OWN_CONSTRUCTION', 'CONSTRUCTION'],
         create_new_db=False,
     )
+
+    # Injecting local variables into the instance variables
+    self.main_database.db_as_list = db_as_list
 
     if write_database:
         self.main_database.write_to_brightway(new_db_name)
@@ -199,17 +211,24 @@ def create_or_modify_activity_from_esm_results(
     :param new_end_use_types: adapt end use types to fit the results LCI datasets mapping
     :return: list of activities to perform double counting removal
     """
+
+    # Store frequently accessed instance variables in local variables inside a method
     db_dict_name = self.main_database.db_as_dict_name
+    mapping = self.mapping
+    esm_location = self.esm_location
+    db_as_list = self.main_database.db_as_list
+    unit_conversion = self.unit_conversion
+    model = self.model
 
     # Check if the original activity is in the database for the location under study
-    if (original_activity_name, original_activity_prod, self.esm_location, original_activity_database) in db_dict_name:
+    if (original_activity_name, original_activity_prod, esm_location, original_activity_database) in db_dict_name:
         activity = db_dict_name[
-            original_activity_name, original_activity_prod, self.esm_location, original_activity_database
+            original_activity_name, original_activity_prod, esm_location, original_activity_database
         ]
 
     # If not, we take a similar activity with another location and regionalize its foreground
     else:
-        activity = [a for a in wurst.get_many(self.main_database.db_as_list, *[
+        activity = [a for a in wurst.get_many(db_as_list, *[
             wurst.equals('name', original_activity_name),
             wurst.equals('reference product', original_activity_prod),
             wurst.equals('database', original_activity_database)
@@ -222,16 +241,16 @@ def create_or_modify_activity_from_esm_results(
     prod_flow = Dataset(activity).get_production_flow()
     prod_flow_amount = prod_flow['amount']  # can be -1 if it is a waste activity
 
-    self.unit_conversion['LCA'] = self.unit_conversion['LCA'].apply(ecoinvent_unit_convention)
-    self.unit_conversion['ESM'] = self.unit_conversion['ESM'].apply(ecoinvent_unit_convention)
+    unit_conversion['LCA'] = unit_conversion['LCA'].apply(ecoinvent_unit_convention)
+    unit_conversion['ESM'] = unit_conversion['ESM'].apply(ecoinvent_unit_convention)
 
-    self.model['Flow'] = self.model.apply(lambda x: replace_mobility_end_use_type(
+    model['Flow'] = model.apply(lambda x: replace_mobility_end_use_type(
         row=x,
         new_end_use_types=new_end_use_types
     ), axis=1)
     model = pd.merge(
-        left=self.model,
-        right=self.model[self.model.Amount == 1.0].drop(columns=['Amount']).rename(columns={'Flow': 'Output'}),
+        left=model,
+        right=model[model.Amount == 1.0].drop(columns=['Amount']).rename(columns={'Flow': 'Output'}),
         how='left',
         on='Name'
     )
@@ -273,7 +292,7 @@ def create_or_modify_activity_from_esm_results(
             amount = 0
 
         if tech in list(
-                self.mapping[(self.mapping.Type == 'Operation') | (self.mapping.Type == 'Resource')].Name.unique()):
+                mapping[(mapping.Type == 'Operation') | (mapping.Type == 'Resource')].Name.unique()):
             total_amount += amount
             check_layers_mapping = True
         else:
@@ -297,10 +316,10 @@ def create_or_modify_activity_from_esm_results(
             pass
         else:
             if tech in list(
-                    self.mapping[(self.mapping.Type == 'Operation') | (self.mapping.Type == 'Resource')].Name.unique()):
-                activity_name, activity_prod, activity_database, activity_location = self.mapping[
-                    (self.mapping.Name == tech) & (
-                                (self.mapping.Type == 'Operation') | (self.mapping.Type == 'Resource'))
+                    mapping[(mapping.Type == 'Operation') | (mapping.Type == 'Resource')].Name.unique()):
+                activity_name, activity_prod, activity_database, activity_location = mapping[
+                    (mapping.Name == tech) & (
+                                (mapping.Type == 'Operation') | (mapping.Type == 'Resource'))
                     ][['Activity', 'Product', 'Database', 'Location']].values[0]
 
                 activity_unit = db_dict_name[activity_name, activity_prod, activity_location, activity_database][
@@ -308,16 +327,16 @@ def create_or_modify_activity_from_esm_results(
 
                 if activity_unit != original_activity_unit:
                     if original_activity_prod.split(',')[0] == 'transport':
-                        conversion_factor = self.unit_conversion[
-                            (self.unit_conversion.Name == tech)
-                            & (self.unit_conversion.ESM == original_activity_unit)
-                            & (self.unit_conversion.LCA == activity_unit)
+                        conversion_factor = unit_conversion[
+                            (unit_conversion.Name == tech)
+                            & (unit_conversion.ESM == original_activity_unit)
+                            & (unit_conversion.LCA == activity_unit)
                             ].Value.values
                     else:
-                        conversion_factor = self.unit_conversion[
-                            (self.unit_conversion.Name == original_activity_prod.split(',')[0])
-                            & (self.unit_conversion.ESM == original_activity_unit)
-                            & (self.unit_conversion.LCA == activity_unit)
+                        conversion_factor = unit_conversion[
+                            (unit_conversion.Name == original_activity_prod.split(',')[0])
+                            & (unit_conversion.ESM == original_activity_unit)
+                            & (unit_conversion.LCA == activity_unit)
                             ].Value.values
                     if len(list(set(conversion_factor))) == 0:
                         raise ValueError(f'The unit conversion factor between {activity_unit} and '
@@ -347,7 +366,7 @@ def create_or_modify_activity_from_esm_results(
                     'comment': f'{tech}, {conversion_factor}',
                 }
                 exchanges.append(new_exc)
-                if tech in list(self.mapping[self.mapping.Type == 'Operation'].Name.unique()):
+                if tech in list(mapping[mapping.Type == 'Operation'].Name.unique()):
                     # we only perform double counting removal for the operation activities
                     perform_d_c.append(
                         [tech, activity_prod, activity_name, activity_location, activity_database, code]
@@ -364,7 +383,7 @@ def create_or_modify_activity_from_esm_results(
             'name': original_activity_name,
             'product': original_activity_prod,
             'unit': original_activity_unit,
-            'location': self.esm_location,
+            'location': esm_location,
             'database': original_activity_database,
         }
     )
@@ -379,19 +398,23 @@ def create_or_modify_activity_from_esm_results(
     new_activity = {
         'database': original_activity_database,
         'name': original_activity_name + ', from ESM results',
-        'location': self.esm_location,
+        'location': esm_location,
         'unit': original_activity_unit,
         'reference product': original_activity_prod,
         'code': new_code,
         'classifications': activity['classifications'],
-        'comment': f'Activity derived from the ESM results in the layers {flows_list} for {self.esm_location}. '
+        'comment': f'Activity derived from the ESM results in the layers {flows_list} for {esm_location}. '
                    + activity['comment'],
         'parameters': activity.get('parameters', {}),
         'categories': activity.get('categories', None),
         'exchanges': exchanges,
     }
 
-    self.main_database.db_as_list.append(new_activity)
+    db_as_list.append(new_activity)
+
+    # Injecting local variables into the instance variables
+    self.main_database.db_as_list = db_as_list
+    self.mapping = mapping
 
     return perform_d_c
 
