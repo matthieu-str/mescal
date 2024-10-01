@@ -5,6 +5,7 @@ from pathlib import Path
 from .modify_inventory import change_dac_biogenic_carbon_flow, change_fossil_carbon_flows_of_biofuels
 from .database import Database, Dataset
 from .utils import random_code
+import time
 
 
 class ESM:
@@ -14,6 +15,9 @@ class ESM:
         double_counting_removal_count.csv (number of flows set to zero), and removed_flows_list.csv (specific activities
         in which the flows were removed).
     """
+
+    # Class variables
+    best_loc_in_ranking = {}  # dictionary to store the best location for each activity
 
     def __init__(
             self,
@@ -189,10 +193,20 @@ class ESM:
         N = self.mapping.shape[1]
 
         # Add construction and resource activities to the database (which do not need double counting removal)
-        self.main_database = self.add_activities_to_database(act_type='Construction')
-        self.main_database = self.add_activities_to_database(act_type='Resource')
+        print(f"### Starting to add construction and resource activities database ###")
+        t1_add = time.time()
+        self.add_activities_to_database(act_type='Construction')
+        self.add_activities_to_database(act_type='Resource')
+        t2_add = time.time()
+        print(f"### Construction and resource activities added to the database ###")
+        print(f"--> Time: {round(t2_add - t1_add, 0)} seconds")
 
+        print(f"### Starting to remove double-counted flows ###")
+        t1_dc = time.time()
         flows_set_to_zero, ei_removal = self.double_counting_removal(df_op=self.mapping_op, N=N, ESM_inputs='all')
+        t2_dc = time.time()
+        print(f"### Double-counting removal done ###")
+        print(f"--> Time: {round(t2_dc - t1_dc, 0)} seconds")
 
         df_flows_set_to_zero = pd.DataFrame(
             data=flows_set_to_zero,
@@ -239,11 +253,16 @@ class ESM:
             double_counting_removal_count[double_counting_removal_count.Amount == 0].index, inplace=True
         )
 
+        print(f"### Starting to correct efficiency differences ###")
+        t1_eff = time.time()
         if self.efficiency is not None:
             self.correct_esm_and_lca_efficiency_differences(
                 removed_flows=df_flows_set_to_zero,
                 double_counting_removal=double_counting_removal_amount,
             )
+        t2_eff = time.time()
+        print(f"### Efficiency differences corrected ###")
+        print(f"--> Time: {round(t2_eff - t1_eff, 0)} seconds")
 
         Path(self.results_path_file).mkdir(parents=True, exist_ok=True)  # Create the folder if it does not exist
 
@@ -253,7 +272,8 @@ class ESM:
         df_flows_set_to_zero.to_csv(f"{self.results_path_file}removed_flows_list.csv", index=False)
 
         if write_database:
-
+            print(f"### Starting to write database ###")
+            t1_mod_inv = time.time()
             esm_db = Database(
                 db_as_list=[act for act in self.main_database.db_as_list if act['database'] == self.esm_db_name])
             esm_db.write_to_brightway(self.esm_db_name)
@@ -275,6 +295,9 @@ class ESM:
                         activity_name=f'{tech}, Operation',
                         biogenic_ratio=biogenic_ratio
                     )
+            t2_mod_inv = time.time()
+            print("### Database written ###")
+            print(f"--> Time: {round(t2_mod_inv - t1_mod_inv, 0)} seconds")
 
         if return_database:
             esm_db = Database(
@@ -320,14 +343,18 @@ class ESM:
     def add_activities_to_database(
             self,
             act_type: str,
-    ) -> Database:
+    ) -> None:
         """
         Add new activities to the LCI database
 
         :param act_type: can be 'Construction', 'Operation', or 'Resource'
         :return: updated LCI database
         """
+
         mapping_type = self.mapping[self.mapping['Type'] == act_type]
+        db_as_list = self.main_database.db_as_list
+        db_as_dict_code = self.main_database.db_as_dict_code
+
         for i in range(len(mapping_type)):
             ds = self.create_new_activity(
                 name=mapping_type['Name'].iloc[i],
@@ -335,9 +362,10 @@ class ESM:
                 current_code=mapping_type['Current_code'].iloc[i],
                 new_code=mapping_type['New_code'].iloc[i],
                 database_name=mapping_type['Database'].iloc[i],
+                db_as_dict_code=db_as_dict_code,
             )
-            self.main_database.db_as_list.append(ds)
-        return self.main_database
+            db_as_list.append(ds)
+        self.main_database.db_as_list = db_as_list
 
     def create_new_activity(
             self,
@@ -346,6 +374,7 @@ class ESM:
             current_code: str,
             new_code: str,
             database_name: str,
+            db_as_dict_code: dict,
     ) -> dict:
         """
         Create a new LCI dataset for the ESM technology or resource
@@ -355,10 +384,11 @@ class ESM:
         :param current_code: code of the activity in the original LCI database
         :param new_code: code of the new activity in the new LCI database
         :param database_name: name of the original LCI database
+        :param db_as_dict_code: dictionary of the original LCI database with (database, code) as key
         :return: new LCI dataset for the technology or resource
         """
 
-        act = self.main_database.db_as_dict_code[(database_name, current_code)]
+        act = db_as_dict_code[(database_name, current_code)]
 
         new_act = copy.deepcopy(act)
         new_act['name'] = f'{name}, {act_type}'
