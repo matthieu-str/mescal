@@ -419,6 +419,7 @@ def create_or_modify_activity_from_esm_results(
     return perform_d_c
 
 
+@staticmethod
 def replace_mobility_end_use_type(row: pd.Series, new_end_use_types: pd.DataFrame) -> str:
     """
     Reformat the end use type of the mobility technologies

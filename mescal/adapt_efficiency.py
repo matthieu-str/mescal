@@ -221,7 +221,7 @@ def get_lca_input_flow_unit_or_product(
     else:
         raise ValueError(f'output_type must be either "unit" or "product"')
 
-
+@staticmethod
 def adapt_biosphere_flows_to_efficiency_difference(
         act: dict,
         efficiency_ratio: float,
@@ -249,6 +249,7 @@ def adapt_biosphere_flows_to_efficiency_difference(
     return act
 
 
+@staticmethod
 def get_lca_input_quantity(
         row: pd.Series,
         double_counting_removal: pd.DataFrame

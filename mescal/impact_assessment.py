@@ -141,6 +141,7 @@ def compute_impact_scores(
     return R_long
 
 
+@staticmethod
 def get_impact_categories(methods: list[str]) -> list[str]:
     """
     Get all impact categories from a list of methods

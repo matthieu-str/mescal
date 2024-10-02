@@ -3,6 +3,7 @@ from .normalization import restrict_lcia_metrics
 from pathlib import Path
 
 
+@staticmethod
 def generate_mod_file_ampl(
         lcia_method: str,
         impact_abbrev: pd.DataFrame,

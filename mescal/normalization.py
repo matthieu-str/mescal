@@ -88,6 +88,7 @@ def restrict_lcia_metrics(
     return df
 
 
+@staticmethod
 def normalize_lca_metrics(
         R: pd.DataFrame,
         mip_gap: float,

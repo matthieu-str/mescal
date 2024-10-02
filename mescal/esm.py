@@ -132,10 +132,13 @@ class ESM:
         return list(self.tech_specifics[self.tech_specifics.Specifics == 'Import/Export'].Name)
 
     # Import methods from other files
-    from .regionalization import regionalize_activity_foreground, change_location_activity, change_location_mapping_file
+    from .regionalization import (
+        regionalize_activity_foreground,
+        change_location_activity,
+        change_location_mapping_file
+    )
     from .double_counting import double_counting_removal, background_search
     from .impact_assessment import compute_impact_scores, get_impact_categories, is_empty
-    get_impact_categories = staticmethod(get_impact_categories)
     from .adapt_efficiency import (
         correct_esm_and_lca_efficiency_differences,
         compute_efficiency_esm,
@@ -143,15 +146,13 @@ class ESM:
         adapt_biosphere_flows_to_efficiency_difference,
         get_lca_input_quantity,
     )
-    adapt_biosphere_flows_to_efficiency_difference = staticmethod(adapt_biosphere_flows_to_efficiency_difference)
-    get_lca_input_quantity = staticmethod(get_lca_input_quantity)
-    from .esm_back_to_lca import (create_new_database_with_esm_results, create_or_modify_activity_from_esm_results,
-                                  replace_mobility_end_use_type)
-    replace_mobility_end_use_type = staticmethod(replace_mobility_end_use_type)
+    from .esm_back_to_lca import (
+        create_new_database_with_esm_results,
+        create_or_modify_activity_from_esm_results,
+        replace_mobility_end_use_type
+    )
     from .normalization import normalize_lca_metrics
-    normalize_lca_metrics = staticmethod(normalize_lca_metrics)
     from .generate_lcia_obj_ampl import generate_mod_file_ampl
-    generate_mod_file_ampl = staticmethod(generate_mod_file_ampl)
 
     def create_esm_database(
             self,
