@@ -133,3 +133,4 @@ dmypy.json
 /examples/results/
 /mescal/export/
 /dev/export/
+/tests/results/
