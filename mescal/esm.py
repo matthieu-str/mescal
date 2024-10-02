@@ -77,9 +77,9 @@ class ESM:
         self.locations_ranking = locations_ranking
         self.spatialized_database = spatialized_database
         self.spatialized_biosphere_db = spatialized_biosphere_db
-        self.efficiency = efficiency if efficiency is not None else pd.DataFrame(columns=['Name', 'Flow'])
+        self.efficiency = efficiency
         self.unit_conversion = unit_conversion
-        self.lifetime = lifetime if lifetime is not None else pd.DataFrame(columns=['Name', 'ESM', 'LCA'])
+        self.lifetime = lifetime
 
     def __repr__(self):
         n_tech = self.mapping[(self.mapping['Type'] == 'Construction') | (self.mapping['Type'] == 'Operation')].shape[0]
@@ -168,9 +168,6 @@ class ESM:
         :return: the mapping file or the ESM database
         """
 
-        if self.technology_compositions is None:
-            self.technology_compositions = pd.DataFrame(columns=['Name', 'Components'])
-
         try:
             self.technology_compositions.Components = self.technology_compositions.Components.apply(ast.literal_eval)
         except ValueError:
@@ -253,16 +250,17 @@ class ESM:
             double_counting_removal_count[double_counting_removal_count.Amount == 0].index, inplace=True
         )
 
-        print(f"### Starting to correct efficiency differences ###")
-        t1_eff = time.time()
         if self.efficiency is not None:
-            self.correct_esm_and_lca_efficiency_differences(
-                removed_flows=df_flows_set_to_zero,
-                double_counting_removal=double_counting_removal_amount,
-            )
-        t2_eff = time.time()
-        print(f"### Efficiency differences corrected ###")
-        print(f"--> Time: {round(t2_eff - t1_eff, 0)} seconds")
+            print(f"### Starting to correct efficiency differences ###")
+            t1_eff = time.time()
+            if self.efficiency is not None:
+                self.correct_esm_and_lca_efficiency_differences(
+                    removed_flows=df_flows_set_to_zero,
+                    double_counting_removal=double_counting_removal_amount,
+                )
+            t2_eff = time.time()
+            print(f"### Efficiency differences corrected ###")
+            print(f"--> Time: {round(t2_eff - t1_eff, 0)} seconds")
 
         Path(self.results_path_file).mkdir(parents=True, exist_ok=True)  # Create the folder if it does not exist
 
