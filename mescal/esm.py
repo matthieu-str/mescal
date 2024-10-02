@@ -159,12 +159,15 @@ class ESM:
             self,
             return_database: bool = False,
             write_database: bool = True,
+            write_double_counting_removal_reports: bool = True,
     ) -> pd.DataFrame | Database:
         """
         Create the ESM database
 
         :param return_database: if True, return the ESM database
         :param write_database: if True, write the ESM database to Brightway2
+        :param write_double_counting_removal_reports: if True, write the double-counting removal reports in the results
+            folder
         :return: the mapping file or the ESM database
         """
 
@@ -264,10 +267,11 @@ class ESM:
 
         Path(self.results_path_file).mkdir(parents=True, exist_ok=True)  # Create the folder if it does not exist
 
-        double_counting_removal_amount.to_csv(f"{self.results_path_file}double_counting_removal.csv", index=False)
-        double_counting_removal_count.to_csv(f"{self.results_path_file}double_counting_removal_count.csv",
-                                             index=False)
-        df_flows_set_to_zero.to_csv(f"{self.results_path_file}removed_flows_list.csv", index=False)
+        if write_double_counting_removal_reports:
+            double_counting_removal_amount.to_csv(f"{self.results_path_file}double_counting_removal.csv", index=False)
+            double_counting_removal_count.to_csv(f"{self.results_path_file}double_counting_removal_count.csv",
+                                                 index=False)
+            df_flows_set_to_zero.to_csv(f"{self.results_path_file}removed_flows_list.csv", index=False)
 
         if write_database:
             print(f"### Starting to write database ###")

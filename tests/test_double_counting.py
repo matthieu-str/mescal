@@ -185,6 +185,7 @@ def test_create_esm_database():
     esm_db = esm.create_esm_database(
         write_database=False,
         return_database=True,
+        write_double_counting_removal_reports=False,
     )
 
     esm_db_dict_name = esm_db.db_as_dict_name
