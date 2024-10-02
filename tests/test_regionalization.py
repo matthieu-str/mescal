@@ -114,7 +114,7 @@ def test_regionalize_activity_foreground():
         spatialized_biosphere_db=Database(db_as_list=dummy_reg_biosphere_db),
         main_database=Database(db_as_list=dummy_db),
     )
-
+    esm.best_loc_in_ranking = {}  # reset the best location in ranking (possibly set by previous tests)
     regionalized_act = esm.regionalize_activity_foreground(act=act)
 
     for exc in regionalized_act['exchanges']:
