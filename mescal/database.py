@@ -130,6 +130,9 @@ class Database:
     def __sub__(self, other):
         return Database(db_as_list=[i for i in self.db_as_list if i not in other.db_as_list])
 
+    def __len__(self):
+        return len(self.db_as_list)
+
     from .CPC import add_product_or_activity_CPC_category, add_CPC_categories
 
     def load(self, create_pickle: bool = False) -> list[dict]:
