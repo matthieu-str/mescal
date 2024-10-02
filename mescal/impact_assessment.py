@@ -14,8 +14,8 @@ def compute_impact_scores(
     """
     Compute the impact scores of the technologies and resources
 
-    :param methods: list of impact assessment methods
-    :return: impact scores of the technologies and resources for all impact categories in the methods
+    :param methods: list of life-cycle impact assessment methods for which LCA scores are computed
+    :return: impact scores of the technologies and resources for all impact categories of all LCIA methods
     """
 
     # Store frequently accessed instance variables in local variables inside a method
@@ -145,8 +145,8 @@ def get_impact_categories(methods: list[str]) -> list[str]:
     """
     Get all impact categories from a list of methods
 
-    :param methods: list of methods
-    :return: list of impact categories
+    :param methods: list of LCIA methods
+    :return: list of impact categories in the LCIA methods
     """
     return [i for i in bd.methods if i[0] in methods]
 

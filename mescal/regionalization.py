@@ -122,15 +122,15 @@ def change_location_activity(
     """
     Changes the location of a process given a ranking of preferred locations
 
-    :param esm_tech_name: name of the technology or resource in the energy system model
+    :param esm_tech_name: name of the technology or resource in the ESM
     :param product: name of the product in the LCI database for technosphere flows
     :param activity: name of the activity in the LCI database
     :param location: initial location of the process
-    :param database: name of the database in the brightway project
+    :param database: name of the database in the Brightway project
     :param activity_type: type of activity, can be 'technosphere' or 'biosphere'
-    :param categories: name of the categories in the LCI database for biosphere flows
-    :param technosphere_or_biosphere_db: LCI database
-    :return: the highest available location within the ranking, or the initial location is any of the list's
+    :param categories: name of the categories in the LCI database (for biosphere flows only)
+    :param technosphere_or_biosphere_db: technosphere or biosphere LCI database, depending on activity_type
+    :return: the highest available location within the ranking, or the initial location is any of the listed
         locations is available
     """
 

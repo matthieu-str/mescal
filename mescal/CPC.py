@@ -5,12 +5,13 @@ from .filesystem_constants import DATA_DIR
 
 def add_product_or_activity_CPC_category(self, name: str, CPC_category: str, search_type: str, key: str) -> None:
     """
-    Add a CPC category to a set of activities in a wurst database
+    Add a CPC category to a set of activities in a LCI database
 
     :param name: name or part of the name of the product or activity
-    :param CPC_category: CPC category
-    :param search_type: type of search: 'equals' or 'contains'
-    :param key: key to search for the product in the activities
+    :param CPC_category: CPC category to add
+    :param search_type: type of search, it can be 'equals' (i.e., exact name matching) or 'contains' (i.e., name is
+        in the activity name or product name)
+    :param key: searching key, it can be 'name' or 'reference product'
     :return: None
     """
     if search_type == 'equals':
@@ -37,9 +38,9 @@ def add_CPC_categories(
         write: bool = False,
 ) -> None:
     """
-    Create a new database with additional CPC categories
+    Add CPC categories to a database, and write it as a new database if asked
 
-    :param new_db_name: name of the new database. Only used if output is 'write' or 'both'.
+    :param new_db_name: name of the new database (only required if write is True)
     :param mapping_product_to_CPC: mapping between products and CPC categories, can be a pandas DataFrame or the
         path towards the csv file
     :param write: if True, write the new database to Brightway

@@ -9,6 +9,9 @@ from .filesystem_constants import DIR_DATABASE_CACHE
 
 
 class Dataset:
+    """
+    Class to perform basic operations on LCI datasets (as dictionaries)
+    """
 
     def __init__(self, act: dict) -> None:
         """
@@ -79,13 +82,16 @@ class Dataset:
 
 
 class Database:
-
+    """
+    Class to perform basic operations on LCI databases. Databases can be formulated as a list of dictionaries or as a
+    dictionary with the (database, code) tuple or the (name, product, location, database) tuple as key.
+    """
     def __init__(
             self,
             db_names: str | list[str] = None,
             db_as_list: list[dict] = None,
             create_pickle: bool = False
-    ) -> None:
+    ):
         """
         Initialize the database
 
@@ -171,13 +177,15 @@ class Database:
         db_names_copy = copy.deepcopy(self.db_names)
         for name in db_names_copy:
             if name not in loaded_databases:
-                db += Database(name)  # .load(create_pickle)
+                db += Database(db_names=name, create_pickle=create_pickle)
                 loaded_databases.add(name)
-                dependencies = list(set([a['exchanges'][i]['database'] for a in db.db_as_list for i in range(len(a['exchanges']))]))
+                dependencies = list(set([a['exchanges'][i]['database']
+                                         for a in db.db_as_list
+                                         for i in range(len(a['exchanges']))]))
                 for dep_db_name in dependencies:
                     if (dep_db_name not in self.db_names) & ('biosphere' not in dep_db_name):
                         if dep_db_name not in loaded_databases:
-                            db += Database(dep_db_name)  # .load(create_pickle)
+                            db += Database(db_names=dep_db_name, create_pickle=create_pickle)
                             loaded_databases.add(dep_db_name)
                         self.db_names.append(dep_db_name)
         return db.db_as_list
@@ -189,13 +197,13 @@ class Database:
             old_main_db_names: list[str] or None = None,
             write: bool = False,
             check_duplicates: bool = False
-    ) -> list[dict] or None:
+    ) -> None:
         """
         Merge multiple LCI databases in one database. The list of databases should contain one main database (e.g., an
         ecoinvent or premise database) towards which all other databases will be relinked.
 
         :param main_ecoinvent_db_name: name of the main database, e.g., ecoinvent or premise database
-        :param new_db_name: name of the new merged database. Only used if output is 'write' or 'both'.
+        :param new_db_name: name of the new merged database (only required if write is True)
         :param old_main_db_names: other main databases that are not in the list of databases, thus the list of databases
             will be unlinked from those
         :param write: if True, write the new database to Brightway
@@ -280,8 +288,8 @@ class Database:
         Converts a list of dictionaries into a dictionary with the (database, code) tuple or the (name, product, location,
         database) tuple as key.
 
-        :param key: 'code' or 'name'
-        :param database_type: 'technosphere' or 'biosphere'
+        :param key: cna be 'code' or 'name'
+        :param database_type: can be 'technosphere' or 'biosphere'
         :return: LCI database as a dictionary
         """
         if key == 'code':
@@ -300,7 +308,7 @@ class Database:
 
     def wurst_to_brightway(self) -> None:
         """
-        Adjust the database to the Brightway2 format
+        Adjust the database to the Brightway format
 
         :return: None
         """
@@ -393,7 +401,7 @@ class Database:
 
     def write_to_brightway(self, new_db_name: str) -> None:
         """
-        Write a wurst database to a Brightway2 project. This function will overwrite the database if it already exists
+        Write a LCI database to a Brightway project. This function will overwrite the database if it already exists.
 
         :param new_db_name: name of the brightway database to be written
         :return: None

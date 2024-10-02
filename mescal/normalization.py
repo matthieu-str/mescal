@@ -103,8 +103,8 @@ def normalize_lca_metrics(
     factors
 
     :param path: path to results folder
-    :param R: dataframe containing the LCA results
-    :param mip_gap: values lowed than the MIP gap (in absolute value) are set to 0
+    :param R: dataframe containing the LCA indicators results
+    :param mip_gap: values lowed than the MIP gap (normalized values) are set to 0
     :param lcia_method: LCIA method to be used
     :param impact_abbrev: dataframe containing the impact categories abbreviations
     :param biogenic: whether biogenic carbon flows impact assessment method should be included or not

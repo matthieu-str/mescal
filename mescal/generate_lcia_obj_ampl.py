@@ -6,28 +6,21 @@ from pathlib import Path
 def generate_mod_file_ampl(
         lcia_method: str,
         impact_abbrev: pd.DataFrame,
-        biogenic: bool = False,
         path: str = 'results/',
         metadata: dict = None
 ) -> None:
     """
     Create an AMPL mod file containing everything related to LCA
 
-    :param lcia_method: lcia method to be used, can be 'midpoints', 'endpoints' or 'endpoints_tot'
-    :param impact_abbrev: dataframe containing the impact abbreviations
-    :param biogenic: whether biogenic carbon flows impact assessment method should be included or not
-    :param path: path to EnergyScope AMPL folder
-    :param metadata: dictionary containing the metadata.
-    :return: None
+    :param lcia_method: LCIA method to be used
+    :param impact_abbrev: dataframe containing the impact abbreviations of the LCIA method
+    :param path: path where the mod file will be saved
+    :param metadata: dictionary containing the metadata to be written at the beginning of the file
+    :return: None (writes the file)
     """
 
     if metadata is None:
         metadata = {}
-
-    if not biogenic:
-        list_biogenic_cat = ["CFB", "REQDB", "m_CCLB", "m_CCSB", "TTEQB", "TTHHB", "CCEQSB", "CCEQLB", "CCHHSB",
-                             "CCHHLB", "MALB", "MASB"]
-        impact_abbrev.drop(impact_abbrev[impact_abbrev.Abbrev.isin(list_biogenic_cat)].index, inplace=True)
 
     impact_abbrev = restrict_lcia_metrics(impact_abbrev, lcia_method)
 

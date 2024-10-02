@@ -23,16 +23,16 @@ def background_search(
     Explores the tree of the market activity with a recursive approach and write the activities to actually check for
     double-counting in the list perform_d_c.
 
-    :param act: activity
+    :param act: LCI dataset
     :param k: tree depth of act with respect to starting activity
     :param k_lim: maximum allowed tree depth (i.e., maximum recursion depth)
     :param amount: product of amounts when going down in the tree
     :param explore_type: can be 'market' or 'background_removal'
     :param ESM_inputs: list of the ESM flows to perform double counting removal on
     :param perform_d_c: list of activities to check for double counting
-    :param db_dict_code: dictionary of activities with code as key
-    :param db_dict_name: dictionary of activities with name as key
-    :param db_as_list: list of activities
+    :param db_dict_code: LCI database as dictionary of activities with (database, code) as key
+    :param db_dict_name: LCI database as dictionary of activities with (name, reference product, location, database) as key
+    :param db_as_list: LCI database as list of activities
     :param create_new_db: if True, create a new database
     :return: list of activities to check for double counting,
         dictionary of activities with code as key,
@@ -265,7 +265,7 @@ def double_counting_removal(
         create_new_db: bool = True,
 ) -> tuple[list[list], dict]:
     """
-    Remove double counting in the ESM database and write it in the brightway project
+    Remove double counting in the ESM database and write it in the Brightway project
 
     :param df_op: operation mapping file
     :param N: number of columns of the original mapping file

@@ -21,7 +21,7 @@ def create_new_database_with_esm_results(
         '_with_ESM_results_for_{esm_location}'
     :param tech_to_remove_layers: technologies to remove from the result LCI datasets
     :param new_end_use_types: adapt end use types to fit the results LCI datasets mapping
-    :param write_database: if True, write the new database in the brightway2 project
+    :param write_database: if True, write the new database in the Brightway project
     :return: None
     """
 
@@ -167,7 +167,7 @@ def create_new_database_with_esm_results(
 
     double_counting_act = pd.merge(double_counting_act, model, on='Name', how='left')
     double_counting_act['CONSTRUCTION'] = double_counting_act.shape[0] * [0]
-    double_counting_act = self.add_technology_specifics(double_counting_act, self.tech_specifics)
+    double_counting_act = self.add_technology_specifics(double_counting_act)
 
     # Injecting local variables into the instance variables
     self.mapping = mapping
@@ -205,7 +205,7 @@ def create_or_modify_activity_from_esm_results(
     :param original_activity_prod: reference product of the original activity
     :param original_activity_name: name of the original activity
     :param original_activity_database: database of the original activity
-    :param flows: mapping file between energy flows and LCI datasets
+    :param flows: mapping file between ESM flows and LCI datasets
     :param esm_results: file of the ESM results in terms of annual production
     :param tech_to_remove_layers: technologies to remove from the result LCI datasets
     :param new_end_use_types: adapt end use types to fit the results LCI datasets mapping

@@ -1,19 +1,18 @@
 import pandas as pd
 import ast
 import copy
+import time
 from pathlib import Path
 from .modify_inventory import change_dac_biogenic_carbon_flow, change_fossil_carbon_flows_of_biofuels
 from .database import Database, Dataset
 from .utils import random_code
-import time
 
 
 class ESM:
     """
-    Create the ESM database after double counting removal. Three csv files summarizing the double-counting removal
-        process are automatically saved in the results' folder: double_counting_removal.csv (amount of removed flows),
-        double_counting_removal_count.csv (number of flows set to zero), and removed_flows_list.csv (specific activities
-        in which the flows were removed).
+    Class that represents the ESM database, that can be modified with double-counting removal, regionalization,
+    efficiency differences correction, and lifetime differences correction. LCA indicators can then be computed
+    from it. And results from the ESM can be added back to the LCI database.
     """
 
     # Class variables
@@ -21,12 +20,15 @@ class ESM:
 
     def __init__(
             self,
+            # Mandatory inputs
             mapping: pd.DataFrame,
             model: pd.DataFrame,
             unit_conversion: pd.DataFrame,
             mapping_esm_flows_to_CPC_cat: pd.DataFrame,
             main_database: Database,
             esm_db_name: str,
+
+            # Optional inputs
             technology_compositions: pd.DataFrame = None,
             results_path_file: str = 'results/',
             tech_specifics: pd.DataFrame = None,
@@ -42,31 +44,33 @@ class ESM:
         """
         Initialize the ESM database creation
 
-        :param mapping: mapping file
-        :param model: model file
-        :param unit_conversion: file containing unit conversion factors
-        :param tech_specifics: technology specifics
-        :param technology_compositions: technology compositions
-        :param mapping_esm_flows_to_CPC_cat: mapping file between the ESM flows and the CPC categories
-        :param main_database: LCI database
-        :param esm_db_name: name of the new LCI database
-        :param results_path_file: path to the results folder
-        :param regionalize_foregrounds: if True, regionalize the foreground activities
-        :param accepted_locations: list of regions to keep in case of regionalization
-        :param esm_location: target region in case of regionalization
-        :param locations_ranking: ranking of the preferred locations in case of regionalization
-        :param spatialized_database: if True, the main database has spatialized elementary flows
-        :param spatialized_biosphere_db: list of flows in the spatialized biosphere database
-        :param efficiency: file containing the ESM (Name, Flow) couples to correct regarding efficiency differences between
-            the ESM and LCI database
-        :param lifetime: file containing the lifetime of the technologies
-        :return: mapping file (updated with new codes) or the ESM database as a list of dictionaries, depending on the
-            'return_obj' parameter. Three csv files are also automatically saved in the results' folder.
+        :param mapping: mapping between the ESM resources, technologies (operation and construction) and flows,
+            and the LCI database activities
+        :param model: dataframe containing the inputs and outputs of each technology in the ESM
+        :param unit_conversion: dataframe containing unit conversion factors for all ESM technologies, resources and
+            flows
+        :param tech_specifics: dataframe containing the specific requirements (if any) of the ESM technologies
+        :param technology_compositions: dataframe containing (if any) the compositions of technologies
+        :param mapping_esm_flows_to_CPC_cat: mapping between ESM flows and CPC categories
+        :param main_database: main LCI database, e.g., ecoinvent or premise database (with CPC categories)
+        :param esm_db_name: name of the ESM database to be written in Brightway
+        :param results_path_file: path to your result folder
+        :param regionalize_foregrounds: if True, regionalize the ESM database foreground
+        :param accepted_locations: list of ecoinvent locations to keep without modification in case of regionalization
+        :param esm_location: ecoinvent location corresponding to the geographical scope of the ESM
+        :param locations_ranking: ranking of the preferred ecoinvent locations in case of regionalization
+        :param spatialized_database: set to True if the main database has spatialized elementary flows
+        :param spatialized_biosphere_db: spatialized biosphere database (to provide if spatialized_database is True)
+        :param efficiency: dataframe containing the ESM technologies to correct regarding efficiency differences
+            between the ESM and LCI database
+        :param lifetime: dataframe containing the lifetime of the ESM technologies
         """
         self.mapping = mapping
         self.model = model
-        self.tech_specifics = tech_specifics if tech_specifics is not None else pd.DataFrame(columns=['Name', 'Specifics', 'Amount'])
-        self.technology_compositions = technology_compositions if technology_compositions is not None else pd.DataFrame(columns=['Name', 'Components'])
+        self.tech_specifics = tech_specifics if tech_specifics is not None \
+            else pd.DataFrame(columns=['Name', 'Specifics', 'Amount'])
+        self.technology_compositions = technology_compositions if technology_compositions is not None \
+            else pd.DataFrame(columns=['Name', 'Components'])
         self.mapping_esm_flows_to_CPC_cat = mapping_esm_flows_to_CPC_cat
         self.main_database = main_database
         self.esm_db_name = esm_db_name
@@ -93,7 +97,7 @@ class ESM:
         model_pivot.fillna(0, inplace=True)
         mapping_op = pd.merge(mapping_op, model_pivot, on='Name', how='left')
         mapping_op['CONSTRUCTION'] = mapping_op.shape[0] * [0]
-        mapping_op = self.add_technology_specifics(mapping_op, self.tech_specifics)
+        mapping_op = self.add_technology_specifics(mapping_op)
         return mapping_op
 
     @property
@@ -127,12 +131,6 @@ class ESM:
     def import_export_list(self):
         return list(self.tech_specifics[self.tech_specifics.Specifics == 'Import/Export'].Name)
 
-    # @property
-    # def technology_compositions_dict(self):
-    #     return {key: value for key, value in dict(zip(
-    #         self.technology_compositions.Name, self.technology_compositions.Components
-    #     )).items()}
-
     # Import methods from other files
     from .regionalization import regionalize_activity_foreground, change_location_activity, change_location_mapping_file
     from .double_counting import double_counting_removal, background_search
@@ -160,15 +158,18 @@ class ESM:
             return_database: bool = False,
             write_database: bool = True,
             write_double_counting_removal_reports: bool = True,
-    ) -> pd.DataFrame | Database:
+    ) -> Database:
         """
-        Create the ESM database
+        Create the ESM database after double counting removal. Three csv files summarizing the double-counting removal
+        process are automatically saved in the results folder: double_counting_removal.csv (amount of removed
+        flows), double_counting_removal_count.csv (number of flows set to zero), and removed_flows_list.csv
+        (specific activities in which the flows were removed).
 
-        :param return_database: if True, return the ESM database
-        :param write_database: if True, write the ESM database to Brightway2
+        :param return_database: if True, return the ESM database as a mescal.Database object
+        :param write_database: if True, write the ESM database to Brightway
         :param write_double_counting_removal_reports: if True, write the double-counting removal reports in the results
             folder
-        :return: the mapping file or the ESM database
+        :return: the ESM database if return_database is True
         """
 
         try:
@@ -311,18 +312,19 @@ class ESM:
         self.main_database = self.main_database - Database(
                 db_as_list=[act for act in self.main_database.db_as_list if act['database'] == self.esm_db_name])
 
-    @staticmethod
     def add_technology_specifics(
+            self,
             mapping_op: pd.DataFrame,
-            df_tech_specifics: pd.DataFrame
     ) -> pd.DataFrame:
         """
         Add technology-specific inputs to the model file
 
         :param mapping_op: operation activities, mapping file merged with the model file
-        :param df_tech_specifics: dataframe of technology specifics
-        :return: updated mapping file
+        :return: the updated mapping file
         """
+
+        df_tech_specifics = self.tech_specifics
+
         # Add a construction input to technologies that have a construction phase
         no_construction_list = list(df_tech_specifics[df_tech_specifics.Specifics == 'No construction'].Name)
         mapping_op['OWN_CONSTRUCTION'] = mapping_op.apply(lambda row: has_construction(row, no_construction_list),
@@ -347,10 +349,10 @@ class ESM:
             act_type: str,
     ) -> None:
         """
-        Add new activities to the LCI database
+        Add new activities to the main database
 
-        :param act_type: can be 'Construction', 'Operation', or 'Resource'
-        :return: updated LCI database
+        :param act_type: the type of activity, it can be 'Construction', 'Operation', or 'Resource'
+        :return: None
         """
 
         mapping_type = self.mapping[self.mapping['Type'] == act_type]
@@ -381,13 +383,13 @@ class ESM:
         """
         Create a new LCI dataset for the ESM technology or resource
 
-        :param name: name of the technology or resource in the esm
-        :param act_type: can be 'Construction', 'Operation', or 'Resource'
+        :param name: name of the technology or resource in the ESM
+        :param act_type: the type of activity, it can be 'Construction', 'Operation', or 'Resource'
         :param current_code: code of the activity in the original LCI database
         :param new_code: code of the new activity in the new LCI database
         :param database_name: name of the original LCI database
         :param db_as_dict_code: dictionary of the original LCI database with (database, code) as key
-        :return: new LCI dataset for the technology or resource
+        :return: the new LCI dataset for the technology or resource
         """
 
         act = db_as_dict_code[(database_name, current_code)]

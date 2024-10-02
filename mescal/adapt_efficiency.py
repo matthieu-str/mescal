@@ -9,11 +9,12 @@ def correct_esm_and_lca_efficiency_differences(
         double_counting_removal: pd.DataFrame,
 ) -> None:
     """
-    Correct the efficiency differences between ESM and LCA for the technologies in the database
+    Correct the efficiency differences between ESM technologies and their construction LCI datasets
 
     :param removed_flows: dataframe containing the name, code and amount of removed flows during double counting
         removal
-    :param double_counting_removal: dataframe containing the scaled amounts removed during double counting removal
+    :param double_counting_removal: dataframe containing the scaled amounts of removed flows during double counting
+        removal
     :return: None
     """
 
@@ -124,7 +125,7 @@ def compute_efficiency_esm(
 
     :param row: series containing the name of the ESM technology and the name of the ESM flow to check for efficiency
         difference
-    :return: efficiency of the process
+    :return: efficiency of the technology with respect to the given flow
     """
     # Store frequently accessed instance variables in local variables inside a method if they don't need to be modified
     model = self.model
@@ -148,7 +149,7 @@ def get_lca_input_flow_unit_or_product(
         removed_flows: pd.DataFrame
 ) -> str | None:
     """
-    Retrieve the unit or product of the flow removed from the double counting removal report
+    Retrieve the unit or product of the removed flow (taken from the double counting removal report)
 
     :param row: series containing the name of the ESM technology and the name of the ESM flow to check for efficiency
         difference
@@ -231,7 +232,7 @@ def adapt_biosphere_flows_to_efficiency_difference(
 
     :param act: LCI dataset to adapt
     :param efficiency_ratio: ratio between the LCA and ESM efficiencies
-    :param tech: name of the technology
+    :param tech: name of the technology in the ESM
     :return: the adapted LCI dataset
     """
     for exc in Dataset(act).get_biosphere_flows():
