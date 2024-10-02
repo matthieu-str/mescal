@@ -300,8 +300,13 @@ def test_dataset():
     assert len(ds.get_biosphere_flows()) == 2
 
 
-def test_add_databases():
+def test_add_sub_databases():
     db1 = Database(db_as_list=dummy_esm_db)
     db2 = Database(db_as_list=dummy_esm_db_2)
     db = db1 + db2
-    assert len(db.db_as_list) == 4
+    assert len(db) == 4
+
+    db = db - db2
+    assert len(db) == 2
+    for act in db1.db_as_list:
+        assert act in db.db_as_list
