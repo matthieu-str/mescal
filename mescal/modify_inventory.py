@@ -216,7 +216,7 @@ def change_direct_carbon_emissions_by_factor(
             'Methane, non-fossil'
         ]:
             exc['amount'] *= factor
-            exc['comment'] = f"Multiplied carbon flows by factor: {factor}. " + exc.get('comment', "")
+            exc['comment'] = f"Multiplied carbon flows by factor: {round(factor, 3)}. " + exc.get('comment', "")
             exc.save()
 
     act.save()
