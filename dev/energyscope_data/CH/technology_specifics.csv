@@ -1,86 +1,86 @@
-Name,Specifics,Amount
-CO2_TO_DIESEL,Background search,2
-CO2_TO_JETFUELS,Background search,0
-CROPS_TO_JETFUELS,Background search,4
-FT,Background search,3
-GASIFICATION_SNG,Background search,2
-HYDRO_GAS,Background search,2
-HYDRO_GAS_CHP,Background search,2
-AEC_OG,Decommissioning,N/A
-ALKALINE_ELECTROLYSIS,Decommissioning,N/A
-DAC_HT,Decommissioning,N/A
-DAC_LT,Decommissioning,N/A
-PEM_ELECTROLYSIS,Decommissioning,N/A
-PEMEC_OG,Decommissioning,N/A
-SOEC_ELECTROLYSIS,Decommissioning,N/A
-SOEC_OG,Decommissioning,N/A
-MOB_FREIGHT_RAIL,Mobility,N/A
-MOB_FREIGHT_ROAD,Mobility,N/A
-MOB_AVIATION,Mobility,N/A
-MOB_PRIVATE_LOCAL,Mobility,N/A
-MOB_PRIVATE_LONGD,Mobility,N/A
-MOB_PUBLIC_LOCAL,Mobility,N/A
-MOB_PUBLIC_LONGD,Mobility,N/A
-H2_COMP_HE,No background search,N/A
-H2_COMP_LM,No background search,N/A
-H2_COMP_MH,No background search,N/A
-H2_EXP_EH,No background search,N/A
-H2_EXP_EH_COGEN,No background search,N/A
-H2_EXP_HM,No background search,N/A
-H2_EXP_HM_COGEN,No background search,N/A
-H2_EXP_ML,No background search,N/A
-H2_EXP_ML_COGEN,No background search,N/A
-NG_COMP_HE,No background search,N/A
-NG_COMP_LM,No background search,N/A
-NG_COMP_MH,No background search,N/A
-NG_EXP_EH,No background search,N/A
-NG_EXP_EH_COGEN,No background search,N/A
-NG_EXP_HM,No background search,N/A
-NG_EXP_HM_COGEN,No background search,N/A
-NG_EXP_ML,No background search,N/A
-NG_EXP_ML_COGEN,No background search,N/A
-SNG_NG,No background search,N/A
-TRAFO_EH,No background search,N/A
-TRAFO_HE,No background search,N/A
-TRAFO_HM,No background search,N/A
-TRAFO_LM,No background search,N/A
-TRAFO_MH,No background search,N/A
-TRAFO_ML,No background search,N/A
-IND_DIRECT_ELEC,No background search,N/A
-DEC_DIRECT_ELEC,No background search,N/A
-HT_LT_DEC,No background search,N/A
-HT_LT_DEC,No construction,N/A
-DEEP_SALINE,No construction,N/A
-DIRECT_USAGE,No construction,N/A
-DOGR,No construction,N/A
-EOR,No construction,N/A
-H2_EXP_EH,No construction,N/A
-H2_EXP_HM,No construction,N/A
-H2_EXP_ML,No construction,N/A
-MINES_STORAGE,No construction,N/A
-NG_EXP_EH,No construction,N/A
-NG_EXP_HM,No construction,N/A
-NG_EXP_ML,No construction,N/A
-SNG_NG,No construction,N/A
-TRAFO_EH,No construction,N/A
-TRAFO_HE,No construction,N/A
-TRAFO_HM,No construction,N/A
-TRAFO_LM,No construction,N/A
-TRAFO_MH,No construction,N/A
-TRAFO_ML,No construction,N/A
-UNMINEABLE_COAL_SEAM,No construction,N/A
-BIOGAS_ATR,Process,N/A
-BIOGAS_ATR_CCS,Process,N/A
-BIOGAS_BIOMETHANE,Process,N/A
-BIOGAS_SMR,Process,N/A
-BIOGAS_SMR_CCS,Process,N/A
-CO2_METHANOL,Process,N/A
-ETHANE_OXIDATION,Process,N/A
-ETHANOL_TO_JETFUELS,Process,N/A
-METHANOL_TO_AROMATICS,Process,N/A
-METHANOL_TO_OLEFINS,Process,N/A
-PYROLYSIS,Process,N/A
-DAC_HT,DAC,N/A
-DAC_LT,DAC,N/A
-ELEC_EXPORT,Import/Export,N/A
-ELECTRICITY_EHV,Import/Export,N/A
+Name,Specifics,Amount,Comment 
+CO2_TO_DIESEL,Background search,2,
+CO2_TO_JETFUELS,Background search,0,
+CROPS_TO_JETFUELS,Background search,4,
+FT,Background search,3,
+GASIFICATION_SNG,Background search,2,
+HYDRO_GAS,Background search,2,
+HYDRO_GAS_CHP,Background search,2,
+AEC_OG,Decommissioning,N/A,
+ALKALINE_ELECTROLYSIS,Decommissioning,N/A,
+DAC_HT,Decommissioning,N/A,
+DAC_LT,Decommissioning,N/A,
+PEM_ELECTROLYSIS,Decommissioning,N/A,
+PEMEC_OG,Decommissioning,N/A,
+SOEC_ELECTROLYSIS,Decommissioning,N/A,
+SOEC_OG,Decommissioning,N/A,
+MOB_FREIGHT_RAIL,Mobility,N/A,
+MOB_FREIGHT_ROAD,Mobility,N/A,
+MOB_AVIATION,Mobility,N/A,
+MOB_PRIVATE_LOCAL,Mobility,N/A,
+MOB_PRIVATE_LONGD,Mobility,N/A,
+MOB_PUBLIC_LOCAL,Mobility,N/A,
+MOB_PUBLIC_LONGD,Mobility,N/A,
+H2_COMP_HE,No background search,N/A,
+H2_COMP_LM,No background search,N/A,
+H2_COMP_MH,No background search,N/A,
+H2_EXP_EH,No background search,N/A,
+H2_EXP_EH_COGEN,No background search,N/A,
+H2_EXP_HM,No background search,N/A,
+H2_EXP_HM_COGEN,No background search,N/A,
+H2_EXP_ML,No background search,N/A,
+H2_EXP_ML_COGEN,No background search,N/A,
+NG_COMP_HE,No background search,N/A,
+NG_COMP_LM,No background search,N/A,
+NG_COMP_MH,No background search,N/A,
+NG_EXP_EH,No background search,N/A,
+NG_EXP_EH_COGEN,No background search,N/A,
+NG_EXP_HM,No background search,N/A,
+NG_EXP_HM_COGEN,No background search,N/A,
+NG_EXP_ML,No background search,N/A,
+NG_EXP_ML_COGEN,No background search,N/A,
+SNG_NG,No background search,N/A,
+TRAFO_EH,No background search,N/A,
+TRAFO_HE,No background search,N/A,
+TRAFO_HM,No background search,N/A,
+TRAFO_LM,No background search,N/A,
+TRAFO_MH,No background search,N/A,
+TRAFO_ML,No background search,N/A,
+IND_DIRECT_ELEC,No background search,N/A,
+DEC_DIRECT_ELEC,No background search,N/A,
+HT_LT_DEC,No background search,N/A,
+HT_LT_DEC,No construction,N/A,
+DEEP_SALINE,No construction,N/A,
+DIRECT_USAGE,No construction,N/A,
+DOGR,No construction,N/A,
+EOR,No construction,N/A,
+H2_EXP_EH,No construction,N/A,
+H2_EXP_HM,No construction,N/A,
+H2_EXP_ML,No construction,N/A,
+MINES_STORAGE,No construction,N/A,
+NG_EXP_EH,No construction,N/A,
+NG_EXP_HM,No construction,N/A,
+NG_EXP_ML,No construction,N/A,
+SNG_NG,No construction,N/A,
+TRAFO_EH,No construction,N/A,
+TRAFO_HE,No construction,N/A,
+TRAFO_HM,No construction,N/A,
+TRAFO_LM,No construction,N/A,
+TRAFO_MH,No construction,N/A,
+TRAFO_ML,No construction,N/A,
+UNMINEABLE_COAL_SEAM,No construction,N/A,
+BIOGAS_ATR,Process,N/A,
+BIOGAS_ATR_CCS,Process,N/A,
+BIOGAS_BIOMETHANE,Process,N/A,
+BIOGAS_SMR,Process,N/A,
+BIOGAS_SMR_CCS,Process,N/A,
+CO2_METHANOL,Process,N/A,
+ETHANE_OXIDATION,Process,N/A,
+ETHANOL_TO_JETFUELS,Process,N/A,
+METHANOL_TO_AROMATICS,Process,N/A,
+METHANOL_TO_OLEFINS,Process,N/A,
+PYROLYSIS,Process,N/A,
+DAC_HT,DAC,N/A,
+DAC_LT,DAC,N/A,
+ELEC_EXPORT,Import/Export,N/A,
+ELECTRICITY_EHV,Import/Export,N/A,
