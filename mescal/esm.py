@@ -3,7 +3,7 @@ import ast
 import copy
 import time
 from pathlib import Path
-from .modify_inventory import change_dac_biogenic_carbon_flow, change_fossil_carbon_flows_of_biofuels
+from .modify_inventory import *
 from .database import Database, Dataset
 from .utils import random_code
 
@@ -334,6 +334,7 @@ class ESM:
         if write_database:
             print(f"### Starting to write database ###")
             t1_mod_inv = time.time()
+
             esm_db = Database(
                 db_as_list=[act for act in self.main_database.db_as_list if act['database'] == self.esm_db_name])
             esm_db.write_to_brightway(self.esm_db_name)
@@ -355,6 +356,18 @@ class ESM:
                         activity_name=f'{tech}, Operation',
                         biogenic_ratio=biogenic_ratio
                     )
+
+            # Adjust carbon flows by a constant factor for some technologies
+            carbon_flows_correction_tech = self.tech_specifics[self.tech_specifics.Specifics == 'Carbon flows'][
+                ['Name', 'Amount']].values.tolist()
+            for tech, factor in carbon_flows_correction_tech:
+                if f'{tech}, Operation' in [act['name'] for act in esm_db.db_as_list]:
+                    change_direct_carbon_emissions_by_factor(
+                        db_name=self.esm_db_name,
+                        activity_name=f'{tech}, Operation',
+                        factor=factor
+                    )
+
             t2_mod_inv = time.time()
             print("### Database written ###")
             print(f"--> Time: {round(t2_mod_inv - t1_mod_inv, 0)} seconds")
