@@ -137,8 +137,13 @@ def compute_efficiency_esm(
         try:
             input_amount += model[(model.Name == row.Name) & (model.Flow == flow)].Amount.values[0]
         except IndexError:
-            raise ValueError(f'The model has no technology {row.Name}, or the technology {row.Name} has no {flow} '
-                             f'input flow.')
+            # This allows the user to put a fuel that is not an input in the ESM but in the LCI dataset in the
+            # efficiency file. This is useful in case of mismatch (different fuel consumed between ESM nd LCI dataset).
+            # However, direct emissions must then be adjusted (tech_specifics file).
+            print(f'Warning: flow of type {flow} found for {row.Name} in efficiency file, but not in model file.')
+            input_amount += 0
+    if input_amount == 0:
+        raise ValueError(f'No flow of type(s) {flows_list} found for {row.Name} in the model file')
     return -1.0 / input_amount  # had negative sign as it is an input
 
 
@@ -241,7 +246,7 @@ def adapt_biosphere_flows_to_efficiency_difference(
             pass
         else:
             exc['amount'] *= efficiency_ratio
-            exc['comment'] = (f'{tech}: EF multiplied by {round(efficiency_ratio, 4)} (efficiency). '
+            exc['comment'] = (f'EF multiplied by {round(efficiency_ratio, 4)} (efficiency). '
                               + exc.get('comment', ''))
 
     act['comment'] = (f'Biosphere flows adjusted by a factor {round(efficiency_ratio, 4)} to correct efficiency '
