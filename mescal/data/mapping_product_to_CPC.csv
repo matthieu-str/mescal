@@ -41,7 +41,9 @@ EV charger,"464: Accumulators, primary cells and primary batteries, and parts th
 "facility, construction",53269: Other constructions for manufacturing,contains,Activity
 farming and supply of,23140: Other cereal grain products (including corn flakes),contains,Product
 forest residue,23140: Other cereal grain products (including corn flakes),equals,Product
-fuel,33370: Fuel oils n.e.c.,equals,Product
+fuel supply for cng vehicles,"12020: Natural gas, liquefied or in the gaseous state",contains,Activity
+fuel supply for diesel vehicles,33370: Fuel oils n.e.c.,contains,Activity
+fuel supply for hydrogen vehicles,"34210: Hydrogen, nitrogen, oxygen, carbon dioxide and rare gases; inorganic oxygen compounds of non-metals n.e.c.",contains,Activity
 "fuel cell system, 1 kWe, proton exchange membrane (PEM)",46410: Primary cells and primary batteries,equals,Product
 geothermal heat plant,"43913: Refrigerating and freezing equipment and heat pumps, except household type equipment",equals,Product
 hard coal IGCC power plant 450MW,53262: Power plants,equals,Product
