@@ -15,10 +15,15 @@ __all__ = (
     "random_code",
     "ecoinvent_unit_convention",
     "change_mapping_year",
+
+    # change_ecoinvent.py
+    "change_ecoinvent_version_mapping",
+    "update_unit_conversion_file",
 )
 
 __version__ = "1.0.3"
 
 from .database import Database, Dataset
 from .esm import ESM
-from .utils import random_code, ecoinvent_unit_convention, change_mapping_year
+from .utils import *
+from .change_ecoinvent import *
