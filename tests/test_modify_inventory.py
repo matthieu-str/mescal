@@ -1,6 +1,6 @@
 import bw2data as bd
 import pytest
-from mescal.modify_inventory import change_dac_biogenic_carbon_flow, change_fossil_carbon_flows_of_biofuels
+from mescal.modify_inventory import *
 from mescal.database import Database
 
 dummy_esm_db = [
@@ -106,7 +106,7 @@ dummy_esm_db = [
 
 
 @pytest.mark.tags("requires_ecoinvent")
-def test_change_carbon_flow():
+def test_change_dac_biogenic_carbon_flow():
     bd.projects.set_current('ecoinvent3.9.1')
     Database(db_as_list=dummy_esm_db).write_to_brightway("dummy_esm_db_dac")
 
@@ -166,3 +166,29 @@ def test_change_carbon_flow():
     assert carbon_mono_fossil.as_dict()['input'] == ('biosphere3', 'ba2f3f82-c93a-47a5-822a-37ec97495275')
     assert carbon_mono_non_fossil.as_dict()['input'] == ('biosphere3', '2cb2333c-1599-46cf-8435-3dffce627524')
 
+
+@pytest.mark.tags("requires_ecoinvent")
+def test_change_direct_carbon_emissions_by_factor():
+    bd.projects.set_current('ecoinvent3.9.1')
+    Database(db_as_list=dummy_esm_db).write_to_brightway("dummy_esm_db_dac")
+    change_direct_carbon_emissions_by_factor(
+        db_name="dummy_esm_db_dac",
+        activity_name="CAR_BIODIESEL, Operation",
+        activity_code="00002",
+        factor=0.5
+    )
+    act_car = [i for i in bd.Database("dummy_esm_db_dac").search("CAR_BIODIESEL, Operation", limit=1000) if (
+        ("CAR_BIODIESEL, Operation" == i.as_dict()['name'])
+    )][0]
+    biosphere_flows_car = [i for i in act_car.biosphere()]
+    assert len(biosphere_flows_car) == 3
+    carbon_dio_fossil_air = [i for i in biosphere_flows_car if
+                             (i.as_dict()['name'] == 'Carbon dioxide, fossil')
+                             & (i.as_dict()['categories'] == ('air',))][0]
+    carbon_dio_fossil_urban = [i for i in biosphere_flows_car if
+                               (i.as_dict()['name'] == 'Carbon dioxide, fossil')
+                               & (i.as_dict()['categories'] == ('air', 'urban air close to ground'))][0]
+    carbon_mono_fossil = [i for i in biosphere_flows_car if i.as_dict()['name'] == 'Carbon monoxide, fossil'][0]
+    assert carbon_dio_fossil_air.as_dict()['amount'] == 0.20 * 0.5
+    assert carbon_dio_fossil_urban.as_dict()['amount'] == 0.30 * 0.5
+    assert carbon_mono_fossil.as_dict()['amount'] == 0.10 * 0.5
