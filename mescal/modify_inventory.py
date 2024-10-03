@@ -181,7 +181,7 @@ def remove_quebec_flow_in_global_heat_market(
     act.save()
 
 
-def change_direct_emissions_by_factor(
+def change_direct_carbon_emissions_by_factor(
         db_name: str,
         activity_name: str = None,
         activity_code: str = None,
@@ -206,10 +206,17 @@ def change_direct_emissions_by_factor(
     else:
         raise ValueError("Either 'activity_name' or 'activity_code' should be provided")
 
-    for exc in act.technosphere():
-        if exc['type'] == 'emission':
+    for exc in act.biosphere():
+        if exc['name'] in [
+            'Carbon dioxide, fossil',
+            'Carbon monoxide, fossil',
+            'Methane, fossil',
+            'Carbon dioxide, non-fossil',
+            'Carbon monoxide, non-fossil',
+            'Methane, non-fossil'
+        ]:
             exc['amount'] *= factor
-            exc['comment'] = f"Multiplied by factor: {factor}. " + exc.get('comment', "")
+            exc['comment'] = f"Multiplied carbon flows by factor: {factor}. " + exc.get('comment', "")
             exc.save()
 
     act.save()
