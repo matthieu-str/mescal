@@ -67,14 +67,15 @@ def regionalize_activity_foreground(
 
             )  # best possible location according to the user ranking
 
-            new_techno_act = db_dict_name[
-                (techno_act_name, techno_act_product, new_location, techno_act_database)
-            ]
-            flow['database'] = new_techno_act['database']
-            flow['code'] = new_techno_act['code']
-            flow['location'] = new_techno_act['location']
-            flow['input'] = (new_techno_act['database'], new_techno_act['code'])
-            flow['comment'] = f'Changed from {techno_act_location} to {new_location}' + flow.get('comment', '')
+            if new_location != techno_act_location:  # if the best location is different from the initial location
+                new_techno_act = db_dict_name[
+                    (techno_act_name, techno_act_product, new_location, techno_act_database)
+                ]
+                flow['database'] = new_techno_act['database']
+                flow['code'] = new_techno_act['code']
+                flow['location'] = new_techno_act['location']
+                flow['input'] = (new_techno_act['database'], new_techno_act['code'])
+                flow['comment'] = f'Changed from {techno_act_location} to {new_location}' + flow.get('comment', '')
 
         if spatialized_database:
             spatialized_biosphere_db_name = [i for i in spatialized_biosphere_db.db_as_list][0]['database']
@@ -94,16 +95,17 @@ def regionalize_activity_foreground(
                         activity_type='biosphere',
                     )  # best possible location according to the user ranking
 
-                    new_flow_name = f"{generic_name}, {new_location}"
-                    new_biosphere_act = spatialized_biosphere_db.list_to_dict(
-                        key='name',
-                        database_type='biosphere'
-                    )[(new_flow_name, flow['categories'], flow['database'])]
+                    if new_location != current_loc:  # if the best location is different from the initial location
+                        new_flow_name = f"{generic_name}, {new_location}"
+                        new_biosphere_act = spatialized_biosphere_db.list_to_dict(
+                            key='name',
+                            database_type='biosphere'
+                        )[(new_flow_name, flow['categories'], flow['database'])]
 
-                    flow['name'] = new_biosphere_act['name']
-                    flow['code'] = new_biosphere_act['code']
-                    flow['input'] = (new_biosphere_act['database'], new_biosphere_act['code'])
-                    flow['comment'] = f'Changed from {current_loc} to {new_location}' + flow.get('comment', '')
+                        flow['name'] = new_biosphere_act['name']
+                        flow['code'] = new_biosphere_act['code']
+                        flow['input'] = (new_biosphere_act['database'], new_biosphere_act['code'])
+                        flow['comment'] = f'Changed from {current_loc} to {new_location}' + flow.get('comment', '')
 
     return new_act
 
@@ -139,7 +141,7 @@ def change_location_activity(
 
     if activity_type == 'technosphere':
         if (product, activity, database) in self.best_loc_in_ranking.keys():
-            return location
+            return self.best_loc_in_ranking[(product, activity, database)]
         act_filter = [
             wurst.searching.equals("name", activity),
             wurst.searching.equals("reference product", product),
@@ -147,7 +149,7 @@ def change_location_activity(
         ]
     elif activity_type == 'biosphere':
         if (activity, categories, database) in self.best_loc_in_ranking.keys():
-            return location
+            return self.best_loc_in_ranking[(activity, categories, database)]
         act_filter = [
             wurst.searching.startswith("name", activity),
             wurst.searching.equals("categories", categories),
@@ -211,12 +213,13 @@ def change_location_mapping_file(self) -> None:
     # Store frequently accessed instance variables in local variables inside a method if they don't need to be modified
     mapping = self.mapping
     main_database = self.main_database
+    main_database_as_list = main_database.db_as_list
 
     if 'Location' not in mapping.columns:
         for i in range(len(mapping)):
             activity_name = mapping.Activity.iloc[i]
             product_name = mapping.Product.iloc[i]
-            location = [a for a in wurst.get_many(main_database, *[
+            location = [a for a in wurst.get_many(main_database_as_list, *[
                 wurst.equals('name', activity_name),
                 wurst.equals('reference product', product_name)
             ])][0]['location']  # picks one location randomly
