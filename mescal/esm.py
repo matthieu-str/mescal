@@ -65,6 +65,7 @@ class ESM:
             between the ESM and LCI database
         :param lifetime: dataframe containing the lifetime of the ESM technologies
         """
+
         self.mapping = mapping
         self.model = model
         self.tech_specifics = tech_specifics if tech_specifics is not None \
@@ -153,6 +154,62 @@ class ESM:
     )
     from .normalization import normalize_lca_metrics
     from .generate_lcia_obj_ampl import generate_mod_file_ampl
+
+    def check_inputs(self) -> None:
+        """
+        Check if the inputs are consistent and send feedback to the user
+
+        :return: None
+        """
+        # Check if the inputs are consistent
+        model = self.model
+        mapping = self.mapping
+        mapping_esm_flows_to_CPC_cat = self.mapping_esm_flows_to_CPC_cat
+        unit_conversion = self.unit_conversion
+        efficiency = self.efficiency
+        lifetime = self.lifetime
+
+        # Check if the technologies and resources in the model file are in the mapping file
+        list_in_model_and_not_in_mapping = []
+        for tech_or_res in list(model.Name.unique()):
+            if tech_or_res not in list(mapping[mapping.Type.isin(['Operation', 'Construction', 'Resource'])].Name):
+                list_in_model_and_not_in_mapping.append(tech_or_res)
+        if len(list_in_model_and_not_in_mapping) > 0:
+            print(f"List of technologies or resources that are in the model file but not in the mapping file. "
+                  f"Their impact scores will be set to the default value")
+            print(f"--> {list_in_model_and_not_in_mapping}")
+
+        # Check if the technologies and resources in the mapping file are in the unit conversion file
+        list_in_mapping_and_not_in_unit_conversion = []
+        for tech_or_res in list(mapping[mapping.Type.isin(['Operation', 'Construction', 'Resource'])].Name):
+            if tech_or_res not in list(unit_conversion.Name):
+                list_in_mapping_and_not_in_unit_conversion.append(tech_or_res)
+        if len(list_in_mapping_and_not_in_unit_conversion) > 0:
+            print(f"List of technologies or resources that are in the mapping file but not in the unit conversion file. "
+                  f"It might be an issue if unit conversions are required during the impact assessment step")
+            print(f"--> {list_in_mapping_and_not_in_unit_conversion}")
+
+        # Check if the flows in the model file are in the ESM flows - CPC mapping file
+        list_flows_not_in_mapping_esm_flows_to_CPC_cat = []
+        for flow in list(model.Flow.unique()):
+            if ((flow not in list(mapping_esm_flows_to_CPC_cat.Flow))  # Flow not in the mapping file
+                    & (len(model[(model.Flow == flow) & (model.Amount < 0)]) > 0)):  # Flow used as an input
+                list_flows_not_in_mapping_esm_flows_to_CPC_cat.append(flow)
+        if len(list_flows_not_in_mapping_esm_flows_to_CPC_cat) > 0:
+            print(f"List of flows that are in the model file but not in the ESM flows to CPC mapping file. "
+                  f"It might be an issue during the double counting if these flows are inputs of SOME esm technologies.")
+            print(f"--> {list_flows_not_in_mapping_esm_flows_to_CPC_cat}")
+
+        if lifetime is not None:
+            # Check if the technologies in the mapping file are in the lifetime file
+            list_in_mapping_and_not_in_lifetime = []
+            for tech in list(mapping[mapping.Type == 'Construction'].Name):
+                if tech not in list(lifetime.Name):
+                    list_in_mapping_and_not_in_lifetime.append(tech)
+            if len(list_in_mapping_and_not_in_lifetime) > 0:
+                print(f"List of technologies that are in the mapping file but not in the lifetime file. "
+                      f"Please add the missing technologies or remove the lifetime file.")
+                print(f"--> {list_in_mapping_and_not_in_lifetime}")
 
     def create_esm_database(
             self,
@@ -267,9 +324,8 @@ class ESM:
             print(f"### Efficiency differences corrected ###")
             print(f"--> Time: {round(t2_eff - t1_eff, 0)} seconds")
 
-        Path(self.results_path_file).mkdir(parents=True, exist_ok=True)  # Create the folder if it does not exist
-
         if write_double_counting_removal_reports:
+            Path(self.results_path_file).mkdir(parents=True, exist_ok=True)  # Create the folder if it does not exist
             double_counting_removal_amount.to_csv(f"{self.results_path_file}double_counting_removal.csv", index=False)
             double_counting_removal_count.to_csv(f"{self.results_path_file}double_counting_removal_count.csv",
                                                  index=False)
@@ -311,7 +367,7 @@ class ESM:
             return esm_db
 
         self.main_database = self.main_database - Database(
-                db_as_list=[act for act in self.main_database.db_as_list if act['database'] == self.esm_db_name])
+            db_as_list=[act for act in self.main_database.db_as_list if act['database'] == self.esm_db_name])
 
     def add_technology_specifics(
             self,
