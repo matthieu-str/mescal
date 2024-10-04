@@ -168,48 +168,90 @@ class ESM:
         unit_conversion = self.unit_conversion
         efficiency = self.efficiency
         lifetime = self.lifetime
+        techno_compositions = self.technology_compositions
+        tech_specifics = self.tech_specifics
+
+        try:
+            self.technology_compositions.Components = self.technology_compositions.Components.apply(ast.literal_eval)
+        except ValueError:
+            pass
 
         # Check if the technologies and resources in the model file are in the mapping file
-        list_in_model_and_not_in_mapping = []
+        set_in_model_and_not_in_mapping = set()
         for tech_or_res in list(model.Name.unique()):
             if tech_or_res not in list(mapping[mapping.Type.isin(['Operation', 'Construction', 'Resource'])].Name):
-                list_in_model_and_not_in_mapping.append(tech_or_res)
-        if len(list_in_model_and_not_in_mapping) > 0:
+                set_in_model_and_not_in_mapping.add(tech_or_res)
+        if len(set_in_model_and_not_in_mapping) > 0:
             print(f"List of technologies or resources that are in the model file but not in the mapping file. "
-                  f"Their impact scores will be set to the default value")
-            print(f"--> {list_in_model_and_not_in_mapping}")
+                  f"Their impact scores will be set to the default value.\n")
+            print(f"--> {sorted(set_in_model_and_not_in_mapping)}\n")
+
+        # Check if the technologies and resources in the mapping file are in the model file
+        set_in_mapping_and_not_in_model = set()
+        list_subcomponents = [x for xs in list(techno_compositions.Components) for x in xs]
+        for tech_or_res in list(mapping[mapping.Type.isin(['Operation', 'Construction', 'Resource'])].Name):
+            if tech_or_res not in list(model.Name.unique()):
+                if tech_or_res in list_subcomponents:
+                    pass
+                else:
+                    set_in_mapping_and_not_in_model.add(tech_or_res)
+        if len(set_in_mapping_and_not_in_model) > 0:
+            print(f"List of technologies or resources that are in the mapping file but not in the model file "
+                  f"(this will not be a problem in the workflow).\n")
+            print(f"--> {sorted(set_in_mapping_and_not_in_model)}\n")
 
         # Check if the technologies and resources in the mapping file are in the unit conversion file
-        list_in_mapping_and_not_in_unit_conversion = []
+        set_in_mapping_and_not_in_unit_conversion = set()
         for tech_or_res in list(mapping[mapping.Type.isin(['Operation', 'Construction', 'Resource'])].Name):
             if tech_or_res not in list(unit_conversion.Name):
-                list_in_mapping_and_not_in_unit_conversion.append(tech_or_res)
-        if len(list_in_mapping_and_not_in_unit_conversion) > 0:
+                set_in_mapping_and_not_in_unit_conversion.add(tech_or_res)
+        if len(set_in_mapping_and_not_in_unit_conversion) > 0:
             print(f"List of technologies or resources that are in the mapping file but not in the unit conversion file. "
-                  f"It might be an issue if unit conversions are required during the impact assessment step")
-            print(f"--> {list_in_mapping_and_not_in_unit_conversion}")
+                  f"It might be an issue if unit conversions are required during the impact assessment step.\n")
+            print(f"--> {sorted(set_in_mapping_and_not_in_unit_conversion)}\n")
 
         # Check if the flows in the model file are in the ESM flows - CPC mapping file
-        list_flows_not_in_mapping_esm_flows_to_CPC_cat = []
+        set_flows_not_in_mapping_esm_flows_to_CPC_cat = set()
         for flow in list(model.Flow.unique()):
             if ((flow not in list(mapping_esm_flows_to_CPC_cat.Flow))  # Flow not in the mapping file
                     & (len(model[(model.Flow == flow) & (model.Amount < 0)]) > 0)):  # Flow used as an input
-                list_flows_not_in_mapping_esm_flows_to_CPC_cat.append(flow)
-        if len(list_flows_not_in_mapping_esm_flows_to_CPC_cat) > 0:
+                set_flows_not_in_mapping_esm_flows_to_CPC_cat.add(flow)
+        if len(set_flows_not_in_mapping_esm_flows_to_CPC_cat) > 0:
             print(f"List of flows that are in the model file but not in the ESM flows to CPC mapping file. "
-                  f"It might be an issue during the double counting if these flows are inputs of SOME esm technologies.")
-            print(f"--> {list_flows_not_in_mapping_esm_flows_to_CPC_cat}")
+                  f"It might be an issue for double counting if these flows are inputs of SOME esm technologies. \n")
+            print(f"--> {sorted(set_flows_not_in_mapping_esm_flows_to_CPC_cat)}\n")
 
         if lifetime is not None:
             # Check if the technologies in the mapping file are in the lifetime file
-            list_in_mapping_and_not_in_lifetime = []
+            set_in_mapping_and_not_in_lifetime = set()
             for tech in list(mapping[mapping.Type == 'Construction'].Name):
                 if tech not in list(lifetime.Name):
-                    list_in_mapping_and_not_in_lifetime.append(tech)
-            if len(list_in_mapping_and_not_in_lifetime) > 0:
+                    set_in_mapping_and_not_in_lifetime.add(tech)
+            if len(set_in_mapping_and_not_in_lifetime) > 0:
                 print(f"List of technologies that are in the mapping file but not in the lifetime file. "
-                      f"Please add the missing technologies or remove the lifetime file.")
-                print(f"--> {list_in_mapping_and_not_in_lifetime}")
+                      f"Please add the missing technologies or remove the lifetime file.\n")
+                print(f"--> {sorted(set_in_mapping_and_not_in_lifetime)}\n")
+
+        if efficiency is not None:
+            # Check if the technologies in the efficiency file are in the mapping file
+            set_in_efficiency_and_not_in_mapping = set()
+            for tech in list(efficiency.Name):
+                if tech not in list(mapping[mapping.Type == 'Operation'].Name):
+                    set_in_efficiency_and_not_in_mapping.add(tech)
+            if len(set_in_efficiency_and_not_in_mapping) > 0:
+                print(f"List of technologies that are in the efficiency file but not in the mapping file "
+                      f"(this will not be a problem in the workflow).\n")
+                print(f"--> {sorted(set_in_efficiency_and_not_in_mapping)}\n")
+
+        # Check if the technologies in the tech_specifics file are in the mapping file
+        set_in_tech_specifics_and_not_in_mapping = set()
+        for tech in list(tech_specifics.Name):
+            if tech not in list(mapping.Name):
+                set_in_tech_specifics_and_not_in_mapping.add(tech)
+        if len(set_in_tech_specifics_and_not_in_mapping) > 0:
+            print(f"List of technologies that are in the tech_specifics file but not in the mapping file "
+                  f"(this will not be a problem in the workflow).\n")
+            print(f"--> {sorted(set_in_tech_specifics_and_not_in_mapping)}\n")
 
     def create_esm_database(
             self,
