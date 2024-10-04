@@ -220,3 +220,46 @@ def change_direct_carbon_emissions_by_factor(
             exc.save()
 
     act.save()
+
+
+def add_carbon_dioxide_flow(
+        db_name: str,
+        amount: float,
+        activity_name: str = None,
+        activity_code: str = None,
+) -> None:
+    """
+    Add a carbon dioxide flow to an activity
+
+    :param db_name: name of the LCI database
+    :param activity_name: name of the activity to be changed (to use only if the name of the activity is unique in the
+        database)
+    :param activity_code: code of the activity to be changed
+    :param amount: amount of the carbon dioxide flow
+    :return: None (changes are saved in the database)
+    """
+    if activity_name is not None:
+        act = [i for i in bd.Database(db_name).search(activity_name, limit=1000) if (
+            (activity_name == i.as_dict()['name'])
+        )][0]
+    elif activity_code is not None:
+        act = bd.Database(db_name).get(activity_code)
+    else:
+        raise ValueError("Either 'activity_name' or 'activity_code' should be provided")
+
+    co2_flow = [bio_act for bio_act in bd.Database('biosphere3').search('Carbon dioxide, fossil', limit=1000) if (
+        (bio_act['name'] == 'Carbon dioxide, fossil')
+        & (bio_act['categories'] == ('air',))
+    )][0]
+
+    new_co2_flow = act.new_exchange(
+        input=co2_flow,
+        name=co2_flow['name'],
+        categories=co2_flow['categories'],
+        amount=amount,
+        type='biosphere',
+    )
+    new_co2_flow['comment'] = "Added flow. " + new_co2_flow.get('comment', "")
+    new_co2_flow.save()
+
+    act.save()
