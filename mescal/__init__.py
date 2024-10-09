@@ -28,7 +28,7 @@ __all__ = (
     "add_carbon_dioxide_flow",
 )
 
-__version__ = "1.0.3"
+__version__ = "1.1.0"
 
 from .database import Database, Dataset
 from .esm import ESM
