@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2024-10-09
+
+### Added
+- The function `change_direct_carbon_emissions_by_factor` (in `modify_inventory.py`) changes all direct carbon emissions by a factor.
+- The function `add_carbon_dioxide_flow` (in `modify_inventory.py`) adds a fossil carbon dioxide flow to an LCI dataset.
+
+### Changed
+- **Major update**: the `mescal` package has been restructured from functional programming to object-oriented programming. The classes `ESM` (in `esm.py`), `Database` (in `database.py`) and `Dataset` (in `database.py`) have been created to perform operations on the ESM database, the LCI databases and the LCI datasets respectively. All functions from v1.0.3 are still available but have been reorganized in the classes. 
+
 ## [1.0.3] - 2024-09-27
 
 ### Added
