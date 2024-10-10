@@ -34,13 +34,14 @@ def test_normalize_lca_metrics():
     R_normalized, refactor = normalize_lca_metrics(
         R=R,
         mip_gap=1e-6,
-        lcia_method='IMPACT World+ Damage 2.0.1_regionalized - Total only',
+        lcia_methods=['IMPACT World+ Damage 2.0.1_regionalized'],
+        specific_lcia_abbrev=['TTHH', 'TTEQ'],
         impact_abbrev=impact_abbrev,
         output='return',
     )
     # refactor should be the highest operation metric over the highest construction metric
-    assert refactor['TTHH'] == 500/20
-    assert refactor['TTEQ'] == 1000/300
+    assert refactor['HH'] == 500/20
+    assert refactor['EQ'] == 1000/300
 
     bus_diesel_op_tthh_normalized = R_normalized[
         (R_normalized.Name == 'BUS_DIESEL')
