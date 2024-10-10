@@ -5,15 +5,21 @@ from pathlib import Path
 
 @staticmethod
 def generate_mod_file_ampl(
-        lcia_method: str,
         impact_abbrev: pd.DataFrame,
+        lcia_methods: list[str],
+        specific_lcia_methods: list[str] = None,
+        specific_lcia_categories: list[str] = None,
+        specific_lcia_abbrev: list[str] = None,
         path: str = 'results/',
         metadata: dict = None
 ) -> None:
     """
     Create an AMPL mod file containing everything related to LCA
 
-    :param lcia_method: LCIA method to be used
+    :param lcia_methods: LCIA methods to be used
+    :param specific_lcia_methods: specific LCIA methods to be used
+    :param specific_lcia_categories: specific LCIA categories to be used
+    :param specific_lcia_abbrev: specific LCIA abbreviations to be used
     :param impact_abbrev: dataframe containing the impact abbreviations of the LCIA method
     :param path: path where the mod file will be saved
     :param metadata: dictionary containing the metadata to be written at the beginning of the file
@@ -23,7 +29,13 @@ def generate_mod_file_ampl(
     if metadata is None:
         metadata = {}
 
-    impact_abbrev = restrict_lcia_metrics(impact_abbrev, lcia_method)
+    impact_abbrev = restrict_lcia_metrics(
+        df=impact_abbrev,
+        lcia_methods=lcia_methods,
+        specific_lcia_methods=specific_lcia_methods,
+        specific_lcia_categories=specific_lcia_categories,
+        specific_lcia_abbrev=specific_lcia_abbrev,
+    )
 
     Path(path).mkdir(parents=True, exist_ok=True)  # Create the folder if it does not exist
 
@@ -41,7 +53,7 @@ def generate_mod_file_ampl(
         f.write('param lcia_constr {INDICATORS,TECHNOLOGIES} default 1e-12;\n'
                 'param lcia_op {INDICATORS,TECHNOLOGIES} default 1e-12;\n'
                 'param lcia_res {INDICATORS, RESOURCES} default 1e-12;\n'
-                'param refactor {INDICATORS} default 1;\n'
+                'param refactor {AOP} default 1;\n'
                 'var LCIA_constr {INDICATORS,TECHNOLOGIES};\n'
                 'var LCIA_op {INDICATORS,TECHNOLOGIES};\n'
                 'var LCIA_res {INDICATORS,RESOURCES};\n'
