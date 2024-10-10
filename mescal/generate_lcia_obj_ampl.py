@@ -47,6 +47,7 @@ def generate_mod_file_ampl(
         f.write('\n')
 
         # Set of LCA indicators
+        f.write('set AOP;\n')
         f.write('set INDICATORS;\n\n')
 
         # Declaring the LCIA parameters and variables
