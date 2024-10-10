@@ -11,7 +11,7 @@ dependencies:
   - python
   - ipython
   # sphinx
-  - sphinx # core builder # https://anaconda.org/conda-forge/sphinx/files
+  - sphinx=7.5.7 # core builder # https://anaconda.org/conda-forge/sphinx/files
   # them
   - sphinx_rtd_theme # theme # https://anaconda.org/conda-forge/sphinx_rtd_theme/files
   # extensions
