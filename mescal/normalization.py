@@ -193,13 +193,13 @@ def normalize_lca_metrics(
             f.write("\n")
 
             # Set of LCA indicators and AoPs
-            f.write(f'set AOP := {" ".join(R_scaled["AoP"].unique())};\n')
             f.write(f"set INDICATORS := {' '.join(R_scaled['Abbrev'].unique())};\n\n")
 
             # Declare the refactor parameters values
             f.write('# Parameters to set the operation and infrastructure indicators at the same order of magnitude\n')
-            for aop in R_scaled['AoP'].unique():
-                f.write(f"let refactor['{aop}'] := {refactor[aop]};\n")
+            for cat in R_scaled['Abbrev'].unique():
+                aop = R[R['Abbrev'] == cat]['AoP'].iloc[0]
+                f.write(f"let refactor['{cat}'] := {refactor[aop]};\n")
             f.write('\n')
 
             # Declare the LCA indicators values
