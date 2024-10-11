@@ -110,6 +110,7 @@ def normalize_lca_metrics(
         specific_lcia_abbrev: list[str] = None,
         biogenic: bool = False,
         path: str = 'results/',
+        file_name: str = 'techs_lcia.dat',
         metadata: dict = None,
         output: str = 'write'
 ) -> None | tuple[pd.DataFrame, dict]:
@@ -118,6 +119,7 @@ def normalize_lca_metrics(
     factors
 
     :param path: path to results folder
+    :param file_name: name of the .dat file
     :param R: dataframe containing the LCA indicators results
     :param mip_gap: values lowed than the MIP gap (normalized values) are set to 0
     :param lcia_methods: LCIA method to be used
@@ -173,7 +175,7 @@ def normalize_lca_metrics(
 
         Path(path).mkdir(parents=True, exist_ok=True)  # Create the folder if it does not exist
 
-        with open(f'{path}techs_lcia.dat', 'w') as f:
+        with open(f'{path}{file_name}', 'w') as f:
 
             # Write metadata at the beginning of the file
             if 'ecoinvent_version' in metadata:
