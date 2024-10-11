@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.1] - 2024-10-11
+
+### Added
+- Arguments `specific_lcia_methods`, `specific_lcia_categories` and `specific_lcia_abbrev` in the `normalize_lca_metrics` (in `normalization.py`) and `generate_mod_file_ampl` (in `generate_lcia_obj_ampl.py`) functions to specify the LCIA methods or impact categories to be used when generating the AMPL .mod and .dat files.
+
+### Changed
+- Set the `refactor` parameter in the `normalize_lca_metrics` function (in `normalization.py`) depending on the `AoP` (in `impact_abbrev.csv`) rather than the impact category. 
+
 ## [1.1.0] - 2024-10-09
 
 ### Added
