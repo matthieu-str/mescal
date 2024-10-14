@@ -69,8 +69,9 @@ passenger bus,49112: Public-transport type passenger motor vehicles,equals,Produ
 passenger car,49113: Motor cars and other motor vehicles principally designed for the transport of persons (except public-transport[…],contains,Product
 Passenger car,49113: Motor cars and other motor vehicles principally designed for the transport of persons (except public-transport[…],contains,Product
 petroleum refinery,53290: Other civil engineering works,equals,Product
-"photovoltaic open ground installation, 560 kWp, single-Si, on open ground",87360: Installation services of electrical machinery and apparatus n.e.c.,equals,Product
-"photovoltaic slanted-roof installation, 1.3 MWp, multi-Si, panel, mounted, on roof",87360: Installation services of electrical machinery and apparatus n.e.c.,equals,Product
+photovoltaic open ground installation,87360: Installation services of electrical machinery and apparatus n.e.c.,contains,Product
+photovoltaic flat-roof installation,87360: Installation services of electrical machinery and apparatus n.e.c.,contains,Product
+photovoltaic slanted-roof installation,87360: Installation services of electrical machinery and apparatus n.e.c.,contains,Product
 "pipeline, for hydrogen distribution",53251: Local pipelines,equals,Product
 "pipeline, for hydrogen transmission",53251: Local pipelines,equals,Product
 plant construction,53269: Other constructions for manufacturing,contains,Activity
