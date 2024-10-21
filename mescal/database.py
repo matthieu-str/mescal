@@ -285,10 +285,11 @@ class Database:
             database_type: str = 'technosphere'
     ) -> dict:
         """
-        Converts a list of dictionaries into a dictionary with the (database, code) tuple or the (name, product, location,
-        database) tuple as key.
+        Converts a list of dictionaries into a dictionary with the (database, code) tuple as key when key = 'code', the
+        (name, product, location, database) tuple as key when key = 'name' for a technosphere database,
+        or the (name, categories, database) tuple as key when key = 'name' for a biosphere database.
 
-        :param key: cna be 'code' or 'name'
+        :param key: can be 'code' or 'name'
         :param database_type: can be 'technosphere' or 'biosphere'
         :return: LCI database as a dictionary
         """
