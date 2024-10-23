@@ -211,7 +211,7 @@ def normalize_lca_metrics(
                         f":= {R_scaled.Value_norm.iloc[i]}; # normalized {R_scaled.Unit.iloc[i]}\n")
 
         # To come back to the original values, we save the maximum value of each AoP
-        R_scaled[['AoP', 'max_AoP']].drop_duplicates().to_csv(f'{path}res_lcia_max.csv', index=False)
+        R_scaled[['Abbrev', 'AoP', 'max_AoP']].drop_duplicates().to_csv(f'{path}res_lcia_max.csv', index=False)
 
         if output == 'both':
             return R_scaled, refactor
