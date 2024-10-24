@@ -3,6 +3,7 @@ import bw2data as bd
 import pytest
 from mescal.esm import ESM
 from mescal.database import Database
+from mescal.filesystem_constants import BW_PROJECT_NAME
 
 dummy_esm_db = [
     {
@@ -101,7 +102,7 @@ lifetime = pd.DataFrame(lifetime, columns=['Name', 'ESM', 'LCA'])
 @pytest.mark.tags("requires_ecoinvent")
 def test_compute_impact_score():
 
-    bd.projects.set_current('ecoinvent3.9.1')
+    bd.projects.set_current(BW_PROJECT_NAME)
     Database(db_as_list=dummy_esm_db).write_to_brightway('dummy_esm_db')
 
     esm = ESM(
@@ -126,4 +127,4 @@ def test_compute_impact_score():
         & (R.Type == 'Construction')
         ].Value.iloc[0]
 
-    assert 58.44 <= lcia_value <= 58.45
+    assert 61.12 <= lcia_value <= 61.13
