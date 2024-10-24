@@ -2,6 +2,7 @@ import bw2data as bd
 import pytest
 from mescal.modify_inventory import *
 from mescal.database import Database
+from mescal.filesystem_constants import BW_PROJECT_NAME
 
 dummy_esm_db = [
     {
@@ -107,7 +108,7 @@ dummy_esm_db = [
 
 @pytest.mark.tags("requires_ecoinvent")
 def test_change_dac_biogenic_carbon_flow():
-    bd.projects.set_current('ecoinvent3.9.1')
+    bd.projects.set_current(BW_PROJECT_NAME)
     Database(db_as_list=dummy_esm_db).write_to_brightway("dummy_esm_db_dac")
 
     change_dac_biogenic_carbon_flow("dummy_esm_db_dac", "DAC_LT, Operation")
@@ -169,7 +170,7 @@ def test_change_dac_biogenic_carbon_flow():
 
 @pytest.mark.tags("requires_ecoinvent")
 def test_change_direct_carbon_emissions_by_factor():
-    bd.projects.set_current('ecoinvent3.9.1')
+    bd.projects.set_current(BW_PROJECT_NAME)
     Database(db_as_list=dummy_esm_db).write_to_brightway("dummy_esm_db_dac")
     change_direct_carbon_emissions_by_factor(
         db_name="dummy_esm_db_dac",

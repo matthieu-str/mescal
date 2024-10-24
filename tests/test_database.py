@@ -1,5 +1,6 @@
 import pandas as pd
 from mescal.database import Database, Dataset
+from mescal.filesystem_constants import BW_PROJECT_NAME
 import bw2data as bd
 import pytest
 
@@ -229,7 +230,7 @@ mapping_product_to_CPC = pd.DataFrame(data=mapping_product_to_CPC, columns=['Nam
 
 @pytest.mark.tags("requires_ecoinvent")
 def test_database():
-    bd.projects.set_current('ecoinvent3.9.1')
+    bd.projects.set_current(BW_PROJECT_NAME)
     db = Database(db_names="ecoinvent-3.9.1-cutoff")
 
     # test loading
@@ -243,7 +244,7 @@ def test_database():
     new_db = Database(db_as_list=dummy_esm_db+dummy_esm_db_2)
     new_db.relink(  # test the relink method
         name_database_unlink='ecoinvent-3.9.1-cutoff',
-        name_database_relink='ecoinvent_cutoff_3.9.1_image_SSP2-Base_2020',
+        database_relink_as_list=Database('ecoinvent_cutoff_3.9.1_image_SSP2-Base_2020').db_as_list,
         name_new_db='new_dummy_esm_db',  # testing the change_name method
         write=True,  # testing the write_to_brightway method
     )
@@ -272,7 +273,7 @@ def test_CPC():
 
 @pytest.mark.tags("requires_ecoinvent")
 def test_complementary_database():
-    bd.projects.set_current('ecoinvent3.9.1')
+    bd.projects.set_current(BW_PROJECT_NAME)
     db = Database(db_as_list=dummy_esm_db)
     db.write_to_brightway('dummy_esm_db')
     db2 = Database(db_as_list=dummy_esm_db_2)
@@ -300,6 +301,7 @@ def test_dataset():
     assert len(ds.get_biosphere_flows()) == 2
 
 
+@pytest.mark.tags("workflow")
 def test_add_sub_databases():
     db1 = Database(db_as_list=dummy_esm_db)
     db2 = Database(db_as_list=dummy_esm_db_2)
