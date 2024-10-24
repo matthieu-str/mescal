@@ -200,7 +200,9 @@ class Database:
     ) -> None:
         """
         Merge multiple LCI databases in one database. The list of databases should contain one main database (e.g., an
-        ecoinvent or premise database) towards which all other databases will be relinked.
+        ecoinvent or premise database) towards which all other databases will be relinked. If you suspect that there
+        might be duplicated LCI datasets over the different databases, you can set check_duplicates to True to remove
+        them.
 
         :param main_ecoinvent_db_name: name of the main database, e.g., ecoinvent or premise database
         :param new_db_name: name of the new merged database (only required if write is True)
@@ -212,24 +214,26 @@ class Database:
         :return: None
         """
 
-        main_ecoinvent = Database(main_ecoinvent_db_name)
+        merged_db_as_list = []  # initialize the list of dictionaries for the merged database
+        main_ecoinvent = Database(db_as_list=[i for i in self.db_as_list if i['database'] == main_ecoinvent_db_name])
         main_ecoinvent_db = main_ecoinvent.db_as_list
 
         for db_name in self.db_names:
-            db = Database(db_name)
+            db = Database(db_as_list=[i for i in self.db_as_list if i['database'] == db_name])
             if db_name != main_ecoinvent_db_name:
                 for old_db_name in old_main_db_names:
                     db.relink(
                         name_database_unlink=old_db_name,
-                        name_database_relink=main_ecoinvent_db_name,
+                        database_relink_as_list=main_ecoinvent_db,
                     )
             else:
                 db.db_as_list = main_ecoinvent_db
-            self.db_as_list += db.db_as_list
+            merged_db_as_list += db.db_as_list
+        self.db_as_list = merged_db_as_list
 
         # Checking for duplicates in terms of (product, name, location)
         if check_duplicates:
-            db_dict_name = main_ecoinvent.db_as_dict_name
+            db_dict_name = self.db_as_dict_name
             db_dict_name_count = {k[:3]: 0 for k in db_dict_name.keys()}
 
             for act in self.db_as_list:  # counting the number of occurrences of each activity
@@ -253,7 +257,6 @@ class Database:
                             if act['code'] != ref_act['code']:  # it is removed if its code is not the same as the reference
                                 self.db_as_list.remove(act)
                         else:  # for other activities, we update the exchanges
-
                             for exc in Dataset(act).get_technosphere_flows():
                                 if (
                                         (exc['name'] == ref_act['name'])
@@ -365,7 +368,8 @@ class Database:
     def relink(
             self,
             name_database_unlink: str,
-            name_database_relink: str,
+            name_database_relink: str = None,
+            database_relink_as_list: list[dict] = None,
             name_new_db: str = None,
             write: bool = False,
     ) -> None:
@@ -374,12 +378,19 @@ class Database:
 
         :param name_database_unlink: name of the database to unlink
         :param name_database_relink: name of the database to relink
+        :param database_relink_as_list: list of dictionaries of the database to relink
         :param name_new_db: name of the new database, if None, the original database is overwritten (if write is True)
         :param write: if True, write the new database to Brightway
         :return: None
         """
 
-        relink_db = Database(name_database_relink)
+        if database_relink_as_list is not None:
+            relink_db = Database(db_as_list=database_relink_as_list)
+        elif name_database_relink is not None:
+            relink_db = Database(name_database_relink)
+        else:
+            raise ValueError("'name_database_relink' or 'database_relink_as_list' must be provided")
+        name_database_relink = relink_db.db_names[0]
         db_relink_dict_code = relink_db.list_to_dict('code')
 
         if name_new_db is None:
