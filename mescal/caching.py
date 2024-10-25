@@ -31,8 +31,9 @@ def load_db(database_name: str, filepath: str = None) -> list[dict]:
     with open(filepath, "rb") as input_file:
         db = pickle.load(input_file)
 
-    for ds in db:
-        if "categories" in ds:
-            del ds["categories"]
+    if 'biosphere' not in database_name:
+        for ds in db:
+            if "categories" in ds:
+                del ds["categories"]
 
     return db
