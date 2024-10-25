@@ -454,7 +454,7 @@ class Database:
         bw_database.register()
         old_db_names = list(set([act['database'] for act in self.db_as_list]))
         if (len(old_db_names) > 1) | (old_db_names[0] != new_db_name):
-            self.change_name(new_db_name, 'biosphere')
+            self.change_name(new_db_name, database_type)
         self.wurst_to_brightway(database_type)
         db = {(i['database'], i['code']): i for i in self.db_as_list}
         bw_database.write(db)
