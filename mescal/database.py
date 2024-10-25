@@ -310,24 +310,29 @@ class Database:
 
         return db_as_dict
 
-    def wurst_to_brightway(self) -> None:
+    def wurst_to_brightway(
+            self,
+            database_type: str = 'technosphere',
+    ) -> None:
         """
         Adjust the database to the Brightway format
 
+        :param database_type: type of database to be written, can be 'technosphere' or 'biosphere'
         :return: None
         """
 
         for act in self.db_as_list:
 
-            # Add the input and output keys in exchanges
-            for exc in act['exchanges']:
-                if 'input' not in exc.keys():
-                    exc['input'] = (exc['database'], exc['code'])
-                else:  # guaranteeing consistency between input, and database and code
-                    exc['database'] = exc['input'][0]
-                    exc['code'] = exc['input'][1]
-                if 'output' not in exc.keys():
-                    exc['output'] = (act['database'], act['code'])
+            if database_type == 'technosphere':  # only activities from technosphere databases have exchanges
+                # Add the input and output keys in exchanges
+                for exc in act['exchanges']:
+                    if 'input' not in exc.keys():
+                        exc['input'] = (exc['database'], exc['code'])
+                    else:  # guaranteeing consistency between input, and database and code
+                        exc['database'] = exc['input'][0]
+                        exc['code'] = exc['input'][1]
+                    if 'output' not in exc.keys():
+                        exc['output'] = (act['database'], act['code'])
 
             # Restore parameters to Brightway2 format which allows for uncertainty and comments
             if "parameters" in act:
@@ -339,31 +344,45 @@ class Database:
             if act['unit'] == 'ton-kilometer':
                 act['unit'] = 'ton kilometer'
 
-            if "categories" in act:
-                del act["categories"]
+            if database_type == 'technosphere':  # only activities from biosphere databases should have categories
+                if "categories" in act:
+                    del act["categories"]
 
-    def change_name(self, new_db_name: str) -> None:
+            elif database_type == 'biosphere':
+                act['type'] = 'natural resource' if act['categories'][0] == 'natural resource' else 'emission'
+                if "reference product" in act:
+                    del act["reference product"]
+                if "location" in act:
+                    del act["location"]
+
+    def change_name(
+            self,
+            new_db_name: str,
+            database_type: str = 'technosphere',
+    ) -> None:
         """
         Change the name of the database
 
         :param new_db_name: new name of the database
+        :param database_type: type of database to be written, can be 'technosphere' or 'biosphere'
         :return: None
         """
 
         old_dbs_name = list(set([act['database'] for act in self.db_as_list]))
         for act in self.db_as_list:
             act['database'] = new_db_name
-            for exc in act['exchanges']:
-                if exc['database'] in old_dbs_name:
-                    exc['database'] = new_db_name
-                if 'input' in exc.keys():
-                    if exc['input'][0] in old_dbs_name:
-                        exc['input'] = (new_db_name, exc['input'][1])
-                if 'output' in exc.keys():
-                    if exc['output'][0] in old_dbs_name:
-                        exc['output'] = (new_db_name, exc['output'][1])
-                else:
-                    pass
+            if database_type == 'technosphere':  # only activities from technosphere databases have exchanges
+                for exc in act['exchanges']:
+                    if exc['database'] in old_dbs_name:
+                        exc['database'] = new_db_name
+                    if 'input' in exc.keys():
+                        if exc['input'][0] in old_dbs_name:
+                            exc['input'] = (new_db_name, exc['input'][1])
+                    if 'output' in exc.keys():
+                        if exc['output'][0] in old_dbs_name:
+                            exc['output'] = (new_db_name, exc['output'][1])
+                    else:
+                        pass
 
     def relink(
             self,
@@ -411,13 +430,21 @@ class Database:
         if write:
             self.write_to_brightway(name_new_db)
 
-    def write_to_brightway(self, new_db_name: str) -> None:
+    def write_to_brightway(
+            self,
+            new_db_name: str,
+            database_type: str = 'technosphere',
+    ) -> None:
         """
         Write a LCI database to a Brightway project. This function will overwrite the database if it already exists.
 
         :param new_db_name: name of the brightway database to be written
+        :param database_type: type of database to be written, can be 'technosphere' or 'biosphere'
         :return: None
         """
+
+        if database_type not in ['technosphere', 'biosphere']:
+            raise ValueError('Database type must be either "technosphere" or "biosphere"')
 
         if new_db_name in list(bd.databases):  # if the database already exists, delete it
             del bd.databases[new_db_name]
@@ -427,8 +454,8 @@ class Database:
         bw_database.register()
         old_db_names = list(set([act['database'] for act in self.db_as_list]))
         if (len(old_db_names) > 1) | (old_db_names[0] != new_db_name):
-            self.change_name(new_db_name)
-        self.wurst_to_brightway()
+            self.change_name(new_db_name, 'biosphere')
+        self.wurst_to_brightway(database_type)
         db = {(i['database'], i['code']): i for i in self.db_as_list}
         bw_database.write(db)
 
@@ -446,7 +473,13 @@ class Database:
             else:
                 raise ValueError(f"{self.db_names[0]} is not a registered database")
 
-    def get_code(self, product, activity, location, database) -> str or None:
+    def get_code(
+            self,
+            product: str,
+            activity: str,
+            location: str,
+            database: str
+    ) -> str or None:
         """
         Get the code of an activity
 
