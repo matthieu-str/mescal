@@ -263,3 +263,118 @@ def add_carbon_dioxide_flow(
     new_co2_flow.save()
 
     act.save()
+
+
+def add_carbon_capture_to_plant(
+        self,
+        db_name: str,
+        plant_type: str,
+        activity_name: str = None,
+        activity_code: str = None,
+        capture_ratio: float = 0.95,
+) -> None:
+    """
+    Add a carbon capture process to a technology, and modifies its direct carbon dioxide emissions
+
+    :param db_name: name of the LCI database
+    :param activity_name: name of the activity to be changed (to use only if the name of the activity is unique in the
+        database)
+    :param plant_type: type of the activity to be changed. Can be 'cement', 'hydrogen', 'municipal solid waste',
+        'synthetic natural gas', 'wood', 'hard coal', 'lignite', or 'natural gas'.
+    :param activity_code: code of the activity to be changed
+    :param capture_ratio: carbon capture ratio, i.e., direct carbon dioxide emissions reduction rate
+    :return: None (changes are saved in the database)
+    """
+
+    if activity_name is not None:
+        act = [i for i in bd.Database(db_name).search(activity_name, limit=1000) if (
+            (activity_name == i.as_dict()['name'])
+        )][0]
+    elif activity_code is not None:
+        act = bd.Database(db_name).get(activity_code)
+    else:
+        raise ValueError("Either 'activity_name' or 'activity_code' should be provided")
+
+    # Changing the activity name
+    act['name'] += ' with CCS'
+
+    # Add comment
+    act['comment'] = ("Added CCS process and adjusted direct carbon dioxide emissions accordingly. "
+                      + act.get('comment', ""))
+
+    # Reducing the direct carbon dioxide emissions
+    amount_co2_captured = 0  # total amount of CO2 captured
+    for exc in act.biosphere():
+        if exc['name'] in ['Carbon dioxide, fossil', 'Carbon dioxide, non-fossil']:
+            amount_co2_captured += exc['amount'] * capture_ratio
+            exc['amount'] *= (1 - capture_ratio)
+            exc['comment'] = (f"Multiplied CO2 flows by factor: {round((1 - capture_ratio), 3)}. "
+                              + exc.get('comment', ""))
+            exc.save()
+
+    # add processes required for CCS to technosphere flows for the different plant types
+    if plant_type == 'cement':
+        ccs_product_name = 'carbon dioxide, captured at cement plant'
+        ccs_activity_name = 'carbon dioxide, captured at cement production plant, using monoethanolamine'
+    elif plant_type == 'hydrogen':
+        ccs_product_name = 'carbon dioxide, captured at hydrogen production plant, pre, pipeline 200km, storage 1000m'
+        ccs_activity_name = 'carbon dioxide, captured at hydrogen production plant, pre, pipeline 200km, storage 1000m'
+    elif plant_type == 'municipal solid waste':
+        ccs_product_name = 'carbon dioxide, captured and reused'
+        ccs_activity_name = 'carbon dioxide, captured at municipal solid waste incineration plant, for subsequent reuse'
+    elif plant_type == 'synthetic natural gas':
+        ccs_product_name = (
+            'carbon dioxide, captured at synthetic natural gas plant, post, 200km pipeline, storage '
+            '1000m')
+        ccs_activity_name = (
+            'carbon dioxide, captured at synthetic natural gas plant, post, 200km pipeline, storage '
+            '1000m')
+    elif plant_type == 'wood':
+        ccs_product_name = (
+            'carbon dioxide, captured at wood burning power plant 20 MW post, pipeline 200km, storage '
+            '1000m')
+        ccs_activity_name = (
+            'carbon dioxide, captured at wood burning power plant 20 MW post, pipeline 200km, storage '
+            '1000m')
+    elif plant_type == 'hard coal':
+        ccs_product_name = (
+            'carbon dioxide, captured from hard coal-fired power plant, post, pipeline 200km, storage '
+            '1000m')
+        ccs_activity_name = (
+            'carbon dioxide, captured from hard coal-fired power plant, post, pipeline 200km, storage '
+            '1000m')
+    elif plant_type == 'lignite':
+        ccs_product_name = 'carbon dioxide, captured from lignite, post, pipeline 200km, storage 1000m'
+        ccs_activity_name = 'carbon dioxide, captured from lignite, post, pipeline 200km, storage 1000m'
+    elif plant_type == 'natural gas':
+        ccs_product_name = 'carbon dioxide, captured from natural gas, post, 200km pipeline, storage 1000m'
+        ccs_activity_name = 'carbon dioxide, captured from natural gas, post, 200km pipeline, storage 1000m'
+    else:
+        raise ValueError(f"Unexpected plant type: {plant_type}. Should be 'cement', 'hydrogen', 'municipal solid "
+                         f"waste', 'synthetic natural gas', 'wood', 'hard coal', 'lignite', or 'natural gas'.")
+
+    act_loc = act['location']
+    ccs_act_loc = self.change_location_activity(
+        activity=ccs_activity_name,
+        product=ccs_product_name,
+        location=act_loc,
+        database=db_name,
+        technosphere_or_biosphere_db=self.main_database,
+    )
+
+    ccs_act = [i for i in bd.Database(db_name).search(ccs_activity_name, limit=1000) if (
+        (ccs_activity_name == i.as_dict()['name'])
+        & (ccs_product_name == i.as_dict()['reference product'])
+        & (ccs_act_loc == i.as_dict()['location'])
+    )][0]
+
+    # add a new non-fossil elementary flow to the activity
+    new_ccs_exc = act.new_exchange(
+        input=ccs_act,
+        amount=amount_co2_captured,
+        type='technosphere',
+    )
+    new_ccs_exc['comment'] = 'Added carbon capture flow'
+    new_ccs_exc.save()
+
+    act.save()
