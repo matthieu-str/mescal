@@ -7,6 +7,7 @@ def correct_esm_and_lca_efficiency_differences(
         self,
         removed_flows: pd.DataFrame,
         double_counting_removal: pd.DataFrame,
+        write_efficiency_report: bool = True,
 ) -> None:
     """
     Correct the efficiency differences between ESM technologies and their construction LCI datasets
@@ -15,6 +16,7 @@ def correct_esm_and_lca_efficiency_differences(
         removal
     :param double_counting_removal: dataframe containing the scaled amounts of removed flows during double counting
         removal
+    :param write_efficiency_report: if True, write the efficiency differences in a csv file
     :return: None
     """
 
@@ -84,6 +86,8 @@ def correct_esm_and_lca_efficiency_differences(
     efficiency['LCA efficiency'] = efficiency['Input conversion factor'] / (
             efficiency['Output conversion factor'] * efficiency['LCA input quantity'])
 
+    efficiency['efficiency_ratio'] = efficiency['LCA efficiency'] / efficiency['ESM efficiency']
+
     for i in range(len(efficiency)):
 
         act_to_adapt_list = []
@@ -112,8 +116,12 @@ def correct_esm_and_lca_efficiency_differences(
                   f'adjusted.')
 
         for act in act_to_adapt_list:
-            efficiency_ratio = efficiency['LCA efficiency'].iloc[i] / efficiency['ESM efficiency'].iloc[i]
+            efficiency_ratio = efficiency['efficiency_ratio'].iloc[i]
             act = self.adapt_biosphere_flows_to_efficiency_difference(act, efficiency_ratio, tech)
+
+    if write_efficiency_report:
+        # saving the efficiency differences in a csv file
+        efficiency.to_csv(f'{self.results_path_file}efficiency_differences.csv', index=False)
 
 
 def compute_efficiency_esm(
