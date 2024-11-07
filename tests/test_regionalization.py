@@ -110,7 +110,6 @@ def test_regionalize_activity_foreground():
         locations_ranking=['FR', 'RER', 'GLO', 'RoW'],
         accepted_locations=['FR'],
         esm_location="FR",
-        spatialized_database=True,
         spatialized_biosphere_db=Database(db_as_list=dummy_reg_biosphere_db),
         main_database=Database(db_as_list=dummy_db),
     )

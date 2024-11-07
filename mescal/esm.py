@@ -36,7 +36,6 @@ class ESM:
             accepted_locations: list[str] = None,
             esm_location: str = None,
             locations_ranking: list[str] = None,
-            spatialized_database: bool = False,
             spatialized_biosphere_db: Database = None,
             efficiency: pd.DataFrame = None,
             lifetime: pd.DataFrame = None,
@@ -59,8 +58,7 @@ class ESM:
         :param accepted_locations: list of ecoinvent locations to keep without modification in case of regionalization
         :param esm_location: ecoinvent location corresponding to the geographical scope of the ESM
         :param locations_ranking: ranking of the preferred ecoinvent locations in case of regionalization
-        :param spatialized_database: set to True if the main database has spatialized elementary flows
-        :param spatialized_biosphere_db: spatialized biosphere database (to provide if spatialized_database is True)
+        :param spatialized_biosphere_db: spatialized biosphere database
         :param efficiency: dataframe containing the ESM technologies to correct regarding efficiency differences
             between the ESM and LCI database
         :param lifetime: dataframe containing the lifetime of the ESM technologies
@@ -80,7 +78,7 @@ class ESM:
         self.accepted_locations = accepted_locations
         self.esm_location = esm_location
         self.locations_ranking = locations_ranking
-        self.spatialized_database = spatialized_database
+        self.spatialized_database = True if spatialized_biosphere_db is not None else False
         self.spatialized_biosphere_db = spatialized_biosphere_db
         self.efficiency = efficiency
         self.unit_conversion = unit_conversion
