@@ -516,6 +516,7 @@ def test_correct_esm_and_lca_efficiency_differences():
     esm.correct_esm_and_lca_efficiency_differences(
         removed_flows=removed_flows,
         double_counting_removal=double_counting_removal,
+        write_efficiency_report=False,
     )
 
     # updated_db = correct_esm_and_lca_efficiency_differences(
