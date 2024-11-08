@@ -37,8 +37,8 @@ BIOGAS_ATR_CCS_PLANT,Construction,1.0,unit,unit
 BIOGAS_ATR_CCS_TANK,Construction,4.760516665,unit,unit
 BIOGAS_ATR_PLANT,Construction,1.0,unit,unit
 BIOGAS_ATR_TANK,Construction,4.760516665,unit,unit
-BIOGAS_BIOMETHANE,Construction,0.00239035431,unit,kilowatt
-BIOGAS_BIOMETHANE,Operation,0.1265902905,kilogram,kilowatt hour
+BIOGAS_BIOMETHANE,Construction,1.151633121e-05,unit,kilowatt
+BIOGAS_BIOMETHANE,Operation,0.07643312102,kilogram,kilowatt hour
 BIOGAS_SMR,Construction,4.524684685e-06,unit,kilowatt
 BIOGAS_SMR,Operation,0.03003003003,kilogram,kilowatt hour
 BIOGAS_SMR_CCS,Construction,4.524684685e-06,unit,kilowatt
@@ -365,6 +365,10 @@ DHN_COGEN_GAS_HEAT,Construction,1.0,unit,unit
 DHN_COGEN_WASTE,Construction,0.0022,unit,kilowatt
 DHN_COGEN_WASTE,Operation,3.6,megajoule,kilowatt hour
 DHN_COGEN_WASTE_BOILER,Construction,0.04818496518,unit,unit
+DHN_COGEN_WASTE_CC,Construction,0.0022,unit,kilowatt
+DHN_COGEN_WASTE_CC,Operation,3.6,megajoule,kilowatt hour
+DHN_COGEN_WASTE_CC_BOILER,Construction,0.04818496518,unit,unit
+DHN_COGEN_WASTE_CC_TURBINE,Construction,1.0,unit,unit
 DHN_COGEN_WASTE_TURBINE,Construction,1.0,unit,unit
 DHN_COGEN_WOOD,Construction,0.0003333166675,unit,kilowatt
 DHN_COGEN_WOOD,Operation,10.6729914,megajoule,kilowatt hour
@@ -442,6 +446,8 @@ H2_LP,Resource,0.03003003003,kilogram,kilowatt hour
 H2_MP,Resource,0.03003003003,kilogram,kilowatt hour
 H2_NG_CCGT,Construction,2.5e-06,unit,kilowatt
 H2_NG_CCGT,Operation,1.0,kilowatt hour,kilowatt hour
+H2_NG_CCGT_CCS,Construction,2.5e-06,unit,kilowatt
+H2_NG_CCGT_CCS,Operation,1.0,kilowatt hour,kilowatt hour
 H2_STO,Construction,0.03003003003,kilogram,kilowatt hour
 HT_LT_DEC,Operation,3.6,megajoule,kilowatt hour
 HV_GRID,Construction,2.3e-05,kilometer,kilowatt
@@ -467,6 +473,8 @@ IND_BOILER_OIL_PLANT,Construction,1.0,unit,unit
 IND_BOILER_OIL_TANK,Construction,13.33321333,unit,unit
 IND_BOILER_WASTE,Construction,2.802618364e-05,unit,kilowatt
 IND_BOILER_WASTE,Operation,3.6,megajoule,kilowatt hour
+IND_BOILER_WASTE_CC,Construction,2.802618364e-05,unit,kilowatt
+IND_BOILER_WASTE_CC,Operation,3.6,megajoule,kilowatt hour
 IND_BOILER_WOOD,Construction,0.001,unit,kilowatt
 IND_BOILER_WOOD,Operation,3.6,megajoule,kilowatt hour
 IND_COGEN_GAS,Construction,0.000956,unit,kilowatt
@@ -476,6 +484,10 @@ IND_COGEN_GAS_ELEC,Construction,1.0,unit,unit
 IND_COGEN_GAS_HEAT,Construction,1.0,unit,unit
 IND_COGEN_WASTE,Construction,0.001,unit,kilowatt
 IND_COGEN_WASTE,Operation,3.6,megajoule,kilowatt hour
+IND_COGEN_WASTE_CC,Construction,0.001,unit,kilowatt
+IND_COGEN_WASTE_CC,Operation,3.6,megajoule,kilowatt hour
+IND_COGEN_WASTE_CC_PLANT,Construction,0.02646917344,unit,unit
+IND_COGEN_WASTE_CC_TURBINE,Construction,1.0,unit,unit
 IND_COGEN_WASTE_PLANT,Construction,0.02646917344,unit,unit
 IND_COGEN_WASTE_TURBINE,Construction,1.0,unit,unit
 IND_COGEN_WOOD,Construction,0.0003333166675,unit,kilowatt
@@ -627,7 +639,7 @@ PP,Resource,1.0,kilogram,kilogram
 PROPANE,Resource,0.0775862069,kilogram,kilowatt hour
 PROPYLENE,Resource,0.07860433634,kilogram,kilowatt hour
 PS,Resource,1.0,kilogram,kilogram
-PV,Construction,0.0007692307692,unit,kilowatt
+PV,Construction,0.3333333333,unit,kilowatt
 PV,Operation,1.0,kilowatt hour,kilowatt hour
 PVC,Resource,1.0,kilogram,kilogram
 PVC_FORMATION,Construction,0.000150672,unit,kilogram per hour
@@ -974,8 +986,8 @@ WOOD,Resource,0.2337662338,kilogram,kilowatt hour
 WOOD_METHANOL,Construction,7.644444444e-06,unit,kilowatt
 WOOD_METHANOL,Operation,0.1805054152,kilogram,kilowatt hour
 XYLENE,Resource,0.08788847929,kilogram,kilowatt hour
-biogas,Other,1.29,cubic meter,kilogram
 biogas,Other,0.777,kilogram,cubic meter
+biogas,Other,1.29,cubic meter,kilogram
 biomass,Other,0.234,kilogram,kilowatt hour
 diesel,Other,0.0845,kilogram,kilowatt hour
 electricity,Other,0.278,kilowatt hour,megajoule
@@ -989,14 +1001,14 @@ kerosene,Other,0.0838,kilogram,kilowatt hour
 light fuel oil,Other,0.0887,kilogram,kilowatt hour
 lignite,Other,0.271,kilogram,kilowatt hour
 manure,Other,0.253,kilogram,kilowatt hour
-natural gas,Other,0.0763,kilogram,kilowatt hour
-natural gas,Other,0.0982,cubic meter,kilowatt hour
 natural gas,Other,1.29,cubic meter,kilogram
+natural gas,Other,0.0982,cubic meter,kilowatt hour
+natural gas,Other,0.0763,kilogram,kilowatt hour
 natural gas,Other,0.777,kilogram,cubic meter
 nuclear fuel element,Other,9.23e-07,kilogram,kilowatt hour
 petrol,Other,0.0829,kilogram,kilowatt hour
-syngas,Other,0.47,kilogram,cubic meter
 syngas,Other,2.13,cubic meter,kilogram
+syngas,Other,0.47,kilogram,cubic meter
 waste wood,Other,0.234,kilogram,kilowatt hour
 wood ash mixture,Other,0.234,kilogram,kilowatt hour
 wood chips,Other,0.234,kilogram,kilowatt hour
