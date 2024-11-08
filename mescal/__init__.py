@@ -26,6 +26,7 @@ __all__ = (
     "remove_quebec_flow_in_global_heat_market",
     "change_direct_carbon_emissions_by_factor",
     "add_carbon_dioxide_flow",
+    "add_carbon_capture_to_plant",
 )
 
 __version__ = "1.1.1"
