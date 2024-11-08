@@ -29,6 +29,7 @@ class ESM:
             esm_db_name: str,
 
             # Optional inputs
+            main_database_name: str = None,
             technology_compositions: pd.DataFrame = None,
             results_path_file: str = 'results/',
             tech_specifics: pd.DataFrame = None,
@@ -53,6 +54,8 @@ class ESM:
         :param mapping_esm_flows_to_CPC_cat: mapping between ESM flows and CPC categories
         :param main_database: main LCI database, e.g., ecoinvent or premise database (with CPC categories)
         :param esm_db_name: name of the ESM database to be written in Brightway
+        :param main_database_name: name of the main database (e.g., 'ecoinvent-3.9.1-cutoff') if main_database
+            is an aggregation of the main database and complementary databases
         :param results_path_file: path to your result folder
         :param regionalize_foregrounds: if True, regionalize the ESM database foreground
         :param accepted_locations: list of ecoinvent locations to keep without modification in case of regionalization
@@ -72,6 +75,8 @@ class ESM:
             else pd.DataFrame(columns=['Name', 'Components'])
         self.mapping_esm_flows_to_CPC_cat = mapping_esm_flows_to_CPC_cat
         self.main_database = main_database
+        self.main_database_name = main_database_name if main_database_name is not None else \
+            (main_database.db_names if type(main_database.db_names) is str else main_database.db_names[0])
         self.esm_db_name = esm_db_name
         self.results_path_file = results_path_file
         self.regionalize_foregrounds = regionalize_foregrounds
@@ -115,7 +120,7 @@ class ESM:
     def background_search_act(self):
         background_search_act = {}
         for tech in self.activities_background_search:
-            background_search_act[tech] = self.tech_specifics[self.tech_specifics.Name == tech].Amount.iloc[0]
+            background_search_act[tech] = int(self.tech_specifics[self.tech_specifics.Name == tech].Amount.iloc[0])
         return background_search_act
 
     @property
@@ -152,7 +157,6 @@ class ESM:
     )
     from .normalization import normalize_lca_metrics
     from .generate_lcia_obj_ampl import generate_mod_file_ampl
-    from .modify_inventory import add_carbon_capture_to_plant
 
     def check_inputs(self) -> None:
         """
@@ -232,7 +236,7 @@ class ESM:
                 print(f"--> {sorted(set_in_mapping_and_not_in_lifetime)}\n")
 
         if efficiency is not None:
-            # Check if the technologies in the efficiency file are in the mapping file
+            # Check if the technologies in the efficiency file are in the mapping file and the model file
             set_in_efficiency_and_not_in_mapping = set()
             for tech in list(efficiency.Name):
                 if tech not in list(mapping[mapping.Type == 'Operation'].Name):
@@ -241,6 +245,16 @@ class ESM:
                 print(f"List of technologies that are in the efficiency file but not in the mapping file "
                       f"(this will not be a problem in the workflow).\n")
                 print(f"--> {sorted(set_in_efficiency_and_not_in_mapping)}\n")
+
+            set_in_efficiency_and_not_in_model = set()
+            for tech in list(efficiency.Name):
+                if tech not in list(model.Name):
+                    set_in_efficiency_and_not_in_model.add(tech)
+            if len(set_in_efficiency_and_not_in_model) > 0:
+                print(f"List of technologies that are in the efficiency file but not in the model file. You should "
+                      f"remove these technologies from the efficiency file, as the efficiency in the model cannot be "
+                      f"retrieved.\n")
+                print(f"--> {sorted(set_in_efficiency_and_not_in_model)}\n")
 
         # Check if the technologies in the tech_specifics file are in the mapping file
         set_in_tech_specifics_and_not_in_mapping = set()
@@ -395,7 +409,7 @@ class ESM:
                     change_fossil_carbon_flows_of_biofuels(
                         db_name=self.esm_db_name,
                         activity_name=f'{tech}, Operation',
-                        biogenic_ratio=biogenic_ratio
+                        biogenic_ratio=float(biogenic_ratio),
                     )
 
             # Adjust carbon flows by a constant factor for some technologies
@@ -406,7 +420,21 @@ class ESM:
                     change_direct_carbon_emissions_by_factor(
                         db_name=self.esm_db_name,
                         activity_name=f'{tech}, Operation',
-                        factor=factor
+                        factor=float(factor),
+                    )
+
+            # Add carbon capture to plant
+            add_carbon_capture_tech = self.tech_specifics[self.tech_specifics.Specifics == 'Add CC'][
+                ['Name', 'Amount']].values.tolist()
+            for tech, type_and_ratio in add_carbon_capture_tech:
+                if f'{tech}, Operation' in [act['name'] for act in esm_db.db_as_list]:
+                    type_and_ratio = type_and_ratio.split(', ')
+                    add_carbon_capture_to_plant(
+                        activity_database_name=self.esm_db_name,
+                        premise_database_name=self.main_database_name,
+                        activity_name=f'{tech}, Operation',
+                        plant_type=str(type_and_ratio[0]),
+                        capture_ratio=float(type_and_ratio[1]),
                     )
 
             t2_mod_inv = time.time()
