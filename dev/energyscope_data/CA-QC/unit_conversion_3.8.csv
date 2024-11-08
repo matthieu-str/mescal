@@ -540,10 +540,10 @@ LCV_GASOLINE_MD,Operation,1.3333333330000001,kilometer,ton kilometer
 LCV_GASOLINE_MD,Construction,0.0479364519,unit,ton kilometer per hour
 LCV_GASOLINE_SD,Operation,1.3333333330000001,kilometer,ton kilometer
 LCV_GASOLINE_SD,Construction,0.0479364519,unit,ton kilometer per hour
-LCV_PHEV_GASOLINE_MD,Construction,0.0479364519,unit,ton kilometer per hour
-LCV_PHEV_GASOLINE_MD,Operation,1.3333333330000001,kilometer,ton kilometer
-LCV_PHEV_GASOLINE_SD,Construction,0.0479364519,unit,ton kilometer per hour
-LCV_PHEV_GASOLINE_SD,Operation,1.3333333330000001,kilometer,ton kilometer
+LCV_PHEV_DIESEL_MD,Construction,0.0479364519,unit,ton kilometer per hour
+LCV_PHEV_DIESEL_MD,Operation,1.3333333330000001,kilometer,ton kilometer
+LCV_PHEV_DIESEL_SD,Construction,0.0479364519,unit,ton kilometer per hour
+LCV_PHEV_DIESEL_SD,Operation,1.3333333330000001,kilometer,ton kilometer
 LCV_PROPANE_MD,Operation,1.3333333330000001,kilometer,ton kilometer
 LCV_PROPANE_MD,Construction,0.0479364519,unit,ton kilometer per hour
 LCV_PROPANE_SD,Operation,1.3333333330000001,kilometer,ton kilometer

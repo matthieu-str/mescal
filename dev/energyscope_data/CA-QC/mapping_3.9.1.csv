@@ -485,10 +485,10 @@ LCV_GASOLINE_MD,Construction,"truck, Euro-6","truck, diesel, 3.5t, 2020, Euro-6,
 LCV_GASOLINE_MD,Operation,"transport, truck, Euro-6","transport, truck, diesel, 3.5t, 2020, Euro-6, urban delivery",CH,urban delivery_truck
 LCV_GASOLINE_SD,Construction,"truck, Euro-6","truck, diesel, 3.5t, 2020, Euro-6, urban delivery",CH,urban delivery_truck
 LCV_GASOLINE_SD,Operation,"transport, truck, Euro-6","transport, truck, diesel, 3.5t, 2020, Euro-6, urban delivery",CH,urban delivery_truck
-LCV_PHEV_GASOLINE_MD,Construction,"truck, Euro-6","truck, plugin diesel hybrid, 3.5t, 2020, Euro-6, urban delivery",CH,urban delivery_truck
-LCV_PHEV_GASOLINE_MD,Operation,"transport, truck, Euro-6","transport, truck, plugin diesel hybrid, 3.5t, 2020, Euro-6, urban delivery",CH,urban delivery_truck
-LCV_PHEV_GASOLINE_SD,Operation,"transport, truck, Euro-6","transport, truck, plugin diesel hybrid, 3.5t, 2020, Euro-6, urban delivery",CH,urban delivery_truck
-LCV_PHEV_GASOLINE_SD,Construction,"truck, Euro-6","truck, plugin diesel hybrid, 3.5t, 2020, Euro-6, urban delivery",CH,urban delivery_truck
+LCV_PHEV_DIESEL_MD,Construction,"truck, Euro-6","truck, plugin diesel hybrid, 3.5t, 2020, Euro-6, urban delivery",CH,urban delivery_truck
+LCV_PHEV_DIESEL_MD,Operation,"transport, truck, Euro-6","transport, truck, plugin diesel hybrid, 3.5t, 2020, Euro-6, urban delivery",CH,urban delivery_truck
+LCV_PHEV_DIESEL_SD,Operation,"transport, truck, Euro-6","transport, truck, plugin diesel hybrid, 3.5t, 2020, Euro-6, urban delivery",CH,urban delivery_truck
+LCV_PHEV_DIESEL_SD,Construction,"truck, Euro-6","truck, plugin diesel hybrid, 3.5t, 2020, Euro-6, urban delivery",CH,urban delivery_truck
 LCV_PROPANE_MD,Operation,"transport, truck, Euro-6","transport, truck, compressed gas, 3.5t, 2020, Euro-6, urban delivery",CH,urban delivery_truck
 LCV_PROPANE_MD,Construction,"truck, Euro-6","truck, compressed gas, 3.5t, 2020, Euro-6, urban delivery",CH,urban delivery_truck
 LCV_PROPANE_SD,Construction,"truck, Euro-6","truck, compressed gas, 3.5t, 2020, Euro-6, urban delivery",CH,urban delivery_truck

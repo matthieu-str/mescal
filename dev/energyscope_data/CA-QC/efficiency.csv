@@ -149,8 +149,8 @@ LCV_FC_CH4_MD,['NG_HP'],
 LCV_FC_CH4_SD,['NG_HP'],
 LCV_GASOLINE_MD,['GASOLINE'],
 LCV_GASOLINE_SD,['GASOLINE'],
-LCV_PHEV_GASOLINE_MD,['GASOLINE'],
-LCV_PHEV_GASOLINE_SD,['GASOLINE'],
+LCV_PHEV_DIESEL_MD,['DIESEL'],
+LCV_PHEV_DIESEL_SD,['DIESEL'],
 LCV_PROPANE_MD,"['PROPANE', 'TRANSPORT_FUEL']","Natural gas input accepted, direct emissions adjusted accordingly"
 LCV_PROPANE_SD,"['PROPANE', 'TRANSPORT_FUEL']","Natural gas input accepted, direct emissions adjusted accordingly"
 METHANATION,['H2_MP'],
