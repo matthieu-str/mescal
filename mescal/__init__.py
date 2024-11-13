@@ -27,6 +27,7 @@ __all__ = (
     "change_direct_carbon_emissions_by_factor",
     "add_carbon_dioxide_flow",
     "add_carbon_capture_to_plant",
+    "adapt_row_activity_based_on_other_activity",
 )
 
 __version__ = "1.1.1"

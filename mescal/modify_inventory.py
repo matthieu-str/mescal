@@ -386,3 +386,86 @@ def add_carbon_capture_to_plant(
     new_ccs_exc.save()
 
     act.save()
+
+
+def adapt_row_activity_based_on_other_activity(
+        db_name: str,
+        activity_name: str,
+        product_name: str,
+        reference_activity_location: str,
+) -> None:
+    """
+    Change one RoW activity by copying and adapting the same activity in another location
+
+    :param db_name: name of the LCI database
+    :param activity_name: name of the activity to be changed
+    :param product_name: name of the reference product of the activity to be changed
+    :param reference_activity_location: location of the activity to be used as reference
+    :return: None (changes are saved in the database)
+    """
+    
+    act = [i for i in bd.Database(db_name).search(activity_name, limit=1000) if (
+            (i.as_dict()['name'] == activity_name)
+            & (i.as_dict()['reference product'] == product_name)
+            & (i.as_dict()['location'] == 'RoW')
+    )][0]  # activity to be changed
+    
+    for exc in act.technosphere():
+        exc.delete()  # delete all technosphere exchanges
+    
+    for exc in act.biosphere():
+        exc.delete()  # delete all biosphere exchanges
+    
+    ref_act = [i for i in bd.Database(db_name).search(activity_name, limit=1000) if (
+            (activity_name == i.as_dict()['name'])
+            & (i.as_dict()['reference product'] == product_name)
+            & (i.as_dict()['location'] == reference_activity_location)
+    )][0]  # reference activity to be copied and adjusted
+    
+    for exc in ref_act.technosphere():
+
+        exc_act = bd.Database(db_name).get(exc.input[1])
+
+        if exc_act.as_dict()['location'] in ['RoW', 'GLO']:  # if the exchange is RoW or GLO, copy it without changes
+            act.new_exchange(
+                input=exc.input,
+                amount=exc.amount,
+                type='technosphere',
+            ).save()
+
+        else:  # if the exchange is not RoW or GLO, search for the same exchange in RoW or GLO
+            new_exc_act = [i for i in bd.Database(db_name).search(exc_act.as_dict()['name'], limit=1000) if (
+                    (i.as_dict()['name'] == exc_act.as_dict()['name'])
+                    & (i.as_dict()['reference product'] == exc_act.as_dict()['reference product'])
+                    & (i.as_dict()['location'] == 'RoW')
+            )]
+            
+            if len(new_exc_act) > 0:
+                new_exc_act = new_exc_act[0]  # if an exchange is found in RoW, take the first one
+                
+            else:
+                new_exc_act = [i for i in bd.Database(db_name).search(exc_act.as_dict()['name'], limit=1000) if (
+                    (i.as_dict()['name'] == exc_act.as_dict()['name'])
+                    & (i.as_dict()['reference product'] == exc_act.as_dict()['reference product'])
+                    & (i.as_dict()['location'] == 'GLO')
+                )]
+         
+                if len(new_exc_act) > 0:
+                    new_exc_act = new_exc_act[0]  # if an exchange is found in GLO, take the first one
+                else:
+                    new_exc_act = exc_act  # if no exchange is found in RoW or GLO, keep the original exchange
+            
+            act.new_exchange(
+                input=(new_exc_act.as_dict()['database'], new_exc_act.as_dict()['code']),
+                amount=exc.amount,
+                type='technosphere',
+            ).save()  # add the new technosphere exchange
+    
+    for exc in ref_act.biosphere():
+        act.new_exchange(
+            input=exc.input,
+            amount=exc.amount,
+            type='biosphere',
+        ).save()  # add the new biosphere exchange
+                
+    act.save()
