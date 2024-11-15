@@ -78,6 +78,8 @@ BUS_FC_CH4_SD,Construction,0.004002646154,unit,person kilometer per hour
 BUS_FC_CH4_SD,Operation,1.0,person kilometer,person kilometer
 BUS_FC_H2_SD,Construction,0.004002646154,unit,person kilometer per hour
 BUS_FC_H2_SD,Operation,1.0,person kilometer,person kilometer
+BUS_GASOLINE_SD,Construction,0.004002646154,unit,person kilometer per hour
+BUS_GASOLINE_SD,Operation,1.0,person kilometer,person kilometer
 BUS_HY_DIESEL_SD,Construction,0.004002646154,unit,person kilometer per hour
 BUS_HY_DIESEL_SD,Operation,1.0,person kilometer,person kilometer
 BUS_PROPANE_SD,Construction,0.004002646154,unit,person kilometer per hour
@@ -382,7 +384,6 @@ DHN_HP_ELEC,Operation,3.6,megajoule,kilowatt hour
 DHN_TH_STORAGE,Construction,5e-05,unit,kilowatt
 DIESEL,Resource,0.08453085376,kilogram,kilowatt hour
 DIE_STO,Construction,6.244891679e-09,unit,kilowatt hour
-DIRECT_USAGE,Operation,1.0,kilogram,kilogram
 DOGR,Operation,1.0,kilogram,kilogram
 EHV_GRID,Construction,7.82e-05,kilometer,kilowatt
 ELECTRICITY_EHV,Resource,1.0,kilowatt hour,kilowatt hour
@@ -932,6 +933,8 @@ TRUCK_LH_EV_LD,Construction,0.0011233866519999,unit,ton kilometer per hour
 TRUCK_LH_EV_LD,Operation,1.0,ton kilometer,ton kilometer
 TRUCK_LH_FC_CH4_LD,Construction,0.0011233866519999,unit,ton kilometer per hour
 TRUCK_LH_FC_CH4_LD,Operation,1.0,ton kilometer,ton kilometer
+TRUCK_LH_GASOLINE_LD,Construction,0.0011233866519999,unit,ton kilometer per hour
+TRUCK_LH_GASOLINE_LD,Operation,1.0,ton kilometer,ton kilometer
 TRUCK_LH_HY_DIESEL_LD,Construction,0.0011233866519999,unit,ton kilometer per hour
 TRUCK_LH_HY_DIESEL_LD,Operation,1.0,ton kilometer,ton kilometer
 TRUCK_LH_PROPANE_LD,Construction,0.0011233866519999,unit,ton kilometer per hour
@@ -960,6 +963,10 @@ TRUCK_SH_FC_CH4_MD,Construction,0.003263942308,unit,ton kilometer per hour
 TRUCK_SH_FC_CH4_MD,Operation,0.3125,kilometer,ton kilometer
 TRUCK_SH_FC_CH4_SD,Construction,0.003263942308,unit,ton kilometer per hour
 TRUCK_SH_FC_CH4_SD,Operation,0.3125,kilometer,ton kilometer
+TRUCK_SH_GASOLINE_MD,Construction,0.003263942308,unit,ton kilometer per hour
+TRUCK_SH_GASOLINE_MD,Operation,0.3125,kilometer,ton kilometer
+TRUCK_SH_GASOLINE_SD,Construction,0.003263942308,unit,ton kilometer per hour
+TRUCK_SH_GASOLINE_SD,Operation,0.3125,kilometer,ton kilometer
 TRUCK_SH_HY_DIESEL_MD,Construction,0.003263942308,unit,ton kilometer per hour
 TRUCK_SH_HY_DIESEL_MD,Operation,0.3125,kilometer,ton kilometer
 TRUCK_SH_HY_DIESEL_SD,Construction,0.003263942308,unit,ton kilometer per hour

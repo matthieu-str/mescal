@@ -15,6 +15,7 @@ BUS_BIODIESEL_B100_SD,['BIO_DIESEL'],
 BUS_BIODIESEL_B20_SD,"['BIO_DIESEL', 'DIESEL']","Diesel input accepted, fossil carbon emissions turned into biogenic carbon flows accordingly"
 BUS_CNG_SD,['NG_HP'],
 BUS_DIESEL_SD,['DIESEL'],
+BUS_GASOLINE_SD,['GASOLINE'],
 BUS_HY_DIESEL_SD,['DIESEL'],
 BUS_PROPANE_SD,"['PROPANE', 'TRANSPORT_FUEL']","Natural gas input accepted, direct emissions adjusted accordingly"
 CAR_BIODIESEL_B100_ELD,['BIO_DIESEL'],
@@ -245,6 +246,7 @@ TRUCK_LH_BIODIESEL_B20_LD,"['BIO_DIESEL', 'DIESEL']","Diesel input accepted, fos
 TRUCK_LH_CNG_LD,['NG_HP'],
 TRUCK_LH_DIESEL_LD,['DIESEL'],
 TRUCK_LH_FC_CH4_LD,['NG_HP'],
+TRUCK_LH_GASOLINE_LD,['GASOLINE'],
 TRUCK_LH_HY_DIESEL_LD,['DIESEL'],
 TRUCK_LH_PROPANE_LD,"['PROPANE', 'TRANSPORT_FUEL']","Natural gas input accepted, direct emissions adjusted accordingly"
 TRUCK_SH_BIODIESEL_B100_MD,['BIO_DIESEL'],
@@ -257,6 +259,8 @@ TRUCK_SH_DIESEL_MD,['DIESEL'],
 TRUCK_SH_DIESEL_SD,['DIESEL'],
 TRUCK_SH_FC_CH4_MD,['NG_HP'],
 TRUCK_SH_FC_CH4_SD,['NG_HP'],
+TRUCK_SH_GASOLINE_MD,['GASOLINE'],
+TRUCK_SH_GASOLINE_SD,['GASOLINE'],
 TRUCK_SH_HY_DIESEL_MD,['DIESEL'],
 TRUCK_SH_HY_DIESEL_SD,['DIESEL'],
 TRUCK_SH_PROPANE_MD,"['PROPANE', 'TRANSPORT_FUEL']","Natural gas input accepted, direct emissions adjusted accordingly"
