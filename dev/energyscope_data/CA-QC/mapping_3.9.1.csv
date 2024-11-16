@@ -164,8 +164,6 @@ CAR_MEOH_MD,Operation,"transport, passenger car, EURO-6ab","transport, passenger
 CAR_MEOH_MD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2020
 CAR_MEOH_SD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2020
 CAR_MEOH_SD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2020
-CAR_PHEV_DIESEL,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, plugin diesel hybrid, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2020
-CAR_PHEV_DIESEL,Construction,"Passenger car, EURO-6ab","Passenger car, plugin diesel hybrid, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2020
 CAR_PHEV_ELD,Construction,"Passenger car, EURO-6ab","Passenger car, plugin gasoline hybrid, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2020
 CAR_PHEV_ELD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, plugin gasoline hybrid, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2020
 CAR_PHEV_LD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, plugin gasoline hybrid, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2020
