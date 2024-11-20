@@ -3,7 +3,10 @@ from .utils import ecoinvent_unit_convention
 from .filesystem_constants import DATA_DIR
 
 
-def load_change_report_annex(v_from: str, v_to: str) -> pd.DataFrame:
+def load_change_report_annex(
+        v_from: str,
+        v_to: str
+) -> pd.DataFrame:
     """
     Load the change report annex between two versions of the ecoinvent database
 
@@ -43,7 +46,10 @@ def load_change_report_annex(v_from: str, v_to: str) -> pd.DataFrame:
     return df
 
 
-def concatenate_change_reports(v_from: str, v_to: str) -> pd.DataFrame:
+def concatenate_change_reports(
+        v_from: str,
+        v_to: str
+) -> pd.DataFrame:
     """
     Concatenate change reports annexes of the ecoinvent database
 
@@ -96,7 +102,10 @@ def handle_multi_processes_ecoinvent(df: pd.DataFrame) -> pd.DataFrame:
     return updated_df
 
 
-def load_concatenated_ecoinvent_change_report(v_from: str, v_to: str) -> pd.DataFrame:
+def load_concatenated_ecoinvent_change_report(
+        v_from: str,
+        v_to: str
+) -> pd.DataFrame:
     """
     Load the concatenated change report between two versions of the ecoinvent database
 
@@ -126,8 +135,11 @@ def load_concatenated_ecoinvent_change_report(v_from: str, v_to: str) -> pd.Data
     return df
 
 
-def update_mapping_file(mapping: pd.DataFrame, change_report: pd.DataFrame, unit_to_change: list = None) \
-        -> tuple[pd.DataFrame, int, [tuple[str, str], tuple[str, str, str], str, str]]:
+def update_mapping_file(
+        mapping: pd.DataFrame,
+        change_report: pd.DataFrame,
+        unit_to_change: list = None
+) -> tuple[pd.DataFrame, int, [tuple[str, str], tuple[str, str, str], str, str]]:
     """
     Update the mapping file with the concatenated change report
 
@@ -197,8 +209,12 @@ def update_mapping_file(mapping: pd.DataFrame, change_report: pd.DataFrame, unit
     return updated_mapping, counter, unit_to_change
 
 
-def change_database_name_in_mapping_file(row: pd.Series, version_from: str, version_to: str,
-                                         name_complementary_db: str = None) -> pd.Series:
+def change_database_name_in_mapping_file(
+        row: pd.Series,
+        version_from: str,
+        version_to: str,
+        name_complementary_db: str = None
+) -> pd.Series:
     """
     Change the name of the database in the mapping file
 
@@ -223,8 +239,12 @@ def change_database_name_in_mapping_file(row: pd.Series, version_from: str, vers
     return row
 
 
-def change_ecoinvent_version_mapping(mapping: pd.DataFrame, v_from: str, v_to: str, name_complementary_db: str = None) \
-        -> tuple[pd.DataFrame, [tuple[str, str], tuple[str, str, str], str, str]]:
+def change_ecoinvent_version_mapping(
+        mapping: pd.DataFrame,
+        v_from: str,
+        v_to: str,
+        name_complementary_db: str = None
+) -> tuple[pd.DataFrame, [tuple[str, str], tuple[str, str, str], str, str]]:
     """
     Change the version of the ecoinvent database in the mapping file
 
@@ -249,8 +269,11 @@ def change_ecoinvent_version_mapping(mapping: pd.DataFrame, v_from: str, v_to: s
     return updated_mapping, unit_to_change
 
 
-def update_unit_conversion_file(unit_conversion: pd.DataFrame, unit_changes: list, new_unit_conversion_factors: dict) \
-        -> pd.DataFrame:
+def update_unit_conversion_file(
+        unit_conversion: pd.DataFrame,
+        unit_changes: list,
+        new_unit_conversion_factors: dict
+) -> pd.DataFrame:
     """
     Adapt the unit conversion file according to the possible unit changes in the mapping file
 
@@ -270,7 +293,8 @@ def update_unit_conversion_file(unit_conversion: pd.DataFrame, unit_changes: lis
                              f'is not the same as the one in the mapping file. {unit_lca} != {unit_changes[i][2]}')
         else:
             if unit_changes[i][0] in new_unit_conversion_factors.keys():
-                new_value = new_unit_conversion_factors[unit_changes[i][0]]
+                new_value = new_unit_conversion_factors[unit_changes[i][0]][0]
+                new_comment = new_unit_conversion_factors[unit_changes[i][0]][1]
             else:
                 raise ValueError(f"Missing new unit conversion factor for {unit_changes[i][0]}")
 
@@ -282,7 +306,12 @@ def update_unit_conversion_file(unit_conversion: pd.DataFrame, unit_changes: lis
 
             # add new row
             unit_conversion.loc[unit_conversion.index.max() + 1] = [
-                unit_changes[i][0][0], unit_changes[i][0][1], new_value, unit_changes[i][3], unit_esm
+                unit_changes[i][0][0],
+                unit_changes[i][0][1],
+                new_value,
+                unit_changes[i][3],
+                unit_esm,
+                new_comment,
             ]
 
     return unit_conversion
