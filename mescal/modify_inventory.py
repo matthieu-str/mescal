@@ -469,3 +469,41 @@ def adapt_rest_of_the_world_activity_based_on_other_activity(
         ).save()  # add the new biosphere exchange
                 
     act.save()
+
+
+def change_flow_value(
+        activity_code: str,
+        database_name: str,
+        flow_code: str,
+        flow_type: str,
+        new_value: float,
+) -> None:
+    """
+    Change the value of a flow in an activity
+
+    :param activity_code: code of the activity to be changed
+    :param database_name: name of the LCI database
+    :param flow_code: code of the flow to be changed
+    :param flow_type: type of the flow to be changed. Can be 'biosphere' or 'technosphere'.
+    :param new_value: new value of the flow
+    :return: None (changes are saved in the database)
+    """
+
+    act = bd.Database(database_name).get(activity_code)
+
+    if flow_type == 'biosphere':
+        for exc in act.biosphere():
+            if exc.input[1] == flow_code:
+                exc['amount'] = new_value
+                exc.save()
+
+    elif flow_type == 'technosphere':
+        for exc in act.technosphere():
+            if exc.input[1] == flow_code:
+                exc['amount'] = new_value
+                exc.save()
+
+    else:
+        raise ValueError("flow_type should be either 'biosphere' or 'technosphere'")
+
+    act.save()
