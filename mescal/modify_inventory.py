@@ -388,7 +388,7 @@ def add_carbon_capture_to_plant(
     act.save()
 
 
-def adapt_row_activity_based_on_other_activity(
+def adapt_rest_of_the_world_activity_based_on_other_activity(
         db_name: str,
         activity_name: str,
         product_name: str,
