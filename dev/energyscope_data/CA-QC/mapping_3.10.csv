@@ -1,0 +1,993 @@
+Name,Type,Product,Activity,Location,Database
+AFC,Construction,"fuel cell system, 1 kWe, proton exchange membrane (PEM)","fuel cell system assembly, 1 kWe, proton exchange membrane (PEM)",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+AFC,Operation,"electricity, from residential heating system","electricity, residential, by conversion of hydrogen using fuel cell, PEM, allocated by exergy, distributed by pipeline, produced by Electrolysis, PEM using electricity from grid",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+ALKALINE_ELECTROLYSIS,Operation,"hydrogen, gaseous, 20 bar","hydrogen production, gaseous, 20 bar, from AEC electrolysis, from grid electricity",CAN,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+ALKALINE_ELECTROLYSIS_PLANT,Construction,"electrolyzer, 1MWe, AEC, Balance of Plant","electrolyzer production, 1MWe, AEC, Balance of Plant",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+ALKALINE_ELECTROLYSIS_PLANT_DECOM,Construction,"used fuel cell balance of plant, 1MWe, AEC","treatment of fuel cell balance of plant, 1MWe, AEC",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+ALKALINE_ELECTROLYSIS_STACK,Construction,"electrolyzer, 1MWe, AEC, Stack","electrolyzer production, 1MWe, AEC, Stack",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+ALKALINE_ELECTROLYSIS_STACK_DECOM,Construction,"used fuel cell stack, 1MWe, AEC","treatment of fuel cell stack, 1MWe, AEC",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+AL_MAKING,Construction,aluminium casting facility,aluminium casting facility construction,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+AL_MAKING,Operation,"aluminium, primary, ingot","aluminium production, primary, ingot",CA,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+AL_MAKING_HR,Construction,aluminium casting facility,aluminium casting facility construction,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+AL_MAKING_HR,Operation,"aluminium, primary, ingot","aluminium production, primary, ingot",CA,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+AN_DIG,Operation,biogas,anaerobic digestion of manure,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+AN_DIG,Construction,"anaerobic digestion plant, for biowaste","anaerobic digestion plant construction, for biowaste",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+AN_DIG_SI,Operation,biogas,anaerobic digestion of manure,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+AN_DIG_SI_COGEN,Construction,"heat and power co-generation unit, 160kW electrical, common components for heat+electricity","heat and power co-generation unit construction, 160kW electrical, common components for heat+electricity",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+AN_DIG_SI_PLANT,Construction,"anaerobic digestion plant, for biowaste","anaerobic digestion plant construction, for biowaste",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+ATR,Operation,"hydrogen, gaseous, low pressure","hydrogen production, auto-thermal reforming",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+ATR_CCS,Operation,"hydrogen, gaseous, low pressure","hydrogen production, auto-thermal reforming, with CCS",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+ATR_CCS_PLANT,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+ATR_CCS_TANK,Construction,"liquid storage tank, chemicals, organics","market for liquid storage tank, chemicals, organics",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+ATR_PLANT,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+ATR_TANK,Construction,"liquid storage tank, chemicals, organics","market for liquid storage tank, chemicals, organics",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+BATTERY,Construction,"battery, Li-ion, LiMn2O4, rechargeable, prismatic","market for battery, Li-ion, LiMn2O4, rechargeable, prismatic",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+BIOGAS_ATR,Operation,"hydrogen, gaseous, low pressure","hydrogen production, auto-thermal reforming, from biomethane",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+BIOGAS_ATR_CCS,Operation,"hydrogen, gaseous, low pressure","hydrogen production, auto-thermal reforming, from biomethane, with CCS",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+BIOGAS_ATR_CCS_PLANT,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+BIOGAS_ATR_CCS_TANK,Construction,"liquid storage tank, chemicals, organics","market for liquid storage tank, chemicals, organics",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+BIOGAS_ATR_PLANT,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+BIOGAS_ATR_TANK,Construction,"liquid storage tank, chemicals, organics","market for liquid storage tank, chemicals, organics",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+BIOGAS_BIOMETHANE,Construction,"chemical factory, organics","market for chemical factory, organics",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+BIOGAS_BIOMETHANE,Operation,"biomethane, from biogas upgrading, using amine scrubbing","biomethane production, from biogas upgrading, using amine scrubbing",CAN,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+BIOGAS_SMR,Operation,"hydrogen, gaseous, low pressure","hydrogen production, steam methane reforming, from biomethane",CAN,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+BIOGAS_SMR_CCS,Operation,"hydrogen, gaseous, low pressure","hydrogen production, steam methane reforming, from biomethane, with CCS",CAN,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+BIOGAS_SMR_CCS_PLANT,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+BIOGAS_SMR_CCS_TANK,Construction,"liquid storage tank, chemicals, organics","market for liquid storage tank, chemicals, organics",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+BIOGAS_SMR_PLANT,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+BIOGAS_SMR_TANK,Construction,"liquid storage tank, chemicals, organics","market for liquid storage tank, chemicals, organics",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+BIOMASS_GAS_EF_H2,Operation,"hydrogen, gaseous, 25 bar","hydrogen production, gaseous, 25 bar, from gasification of woody biomass in entrained flow gasifier, at gasification plant",CAN,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+BIOMASS_GAS_EF_H2_CCS,Operation,"hydrogen, gaseous, 25 bar","hydrogen production, gaseous, 25 bar, from gasification of woody biomass in entrained flow gasifier, with CCS, at gasification plant",CAN,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+BIOMASS_GAS_EF_H2_CCS_PLANT,Construction,synthetic gas factory,synthetic gas factory construction,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+BIOMASS_GAS_EF_H2_CCS_TANK,Construction,"liquid storage tank, chemicals, organics","market for liquid storage tank, chemicals, organics",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+BIOMASS_GAS_EF_H2_PLANT,Construction,synthetic gas factory,synthetic gas factory construction,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+BIOMASS_GAS_EF_H2_TANK,Construction,"liquid storage tank, chemicals, organics","market for liquid storage tank, chemicals, organics",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+BIOMASS_GAS_FB_H2,Operation,"hydrogen, gaseous, 25 bar","hydrogen production, gaseous, 25 bar, from gasification of woody biomass in entrained flow gasifier, at gasification plant",CAN,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+BIOMASS_GAS_FB_H2_CCS,Operation,"hydrogen, gaseous, 25 bar","hydrogen production, gaseous, 25 bar, from gasification of woody biomass in entrained flow gasifier, with CCS, at gasification plant",CAN,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+BIOMASS_GAS_FB_H2_CCS_PLANT,Construction,synthetic gas factory,synthetic gas factory construction,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+BIOMASS_GAS_FB_H2_CCS_TANK,Construction,"liquid storage tank, chemicals, organics","market for liquid storage tank, chemicals, organics",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+BIOMASS_GAS_FB_H2_PLANT,Construction,synthetic gas factory,synthetic gas factory construction,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+BIOMASS_GAS_FB_H2_TANK,Construction,"liquid storage tank, chemicals, organics","market for liquid storage tank, chemicals, organics",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+BUS_BIODIESEL_B100_SD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m double deck urban bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+BUS_BIODIESEL_B100_SD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m double deck urban bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+BUS_BIODIESEL_B20_SD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m double deck urban bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+BUS_BIODIESEL_B20_SD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m double deck urban bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+BUS_CNG_SD,Construction,"Passenger bus, EURO-VI","Passenger bus, compressed gas, 13m double deck urban bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+BUS_CNG_SD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, compressed gas, 13m double deck urban bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+BUS_DIESEL_SD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m double deck urban bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+BUS_DIESEL_SD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m double deck urban bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+BUS_EV_SD,Construction,passenger bus,"passenger bus, battery electric - overnight charging, 13m double deck urban bus",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+BUS_EV_SD,Operation,"transport, passenger bus","transport, passenger bus, battery electric - overnight charging, 13m double deck urban bus",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+BUS_FC_CH4_SD,Construction,passenger bus,"passenger bus, fuel cell electric, 13m double deck urban bus",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+BUS_FC_CH4_SD,Operation,"transport, passenger bus","transport, passenger bus, fuel cell electric, 13m double deck urban bus",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+BUS_FC_H2_SD,Construction,passenger bus,"passenger bus, fuel cell electric, 13m double deck urban bus",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+BUS_FC_H2_SD,Operation,"transport, passenger bus","transport, passenger bus, fuel cell electric, 13m double deck urban bus",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+BUS_HY_DIESEL_SD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel hybrid, 13m double deck urban bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+BUS_HY_DIESEL_SD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel hybrid, 13m double deck urban bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+BUS_PROPANE_SD,Construction,"Passenger bus, EURO-VI","Passenger bus, compressed gas, 13m double deck urban bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+BUS_PROPANE_SD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, compressed gas, 13m double deck urban bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_BIODIESEL_B100_ELD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_BIODIESEL_B100_ELD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_BIODIESEL_B100_LD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_BIODIESEL_B100_LD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_BIODIESEL_B100_MD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_BIODIESEL_B100_MD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_BIODIESEL_B100_SD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_BIODIESEL_B100_SD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_BIODIESEL_B20_ELD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_BIODIESEL_B20_ELD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_BIODIESEL_B20_LD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_BIODIESEL_B20_LD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_BIODIESEL_B20_MD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_BIODIESEL_B20_MD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_BIODIESEL_B20_SD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_BIODIESEL_B20_SD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_CNG_ELD,Construction,"Passenger car, EURO-6ab","Passenger car, compressed gas, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_CNG_ELD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, compressed gas, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_CNG_LD,Construction,"Passenger car, EURO-6ab","Passenger car, compressed gas, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_CNG_LD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, compressed gas, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_CNG_MD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, compressed gas, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_CNG_MD,Construction,"Passenger car, EURO-6ab","Passenger car, compressed gas, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_CNG_SD,Construction,"Passenger car, EURO-6ab","Passenger car, compressed gas, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_CNG_SD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, compressed gas, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_DIESEL_ELD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_DIESEL_ELD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_DIESEL_LD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_DIESEL_LD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_DIESEL_MD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_DIESEL_MD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_DIESEL_SD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_DIESEL_SD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_ETOH_E10_ELD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_ETOH_E10_ELD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_ETOH_E10_LD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_ETOH_E10_LD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_ETOH_E10_MD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_ETOH_E10_MD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_ETOH_E10_SD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_ETOH_E10_SD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_ETOH_E85_ELD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_ETOH_E85_ELD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_ETOH_E85_LD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_ETOH_E85_LD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_ETOH_E85_MD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_ETOH_E85_MD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_ETOH_E85_SD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_ETOH_E85_SD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_EV_ELD,Operation,"transport, passenger car","transport, passenger car, battery electric, Medium",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_EV_ELD,Construction,passenger car,"passenger car, battery electric, Medium",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_EV_LD,Operation,"transport, passenger car","transport, passenger car, battery electric, Medium",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_EV_LD,Construction,passenger car,"passenger car, battery electric, Medium",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_EV_MD,Operation,"transport, passenger car","transport, passenger car, battery electric, Medium",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_EV_MD,Construction,passenger car,"passenger car, battery electric, Medium",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_EV_SD,Construction,passenger car,"passenger car, battery electric, Medium",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_EV_SD,Operation,"transport, passenger car","transport, passenger car, battery electric, Medium",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_FC_CH4_ELD,Construction,passenger car,"passenger car, fuel cell electric, Medium",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_FC_CH4_ELD,Operation,"transport, passenger car","transport, passenger car, fuel cell electric, Medium",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_FC_CH4_LD,Construction,passenger car,"passenger car, fuel cell electric, Medium",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_FC_CH4_LD,Operation,"transport, passenger car","transport, passenger car, fuel cell electric, Medium",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_FC_CH4_MD,Operation,"transport, passenger car","transport, passenger car, fuel cell electric, Medium",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_FC_CH4_MD,Construction,passenger car,"passenger car, fuel cell electric, Medium",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_FC_CH4_SD,Operation,"transport, passenger car","transport, passenger car, fuel cell electric, Medium",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_FC_CH4_SD,Construction,passenger car,"passenger car, fuel cell electric, Medium",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_FC_H2_ELD,Operation,"transport, passenger car","transport, passenger car, fuel cell electric, Medium",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_FC_H2_ELD,Construction,passenger car,"passenger car, fuel cell electric, Medium",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_FC_H2_LD,Operation,"transport, passenger car","transport, passenger car, fuel cell electric, Medium",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_FC_H2_LD,Construction,passenger car,"passenger car, fuel cell electric, Medium",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_FC_H2_MD,Operation,"transport, passenger car","transport, passenger car, fuel cell electric, Medium",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_FC_H2_MD,Construction,passenger car,"passenger car, fuel cell electric, Medium",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_FC_H2_SD,Construction,passenger car,"passenger car, fuel cell electric, Medium",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_FC_H2_SD,Operation,"transport, passenger car","transport, passenger car, fuel cell electric, Medium",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_GASOLINE_ELD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_GASOLINE_ELD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_GASOLINE_LD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_GASOLINE_LD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_GASOLINE_MD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_GASOLINE_MD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_GASOLINE_SD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_GASOLINE_SD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_HEV_ELD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline hybrid, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_HEV_ELD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline hybrid, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_HEV_LD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline hybrid, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_HEV_LD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline hybrid, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_HEV_MD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline hybrid, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_HEV_MD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline hybrid, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_HEV_SD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline hybrid, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_HEV_SD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline hybrid, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_MEOH_ELD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_MEOH_ELD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_MEOH_LD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_MEOH_LD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_MEOH_MD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_MEOH_MD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_MEOH_SD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_MEOH_SD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_PHEV_ELD,Construction,"Passenger car, EURO-6ab","Passenger car, plugin gasoline hybrid, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_PHEV_ELD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, plugin gasoline hybrid, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_PHEV_LD,Construction,"Passenger car, EURO-6ab","Passenger car, plugin gasoline hybrid, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_PHEV_LD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, plugin gasoline hybrid, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_PHEV_MD,Construction,"Passenger car, EURO-6ab","Passenger car, plugin gasoline hybrid, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_PHEV_MD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, plugin gasoline hybrid, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_PHEV_SD,Construction,"Passenger car, EURO-6ab","Passenger car, plugin gasoline hybrid, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_PHEV_SD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, plugin gasoline hybrid, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_PROPANE_ELD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, compressed gas, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_PROPANE_ELD,Construction,"Passenger car, EURO-6ab","Passenger car, compressed gas, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_PROPANE_LD,Construction,"Passenger car, EURO-6ab","Passenger car, compressed gas, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_PROPANE_LD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, compressed gas, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_PROPANE_MD,Construction,"Passenger car, EURO-6ab","Passenger car, compressed gas, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_PROPANE_MD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, compressed gas, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_PROPANE_SD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, compressed gas, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CAR_PROPANE_SD,Construction,"Passenger car, EURO-6ab","Passenger car, compressed gas, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CCGT,Construction,"NGCC power plant, 400MWe","market for gas power plant, combined cycle, 400MW electrical",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CCGT,Operation,"electricity, high voltage","electricity production, at natural gas-fired combined cycle power plant",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CCGT_CC,Operation,"electricity, high voltage","electricity production, at natural gas-fired combined cycle power plant, post, pipeline 200km, storage 1000m",CAN,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CCGT_CC,Construction,"NGCC power plant, 400MWe","market for gas power plant, combined cycle, 400MW electrical",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CEMENT_PROD,Operation,"cement, CEM II/B","cement production, CEM II/B",CAN,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CEMENT_PROD,Construction,cement factory,cement factory construction,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CEMENT_PROD_HP,Construction,cement factory,cement factory construction,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CEMENT_PROD_HP,Operation,"cement, CEM II/B","cement production, CEM II/B",CAN,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CO2_METHANOL,Construction,methanol factory,methanol factory construction,GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CO2_METHANOL,Operation,methanol,"methanol production, natural gas reforming",CN,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CO2_STO,Construction,"liquid storage tank, chemicals, organics","market for liquid storage tank, chemicals, organics",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CO2_TO_DIESEL,Construction,petroleum refinery,petroleum refinery construction,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CO2_TO_DIESEL,Operation,"diesel, synthetic","diesel production, synthetic, Fischer Tropsch process, hydrogen from electrolysis, energy allocation",CAN,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CO2_TO_JETFUELS,Construction,petroleum refinery,petroleum refinery construction,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CO2_TO_JETFUELS,Operation,"kerosene, synthetic","kerosene production, from methanol, hydrogen from electrolysis, CO2 from cement plant, energy allocation",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COACH_BIODIESEL_B100_ELD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COACH_BIODIESEL_B100_ELD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COACH_BIODIESEL_B100_LD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COACH_BIODIESEL_B100_LD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COACH_BIODIESEL_B100_MD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COACH_BIODIESEL_B100_MD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COACH_BIODIESEL_B20_ELD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COACH_BIODIESEL_B20_ELD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COACH_BIODIESEL_B20_LD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COACH_BIODIESEL_B20_LD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COACH_BIODIESEL_B20_MD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COACH_BIODIESEL_B20_MD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COACH_CNG_ELD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, compressed gas, 13m single deck coach bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COACH_CNG_ELD,Construction,"Passenger bus, EURO-VI","Passenger bus, compressed gas, 13m single deck coach bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COACH_CNG_LD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, compressed gas, 13m single deck coach bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COACH_CNG_LD,Construction,"Passenger bus, EURO-VI","Passenger bus, compressed gas, 13m single deck coach bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COACH_CNG_MD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, compressed gas, 13m single deck coach bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COACH_CNG_MD,Construction,"Passenger bus, EURO-VI","Passenger bus, compressed gas, 13m single deck coach bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COACH_DIESEL_ELD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COACH_DIESEL_ELD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COACH_DIESEL_LD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COACH_DIESEL_LD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COACH_DIESEL_MD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COACH_DIESEL_MD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COACH_ETOH_E10_ELD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COACH_ETOH_E10_ELD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COACH_ETOH_E10_LD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COACH_ETOH_E10_LD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COACH_ETOH_E10_MD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COACH_ETOH_E10_MD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COACH_EV_ELD,Operation,"transport, passenger bus","transport, passenger bus, battery electric - overnight charging, 13m single deck urban bus",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COACH_EV_ELD,Construction,passenger bus,"passenger bus, battery electric - overnight charging, 13m single deck urban bus",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COACH_EV_LD,Operation,"transport, passenger bus","transport, passenger bus, battery electric - overnight charging, 13m single deck urban bus",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COACH_EV_LD,Construction,passenger bus,"passenger bus, battery electric - overnight charging, 13m single deck urban bus",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COACH_EV_MD,Construction,passenger bus,"passenger bus, battery electric - overnight charging, 13m single deck urban bus",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COACH_EV_MD,Operation,"transport, passenger bus","transport, passenger bus, battery electric - overnight charging, 13m single deck urban bus",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COACH_FC_CH4_ELD,Operation,"transport, passenger bus","transport, passenger bus, fuel cell electric, 13m single deck coach bus",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COACH_FC_CH4_ELD,Construction,passenger bus,"passenger bus, fuel cell electric, 13m single deck coach bus",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COACH_FC_CH4_LD,Construction,passenger bus,"passenger bus, fuel cell electric, 13m single deck coach bus",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COACH_FC_CH4_LD,Operation,"transport, passenger bus","transport, passenger bus, fuel cell electric, 13m single deck coach bus",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COACH_FC_CH4_MD,Construction,passenger bus,"passenger bus, fuel cell electric, 13m single deck coach bus",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COACH_FC_CH4_MD,Operation,"transport, passenger bus","transport, passenger bus, fuel cell electric, 13m single deck coach bus",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COACH_GASOLINE_ELD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COACH_GASOLINE_ELD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COACH_GASOLINE_LD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COACH_GASOLINE_LD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COACH_GASOLINE_MD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COACH_GASOLINE_MD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COACH_HY_DIESEL_ELD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel hybrid, 13m single deck coach bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COACH_HY_DIESEL_ELD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel hybrid, 13m single deck coach bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COACH_HY_DIESEL_LD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel hybrid, 13m single deck coach bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COACH_HY_DIESEL_LD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel hybrid, 13m single deck coach bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COACH_HY_DIESEL_MD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel hybrid, 13m single deck coach bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COACH_HY_DIESEL_MD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel hybrid, 13m single deck coach bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COACH_PROPANE_ELD,Construction,"Passenger bus, EURO-VI","Passenger bus, compressed gas, 13m single deck coach bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COACH_PROPANE_ELD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, compressed gas, 13m single deck coach bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COACH_PROPANE_LD,Construction,"Passenger bus, EURO-VI","Passenger bus, compressed gas, 13m single deck coach bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COACH_PROPANE_LD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, compressed gas, 13m single deck coach bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COACH_PROPANE_MD,Construction,"Passenger bus, EURO-VI","Passenger bus, compressed gas, 13m single deck coach bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COACH_PROPANE_MD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, compressed gas, 13m single deck coach bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COAL_GAS_H2,Operation,"hydrogen, gaseous, low pressure","hydrogen production, coal gasification",CAN,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COAL_GAS_H2_ADV,Operation,"hydrogen, gaseous, low pressure","hydrogen production, coal gasification",CAN,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COAL_GAS_H2_ADV_CCS,Operation,"hydrogen, gaseous, low pressure","hydrogen production, coal gasification, with CCS",CAN,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COAL_GAS_H2_ADV_CCS_PLANT,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COAL_GAS_H2_ADV_CCS_TANK,Construction,"liquid storage tank, chemicals, organics","liquid storage tank production, chemicals, organics",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COAL_GAS_H2_ADV_PLANT,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COAL_GAS_H2_ADV_TANK,Construction,"liquid storage tank, chemicals, organics","liquid storage tank production, chemicals, organics",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COAL_GAS_H2_CCS,Operation,"hydrogen, gaseous, low pressure","hydrogen production, coal gasification, with CCS",CAN,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COAL_GAS_H2_CCS_PLANT,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COAL_GAS_H2_CCS_TANK,Construction,"liquid storage tank, chemicals, organics","liquid storage tank production, chemicals, organics",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COAL_GAS_H2_PLANT,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COAL_GAS_H2_TANK,Construction,"liquid storage tank, chemicals, organics","liquid storage tank production, chemicals, organics",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COAL_IGCC,Operation,"electricity, high voltage","electricity production, at hard coal-fired IGCC power plant",CAN,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COAL_IGCC,Construction,hard coal IGCC power plant 450MW,hard coal IGCC power plant 450MW,RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COAL_IGCC_CC,Construction,hard coal IGCC power plant 450MW,hard coal IGCC power plant 450MW,RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COAL_IGCC_CC,Operation,"electricity, high voltage","electricity production, at hard coal-fired IGCC power plant, pre, pipeline 200km, storage 1000m",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COAL_US,Construction,lignite power plant,market for lignite power plant,GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COAL_US,Operation,"electricity, high voltage","electricity production, at lignite-fired power plant, pulverised",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COAL_US_CC,Operation,"electricity, high voltage","electricity production, at lignite-fired power plant, post, pipeline 200km, storage 1000m",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COAL_US_CC,Construction,lignite power plant,market for lignite power plant,GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COMMUTER_RAIL_DIESEL_MD,Construction,"train, passenger, regional","train production, passenger, regional",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COMMUTER_RAIL_DIESEL_MD,Operation,"transport, passenger train","transport, passenger train",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COMMUTER_RAIL_ELEC_MD,Operation,"transport, passenger train","transport, passenger train, regional",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COMMUTER_RAIL_ELEC_MD,Construction,"train, passenger, regional","train production, passenger, regional",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CROPS_TO_ETHANOL,Operation,"ethanol, from corn","ethanol production, via fermentation, from corn, energy allocation",CAN,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CROPS_TO_ETHANOL,Construction,ethanol fermentation plant,market for ethanol fermentation plant,GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CROPS_TO_JETFUELS,Construction,petroleum refinery,petroleum refinery construction,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CROPS_TO_JETFUELS,Operation,"kerosene, synthetic","kerosene production, synthetic, Fischer Tropsch process, hydrogen from wood gasification, energy allocation",CAN,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CUMENE_PROCESS,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CUMENE_PROCESS,Operation,cumene,"cumene production, benzene alkylation",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DAC_HT,Operation,"carbon dioxide, captured from atmosphere","carbon dioxide, captured from atmosphere, with a sorbent-based direct air capture system, 100ktCO2",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DAC_HT_PLANT,Construction,direct air capture system,"direct air capture system, sorbent-based, 100ktCO2",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DAC_HT_PLANT_DECOM,Construction,direct air capture system,"treatment of direct air capture system, sorbent-based, 100ktCO2",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DAC_LT,Operation,"carbon dioxide, captured from atmosphere","carbon dioxide, captured from atmosphere, with a solvent-based direct air capture system, 1MtCO2",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DAC_LT_PLANT,Construction,direct air capture system,"direct air capture system, solvent-based, 1MtCO2",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DAC_LT_PLANT_DECOM,Construction,direct air capture system,"treatment of direct air capture system, solvent-based, 1MtCO2",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DEC_ADVCOGEN_H2,Construction,"fuel cell, polymer electrolyte membrane, 2kW electrical, future","fuel cell production, polymer electrolyte membrane, 2kW electrical, future",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DEC_ADVCOGEN_H2,Operation,"electricity, from residential heating system","electricity, residential, by conversion of hydrogen using fuel cell, PEM, allocated by exergy, distributed by pipeline, produced by Electrolysis, PEM using electricity from grid",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DEC_BOILER_GAS,Construction,gas boiler,gas boiler production,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DEC_BOILER_GAS,Operation,"heat, central or small-scale, natural gas","heat production, natural gas, at boiler modulating <100kW",CAN,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DEC_BOILER_OIL,Operation,"heat, central or small-scale, other than natural gas","heat production, light fuel oil, at boiler 10kW condensing, non-modulating",CAN,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DEC_BOILER_OIL_BOILER,Construction,"oil boiler, 10kW","oil boiler production, 10kW",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DEC_BOILER_OIL_TANK,Construction,"oil storage, 3000l","market for oil storage, 3000l",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DEC_BOILER_WOOD,Construction,"furnace, wood chips, hardwood storage area, 50kW","furnace production, wood chips, hardwood storage area, 50kW",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DEC_BOILER_WOOD,Operation,"heat, central or small-scale, other than natural gas","heat production, wood chips from industry, at furnace 50kW, state-of-the-art 2014",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DEC_COGEN_GAS,Operation,"heat, central or small-scale, natural gas","heat and power co-generation, natural gas, 50kW electrical, lean burn",CAN,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DEC_COGEN_GAS_CHP,Construction,"heat and power co-generation unit, 50kW electrical, common components for heat+electricity","heat and power co-generation unit construction, 50kW electrical, common components for heat+electricity",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DEC_COGEN_GAS_ELEC,Construction,"heat and power co-generation unit, 50kW electrical, components for electricity only","heat and power co-generation unit construction, 50kW electrical, components for electricity only",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DEC_COGEN_GAS_HEAT,Construction,"heat and power co-generation unit, 50kW electrical, components for heat only","heat and power co-generation unit construction, 50kW electrical, components for heat only",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DEC_COGEN_OIL,Operation,"heat, central or small-scale, other than natural gas","heat production, light fuel oil, at boiler 10kW condensing, non-modulating",CAN,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DEC_COGEN_OIL_BOILER,Construction,"oil boiler, 10kW","oil boiler production, 10kW",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DEC_COGEN_OIL_TANK,Construction,"oil storage, 3000l","market for oil storage, 3000l",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DEC_COGEN_OIL_TURBINE,Construction,"heat and power co-generation unit, organic Rankine cycle, 200kW electrical","heat and power co-generation unit construction, organic Rankine cycle, 200kW electrical",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DEC_COGEN_WOOD,Operation,"heat, central or small-scale, other than natural gas","heat production, wood chips from industry, at furnace 50kW, state-of-the-art 2014",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DEC_COGEN_WOOD_BOILER,Construction,"furnace, wood chips, hardwood storage area, 50kW","furnace production, wood chips, hardwood storage area, 50kW",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DEC_COGEN_WOOD_TURBINE,Construction,"heat and power co-generation unit, organic Rankine cycle, 200kW electrical","heat and power co-generation unit construction, organic Rankine cycle, 200kW electrical",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DEC_DIRECT_ELEC,Construction,"auxiliary heating unit, electric, 5kW","auxiliary heating unit production, electric, 5kW",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DEC_DIRECT_ELEC,Operation,"electricity, low voltage","market for electricity, low voltage",CA-QC,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DEC_HP_ELEC,Construction,"heat pump, brine-water, 10kW","heat pump production, brine-water, 10kW",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DEC_HP_ELEC,Operation,"heat, air-water heat pump 10kW","heat production, air-water heat pump 10kW",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DEC_SOLAR,Construction,"flat plate solar collector, Cu absorber","flat plate solar collector production, Cu absorber",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DEC_THHP_GAS,Operation,"heat, future","heat production, natural gas, at diffusion absorption heat pump 4kW, future",CAN,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DEC_THHP_GAS_HEX,Construction,"borehole heat exchanger, 150m","borehole heat exchanger production, 150m",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DEC_THHP_GAS_HP,Construction,"heat pump, diffusion absorption, 4kW, future","heat pump production, diffusion absorption, 4kW, future",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DEC_TH_STORAGE,Construction,"thermal storage system, solar tower power plant, 20 MW","thermal storage system construction, solar tower power plant, 20 MW",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DEEP_SALINE,Operation,"carbon dioxide, stored","carbon dioxide compression, transport and storage",CAN,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DHN_BOILER_GAS,Operation,"heat, district or industrial, natural gas","heat production, natural gas, at boiler modulating >100kW",CA-QC,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DHN_BOILER_GAS,Construction,"industrial furnace, natural gas","market for industrial furnace, natural gas",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DHN_BOILER_OIL,Operation,"heat, district or industrial, other than natural gas","heat production, light fuel oil, at industrial furnace 1MW",CA-QC,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DHN_BOILER_OIL_BOILER,Construction,"industrial furnace, 1MW, oil","industrial furnace production, 1MW, oil",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DHN_BOILER_OIL_TANK,Construction,"oil storage, 3000l","oil storage production, 3000l",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DHN_BOILER_WOOD,Operation,"heat, district or industrial, other than natural gas","heat production, wood chips from industry, at furnace 1000kW, state-of-the-art 2014",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DHN_BOILER_WOOD_BOILER,Construction,"furnace, wood chips, with silo, 1000kW","furnace production, wood chips, with silo, 1000kW",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DHN_BOILER_WOOD_DUST,Construction,"dust collector, electrostatic precipitator, for industrial use","market for dust collector, electrostatic precipitator, for industrial use",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DHN_COGEN_GAS,Operation,"heat, district or industrial, natural gas","heat and power co-generation, natural gas, 1MW electrical, lean burn",CAN,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DHN_COGEN_GAS_CHP,Construction,"heat and power co-generation unit, 1MW electrical, common components for heat+electricity","heat and power co-generation unit construction, 1MW electrical, common components for heat+electricity",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DHN_COGEN_GAS_ELEC,Construction,"heat and power co-generation unit, 1MW electrical, components for electricity only","heat and power co-generation unit construction, 1MW electrical, components for electricity only",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DHN_COGEN_GAS_HEAT,Construction,"heat and power co-generation unit, 1MW electrical, components for heat only","heat and power co-generation unit construction, 1MW electrical, components for heat only",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DHN_COGEN_WASTE,Operation,"heat, district or industrial, other than natural gas","heat, from municipal waste incineration to generic market for heat district or industrial, other than natural gas",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DHN_COGEN_WASTE_BOILER,Construction,municipal waste incineration facility,municipal waste incineration facility construction,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DHN_COGEN_WASTE_CC,Operation,"heat, district or industrial, other than natural gas","heat, from municipal waste incineration to generic market for heat district or industrial, other than natural gas",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DHN_COGEN_WASTE_CC_BOILER,Construction,municipal waste incineration facility,municipal waste incineration facility construction,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DHN_COGEN_WASTE_CC_TURBINE,Construction,"heat and power co-generation unit, organic Rankine cycle, 200kW electrical","heat and power co-generation unit construction, organic Rankine cycle, 200kW electrical",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DHN_COGEN_WASTE_TURBINE,Construction,"heat and power co-generation unit, organic Rankine cycle, 200kW electrical","heat and power co-generation unit construction, organic Rankine cycle, 200kW electrical",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DHN_COGEN_WOOD,Operation,"heat, district or industrial, other than natural gas","heat and power co-generation, wood chips, 6667 kW, state-of-the-art 2014",CA-QC,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DHN_COGEN_WOOD_BOILER,Construction,"furnace, wood chips, with silo, 5000kW","furnace production, wood chips, with silo, 5000kW",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DHN_COGEN_WOOD_DUST,Construction,"dust collector, electrostatic precipitator, for industrial use","market for dust collector, electrostatic precipitator, for industrial use",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DHN_COGEN_WOOD_TURBINE,Construction,"heat and power co-generation unit, organic Rankine cycle, 1000kW electrical","market for heat and power co-generation unit, organic Rankine cycle, 1000kW electrical",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DHN_DEEP_GEO,Construction,geothermal heat plant,geothermal heat plant construction,CA,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DHN_DEEP_GEO,Operation,"heat, deep geothermal","heat production, deep geothermal",CA,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DHN_HP_ELEC,Construction,"heat pump, 30kW","heat pump production, 30kW",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DHN_HP_ELEC,Operation,"heat, central or small-scale, other than natural gas","heat production, at heat pump 30kW, allocation exergy",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DHN_TH_STORAGE,Construction,"thermal storage system, solar tower power plant, 20 MW","thermal storage system construction, solar tower power plant, 20 MW",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DIE_STO,Construction,"liquid storage tank, chemicals, organics","liquid storage tank production, chemicals, organics",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DIRECT_USAGE,Operation,"carbon dioxide, stored","carbon dioxide compression, transport and storage",CAN,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DOGR,Operation,"carbon dioxide, stored","carbon dioxide compression, transport and storage",CAN,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+EHV_GRID,Construction,"transmission network, electricity, high voltage","transmission network construction, electricity, high voltage",CA-QC,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+ELEC_STO,Construction,"battery, Li-ion, LiMn2O4, rechargeable, prismatic","market for battery, Li-ion, LiMn2O4, rechargeable, prismatic",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+EOR,Operation,"carbon dioxide, stored","carbon dioxide compression, transport and storage",CAN,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+ETHANE_CRACKING,Operation,ethane,natural gas liquids fractionation,GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+ETHANE_CRACKING,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+ETHANE_OXIDATION,Operation,"acetic acid, without water, in 98% solution state","acetic acid production, methanol carboxylation (Monsanto), product in 98% solution state",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+ETHANE_OXIDATION,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+ETHANE_TO_ETHYLENE,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+ETHANE_TO_ETHYLENE,Operation,ethylene,"unsaturated hydrocarbons production, steam cracking operation, average",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+ETHANOL_TO_JETFUELS,Operation,"kerosene, synthetic","kerosene production, from methanol, hydrogen from coal gasification, energy allocation",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+ETHANOL_TO_JETFUELS,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+ETHYLENE_POLYMERIZATION,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+ETHYLENE_POLYMERIZATION,Operation,ethylene,"unsaturated hydrocarbons production, steam cracking operation, average",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+FOOD_PROD,Operation,"sugar, from sugar beet",beet sugar production,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+FOOD_PROD,Construction,sugar refinery,sugar refinery construction,GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+FOOD_PROD_HP,Construction,sugar refinery,sugar refinery construction,GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+FOOD_PROD_HP,Operation,"sugar, from sugar beet",beet sugar production,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+FOOD_PROD_HR,Construction,sugar refinery,sugar refinery construction,GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+FOOD_PROD_HR,Operation,"sugar, from sugar beet",beet sugar production,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+FT,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+FT,Operation,"diesel, synthetic, vehicle grade","diesel production, synthetic, from Fischer Tropsch process, hydrogen from wood gasification, energy allocation, at fuelling station",CAN,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+GASIFICATION_H2,Operation,"hydrogen, gaseous, 25 bar","hydrogen production, gaseous, 25 bar, from heatpipe reformer gasification of woody biomass, at gasification plant",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+GASIFICATION_H2_PLANT,Construction,synthetic gas factory,synthetic gas factory construction,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+GASIFICATION_H2_TANK,Construction,"liquid storage tank, chemicals, organics","market for liquid storage tank, chemicals, organics",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+GASIFICATION_SNG,Operation,"syngas, RWGS, Production","syngas, RWGS, Production, for Fischer Tropsch process, hydrogen from wood gasification",CAN,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+GASIFICATION_SNG_PLANT,Construction,synthetic gas factory,synthetic gas factory construction,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+GASIFICATION_SNG_TANK,Construction,"liquid storage tank, chemicals, organics","market for liquid storage tank, chemicals, organics",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+GASO_STO,Construction,"liquid storage tank, chemicals, organics","liquid storage tank production, chemicals, organics",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+GEOTHERMAL,Operation,"electricity, high voltage","electricity production, deep geothermal",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+GEOTHERMAL,Construction,"geothermal power plant, 5.5MWel",geothermal power plant construction,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+H2_CCGT,Construction,"gas power plant, combined cycle, 400MW electrical","gas power plant construction, combined cycle, 400MW electrical",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+H2_CCGT,Operation,"electricity, high voltage","electricity production, from hydrogen-fired one gigawatt gas turbine",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+H2_COMP_HE,Operation,"hydrogen, gaseous, low pressure","market for hydrogen, gaseous, low pressure",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+H2_COMP_HE,Construction,"compressor, for hydrogen transmission",compressor assembly for transmission hydrogen pipeline,RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+H2_COMP_LM,Construction,"compressor, for hydrogen transmission",compressor assembly for transmission hydrogen pipeline,RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+H2_COMP_LM,Operation,"hydrogen, gaseous, low pressure","market for hydrogen, gaseous, low pressure",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+H2_COMP_MH,Construction,"compressor, for hydrogen transmission",compressor assembly for transmission hydrogen pipeline,RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+H2_COMP_MH,Operation,"hydrogen, gaseous, low pressure","market for hydrogen, gaseous, low pressure",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+H2_EXP_EH,Operation,"hydrogen, gaseous, low pressure","market for hydrogen, gaseous, low pressure",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+H2_EXP_EH_COGEN,Construction,"air input/output unit, heat and power co-generation unit, 160kW electrical","air input/output unit production, heat and power co-generation unit, 160kW electrical",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+H2_EXP_EH_COGEN,Operation,"hydrogen, gaseous, low pressure","market for hydrogen, gaseous, low pressure",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+H2_EXP_HM,Operation,"hydrogen, gaseous, low pressure","market for hydrogen, gaseous, low pressure",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+H2_EXP_HM_COGEN,Construction,"air input/output unit, heat and power co-generation unit, 160kW electrical","air input/output unit production, heat and power co-generation unit, 160kW electrical",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+H2_EXP_HM_COGEN,Operation,"hydrogen, gaseous, low pressure","market for hydrogen, gaseous, low pressure",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+H2_EXP_ML,Operation,"hydrogen, gaseous, low pressure","market for hydrogen, gaseous, low pressure",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+H2_EXP_ML_COGEN,Operation,"hydrogen, gaseous, low pressure","market for hydrogen, gaseous, low pressure",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+H2_EXP_ML_COGEN,Construction,"air input/output unit, heat and power co-generation unit, 160kW electrical","air input/output unit production, heat and power co-generation unit, 160kW electrical",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+H2_NG_CCGT,Operation,"electricity, high voltage","electricity production, at natural gas-fired combined cycle power plant",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+H2_NG_CCGT,Construction,"NGCC power plant, 400MWe","market for gas power plant, combined cycle, 400MW electrical",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+H2_NG_CCGT_CCS,Construction,"NGCC power plant, 400MWe","market for gas power plant, combined cycle, 400MW electrical",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+H2_NG_CCGT_CCS,Operation,"electricity, high voltage","electricity production, at natural gas-fired combined cycle power plant, post, pipeline 200km, storage 1000m",CAN,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+H2_STO,Construction,high pressure hydrogen storage tank,high pressure hydrogen storage tank,GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+HT_LT_DEC,Operation,"heat, district or industrial, other than natural gas","market for heat, district or industrial, other than natural gas",CA-QC,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+HV_GRID,Construction,"transmission network, electricity, high voltage","transmission network construction, electricity, high voltage",CA-QC,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+HYDRO_DAM,Operation,"electricity, high voltage","electricity production, hydro, reservoir, non-alpine region",CA-QC,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+HYDRO_DAM,Construction,"hydropower plant, reservoir","hydropower plant construction, reservoir",CA-QC,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+HYDRO_GAS,Construction,synthetic gas factory,synthetic gas factory construction,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+HYDRO_GAS,Operation,"syngas, RWGS, Production","syngas, RWGS, Production, for Fischer Tropsch process, hydrogen from wood gasification",CAN,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+HYDRO_GAS_CHP,Operation,"syngas, RWGS, Production","syngas, RWGS, Production, for Fischer Tropsch process, hydrogen from wood gasification",CAN,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+HYDRO_GAS_CHP_PLANT,Construction,synthetic gas factory,synthetic gas factory construction,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+HYDRO_GAS_CHP_TURBINE,Construction,"heat and power co-generation unit, organic Rankine cycle, 200kW electrical","heat and power co-generation unit construction, organic Rankine cycle, 200kW electrical",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+HYDRO_RIVER,Construction,"hydropower plant, run-of-river","hydropower plant construction, run-of-river",CA-QC,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+HYDRO_RIVER,Operation,"electricity, high voltage","electricity production, hydro, run-of-river",CA-QC,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+HYDRO_STORAGE,Construction,"hydropower plant, reservoir","hydropower plant construction, reservoir",CA-QC,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+HYDRO_STORAGE,Operation,"electricity, high voltage","electricity production, hydro, pumped storage",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+IND_BOILER_COAL,Construction,"industrial furnace, coal, 1-10MW","industrial furnace production, coal, 1-10MW",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+IND_BOILER_COAL,Operation,"heat, district or industrial, other than natural gas","heat production, at hard coal industrial furnace 1-10MW",CA-QC,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+IND_BOILER_GAS,Operation,"heat, district or industrial, natural gas","heat production, natural gas, at industrial furnace >100kW",CA-QC,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+IND_BOILER_GAS,Construction,"industrial furnace, natural gas","industrial furnace production, natural gas",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+IND_BOILER_OIL,Operation,"heat, district or industrial, other than natural gas","heat production, heavy fuel oil, at industrial furnace 1MW",CA-QC,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+IND_BOILER_OIL_PLANT,Construction,"industrial furnace, 1MW, oil","industrial furnace production, 1MW, oil",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+IND_BOILER_OIL_TANK,Construction,"oil storage, 3000l","market for oil storage, 3000l",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+IND_BOILER_WASTE,Construction,municipal waste incineration facility,municipal waste incineration facility construction,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+IND_BOILER_WASTE,Operation,"heat, district or industrial, other than natural gas","heat, from municipal waste incineration to generic market for heat district or industrial, other than natural gas",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+IND_BOILER_WASTE_CC,Operation,"heat, district or industrial, other than natural gas","heat, from municipal waste incineration to generic market for heat district or industrial, other than natural gas",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+IND_BOILER_WASTE_CC,Construction,municipal waste incineration facility,municipal waste incineration facility construction,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+IND_BOILER_WOOD,Construction,"furnace, wood chips, with silo, 1000kW","furnace production, wood chips, with silo, 1000kW",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+IND_BOILER_WOOD,Operation,"heat, district or industrial, other than natural gas","heat production, wood chips from industry, at furnace 1000kW",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+IND_COGEN_GAS,Operation,"heat, district or industrial, natural gas","heat and power co-generation, natural gas, 1MW electrical, lean burn",CAN,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+IND_COGEN_GAS_CHP,Construction,"heat and power co-generation unit, 1MW electrical, common components for heat+electricity","heat and power co-generation unit construction, 1MW electrical, common components for heat+electricity",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+IND_COGEN_GAS_ELEC,Construction,"heat and power co-generation unit, 1MW electrical, components for electricity only","heat and power co-generation unit construction, 1MW electrical, components for electricity only",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+IND_COGEN_GAS_HEAT,Construction,"heat and power co-generation unit, 1MW electrical, components for heat only","heat and power co-generation unit construction, 1MW electrical, components for heat only",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+IND_COGEN_WASTE,Operation,"heat, district or industrial, other than natural gas","heat, from municipal waste incineration to generic market for heat district or industrial, other than natural gas",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+IND_COGEN_WASTE_CC,Operation,"heat, district or industrial, other than natural gas","heat, from municipal waste incineration to generic market for heat district or industrial, other than natural gas",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+IND_COGEN_WASTE_CC_PLANT,Construction,municipal waste incineration facility,municipal waste incineration facility construction,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+IND_COGEN_WASTE_CC_TURBINE,Construction,"heat and power co-generation unit, organic Rankine cycle, 200kW electrical","heat and power co-generation unit construction, organic Rankine cycle, 200kW electrical",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+IND_COGEN_WASTE_PLANT,Construction,municipal waste incineration facility,municipal waste incineration facility construction,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+IND_COGEN_WASTE_TURBINE,Construction,"heat and power co-generation unit, organic Rankine cycle, 200kW electrical","heat and power co-generation unit construction, organic Rankine cycle, 200kW electrical",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+IND_COGEN_WOOD,Operation,"heat, district or industrial, other than natural gas","heat and power co-generation, wood chips, 6667 kW, state-of-the-art 2014",CA-QC,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+IND_COGEN_WOOD_DUST,Construction,"dust collector, electrostatic precipitator, for industrial use","market for dust collector, electrostatic precipitator, for industrial use",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+IND_COGEN_WOOD_PLANT,Construction,"furnace, wood chips, with silo, 5000kW","furnace production, wood chips, with silo, 5000kW",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+IND_COGEN_WOOD_TURBINE,Construction,"heat and power co-generation unit, organic Rankine cycle, 1000kW electrical","market for heat and power co-generation unit, organic Rankine cycle, 1000kW electrical",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+IND_DIRECT_ELEC,Construction,"auxiliary heating unit, electric, 5kW","auxiliary heating unit production, electric, 5kW",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+IND_DIRECT_ELEC,Operation,"electricity, high voltage","market for electricity, high voltage",CA-QC,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+IND_HP_ELEC,Construction,"heat pump, brine-water, 10kW","heat pump production, brine-water, 10kW",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+IND_HP_ELEC,Operation,"heat, air-water heat pump 10kW","heat production, air-water heat pump 10kW",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+LCV_BIODIESEL_B100_MD,Construction,truck,"truck, diesel, 3.5t, urban delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+LCV_BIODIESEL_B100_MD,Operation,"transport, truck","transport, truck, diesel, 3.5t, urban delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+LCV_BIODIESEL_B100_SD,Construction,truck,"truck, diesel, 3.5t, urban delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+LCV_BIODIESEL_B100_SD,Operation,"transport, truck","transport, truck, diesel, 3.5t, urban delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+LCV_BIODIESEL_B20_MD,Construction,truck,"truck, diesel, 3.5t, urban delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+LCV_BIODIESEL_B20_MD,Operation,"transport, truck","transport, truck, diesel, 3.5t, urban delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+LCV_BIODIESEL_B20_SD,Construction,truck,"truck, diesel, 3.5t, urban delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+LCV_BIODIESEL_B20_SD,Operation,"transport, truck","transport, truck, diesel, 3.5t, urban delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+LCV_CNG_MD,Operation,"transport, truck","transport, truck, compressed gas, 3.5t, urban delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+LCV_CNG_MD,Construction,truck,"truck, compressed gas, 3.5t, urban delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+LCV_CNG_SD,Construction,truck,"truck, compressed gas, 3.5t, urban delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+LCV_CNG_SD,Operation,"transport, truck","transport, truck, compressed gas, 3.5t, urban delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+LCV_DIESEL_MD,Operation,"transport, truck","transport, truck, diesel, 3.5t, urban delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+LCV_DIESEL_MD,Construction,truck,"truck, diesel, 3.5t, urban delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+LCV_DIESEL_SD,Construction,truck,"truck, diesel, 3.5t, urban delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+LCV_DIESEL_SD,Operation,"transport, truck","transport, truck, diesel, 3.5t, urban delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+LCV_ETOH_E10_MD,Construction,truck,"truck, diesel, 3.5t, urban delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+LCV_ETOH_E10_MD,Operation,"transport, truck","transport, truck, diesel, 3.5t, urban delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+LCV_ETOH_E10_SD,Construction,truck,"truck, diesel, 3.5t, urban delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+LCV_ETOH_E10_SD,Operation,"transport, truck","transport, truck, diesel, 3.5t, urban delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+LCV_ETOH_E85_MD,Construction,truck,"truck, diesel, 3.5t, urban delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+LCV_ETOH_E85_MD,Operation,"transport, truck","transport, truck, diesel, 3.5t, urban delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+LCV_ETOH_E85_SD,Operation,"transport, truck","transport, truck, diesel, 3.5t, urban delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+LCV_ETOH_E85_SD,Construction,truck,"truck, diesel, 3.5t, urban delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+LCV_EV_MD,Operation,"transport, truck","transport, truck, battery electric, 3.5t, urban delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+LCV_EV_MD,Construction,truck,"truck, battery electric, 3.5t, urban delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+LCV_EV_SD,Construction,truck,"truck, battery electric, 3.5t, urban delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+LCV_EV_SD,Operation,"transport, truck","transport, truck, battery electric, 3.5t, urban delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+LCV_FC_CH4_MD,Operation,"transport, truck","transport, truck, fuel cell electric, 3.5t, urban delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+LCV_FC_CH4_MD,Construction,truck,"truck, fuel cell electric, 3.5t, urban delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+LCV_FC_CH4_SD,Operation,"transport, truck","transport, truck, fuel cell electric, 3.5t, urban delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+LCV_FC_CH4_SD,Construction,truck,"truck, fuel cell electric, 3.5t, urban delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+LCV_FC_H2_MD,Operation,"transport, truck","transport, truck, fuel cell electric, 3.5t, urban delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+LCV_FC_H2_MD,Construction,truck,"truck, fuel cell electric, 3.5t, urban delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+LCV_FC_H2_SD,Operation,"transport, truck","transport, truck, fuel cell electric, 3.5t, urban delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+LCV_FC_H2_SD,Construction,truck,"truck, fuel cell electric, 3.5t, urban delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+LCV_GASOLINE_MD,Construction,truck,"truck, diesel, 3.5t, urban delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+LCV_GASOLINE_MD,Operation,"transport, truck","transport, truck, diesel, 3.5t, urban delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+LCV_GASOLINE_SD,Construction,truck,"truck, diesel, 3.5t, urban delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+LCV_GASOLINE_SD,Operation,"transport, truck","transport, truck, diesel, 3.5t, urban delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+LCV_PHEV_DIESEL_MD,Construction,truck,"truck, plugin diesel hybrid, 3.5t, urban delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+LCV_PHEV_DIESEL_MD,Operation,"transport, truck","transport, truck, plugin diesel hybrid, 3.5t, urban delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+LCV_PHEV_DIESEL_SD,Operation,"transport, truck","transport, truck, plugin diesel hybrid, 3.5t, urban delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+LCV_PHEV_DIESEL_SD,Construction,truck,"truck, plugin diesel hybrid, 3.5t, urban delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+LCV_PROPANE_MD,Operation,"transport, truck","transport, truck, compressed gas, 3.5t, urban delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+LCV_PROPANE_MD,Construction,truck,"truck, compressed gas, 3.5t, urban delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+LCV_PROPANE_SD,Construction,truck,"truck, compressed gas, 3.5t, urban delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+LCV_PROPANE_SD,Operation,"transport, truck","transport, truck, compressed gas, 3.5t, urban delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+LV_GRID,Construction,"distribution network, electricity, low voltage","distribution network construction, electricity, low voltage",CA-QC,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+METATHESIS_PROPYLENE,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+METATHESIS_PROPYLENE,Operation,propylene,"unsaturated hydrocarbons production, steam cracking operation, average",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+METHANATION,Operation,"methane, from electrochemical methanation","methane, from electrochemical methanation, with carbon from municipal waste incineration plant",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+METHANATION,Construction,synthetic gas factory,synthetic gas factory construction,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+METHANE_TO_METHANOL,Operation,methanol,"methanol production, natural gas reforming",CN,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+METHANE_TO_METHANOL,Construction,methanol factory,methanol factory construction,GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+METHANOL_CARBONYLATION,Operation,"acetic acid, without water, in 98% solution state","acetic acid production, methanol carboxylation (Monsanto), product in 98% solution state",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+METHANOL_CARBONYLATION,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+METHANOL_FT,Operation,"methanol, from biomass","methanol production, biomass gasification",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+METHANOL_FT,Construction,methanol factory,methanol factory construction,GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+METHANOL_TO_AROMATICS,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+METHANOL_TO_AROMATICS,Operation,"xylene, mixed","BTX production, from pyrolysis gas, average",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+METHANOL_TO_OLEFINS,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+METHANOL_TO_OLEFINS,Operation,n-olefins,n-olefins production,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+MINES_STORAGE,Operation,"carbon dioxide, stored","carbon dioxide compression, transport and storage",CAN,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+MV_GRID,Construction,"distribution network, electricity, low voltage","distribution network construction, electricity, low voltage",CA-QC,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+NEW_HYDRO_DAM,Operation,"electricity, high voltage","electricity production, hydro, reservoir, non-alpine region",CA-QC,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+NEW_HYDRO_DAM,Construction,"hydropower plant, reservoir","hydropower plant construction, reservoir",CA-QC,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+NEW_HYDRO_RIVER,Construction,"hydropower plant, run-of-river","hydropower plant construction, run-of-river",CA-QC,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+NEW_HYDRO_RIVER,Operation,"electricity, high voltage","electricity production, hydro, run-of-river",CA-QC,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+NG_COMP_HE,Construction,"air compressor, screw-type compressor, 300kW","air compressor production, screw-type compressor, 300kW",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+NG_COMP_HE,Operation,"natural gas, high pressure","market for natural gas, high pressure",CA,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+NG_COMP_LM,Construction,"air compressor, screw-type compressor, 4kW","air compressor production, screw-type compressor, 4kW",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+NG_COMP_LM,Operation,"natural gas, low pressure","market for natural gas, low pressure",CA,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+NG_COMP_MH,Operation,"natural gas, medium pressure, vehicle grade","market for natural gas, medium pressure, vehicle grade",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+NG_COMP_MH,Construction,"air compressor, screw-type compressor, 300kW","air compressor production, screw-type compressor, 300kW",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+NG_EXP_EH,Operation,"natural gas, high pressure","market for natural gas, high pressure",CA,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+NG_EXP_EH_COGEN,Operation,"natural gas, high pressure","market for natural gas, high pressure",CA,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+NG_EXP_EH_COGEN,Construction,"air input/output unit, heat and power co-generation unit, 160kW electrical","air input/output unit production, heat and power co-generation unit, 160kW electrical",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+NG_EXP_HM,Operation,"natural gas, high pressure","market for natural gas, high pressure",CA,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+NG_EXP_HM_COGEN,Construction,"air input/output unit, heat and power co-generation unit, 160kW electrical","air input/output unit production, heat and power co-generation unit, 160kW electrical",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+NG_EXP_HM_COGEN,Operation,"natural gas, high pressure","market for natural gas, high pressure",CA,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+NG_EXP_ML,Operation,"natural gas, medium pressure, vehicle grade","market for natural gas, medium pressure, vehicle grade",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+NG_EXP_ML_COGEN,Construction,"air input/output unit, heat and power co-generation unit, 160kW electrical","air input/output unit production, heat and power co-generation unit, 160kW electrical",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+NG_EXP_ML_COGEN,Operation,"natural gas, medium pressure, vehicle grade","market for natural gas, medium pressure, vehicle grade",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+NG_PYROLYSIS_PLASMA,Operation,"hydrogen, gaseous, 100 bar","hydrogen production, gaseous, 100 bar, from methane pyrolysis",CAN,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+NG_PYROLYSIS_PLASMA,Construction,"air compressor, screw-type compressor, 4kW","market for air compressor, screw-type compressor, 4kW",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+NG_PYROLYSIS_THERMAL,Construction,"air compressor, screw-type compressor, 4kW","market for air compressor, screw-type compressor, 4kW",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+NG_PYROLYSIS_THERMAL,Operation,"hydrogen, gaseous, 100 bar","hydrogen production, gaseous, 100 bar, from methane pyrolysis",CAN,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+NG_REFORMING,Operation,"hydrogen, gaseous, low pressure","hydrogen production, steam methane reforming",CAN,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+NG_REFORMING_PLANT,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+NG_REFORMING_TANK,Construction,"liquid storage tank, chemicals, organics","market for liquid storage tank, chemicals, organics",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+NG_STO,Construction,"liquid storage tank, chemicals, organics","liquid storage tank production, chemicals, organics",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+NUCLEAR,Operation,"electricity, high voltage","electricity production, nuclear, pressure water reactor",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+NUCLEAR,Construction,"nuclear power plant, pressure water reactor, 1000MW","nuclear power plant construction, pressure water reactor, 1000MW",US,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+OCGT_LARGE,Construction,"gas turbine, 10MW electrical","market for gas turbine, 10MW electrical",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+OCGT_LARGE,Operation,"natural gas, burned in gas turbine","natural gas, burned in gas turbine",CA,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+OCGT_SMALL,Operation,"natural gas, burned in gas turbine","natural gas, burned in gas turbine",CA,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+OCGT_SMALL,Construction,"gas turbine, 10MW electrical","market for gas turbine, 10MW electrical",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+PAFC,Operation,"electricity, from residential heating system","electricity, residential, by conversion of hydrogen using fuel cell, PEM, allocated by exergy, distributed by pipeline, produced by Electrolysis, PEM using electricity from grid",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+PAFC,Construction,"fuel cell system, 1 kWe, proton exchange membrane (PEM)","fuel cell system assembly, 1 kWe, proton exchange membrane (PEM)",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+PAPER_MAKING,Operation,"paper, newsprint","paper production, newsprint, recycled",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+PAPER_MAKING,Construction,"paper mill, integrated","paper mill construction, integrated",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+PAPER_MAKING_HP,Construction,"paper mill, integrated","paper mill construction, integrated",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+PAPER_MAKING_HP,Operation,"paper, newsprint","paper production, newsprint, recycled",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+PAPER_MAKING_HR,Construction,"paper mill, integrated","paper mill construction, integrated",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+PAPER_MAKING_HR,Operation,"paper, newsprint","paper production, newsprint, recycled",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+PEMFC,Construction,"fuel cell system, 1 kWe, proton exchange membrane (PEM)","fuel cell system assembly, 1 kWe, proton exchange membrane (PEM)",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+PEM_ELECTROLYSIS,Operation,"hydrogen, gaseous, 30 bar","hydrogen production, gaseous, 30 bar, from PEM electrolysis, from grid electricity",CAN,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+PEM_ELECTROLYSIS_PLANT,Construction,"electrolyzer, 1MWe, PEM, Balance of Plant","electrolyzer production, 1MWe, PEM, Balance of Plant",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+PEM_ELECTROLYSIS_PLANT_DECOM,Construction,"used fuel cell balance of plant, 1MWe, PEM","treatment of fuel cell balance of plant, 1MWe, PEM",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+PEM_ELECTROLYSIS_STACK,Construction,"electrolyzer, 1MWe, PEM, Stack","electrolyzer production, 1MWe, PEM, Stack",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+PEM_ELECTROLYSIS_STACK_DECOM,Construction,"used fuel cell stack, 1MWe, PEM","treatment of fuel cell stack, 1MWe, PEM",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+PET_FORMATION,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+PET_FORMATION,Operation,"polyethylene terephthalate, granulate, amorphous","polyethylene terephthalate production, granulate, amorphous",CA-QC,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+PLANE_FREIGHT_ELD,Operation,"transport, freight, aircraft, medium haul","transport, freight, aircraft, dedicated freight, medium haul",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+PLANE_FREIGHT_ELD,Construction,"aircraft, dedicated freight, medium haul","market for aircraft, dedicated freight, medium haul",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+PLANE_LH_ELD,Construction,"aircraft, passenger, very short haul","market for aircraft, passenger, very short haul",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+PLANE_LH_ELD,Operation,"transport, passenger aircraft, very short haul","transport, passenger aircraft, very short haul",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+PLANE_SH_LD,Operation,"transport, passenger aircraft, medium haul","transport, passenger aircraft, medium haul",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+PLANE_SH_LD,Construction,"aircraft, passenger, medium haul","market for aircraft, passenger, medium haul",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+POLYPROPYLENE_PP,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+POLYPROPYLENE_PP,Operation,"polypropylene, granulate","polypropylene production, granulate",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+PV,Construction,"photovoltaic flat-roof installation, 3kWp, multi-Si, on roof","photovoltaic flat-roof installation, 3kWp, multi-Si, on roof",US,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+PV,Operation,"electricity, low voltage","electricity production, photovoltaic, residential",CA,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+PVC_FORMATION,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+PVC_FORMATION,Operation,"polyvinylchloride, bulk polymerised","polyvinylchloride production, bulk polymerisation",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+PYROLYSIS,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+PYROLYSIS,Operation,light fuel oil,"light fuel oil production, from waste polyethylene",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SCHOOLBUS_BIODIESEL_B100_SD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m single deck urban bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SCHOOLBUS_BIODIESEL_B100_SD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m single deck urban bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SCHOOLBUS_BIODIESEL_B20_SD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m single deck urban bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SCHOOLBUS_BIODIESEL_B20_SD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m single deck urban bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SCHOOLBUS_CNG_SD,Construction,"Passenger bus, EURO-VI","Passenger bus, compressed gas, 13m single deck urban bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SCHOOLBUS_CNG_SD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, compressed gas, 13m single deck urban bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SCHOOLBUS_DIESEL_SD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m single deck urban bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SCHOOLBUS_DIESEL_SD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m single deck urban bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SCHOOLBUS_ETOH_E10_SD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m single deck urban bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SCHOOLBUS_ETOH_E10_SD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m single deck urban bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SCHOOLBUS_EV_SD,Operation,"transport, passenger bus","transport, passenger bus, battery electric - overnight charging, 13m single deck urban bus",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SCHOOLBUS_EV_SD,Construction,passenger bus,"passenger bus, battery electric - overnight charging, 13m single deck urban bus",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SCHOOLBUS_FC_CH4_SD,Operation,"transport, passenger bus","transport, passenger bus, fuel cell electric, 13m single deck urban bus",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SCHOOLBUS_FC_CH4_SD,Construction,passenger bus,"passenger bus, fuel cell electric, 13m single deck urban bus",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SCHOOLBUS_GASOLINE_SD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m single deck urban bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SCHOOLBUS_GASOLINE_SD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m single deck urban bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SCHOOLBUS_HY_DIESEL_SD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel hybrid, 13m single deck urban bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SCHOOLBUS_HY_DIESEL_SD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel hybrid, 13m single deck urban bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SCHOOLBUS_PROPANE_SD,Construction,"Passenger bus, EURO-VI","Passenger bus, compressed gas, 13m single deck urban bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SCHOOLBUS_PROPANE_SD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, compressed gas, 13m single deck urban bus, EURO-VI",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SEMI_LH_BIODIESEL_B100_ELD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, diesel, 26t gross weight, EURO-VI, long haul",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SEMI_LH_BIODIESEL_B100_ELD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 26t gross weight, EURO-VI, long haul",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SEMI_LH_BIODIESEL_B100_LD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, diesel, 26t gross weight, EURO-VI, long haul",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SEMI_LH_BIODIESEL_B100_LD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 26t gross weight, EURO-VI, long haul",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SEMI_LH_BIODIESEL_B20_ELD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 26t gross weight, EURO-VI, long haul",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SEMI_LH_BIODIESEL_B20_ELD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, diesel, 26t gross weight, EURO-VI, long haul",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SEMI_LH_BIODIESEL_B20_LD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 26t gross weight, EURO-VI, long haul",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SEMI_LH_BIODIESEL_B20_LD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, diesel, 26t gross weight, EURO-VI, long haul",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SEMI_LH_CNG_ELD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, compressed gas, 26t gross weight, EURO-VI, long haul",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SEMI_LH_CNG_ELD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, compressed gas, 26t gross weight, EURO-VI, long haul",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SEMI_LH_CNG_LD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, compressed gas, 26t gross weight, EURO-VI, long haul",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SEMI_LH_CNG_LD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, compressed gas, 26t gross weight, EURO-VI, long haul",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SEMI_LH_DIESEL_ELD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 26t gross weight, EURO-VI, long haul",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SEMI_LH_DIESEL_ELD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, diesel, 26t gross weight, EURO-VI, long haul",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SEMI_LH_DIESEL_LD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 26t gross weight, EURO-VI, long haul",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SEMI_LH_DIESEL_LD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, diesel, 26t gross weight, EURO-VI, long haul",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SEMI_LH_EV_ELD,Construction,medium duty truck,"medium duty truck, battery electric, 26t gross weight, long haul",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SEMI_LH_EV_ELD,Operation,"transport, freight, lorry","transport, freight, lorry, battery electric, 26t gross weight, long haul",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SEMI_LH_EV_LD,Construction,medium duty truck,"medium duty truck, battery electric, 26t gross weight, long haul",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SEMI_LH_EV_LD,Operation,"transport, freight, lorry","transport, freight, lorry, battery electric, 26t gross weight, long haul",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SEMI_LH_FC_CH4_ELD,Construction,medium duty truck,"medium duty truck, fuel cell electric, 26t gross weight, long haul",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SEMI_LH_FC_CH4_ELD,Operation,"transport, freight, lorry","transport, freight, lorry, fuel cell electric, 26t gross weight, long haul",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SEMI_LH_FC_CH4_LD,Construction,medium duty truck,"medium duty truck, fuel cell electric, 26t gross weight, long haul",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SEMI_LH_FC_CH4_LD,Operation,"transport, freight, lorry","transport, freight, lorry, fuel cell electric, 26t gross weight, long haul",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SEMI_LH_FC_H2_ELD,Construction,medium duty truck,"medium duty truck, fuel cell electric, 26t gross weight, long haul",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SEMI_LH_FC_H2_ELD,Operation,"transport, freight, lorry","transport, freight, lorry, fuel cell electric, 26t gross weight, long haul",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SEMI_LH_FC_H2_LD,Construction,medium duty truck,"medium duty truck, fuel cell electric, 26t gross weight, long haul",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SEMI_LH_FC_H2_LD,Operation,"transport, freight, lorry","transport, freight, lorry, fuel cell electric, 26t gross weight, long haul",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SEMI_LH_HY_DIESEL_ELD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, diesel hybrid, 26t gross weight, EURO-VI, long haul",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SEMI_LH_HY_DIESEL_ELD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel hybrid, 26t gross weight, EURO-VI, long haul",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SEMI_LH_HY_DIESEL_LD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, diesel hybrid, 26t gross weight, EURO-VI, long haul",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SEMI_LH_HY_DIESEL_LD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel hybrid, 26t gross weight, EURO-VI, long haul",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SEMI_LH_PROPANE_ELD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, compressed gas, 26t gross weight, EURO-VI, long haul",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SEMI_LH_PROPANE_ELD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, compressed gas, 26t gross weight, EURO-VI, long haul",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SEMI_LH_PROPANE_LD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, compressed gas, 26t gross weight, EURO-VI, long haul",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SEMI_LH_PROPANE_LD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, compressed gas, 26t gross weight, EURO-VI, long haul",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SEMI_SH_BIODIESEL_B100_MD,Operation,"transport, truck","transport, truck, diesel, 26t, regional delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SEMI_SH_BIODIESEL_B100_MD,Construction,truck,"truck, diesel, 26t, regional delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SEMI_SH_BIODIESEL_B20_MD,Operation,"transport, truck","transport, truck, diesel, 26t, regional delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SEMI_SH_BIODIESEL_B20_MD,Construction,truck,"truck, diesel, 26t, regional delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SEMI_SH_CNG_MD,Operation,"transport, truck","transport, truck, compressed gas, 26t, regional delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SEMI_SH_CNG_MD,Construction,truck,"truck, compressed gas, 26t, regional delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SEMI_SH_DIESEL_MD,Operation,"transport, truck","transport, truck, diesel, 26t, regional delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SEMI_SH_DIESEL_MD,Construction,truck,"truck, diesel, 26t, regional delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SEMI_SH_EV_MD,Construction,truck,"truck, battery electric, 26t, regional delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SEMI_SH_EV_MD,Operation,"transport, truck","transport, truck, battery electric, 26t, regional delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SEMI_SH_FC_CH4_MD,Operation,"transport, truck","transport, truck, fuel cell electric, 26t, regional delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SEMI_SH_FC_CH4_MD,Construction,truck,"truck, fuel cell electric, 26t, regional delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SEMI_SH_FC_H2_MD,Construction,truck,"truck, fuel cell electric, 26t, regional delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SEMI_SH_FC_H2_MD,Operation,"transport, truck","transport, truck, fuel cell electric, 26t, regional delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SEMI_SH_HY_DIESEL_MD,Operation,"transport, truck","transport, truck, diesel hybrid, 26t, regional delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SEMI_SH_HY_DIESEL_MD,Construction,truck,"truck, diesel hybrid, 26t, regional delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SEMI_SH_PROPANE_MD,Construction,truck,"truck, compressed gas, 26t, regional delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SEMI_SH_PROPANE_MD,Operation,"transport, truck","transport, truck, compressed gas, 26t, regional delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SMART_PROCESS,Operation,styrene,styrene production,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SMART_PROCESS,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SMR,Operation,"hydrogen, gaseous, low pressure","hydrogen production, steam methane reforming",CAN,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SMR_CCS,Operation,"hydrogen, gaseous, low pressure","hydrogen production, steam methane reforming, with CCS",CAN,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SMR_CCS_PLANT,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SMR_CCS_TANK,Construction,"liquid storage tank, chemicals, organics","market for liquid storage tank, chemicals, organics",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SMR_PLANT,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SMR_TANK,Construction,"liquid storage tank, chemicals, organics","market for liquid storage tank, chemicals, organics",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SNG_NG,Operation,biogas,market for biogas,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SOEC_ELECTROLYSIS,Operation,"hydrogen, gaseous, 1 bar","hydrogen production, gaseous, 1 bar, from SOEC electrolysis, from grid electricity",CAN,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SOEC_ELECTROLYSIS_PLANT,Construction,"electrolyzer, 1MWe, SOEC, Balance of Plant","electrolyzer production, 1MWe, SOEC, Balance of Plant",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SOEC_ELECTROLYSIS_PLANT_DECOM,Construction,"used fuel cell balance of plant, 1MWe, SOEC","treatment of fuel cell balance of plant, 1MWe, SOEC",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SOEC_ELECTROLYSIS_STACK,Construction,"electrolyzer, 1MWe, SOEC, Stack","electrolyzer production, 1MWe, SOEC, Stack",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SOEC_ELECTROLYSIS_STACK_DECOM,Construction,"used fuel cell stack, 1MWe, SOEC","treatment of fuel cell stack, 1MWe, SOEC",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SOFC,Construction,"fuel cell, stack solid oxide, 125kW electrical, future","fuel cell production, stack solid oxide, 125kW electrical, future",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SOFC,Operation,"electricity, from residential heating system","electricity, residential, by conversion of hydrogen using fuel cell, SOFC, allocated by exergy, distributed by pipeline, produced by Electrolysis, PEM using electricity from grid",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+STEEL_MAKING,Construction,aluminium casting facility,aluminium casting facility construction,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+STEEL_MAKING,Operation,"steel, chromium steel 18/8","market for steel, chromium steel 18/8",CAN,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+STEEL_MAKING_HP,Construction,aluminium casting facility,aluminium casting facility construction,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+STEEL_MAKING_HP,Operation,"steel, chromium steel 18/8","market for steel, chromium steel 18/8",CAN,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+STEEL_MAKING_HR,Construction,aluminium casting facility,aluminium casting facility construction,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+STEEL_MAKING_HR,Operation,"steel, chromium steel 18/8","market for steel, chromium steel 18/8",CAN,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+STYRENE_POLYMERIZATION,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+STYRENE_POLYMERIZATION,Operation,"polystyrene, expandable","polystyrene production, expandable",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_BIODIESEL_B100_ELD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_BIODIESEL_B100_ELD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_BIODIESEL_B100_LD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_BIODIESEL_B100_LD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_BIODIESEL_B100_MD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_BIODIESEL_B100_MD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_BIODIESEL_B100_SD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_BIODIESEL_B100_SD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_BIODIESEL_B20_ELD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_BIODIESEL_B20_ELD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_BIODIESEL_B20_LD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_BIODIESEL_B20_LD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_BIODIESEL_B20_MD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_BIODIESEL_B20_MD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_BIODIESEL_B20_SD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_BIODIESEL_B20_SD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_CNG_ELD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, compressed gas, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_CNG_ELD,Construction,"Passenger car, EURO-6ab","Passenger car, compressed gas, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_CNG_LD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, compressed gas, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_CNG_LD,Construction,"Passenger car, EURO-6ab","Passenger car, compressed gas, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_CNG_MD,Construction,"Passenger car, EURO-6ab","Passenger car, compressed gas, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_CNG_MD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, compressed gas, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_CNG_SD,Construction,"Passenger car, EURO-6ab","Passenger car, compressed gas, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_CNG_SD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, compressed gas, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_DIESEL_ELD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_DIESEL_ELD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_DIESEL_LD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_DIESEL_LD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_DIESEL_MD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_DIESEL_MD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_DIESEL_SD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_DIESEL_SD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_ETOH_E10_ELD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_ETOH_E10_ELD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_ETOH_E10_LD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_ETOH_E10_LD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_ETOH_E10_MD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_ETOH_E10_MD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_ETOH_E10_SD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_ETOH_E10_SD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_ETOH_E85_ELD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_ETOH_E85_ELD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_ETOH_E85_LD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_ETOH_E85_LD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_ETOH_E85_MD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_ETOH_E85_MD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_ETOH_E85_SD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_ETOH_E85_SD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_EV_ELD,Construction,passenger car,"passenger car, battery electric, Large SUV",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_EV_ELD,Operation,"transport, passenger car","transport, passenger car, battery electric, Large SUV",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_EV_LD,Construction,passenger car,"passenger car, battery electric, Large SUV",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_EV_LD,Operation,"transport, passenger car","transport, passenger car, battery electric, Large SUV",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_EV_MD,Construction,passenger car,"passenger car, battery electric, Large SUV",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_EV_MD,Operation,"transport, passenger car","transport, passenger car, battery electric, Large SUV",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_EV_SD,Operation,"transport, passenger car","transport, passenger car, battery electric, Large SUV",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_EV_SD,Construction,passenger car,"passenger car, battery electric, Large SUV",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_FC_CH4_ELD,Operation,"transport, passenger car","transport, passenger car, fuel cell electric, Large SUV",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_FC_CH4_ELD,Construction,passenger car,"passenger car, fuel cell electric, Large SUV",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_FC_CH4_LD,Operation,"transport, passenger car","transport, passenger car, fuel cell electric, Large SUV",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_FC_CH4_LD,Construction,passenger car,"passenger car, fuel cell electric, Large SUV",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_FC_CH4_MD,Operation,"transport, passenger car","transport, passenger car, fuel cell electric, Large SUV",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_FC_CH4_MD,Construction,passenger car,"passenger car, fuel cell electric, Large SUV",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_FC_CH4_SD,Operation,"transport, passenger car","transport, passenger car, fuel cell electric, Large SUV",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_FC_CH4_SD,Construction,passenger car,"passenger car, fuel cell electric, Large SUV",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_FC_H2_ELD,Operation,"transport, passenger car","transport, passenger car, fuel cell electric, Large SUV",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_FC_H2_ELD,Construction,passenger car,"passenger car, fuel cell electric, Large SUV",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_FC_H2_LD,Construction,passenger car,"passenger car, fuel cell electric, Large SUV",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_FC_H2_LD,Operation,"transport, passenger car","transport, passenger car, fuel cell electric, Large SUV",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_FC_H2_MD,Construction,passenger car,"passenger car, fuel cell electric, Large SUV",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_FC_H2_MD,Operation,"transport, passenger car","transport, passenger car, fuel cell electric, Large SUV",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_FC_H2_SD,Construction,passenger car,"passenger car, fuel cell electric, Large SUV",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_FC_H2_SD,Operation,"transport, passenger car","transport, passenger car, fuel cell electric, Large SUV",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_GASOLINE_ELD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_GASOLINE_ELD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_GASOLINE_LD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_GASOLINE_LD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_GASOLINE_MD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_GASOLINE_MD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_GASOLINE_SD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_GASOLINE_SD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_HY_GASOLINE_ELD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline hybrid, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_HY_GASOLINE_ELD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline hybrid, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_HY_GASOLINE_LD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline hybrid, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_HY_GASOLINE_LD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline hybrid, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_HY_GASOLINE_MD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline hybrid, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_HY_GASOLINE_MD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline hybrid, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_HY_GASOLINE_SD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline hybrid, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_HY_GASOLINE_SD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline hybrid, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_PHEV_GASOLINE_ELD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, plugin gasoline hybrid, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_PHEV_GASOLINE_ELD,Construction,"Passenger car, EURO-6ab","Passenger car, plugin gasoline hybrid, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_PHEV_GASOLINE_LD,Construction,"Passenger car, EURO-6ab","Passenger car, plugin gasoline hybrid, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_PHEV_GASOLINE_LD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, plugin gasoline hybrid, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_PHEV_GASOLINE_MD,Construction,"Passenger car, EURO-6ab","Passenger car, plugin gasoline hybrid, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_PHEV_GASOLINE_MD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, plugin gasoline hybrid, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_PHEV_GASOLINE_SD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, plugin gasoline hybrid, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_PHEV_GASOLINE_SD,Construction,"Passenger car, EURO-6ab","Passenger car, plugin gasoline hybrid, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_PROPANE_ELD,Construction,"Passenger car, EURO-6ab","Passenger car, compressed gas, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_PROPANE_ELD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, compressed gas, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_PROPANE_LD,Construction,"Passenger car, EURO-6ab","Passenger car, compressed gas, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_PROPANE_LD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, compressed gas, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_PROPANE_MD,Construction,"Passenger car, EURO-6ab","Passenger car, compressed gas, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_PROPANE_MD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, compressed gas, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_PROPANE_SD,Construction,"Passenger car, EURO-6ab","Passenger car, compressed gas, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SUV_PROPANE_SD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, compressed gas, Large SUV, EURO-6ab",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TIDAL,Construction,wave energy converter platform,wave energy converter platform production,RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TIDAL,Operation,"electricity, high voltage","electricity production, wave energy converter",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRAFO_EH,Operation,"electricity, high voltage","market for electricity, high voltage",CA-QC,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRAFO_HE,Operation,"electricity, high voltage","market for electricity, high voltage",CA-QC,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRAFO_HM,Operation,"electricity, high voltage","market for electricity, high voltage",CA-QC,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRAFO_LM,Operation,"electricity, low voltage","market for electricity, low voltage",CA-QC,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRAFO_MH,Operation,"electricity, medium voltage","market for electricity, medium voltage",CA-QC,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRAFO_ML,Operation,"electricity, medium voltage","market for electricity, medium voltage",CA-QC,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRAIN_DIESEL_ELD,Operation,"transport, passenger train","transport, passenger train",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRAIN_DIESEL_ELD,Construction,"train, passenger, long-distance","train production, passenger, long-distance",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRAIN_DIESEL_LD,Operation,"transport, passenger train","transport, passenger train",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRAIN_DIESEL_LD,Construction,"train, passenger, long-distance","train production, passenger, long-distance",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRAIN_ELEC_ELD,Construction,"train, passenger, high speed","market for train, passenger, high speed",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRAIN_ELEC_ELD,Operation,"transport, passenger train","transport, passenger train, high-speed",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRAIN_ELEC_LD,Construction,"train, passenger, high speed","market for train, passenger, high speed",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRAIN_ELEC_LD,Operation,"transport, passenger train","transport, passenger train, high-speed",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRAIN_FREIGHT_DIESEL_ELD,Operation,"transport, freight train","transport, freight train, diesel",US,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRAIN_FREIGHT_DIESEL_ELD_LOC,Construction,locomotive,locomotive production,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRAIN_FREIGHT_DIESEL_ELD_WAG,Construction,goods wagon,goods wagon production,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRAIN_FREIGHT_DIESEL_LD,Operation,"transport, freight train","transport, freight train, diesel",US,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRAIN_FREIGHT_DIESEL_LD_LOC,Construction,locomotive,locomotive production,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRAIN_FREIGHT_DIESEL_LD_WAG,Construction,goods wagon,goods wagon production,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRAIN_FREIGHT_ELEC_ELD,Operation,"transport, freight train","transport, freight train, electricity",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRAIN_FREIGHT_ELEC_ELD_LOC,Construction,locomotive,locomotive production,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRAIN_FREIGHT_ELEC_ELD_WAG,Construction,goods wagon,goods wagon production,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRAIN_FREIGHT_ELEC_LD,Operation,"transport, freight train","transport, freight train, electricity",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRAIN_FREIGHT_ELEC_LD_LOC,Construction,locomotive,locomotive production,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRAIN_FREIGHT_ELEC_LD_WAG,Construction,goods wagon,goods wagon production,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRAIN_FREIGHT_H2_ELD,Operation,"transport, freight train","transport, freight train, electricity",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRAIN_FREIGHT_H2_ELD_LOC,Construction,locomotive,locomotive production,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRAIN_FREIGHT_H2_ELD_WAG,Construction,goods wagon,goods wagon production,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRAIN_FREIGHT_H2_HYBRID_ELD,Operation,"transport, freight train","transport, freight train, electricity",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRAIN_FREIGHT_H2_HYBRID_ELD_LOC,Construction,locomotive,locomotive production,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRAIN_FREIGHT_H2_HYBRID_ELD_WAG,Construction,goods wagon,goods wagon production,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRAIN_FREIGHT_H2_HYBRID_LD,Operation,"transport, freight train","transport, freight train, electricity",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRAIN_FREIGHT_H2_HYBRID_LD_LOC,Construction,locomotive,locomotive production,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRAIN_FREIGHT_H2_HYBRID_LD_WAG,Construction,goods wagon,goods wagon production,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRAIN_FREIGHT_H2_LD,Operation,"transport, freight train","transport, freight train, electricity",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRAIN_FREIGHT_H2_LD_LOC,Construction,locomotive,locomotive production,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRAIN_FREIGHT_H2_LD_WAG,Construction,goods wagon,goods wagon production,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRAIN_FREIGHT_NG_ELD,Operation,"transport, freight train","transport, freight train, diesel",US,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRAIN_FREIGHT_NG_ELD_LOC,Construction,locomotive,locomotive production,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRAIN_FREIGHT_NG_ELD_WAG,Construction,goods wagon,goods wagon production,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRAIN_FREIGHT_NG_LD,Operation,"transport, freight train","transport, freight train, diesel",US,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRAIN_FREIGHT_NG_LD_LOC,Construction,locomotive,locomotive production,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRAIN_FREIGHT_NG_LD_WAG,Construction,goods wagon,goods wagon production,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRAIN_H2_ELD,Construction,"train, passenger, long-distance","train production, passenger, long-distance",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRAIN_H2_ELD,Operation,"transport, passenger train","transport, passenger train",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRAIN_H2_LD,Construction,"train, passenger, long-distance","train production, passenger, long-distance",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRAIN_H2_LD,Operation,"transport, passenger train","transport, passenger train",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRAIN_NG_ELD,Operation,"transport, passenger train","transport, passenger train",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRAIN_NG_ELD,Construction,"train, passenger, long-distance","train production, passenger, long-distance",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRAIN_NG_LD,Operation,"transport, passenger train","transport, passenger train",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRAIN_NG_LD,Construction,"train, passenger, long-distance","train production, passenger, long-distance",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRAMWAY_SD,Operation,"transport, tram","transport, tram",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRAMWAY_SD,Construction,tram,tram production,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRUCK_LH_BIODIESEL_B100_LD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 18t gross weight, EURO-VI, long haul",CAN,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRUCK_LH_BIODIESEL_B100_LD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, diesel, 18t gross weight, EURO-VI, long haul",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRUCK_LH_BIODIESEL_B20_LD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 18t gross weight, EURO-VI, long haul",CAN,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRUCK_LH_BIODIESEL_B20_LD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, diesel, 18t gross weight, EURO-VI, long haul",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRUCK_LH_CNG_LD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, compressed gas, 18t gross weight, EURO-VI, long haul",CAN,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRUCK_LH_CNG_LD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, compressed gas, 18t gross weight, EURO-VI, long haul",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRUCK_LH_DIESEL_LD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 18t gross weight, EURO-VI, long haul",CAN,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRUCK_LH_DIESEL_LD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, diesel, 18t gross weight, EURO-VI, long haul",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRUCK_LH_EV_LD,Construction,medium duty truck,"medium duty truck, battery electric, 18t gross weight, long haul",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRUCK_LH_EV_LD,Operation,"transport, freight, lorry","transport, freight, lorry, battery electric, 18t gross weight, long haul",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRUCK_LH_FC_CH4_LD,Construction,medium duty truck,"medium duty truck, fuel cell electric, 18t gross weight, long haul",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRUCK_LH_FC_CH4_LD,Operation,"transport, freight, lorry","transport, freight, lorry, fuel cell electric, 18t gross weight, long haul",CAN,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRUCK_LH_HY_DIESEL_LD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, diesel hybrid, 18t gross weight, EURO-VI, long haul",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRUCK_LH_HY_DIESEL_LD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel hybrid, 18t gross weight, EURO-VI, long haul",CAN,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRUCK_LH_PROPANE_LD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, compressed gas, 18t gross weight, EURO-VI, long haul",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRUCK_LH_PROPANE_LD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, compressed gas, 18t gross weight, EURO-VI, long haul",CAN,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRUCK_SH_BIODIESEL_B100_MD,Construction,truck,"truck, diesel, 18t, regional delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRUCK_SH_BIODIESEL_B100_MD,Operation,"transport, truck","transport, truck, diesel, 18t, regional delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRUCK_SH_BIODIESEL_B100_SD,Construction,truck,"truck, diesel, 18t, regional delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRUCK_SH_BIODIESEL_B100_SD,Operation,"transport, truck","transport, truck, diesel, 18t, regional delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRUCK_SH_BIODIESEL_B20_MD,Construction,truck,"truck, diesel, 18t, regional delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRUCK_SH_BIODIESEL_B20_MD,Operation,"transport, truck","transport, truck, diesel, 18t, regional delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRUCK_SH_BIODIESEL_B20_SD,Construction,truck,"truck, diesel, 18t, regional delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRUCK_SH_BIODIESEL_B20_SD,Operation,"transport, truck","transport, truck, diesel, 18t, regional delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRUCK_SH_CNG_MD,Operation,"transport, truck","transport, truck, compressed gas, 18t, regional delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRUCK_SH_CNG_MD,Construction,truck,"truck, compressed gas, 18t, regional delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRUCK_SH_CNG_SD,Operation,"transport, truck","transport, truck, compressed gas, 18t, regional delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRUCK_SH_CNG_SD,Construction,truck,"truck, compressed gas, 18t, regional delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRUCK_SH_DIESEL_MD,Construction,truck,"truck, diesel, 18t, regional delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRUCK_SH_DIESEL_MD,Operation,"transport, truck","transport, truck, diesel, 18t, regional delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRUCK_SH_DIESEL_SD,Operation,"transport, truck","transport, truck, diesel, 18t, regional delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRUCK_SH_DIESEL_SD,Construction,truck,"truck, diesel, 18t, regional delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRUCK_SH_EV_MD,Construction,truck,"truck, battery electric, 18t, regional delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRUCK_SH_EV_MD,Operation,"transport, truck","transport, truck, battery electric, 18t, regional delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRUCK_SH_EV_SD,Construction,truck,"truck, battery electric, 18t, regional delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRUCK_SH_EV_SD,Operation,"transport, truck","transport, truck, battery electric, 18t, regional delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRUCK_SH_FC_CH4_MD,Construction,truck,"truck, fuel cell electric, 18t, regional delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRUCK_SH_FC_CH4_MD,Operation,"transport, truck","transport, truck, fuel cell electric, 18t, regional delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRUCK_SH_FC_CH4_SD,Construction,truck,"truck, fuel cell electric, 18t, regional delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRUCK_SH_FC_CH4_SD,Operation,"transport, truck","transport, truck, fuel cell electric, 18t, regional delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRUCK_SH_HY_DIESEL_MD,Construction,truck,"truck, diesel hybrid, 18t, regional delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRUCK_SH_HY_DIESEL_MD,Operation,"transport, truck","transport, truck, diesel hybrid, 18t, regional delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRUCK_SH_HY_DIESEL_SD,Construction,truck,"truck, diesel hybrid, 18t, regional delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRUCK_SH_HY_DIESEL_SD,Operation,"transport, truck","transport, truck, diesel hybrid, 18t, regional delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRUCK_SH_PROPANE_MD,Operation,"transport, truck","transport, truck, compressed gas, 18t, regional delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRUCK_SH_PROPANE_MD,Construction,truck,"truck, compressed gas, 18t, regional delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRUCK_SH_PROPANE_SD,Operation,"transport, truck","transport, truck, compressed gas, 18t, regional delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TRUCK_SH_PROPANE_SD,Construction,truck,"truck, compressed gas, 18t, regional delivery",CH,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+UNMINEABLE_COAL_SEAM,Operation,"carbon dioxide, stored","carbon dioxide compression, transport and storage",CAN,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+WIND_OFFSHORE,Operation,"electricity, high voltage","electricity production, wind, 1-3MW turbine, offshore",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+WIND_OFFSHORE_FIXED,Construction,"wind power plant, 2MW, offshore, fixed parts","market for wind power plant, 2MW, offshore, fixed parts",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+WIND_OFFSHORE_MOVING,Construction,"wind power plant, 2MW, offshore, moving parts","market for wind power plant, 2MW, offshore, moving parts",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+WIND_ONSHORE,Operation,"electricity, high voltage","electricity production, wind, 1-3MW turbine, onshore",CA-QC,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+WIND_ONSHORE_CONNECTION,Construction,"wind turbine network connection, 2MW, onshore","wind turbine network connection construction, 2MW, onshore",CA-QC,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+WIND_ONSHORE_TURBINE,Construction,"wind turbine, 2MW, onshore","wind turbine construction, 2MW, onshore",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+WOOD_METHANOL,Construction,methanol factory,methanol factory construction,GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+WOOD_METHANOL,Operation,"methanol, unpurified","methanol synthesis, from wood, with CCS",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+ACETIC_ACID,Resource,"acetic acid, without water, in 98% solution state","market for acetic acid, without water, in 98% solution state",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+ACETONE,Resource,"acetone, liquid","market for acetone, liquid",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+BIO_DIESEL,Resource,"biodiesel, vehicle grade","biodiesel, from used cooking oil, at fuelling station",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+BENZENE,Resource,benzene,market for benzene,RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COAL,Resource,hard coal,market for hard coal,RNA,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DIESEL,Resource,"diesel, low-sulfur","market for diesel, low-sulfur",CAN,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+ELEC_EXPORT,Resource,"electricity, high voltage","market for electricity, high voltage",CA-QC,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+ELECTRICITY_EHV,Resource,"electricity, high voltage","electricity production, hydro, reservoir, non-alpine region",CA-QC,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+ETHANE,Resource,ethane,market for ethane,GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+ETHANOL,Resource,"ethanol, without water, in 99.7% solution state, from fermentation","market for ethanol, without water, in 99.7% solution state, from fermentation",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+ETHYLBENZENE,Resource,ethyl benzene,market for ethyl benzene,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+ETHYLENE,Resource,ethylene,market for ethylene,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+GASOLINE,Resource,"petrol, low-sulfur","market for petrol, low-sulfur",CAN,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+H2_EHP,Resource,"hydrogen, gaseous, low pressure","market for hydrogen, gaseous, low pressure",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+H2_HP,Resource,"hydrogen, gaseous, low pressure","market for hydrogen, gaseous, low pressure",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+H2_LP,Resource,"hydrogen, gaseous, low pressure","market for hydrogen, gaseous, low pressure",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+H2_MP,Resource,"hydrogen, gaseous, low pressure","market for hydrogen, gaseous, low pressure",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+JETFUEL,Resource,kerosene,market for kerosene,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+LFO,Resource,light fuel oil,market for light fuel oil,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+LNG,Resource,"natural gas, liquefied","market for natural gas, liquefied",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+METHANOL,Resource,methanol,market for methanol,CN,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+NG_EHP,Resource,"natural gas, high pressure","market for natural gas, high pressure",CA,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+NG_HP,Resource,"natural gas, high pressure","market for natural gas, high pressure",CA,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+NG_LP,Resource,"natural gas, low pressure","market for natural gas, low pressure",CA,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+NG_MP,Resource,"natural gas, medium pressure, vehicle grade","natural gas production, medium pressure, vehicle grade",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+PE,Resource,"polyethylene, high density, granulate","market for polyethylene, high density, granulate",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+PET,Resource,"polyethylene terephthalate, granulate, amorphous","market for polyethylene terephthalate, granulate, amorphous",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+PHENOL,Resource,phenol,market for phenol,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+PP,Resource,"polypropylene, granulate","market for polypropylene, granulate",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+PROPANE,Resource,propane,market for propane,GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+PROPYLENE,Resource,propylene,market for propylene,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+PS,Resource,"polystyrene, general purpose","market for polystyrene, general purpose",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+PVC,Resource,"polyvinylchloride, bulk polymerised","market for polyvinylchloride, bulk polymerised",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SNG,Resource,biogas,market for biogas,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+STYRENE,Resource,styrene,market for styrene,GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TOLUENE,Resource,"toluene, liquid","market for toluene, liquid",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+URANIUM,Resource,"nuclear fuel element, for pressure water reactor, UO2 4.2% & MOX","market for nuclear fuel element, for pressure water reactor, UO2 4.2% & MOX",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+WASTE,Resource,municipal solid waste,market for municipal solid waste,CA,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+WASTE_BIO,Resource,biowaste,market for biowaste,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+WASTE_FOS,Resource,refinery sludge,market for refinery sludge,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+WET_BIOMASS,Resource,"wood chips, wet, measured as dry mass","market for wood chips, wet, measured as dry mass",CA-QC,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+WOOD,Resource,"wood chips, dry, measured as dry mass","market for wood chips, dry, measured as dry mass",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+XYLENE,Resource,"xylene, mixed","market for xylene, mixed",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+ACETIC_ACID,Flow,"acetic acid, without water, in 98% solution state","market for acetic acid, without water, in 98% solution state",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+ACETONE,Flow,"acetone, liquid","market for acetone, liquid",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+ALUMINUM,Flow,"aluminium, primary, ingot","market for aluminium, primary, ingot",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+BENZENE,Flow,benzene,market for benzene,RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+BIO_DIESEL,Flow,"biodiesel, vehicle grade","biodiesel, from used cooking oil, at fuelling station",RER,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CEMENT,Flow,"cement, unspecified","market for cement, unspecified",CA-QC,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+CO2_C,Flow,"carbon dioxide, liquid","market for carbon dioxide, liquid",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+COAL,Flow,hard coal,market for hard coal,RNA,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+DIESEL,Flow,"diesel, low-sulfur","market for diesel, low-sulfur",CAN,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+ELECTRICITY_EHV,Flow,"electricity, high voltage","market for electricity, high voltage",CA-QC,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+ELECTRICITY_HV,Flow,"electricity, high voltage","market for electricity, high voltage",CA-QC,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+ELECTRICITY_LV,Flow,"electricity, low voltage","market for electricity, low voltage",CA-QC,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+ELECTRICITY_MV,Flow,"electricity, medium voltage","market for electricity, medium voltage",CA-QC,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+ETHANE,Flow,ethane,market for ethane,GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+ETHANOL,Flow,"ethanol, without water, in 99.7% solution state, from fermentation","market for ethanol, without water, in 99.7% solution state, from fermentation",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+ETHYLBENZENE,Flow,ethyl benzene,market for ethyl benzene,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+ETHYLENE,Flow,ethylene,market for ethylene,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+FOOD,Flow,"sugar, from sugar beet",beet sugar production,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+GASOLINE,Flow,"petrol, low-sulfur","market for petrol, low-sulfur",CAN,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+H2_EHP,Flow,"hydrogen, gaseous, low pressure","market for hydrogen, gaseous, low pressure",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+H2_HP,Flow,"hydrogen, gaseous, low pressure","market for hydrogen, gaseous, low pressure",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+H2_LP,Flow,"hydrogen, gaseous, low pressure","market for hydrogen, gaseous, low pressure",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+H2_MP,Flow,"hydrogen, gaseous, low pressure","market for hydrogen, gaseous, low pressure",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+HEAT_HIGH_T,Flow,"heat, district or industrial, other than natural gas","market for heat, district or industrial, other than natural gas",CA-QC,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+HEAT_LOW_T_DECEN,Flow,"heat, central or small-scale, other than natural gas","market for heat, central or small-scale, other than natural gas",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+HEAT_LOW_T_DHN,Flow,"heat, district or industrial, other than natural gas","market for heat, district or industrial, other than natural gas",CA-QC,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+JETFUEL,Flow,kerosene,market for kerosene,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+LFO,Flow,light fuel oil,market for light fuel oil,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+LNG,Flow,"natural gas, liquefied","market for natural gas, liquefied",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+METHANOL,Flow,methanol,market for methanol,CN,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+MOB_FREIGHT_LCV,Flow,"transport, freight, light commercial vehicle","market for transport, freight, light commercial vehicle",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+MOB_FREIGHT_SEMI,Flow,"transport, freight, lorry, unspecified","market for transport, freight, lorry, unspecified",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+MOB_FREIGHT_TRUCK,Flow,"transport, freight, lorry, unspecified","market for transport, freight, lorry, unspecified",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+MOB_FREIGHT_TRAIN,Flow,"transport, freight train","market for transport, freight train",US,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+MOB_PRIVATE_CAR,Flow,"transport, passenger car","market for transport, passenger car",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+MOB_PRIVATE_SUV,Flow,"transport, passenger car","market for transport, passenger car",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+MOB_PUBLIC_BUS,Flow,"transport, regular bus","market for transport, regular bus",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+MOB_PUBLIC_COACH,Flow,"transport, passenger coach","market for transport, passenger coach",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+MOB_PUBLIC_TRAIN,Flow,"transport, passenger train","market for transport, passenger train",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+NG_EHP,Flow,"natural gas, high pressure","market for natural gas, high pressure",CA,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+NG_HP,Flow,"natural gas, high pressure","market for natural gas, high pressure",CA,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+NG_LP,Flow,"natural gas, low pressure","market for natural gas, low pressure",CA,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+NG_MP,Flow,"natural gas, medium pressure, vehicle grade","natural gas production, medium pressure, vehicle grade",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+PAPER,Flow,"paper, newsprint","paper production, newsprint, recycled",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+PE,Flow,"polyethylene, high density, granulate","market for polyethylene, high density, granulate",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+PET,Flow,"polyethylene terephthalate, granulate, amorphous","market for polyethylene terephthalate, granulate, amorphous",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+PHENOL,Flow,phenol,market for phenol,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+PP,Flow,"polypropylene, granulate","market for polypropylene, granulate",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+PROPYLENE,Flow,propylene,market for propylene,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+PS,Flow,"polystyrene, general purpose","market for polystyrene, general purpose",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+PVC,Flow,"polyvinylchloride, bulk polymerised","market for polyvinylchloride, bulk polymerised",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+SNG,Flow,biogas,market for biogas,RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+STEEL,Flow,"steel, chromium steel 18/8","market for steel, chromium steel 18/8",CAN,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+STYRENE,Flow,styrene,market for styrene,GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+TOLUENE,Flow,"toluene, liquid","market for toluene, liquid",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+URANIUM,Flow,"nuclear fuel element, for pressure water reactor, UO2 4.2% & MOX","market for nuclear fuel element, for pressure water reactor, UO2 4.2% & MOX",GLO,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+WASTE,Flow,municipal solid waste,market for municipal solid waste,CA,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+WET_BIOMASS,Flow,"wood chips, wet, measured as dry mass","market for wood chips, wet, measured as dry mass",CA-QC,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+WOOD,Flow,"wood chips, dry, measured as dry mass","market for wood chips, dry, measured as dry mass",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
+XYLENE,Flow,"xylene, mixed","market for xylene, mixed",RoW,ecoinvent_cutoff_3.10_image_SSP2-Base_2050+truck_carculator
