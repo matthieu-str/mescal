@@ -70,7 +70,6 @@ def from_str_to_tuple(df: pd.DataFrame, col: str) -> pd.DataFrame:
 def restrict_lcia_metrics(
         df: pd.DataFrame,
         lcia_methods: list[str],
-        specific_lcia_methods: list[str] = None,
         specific_lcia_categories: list[str] = None,
         specific_lcia_abbrev: list[str] = None,
 ) -> pd.DataFrame:
@@ -79,7 +78,6 @@ def restrict_lcia_metrics(
 
     :param df: dataframe containing the LCA metrics
     :param lcia_methods: general LCIA method to be used
-    :param specific_lcia_methods: specific LCIA methods to be used
     :param specific_lcia_categories: specific LCIA categories to be used
     :param specific_lcia_abbrev: specific LCIA abbreviations to be used
     :return: dataframe containing the LCA metrics for the specified LCIA method
@@ -87,11 +85,8 @@ def restrict_lcia_metrics(
 
     df = df[df.apply(lambda x: x.Impact_category[0] in lcia_methods, axis=1)]
 
-    if specific_lcia_methods is not None:
-        df = df[df.apply(lambda x: x.Impact_category[0] in specific_lcia_methods, axis=1)]
-
     if specific_lcia_categories is not None:
-        df = df[df.apply(lambda x: x.Impact_category[2] in specific_lcia_categories, axis=1)]
+        df = df[df.apply(lambda x: x.Impact_category[-1] in specific_lcia_categories, axis=1)]
 
     if specific_lcia_abbrev is not None:
         df = df[df.apply(lambda x: x.Abbrev in specific_lcia_abbrev, axis=1)]
@@ -105,10 +100,8 @@ def normalize_lca_metrics(
         mip_gap: float,
         impact_abbrev: pd.DataFrame,
         lcia_methods: list[str],
-        specific_lcia_methods: list[str] = None,
         specific_lcia_categories: list[str] = None,
         specific_lcia_abbrev: list[str] = None,
-        biogenic: bool = False,
         path: str = 'results/',
         file_name: str = 'techs_lcia.dat',
         metadata: dict = None,
@@ -123,11 +116,9 @@ def normalize_lca_metrics(
     :param R: dataframe containing the LCA indicators results
     :param mip_gap: values lowed than the MIP gap (normalized values) are set to 0
     :param lcia_methods: LCIA method to be used
-    :param specific_lcia_methods: specific LCIA methods to be used
     :param specific_lcia_categories: specific LCIA categories to be used
     :param specific_lcia_abbrev: specific LCIA abbreviations to be used
     :param impact_abbrev: dataframe containing the impact categories abbreviations
-    :param biogenic: whether biogenic carbon flows impact assessment method should be included or not
     :param metadata: dictionary containing the metadata. Can contain keys 'ecoinvent_version, 'year', 'spatialized',
         'regionalized', 'iam', 'ssp_rcp', 'lcia_method'.
     :param output: if 'write', writes the .dat file in 'path', if 'return', normalizes pandas dataframe, if 'both' does
@@ -137,18 +128,12 @@ def normalize_lca_metrics(
     if metadata is None:
         metadata = {}
 
-    if not biogenic:
-        list_biogenic_cat = ["CFB", "REQDB", "m_CCLB", "m_CCSB", "TTEQB", "TTHHB", "CCEQSB", "CCEQLB", "CCHHSB",
-                             "CCHHLB", "MALB", "MASB"]
-        impact_abbrev.drop(impact_abbrev[impact_abbrev.Abbrev.isin(list_biogenic_cat)].index, inplace=True)
-
     R = from_str_to_tuple(R, 'Impact_category')
     impact_abbrev = from_str_to_tuple(impact_abbrev, 'Impact_category')
 
     impact_abbrev = restrict_lcia_metrics(
         df=impact_abbrev,
         lcia_methods=lcia_methods,
-        specific_lcia_methods=specific_lcia_methods,
         specific_lcia_categories=specific_lcia_categories,
         specific_lcia_abbrev=specific_lcia_abbrev,
     )
