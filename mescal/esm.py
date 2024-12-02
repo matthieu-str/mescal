@@ -317,7 +317,11 @@ class ESM:
 
         print(f"### Starting to remove double-counted flows ###")
         t1_dc = time.time()
-        flows_set_to_zero, ei_removal = self.double_counting_removal(df_op=self.mapping_op, N=N, ESM_inputs='all')
+        (
+            flows_set_to_zero,
+            ei_removal,
+            activities_subject_to_double_counting
+        ) = self.double_counting_removal(df_op=self.mapping_op, N=N, ESM_inputs='all')
         t2_dc = time.time()
         print(f"### Double-counting removal done ###")
         print(f"--> Time: {round(t2_dc - t1_dc, 0)} seconds")
@@ -385,6 +389,10 @@ class ESM:
             double_counting_removal_count.to_csv(f"{self.results_path_file}double_counting_removal_count.csv",
                                                  index=False)
             df_flows_set_to_zero.to_csv(f"{self.results_path_file}removed_flows_list.csv", index=False)
+            pd.DataFrame(
+                data=[[i[0], i[1]] for i in activities_subject_to_double_counting],
+                columns=['Activity name', 'Activity code']
+            ).to_csv(f"{self.results_path_file}activities_subject_to_double_counting.csv", index=False)
 
         if write_database:
             print(f"### Starting to write database ###")

@@ -263,7 +263,7 @@ def double_counting_removal(
         N: int,
         ESM_inputs: list[str] or str = 'all',
         create_new_db: bool = True,
-) -> tuple[list[list], dict]:
+) -> tuple[list[list], dict, list[tuple[str, str]]]:
     """
     Remove double counting in the ESM database and write it in the Brightway project
 
@@ -271,7 +271,7 @@ def double_counting_removal(
     :param N: number of columns of the original mapping file
     :param ESM_inputs: list of the ESM flows to perform double counting removal on
     :param create_new_db: if True, create a new database
-    :return: list of removed flows, dictionary of removed quantities
+    :return: list of removed flows, dictionary of removed quantities, list of activities subject to double counting
     """
     # Store frequently accessed instance variables in local variables inside a method.
     # Those will be passed to the background_search method via arguments.
@@ -289,6 +289,9 @@ def double_counting_removal(
 
     # Initializing list of removed flows
     flows_set_to_zero = []
+
+    # Initializing the list of activities subject to double counting
+    activities_subject_to_double_counting = []
 
     # Initializing the dict of removed quantities
     ei_removal = {}
@@ -563,9 +566,12 @@ def double_counting_removal(
 
             id_d_c += 1
 
+        activities_subject_to_double_counting.extend([(i[0], i[1]) for i in perform_d_c])
+
     # Injecting local variables into the instance variables
     self.main_database.db_as_list = db_as_list
-    # self.main_database.db_as_dict_code = db_dict_code
-    # self.main_database.db_as_dict_name = db_dict_name
 
-    return flows_set_to_zero, ei_removal
+    # Remove duplicates in the list of activities subject to double counting
+    activities_subject_to_double_counting = list(set(activities_subject_to_double_counting))
+
+    return flows_set_to_zero, ei_removal, activities_subject_to_double_counting

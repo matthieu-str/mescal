@@ -173,7 +173,7 @@ def create_new_database_with_esm_results(
     self.mapping = mapping
     self.main_database.db_as_list = db_as_list
 
-    flows_set_to_zero, ei_removal = self.double_counting_removal(
+    flows_set_to_zero, ei_removal, activities_subject_to_double_counting = self.double_counting_removal(
         df_op=double_counting_act,
         N=N,
         ESM_inputs=['OWN_CONSTRUCTION', 'CONSTRUCTION'],
