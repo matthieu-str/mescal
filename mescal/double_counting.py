@@ -263,7 +263,7 @@ def double_counting_removal(
         N: int,
         ESM_inputs: list[str] or str = 'all',
         create_new_db: bool = True,
-) -> tuple[list[list], dict, list[tuple[str, str]]]:
+) -> tuple[list[list], dict, list[tuple[str, str, float]]]:
     """
     Remove double counting in the ESM database and write it in the Brightway project
 
@@ -566,7 +566,7 @@ def double_counting_removal(
 
             id_d_c += 1
 
-        activities_subject_to_double_counting.extend([(i[0], i[1]) for i in perform_d_c])
+        activities_subject_to_double_counting.extend([(i[0], i[1], i[2]) for i in perform_d_c])
 
     # Injecting local variables into the instance variables
     self.main_database.db_as_list = db_as_list

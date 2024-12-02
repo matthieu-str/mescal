@@ -390,8 +390,8 @@ class ESM:
                                                  index=False)
             df_flows_set_to_zero.to_csv(f"{self.results_path_file}removed_flows_list.csv", index=False)
             pd.DataFrame(
-                data=[[i[0], i[1]] for i in activities_subject_to_double_counting],
-                columns=['Activity name', 'Activity code']
+                data=[[i[0], i[1], i[2]] for i in activities_subject_to_double_counting],
+                columns=['Activity name', 'Activity code', 'Amount']
             ).to_csv(f"{self.results_path_file}activities_subject_to_double_counting.csv", index=False)
 
         if write_database:
