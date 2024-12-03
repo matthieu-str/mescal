@@ -10,13 +10,27 @@ pd.options.mode.chained_assignment = None  # default='warn'
 def compute_impact_scores(
         self,
         methods: list[str],
+        assessment_type: str = 'esm',
+        activities_subject_to_double_counting: pd.DataFrame = None,
+        overwrite: bool = True,
 ) -> pd.DataFrame:
     """
     Compute the impact scores of the technologies and resources
 
     :param methods: list of life-cycle impact assessment methods for which LCA scores are computed
+    :param assessment_type: type of assessment, can be 'esm' for the full LCA database, or 'direct emissions' for the
+        computation of territorial emissions only
+    :param activities_subject_to_double_counting: activities that were subject to the double counting removal
+    :param overwrite: only relevant if assessment_type is 'direct emissions', if True, the direct emissions database
+        will be overwritten if it exists
     :return: impact scores of the technologies and resources for all impact categories of all LCIA methods
     """
+    if assessment_type == 'direct emissions' and activities_subject_to_double_counting is None:
+        raise ValueError('For territorial emissions computation, the activities_subject_to_double_counting dataframe '
+                         'must be provided')
+
+    if assessment_type != 'esm' and assessment_type != 'direct emissions':
+        raise ValueError('The assessment type must be either "esm" or "direct emissions"')
 
     # Store frequently accessed instance variables in local variables inside a method
     mapping = self.mapping
@@ -27,15 +41,46 @@ def compute_impact_scores(
     esm_db = Database(db_names=esm_db_name)
     esm_db_dict_code = esm_db.db_as_dict_code
 
-    activities = [esm_db_dict_code[(esm_db_name, mapping['New_code'].iloc[i])] for i in
-                  range(len(mapping[mapping.Type != 'Flow']))]
+    if assessment_type == 'esm':
+        calculation_setup_name = 'impact_scores'
+        activities = [esm_db_dict_code[(esm_db_name, mapping['New_code'].iloc[i])] for i in
+                      range(len(mapping[mapping.Type != 'Flow']))]
+
+    elif assessment_type == 'direct emissions':
+        calculation_setup_name = 'direct_emissions'
+        activities_subject_to_double_counting['Type'] = 'Operation'
+        activities_subject_to_double_counting['Database'] = esm_db_name+'_direct_emissions'
+
+        # Filtering the database to keep only the activities subject to double counting (i.e., the ones with
+        # direct emissions)
+        activities = [i for i in esm_db.db_as_list if
+                      i['code'] in list(activities_subject_to_double_counting['Activity code'].unique())]
+
+        # Set the amount of all technosphere exchanges to 0 (keeps direct emissions only) and change database name
+        for act in activities:
+            act['database'] = esm_db_name+'_direct_emissions'
+            for exc in act['exchanges']:
+                if exc['type'] == 'technosphere':
+                    exc['amount'] = 0
+
+        direct_emissions_db = self.aggregate_direct_emissions_activities(
+            esm_db=esm_db,
+            direct_emissions_db=activities,
+            activities_subject_to_double_counting=activities_subject_to_double_counting,
+        )  # aggregate activities subject to double counting for each ESM technology
+        direct_emissions_db.write_to_brightway(new_db_name=f'{esm_db_name}_direct_emissions', overwrite=overwrite)
+        activities = [i for i in direct_emissions_db.db_as_list]  # update database name
+
+    else:
+        raise ValueError('The assessment type must be either "esm" or "direct emissions')
+
     activities_bw = {(i['database'], i['code']): i for i in activities}
     impact_categories = self.get_impact_categories(methods)
-    bd.calculation_setups['impact_scores'] = {
+    bd.calculation_setups[calculation_setup_name] = {
         'inv': [{key: 1} for key in list(activities_bw.keys())],
         'ia': impact_categories
     }
-    multilca = bc.MultiLCA('impact_scores')  # computes the LCA scores
+    multilca = bc.MultiLCA(calculation_setup_name)  # computes the LCA scores
 
     R = pd.DataFrame(
         multilca.results,
@@ -47,11 +92,22 @@ def compute_impact_scores(
         left=mapping[['Name', 'Type', 'New_code']],
         right=unit_conversion,
         on=['Name', 'Type'],
-        how='left'
+        how='left',
     )
-    unit_conversion_code = pd.Series(data=unit_conversion_code.Value.values, index=unit_conversion_code.New_code)
+    unit_conversion_code = pd.Series(
+        data=unit_conversion_code['Value'].values,
+        index=unit_conversion_code['New_code'],
+    )
 
     R = R * unit_conversion_code[R.columns]  # multiply each column by its unit conversion factor
+
+    if assessment_type == 'direct emissions':
+        # TODO: reformat R correctly
+        # R_long = R.melt(ignore_index=False, var_name='Activity code')
+        # R_long.rename(columns={'index': 'Impact_category', 'value': 'Value'}, inplace=True)
+        # R_long = R_long.reset_index().merge(right=activities_subject_to_double_counting[['Name', 'Activity code']],
+        #                                     on='Activity code')
+        return R
 
     R_tech_op = R[list(mapping[mapping.Type == 'Operation'].New_code)]
     R_tech_constr = R[list(mapping[mapping.Type == 'Construction'].New_code)]
@@ -150,6 +206,79 @@ def get_impact_categories(methods: list[str]) -> list[str]:
     :return: list of impact categories in the LCIA methods
     """
     return [i for i in bd.methods if i[0] in methods]
+
+
+def aggregate_direct_emissions_activities(
+        self,
+        esm_db: Database,
+        direct_emissions_db: list[dict],
+        activities_subject_to_double_counting: pd.DataFrame,
+) -> Database:
+    """
+    Aggregate the activities subject to double counting for the same ESM technology
+
+    :param esm_db: ESM database
+    :param direct_emissions_db: direct emissions ESM database before aggregation
+    :param activities_subject_to_double_counting: dataframe of activities subject to double counting
+    :return: aggregated direct emissions ESM database
+    """
+    for tech in activities_subject_to_double_counting['Name'].unique():
+        activities = activities_subject_to_double_counting[activities_subject_to_double_counting.Name == tech]
+        old_act = [i for i in esm_db.db_as_list if i['name'] == f'{tech}, Operation'][0]
+
+        if (
+                (len(activities) == 1)
+                & (activities.iloc[0]['Amount'] == 1.0)
+                # & (activities.iloc[0]['Activity code'] == old_act['code'])
+                ):
+            act = [i for i in direct_emissions_db if i['code'] == activities.iloc[0]['Activity code']][0]
+            act['name'] = f'{tech}, Operation'
+            for exc in act['exchanges']:
+                if exc['type'] == 'production':
+                    exc['name'] = f'{tech}, Operation'
+                    exc['database'] = self.esm_db_name + '_direct_emissions'
+
+        else:
+            exchanges = [
+                {
+                    "amount": 1,
+                    "name": f'{tech}, Operation',
+                    "product": old_act['reference product'],
+                    "location": old_act['location'],
+                    "database": self.esm_db_name + '_direct_emissions',
+                    "code": old_act['code'],
+                    "type": "production",
+                    "unit": old_act['unit'],
+                }
+            ]
+            for i in range(len(activities)):
+                exc_code = activities.iloc[i]['Activity code']
+                exc_amount = activities.iloc[i]['Amount']
+                exc_act = [i for i in direct_emissions_db if i['code'] == exc_code][0]
+                new_exc = {
+                    "name": exc_act['name'],
+                    "product": exc_act['reference product'],
+                    "location": exc_act['location'],
+                    "unit": exc_act['unit'],
+                    "amount": exc_amount,
+                    "database": self.esm_db_name,
+                    "code": exc_code,
+                    "type": "technosphere",
+                }
+                exchanges.append(new_exc)
+                direct_emissions_db = [i for i in direct_emissions_db if i['code'] != exc_code]  # remove old activity
+            new_act = {
+                "name": f'{tech}, Operation',
+                "reference product": old_act['reference product'],
+                "location": old_act['location'],
+                "code": old_act['code'],
+                "unit": old_act['unit'],
+                "database": self.esm_db_name + '_direct_emissions',
+                "exchanges": exchanges,
+            }
+            direct_emissions_db.append(new_act)  # add new activity
+
+    return Database(db_as_list=direct_emissions_db)
 
 
 def is_empty(self, row: pd.Series) -> float:
