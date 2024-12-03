@@ -142,7 +142,12 @@ class ESM:
         change_location_mapping_file
     )
     from .double_counting import double_counting_removal, background_search
-    from .impact_assessment import compute_impact_scores, get_impact_categories, is_empty
+    from .impact_assessment import (
+        compute_impact_scores,
+        get_impact_categories,
+        is_empty,
+        aggregate_direct_emissions_activities
+    )
     from .adapt_efficiency import (
         correct_esm_and_lca_efficiency_differences,
         compute_efficiency_esm,
@@ -390,8 +395,8 @@ class ESM:
                                                  index=False)
             df_flows_set_to_zero.to_csv(f"{self.results_path_file}removed_flows_list.csv", index=False)
             pd.DataFrame(
-                data=[[i[0], i[1], i[2]] for i in activities_subject_to_double_counting],
-                columns=['Activity name', 'Activity code', 'Amount']
+                data=activities_subject_to_double_counting,
+                columns=['Name', 'Activity name', 'Activity code', 'Amount']
             ).to_csv(f"{self.results_path_file}activities_subject_to_double_counting.csv", index=False)
 
         if write_database:
