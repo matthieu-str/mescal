@@ -434,20 +434,28 @@ class Database:
             self,
             new_db_name: str,
             database_type: str = 'technosphere',
+            overwrite: bool = True,
     ) -> None:
         """
         Write a LCI database to a Brightway project. This function will overwrite the database if it already exists.
 
         :param new_db_name: name of the brightway database to be written
         :param database_type: type of database to be written, can be 'technosphere' or 'biosphere'
+        :param overwrite: if True, overwrite the database if it already exists
         :return: None
         """
 
         if database_type not in ['technosphere', 'biosphere']:
             raise ValueError('Database type must be either "technosphere" or "biosphere"')
 
-        if new_db_name in list(bd.databases):  # if the database already exists, delete it
-            del bd.databases[new_db_name]
+        if new_db_name in list(bd.databases):  # if the database already exists
+            if overwrite:
+                del bd.databases[new_db_name]
+                print(f"Previous {new_db_name} will be overwritten!")
+            else:
+                print(f"{new_db_name} already exists in Brightway. To overwrite it, set 'overwrite' to True or delete "
+                      f"it manually")
+                return
         else:
             pass
         bw_database = bd.Database(new_db_name)
@@ -458,6 +466,7 @@ class Database:
         self.wurst_to_brightway(database_type)
         db = {(i['database'], i['code']): i for i in self.db_as_list}
         bw_database.write(db)
+        print(f"{new_db_name} written to Brightway!")
 
     def delete(self) -> None:
         """
