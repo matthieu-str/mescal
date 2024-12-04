@@ -1,3 +1,4 @@
+import copy
 import bw2calc as bc
 import bw2data as bd
 import pandas as pd
@@ -43,8 +44,8 @@ def compute_impact_scores(
 
     if assessment_type == 'esm':
         calculation_setup_name = 'impact_scores'
-        activities = [esm_db_dict_code[(esm_db_name, mapping['New_code'].iloc[i])] for i in
-                      range(len(mapping[mapping.Type != 'Flow']))]
+        activities = [esm_db_dict_code[(esm_db_name, new_code)]
+                      for new_code in list(mapping[mapping.Type != 'Flow'].New_code)]
 
     elif assessment_type == 'direct emissions':
         calculation_setup_name = 'direct_emissions'
@@ -56,12 +57,24 @@ def compute_impact_scores(
         activities = [i for i in esm_db.db_as_list if
                       i['code'] in list(activities_subject_to_double_counting['Activity code'].unique())]
 
+        virtual_act = copy.deepcopy([i for i in Database(self.main_database_name).db_as_list
+                                     if i['code'] == '0a53194111cb9168310016ac76b6590f'][0])
+
         # Set the amount of all technosphere exchanges to 0 (keeps direct emissions only) and change database name
         for act in activities:
             act['database'] = esm_db_name+'_direct_emissions'
             for exc in act['exchanges']:
-                if exc['type'] == 'technosphere':
-                    exc['amount'] = 0
+                if exc['type'] == 'production':
+                    exc['database'] = esm_db_name+'_direct_emissions'
+                    if 'input' in exc:
+                        exc['input'][0] = self.esm_db_name + '_direct_emissions'
+                    if 'output' in exc:
+                        exc['output'][0] = self.esm_db_name + '_direct_emissions'
+
+            act['exchanges'] = [exc for exc in act['exchanges'] if exc['type'] != 'technosphere']
+            act['comment'] = ('Technosphere flows have been set to 0 to keep only direct emissions. '
+                              + act.get('comment', ''))
+            act = add_virtual_technosphere_flow(act=act, exc_act=virtual_act, amount=1e-10)
 
         direct_emissions_db = self.aggregate_direct_emissions_activities(
             esm_db=esm_db,
@@ -69,7 +82,9 @@ def compute_impact_scores(
             activities_subject_to_double_counting=activities_subject_to_double_counting,
         )  # aggregate activities subject to double counting for each ESM technology
         direct_emissions_db.write_to_brightway(new_db_name=f'{esm_db_name}_direct_emissions', overwrite=overwrite)
-        activities = [i for i in direct_emissions_db.db_as_list]  # update database name
+        direct_emissions_db_dict_code = direct_emissions_db.db_as_dict_code
+        activities = [direct_emissions_db_dict_code[(esm_db_name + '_direct_emissions', new_code)]
+                      for new_code in list(mapping[mapping.Type == 'Operation'].New_code)]
 
     else:
         raise ValueError('The assessment type must be either "esm" or "direct emissions')
@@ -229,7 +244,7 @@ def aggregate_direct_emissions_activities(
         if (
                 (len(activities) == 1)
                 & (activities.iloc[0]['Amount'] == 1.0)
-                # & (activities.iloc[0]['Activity code'] == old_act['code'])
+                & (activities.iloc[0]['Activity code'] == old_act['code'])
                 ):
             act = [i for i in direct_emissions_db if i['code'] == activities.iloc[0]['Activity code']][0]
             act['name'] = f'{tech}, Operation'
@@ -237,6 +252,10 @@ def aggregate_direct_emissions_activities(
                 if exc['type'] == 'production':
                     exc['name'] = f'{tech}, Operation'
                     exc['database'] = self.esm_db_name + '_direct_emissions'
+                    if 'input' in exc:
+                        exc['input'][0] = self.esm_db_name + '_direct_emissions'
+                    if 'output' in exc:
+                        exc['output'][0] = self.esm_db_name + '_direct_emissions'
 
         else:
             exchanges = [
@@ -261,12 +280,11 @@ def aggregate_direct_emissions_activities(
                     "location": exc_act['location'],
                     "unit": exc_act['unit'],
                     "amount": exc_amount,
-                    "database": self.esm_db_name,
+                    "database": self.esm_db_name+'_direct_emissions',
                     "code": exc_code,
                     "type": "technosphere",
                 }
                 exchanges.append(new_exc)
-                direct_emissions_db = [i for i in direct_emissions_db if i['code'] != exc_code]  # remove old activity
             new_act = {
                 "name": f'{tech}, Operation',
                 "reference product": old_act['reference product'],
@@ -292,3 +310,30 @@ def is_empty(self, row: pd.Series) -> float:
         return row.ESM
     else:
         return row.LCA
+
+
+def add_virtual_technosphere_flow(
+        act: dict,
+        exc_act: dict,
+        amount: float
+) -> dict:
+    """
+    Add a technosphere exchange to an activity
+
+    :param act: activity to which the exchange is added
+    :param exc_act: activity of the exchange
+    :param amount: amount of the exchange
+    :return: the activity with the new exchange
+    """
+    new_exc = {
+        "name": exc_act['name'],
+        "product": exc_act['reference product'],
+        "location": exc_act['location'],
+        "unit": exc_act['unit'],
+        "amount": amount,
+        "database": exc_act['database'],
+        "code": exc_act['code'],
+        "type": "technosphere",
+    }
+    act['exchanges'].append(new_exc)
+    return act
