@@ -61,7 +61,7 @@ def compute_impact_scores(
         for act in activities:
             act['database'] = esm_direct_emissions_db_name  # change database name
             # remove all technosphere exchanges
-            # act['exchanges'] = [exc for exc in act['exchanges'] if exc['type'] != 'technosphere']
+            act['exchanges'] = [exc for exc in act['exchanges'] if exc['type'] != 'technosphere']
             act['comment'] = ('Technosphere flows have been set to 0 to keep only direct emissions. '
                               + act.get('comment', ''))
             for exc in act['exchanges']:  # change database name in exchanges
