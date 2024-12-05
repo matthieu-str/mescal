@@ -34,7 +34,6 @@ def generate_mod_file_ampl(
     impact_abbrev = restrict_lcia_metrics(
         df=impact_abbrev,
         lcia_methods=lcia_methods,
-        specific_lcia_methods=specific_lcia_methods,
         specific_lcia_categories=specific_lcia_categories,
         specific_lcia_abbrev=specific_lcia_abbrev,
     )
