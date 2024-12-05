@@ -103,7 +103,7 @@ def normalize_lca_metrics(
         specific_lcia_categories: list[str] = None,
         specific_lcia_abbrev: list[str] = None,
         path: str = 'results/',
-        file_name: str = 'techs_lcia.dat',
+        file_name: str = 'techs_lcia',
         metadata: dict = None,
         output: str = 'write'
 ) -> None | tuple[pd.DataFrame, dict]:
@@ -160,7 +160,7 @@ def normalize_lca_metrics(
 
         Path(path).mkdir(parents=True, exist_ok=True)  # Create the folder if it does not exist
 
-        with open(f'{path}{file_name}', 'w') as f:
+        with open(f'{path}{file_name}.dat', 'w') as f:
 
             # Write metadata at the beginning of the file
             if 'ecoinvent_version' in metadata:
@@ -196,7 +196,7 @@ def normalize_lca_metrics(
                         f":= {R_scaled.Value_norm.iloc[i]}; # normalized {R_scaled.Unit.iloc[i]}\n")
 
         # To come back to the original values, we save the maximum value of each AoP
-        R_scaled[['Abbrev', 'AoP', 'max_AoP']].drop_duplicates().to_csv(f'{path}res_lcia_max.csv', index=False)
+        R_scaled[['Abbrev', 'AoP', 'max_AoP']].drop_duplicates().to_csv(f'{path}{file_name}_max.csv', index=False)
 
         if output == 'both':
             return R_scaled, refactor

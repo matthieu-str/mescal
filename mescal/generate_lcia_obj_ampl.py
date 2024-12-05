@@ -11,7 +11,7 @@ def generate_mod_file_ampl(
         specific_lcia_categories: list[str] = None,
         specific_lcia_abbrev: list[str] = None,
         path: str = 'results/',
-        file_name: str = 'objectives.mod',
+        file_name: str = 'objectives',
         metadata: dict = None
 ) -> None:
     """
@@ -23,7 +23,7 @@ def generate_mod_file_ampl(
     :param specific_lcia_abbrev: specific LCIA abbreviations to be used
     :param impact_abbrev: dataframe containing the impact abbreviations of the LCIA method
     :param path: path where the mod file will be saved
-    :param file_name: name of the mod file
+    :param file_name: name of the .mod file
     :param metadata: dictionary containing the metadata to be written at the beginning of the file
     :return: None (writes the file)
     """
@@ -40,7 +40,7 @@ def generate_mod_file_ampl(
 
     Path(path).mkdir(parents=True, exist_ok=True)  # Create the folder if it does not exist
 
-    with open(f'{path}{file_name}', 'w') as f:
+    with open(f'{path}{file_name}.mod', 'w') as f:
 
         # Write metadata at the beginning of the file
         if 'lcia_method' in metadata:
