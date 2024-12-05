@@ -237,9 +237,9 @@ def test_database():
     assert len(db.db_as_list) == 21238
     assert db.db_as_list[0]['database'] == 'ecoinvent-3.9.1-cutoff'
 
-    multiple_dbs = Database(db_names=["ecoinvent-3.9.1-cutoff", "long haul_truck"])
-    assert len(multiple_dbs.db_as_list) == 21238 + 893
-    assert set([x['database'] for x in multiple_dbs.db_as_list]) == {'ecoinvent-3.9.1-cutoff', 'long haul_truck'}
+    multiple_dbs = Database(db_names=["ecoinvent-3.9.1-cutoff", "regional delivery_truck"])
+    assert len(multiple_dbs.db_as_list) == 21238 + 935
+    assert set([x['database'] for x in multiple_dbs.db_as_list]) == {'ecoinvent-3.9.1-cutoff', 'regional delivery_truck'}
 
     new_db = Database(db_as_list=dummy_esm_db+dummy_esm_db_2)
     new_db.relink(  # test the relink method
