@@ -102,6 +102,7 @@ def normalize_lca_metrics(
         lcia_methods: list[str],
         specific_lcia_categories: list[str] = None,
         specific_lcia_abbrev: list[str] = None,
+        assessment_type: str = 'esm',
         path: str = 'results/',
         file_name: str = 'techs_lcia',
         metadata: dict = None,
@@ -118,6 +119,8 @@ def normalize_lca_metrics(
     :param lcia_methods: LCIA method to be used
     :param specific_lcia_categories: specific LCIA categories to be used
     :param specific_lcia_abbrev: specific LCIA abbreviations to be used
+    :param assessment_type: type of assessment, can be 'esm' for the full LCA database, or 'direct emissions' for the
+        computation of territorial emissions only
     :param impact_abbrev: dataframe containing the impact categories abbreviations
     :param metadata: dictionary containing the metadata. Can contain keys 'ecoinvent_version, 'year', 'spatialized',
         'regionalized', 'iam', 'ssp_rcp', 'lcia_method'.
@@ -125,6 +128,9 @@ def normalize_lca_metrics(
         both operations.
     :return: None or the normalized pandas dataframe and the refactor dictionary (depending on the value of 'output')
     """
+    if assessment_type not in ['esm', 'direct emissions']:
+        raise ValueError(f"Unknown assessment type: {assessment_type}. Must be 'esm' or 'direct emissions'.")
+
     if metadata is None:
         metadata = {}
 
@@ -183,11 +189,13 @@ def normalize_lca_metrics(
             f.write(f"set INDICATORS := {' '.join(R_scaled['Abbrev'].unique())};\n\n")
 
             # Declare the refactor parameters values
-            f.write('# Parameters to set the operation and infrastructure indicators at the same order of magnitude\n')
-            for cat in R_scaled['Abbrev'].unique():
-                aop = R[R['Abbrev'] == cat]['AoP'].iloc[0]
-                f.write(f"let refactor['{cat}'] := {refactor[aop]};\n")
-            f.write('\n')
+            if assessment_type == 'esm':
+                f.write('# Parameters to set the operation and infrastructure indicators at the same order of '
+                        'magnitude\n')
+                for cat in R_scaled['Abbrev'].unique():
+                    aop = R[R['Abbrev'] == cat]['AoP'].iloc[0]
+                    f.write(f"let refactor['{cat}'] := {refactor[aop]};\n")
+                f.write('\n')
 
             # Declare the LCA indicators values
             for i in range(len(R_scaled)):
