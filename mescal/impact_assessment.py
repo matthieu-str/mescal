@@ -115,12 +115,14 @@ def compute_impact_scores(
     R = R * unit_conversion_code[R.columns]  # multiply each column by its unit conversion factor
 
     if assessment_type == 'direct emissions':
-        # TODO: reformat R correctly
-        # R_long = R.melt(ignore_index=False, var_name='Activity code')
-        # R_long.rename(columns={'index': 'Impact_category', 'value': 'Value'}, inplace=True)
-        # R_long = R_long.reset_index().merge(right=activities_subject_to_double_counting[['Name', 'Activity code']],
-        #                                     on='Activity code')
-        return R
+        R_long = R.melt(ignore_index=False, var_name='New_code').reset_index()
+        R_long.rename(columns={'index': 'Impact_category', 'value': 'Value'}, inplace=True)
+        R_long = R_long.merge(
+            right=activities_subject_to_double_counting[['Name', 'Activity code', 'Type']],
+            left_on='New_code',
+            right_on='Activity code'
+        ).drop(columns='Activity code')
+        return R_long
 
     R_tech_op = R[list(mapping[mapping.Type == 'Operation'].New_code)]
     R_tech_constr = R[list(mapping[mapping.Type == 'Construction'].New_code)]
