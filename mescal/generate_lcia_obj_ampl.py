@@ -51,9 +51,9 @@ def generate_mod_file_ampl(
         f.write('set INDICATORS;\n\n')
 
         # Declaring the LCIA parameters and variables
-        f.write('param lcia_constr {INDICATORS,TECHNOLOGIES} default 1e-12;\n'
-                'param lcia_op {INDICATORS,TECHNOLOGIES} default 1e-12;\n'
-                'param lcia_res {INDICATORS, RESOURCES} default 1e-12;\n'
+        f.write('param lcia_constr {INDICATORS,TECHNOLOGIES} default 0;\n'
+                'param lcia_op {INDICATORS,TECHNOLOGIES} default 0;\n'
+                'param lcia_res {INDICATORS, RESOURCES} default 0;\n'
                 'param refactor {INDICATORS} default 1;\n'
                 'var LCIA_constr {INDICATORS,TECHNOLOGIES};\n'
                 'var LCIA_op {INDICATORS,TECHNOLOGIES};\n'
