@@ -14,6 +14,8 @@ def load_change_report_annex(
     :param v_to: next version of the ecoinvent database
     :return: change report annex as a pandas DataFrame
     """
+    v_from_main = '.'.join(v_from.split('.')[:2])
+
     df = pd.read_excel(io=DATA_DIR / "ecoinvent_change_reports" / f"Change Report Annex v{v_from} - v{v_to}.xlsx",
                        sheet_name="Qualitative Changes",
                        usecols=[
@@ -25,7 +27,7 @@ def load_change_report_annex(
                            f'Reference Product Unit - {v_to}',
                            f'Activity Name - {v_to}',
                            f'Geography - {v_to}',
-                           f'Dataset in version {v_from[:3]} has been deleted'
+                           f'Dataset in version {v_from_main} has been deleted'
                        ])
 
     df.rename(columns={
@@ -37,7 +39,7 @@ def load_change_report_annex(
         f'Geography - {v_to}': 'Geography - new',
         f'Reference Product - {v_to}': 'Reference Product - new',
         f'Reference Product Unit - {v_to}': 'Unit - new',
-        f'Dataset in version {v_from[:3]} has been deleted' :'Deleted'
+        f'Dataset in version {v_from_main} has been deleted': 'Deleted'
     }, inplace=True)
 
     df['Version from'] = v_from
@@ -57,7 +59,7 @@ def concatenate_change_reports(
     :param v_to: final version of the ecoinvent database
     :return: concatenated change report annex as a pandas DataFrame
     """
-    ecoinvent_versions = ['3.8', '3.9', '3.9.1', '3.10']
+    ecoinvent_versions = ['3.8', '3.9', '3.9.1', '3.10', '3.10.1', '3.11']
     change_reports = []
     i = 0
     while v_from != ecoinvent_versions[i]:
