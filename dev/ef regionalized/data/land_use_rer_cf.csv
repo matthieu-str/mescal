@@ -1,0 +1,172 @@
+FLOW_name,CF EF3.1
+agriculture,28.777402327377903
+"agriculture, mosaic",28.777402327377903
+arable,29.036045437898398
+"arable, fallow",29.29474793269037
+"arable, flooded crops",28.00324328280152
+"arable, greenhouse",24.808542367691974
+"arable, irrigated",29.036045437898395
+"arable, irrigated, extensive",25.712724391115078
+"arable, irrigated, intensive",29.165393639259037
+"arable, non-irrigated",29.036045437898398
+"arable, non-irrigated, extensive",25.712724391115078
+"arable, non-irrigated, intensive",29.165393639259037
+artificial areas,132.101918671121
+bare area,65.96301984556271
+construction site,81.51870540504812
+dump site,85.63824877611248
+field margins/hedgerows,25.91173592409249
+forest,15.797892771575809
+"forest, extensive",12.436000372221184
+"forest, intensive",24.529266831692933
+"forest, natural",5.712184703865592
+"forest, primary",5.712184703865592
+"forest, secondary",5.714777127445064
+"forest, used",24.52926683169292
+from agriculture,-287.7740232737791
+"from agriculture, mosaic",-287.77402327377905
+from arable,-290.360454378984
+"from arable, fallow",-292.9474793269038
+"from arable, flooded crops",-280.0324328280152
+"from arable, greenhouse",-248.08542367691976
+"from arable, irrigated",-290.360454378984
+"from arable, irrigated, extensive",-257.1272439111508
+"from arable, irrigated, intensive",-291.6539363925904
+"from arable, non-irrigated",-290.36045437898395
+"from arable, non-irrigated, extensive",-257.12724391115074
+"from arable, non-irrigated, intensive",-291.6539363925903
+from artificial areas,-5614.471491004087
+from bare area,-659.630198455627
+from construction site,-3464.5250235425506
+from dump site,-3639.6320742344897
+from field margins/hedgerows,-259.11735924092494
+from forest,-157.9789277157581
+"from forest, extensive",-124.36000372221186
+"from forest, intensive",-245.29266831692934
+"from forest, natural",-57.12184703865591
+"from forest, primary",-57.12184703865591
+"from forest, secondary",-57.14777127445063
+"from forest, used",-245.29266831692928
+from grassland,-259.1173592409249
+"from grassland, for livestock grazing",-403.29311201919705
+"from grassland, not used",-259.1173592409248
+from grassland/pasture/meadow,-259.1173592409248
+from industrial area,-5636.748614062225
+from mineral extraction site,-3464.525023542551
+from pasture/meadow,-403.293112019197
+"from pasture/meadow, extensive",-292.7105989611826
+"from pasture/meadow, intensive",-435.23389290707894
+from permanent crops,-290.36045437898395
+"from permanent crops, irrigated",-290.36045437898395
+"from permanent crops, irrigated, extensive",-257.12724391115074
+"from permanent crops, irrigated, intensive",-290.360454378984
+"from permanent crops, non-irrigated",-290.360454378984
+"from permanent crops, non-irrigated, extensive",-257.12724391115074
+"from permanent crops, non-irrigated, intensive",-290.36045437898406
+from shrub land,-175.27898671428864
+from snow and ice,-659.6301984556271
+from traffic area,-5585.87221969822
+"from traffic area, rail network",-5586.5689906987
+"from traffic area, rail/road embankment",-4770.707363624954
+"from traffic area, road network",-7153.920366214048
+from unspecified,-2678.192751428056
+"from unspecified, natural",-242.65426639875295
+"from unspecified, used",-1480.063494195165
+from urban,-5643.010311861627
+"from urban, continuously built",-7386.924436532971
+"from urban, discontinuously built",-4635.4044341715835
+"from urban, green areas",-1534.9075349903094
+from urban/industrial fallow,-5586.139252256168
+from wetlands,222.8075779172872
+"from wetlands, coastal",222.80757791728718
+"from wetlands, inland",222.8075779172872
+grassland,25.911735924092493
+"grassland, for livestock grazing",40.32931120191971
+"grassland, not used",25.911735924092493
+grassland/pasture/meadow,25.911735924092483
+industrial area,132.6279611806652
+mineral extraction site,81.51870540504811
+pasture/meadow,40.3293112019197
+"pasture/meadow, extensive",29.271059896118256
+"pasture/meadow, intensive",43.5233892907079
+permanent crops,29.036045437898398
+"permanent crops, irrigated",29.036045437898398
+"permanent crops, irrigated, extensive",25.712724391115074
+"permanent crops, irrigated, intensive",29.036045437898405
+"permanent crops, non-irrigated",29.036045437898395
+"permanent crops, non-irrigated, extensive",25.712724391115078
+"permanent crops, non-irrigated, intensive",29.036045437898405
+shrub land,17.527898671428865
+snow and ice,65.9630198455627
+to agriculture,287.7740232737791
+"to agriculture, mosaic",287.77402327377905
+to arable,290.36045437898395
+"to arable, fallow",292.94747932690376
+"to arable, flooded crops",280.0324328280152
+"to arable, greenhouse",248.0854236769197
+"to arable, irrigated",290.36045437898395
+"to arable, irrigated, extensive",257.12724391115074
+"to arable, irrigated, intensive",291.6539363925904
+"to arable, non-irrigated",290.360454378984
+"to arable, non-irrigated, extensive",257.12724391115074
+"to arable, non-irrigated, intensive",291.6539363925903
+to artificial areas,5614.471491004087
+to bare area,659.6301984556271
+to construction site,3464.5250235425506
+to dump site,3639.6320742344906
+to field margins/hedgerows,259.1173592409249
+to forest,157.97892771575812
+"to forest, extensive",124.36000372221184
+"to forest, intensive",245.29266831692934
+"to forest, natural",57.121847038655915
+"to forest, primary",57.121847038655915
+"to forest, secondary",57.14777127445064
+"to forest, used",245.29266831692928
+to grassland,259.1173592409249
+"to grassland, for livestock grazing",403.29311201919705
+"to grassland, not used",259.1173592409249
+to grassland/pasture/meadow,259.1173592409249
+to industrial area,5636.748614062226
+to mineral extraction site,3464.5250235425506
+to pasture/meadow,403.29311201919705
+"to pasture/meadow, extensive",292.71059896118254
+"to pasture/meadow, intensive",435.2338929070788
+to permanent crops,290.36045437898406
+"to permanent crops, irrigated",290.360454378984
+"to permanent crops, irrigated, extensive",257.1272439111508
+"to permanent crops, irrigated, intensive",290.36045437898395
+"to permanent crops, non-irrigated",290.360454378984
+"to permanent crops, non-irrigated, extensive",257.12724391115074
+"to permanent crops, non-irrigated, intensive",290.36045437898395
+to shrub land,175.27898671428866
+to snow and ice,659.6301984556271
+to traffic area,5585.872219698221
+"to traffic area, rail network",5586.568990698699
+"to traffic area, rail/road embankment",4770.707363624955
+"to traffic area, road network",7153.920366214048
+to unspecified,2678.192751428056
+"to unspecified, natural",242.65426639875298
+"to unspecified, used",1480.0634941951655
+to urban,5643.010311861627
+"to urban, continuously built",7386.9244365329705
+"to urban, discontinuously built",4635.404434171584
+"to urban, green areas",1534.9075349903092
+to urban/industrial fallow,5586.139252256169
+to wetlands,-222.8075779172872
+"to wetlands, coastal",-222.80757791728715
+"to wetlands, inland",-222.8075779172872
+traffic area,131.43089113233452
+"traffic area, rail network",131.44759856897892
+"traffic area, rail/road embankment",112.25095182218541
+"traffic area, road network",168.33037744576507
+unspecified,63.01716702539842
+"unspecified, natural",24.265426639875297
+"unspecified, used",34.82530241995926
+urban,132.78023102414684
+"urban, continuously built",173.8118783330195
+"urban, discontinuously built",109.06765362833607
+"urban, green areas",36.115544309029445
+urban/industrial fallow,131.4372954232438
+wetlands,-22.280757791728714
+"wetlands, coastal",-22.280757791728718
+"wetlands, inland",-22.280757791728725
