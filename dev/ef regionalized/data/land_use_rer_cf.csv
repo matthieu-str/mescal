@@ -1,172 +1,172 @@
-FLOW_name,CF EF3.1
-agriculture,28.777402327377903
-"agriculture, mosaic",28.777402327377903
-arable,29.036045437898398
-"arable, fallow",29.29474793269037
-"arable, flooded crops",28.00324328280152
-"arable, greenhouse",24.808542367691974
-"arable, irrigated",29.036045437898395
-"arable, irrigated, extensive",25.712724391115078
-"arable, irrigated, intensive",29.165393639259037
-"arable, non-irrigated",29.036045437898398
-"arable, non-irrigated, extensive",25.712724391115078
-"arable, non-irrigated, intensive",29.165393639259037
-artificial areas,132.101918671121
-bare area,65.96301984556271
-construction site,81.51870540504812
-dump site,85.63824877611248
-field margins/hedgerows,25.91173592409249
-forest,15.797892771575809
-"forest, extensive",12.436000372221184
-"forest, intensive",24.529266831692933
-"forest, natural",5.712184703865592
-"forest, primary",5.712184703865592
-"forest, secondary",5.714777127445064
-"forest, used",24.52926683169292
-from agriculture,-287.7740232737791
-"from agriculture, mosaic",-287.77402327377905
-from arable,-290.360454378984
-"from arable, fallow",-292.9474793269038
-"from arable, flooded crops",-280.0324328280152
-"from arable, greenhouse",-248.08542367691976
-"from arable, irrigated",-290.360454378984
-"from arable, irrigated, extensive",-257.1272439111508
-"from arable, irrigated, intensive",-291.6539363925904
-"from arable, non-irrigated",-290.36045437898395
-"from arable, non-irrigated, extensive",-257.12724391115074
-"from arable, non-irrigated, intensive",-291.6539363925903
-from artificial areas,-5614.471491004087
-from bare area,-659.630198455627
-from construction site,-3464.5250235425506
-from dump site,-3639.6320742344897
-from field margins/hedgerows,-259.11735924092494
-from forest,-157.9789277157581
-"from forest, extensive",-124.36000372221186
-"from forest, intensive",-245.29266831692934
-"from forest, natural",-57.12184703865591
-"from forest, primary",-57.12184703865591
-"from forest, secondary",-57.14777127445063
-"from forest, used",-245.29266831692928
-from grassland,-259.1173592409249
-"from grassland, for livestock grazing",-403.29311201919705
-"from grassland, not used",-259.1173592409248
-from grassland/pasture/meadow,-259.1173592409248
-from industrial area,-5636.748614062225
-from mineral extraction site,-3464.525023542551
-from pasture/meadow,-403.293112019197
-"from pasture/meadow, extensive",-292.7105989611826
-"from pasture/meadow, intensive",-435.23389290707894
-from permanent crops,-290.36045437898395
-"from permanent crops, irrigated",-290.36045437898395
-"from permanent crops, irrigated, extensive",-257.12724391115074
-"from permanent crops, irrigated, intensive",-290.360454378984
-"from permanent crops, non-irrigated",-290.360454378984
-"from permanent crops, non-irrigated, extensive",-257.12724391115074
-"from permanent crops, non-irrigated, intensive",-290.36045437898406
-from shrub land,-175.27898671428864
-from snow and ice,-659.6301984556271
-from traffic area,-5585.87221969822
-"from traffic area, rail network",-5586.5689906987
-"from traffic area, rail/road embankment",-4770.707363624954
-"from traffic area, road network",-7153.920366214048
-from unspecified,-2678.192751428056
-"from unspecified, natural",-242.65426639875295
-"from unspecified, used",-1480.063494195165
-from urban,-5643.010311861627
-"from urban, continuously built",-7386.924436532971
-"from urban, discontinuously built",-4635.4044341715835
-"from urban, green areas",-1534.9075349903094
-from urban/industrial fallow,-5586.139252256168
-from wetlands,222.8075779172872
-"from wetlands, coastal",222.80757791728718
-"from wetlands, inland",222.8075779172872
-grassland,25.911735924092493
-"grassland, for livestock grazing",40.32931120191971
-"grassland, not used",25.911735924092493
-grassland/pasture/meadow,25.911735924092483
-industrial area,132.6279611806652
-mineral extraction site,81.51870540504811
-pasture/meadow,40.3293112019197
-"pasture/meadow, extensive",29.271059896118256
-"pasture/meadow, intensive",43.5233892907079
-permanent crops,29.036045437898398
-"permanent crops, irrigated",29.036045437898398
-"permanent crops, irrigated, extensive",25.712724391115074
-"permanent crops, irrigated, intensive",29.036045437898405
-"permanent crops, non-irrigated",29.036045437898395
-"permanent crops, non-irrigated, extensive",25.712724391115078
-"permanent crops, non-irrigated, intensive",29.036045437898405
-shrub land,17.527898671428865
-snow and ice,65.9630198455627
-to agriculture,287.7740232737791
-"to agriculture, mosaic",287.77402327377905
-to arable,290.36045437898395
-"to arable, fallow",292.94747932690376
-"to arable, flooded crops",280.0324328280152
-"to arable, greenhouse",248.0854236769197
-"to arable, irrigated",290.36045437898395
-"to arable, irrigated, extensive",257.12724391115074
-"to arable, irrigated, intensive",291.6539363925904
-"to arable, non-irrigated",290.360454378984
-"to arable, non-irrigated, extensive",257.12724391115074
-"to arable, non-irrigated, intensive",291.6539363925903
-to artificial areas,5614.471491004087
-to bare area,659.6301984556271
-to construction site,3464.5250235425506
-to dump site,3639.6320742344906
-to field margins/hedgerows,259.1173592409249
-to forest,157.97892771575812
-"to forest, extensive",124.36000372221184
-"to forest, intensive",245.29266831692934
-"to forest, natural",57.121847038655915
-"to forest, primary",57.121847038655915
-"to forest, secondary",57.14777127445064
-"to forest, used",245.29266831692928
-to grassland,259.1173592409249
-"to grassland, for livestock grazing",403.29311201919705
-"to grassland, not used",259.1173592409249
-to grassland/pasture/meadow,259.1173592409249
-to industrial area,5636.748614062226
-to mineral extraction site,3464.5250235425506
-to pasture/meadow,403.29311201919705
-"to pasture/meadow, extensive",292.71059896118254
-"to pasture/meadow, intensive",435.2338929070788
-to permanent crops,290.36045437898406
-"to permanent crops, irrigated",290.360454378984
-"to permanent crops, irrigated, extensive",257.1272439111508
-"to permanent crops, irrigated, intensive",290.36045437898395
-"to permanent crops, non-irrigated",290.360454378984
-"to permanent crops, non-irrigated, extensive",257.12724391115074
-"to permanent crops, non-irrigated, intensive",290.36045437898395
-to shrub land,175.27898671428866
-to snow and ice,659.6301984556271
-to traffic area,5585.872219698221
-"to traffic area, rail network",5586.568990698699
-"to traffic area, rail/road embankment",4770.707363624955
-"to traffic area, road network",7153.920366214048
-to unspecified,2678.192751428056
-"to unspecified, natural",242.65426639875298
-"to unspecified, used",1480.0634941951655
-to urban,5643.010311861627
-"to urban, continuously built",7386.9244365329705
-"to urban, discontinuously built",4635.404434171584
-"to urban, green areas",1534.9075349903092
-to urban/industrial fallow,5586.139252256169
-to wetlands,-222.8075779172872
-"to wetlands, coastal",-222.80757791728715
-"to wetlands, inland",-222.8075779172872
-traffic area,131.43089113233452
-"traffic area, rail network",131.44759856897892
-"traffic area, rail/road embankment",112.25095182218541
-"traffic area, road network",168.33037744576507
-unspecified,63.01716702539842
-"unspecified, natural",24.265426639875297
-"unspecified, used",34.82530241995926
-urban,132.78023102414684
-"urban, continuously built",173.8118783330195
-"urban, discontinuously built",109.06765362833607
-"urban, green areas",36.115544309029445
-urban/industrial fallow,131.4372954232438
-wetlands,-22.280757791728714
-"wetlands, coastal",-22.280757791728718
-"wetlands, inland",-22.280757791728725
+FLOW_name,CF EF3.1,FLOW_class1,FLOW_class0,LCIAMethod_location,FLOW_uuid,LCIAMethod_uuid EF3.1,LCIAMethod_name,FLOW_class2,LCIAMethod_derivation,LCIAMethod_direction
+from agriculture,-287.7740232737791,Land transformation,Land use,RER,c0143eba-3daf-44ad-8d34-6e1d34128ace,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"from agriculture, mosaic",-287.77402327377905,Land transformation,Land use,RER,aeea42cc-4215-465f-981f-ae2ab387fbb9,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+from arable,-290.360454378984,Land transformation,Land use,RER,9699a63f-c966-43a4-816c-b1fbbf0a3e88,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"from arable, fallow",-292.9474793269038,Land transformation,Land use,RER,67055318-bad9-420f-ae31-9ba54456518d,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"from arable, flooded crops",-280.0324328280152,Land transformation,Land use,RER,d31e09db-9fc4-4842-8366-14dae068b402,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"from arable, greenhouse",-248.08542367691976,Land transformation,Land use,RER,9d4b5f58-7427-4a3f-95ce-0ea5daea10da,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"from arable, irrigated",-290.360454378984,Land transformation,Land use,RER,d0c20793-3df9-44d3-9c84-5fb6feedcd12,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"from arable, irrigated, extensive",-257.1272439111508,Land transformation,Land use,RER,03b56eb6-cc68-4251-9317-06878cb27dff,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"from arable, irrigated, intensive",-291.6539363925904,Land transformation,Land use,RER,a687e5df-4694-4151-ba84-0722481d6fdf,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"from arable, non-irrigated",-290.36045437898395,Land transformation,Land use,RER,87334803-fa5b-4c21-b52c-de9d79d806f8,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"from arable, non-irrigated, extensive",-257.12724391115074,Land transformation,Land use,RER,5fa13d85-1722-4858-9cff-caec97da2363,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"from arable, non-irrigated, intensive",-291.6539363925903,Land transformation,Land use,RER,37b2391c-6d90-4ef3-be80-df3d114cface,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+from artificial areas,-5614.471491004087,Land transformation,Land use,RER,9db48d2d-17e8-4b4c-b439-2aab1c3d80f2,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+from bare area,-659.630198455627,Land transformation,Land use,RER,b6d6d67f-a3c4-4292-93cf-0454339ace53,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+from construction site,-3464.5250235425506,Land transformation,Land use,RER,f155e517-6618-4a26-9f14-b59cd6f11c03,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+from dump site,-3639.6320742344897,Land transformation,Land use,RER,05d4147c-59c1-46df-8df9-3971fab75779,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+from field margins/hedgerows,-259.11735924092494,Land transformation,Land use,RER,26979302-3aba-48bc-a35f-eb66fdd4d369,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+from forest,-157.9789277157581,Land transformation,Land use,RER,25a53117-7717-41f6-9085-64b1728c9b0d,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"from forest, extensive",-124.36000372221186,Land transformation,Land use,RER,d30e2c86-78a3-4693-99c9-e69b95548e99,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"from forest, intensive",-245.29266831692934,Land transformation,Land use,RER,f80c15bc-c2bf-4491-8b02-46ad74b8e1eb,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"from forest, natural",-57.12184703865591,Land transformation,Land use,RER,ac0aba5c-66ce-42c9-9f46-1e47ab7bc4b9,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"from forest, primary",-57.12184703865591,Land transformation,Land use,RER,9c15ac25-4ac3-454c-8104-4d10cfba9376,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"from forest, secondary",-57.14777127445063,Land transformation,Land use,RER,522f6ba8-5914-4f91-a198-a0da9aab707d,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"from forest, used",-245.29266831692928,Land transformation,Land use,RER,d4008b63-fb71-4e00-bfda-3528c9c7e40d,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+from grassland,-259.1173592409249,Land transformation,Land use,RER,80a0d183-7b74-4497-95f5-8bf25681c32e,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"from grassland, for livestock grazing",-403.29311201919705,Land transformation,Land use,RER,fa535fee-c7d4-499c-ba15-2bcb60206b6e,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"from grassland, not used",-259.1173592409248,Land transformation,Land use,RER,503f7e73-748c-4f38-9b87-90805b5d1c38,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+from grassland/pasture/meadow,-259.1173592409248,Land transformation,Land use,RER,32e9ce57-5c64-44fe-ba5f-e29adb467eb7,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+from industrial area,-5636.748614062225,Land transformation,Land use,RER,2abdec35-e00d-4760-842c-e63403507b1d,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+from mineral extraction site,-3464.525023542551,Land transformation,Land use,RER,b129498b-6ff1-4025-95f4-a7f821b341c1,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+from pasture/meadow,-403.293112019197,Land transformation,Land use,RER,e29e7755-623d-47fb-b2ac-c0615a1b709f,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"from pasture/meadow, extensive",-292.7105989611826,Land transformation,Land use,RER,5ba8d644-c1bb-410b-9bf4-e5f969efb078,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"from pasture/meadow, intensive",-435.23389290707894,Land transformation,Land use,RER,9cc0de8b-e413-48a5-b013-80ff11a693b2,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+from permanent crops,-290.36045437898395,Land transformation,Land use,RER,f49ad273-9482-453c-8bdb-dadf8751e3ae,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"from permanent crops, irrigated",-290.36045437898395,Land transformation,Land use,RER,a6e91bef-0f5a-4c02-8f01-05d7240bd4b5,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"from permanent crops, irrigated, extensive",-257.12724391115074,Land transformation,Land use,RER,9c374b15-d39d-4132-9648-507b7e48e003,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"from permanent crops, irrigated, intensive",-290.360454378984,Land transformation,Land use,RER,8eb99b01-7ad0-41ad-9242-cd2728f21182,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"from permanent crops, non-irrigated",-290.360454378984,Land transformation,Land use,RER,204480e6-eae8-43dc-b42b-3de73765deba,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"from permanent crops, non-irrigated, extensive",-257.12724391115074,Land transformation,Land use,RER,dd5923b1-6ff5-4bb2-a37a-20b84727c16a,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"from permanent crops, non-irrigated, intensive",-290.36045437898406,Land transformation,Land use,RER,5bd6b1f7-11f8-40d5-ab22-19cadfa38402,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+from shrub land,-175.27898671428864,Land transformation,Land use,RER,64faa7b1-e114-497a-b584-f4659e7115e4,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+from snow and ice,-659.6301984556271,Land transformation,Land use,RER,9b9212b8-aed9-4ffc-80a4-6e1c11ddb7ce,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+from traffic area,-5585.87221969822,Land transformation,Land use,RER,21c8ec32-41d8-4eb8-aee5-910702f064a6,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"from traffic area, rail network",-5586.5689906987,Land transformation,Land use,RER,cb38c620-e380-4765-8d51-2935315f5e6f,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"from traffic area, rail/road embankment",-4770.707363624954,Land transformation,Land use,RER,1102e599-8b30-4c4e-bc98-6c34ac2c1748,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"from traffic area, road network",-7153.920366214048,Land transformation,Land use,RER,1058891f-9dbe-419c-ae48-9d03289eeb39,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+from unspecified,-2678.192751428056,Land transformation,Land use,RER,52a7fc6d-de3b-4348-9ef2-11b119da6c98,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"from unspecified, natural",-242.65426639875295,Land transformation,Land use,RER,d4b314f8-1a50-45bf-b139-79dca87d197f,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"from unspecified, used",-1480.063494195165,Land transformation,Land use,RER,12411c15-bb42-428a-8bb0-b8b7276e7c63,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+from urban,-5643.010311861627,Land transformation,Land use,RER,5a95a24a-1e9d-4ce9-8a57-b4da488cc8a8,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"from urban, continuously built",-7386.924436532971,Land transformation,Land use,RER,157addff-967a-49a8-b3ee-8393e0ffce5a,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"from urban, discontinuously built",-4635.4044341715835,Land transformation,Land use,RER,e13b293a-b22b-46aa-a689-b2e22d31f358,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"from urban, green areas",-1534.9075349903094,Land transformation,Land use,RER,cb72d307-631d-4e10-b036-d861d45caa82,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+from urban/industrial fallow,-5586.139252256168,Land transformation,Land use,RER,c832b55c-3bce-4f31-abbe-ee7f10c0d6d5,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+from wetlands,222.8075779172872,Land transformation,Land use,RER,651df0ec-3468-4453-aa11-dc197034517f,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"from wetlands, coastal",222.80757791728718,Land transformation,Land use,RER,3aa0cf01-ae8f-4d67-b584-96df1ef6ba4f,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"from wetlands, inland",222.8075779172872,Land transformation,Land use,RER,ca6db37c-1592-4468-8a0f-ec35ca8b5c76,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+to agriculture,287.7740232737791,Land transformation,Land use,RER,28e5f69f-7b2e-4e31-9725-d407b2964b3f,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Output
+"to agriculture, mosaic",287.77402327377905,Land transformation,Land use,RER,b886560e-7ab8-4ec9-8a0a-802affe63186,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Output
+to arable,290.36045437898395,Land transformation,Land use,RER,933debfd-2aa5-4a35-b07b-2732350ea29c,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Output
+"to arable, fallow",292.94747932690376,Land transformation,Land use,RER,7b830424-436d-428c-b2ad-3e93f3115d7b,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Output
+"to arable, flooded crops",280.0324328280152,Land transformation,Land use,RER,38a1c24d-8eda-43f4-a705-4d28fcf43770,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Output
+"to arable, greenhouse",248.0854236769197,Land transformation,Land use,RER,71dbb6d9-fd63-4956-a5e0-0aa45152ad8f,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Output
+"to arable, irrigated",290.36045437898395,Land transformation,Land use,RER,6bcfa2f7-4970-469a-ae70-d1814e8a6bc3,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Output
+"to arable, irrigated, extensive",257.12724391115074,Land transformation,Land use,RER,377979ef-ab2d-44ec-935f-7f77d5d9f52a,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Output
+"to arable, irrigated, intensive",291.6539363925904,Land transformation,Land use,RER,f6225b5f-b9cf-4c88-82d2-a578e1ce5e42,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Output
+"to arable, non-irrigated",290.360454378984,Land transformation,Land use,RER,aa9dc400-929f-48c8-86c6-628f34a0efa3,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Output
+"to arable, non-irrigated, extensive",257.12724391115074,Land transformation,Land use,RER,fe3b7db4-a7e6-4e83-876e-ef859c1c421c,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Output
+"to arable, non-irrigated, intensive",291.6539363925903,Land transformation,Land use,RER,3b9ccd9f-1dd3-48ad-b444-b08fb5a63a89,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Output
+to artificial areas,5614.471491004087,Land transformation,Land use,RER,0c72ce8f-abf1-4d29-8a13-01f9dc6b1c3b,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Output
+to bare area,659.6301984556271,Land transformation,Land use,RER,8af79474-1d57-4251-a878-c2973b2814e6,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Output
+to construction site,3464.5250235425506,Land transformation,Land use,RER,af3058b8-cba0-4fbf-9e7f-ff822177623b,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Output
+to dump site,3639.6320742344906,Land transformation,Land use,RER,9fcab08d-c0e9-490f-b594-ee023a78d5c7,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Output
+to field margins/hedgerows,259.1173592409249,Land transformation,Land use,RER,09fe907b-527e-4da9-91f3-7b9a75892b2d,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Output
+to forest,157.97892771575812,Land transformation,Land use,RER,37c63eed-fdfd-4601-9756-7094d4c9f381,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Output
+"to forest, extensive",124.36000372221184,Land transformation,Land use,RER,a53128a5-3383-4487-baab-860c4492f6e3,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Output
+"to forest, intensive",245.29266831692934,Land transformation,Land use,RER,f20439b3-200f-48d7-b0a0-972a0628a31e,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Output
+"to forest, natural",57.121847038655915,Land transformation,Land use,RER,f775aae7-0b18-467e-bb29-97b5497eabd9,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Output
+"to forest, primary",57.121847038655915,Land transformation,Land use,RER,f825b854-b44e-4805-bf7a-891d5e99771a,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Output
+"to forest, secondary",57.14777127445064,Land transformation,Land use,RER,f210f08e-7377-49b2-bed9-7e420a951ae9,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Output
+"to forest, used",245.29266831692928,Land transformation,Land use,RER,8db68d81-3998-4b52-af19-2beb2ac9a98e,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Output
+to grassland,259.1173592409249,Land transformation,Land use,RER,91e86b1f-98b2-433a-8356-cfc2b2b2a7c4,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Output
+"to grassland, for livestock grazing",403.29311201919705,Land transformation,Land use,RER,da92b58d-96f2-4367-9f54-12edf135128b,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Output
+"to grassland, not used",259.1173592409249,Land transformation,Land use,RER,6985efa9-a113-48fa-a504-f520d91868bf,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Output
+to grassland/pasture/meadow,259.1173592409249,Land transformation,Land use,RER,72b6ac89-b4c8-4429-a908-7d5e0293a9a6,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Output
+to industrial area,5636.748614062226,Land transformation,Land use,RER,2f8cc78f-7f63-4b5c-9010-70a847737d23,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Output
+to mineral extraction site,3464.5250235425506,Land transformation,Land use,RER,68f57e2a-2909-423c-ad8e-6a695f59a48f,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Output
+to pasture/meadow,403.29311201919705,Land transformation,Land use,RER,848d055d-88c2-4926-9ddd-1671887c4e2f,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Output
+"to pasture/meadow, extensive",292.71059896118254,Land transformation,Land use,RER,8348ce0c-3dcf-4425-8336-04d6c5619e4d,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Output
+"to pasture/meadow, intensive",435.2338929070788,Land transformation,Land use,RER,6d2e9579-899e-4de6-a13d-e569c4aacd81,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Output
+to permanent crops,290.36045437898406,Land transformation,Land use,RER,6d205e19-e6c2-4090-b138-01a1b9326a76,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Output
+"to permanent crops, irrigated",290.360454378984,Land transformation,Land use,RER,a41d68cf-dc3f-4ced-b76b-10f3b9289a76,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Output
+"to permanent crops, irrigated, extensive",257.1272439111508,Land transformation,Land use,RER,19b04efe-3d1e-44d8-963e-e9cbc3c97613,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Output
+"to permanent crops, irrigated, intensive",290.36045437898395,Land transformation,Land use,RER,75fb549e-21ce-4ad2-b65e-fa9b1664b74a,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Output
+"to permanent crops, non-irrigated",290.360454378984,Land transformation,Land use,RER,ce732468-207d-4c2f-80dc-3a2e565cfe43,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Output
+"to permanent crops, non-irrigated, extensive",257.12724391115074,Land transformation,Land use,RER,793ad34b-c186-4933-94d6-ff1b09a24cd8,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Output
+"to permanent crops, non-irrigated, intensive",290.36045437898395,Land transformation,Land use,RER,8e2bf561-a95a-402d-83c1-d737dd73523d,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Output
+to shrub land,175.27898671428866,Land transformation,Land use,RER,1a00b335-af6e-47db-bc23-012f2c0642ab,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Output
+to snow and ice,659.6301984556271,Land transformation,Land use,RER,ecfea201-cb70-4704-a087-d031a753fa42,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Output
+to traffic area,5585.872219698221,Land transformation,Land use,RER,0becf44a-3734-4bd0-bd5f-70ec2a4e1571,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Output
+"to traffic area, rail network",5586.568990698699,Land transformation,Land use,RER,68e9e9b5-bd61-4fd3-a422-c3cff4f67203,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Output
+"to traffic area, rail/road embankment",4770.707363624955,Land transformation,Land use,RER,0c08b290-70d4-4d06-bf99-af10a0df99d5,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Output
+"to traffic area, road network",7153.920366214048,Land transformation,Land use,RER,4a227586-270a-4b07-9f15-79da640bec83,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Output
+to unspecified,2678.192751428056,Land transformation,Land use,RER,7db3936a-8686-46e7-a694-107a117c6360,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Output
+"to unspecified, natural",242.65426639875298,Land transformation,Land use,RER,fae48449-451a-4d3c-b2fd-fc9102913b95,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Output
+"to unspecified, used",1480.0634941951655,Land transformation,Land use,RER,fa4d4851-3cab-48a0-a2e4-d3e047323eb6,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Output
+to urban,5643.010311861627,Land transformation,Land use,RER,dc65135e-0c62-40de-8f66-b41f519bd9e6,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Output
+"to urban, continuously built",7386.9244365329705,Land transformation,Land use,RER,f2a476ca-2f66-4b4e-ae8e-2af9e263d722,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Output
+"to urban, discontinuously built",4635.404434171584,Land transformation,Land use,RER,dc3f4893-9db3-4d19-b108-bcd3a44ed78d,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Output
+"to urban, green areas",1534.9075349903092,Land transformation,Land use,RER,88586e86-b7e9-498f-866a-87055995af9e,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Output
+to urban/industrial fallow,5586.139252256169,Land transformation,Land use,RER,b0259a80-eb97-4dee-be0a-d0535a8a9ed4,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Output
+to wetlands,-222.8075779172872,Land transformation,Land use,RER,3d6ecf59-2f58-40a9-a385-fcfd8dac0b24,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Output
+"to wetlands, coastal",-222.80757791728715,Land transformation,Land use,RER,84006665-082c-41fd-8aba-e785321b095e,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Output
+"to wetlands, inland",-222.8075779172872,Land transformation,Land use,RER,7a0b4a8e-c115-4a55-abe9-dfccbe888a7a,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Output
+agriculture,28.777402327377903,Land occupation,Land use,RER,e1d56d4e-afe3-4b92-bd51-0a21f75e50a8,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"agriculture, mosaic",28.777402327377903,Land occupation,Land use,RER,1d443c61-ff6f-419a-99a8-9ff3055f4922,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+arable,29.036045437898398,Land occupation,Land use,RER,b88d3b6d-229e-477e-bce1-e16376f75c7b,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"arable, fallow",29.29474793269037,Land occupation,Land use,RER,8681540b-cc15-40e7-9801-6f5bcda4d540,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"arable, flooded crops",28.00324328280152,Land occupation,Land use,RER,ebca263d-89b9-4585-b75b-0ea8d5653514,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"arable, greenhouse",24.808542367691974,Land occupation,Land use,RER,b551114c-dc87-4359-a914-98b852ac9d9b,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"arable, irrigated",29.036045437898395,Land occupation,Land use,RER,d7c58737-6937-4ba9-bd00-c5df908cc9aa,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"arable, irrigated, extensive",25.712724391115078,Land occupation,Land use,RER,dce99876-da7e-45f1-991d-a129dee63d20,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"arable, irrigated, intensive",29.165393639259037,Land occupation,Land use,RER,39f017d4-14b0-44c2-93c6-ed6bf28332a8,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"arable, non-irrigated",29.036045437898398,Land occupation,Land use,RER,97990d8f-aae4-41ea-afb4-c62d2bcfea3b,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"arable, non-irrigated, extensive",25.712724391115078,Land occupation,Land use,RER,f6637a0f-6f2e-4426-9ebc-6cbdbab1bd5f,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"arable, non-irrigated, intensive",29.165393639259037,Land occupation,Land use,RER,6f4ecdc5-0cf7-430b-9c66-8efe4113b2a2,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+artificial areas,132.101918671121,Land occupation,Land use,RER,3f52e820-a921-4ddb-a51b-45fdabc77d6e,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+bare area,65.96301984556271,Land occupation,Land use,RER,519bd467-de3e-49eb-be1f-504323399437,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+construction site,81.51870540504812,Land occupation,Land use,RER,2de36d9f-313b-4fb1-8060-676eecbfec29,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+dump site,85.63824877611248,Land occupation,Land use,RER,616ab5c3-116f-4fbb-bc6b-196318afe5be,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+field margins/hedgerows,25.91173592409249,Land occupation,Land use,RER,a88d4641-628b-4c82-906e-13769ac00dd6,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+forest,15.797892771575809,Land occupation,Land use,RER,641d3aa1-93d3-4fb2-9bd8-17600536c3c0,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"forest, extensive",12.436000372221184,Land occupation,Land use,RER,9153cfb0-e762-47ba-9514-92d37321e68a,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"forest, intensive",24.529266831692933,Land occupation,Land use,RER,eb01bbdf-8977-4dd2-9c20-9d59d6f8a71f,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"forest, natural",5.712184703865592,Land occupation,Land use,RER,0747ea88-7080-442f-b55c-832a0058d74a,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"forest, primary",5.712184703865592,Land occupation,Land use,RER,105971fb-c1f3-42a2-ac38-42169e85d3e7,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"forest, secondary",5.714777127445064,Land occupation,Land use,RER,2b97517c-87dd-4be0-824d-37b7aaaef8d4,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"forest, used",24.52926683169292,Land occupation,Land use,RER,c38ef9cf-ae41-40a8-b018-58d9472c7cfa,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+grassland,25.911735924092493,Land occupation,Land use,RER,82801171-9dd0-428e-9cb5-1e9c4211b2f7,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"grassland, for livestock grazing",40.32931120191971,Land occupation,Land use,RER,ec034746-a6cb-4ae3-99cc-f199893e1b9f,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"grassland, not used",25.911735924092493,Land occupation,Land use,RER,f5ca317d-5aab-4adf-add9-6ec43f5ffbd0,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+grassland/pasture/meadow,25.911735924092483,Land occupation,Land use,RER,bc2fb99a-c9b4-4473-9870-089bcef3054f,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+industrial area,132.6279611806652,Land occupation,Land use,RER,eb84226d-129f-49d8-8d69-cc484b7a6cbf,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+mineral extraction site,81.51870540504811,Land occupation,Land use,RER,b0744c5e-9859-470f-99dc-b117be5a32c5,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+pasture/meadow,40.3293112019197,Land occupation,Land use,RER,07937495-00a4-4676-8ef7-1161ee7a9f28,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"pasture/meadow, extensive",29.271059896118256,Land occupation,Land use,RER,52a3918e-59b7-4d62-9255-a8479e6671ae,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"pasture/meadow, intensive",43.5233892907079,Land occupation,Land use,RER,b76e1ff4-d0f3-4906-b6f9-240112e3dd69,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+permanent crops,29.036045437898398,Land occupation,Land use,RER,ceabbb26-5d70-41f2-81bd-c1b096dc0931,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"permanent crops, irrigated",29.036045437898398,Land occupation,Land use,RER,e0e757b9-3cfe-46d2-846b-f5f1beb2e41b,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"permanent crops, irrigated, extensive",25.712724391115074,Land occupation,Land use,RER,fcab01e3-c0b4-4147-a2d5-6387ffbf1840,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"permanent crops, irrigated, intensive",29.036045437898405,Land occupation,Land use,RER,937d6042-bb74-4425-888f-86e8d64c7875,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"permanent crops, non-irrigated",29.036045437898395,Land occupation,Land use,RER,d09f1f0e-875a-43a4-aee7-dd3b5606dcce,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"permanent crops, non-irrigated, extensive",25.712724391115078,Land occupation,Land use,RER,68b3e3c6-04f4-49a6-91d0-8be809ec3835,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"permanent crops, non-irrigated, intensive",29.036045437898405,Land occupation,Land use,RER,0ef5f936-2cfd-49a8-8d11-a062926464e4,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+shrub land,17.527898671428865,Land occupation,Land use,RER,8ee82f3b-c2dd-4807-8e65-b33dc05f4aee,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+snow and ice,65.9630198455627,Land occupation,Land use,RER,89d3cae6-e44e-40cb-a3dc-82d57aa799be,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+traffic area,131.43089113233452,Land occupation,Land use,RER,a205d0e9-cc71-4e4f-8c9f-c62b188321b3,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"traffic area, rail network",131.44759856897892,Land occupation,Land use,RER,e1f89e32-e86c-452d-91bc-57d93ded3d0d,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"traffic area, rail/road embankment",112.25095182218541,Land occupation,Land use,RER,1dea9abe-eef4-4e7e-9439-fa041242ceb5,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"traffic area, road network",168.33037744576507,Land occupation,Land use,RER,92f1554f-121d-4f07-a1bb-b07cd2f7c2f5,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+unspecified,63.01716702539842,Land occupation,Land use,RER,be7cc1fe-c49e-4cce-9549-3d547f10c189,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"unspecified, natural",24.265426639875297,Land occupation,Land use,RER,d0630a10-a018-4624-b617-ffd63044b522,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"unspecified, used",34.82530241995926,Land occupation,Land use,RER,3b93ab27-c0b5-4376-be16-7946c7dd6d87,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+urban,132.78023102414684,Land occupation,Land use,RER,d433f59a-a45d-42a4-88bc-ae8a4f29af39,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"urban, continuously built",173.8118783330195,Land occupation,Land use,RER,6d34cf70-c64e-4a5b-8738-fd6e3237888f,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"urban, discontinuously built",109.06765362833607,Land occupation,Land use,RER,0860f823-69da-48ae-b3ea-4ede3b661b7d,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"urban, green areas",36.115544309029445,Land occupation,Land use,RER,42378359-15eb-4e60-8f72-b796b9d71e69,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+urban/industrial fallow,131.4372954232438,Land occupation,Land use,RER,1c6a1585-0329-4134-aa24-b0aca0c5af11,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+wetlands,-22.280757791728714,Land occupation,Land use,RER,f0efe0f8-35ff-4d74-b084-38b4319c8a84,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"wetlands, coastal",-22.280757791728718,Land occupation,Land use,RER,4c3b387c-8c28-4848-90fe-39620a81a013,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
+"wetlands, inland",-22.280757791728725,Land occupation,Land use,RER,4d88d516-d8b4-4799-b3eb-44d57dd3e9a7,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,Calculated,Input
