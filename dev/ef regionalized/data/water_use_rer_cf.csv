@@ -1,0 +1,12 @@
+FLOW_uuid,FLOW_name,LCIAMethod_uuid EF3.1,LCIAMethod_name,CF EF3.1,LCIAMethod_location,FLOW_class0,FLOW_class1,FLOW_class2,LCIAMethod_derivation,LCIAMethod_direction
+5fdac403-9f2c-4a10-b8d6-5367cc9d2d9b,freshwater,b2ad66ce-c78d-11e6-9d9d-cec0c932ce01,Water use,36.53,RER,Resources,Resources from water,Renewable material resources from water,Unknown derivation,Input
+4f462198-40cd-4184-8733-86648a20dc3f,ground water,b2ad66ce-c78d-11e6-9d9d-cec0c932ce01,Water use,36.53,RER,Resources,Resources from water,Renewable material resources from water,Unknown derivation,Input
+c506b970-7b92-452f-8d6f-05d4f203d958,lake water,b2ad66ce-c78d-11e6-9d9d-cec0c932ce01,Water use,36.53,RER,Resources,Resources from water,Renewable material resources from water,Unknown derivation,Input
+805a7346-1664-4483-afe3-4b224be5e361,river water,b2ad66ce-c78d-11e6-9d9d-cec0c932ce01,Water use,36.53,RER,Resources,Resources from water,Renewable material resources from water,Unknown derivation,Input
+5e50fc01-19c6-4377-a1cc-bc65a12498ea,Water,b2ad66ce-c78d-11e6-9d9d-cec0c932ce01,Water use,-36.53,RER,Emissions,Emissions to water,Emissions to fresh water,Unknown derivation,Output
+a3876d9b-a3e8-4680-861a-4e08642f1392,Water,b2ad66ce-c78d-11e6-9d9d-cec0c932ce01,Water use,-36.53,RER,Emissions,Emissions to water,"Emissions to water, unspecified",Unknown derivation,Output
+419682fe-60fb-4b43-be89-bf2824b51104,water,b2ad66ce-c78d-11e6-9d9d-cec0c932ce01,Water use,36.53,RER,Resources,Resources from water,Renewable material resources from water,Unknown derivation,Input
+e2f7117d-06a4-49d8-9f5c-ae1a1f18ffb2,Water from cooling,b2ad66ce-c78d-11e6-9d9d-cec0c932ce01,Water use,-36.53,RER,Emissions,Emissions to water,Emissions to fresh water,Unknown derivation,Output
+73fb4dab-b979-4dcc-8616-2193fc154255,Water from turbine,b2ad66ce-c78d-11e6-9d9d-cec0c932ce01,Water use,-36.53,RER,Emissions,Emissions to water,Emissions to fresh water,Unknown derivation,Output
+21868f36-62ab-4e8e-98ed-7106228c17be,Water to Cooling,b2ad66ce-c78d-11e6-9d9d-cec0c932ce01,Water use,36.53,RER,Resources,Resources from water,Renewable material resources from water,Unknown derivation,Input
+9575e5d0-f865-4ad1-9d98-6b0d6e275780,Water to turbine,b2ad66ce-c78d-11e6-9d9d-cec0c932ce01,Water use,36.53,RER,Resources,Resources from water,Renewable material resources from water,Unknown derivation,Input
