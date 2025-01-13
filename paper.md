@@ -36,7 +36,7 @@ bibliography: paper.bib
 # Statement of need
 
 # Description
-`mescal` is an extension of the work of `@schnidrig2024`. 
+`mescal` is an extension of the work of @schnidrig2024. 
 
 Figure \autoref{fig:workflow} shows the `mescal` workflow.
 
