@@ -99,7 +99,7 @@ the flows of all infrastructure and operation LCI datasets according to a user-d
 (\autoref{fig:flowchart_regionalization}). The types and quantities of the flows remain unchanged. The background 
 inventory can be regionalized too using the `regioinvent` tool [@maximeagez2025].
 
-![Flowchart of the regionalization process.\label{fig:flowchart_regionalization}](docs/pics/regionalization_flowchart.png)
+![Flowchart of the regionalization process.\label{fig:flowchart_regionalization}](docs/pics/regionalization_flowchart.png){ width=75% }
 
 ## Double-counting removal
 Double-counting refers to the overestimation of impacts due to the multiple occurrence of the same flow, potentially 
