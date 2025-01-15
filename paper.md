@@ -51,7 +51,7 @@ comparable, robust and transparent methods [@hellweg2023].
 LCA is often used as a post-processing tool to assess the environmental impacts of energy system scenarios. 
 However, this results in ex-post analyses, where LCA indicators cannot be used actively in the modelling process. 
 To this end, LCA indicators need to be endogenously integrated in ESM to define environmental constraints or objectives.
-Several studies have endogenously integrated LCA indicators in ESM [@rauner2017,@vandepaer2020,@reinert2022], but 
+Several studies have endogenously integrated LCA indicators in ESM [@rauner2017; @vandepaer2020; @reinert2022], but 
 they are ESM-specific and hardly reproducible.
 
 Recently, @sacchi2024 presented `pathways`, a Python package using the `brightway` framework [@mutel2017] that 
@@ -66,6 +66,7 @@ and modifies the LCI database to account for ESM results. `mescal` is based upon
 
 # Description
 `mescal` reads four mandatory CSV files:
+
 - `Mapping.csv`: the mapping between ESM processes (i.e., technologies and resources) and LCI datasets from a LCI 
 database, e.g., _ecoinvent_ [@wernet2016].
 
@@ -76,6 +77,7 @@ database, e.g., _ecoinvent_ [@wernet2016].
 - `CPC.csv`: the mapping between ESM flows and Central Product Classification (CPC) categories [@unitednations2015].
 
 In addition, `mescal` reads several optional CSV files, including:
+
 - `Lifetime.csv`: the lifetime of the ESM technologies in the ESM and in the LCI database.
 
 - `Efficiency.csv`: the list of ESM technologies for which efficiency adjustment will be performed.
@@ -112,6 +114,7 @@ double-counting removal process should be applied via a recursive algorithm expl
 
 ## ESM and LCA database harmonization
 `mescal` adjusts LCI datasets and LCIA scores to account for differences between the ESM and LCI databases:
+
 - **Technologies lifetime**: `mescal` adjusts LCA scores to integrate the difference in lifetime between the ESM technologies and
 their infrastructure LCI datasets. The specific LCIA impact is multiplied by the ratio between the ESM lifetime and the LCI 
 dataset lifetime to ensure that the annual impact in the ESM is computed with the LCI dataset lifetime. 
@@ -134,7 +137,7 @@ Conversion factors encompass LCI datasets assumptions such as capacity factors o
 - **Generation of new LCI datasets**: `mescal` generates new LCI datasets by operating modifications on existing ones, 
 to enhance their alignment with the ESM technology. For example, biodiesel-fuelled mobility LCI datasets are created by 
 replacing direct fossil carbon emissions by biogenic carbon emissions, while the diesel input is set to zero during the 
-- double-counting removal step. 
+double-counting removal step. 
 
 ## Life-Cycle Impact Assessment
 `mescal` can compute LCA indicators using any impact assessment method, e.g., IMPACT World+ [@bulle2019], ReCiPe 
