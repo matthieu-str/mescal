@@ -162,6 +162,10 @@ class ESM:
     )
     from .normalization import normalize_lca_metrics
     from .generate_lcia_obj_ampl import generate_mod_file_ampl
+    from .plot import (
+        plot_indicators_of_technologies_for_one_impact_category,
+        plot_indicators_of_resources_for_one_impact_category,
+    )
 
     def check_inputs(self) -> None:
         """
