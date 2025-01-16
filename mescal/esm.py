@@ -165,6 +165,8 @@ class ESM:
     from .plot import (
         plot_indicators_of_technologies_for_one_impact_category,
         plot_indicators_of_resources_for_one_impact_category,
+        plot_indicators_of_technologies_for_several_impact_categories,
+        plot_indicators_of_resources_for_several_impact_categories,
     )
 
     def check_inputs(self) -> None:

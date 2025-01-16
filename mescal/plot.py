@@ -1,5 +1,6 @@
 from plotly.subplots import make_subplots
 import plotly.graph_objects as go
+import plotly.express as px
 import bw2data as bd
 import pandas as pd
 from pathlib import Path
@@ -101,7 +102,7 @@ def plot_indicators_of_technologies_for_one_impact_category(
     fig.update_layout(
         title_text=graph_title,
         template='plotly_white',
-        showlegend=False
+        showlegend=False,
     )
 
     # Update axis labels
@@ -186,7 +187,7 @@ def plot_indicators_of_resources_for_one_impact_category(
     fig.update_layout(
         title_text=graph_title,
         template='plotly_white',
-        showlegend=False
+        showlegend=False,
     )
 
     # Update axis labels
@@ -206,7 +207,169 @@ def plot_indicators_of_resources_for_one_impact_category(
         fig.write_image(f'{saving_path}{filename}.{saving_format}')
 
 
-def plot_indicators_of_technologies_for_several_impact_category():
-    pass
-    # TODO
-    # plot different technologies for different impact categories (with relative values [%] w.r.t the max impact)
+def plot_indicators_of_technologies_for_several_impact_categories(
+        self,
+        R: pd.DataFrame,
+        technologies_list: list[str],
+        impact_categories_list: list[tuple],
+        filename: str = None,
+        saving_format: str = None,
+        saving_path: str = None,
+        show_plot: bool = True,
+):
+
+    if saving_path is None:
+        saving_path = ''
+
+    for tech in technologies_list:
+        if tech not in R['Name'].unique():
+            raise ValueError(f'Technology {tech} not found in the LCA indicators dataframe')
+
+    for impact_category in impact_categories_list:
+        if str(impact_category) not in R['Impact_category'].unique():
+            raise ValueError(f'Impact category {impact_category} not found in the LCA indicators dataframe')
+
+    data_op = []
+    data_constr = []
+
+    color_scale = px.colors.qualitative.Plotly
+
+    for i, impact_category in enumerate(impact_categories_list):
+        df_op = R[
+            (R['Name'].isin(technologies_list))
+            & (R['Impact_category'] == str(impact_category))
+            & (R['Type'] == 'Operation')
+            ]
+        data_op.append(go.Bar(
+            name=impact_category[-1],
+            x=df_op['Name'],
+            y=100*df_op['Value']/df_op['Value'].max(),
+            marker=dict(color=color_scale[i % len(color_scale)]),
+            hovertemplate=
+            '<br><b>Technology</b>: %{x}</br>' +
+            '<b>Relative value</b>: %{y:.2f}%</br>' +
+            '<b>Physical value</b>: %{customdata:.2e}</br>',
+            customdata=df_op['Value'],
+        ))
+
+        df_constr = R[
+            (R['Name'].isin(technologies_list))
+            & (R['Impact_category'] == str(impact_category))
+            & (R['Type'] == 'Construction')
+            ]
+        data_constr.append(go.Bar(
+            name=impact_category[-1],
+            x=df_constr['Name'],
+            y=100*df_constr['Value']/df_constr['Value'].max(),
+            marker=dict(color=color_scale[i % len(color_scale)]),
+            hovertemplate=
+            '<br><b>Technology</b>: %{x}</br>' +
+            '<b>Relative value</b>: %{y:.2f}%</br>' +
+            '<b>Physical value</b>: %{customdata:.2e}</br>',
+            customdata=df_constr['Value'],
+            ))
+
+    # Create subplots
+    fig = make_subplots(
+        rows=1,
+        cols=2,
+        subplot_titles=("Operation", "Construction"),
+        )
+
+    # Add bar chart for operation
+    for trace in data_op:
+        fig.add_trace(trace, row=1, col=1)
+
+    # Add bar chart for construction
+    for trace in data_constr:
+        trace.showlegend = False  # Hide legend for the second subplot
+        fig.add_trace(trace, row=1, col=2)
+
+    fig.update_layout(barmode='group')
+
+    # Update axis labels
+    fig.update_yaxes(title_text=f'Relative impacts [%]', row=1, col=1)
+
+    # Update layout
+    fig.update_layout(
+        template='plotly_white',
+        showlegend=True,
+        legend_title_text='Impact categories',
+    )
+
+    # Show plot
+    if show_plot:
+        fig.show()
+
+    if saving_format is None or filename is None:
+        pass
+    elif saving_format == 'html':
+        Path(saving_path).mkdir(parents=True, exist_ok=True)  # Create the folder if it does not exist
+        fig.write_html(f'{saving_path}{filename}.{saving_format}')
+    else:
+        Path(saving_path).mkdir(parents=True, exist_ok=True)  # Create the folder if it does not exist
+        fig.write_image(f'{saving_path}{filename}.{saving_format}')
+
+
+def plot_indicators_of_resources_for_several_impact_categories(
+        self,
+        R: pd.DataFrame,
+        resources_list: list[str],
+        impact_categories_list: list[tuple],
+        filename: str = None,
+        saving_format: str = None,
+        saving_path: str = None,
+        show_plot: bool = True,
+):
+
+    if saving_path is None:
+        saving_path = ''
+
+    for res in resources_list:
+        if res not in R['Name'].unique():
+            raise ValueError(f'Resource {res} not found in the LCA indicators dataframe')
+
+    for impact_category in impact_categories_list:
+        if str(impact_category) not in R['Impact_category'].unique():
+            raise ValueError(f'Impact category {impact_category} not found in the LCA indicators dataframe')
+
+    data = []
+
+    for impact_category in impact_categories_list:
+        df = R[(R['Name'].isin(resources_list)) & (R['Impact_category'] == str(impact_category))]
+        data.append(go.Bar(
+            name=impact_category[-1],
+            x=df['Name'],
+            y=100*df['Value']/df['Value'].max(),
+            hovertemplate=
+            '<br><b>Resource</b>: %{x}</br>' +
+            '<b>Relative value</b>: %{y:.2f}%</br>' +
+            '<b>Physical value</b>: %{customdata:.2e}</br>',
+            customdata=df['Value'],
+        ))
+
+    fig = go.Figure(data=data)
+    fig.update_layout(barmode='group')
+
+    # Update axis labels
+    fig.update_yaxes(title_text=f'Relative impacts [%]')
+
+    # Update layout
+    fig.update_layout(
+        template='plotly_white',
+        showlegend=True,
+        legend_title_text='Impact categories',
+    )
+
+    # Show plot
+    if show_plot:
+        fig.show()
+
+    if saving_format is None or filename is None:
+        pass
+    elif saving_format == 'html':
+        Path(saving_path).mkdir(parents=True, exist_ok=True)  # Create the folder if it does not exist
+        fig.write_html(f'{saving_path}{filename}.{saving_format}')
+    else:
+        Path(saving_path).mkdir(parents=True, exist_ok=True)  # Create the folder if it does not exist
+        fig.write_image(f'{saving_path}{filename}.{saving_format}')
