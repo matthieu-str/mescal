@@ -180,9 +180,26 @@ respectively derived from the operation and resource normalized specific impacts
 $lcia^{norm}_{res}$), which are respectively computed from the operation and resource LCI datasets, and scaled 
 with the annual energy production ($\pmb{F_t} \cdot t_{op}$). 
 
-\begin{equation}\label{eq:lcia_tot}
-\pmb{LCIA_{tot}}(k) = \sum_{j \in TECH}(\pmb{LCIA_{infra}}(j,k) + \pmb{LCIA_{op}}(j,k)) + \sum_{r \in RES} \pmb{LCIA_{res}}(r,k) \quad \forall k \in ENV 
-\end{equation}
+$$
+LCIA_{\text{tot}}(k) = \sum_{j \in \text{TECH}} \left( LCIA_{\text{infra}}(j, k) + LCIA_{\text{op}}(j, k) \right)
++ \sum_{r \in \text{RES}} LCIA_{\text{res}}(r, k) \quad \forall k \in \text{ENV}
+$$
+
+$$
+LCIA_{\text{infra}}(j, k) = lcia_{\text{infra}}^{\text{norm}}(j, k)
+\cdot F(j) \cdot \frac{1}{n_{\text{ESM}}(j)} 
+\quad \forall (j, k) \in \text{TECH} \times \text{ENV}
+$$
+
+$$
+LCIA_{\text{op}}(j, k) = lcia_{\text{op}}^{\text{norm}}(j, k) \cdot \sum_{t \in T} F_t(j, t) \cdot t_{\text{op}}(t)
+\quad \forall (j, k) \in \text{TECH} \times \text{ENV}
+$$
+
+$$
+LCIA_{\text{res}}(r, k) = lcia_{\text{res}}^{\text{norm}}(r, k) \cdot \sum_{t \in T} F_t(r, t) \cdot t_{\text{op}}(t)
+\quad \forall (r, k) \in \text{RES} \times \text{ENV}
+$$
 
 ## Integrating ESM results in the LCI database
 In ordre to update the LCI database with the ESM results, `mescal` overwrites the relevant LCI datasets, 
