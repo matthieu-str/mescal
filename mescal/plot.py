@@ -86,7 +86,7 @@ def plot_indicators_of_technologies_for_one_impact_category(
             name='Operation',
             hovertemplate=
             '<br><b>Technology</b>: %{x}</br>' +
-            '<b>Value</b>: %{y:.2e}</br>',
+            '<b>Value</b>: %{y:.2e}' + f' {unit}</br>',
         ),
         row=1, col=1
     )
@@ -99,7 +99,7 @@ def plot_indicators_of_technologies_for_one_impact_category(
             name='Construction',
             hovertemplate=
             '<br><b>Technology</b>: %{x}</br>' +
-            '<b>Value</b>: %{y:.2e}</br>',
+            '<b>Value</b>: %{y:.2e}' + f' {unit}</br>',
         ),
         row=1, col=2
     )
@@ -189,7 +189,7 @@ def plot_indicators_of_resources_for_one_impact_category(
             name='Resource',
             hovertemplate=
             '<br><b>Resource</b>: %{x}</br>' +
-            '<b>Value</b>: %{y:.2e}</br>',
+            '<b>Value</b>: %{y:.2e}' + f' {unit}</br>',
         ),
     )
 
@@ -245,6 +245,8 @@ def plot_indicators_of_technologies_for_several_impact_categories(
     color_scale = px.colors.qualitative.Plotly
 
     for i, impact_category in enumerate(impact_categories_list):
+        unit = bd.Method(impact_category).metadata['unit']
+
         df_op = R[
             (R['Name'].isin(technologies_list))
             & (R['Impact_category'] == str(impact_category))
@@ -258,7 +260,7 @@ def plot_indicators_of_technologies_for_several_impact_categories(
             hovertemplate=
             '<br><b>Technology</b>: %{x}</br>' +
             '<b>Relative value</b>: %{y:.2f}%</br>' +
-            '<b>Physical value</b>: %{customdata:.2e}</br>',
+            '<b>Physical value</b>: %{customdata:.2e}' + f' {unit}</br>',
             customdata=df_op['Value'],
         ))
 
@@ -275,7 +277,7 @@ def plot_indicators_of_technologies_for_several_impact_categories(
             hovertemplate=
             '<br><b>Technology</b>: %{x}</br>' +
             '<b>Relative value</b>: %{y:.2f}%</br>' +
-            '<b>Physical value</b>: %{customdata:.2e}</br>',
+            '<b>Physical value</b>: %{customdata:.2e}' + f' {unit}</br>',
             customdata=df_constr['Value'],
             ))
 
@@ -346,6 +348,7 @@ def plot_indicators_of_resources_for_several_impact_categories(
     data = []
 
     for impact_category in impact_categories_list:
+        unit = bd.Method(impact_category).metadata['unit']
         df = R[(R['Name'].isin(resources_list)) & (R['Impact_category'] == str(impact_category))]
         data.append(go.Bar(
             name=impact_category[-1],
@@ -354,7 +357,7 @@ def plot_indicators_of_resources_for_several_impact_categories(
             hovertemplate=
             '<br><b>Resource</b>: %{x}</br>' +
             '<b>Relative value</b>: %{y:.2f}%</br>' +
-            '<b>Physical value</b>: %{customdata:.2e}</br>',
+            '<b>Physical value</b>: %{customdata:.2e}' + f' {unit}</br>',
             customdata=df['Value'],
         ))
 
