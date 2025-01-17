@@ -83,7 +83,10 @@ def plot_indicators_of_technologies_for_one_impact_category(
         go.Bar(
             x=df_op['Name'],
             y=df_op['Value'],
-            name='Operation'
+            name='Operation',
+            hovertemplate=
+            '<br><b>Technology</b>: %{x}</br>' +
+            '<b>Value</b>: %{y:.2e}</br>',
         ),
         row=1, col=1
     )
@@ -93,7 +96,10 @@ def plot_indicators_of_technologies_for_one_impact_category(
         go.Bar(
             x=df_constr['Name'],
             y=df_constr['Value'],
-            name='Construction'
+            name='Construction',
+            hovertemplate=
+            '<br><b>Technology</b>: %{x}</br>' +
+            '<b>Value</b>: %{y:.2e}</br>',
         ),
         row=1, col=2
     )
@@ -180,6 +186,10 @@ def plot_indicators_of_resources_for_one_impact_category(
         go.Bar(
             x=df['Name'],
             y=df['Value'],
+            name='Resource',
+            hovertemplate=
+            '<br><b>Resource</b>: %{x}</br>' +
+            '<b>Value</b>: %{y:.2e}</br>',
         ),
     )
 
