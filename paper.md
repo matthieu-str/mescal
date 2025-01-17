@@ -34,9 +34,9 @@ bibliography: paper.bib
 # Summary
 `mescal` is a Python package that integrates Life-Cycle Assessment (LCA) indicators within Energy System Models 
 (ESM). Based on the choice of one or several impact assessment methods, `mescal` generates a set of LCA indicators 
-for each technology and resource of ESM. These indicators may be employed in an ex-post analysis, or be 
+for each technology and resource of an ESM. These indicators may be employed in an ex-post analysis, or be 
 integrated as parameters in ESM to add environmental constraints or define environmental objective functions. 
-Furthermore, `mescal` propagates ESM results back to the Life-Cycle Inventory (LCI) database, thus allowing energy 
+Furthermore, `mescal` updates the Life-Cycle Inventory (LCI) database with ESM results, thus allowing energy 
 modellers and LCA practitioners to include ESM projections in their sustainability analyses.
 
 # Statement of need
@@ -52,8 +52,11 @@ LCA is often used as a post-processing tool to assess the environmental impacts 
 However, ex-post analyses do not allow LCA indicators to be used actively in the modelling process and thus in 
 the scenarios design. 
 To this end, LCA indicators need to be endogenously integrated in ESM to define environmental constraints or objectives.
-Several studies have endogenously integrated LCA indicators in ESM [@rauner2017; @vandepaer2020; @reinert2022], but 
-they are ESM-specific and hardly reproducible.
+Several studies have endogenously integrated LCA indicators in ESM [@rauner2017; @vandepaer2020; @reinert2022].
+@xu2020 went further by proposing a framework to bidirectionally couple LCA and ESM: environmental impacts are 
+computed using the energy mix obtained via the ESM, thus resulting in an iterative feedback loop.
+However, these studies lack generalization and are hardly reproducible when considering different ESM.
+
 
 Recently, @sacchi2024 presented `pathways`, a Python package that assess energy transition scenarios with LCA. 
 Based on the `brightway` framework [@mutel2017], this tool allows a fully transparent and reproducible assessment of 
@@ -63,8 +66,8 @@ propagation of ESM results back to the LCI database.
 
 To address these limitations, the Python package `mescal` endogenously integrates LCA indicators in ESM
 and modifies the LCI database to account for ESM results. `mescal` is an open-source library based upon `wurst` and 
-the `brightway` framework [@mutel2017], which aims to enhance transparency and comparability among ESM envisioning an 
-enlarged set of sustainability metrics.
+the `brightway` framework [@mutel2017], which aims to enhance transparency and comparability among ESM envisioning to 
+enlarge their set of sustainability metrics.
 
 # Description
 `mescal` reads four mandatory CSV files:
@@ -175,6 +178,10 @@ scores.
 In ordre to update the LCI database with the ESM results, `mescal` overwrites the relevant LCI datasets, 
 i.e., LCI datasets that are in the sectoral and geographical scope of the ESM, such as markets for electricity, heat or 
 transport. 
+Updating the LCI database background inventory paves for the way for using `mescal` with myopic ESM, i.e., ESM 
+dividing the transition period into a sequence of consecutive optimization problems [@prina2020], through a 3-step 
+procedure: 1) run the ESM at time-step $t$, 2) update the LCI database with the ESM results at time-step $t$, 
+and 3) update the LCA indicators with the updated LCI database for time-step $t+1$.
 
 ## Example notebook
 
