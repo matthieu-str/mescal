@@ -171,29 +171,29 @@ magnitude, numerical stability is improved in the solving process.
 
 ## Equations specification
 The following set of modelling equations should be included in ESM.
-The environmental objective $\mathbf{LCIA_{tot}}$ is defined as the sum of the impacts of the infrastructure, operation, 
-and resource parts, namely $\mathbf{LCIA_{infra}}$, $\mathbf{LCIA_{op}}$, and $\mathbf{LCIA_{res}}$.
+The environmental objective ${LCIA_{tot}}$ is defined as the sum of the impacts of the infrastructure, operation, 
+and resource parts, namely ${LCIA_{infra}}$, ${LCIA_{op}}$, and ${LCIA_{res}}$.
 The infrastructure impact is derived from the normalized specific impact ($lcia^{norm}_{infra}$), which is computed 
 from the infrastructure LCI dataset. This value is then divided by the technology's lifetime in the ESM 
-($n_{ESM}$), and scaled with the technology's installed capacity ($\mathbf{F}$). The operation and resource impacts are 
+($n_{ESM}$), and scaled with the technology's installed capacity (${F}$). The operation and resource impacts are 
 respectively derived from the operation and resource normalized specific impacts ($lcia^{norm}_{op}$ and 
 $lcia^{norm}_{res}$), which are respectively computed from the operation and resource LCI datasets, and scaled 
-with the annual energy production (\mathbf{F_t} \times t_{op}$). 
+with the annual energy production ({F_t} \times t_{op}$). 
 
 $$
-\mathbf{LCIA_{tot}}(k) = \sum_{j \in TECH} \left( \mathbf{LCIA_{infra}}(j, k) + \mathbf{LCIA_{op}}(j, k) \right) + \sum_{r \in RES} \mathbf{LCIA_{res}}(r, k) \quad \forall k \in ENV
-$$
-
-$$
-\mathbf{LCIA_{infra}}(j, k) = lcia_{infra}^{norm}(j, k) \cdot \mathbf{F}(j) \cdot \frac{1}{n_{ESM}(j)} \quad \forall (j, k) \in TECH \times ENV
+{LCIA_{tot}}(k) = \sum_{j \in TECH} \left( {LCIA_{infra}}(j, k) + {LCIA_{op}}(j, k) \right) + \sum_{r \in RES} {LCIA_{res}}(r, k) \quad \forall k \in ENV
 $$
 
 $$
-\mathbf{LCIA_{op}}(j, k) = lcia_{op}^{norm}(j, k) \cdot \sum_{t \in T} \mathbf{F_t}(j, t) \cdot t_{op}(t) \quad \forall (j, k) \in TECH \times ENV
+{LCIA_{infra}}(j, k) = lcia_{infra}^{norm}(j, k) \cdot {F}(j) \cdot \frac{1}{n_{ESM}(j)} \quad \forall (j, k) \in TECH \times ENV
 $$
 
 $$
-\mathbf{LCIA_{res}}(r, k) = lcia_{res}^{norm}(r, k) \cdot \sum_{t \in T} \mathbf{F_t}(r, t) \cdot t_{op}(t) \quad \forall (r, k) \in RES \times ENV
+{LCIA_{op}}(j, k) = lcia_{op}^{norm}(j, k) \cdot \sum_{t \in T} {F_t}(j, t) \cdot t_{op}(t) \quad \forall (j, k) \in TECH \times ENV
+$$
+
+$$
+{LCIA_{res}}(r, k) = lcia_{res}^{norm}(r, k) \cdot \sum_{t \in T} {F_t}(r, t) \cdot t_{op}(t) \quad \forall (r, k) \in RES \times ENV
 $$
 
 
