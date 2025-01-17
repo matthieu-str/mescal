@@ -127,7 +127,7 @@ def plot_indicators_of_technologies_for_one_impact_category(
             trace.showlegend = False  # Hide legend for the second subplot
             fig.add_trace(trace, row=1, col=2)
 
-        fig.update_layout(barmode='stack', showlegend=True)
+        fig.update_layout(barmode='stack', showlegend=True, legend_title_text='Impact categories')
 
     else:
         # Add bar chart for operation
@@ -260,7 +260,7 @@ def plot_indicators_of_resources_for_one_impact_category(
             ))
 
         fig = go.Figure(data=data)
-        fig.update_layout(barmode='stack', showlegend=True)
+        fig.update_layout(barmode='stack', showlegend=True, legend_title_text='Impact categories')
 
     else:
         df = R[(R['Name'].isin(resources_list)) & (R['Impact_category'] == str(impact_category))]
