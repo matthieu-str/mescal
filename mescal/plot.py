@@ -4,6 +4,7 @@ import plotly.express as px
 import bw2data as bd
 import pandas as pd
 from pathlib import Path
+from ast import literal_eval
 
 
 def plot_indicators_of_technologies_for_one_impact_category(
@@ -16,6 +17,7 @@ def plot_indicators_of_technologies_for_one_impact_category(
         saving_format: str = None,
         saving_path: str = None,
         show_plot: bool = True,
+        contributions_total_score: bool = False,
 ):
     """
     Plot operation and infrastructure LCA indicators for a set of technologies for a given impact category.
@@ -31,6 +33,7 @@ def plot_indicators_of_technologies_for_one_impact_category(
     :param saving_path: path to save the plot under the form 'path/to/folder/'. If None, the plot is saved in the
         current directory.
     :param show_plot: if True, the plot is shown in the notebook.
+    :param contributions_total_score: if True, the contributions of all categories to the total score are shown.
     :return: None (plot is shown and/or saved)
     """
 
@@ -55,65 +58,115 @@ def plot_indicators_of_technologies_for_one_impact_category(
         graph_title = f"LCA Indicators for {impact_category[-1]}"
 
     if 'operation_unit' in metadata and 'construction_unit' in metadata:
-        operation_unit = f'/{metadata["operation_unit"]}'
-        construction_unit = f'/{metadata["construction_unit"]}'
+        operation_unit = f'{unit}/{metadata["operation_unit"]}'
+        construction_unit = f'{unit}/{metadata["construction_unit"]}'
     else:
-        operation_unit = ''
-        construction_unit = ''
+        operation_unit = unit
+        construction_unit = unit
 
-    df = R[(R['Name'].isin(technologies_list)) & (R['Impact_category'] == str(impact_category))]
+    if contributions_total_score:
+        impact_category_set = str(impact_category).split(impact_category_name)[0]
+        df = R[
+            (R['Name'].isin(technologies_list))
+            & (R['Impact_category'].str.startswith(impact_category_set))  # Disaggregate total endpoint indicator
+            & (R['Impact_category'] != str(impact_category))  # Exclude total endpoint indicator
+            ]
+    else:
+        df = R[(R['Name'].isin(technologies_list)) & (R['Impact_category'] == str(impact_category))]
     df_op = df[df['Type'] == 'Operation']
     df_constr = df[df['Type'] == 'Construction']
 
     if self.lifetime is not None:
         df_constr = df_constr.merge(self.lifetime, on='Name')
         df_constr['Value'] = df_constr['Value'] / df_constr['ESM']
-        construction_unit += '.year'
+        construction_unit += '/year'
 
     # Create subplots
     fig = make_subplots(
         rows=1,
         cols=2,
-        subplot_titles=(
-            f"Operation {operation_unit}", f"Construction {construction_unit}"),
+        subplot_titles=("Operation", "Construction"),
         )
 
-    # Add bar chart for operation
-    fig.add_trace(
-        go.Bar(
-            x=df_op['Name'],
-            y=df_op['Value'],
-            name='Operation',
-            hovertemplate=
-            '<br><b>Technology</b>: %{x}</br>' +
-            '<b>Value</b>: %{y:.2e}' + f' {unit}</br>',
-        ),
-        row=1, col=1
-    )
+    if contributions_total_score:
 
-    # Add bar chart for construction
-    fig.add_trace(
-        go.Bar(
-            x=df_constr['Name'],
-            y=df_constr['Value'],
-            name='Construction',
-            hovertemplate=
-            '<br><b>Technology</b>: %{x}</br>' +
-            '<b>Value</b>: %{y:.2e}' + f' {unit}</br>',
-        ),
-        row=1, col=2
-    )
+        color_scale = px.colors.qualitative.Plotly
+        data_op = []
+        data_constr = []
+
+        for i, disaggregated_impact_category in enumerate(df_op['Impact_category'].unique()):
+            df_op_disaggregated = df_op[df_op['Impact_category'] == str(disaggregated_impact_category)]
+            df_constr_disaggregated = df_constr[df_constr['Impact_category'] == str(disaggregated_impact_category)]
+
+            data_op.append(go.Bar(
+                name=literal_eval(disaggregated_impact_category)[-1],
+                x=df_op_disaggregated['Name'],
+                y=df_op_disaggregated['Value'],
+                marker=dict(color=color_scale[i % len(color_scale)]),
+                hovertemplate=
+                '<br><b>Technology</b>: %{x}</br>' +
+                '<b>Value</b>: %{y:.2e}' + f' {unit}</br>',
+            ))
+
+            data_constr.append(go.Bar(
+                name=literal_eval(disaggregated_impact_category)[-1],
+                x=df_constr_disaggregated['Name'],
+                y=df_constr_disaggregated['Value'],
+                marker=dict(color=color_scale[i % len(color_scale)]),
+                hovertemplate=
+                '<br><b>Technology</b>: %{x}</br>' +
+                '<b>Value</b>: %{y:.2e}' + f' {unit}</br>',
+            ))
+
+        # Add bar chart for operation
+        for trace in data_op:
+            fig.add_trace(trace, row=1, col=1)
+
+        # Add bar chart for construction
+        for trace in data_constr:
+            trace.showlegend = False  # Hide legend for the second subplot
+            fig.add_trace(trace, row=1, col=2)
+
+        fig.update_layout(barmode='stack', showlegend=True)
+
+    else:
+        # Add bar chart for operation
+        fig.add_trace(
+            go.Bar(
+                x=df_op['Name'],
+                y=df_op['Value'],
+                name='Operation',
+                hovertemplate=
+                '<br><b>Technology</b>: %{x}</br>' +
+                '<b>Value</b>: %{y:.2e}' + f' {unit}</br>',
+            ),
+            row=1, col=1
+        )
+
+        # Add bar chart for construction
+        fig.add_trace(
+            go.Bar(
+                x=df_constr['Name'],
+                y=df_constr['Value'],
+                name='Construction',
+                hovertemplate=
+                '<br><b>Technology</b>: %{x}</br>' +
+                '<b>Value</b>: %{y:.2e}' + f' {unit}</br>',
+            ),
+            row=1, col=2
+        )
+
+        fig.update_layout(showlegend=False)
 
     # Update layout
     fig.update_layout(
         title_text=graph_title,
         template='plotly_white',
-        showlegend=False,
     )
 
     # Update axis labels
-    fig.update_yaxes(title_text=f'{impact_category_name} [{unit}]', row=1, col=1)
-    fig.update_yaxes(title_text=f'{impact_category_name} [{unit}]', row=1, col=2)
+    fig.update_yaxes(title_text=f'{impact_category_name} [{operation_unit}]', row=1, col=1)
+    fig.update_yaxes(title_text=f'{impact_category_name} [{construction_unit}]', row=1, col=2)
 
     # Show plot
     if show_plot:
@@ -139,6 +192,7 @@ def plot_indicators_of_resources_for_one_impact_category(
         saving_format: str = None,
         saving_path: str = None,
         show_plot: bool = True,
+        contributions_total_score: bool = False,
 ):
     """
     Plot operation LCA indicators for a set of resources for a given impact category.
@@ -153,6 +207,7 @@ def plot_indicators_of_resources_for_one_impact_category(
     :param saving_path: path to save the plot under the form 'path/to/folder/'. If None, the plot is saved in the
         current directory.
     :param show_plot: if True, the plot is shown in the notebook.
+    :param contributions_total_score: if True, the contributions of all categories to the total score are shown.
     :return: None (plot is shown and/or saved)
     """
 
@@ -177,27 +232,53 @@ def plot_indicators_of_resources_for_one_impact_category(
         graph_title = f"LCA Indicators for {impact_category[-1]}"
 
     if 'unit' in metadata:
-        graph_title += f' (/{metadata["unit"]})'
+        unit += f'/{metadata["unit"]}'
 
-    df = R[(R['Name'].isin(resources_list)) & (R['Impact_category'] == str(impact_category))]
+    if contributions_total_score:
+        impact_category_set = str(impact_category).split(impact_category_name)[0]
+        df = R[
+            (R['Name'].isin(resources_list))
+            & (R['Impact_category'].str.startswith(impact_category_set))  # Disaggregate total endpoint indicator
+            & (R['Impact_category'] != str(impact_category))  # Exclude total endpoint indicator
+            ]
 
-    # Add bar chart
-    fig = go.Figure(
-        go.Bar(
-            x=df['Name'],
-            y=df['Value'],
-            name='Resource',
-            hovertemplate=
-            '<br><b>Resource</b>: %{x}</br>' +
-            '<b>Value</b>: %{y:.2e}' + f' {unit}</br>',
-        ),
-    )
+        data = []
+
+        for disaggregated_impact_category in df['Impact_category'].unique():
+            df_disaggregated = df[df['Impact_category'] == str(disaggregated_impact_category)]
+            data.append(go.Bar(
+                name=literal_eval(disaggregated_impact_category)[-1],
+                x=df_disaggregated['Name'],
+                y=df_disaggregated['Value'],
+                hovertemplate=
+                '<br><b>Resource</b>: %{x}</br>' +
+                '<b>Value</b>: %{y:.2e}' + f' {unit}</br>',
+            ))
+
+        fig = go.Figure(data=data)
+        fig.update_layout(barmode='stack', showlegend=True)
+
+    else:
+        df = R[(R['Name'].isin(resources_list)) & (R['Impact_category'] == str(impact_category))]
+
+        # Add bar chart
+        fig = go.Figure(
+            go.Bar(
+                x=df['Name'],
+                y=df['Value'],
+                name='Resource',
+                hovertemplate=
+                '<br><b>Resource</b>: %{x}</br>' +
+                '<b>Value</b>: %{y:.2e}' + f' {unit}</br>',
+            ),
+        )
+
+        fig.update_layout(showlegend=False)
 
     # Update layout
     fig.update_layout(
         title_text=graph_title,
         template='plotly_white',
-        showlegend=False,
     )
 
     # Update axis labels
