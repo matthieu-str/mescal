@@ -75,7 +75,7 @@ enlarge their set of sustainability metrics.
 - `Mapping.csv`: the mapping between ESM processes (i.e., technologies and resources) and LCI datasets from a LCI 
 database, e.g., _ecoinvent_ [@wernet2016].
 
-- `Model.csv`: the input and output flows of ESM technologies. 
+- `ESM.csv`: the input and output flows of ESM technologies. 
 
 - `Conversion factors.csv`: the set of unit conversion factors between ESM processes and their mapped LCI datasets.
 
@@ -146,7 +146,7 @@ the amount of direct emissions proportionally to the efficiency difference. Exce
 energy elementary flows, the amounts of all elementary flows in the direct emissions of the operation LCI datasets are adjusted 
 using the ratio between the ESM and LCI dataset efficiencies (`Lifetime.csv`). The efficiency of the operation LCI dataset is computed 
 using the quantity of fuel that was removed during the double-counting removal step, while the efficiency of the ESM 
-process is computed from `Model.csv`. This transformation is applied to a list of ESM technologies given by the user 
+process is computed from `ESM.csv`. This transformation is applied to a list of ESM technologies given by the user 
 (`Efficiency.csv`), typically technologies involving a combustion process. 
 
 - **Physical units**: The energy and material output flows may be expressed in different units in the ESM and the LCI 
@@ -167,20 +167,45 @@ set to zero during the double-counting removal step.
 Prior to integration into ESM, LCA indicators are normalized. In the context of optimization, 
 normalization is beneficial in facilitating the solver's convergence, given that LCA indicators may exhibit 
 significant discrepancies in magnitude across impact categories. By aligning all metrics within a comparable order of 
-magnitude, numerical stability is improved in the solving process. Furthermore, considerable discrepancies in magnitude 
-may be observed between infrastructure and operation LCA indicators within the same impact category, given that 
-these are not expressed with the same physical unit. Consequently, an adjustment factor was applied to infrastructure 
-LCIA scores, to ensure that the maximum infrastructure and operation metrics of a given impact category are both 
-normalized to 1. This adjustment factor is accounted when converting the normalized impact scores into physical impact 
-scores.
+magnitude, numerical stability is improved in the solving process. 
+
+## Equations specification
+The following set of modelling equations should be included in ESM.
+The environmental objective $\pmb{LCIA_{tot}}$ is defined as the sum of the impacts of the infrastructure, operation, 
+and resource parts, namely $\pmb{LCIA_{infra}}$, $\pmb{LCIA_{op}}$, and  $\pmb{LCIA_{res}}$ (\autoref{eq:lcia_tot}). 
+The infrastructure impact is derived from the normalized specific impact ($lcia^{norm}_{infra}$), which is computed 
+from the infrastructure \gls{LCI} dataset. This value is then divided by the technology's lifetime in the ESM 
+($n_{ESM}$), and scaled with the technology's installed capacity ($\pmb{F}$). The operation and resource impacts are 
+respectively derived from the operation and resource normalized specific impacts ($lcia^{norm}_{op}$ and 
+$lcia^{norm}_{res}$), which are respectively computed from the operation and resource LCI datasets, and scaled 
+with the annual energy production ($\pmb{F_t} \cdot t_{op}$). 
+
+\begin{align}
+\begin{split}
+    \pmb{LCIA_{tot}}(k) = \sum_{j \in TECH}(\pmb{LCIA_{infra}}(j,k) + \pmb{LCIA_{op}}(j,k)) \\
+    + \sum_{r \in RES} \pmb{LCIA_{res}}(r,k) \quad \forall k \in ENV \label{eq:lcia_tot}
+\end{split}
+\end{align}
+\begin{align}
+\begin{split}
+    \pmb{LCIA_{infra}}(j,k) = lcia_{infra}^{norm}(j,k) \cdot \pmb{F}(j) \cdot \frac{1}{n_{ESM}(j)} \\ 
+    \quad \forall (j,k) \in TECH \times ENV \label{eq:lcia_infra}
+\end{split}
+\end{align}
+\begin{align}
+    \pmb{LCIA_{op}}(j,k)= lcia_{op}^{norm}(j,k) \cdot \sum_{t \in T} \pmb{F_t}(j,t) \cdot t_{op}(t) \quad \forall (j,k) \in TECH \times ENV \label{eq:lcia_variable}
+\end{align}
+\begin{align}
+    \pmb{LCIA_{res}}(r,k) = lcia_{res}^{norm}(r,k) \cdot \sum_{t \in T} \pmb{F_t}(r,t) \cdot t_{op}(t) \quad \forall (r,k) \in RES \times ENV \label{eq:lcia_resource}
+\end{align}
 
 ## Integrating ESM results in the LCI database
 In ordre to update the LCI database with the ESM results, `mescal` overwrites the relevant LCI datasets, 
 i.e., LCI datasets that are in the sectoral and geographical scope of the ESM, such as markets for electricity, heat or 
 transport. 
 Updating the LCI database background inventory paves for the way for using `mescal` with myopic ESM, i.e., ESM 
-dividing the transition period into a sequence of consecutive optimization problems [@prina2020], through a 3-step 
-procedure: 1) run the ESM at time-step $t$, 2) update the LCI database with the ESM results at time-step $t$, 
+dividing the transition period into a sequence of consecutive optimization problems [@prina2020], through an iterative 
+3-step procedure: 1) run the ESM at time-step $t$, 2) update the LCI database with the ESM results at time-step $t$, 
 and 3) update the LCA indicators with the updated LCI database for time-step $t+1$.
 
 ## Example notebook
@@ -203,7 +228,7 @@ As an example, `mescal` methodology has been applied by @schnidrig2024 with the 
 to analyse environmental-economic trade-offs in Swiss energy system transitions.
 
 # Conclusion
-`mescal` is a Python package that couples LCA with ESM. It integrates LCA indicators in ESM to enlarge the set of
+`mescal` is a Python package that bidirectionally couples LCA and ESM. It integrates LCA indicators in ESM to enlarge the set of
 sustainability indicators and thus better highlight trade-offs of energy transition pathways. Additionally, it integrates 
 the results of ESM back to the LCI database, thus allowing LCA practitioners to include ESM projections in their analyses. 
 
