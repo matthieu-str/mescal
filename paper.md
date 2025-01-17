@@ -174,7 +174,7 @@ The following set of modelling equations should be included in ESM.
 The environmental objective $LCIA_{tot}$ is defined as the sum of the impacts of the infrastructure, operation, 
 and resource parts, namely $LCIA_{infra}$, $LCIA_{op}$, and  $LCIA_{res}$.
 The infrastructure impact is derived from the normalized specific impact ($lcia^{norm}_{infra}$), which is computed 
-from the infrastructure \gls{LCI} dataset. This value is then divided by the technology's lifetime in the ESM 
+from the infrastructure LCI dataset. This value is then divided by the technology's lifetime in the ESM 
 ($n_{ESM}$), and scaled with the technology's installed capacity ($F$). The operation and resource impacts are 
 respectively derived from the operation and resource normalized specific impacts ($lcia^{norm}_{op}$ and 
 $lcia^{norm}_{res}$), which are respectively computed from the operation and resource LCI datasets, and scaled 
