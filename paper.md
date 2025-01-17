@@ -181,24 +181,7 @@ $lcia^{norm}_{res}$), which are respectively computed from the operation and res
 with the annual energy production ($\pmb{F_t} \cdot t_{op}$). 
 
 $$
-LCIA_{\text{tot}}(k) = \sum_{j \in \text{TECH}} \left( LCIA_{\text{infra}}(j, k) + LCIA_{\text{op}}(j, k) \right)
-+ \sum_{r \in \text{RES}} LCIA_{\text{res}}(r, k) \quad \forall k \in \text{ENV}
-$$
-
-$$
-LCIA_{\text{infra}}(j, k) = lcia_{\text{infra}}^{\text{norm}}(j, k)
-\cdot F(j) \cdot \frac{1}{n_{\text{ESM}}(j)} 
-\quad \forall (j, k) \in \text{TECH} \times \text{ENV}
-$$
-
-$$
-LCIA_{\text{op}}(j, k) = lcia_{\text{op}}^{\text{norm}}(j, k) \cdot \sum_{t \in T} F_t(j, t) \cdot t_{\text{op}}(t)
-\quad \forall (j, k) \in \text{TECH} \times \text{ENV}
-$$
-
-$$
-LCIA_{\text{res}}(r, k) = lcia_{\text{res}}^{\text{norm}}(r, k) \cdot \sum_{t \in T} F_t(r, t) \cdot t_{\text{op}}(t)
-\quad \forall (r, k) \in \text{RES} \times \text{ENV}
+LCIA_{\text{tot}}(k) = \sum_{j \in \text{TECH}} \left( LCIA_{\text{infra}}(j, k) + LCIA_{\text{op}}(j, k) \right) + \sum_{r \in \text{RES}} LCIA_{\text{res}}(r, k) \quad \forall k \in \text{ENV}
 $$
 
 ## Integrating ESM results in the LCI database
