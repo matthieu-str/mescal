@@ -12,6 +12,7 @@ def create_new_database_with_esm_results(
         new_db_name: str = None,
         tech_to_remove_layers: pd.DataFrame = None,
         write_database: bool = True,
+        remove_background_construction_flows: bool = True,
 ) -> None:
     """
     Create a new database with the ESM results
@@ -22,6 +23,11 @@ def create_new_database_with_esm_results(
     :param tech_to_remove_layers: technologies to remove from the result LCI datasets
     :param new_end_use_types: adapt end use types to fit the results LCI datasets mapping
     :param write_database: if True, write the new database in the Brightway project
+    :param remove_background_construction_flows: if True, the new LCI datasets undergo the double-counting removal
+        process to remove background construction flows. It should be set to True in the context of a loop between
+        the ESM and LCI database, in order to not count the infrastructure impacts several times over several
+        time-steps. It should be set to False if the new database is meant to be shared or used as a standalone
+        database.
     :return: None
     """
 
@@ -173,12 +179,14 @@ def create_new_database_with_esm_results(
     self.mapping = mapping
     self.main_database.db_as_list = db_as_list
 
-    flows_set_to_zero, ei_removal, activities_subject_to_double_counting = self.double_counting_removal(
-        df_op=double_counting_act,
-        N=N,
-        ESM_inputs=['OWN_CONSTRUCTION', 'CONSTRUCTION'],
-        create_new_db=False,
-    )
+    if remove_background_construction_flows:
+        # Double-counting removal of background construction flows
+        flows_set_to_zero, ei_removal, activities_subject_to_double_counting = self.double_counting_removal(
+            df_op=double_counting_act,
+            N=N,
+            ESM_inputs=['OWN_CONSTRUCTION', 'CONSTRUCTION'],
+            create_new_db=False,
+        )
 
     # Injecting local variables into the instance variables
     self.main_database.db_as_list = db_as_list
