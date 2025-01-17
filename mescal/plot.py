@@ -182,8 +182,8 @@ def plot_indicators_of_technologies_for_one_impact_category(
         fig.write_image(f'{saving_path}{filename}.{saving_format}')
 
 
+@staticmethod
 def plot_indicators_of_resources_for_one_impact_category(
-        self,
         R: pd.DataFrame,
         resources_list: list[str],
         impact_category: tuple,
@@ -235,7 +235,9 @@ def plot_indicators_of_resources_for_one_impact_category(
         unit += f'/{metadata["unit"]}'
 
     if contributions_total_score:
+
         impact_category_set = str(impact_category).split(impact_category_name)[0]
+
         df = R[
             (R['Name'].isin(resources_list))
             & (R['Impact_category'].str.startswith(impact_category_set))  # Disaggregate total endpoint indicator
@@ -245,7 +247,9 @@ def plot_indicators_of_resources_for_one_impact_category(
         data = []
 
         for disaggregated_impact_category in df['Impact_category'].unique():
+
             df_disaggregated = df[df['Impact_category'] == str(disaggregated_impact_category)]
+
             data.append(go.Bar(
                 name=literal_eval(disaggregated_impact_category)[-1],
                 x=df_disaggregated['Name'],
@@ -298,8 +302,8 @@ def plot_indicators_of_resources_for_one_impact_category(
         fig.write_image(f'{saving_path}{filename}.{saving_format}')
 
 
+@staticmethod
 def plot_indicators_of_technologies_for_several_impact_categories(
-        self,
         R: pd.DataFrame,
         technologies_list: list[str],
         impact_categories_list: list[tuple],
@@ -308,6 +312,20 @@ def plot_indicators_of_technologies_for_several_impact_categories(
         saving_path: str = None,
         show_plot: bool = True,
 ):
+    """
+    Plot operation and infrastructure LCA indicators for a set of technologies for a set of impact categories.
+
+    :param R: dataframe of LCA indicators
+    :param technologies_list: list of technologies to plot. They should have the same operation/infrastructure units
+        to have a meaningful comparison
+    :param impact_categories_list: list of impact category to plot (brightway format)
+    :param filename: name of the file to save the plot. If None, the plot is named with the impact category.
+    :param saving_format: format to save the plot, can be 'png', 'jpeg', 'pdf', 'html', etc.
+    :param saving_path: path to save the plot under the form 'path/to/folder/'. If None, the plot is saved in the
+        current directory.
+    :param show_plot: if True, the plot is shown in the notebook.
+    :return: None (plot is shown and/or saved)
+    """
 
     if saving_path is None:
         saving_path = ''
@@ -326,6 +344,7 @@ def plot_indicators_of_technologies_for_several_impact_categories(
     color_scale = px.colors.qualitative.Plotly
 
     for i, impact_category in enumerate(impact_categories_list):
+
         unit = bd.Method(impact_category).metadata['unit']
 
         df_op = R[
@@ -333,6 +352,7 @@ def plot_indicators_of_technologies_for_several_impact_categories(
             & (R['Impact_category'] == str(impact_category))
             & (R['Type'] == 'Operation')
             ]
+
         data_op.append(go.Bar(
             name=impact_category[-1],
             x=df_op['Name'],
@@ -350,6 +370,7 @@ def plot_indicators_of_technologies_for_several_impact_categories(
             & (R['Impact_category'] == str(impact_category))
             & (R['Type'] == 'Construction')
             ]
+
         data_constr.append(go.Bar(
             name=impact_category[-1],
             x=df_constr['Name'],
@@ -404,8 +425,8 @@ def plot_indicators_of_technologies_for_several_impact_categories(
         fig.write_image(f'{saving_path}{filename}.{saving_format}')
 
 
+@staticmethod
 def plot_indicators_of_resources_for_several_impact_categories(
-        self,
         R: pd.DataFrame,
         resources_list: list[str],
         impact_categories_list: list[tuple],
@@ -414,6 +435,20 @@ def plot_indicators_of_resources_for_several_impact_categories(
         saving_path: str = None,
         show_plot: bool = True,
 ):
+    """
+    Plot LCA indicators for a set of resources for a set of impact categories.
+
+    :param R: dataframe of LCA indicators
+    :param resources_list: list of technologies to plot. They should have the same operation/infrastructure units
+        to have a meaningful comparison
+    :param impact_categories_list: list of impact category to plot (brightway format)
+    :param filename: name of the file to save the plot. If None, the plot is named with the impact category.
+    :param saving_format: format to save the plot, can be 'png', 'jpeg', 'pdf', 'html', etc.
+    :param saving_path: path to save the plot under the form 'path/to/folder/'. If None, the plot is saved in the
+        current directory.
+    :param show_plot: if True, the plot is shown in the notebook.
+    :return: None (plot is shown and/or saved)
+    """
 
     if saving_path is None:
         saving_path = ''
@@ -429,8 +464,10 @@ def plot_indicators_of_resources_for_several_impact_categories(
     data = []
 
     for impact_category in impact_categories_list:
+
         unit = bd.Method(impact_category).metadata['unit']
         df = R[(R['Name'].isin(resources_list)) & (R['Impact_category'] == str(impact_category))]
+
         data.append(go.Bar(
             name=impact_category[-1],
             x=df['Name'],
