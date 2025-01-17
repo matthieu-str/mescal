@@ -171,14 +171,14 @@ magnitude, numerical stability is improved in the solving process.
 
 ## Equations specification
 The following set of modelling equations should be included in ESM.
-The environmental objective $\pmb{LCIA_{tot}}$ is defined as the sum of the impacts of the infrastructure, operation, 
-and resource parts, namely $\pmb{LCIA_{infra}}$, $\pmb{LCIA_{op}}$, and  $\pmb{LCIA_{res}}$ (\autoref{eq:lcia_tot}). 
+The environmental objective $LCIA_{tot}$ is defined as the sum of the impacts of the infrastructure, operation, 
+and resource parts, namely $LCIA_{infra}$, $LCIA_{op}$, and  $LCIA_{res}$.
 The infrastructure impact is derived from the normalized specific impact ($lcia^{norm}_{infra}$), which is computed 
 from the infrastructure \gls{LCI} dataset. This value is then divided by the technology's lifetime in the ESM 
-($n_{ESM}$), and scaled with the technology's installed capacity ($\pmb{F}$). The operation and resource impacts are 
+($n_{ESM}$), and scaled with the technology's installed capacity ($F$). The operation and resource impacts are 
 respectively derived from the operation and resource normalized specific impacts ($lcia^{norm}_{op}$ and 
 $lcia^{norm}_{res}$), which are respectively computed from the operation and resource LCI datasets, and scaled 
-with the annual energy production ($\pmb{F_t} \cdot t_{op}$). 
+with the annual energy production (F_t \cdot t_{op}$). 
 
 $$
 LCIA_{\text{tot}}(k) = \sum_{j \in \text{TECH}} \left( LCIA_{\text{infra}}(j, k) + LCIA_{\text{op}}(j, k) \right) + \sum_{r \in \text{RES}} LCIA_{\text{res}}(r, k) \quad \forall k \in \text{ENV}
