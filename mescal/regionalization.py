@@ -27,7 +27,7 @@ def regionalize_activity_foreground(
         new_act = copy.deepcopy(act)
 
     # Imports and exports are special cases for which we do not regionalize
-    elif act['location'] in self.import_export_list:
+    elif act['name'] in self.import_export_list:
         new_act = copy.deepcopy(act)
 
     else:
@@ -64,7 +64,6 @@ def regionalize_activity_foreground(
                 database=techno_act_database,
                 technosphere_or_biosphere_db=main_database,
                 activity_type='technosphere',
-
             )  # best possible location according to the user ranking
 
             if new_location != techno_act_location:  # if the best location is different from the initial location
