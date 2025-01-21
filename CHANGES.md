@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.2] - TBD
+
+### Added
+- Add a spatialized biosphere database and the regionalized EF 3.1 methods to your brightway project (in `EF 3.1 regionalized.ipynb`). Your ecoinvent database needs to be spatialized (see (`Regioinvent`)[https://github.com/CIRAIG/Regioinvent/] or (`Regiopremise`)[https://github.com/matthieu-str/Regiopremise/tree/master]). 
+- The function `add_carbon_capture_to_plant` (in `modify_inventory.py`) adds a carbon capture and storage (CCS) process to a power plant and modifies its direct emissions accordingly.
+- The `main_database_name` argument of the `ESM` class specifies the name of your ecoinvent database in case the input database in an aggregation of several databases.
+- The `assessment_type` argument in `normalize_lca_metrics` (in `normalization.py`) and `generate_mod_file_ampl` (in `generate_lcia_obj_ampl.py`) functions to differentiate between life-cycle impacts computation (by default) and territorial impact computation (`assessment_type="direct emissions"`). 
+- Plotting methods (in `plot.py`) to visualize the results of the `compute_impact_scores` function (in `impact_assessment.py`).
+
+### Changed
+- The `mapping_ecoinvent_version_ipynb` notebook (to change the ecoinvent version of your mapping file) has been updated to work with version 3.10.1 of ecoinvent.
+
+### Removed
+- The `spatialized_database` argument of the `ESM` class was removed. It is not set to True if `spatialized_biosphere_db` is not None.
+
 ## [1.1.1] - 2024-10-11
 
 ### Added
