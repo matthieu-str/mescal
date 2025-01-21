@@ -38,8 +38,6 @@ def create_new_database_with_esm_results(
     mapping = self.mapping
     esm_location = self.esm_location
 
-    self.regionalize_foregrounds = False  # we want to keep the original foregrounds
-
     if tech_to_remove_layers is None:
         tech_to_remove_layers = pd.DataFrame(columns=['Layers', 'Technologies'])
     if new_end_use_types is None:
@@ -379,6 +377,7 @@ def create_or_modify_activity_from_esm_results(
                 new_act['name'] += f' ({tech})'
                 new_act['code'] = activity_new_code
                 prod_flow = Dataset(new_act).get_production_flow()
+                prod_flow['name'] = new_act['name']
                 prod_flow['code'] = activity_new_code
 
                 if self.regionalize_foregrounds:
