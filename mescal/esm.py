@@ -413,48 +413,8 @@ class ESM:
                 db_as_list=[act for act in self.main_database.db_as_list if act['database'] == self.esm_db_name])
             esm_db.write_to_brightway(self.esm_db_name)
 
-            # The following modifications are made via bw2data and thus need a written database
-            # Change carbon flow of DAC from biogenic to fossil
-            dac_technologies = list(self.tech_specifics[self.tech_specifics.Specifics == 'DAC'].Name)
-            for tech in dac_technologies:
-                if f'{tech}, Operation' in [act['name'] for act in esm_db.db_as_list]:
-                    change_dac_biogenic_carbon_flow(db_name=self.esm_db_name, activity_name=f'{tech}, Operation')
-
-            # Change carbon flows of biofuel mobility technologies
-            biofuel_mob_tech = self.tech_specifics[self.tech_specifics.Specifics == 'Biofuel'][
-                ['Name', 'Amount']].values.tolist()
-            for tech, biogenic_ratio in biofuel_mob_tech:
-                if f'{tech}, Operation' in [act['name'] for act in esm_db.db_as_list]:
-                    change_fossil_carbon_flows_of_biofuels(
-                        db_name=self.esm_db_name,
-                        activity_name=f'{tech}, Operation',
-                        biogenic_ratio=float(biogenic_ratio),
-                    )
-
-            # Adjust carbon flows by a constant factor for some technologies
-            carbon_flows_correction_tech = self.tech_specifics[self.tech_specifics.Specifics == 'Carbon flows'][
-                ['Name', 'Amount']].values.tolist()
-            for tech, factor in carbon_flows_correction_tech:
-                if f'{tech}, Operation' in [act['name'] for act in esm_db.db_as_list]:
-                    change_direct_carbon_emissions_by_factor(
-                        db_name=self.esm_db_name,
-                        activity_name=f'{tech}, Operation',
-                        factor=float(factor),
-                    )
-
-            # Add carbon capture to plant
-            add_carbon_capture_tech = self.tech_specifics[self.tech_specifics.Specifics == 'Add CC'][
-                ['Name', 'Amount']].values.tolist()
-            for tech, type_and_ratio in add_carbon_capture_tech:
-                if f'{tech}, Operation' in [act['name'] for act in esm_db.db_as_list]:
-                    type_and_ratio = type_and_ratio.split(', ')
-                    add_carbon_capture_to_plant(
-                        activity_database_name=self.esm_db_name,
-                        premise_database_name=self.main_database_name,
-                        activity_name=f'{tech}, Operation',
-                        plant_type=str(type_and_ratio[0]),
-                        capture_ratio=float(type_and_ratio[1]),
-                    )
+            # Modify the written database according to the tech_specifics.csv file
+            self.modify_written_activities(db=esm_db)
 
             t2_mod_inv = time.time()
             print("### Database written ###")
@@ -565,6 +525,121 @@ class ESM:
             new_act = self.regionalize_activity_foreground(act=new_act)
 
         return new_act
+
+    def modify_written_activities(
+            self,
+            db: Database,
+            db_type: str = 'esm',
+    ) -> None:
+        """
+        Modify the written database according to the tech_specifics.csv file and using functions from
+        modify_inventory.py
+
+        :param db: LCI database
+        :param db_type: type of LCI database, can be 'esm' or 'main'
+        :return: None (activities are modified in the brightway project)
+        """
+
+        if db_type == 'esm':
+            db_name = self.esm_db_name
+            return_type = 'name'
+        elif db_type == 'main':
+            db_name = db.db_names
+            return_type = 'code'
+        else:
+            raise ValueError('db_type must be either "esm" or "main"')
+
+        # Change carbon flow of DAC from biogenic to fossil
+        dac_technologies = list(self.tech_specifics[self.tech_specifics.Specifics == 'DAC'].Name)
+        for tech in dac_technologies:
+            activity_name_or_code = self.get_activity_name_or_code(tech=tech, return_type=return_type)
+            if activity_name_or_code in [act[return_type] for act in db.db_as_list]:
+                if return_type == 'name':
+                    change_dac_biogenic_carbon_flow(db_name=db_name, activity_name=activity_name_or_code)
+                elif return_type == 'code':
+                    change_dac_biogenic_carbon_flow(db_name=db_name, activity_code=activity_name_or_code)
+
+        # Change carbon flows of biofuel mobility technologies
+        biofuel_mob_tech = self.tech_specifics[self.tech_specifics.Specifics == 'Biofuel'][
+            ['Name', 'Amount']].values.tolist()
+        for tech, biogenic_ratio in biofuel_mob_tech:
+            activity_name_or_code = self.get_activity_name_or_code(tech=tech, return_type=return_type)
+            if activity_name_or_code in [act[return_type] for act in db.db_as_list]:
+                if return_type == 'name':
+                    change_fossil_carbon_flows_of_biofuels(
+                        db_name=db_name,
+                        activity_name=activity_name_or_code,
+                        biogenic_ratio=float(biogenic_ratio),
+                    )
+                elif return_type == 'code':
+                    change_fossil_carbon_flows_of_biofuels(
+                        db_name=db_name,
+                        activity_code=activity_name_or_code,
+                        biogenic_ratio=float(biogenic_ratio),
+                    )
+
+        # Adjust carbon flows by a constant factor for some technologies
+        carbon_flows_correction_tech = self.tech_specifics[self.tech_specifics.Specifics == 'Carbon flows'][
+            ['Name', 'Amount']].values.tolist()
+        for tech, factor in carbon_flows_correction_tech:
+            activity_name_or_code = self.get_activity_name_or_code(tech=tech, return_type=return_type)
+            if activity_name_or_code in [act[return_type] for act in db.db_as_list]:
+                if return_type == 'name':
+                    change_direct_carbon_emissions_by_factor(
+                        db_name=db_name,
+                        activity_name=activity_name_or_code,
+                        factor=float(factor),
+                    )
+                elif return_type == 'code':
+                    change_direct_carbon_emissions_by_factor(
+                        db_name=db_name,
+                        activity_code=activity_name_or_code,
+                        factor=float(factor),
+                    )
+
+        # Add carbon capture to plant
+        add_carbon_capture_tech = self.tech_specifics[self.tech_specifics.Specifics == 'Add CC'][
+            ['Name', 'Amount']].values.tolist()
+        for tech, type_and_ratio in add_carbon_capture_tech:
+            activity_name_or_code = self.get_activity_name_or_code(tech=tech, return_type=return_type)
+            if activity_name_or_code in [act[return_type] for act in db.db_as_list]:
+                if return_type == 'name':
+                    type_and_ratio = type_and_ratio.split(', ')
+                    add_carbon_capture_to_plant(
+                        activity_database_name=db_name,
+                        premise_database_name=self.main_database_name,
+                        activity_name=activity_name_or_code,
+                        plant_type=str(type_and_ratio[0]),
+                        capture_ratio=float(type_and_ratio[1]),
+                    )
+                elif return_type == 'code':
+                    type_and_ratio = type_and_ratio.split(', ')
+                    add_carbon_capture_to_plant(
+                        activity_database_name=db_name,
+                        premise_database_name=self.main_database_name,
+                        activity_code=activity_name_or_code,
+                        plant_type=str(type_and_ratio[0]),
+                        capture_ratio=float(type_and_ratio[1]),
+                    )
+
+    def get_activity_name_or_code(
+            self,
+            tech: str,
+            return_type: str,
+            phase: str = 'Operation',
+    ) -> str:
+        """
+        Returns the name of code of the activity
+
+        :param tech: name of the ESM technology
+        :param return_type: type of return, can be 'name' or 'code'
+        :param phase: phase of the technology, can be 'Operation' or 'Construction'
+        :return: name or code
+        """
+        if return_type == 'name':
+            return f'{tech}, {phase}'
+        elif return_type == 'code':
+            return self.mapping[(self.mapping.Name == tech) & (self.mapping.Type == phase)].New_code.iloc[0]
 
 
 def has_construction(row: pd.Series, no_construction_list: list[str]) -> int:

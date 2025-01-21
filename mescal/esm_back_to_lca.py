@@ -3,6 +3,7 @@ from .utils import random_code, ecoinvent_unit_convention
 import wurst
 import pandas as pd
 import ast
+import copy
 
 
 def create_new_database_with_esm_results(
@@ -13,6 +14,7 @@ def create_new_database_with_esm_results(
         tech_to_remove_layers: pd.DataFrame = None,
         write_database: bool = True,
         remove_background_construction_flows: bool = True,
+        apply_tech_specifics_changes: bool = True,
 ) -> None:
     """
     Create a new database with the ESM results
@@ -28,6 +30,7 @@ def create_new_database_with_esm_results(
         the ESM and LCI database, in order to not count the infrastructure impacts several times over several
         time-steps. It should be set to False if the new database is meant to be shared or used as a standalone
         database.
+    :param apply_tech_specifics_changes: if True, apply the changes specified in the techs_specifics.csv file
     :return: None
     """
 
@@ -196,6 +199,13 @@ def create_new_database_with_esm_results(
     else:
         self.main_database.change_name(new_db_name)
 
+    if apply_tech_specifics_changes:
+        if write_database:
+            # Modifies the written database according to specifications in tech_specifics.csv
+            self.modify_written_activities(db=self.main_database, db_type='main')
+        else:
+            print('The techs_specifics.csv file has not been applied because the database has not been written.')
+
 
 def create_or_modify_activity_from_esm_results(
         self,
@@ -222,6 +232,7 @@ def create_or_modify_activity_from_esm_results(
 
     # Store frequently accessed instance variables in local variables inside a method
     db_dict_name = self.main_database.db_as_dict_name
+    db_dict_code = self.main_database.db_as_dict_code
     mapping = self.mapping
     esm_location = self.esm_location
     db_as_list = self.main_database.db_as_list
@@ -230,23 +241,23 @@ def create_or_modify_activity_from_esm_results(
 
     # Check if the original activity is in the database for the location under study
     if (original_activity_name, original_activity_prod, esm_location, original_activity_database) in db_dict_name:
-        activity = db_dict_name[
+        original_activity = db_dict_name[
             original_activity_name, original_activity_prod, esm_location, original_activity_database
         ]
 
     # If not, we take a similar activity with another location and regionalize its foreground
     else:
-        activity = [a for a in wurst.get_many(db_as_list, *[
+        original_activity = [a for a in wurst.get_many(db_as_list, *[
             wurst.equals('name', original_activity_name),
             wurst.equals('reference product', original_activity_prod),
             wurst.equals('database', original_activity_database)
         ])][0]
 
-        activity = self.regionalize_activity_foreground(act=activity)
+        original_activity = self.regionalize_activity_foreground(act=original_activity)
 
     new_code = random_code()
-    original_activity_unit = activity['unit']
-    prod_flow = Dataset(activity).get_production_flow()
+    original_activity_unit = original_activity['unit']
+    prod_flow = Dataset(original_activity).get_production_flow()
     prod_flow_amount = prod_flow['amount']  # can be -1 if it is a waste activity
 
     unit_conversion['LCA'] = unit_conversion['LCA'].apply(ecoinvent_unit_convention)
@@ -325,13 +336,14 @@ def create_or_modify_activity_from_esm_results(
         else:
             if tech in list(
                     mapping[(mapping.Type == 'Operation') | (mapping.Type == 'Resource')].Name.unique()):
-                activity_name, activity_prod, activity_database, activity_location = mapping[
-                    (mapping.Name == tech) & (
-                                (mapping.Type == 'Operation') | (mapping.Type == 'Resource'))
-                    ][['Activity', 'Product', 'Database', 'Location']].values[0]
+                (activity_name, activity_prod, activity_database,
+                 activity_location, activity_current_code, activity_new_code) = mapping[
+                    (mapping.Name == tech)
+                    & ((mapping.Type == 'Operation') | (mapping.Type == 'Resource'))
+                    ][['Activity', 'Product', 'Database', 'Location', 'Current_code', 'New_code']].values[0]
 
-                activity_unit = db_dict_name[activity_name, activity_prod, activity_location, activity_database][
-                    'unit']
+                activity = db_dict_code[activity_database, activity_current_code]
+                activity_unit = activity['unit']
 
                 if activity_unit != original_activity_unit:
                     if original_activity_prod.split(',')[0] == 'transport':
@@ -361,15 +373,35 @@ def create_or_modify_activity_from_esm_results(
                 if prod_flow_amount == -1.0:  # for waste activities
                     amount *= -1.0
 
-                code = db_dict_name[activity_name, activity_prod, activity_location, activity_database]['code']
+                # Create new activity for the new exchange (because one activity may correspond to several ESM
+                # technologies, which might be adjusted later)
+                new_act = copy.deepcopy(activity)
+                new_act['name'] += f' ({tech})'
+                new_act['code'] = activity_new_code
+                prod_flow = Dataset(new_act).get_production_flow()
+                prod_flow['code'] = activity_new_code
+
+                if self.regionalize_foregrounds:
+                    # Regionalize the foreground of the new activity
+                    new_act = self.regionalize_activity_foreground(act=new_act)
+
+                db_as_list.append(new_act)
+                db_dict_name[(
+                    new_act['name'],
+                    new_act['reference product'],
+                    new_act['location'],
+                    new_act['database']
+                )] = new_act
+                db_dict_code[(new_act['database'], new_act['code'])] = new_act
+
                 new_exc = {
                     'amount': amount / total_amount,
-                    'code': code,
+                    'code': activity_new_code,
                     'type': 'technosphere',
-                    'name': activity_name,
+                    'name': new_act['name'],
                     'product': activity_prod,
                     'unit': activity_unit,
-                    'location': activity_location,
+                    'location': new_act['location'],
                     'database': activity_database,
                     'comment': f'{tech}, {conversion_factor}',
                 }
@@ -377,7 +409,7 @@ def create_or_modify_activity_from_esm_results(
                 if tech in list(mapping[mapping.Type == 'Operation'].Name.unique()):
                     # we only perform double counting removal for the operation activities
                     perform_d_c.append(
-                        [tech, activity_prod, activity_name, activity_location, activity_database, code]
+                        [tech, activity_prod, activity_name, activity_location, activity_database, activity_new_code]
                     )
             else:
                 print(f'The technology {tech} is not in the mapping file. '
@@ -396,7 +428,7 @@ def create_or_modify_activity_from_esm_results(
         }
     )
 
-    for exc in activity['exchanges']:
+    for exc in original_activity['exchanges']:
         if exc['unit'] not in [original_activity_unit, 'unit']:
             # Add flows to the new activity that are not production or construction flows
             exchanges.append(exc)
@@ -410,11 +442,11 @@ def create_or_modify_activity_from_esm_results(
         'unit': original_activity_unit,
         'reference product': original_activity_prod,
         'code': new_code,
-        'classifications': activity['classifications'],
+        'classifications': original_activity['classifications'],
         'comment': f'Activity derived from the ESM results in the layers {flows_list} for {esm_location}. '
-                   + activity['comment'],
-        'parameters': activity.get('parameters', {}),
-        'categories': activity.get('categories', None),
+                   + original_activity['comment'],
+        'parameters': original_activity.get('parameters', {}),
+        'categories': original_activity.get('categories', None),
         'exchanges': exchanges,
     }
 
