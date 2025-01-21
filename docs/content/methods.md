@@ -10,6 +10,8 @@ Modellers should provide a mapping between the technologies and resources in the
 
 LCI datasets can be regionalized to match the location of the ESM. For instance, if a LCI dataset does not exist for the region of interest, a new LCI dataset can be copied and adapted from an existing one (by changing the list of providers) as a proxy. If you are using a spatialized LCI database (i.e., with region-specific elementary flows), biosphere flows will be regionalized following the same procedure.
 
+![flowchart of the regionalization algorithm](../pics/regionalization_flowchart.png "regionalization")
+
 ## Double-counting removal
 
 Double-counting occurs regarding the flows that are explicitly modelled in the ESM, e.g., energy flows (electricity, heat, fuels, etc.). Such flows should be set to zero in the LCI datasets in order to avoid an overestimation of the impacts. The double-counting removal algorithm is as follows:
