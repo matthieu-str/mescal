@@ -10,7 +10,7 @@ Modellers should provide a mapping between the technologies and resources in the
 
 LCI datasets can be regionalized to match the location of the ESM. For instance, if a LCI dataset does not exist for the region of interest, a new LCI dataset can be copied and adapted from an existing one (by changing the list of providers) as a proxy. If you are using a spatialized LCI database (i.e., with region-specific elementary flows), biosphere flows will be regionalized following the same procedure.
 
-![flowchart of the regionalization algorithm](../pics/regionalization_flowchart.png "regionalization")
+![flowchart of the regionalization algorithm](../pics/regionalization_flowchart.png "regionalization") { width=75% } 
 
 ## Double-counting removal
 
