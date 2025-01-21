@@ -381,8 +381,7 @@ class Database:
                     if 'output' in exc.keys():
                         if exc['output'][0] in old_dbs_name:
                             exc['output'] = (new_db_name, exc['output'][1])
-                    else:
-                        pass
+        self.db_names = new_db_name
 
     def relink(
             self,
