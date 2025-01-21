@@ -2,6 +2,7 @@ import pandas as pd
 import pytest
 from mescal.esm import ESM
 from mescal.database import Database, Dataset
+from mescal.utils import random_code
 
 dummy_db = [
     {
@@ -336,13 +337,14 @@ dummy_db = [
 
 mapping = [
     ['HEAT_PUMP', 'Operation', 'heat', 'market for heat production by heat pump', 'CH', '/megajoule',
-     'ecoinvent-3.9.1-cutoff'],
-    ['HEAT_PUMP', 'Construction', 'heat pump', 'heat pump production', 'CH', '/unit', 'ecoinvent-3.9.1-cutoff'],
+     'ecoinvent-3.9.1-cutoff', '99999'],
+    ['HEAT_PUMP', 'Construction', 'heat pump', 'heat pump production', 'CH', '/unit', 'ecoinvent-3.9.1-cutoff',
+     '00000'],
     ['HEAT_PUMP_DOUBLE_STAGE', 'Construction', 'double-stage heat pump', 'double-stage heat pump production', 'CH',
-     '/unit', 'ecoinvent-3.9.1-cutoff'],
+     '/unit', 'ecoinvent-3.9.1-cutoff', '11000'],
     ['HEAT_PUMP_DOUBLE_STAGE', 'Operation', 'heat', 'heat production by double-stage heat pump', 'CH',
-     '/megajoule', 'ecoinvent-3.9.1-cutoff'],
-    ['HEAT', 'Flow', 'heat', 'market for heat', 'CH', '/megajoule', 'ecoinvent-3.9.1-cutoff'],
+     '/megajoule', 'ecoinvent-3.9.1-cutoff', '88888'],
+    ['HEAT', 'Flow', 'heat', 'market for heat', 'CH', '/megajoule', 'ecoinvent-3.9.1-cutoff', '54321'],
 ]
 
 mapping_esm_flows_to_CPC = [
@@ -374,7 +376,9 @@ unit_conversion = [
     ['HEAT_PUMP_DOUBLE_STAGE', 'Construction', 1/10, 'unit', 'kilowatt'],
 ]
 
-mapping = pd.DataFrame(data=mapping, columns=['Name', 'Type', 'Product', 'Activity', 'Location', 'Unit', 'Database'])
+mapping = pd.DataFrame(data=mapping, columns=['Name', 'Type', 'Product', 'Activity',
+                                              'Location', 'Unit', 'Database', 'Current_code'])
+mapping['New_code'] = len(mapping) * [random_code()]
 mapping_esm_flows_to_CPC = pd.DataFrame(mapping_esm_flows_to_CPC, columns=['Flow', 'CPC'])
 model = pd.DataFrame(model, columns=['Name', 'Flow', 'Amount'])
 esm_results = pd.DataFrame(esm_results, columns=['Name', 'Production'])
@@ -410,11 +414,11 @@ def test_create_new_database_with_esm_results():
 
     # Test the entries of the new dataset
     assert len(new_act_technosphere_flows) == 2  # single and double-stage HPs flows
-    assert (((new_act_technosphere_flows[0]['name'] == 'market for heat production by heat pump')
-            & (new_act_technosphere_flows[1]['name'] == "heat production by double-stage heat pump"))
-            | ((new_act_technosphere_flows[1]['name'] == 'market for heat production by heat pump')
-            & (new_act_technosphere_flows[0]['name'] == "heat production by double-stage heat pump")))
-    if new_act_technosphere_flows[0]['name'] == 'market for heat production by heat pump':
+    assert (((new_act_technosphere_flows[0]['name'] == 'market for heat production by heat pump (HEAT_PUMP)')
+            & (new_act_technosphere_flows[1]['name'] == "heat production by double-stage heat pump (HEAT_PUMP_DOUBLE_STAGE)"))
+            | ((new_act_technosphere_flows[1]['name'] == 'market for heat production by heat pump (HEAT_PUMP)')
+            & (new_act_technosphere_flows[0]['name'] == "heat production by double-stage heat pump (HEAT_PUMP_DOUBLE_STAGE)")))
+    if new_act_technosphere_flows[0]['name'] == 'market for heat production by heat pump (HEAT_PUMP)':
         assert new_act_technosphere_flows[0]['amount'] == 10 / (10 + 25)
         assert new_act_technosphere_flows[1]['amount'] == 25 / (10 + 25)
     else:
@@ -423,7 +427,7 @@ def test_create_new_database_with_esm_results():
 
     # Test that double-counting removal on the construction flows has been done
     hp_act = new_db_dict_name[
-        "market for heat production by heat pump", "heat", "CH", 'ecoinvent-3.9.1-cutoff_with_ESM_results_for_CH'
+        "market for heat production by heat pump (HEAT_PUMP)", "heat", "CH", 'ecoinvent-3.9.1-cutoff_with_ESM_results_for_CH'
     ]
     hp_act_technosphere_flows = Dataset(hp_act).get_technosphere_flows()
     for exc in hp_act_technosphere_flows:
@@ -431,7 +435,7 @@ def test_create_new_database_with_esm_results():
             assert exc['amount'] == 0
 
     double_stage_hp_act = new_db_dict_name[
-        "heat production by double-stage heat pump", "heat", "CH", 'ecoinvent-3.9.1-cutoff_with_ESM_results_for_CH'
+        "heat production by double-stage heat pump (HEAT_PUMP_DOUBLE_STAGE)", "heat", "CH", 'ecoinvent-3.9.1-cutoff_with_ESM_results_for_CH'
     ]
     double_stage_hp_act_technosphere_flows = Dataset(double_stage_hp_act).get_technosphere_flows()
     for exc in double_stage_hp_act_technosphere_flows:
