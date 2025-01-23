@@ -504,3 +504,145 @@ def plot_indicators_of_resources_for_several_impact_categories(
     else:
         Path(saving_path).mkdir(parents=True, exist_ok=True)  # Create the folder if it does not exist
         fig.write_image(f'{saving_path}{filename}.{saving_format}')
+
+
+def plot_results(
+        self, 
+        R: pd.DataFrame, 
+        esm_results_tech: pd.DataFrame, 
+        esm_results_res: pd.DataFrame, 
+        impact_categories_list: list[tuple],
+        split_by: str = 'Type',
+        N_highest_contributors: int = 0,
+        normalized: bool = False,
+        n_run: int = 0,
+        filename: str = None,
+        saving_format: str = None,
+        saving_path: str = None,
+        show_plot: bool = True,
+):
+    """
+    Plot the environmental impact results
+
+    :param R: dataframe of LCA indicators
+    :param esm_results_tech: dataframe of ESM results for technologies
+    :param esm_results_res: dataframe of ESM results for resources
+    :param impact_categories_list: list of impact categories to plot (brightway format)
+    :param split_by: can be 'Type' (for life-cycle phases) or 'Name' (for technologies and resources)
+    :param N_highest_contributors: if split_by is 'Name', the number of highest contributors to show
+    :param normalized: if True, the impacts are normalized by the total impact of the category
+    :param n_run: number of the run to plot
+    :param filename: name of the file to save the plot. If None, the plot is named with the impact category.
+    :param saving_format: format to save the plot, can be 'png', 'jpeg', 'pdf', 'html', etc.
+    :param saving_path: path to save the plot under the form 'path/to/folder/'. If None, the plot is saved in the
+        current directory.
+    :param show_plot: if True, the plot is shown in the notebook.
+    :return: None (plot is shown and/or saved)
+    """
+
+    if saving_path is None:
+        saving_path = ''
+
+    if split_by not in ['Type', 'Name']:
+        raise ValueError("split_by must be 'Type' or 'Name'")
+
+    if split_by == 'Type' and N_highest_contributors > 0:
+        raise ValueError('Cannot split by Type and show the N highest contributors at the same time')
+
+    impact_categories_names = {}
+    for cat in impact_categories_list:
+        impact_categories_names[str(cat)] = {}
+        impact_categories_names[str(cat)]['name'] = cat[-1]
+        if normalized:
+            impact_categories_names[str(cat)]['unit'] = '%'
+        else:
+            impact_categories_names[str(cat)]['unit'] = bd.Method(cat).metadata['unit']
+    
+    R = R[R['Impact_category'].isin([str(cat) for cat in impact_categories_list])]
+
+    # Filtering with current run
+    esm_results_tech = esm_results_tech[esm_results_tech['Run'] == n_run]
+    esm_results_res = esm_results_res[esm_results_res['Run'] == n_run]
+
+    df_constr = R[R.Type == 'Construction'].merge(esm_results_tech[['Name', 'Installed capacity']],
+                                                  on=['Name'], how='left')
+    df_op = R[R.Type == 'Operation'].merge(esm_results_tech[['Name', 'Production']], on=['Name'], how='left')
+    df_res = R[R.Type == 'Resource'].merge(esm_results_res[['Name', 'Import']], on=['Name'], how='left')
+    
+    df_constr = df_constr.merge(self.lifetime, on='Name', how='left')
+    df_constr['Impact'] = df_constr['Value'] * df_constr['Installed capacity'] / df_constr['ESM']  # diving by lifetime
+    df_op['Impact'] = df_op['Value'] * df_op['Production']
+    df_res['Impact'] = df_res['Value'] * df_res['Import']
+    
+    df_all = pd.concat([
+        df_constr[['Name', 'Type', 'Impact_category', 'Impact']],
+        df_op[['Name', 'Type', 'Impact_category', 'Impact']],
+        df_res[['Name', 'Type', 'Impact_category', 'Impact']],
+    ])
+    
+    if normalized:
+        df_all['Total impact'] = df_all.groupby('Impact_category')['Impact'].transform('sum')
+        df_all['Normalized impacts'] = 100 * df_all['Impact'] / df_all['Total impact']
+        x = 'Normalized impacts'
+    else:
+        x = 'Impact'
+
+    # Remove rows with zero impacts
+    df_all = df_all[df_all[x] != 0]
+
+    # Replace the impact category name using the impact_categories_names dictionary
+    df_all['Impact_category'] = df_all['Impact_category'].apply(
+        lambda category: f'{impact_categories_names[category]["name"]} [{impact_categories_names[category]["unit"]}]'
+    )
+
+    if split_by == 'Name' and N_highest_contributors > 0:
+        # Calculate total impact for each technology
+        total_impact_per_tech = df_all.groupby('Name')[x].sum().reset_index()
+
+        # Sort technologies by total impact and keep the top N
+        top_techs = total_impact_per_tech.nlargest(N_highest_contributors, x)['Name']
+
+        # Separate top N technologies and others
+        df_top = df_all[df_all['Name'].isin(top_techs)]
+        df_other = df_all[~df_all['Name'].isin(top_techs)]
+
+        # Sum the impacts of the remaining technologies into an "Other" category
+        df_other_sum = df_other.groupby(['Impact_category', split_by])[x].sum().reset_index()
+        df_other_sum['Name'] = 'OTHER'
+
+        # Combine top technologies with the "Other" category
+        df_all = pd.concat([df_top, df_other_sum], ignore_index=True)
+    
+    fig = px.bar(
+        data_frame=df_all.groupby(['Impact_category', split_by]).sum().reset_index(),
+        x=x,
+        y='Impact_category',
+        color=split_by,
+        barmode='stack',
+        orientation='h',
+        labels={'Impact_category': 'Impact categories'},
+        template='plotly_white',
+        text_auto=".2s",
+    )
+
+    # Update layout
+    fig.update_traces(
+        insidetextanchor='middle',
+        hovertemplate=
+        f'<br><b>Impact category</b>: %{{y}}</br>' +
+        f'<b>{x}</b>: %{{x:.2f}}%</br>',
+    )
+
+    # Show plot
+    if show_plot:
+        fig.show()
+
+    if saving_format is None or filename is None:
+        pass
+    elif saving_format == 'html':
+        Path(saving_path).mkdir(parents=True, exist_ok=True)  # Create the folder if it does not exist
+        fig.write_html(f'{saving_path}{filename}.{saving_format}')
+    else:
+        Path(saving_path).mkdir(parents=True, exist_ok=True)  # Create the folder if it does not exist
+        fig.write_image(f'{saving_path}{filename}.{saving_format}')
+    
