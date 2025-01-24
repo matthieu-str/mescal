@@ -584,16 +584,13 @@ def plot_results(
         df_all['Total impact'] = df_all.groupby('Impact_category')['Impact'].transform('sum')
         df_all['Normalized impacts'] = 100 * df_all['Impact'] / df_all['Total impact']
         x = 'Normalized impacts'
+        number_writing = '.2f'
     else:
         x = 'Impact'
+        number_writing = '.2e'
 
     # Remove rows with zero impacts
     df_all = df_all[df_all[x] != 0]
-
-    # Replace the impact category name using the impact_categories_names dictionary
-    df_all['Impact_category'] = df_all['Impact_category'].apply(
-        lambda category: f'{impact_categories_names[category]["name"]} [{impact_categories_names[category]["unit"]}]'
-    )
 
     if split_by == 'Name' and N_highest_contributors > 0:
         # Calculate total impact for each technology
@@ -612,9 +609,20 @@ def plot_results(
 
         # Combine top technologies with the "Other" category
         df_all = pd.concat([df_top, df_other_sum], ignore_index=True)
+
+    # Group by impact category
+    df_all = df_all.groupby(['Impact_category', split_by]).sum().reset_index()
+
+    # Replace the impact category name and add units using the impact_categories_names dictionary
+    df_all['Impact_category_unit'] = df_all['Impact_category'].apply(
+        lambda category: impact_categories_names[category]["unit"]
+    )
+    df_all['Impact_category'] = df_all['Impact_category'].apply(
+        lambda category: impact_categories_names[category]["name"]
+    )
     
     fig = px.bar(
-        data_frame=df_all.groupby(['Impact_category', split_by]).sum().reset_index(),
+        data_frame=df_all,
         x=x,
         y='Impact_category',
         color=split_by,
@@ -629,8 +637,9 @@ def plot_results(
     fig.update_traces(
         insidetextanchor='middle',
         hovertemplate=
-        f'<br><b>Impact category</b>: %{{y}}</br>' +
-        f'<b>{x}</b>: %{{x:.2f}}%</br>',
+        '<br><b>Impact category</b>: %{y}</br>' +
+        f'<b>{x}</b>: %{{x:{number_writing}}} %{{text}}</br>',
+        text=df_all['Impact_category_unit'],
     )
 
     # Show plot
