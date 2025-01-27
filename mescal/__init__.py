@@ -11,6 +11,9 @@ __all__ = (
     "Database",
     "Dataset",
 
+    # plot.py
+    "Plot",
+
     # utils.py
     "random_code",
     "ecoinvent_unit_convention",
@@ -35,6 +38,7 @@ __version__ = "1.1.1"
 
 from .database import Database, Dataset
 from .esm import ESM
+from .plot import Plot
 from .utils import *
 from .change_ecoinvent import *
 from .modify_inventory import *
