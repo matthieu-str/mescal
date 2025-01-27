@@ -22,10 +22,14 @@ class Plot:
         """
         Initialize the Plot class.
 
-        :param df_impact_scores: dataframe of LCA indicators
-        :param esm_results_tech: dataframe of ESM results for technologies
-        :param esm_results_res: dataframe of ESM results for resources
-        :param lifetime: dataframe of lifetime of technologies
+        :param df_impact_scores: dataframe of LCA indicators obtained with the compute_impact_scores method of the ESM
+            class.
+        :param esm_results_tech: dataframe of ESM results for technologies. It should have the following columns: 'Run'
+            (iteration number), 'Name' (technology name), 'Installed capacity' (installed capacity of the technology),
+            'Production' (annual production of the technology).
+        :param esm_results_res: dataframe of ESM results for resources. It should have the following columns: 'Run'
+        (iteration number), 'Name' (resource name), 'Import' (annual import of the resource).
+        :param lifetime: dataframe of lifetime of technologies.
         """
         self.df_impact_scores = df_impact_scores
         self.esm_results_tech = esm_results_tech
@@ -38,7 +42,7 @@ class Plot:
             impact_category: tuple,
             metadata: dict = None,
             filename: str = None,
-            saving_format: str = None,
+            saving_format: str = 'png',
             saving_path: str = None,
             show_plot: bool = True,
             contributions_total_score: bool = False,
@@ -51,8 +55,8 @@ class Plot:
         :param impact_category: impact category to plot (brightway format)
         :param metadata: dictionary with metadata to include in the plot. It can include 'technologies_type',
             'operation_unit', 'construction_unit'.
-        :param filename: name of the file to save the plot. If None, the plot is named with the impact category.
-        :param saving_format: format to save the plot, can be 'png', 'jpeg', 'pdf', 'html', etc.
+        :param filename: name of the file to save the plot. If None, the plot is not saved.
+        :param saving_format: format to save the plot, can be 'png', 'jpeg', 'pdf', 'html', etc. Default is 'png'.
         :param saving_path: path to save the plot under the form 'path/to/folder/'. If None, the plot is saved in the
             current directory.
         :param show_plot: if True, the plot is shown in the notebook.
@@ -73,9 +77,6 @@ class Plot:
 
         unit = bd.Method(impact_category).metadata['unit']
         impact_category_name = impact_category[-1]
-
-        if filename is None:
-            filename = impact_category_name
 
         if 'technologies_type' in metadata:
             graph_title = f"LCA Indicators of {metadata['technologies_type']} technologies for {impact_category[-1]}"
@@ -197,7 +198,7 @@ class Plot:
         if show_plot:
             fig.show()
 
-        if saving_format is None:
+        if filename is None:
             pass
         elif saving_format == 'html':
             Path(saving_path).mkdir(parents=True, exist_ok=True)  # Create the folder if it does not exist
@@ -212,7 +213,7 @@ class Plot:
             impact_category: tuple,
             metadata: dict = None,
             filename: str = None,
-            saving_format: str = None,
+            saving_format: str = 'png',
             saving_path: str = None,
             show_plot: bool = True,
             contributions_total_score: bool = False,
@@ -224,8 +225,8 @@ class Plot:
             to have a meaningful comparison
         :param impact_category: impact category to plot (brightway format)
         :param metadata: dictionary with metadata to include in the plot. It can include 'resources_type', 'unit'.
-        :param filename: name of the file to save the plot. If None, the plot is named with the impact category.
-        :param saving_format: format to save the plot, can be 'png', 'jpeg', 'pdf', 'html', etc.
+        :param filename: name of the file to save the plot. If None, the plot is not saved.
+        :param saving_format: format to save the plot, can be 'png', 'jpeg', 'pdf', 'html', etc. Default is 'png'.
         :param saving_path: path to save the plot under the form 'path/to/folder/'. If None, the plot is saved in the
             current directory.
         :param show_plot: if True, the plot is shown in the notebook.
@@ -246,9 +247,6 @@ class Plot:
 
         unit = bd.Method(impact_category).metadata['unit']
         impact_category_name = impact_category[-1]
-
-        if filename is None:
-            filename = impact_category_name
 
         if 'resources_type' in metadata:
             graph_title = f"LCA Indicators of {metadata['resources_type']} resources for {impact_category[-1]})"
@@ -316,7 +314,7 @@ class Plot:
         if show_plot:
             fig.show()
 
-        if saving_format is None:
+        if filename is None:
             pass
         elif saving_format == 'html':
             Path(saving_path).mkdir(parents=True, exist_ok=True)  # Create the folder if it does not exist
@@ -330,7 +328,7 @@ class Plot:
             technologies_list: list[str],
             impact_categories_list: list[tuple],
             filename: str = None,
-            saving_format: str = None,
+            saving_format: str = 'png',
             saving_path: str = None,
             show_plot: bool = True,
     ):
@@ -340,8 +338,8 @@ class Plot:
         :param technologies_list: list of technologies to plot. They should have the same operation/infrastructure units
             to have a meaningful comparison
         :param impact_categories_list: list of impact category to plot (brightway format)
-        :param filename: name of the file to save the plot. If None, the plot is named with the impact category.
-        :param saving_format: format to save the plot, can be 'png', 'jpeg', 'pdf', 'html', etc.
+        :param filename: name of the file to save the plot. If None, the plot is not saved.
+        :param saving_format: format to save the plot, can be 'png', 'jpeg', 'pdf', 'html', etc. Default is 'png'.
         :param saving_path: path to save the plot under the form 'path/to/folder/'. If None, the plot is saved in the
             current directory.
         :param show_plot: if True, the plot is shown in the notebook.
@@ -438,7 +436,7 @@ class Plot:
         if show_plot:
             fig.show()
 
-        if saving_format is None or filename is None:
+        if filename is None:
             pass
         elif saving_format == 'html':
             Path(saving_path).mkdir(parents=True, exist_ok=True)  # Create the folder if it does not exist
@@ -452,7 +450,7 @@ class Plot:
             resources_list: list[str],
             impact_categories_list: list[tuple],
             filename: str = None,
-            saving_format: str = None,
+            saving_format: str = 'png',
             saving_path: str = None,
             show_plot: bool = True,
     ):
@@ -462,8 +460,8 @@ class Plot:
         :param resources_list: list of technologies to plot. They should have the same operation/infrastructure units
             to have a meaningful comparison
         :param impact_categories_list: list of impact category to plot (brightway format)
-        :param filename: name of the file to save the plot. If None, the plot is named with the impact category.
-        :param saving_format: format to save the plot, can be 'png', 'jpeg', 'pdf', 'html', etc.
+        :param filename: name of the file to save the plot. If None, the plot is not saved.
+        :param saving_format: format to save the plot, can be 'png', 'jpeg', 'pdf', 'html', etc. Default is 'png'.
         :param saving_path: path to save the plot under the form 'path/to/folder/'. If None, the plot is saved in the
             current directory.
         :param show_plot: if True, the plot is shown in the notebook.
@@ -518,7 +516,7 @@ class Plot:
         if show_plot:
             fig.show()
 
-        if saving_format is None or filename is None:
+        if filename is None:
             pass
         elif saving_format == 'html':
             Path(saving_path).mkdir(parents=True, exist_ok=True)  # Create the folder if it does not exist
@@ -535,7 +533,7 @@ class Plot:
             normalized: bool = False,
             n_run: int = 0,
             filename: str = None,
-            saving_format: str = None,
+            saving_format: str = 'png',
             saving_path: str = None,
             show_plot: bool = True,
     ):
@@ -547,8 +545,8 @@ class Plot:
         :param N_highest_contributors: if split_by is 'Name', the number of highest contributors to show
         :param normalized: if True, the impacts are normalized by the total impact of the category
         :param n_run: number of the run to plot
-        :param filename: name of the file to save the plot. If None, the plot is named with the impact category.
-        :param saving_format: format to save the plot, can be 'png', 'jpeg', 'pdf', 'html', etc.
+        :param filename: name of the file to save the plot. If None, the plot is not saved.
+        :param saving_format: format to save the plot, can be 'png', 'jpeg', 'pdf', 'html', etc. Default is 'png'.
         :param saving_path: path to save the plot under the form 'path/to/folder/'. If None, the plot is saved in the
             current directory.
         :param show_plot: if True, the plot is shown in the notebook.
@@ -675,7 +673,7 @@ class Plot:
         if show_plot:
             fig.show()
 
-        if saving_format is None or filename is None:
+        if filename is None:
             pass
         elif saving_format == 'html':
             Path(saving_path).mkdir(parents=True, exist_ok=True)  # Create the folder if it does not exist
