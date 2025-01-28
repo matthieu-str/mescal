@@ -36,6 +36,10 @@ class Plot:
         self.esm_results_res = esm_results_res
         self.lifetime = lifetime
 
+        # The following methods are designed with impact categories as strings
+        if type(self.df_impact_scores.Impact_category.iloc[0]) is tuple:
+            self.df_impact_scores['Impact_category'] = self.df_impact_scores['Impact_category'].apply(str)
+
     def plot_indicators_of_technologies_for_one_impact_category(
             self,
             technologies_list: list[str],
