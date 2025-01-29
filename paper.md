@@ -208,7 +208,7 @@ lcia_{type}^{norm}(j,k) =
     0 \text{ if } \dfrac{lcia_{type}^{(scaled)}(j,k)}{lcia_{max}(k)} \leq \epsilon \\
     \dfrac{lcia_{type}^{(scaled)}(j,k)}{lcia_{max}(k)} \cdot \dfrac{lcia_{infra,max}(k)}{lcia_{op,max}(k)} \text{ else}
 \end{cases}
-\quad \forall (j,k) \in TECH \times ENV & \\quad \forall type \in \{infra, op\}
+\quad \forall (j,k) \in TECH \times ENV \\quad \forall type \in \{infra, op\}
 $$
 
 
