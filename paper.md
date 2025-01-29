@@ -191,7 +191,7 @@ This aims to determine the maximum order of magnitude between the highest and lo
 to eventually facilitate the solver convergence.
 
 $$
-lcia_{type,max}(k) = \max(lcia_{type}(j,k) \ | \ j \in TECH \cup RES) \quad \forall type \in \{infra, op\} \quad \forall k \in ENV
+lcia_{type,max}(k) = \max(lcia_{type}(j,k) \ | \ j \in TECH \ \cup \ RES) \quad \forall type \in \{infra, op\} \quad \forall k \in ENV
 $$
 
 $$
@@ -199,7 +199,7 @@ lcia_{infra}^{scaled}(j,k) = lcia_{infra}^{adj}(j,k) \cdot \dfrac{lcia_{op,max}(
 $$
 
 $$
-lcia_{max}(k) = \max(lcia_{type,max}(j,k) \ | \ type \in \{infra, op\}, \ j \in TECH \cup RES) \quad \forall k \in ENV
+lcia_{max}(k) = \max(lcia_{type,max}(j,k) \ | \ type \in \{infra, op\}, \ j \in TECH \ \cup \ RES) \quad \forall k \in ENV
 $$
 
 $$
@@ -208,7 +208,8 @@ lcia_{type}^{norm}(j,k) =
     0 \text{ if } \dfrac{lcia_{type}^{(scaled)}(j,k)}{lcia_{max}(k)} \leq \epsilon \\
     \dfrac{lcia_{type}^{(scaled)}(j,k)}{lcia_{max}(k)} \cdot \dfrac{lcia_{infra,max}(k)}{lcia_{op,max}(k)} \text{ else}
 \end{cases}
-\quad \forall (j,k) \in TECH \cup RES \times ENV \\ \quad \forall type \in \{infra, op\}
+\quad \forall (j,k) \in TECH \ \cup \ RES \times ENV \\ 
+\quad \forall type \in \{infra, op\}
 $$
 
 
