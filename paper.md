@@ -135,7 +135,7 @@ double-counting removal process should be applied via a recursive algorithm expl
 `mescal` adjusts LCI datasets and LCIA scores to account for differences between the ESM and LCI databases:
 
 - **Technologies lifetime**: `mescal` adjusts the infrastructure LCIA scores to integrate the difference in lifetime 
-between ESM technologies and their infrastructure LCI datasets. The infrastructure specific LCIA score ($lcia_{infra}$) is  
+between ESM technologies and their infrastructure LCI datasets. The infrastructure specific LCIA score ($lcia_{infra}$) is
 multiplied by the ratio between the ESM lifetime ($n_{ESM}$) and the LCI dataset lifetime ($n_{LCI}$) to ensure that the annual impact in the 
 ESM is computed with the LCI dataset lifetime, thus resulting in the adjusted infrastructure specific LCIA score ($lcia_{infra}^{adj}$). 
 This ensures the coherence between the LCIA score and the LCI dataset lifetime.
@@ -156,7 +156,7 @@ double-counting removal step, while the efficiency of the ESM process ($\eta_{ES
 is applied to a list of ESM technologies given by the user (`Efficiency.csv`), typically technologies involving a combustion process. 
 
 $$
-q^{adj}(ef) = q(ef) \cdot \frac{\eta_{LCI}}{\eta_{ESM}} \forall ef \in EF \setminus \{\text{land, energy}\}
+q^{adj}(ef) = q(ef) \cdot \frac{\eta_{LCI}}{\eta_{ESM}} \quad \forall ef \in EF \setminus \{\text{land, energy}\}
 $$
 
 - **Physical units**: The energy and material output flows may be expressed in different units in the ESM and the LCI 
@@ -182,16 +182,16 @@ significant discrepancies in magnitude across impact categories. By aligning all
 magnitude, numerical stability is improved in the solving process. 
 Furthermore, considerable discrepancies in magnitude may be observed between infrastructure and operation LCA indicators 
 within the same impact category, as these are not expressed with the same physical unit. 
-Consequently, a scaling factor ($\dfrac{lcia_{op,max}(k)}{lcia_{infra,max}(k)}$) is applied to infrastructure LCA indicators, 
+Consequently, a scaling factor ($lcia_{op,max}(k) / lcia_{infra,max}(k)$) is applied to infrastructure LCA indicators, 
 to ensure that both the highest infrastructure and operation metric are normalized to 1. 
-The scaling factor invert is then applied to keep the relation between operation and infrastructure LCA indicators. 
-Normalization is performed with the maximum indicator of each impact category ($lcia_{max}(k)$). 
+The scaling factor invert is then applied to keep the magnitude difference between operation and infrastructure LCA indicators. 
+Normalization is performed with the maximum indicator ($lcia_{max}$) of each impact category. 
 In addition, all normalized indicators ($lcia_{type}^{norm}$) that are below a threshold ($\epsilon$) are set to zero. 
 This aims to determine the maximum order of magnitude between the highest and lowest indicators of an impact category, 
-to eventually facilitate the solver's convergence.
+to eventually facilitate the solver convergence.
 
 $$
-lcia_{type,max}(k) = \max(lcia_{type}(j,k) \ | \ j \in TECH) \quad \forall type \in \{infra, op\} \quad \forall k \in ENV
+lcia_{type,max}(k) = \max(lcia_{type}(j,k) \ | \ j \in TECH \cup RES) \quad \forall type \in \{infra, op\} \quad \forall k \in ENV
 $$
 
 $$
@@ -199,7 +199,7 @@ lcia_{infra}^{scaled}(j,k) = lcia_{infra}^{adj}(j,k) \cdot \dfrac{lcia_{op,max}(
 $$
 
 $$
-lcia_{max}(k) = \max(lcia_{type,max}(j,k) \ | \ type \in \{infra, op\}, j \in TECH) \quad \forall k \in ENV
+lcia_{max}(k) = \max(lcia_{type,max}(j,k) \ | \ type \in \{infra, op\}, \ j \in TECH \cup RES) \quad \forall k \in ENV
 $$
 
 $$
@@ -208,7 +208,7 @@ lcia_{type}^{norm}(j,k) =
     0 \text{ if } \dfrac{lcia_{type}^{(scaled)}(j,k)}{lcia_{max}(k)} \leq \epsilon \\
     \dfrac{lcia_{type}^{(scaled)}(j,k)}{lcia_{max}(k)} \cdot \dfrac{lcia_{infra,max}(k)}{lcia_{op,max}(k)} \text{ else}
 \end{cases}
-\quad \forall (j,k) \in TECH \times ENV \\quad \forall type \in \{infra, op\}
+\quad \forall (j,k) \in TECH \cup RES \times ENV \\ \quad \forall type \in \{infra, op\}
 $$
 
 
@@ -236,7 +236,7 @@ $$
 $$
 
 $$
-{LCIA_{res}}(r, k) = lcia_{res}^{norm}(r, k) \cdot \sum_{t \in T} {F_t}(r, t) \cdot t_{op}(t) \quad \forall (r, k) \in RES \times ENV
+{LCIA_{res}}(r, k) = lcia_{op}^{norm}(r, k) \cdot \sum_{t \in T} {F_t}(r, t) \cdot t_{op}(t) \quad \forall (r, k) \in RES \times ENV
 $$
 
 
