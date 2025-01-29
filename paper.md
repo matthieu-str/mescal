@@ -1,9 +1,9 @@
 ---
-title: 'mescal: coupling energy system models with life cycle assessment' 
+title: 'mescal: coupling energy system models with life-cycle assessment' 
 tags:
   - Python
   - energy system models
-  - life cycle assessment
+  - life-cycle assessment
 
 authors:
   - name: Matthieu Souttre
@@ -99,8 +99,8 @@ geographical context.
 ## Mapping between ESM processes and LCI datasets
 Each technology or resource of the ESM is mapped with one or several LCI datasets (`Mapping.csv`). 
 Technologies are typically mapped with two LCI datasets: 1) an operation LCI dataset, which encompasses 
-the use phase of the technology's life cycle, and 2) an infrastructure LCI dataset, which encompasses the 
-construction and dismantling phases of the technology's life cycle. 
+the use phase of the technology's life-cycle, and 2) an infrastructure LCI dataset, which encompasses the 
+construction and dismantling phases of the technology's life-cycle. 
 The ESM resources are typically mapped with one operation LCI dataset. Regarding LCI databases, `mescal` is suited for 
 any version of the _ecoinvent_ database [@wernet2016] and any LCI database generated via `premise` [@sacchi2022], which 
 generates prospective versions of _ecoinvent_ using IAM projections.
@@ -134,20 +134,30 @@ double-counting removal process should be applied via a recursive algorithm expl
 ## ESM and LCA database harmonization
 `mescal` adjusts LCI datasets and LCIA scores to account for differences between the ESM and LCI databases:
 
-- **Technologies lifetime**: `mescal` adjusts LCIA scores to integrate the difference in lifetime between ESM technologies and
-their infrastructure LCI datasets. The specific LCIA score is multiplied by the ratio between the ESM lifetime and the LCI 
-dataset lifetime to ensure that the annual impact in the ESM is computed with the LCI dataset lifetime. 
+- **Technologies lifetime**: `mescal` adjusts the infrastructure LCIA scores to integrate the difference in lifetime 
+between ESM technologies and their infrastructure LCI datasets. The infrastructure specific LCIA score ($lcia_{infra}$) is  
+multiplied by the ratio between the ESM lifetime ($n_{ESM}$) and the LCI dataset lifetime ($n_{LCI}$) to ensure that the annual impact in the 
+ESM is computed with the LCI dataset lifetime, thus resulting in the adjusted infrastructure specific LCIA score ($lcia_{infra}^{adj}$). 
 This ensures the coherence between the LCIA score and the LCI dataset lifetime.
+
+$$
+lcia_{infra}^{adj}(j,k) = lcia_{infra}(j,k) \cdot \frac{n_{ESM}(j)}{n_{LCI}(j)} \quad \forall (j,k) \in TECH \times ENV
+$$
 
 - **Technologies efficiency**: Even if input fuel flows are set to zero in the operation LCI dataset to prevent 
 double-counting, a difference in efficiency between a technology and its corresponding operation LCI 
 dataset would result in an inconsistency regarding the amount of direct emissions. `mescal` resolves this issue by adjusting 
 the amount of direct emissions proportionally to the efficiency difference. Except land occupation, land transformation and 
-energy elementary flows, the amounts of all elementary flows in the direct emissions of the operation LCI datasets are adjusted 
-using the ratio between the ESM and LCI dataset efficiencies (`Lifetime.csv`). The efficiency of the operation LCI dataset is computed 
-using the quantity of fuel that was removed during the double-counting removal step, while the efficiency of the ESM 
-process is computed from `ESM.csv`. This transformation is applied to a list of ESM technologies given by the user 
-(`Efficiency.csv`), typically technologies involving a combustion process. 
+energy elementary flows, the amounts ($q$) of all elementary flows in the direct emissions of the operation LCI datasets are adjusted 
+using the ratio between the LCI dataset ($\eta_{LCI}$) and the ESM ($\eta_{ESM}$) efficiencies (`Lifetime.csv`), thus 
+resulting in adjusted direct emissions amounts ($q^{adj}$). 
+The efficiency of the operation LCI dataset ($\eta_{LCI}$) is computed using the quantity of fuel that was removed during the 
+double-counting removal step, while the efficiency of the ESM process ($\eta_{ESM}$) is computed from `ESM.csv`. This transformation 
+is applied to a list of ESM technologies given by the user (`Efficiency.csv`), typically technologies involving a combustion process. 
+
+$$
+q^{adj}(ef) = q(ef) \cdot \frac{\eta_{LCI}}{\eta_{ESM}} \forall ef \in EF \setminus \{\text{land, energy}\}
+$$
 
 - **Physical units**: The energy and material output flows may be expressed in different units in the ESM and the LCI 
 database. Specific LCIA scores are multiplied by a conversion factor, which converts the specific LCA 
@@ -162,12 +172,45 @@ set to zero during the double-counting removal step.
 ## Life-Cycle Impact Assessment
 `mescal` can compute LCA indicators using any set of impact assessment methods, e.g., IMPACT World+ [@bulle2019], ReCiPe 
 [@huijbregts2017] or Environmental Footprint (EF) [@europeancommission.jointresearchcentre.2018]. 
+Alternatively, a module computing only direct emissions has been developed to ease the comparison between territorial 
+emissions and life-cycle emissions. 
 
 ## Normalization of LCA indicators 
 Prior to integration into ESM, LCA indicators are normalized. In the context of optimization, 
 normalization is beneficial in facilitating the solver's convergence, given that LCA indicators may exhibit 
 significant discrepancies in magnitude across impact categories. By aligning all metrics within a comparable order of 
 magnitude, numerical stability is improved in the solving process. 
+Furthermore, considerable discrepancies in magnitude may be observed between infrastructure and operation LCA indicators 
+within the same impact category, as these are not expressed with the same physical unit. 
+Consequently, a scaling factor ($\dfrac{lcia_{op,max}(k)}{lcia_{infra,max}(k)}$) is applied to infrastructure LCA indicators, 
+to ensure that both the highest infrastructure and operation metric are normalized to 1. 
+The scaling factor invert is then applied to keep the relation between operation and infrastructure LCA indicators. 
+Normalization is performed with the maximum indicator of each impact category ($lcia_{max}(k)$). 
+In addition, all normalized indicators ($lcia_{type}^{norm}$) that are below a threshold ($\epsilon$) are set to zero. 
+This aims to determine the maximum order of magnitude between the highest and lowest indicators of an impact category, 
+to eventually facilitate the solver's convergence.
+
+$$
+lcia_{type,max}(k) = \max(lcia_{type}(j,k) \ | \ j \in TECH) \quad \forall type \in \{infra, op\} \quad \forall k \in ENV
+$$
+
+$$
+lcia_{infra}^{scaled}(j,k) = lcia_{infra}^{adj}(j,k) \cdot \dfrac{lcia_{op,max}(k)}{lcia_{infra,max}(k)} \quad \forall (j,k) \in TECH \times ENV
+$$
+
+$$
+lcia_{max}(k) = \max(lcia_{type,max}(j,k) \ | \ type \in \{infra, op\}, j \in TECH) \quad \forall k \in ENV
+$$
+
+$$
+lcia_{type}^{norm}(j,k) = 
+\begin{cases}
+    0 \text{ if } \dfrac{lcia_{type}^{(scaled)}(j,k)}{lcia_{max}(k)} \leq \epsilon \\
+    \dfrac{lcia_{type}^{(scaled)}(j,k)}{lcia_{max}(k)} \cdot \dfrac{lcia_{infra,max}(k)}{lcia_{op,max}(k)} \text{ else}
+\end{cases}
+\quad \forall (j,k) \in TECH \times ENV & \\quad \forall type \in \{infra, op\}
+$$
+
 
 ## Equations specification
 The following set of modelling equations is included in ESM.
