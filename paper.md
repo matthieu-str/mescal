@@ -135,7 +135,7 @@ is spatialized, i.e., if a geographic location has been attributed to elementary
 The types and quantities of the flows remain unchanged. The LCI database can be spatialized and its background 
 inventory can be regionalized using the `regioinvent` tool [@maximeagez2025].
 
-![Flowchart of the regionalization process.\label{fig:flowchart_regionalization}](docs/pics/regionalization_flowchart.png) { width=75% }
+![Flowchart of the regionalization process.\label{fig:flowchart_regionalization}](docs/pics/regionalization_flowchart.png){ width=75% }
 
 ## Double-counting removal
 Double-counting refers to the multiple occurrence of energy flows within the energy system supply chain, thus leading 
