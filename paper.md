@@ -64,7 +64,7 @@ transition pathways when policy targets were violated.
 For LCA indicators to be used actively in ESM, and thus in the transition scenarios design, hard-linking 
 coupling is required. This denotes the endogenous integration of LCA indicators in ESM.
 Several studies have endogenously integrated LCA indicators in ESM [@rauner2017; @vandepaer2020; @algunaibet2019; @reinert2022], thus 
-paving the way for multi-objective optimization. @vandepear2020 compared the use of the $\epsilon$-constraint 
+paving the way for multi-objective optimization. @vandepaer2020 compared the use of the $\epsilon$-constraint 
 method and the normalization and weighting method to integrate LCA indicators in a bottom-up optimization model. 
 Alternatively, @algunaibet2019 monetized environmental impacts in order to sum them with direct and indirect costs 
 within an economic objective function.
@@ -156,12 +156,14 @@ recursive algorithm exploring the market-type datasets backgrounds (\autoref{fig
 ![Flowchart of the background search process.\label{fig:flowchart_background_search}](docs/pics/background_search_flowchart.png)
 
 ## ESM and LCI database harmonization
-`mescal` adjusts LCI datasets and LCIA scores to account for differences between the ESM and LCI database:
+`mescal` adjusts LCI datasets and impact scores to account for differences between the ESM and LCI database:
 
-- **Technologies lifetime**: `mescal` adjusts the infrastructure LCIA scores to integrate the difference in lifetime 
-between ESM technologies and their infrastructure LCI datasets. The infrastructure specific LCIA score ($lcia_{infra}$) is
-multiplied by the ratio between the ESM lifetime ($n_{ESM}$) and the LCI dataset lifetime ($n_{LCI}$) to ensure that the annual impact in the 
-ESM is computed with the LCI dataset lifetime, thus resulting in the adjusted infrastructure specific LCIA score ($lcia_{infra}^{adj}$).
+- **Technologies lifetime**: Infrastructure LCA indicators are annual impacts, thus `mescal` adjusts the 
+infrastructure impact scores to integrate the difference in lifetime between ESM technologies and their 
+infrastructure LCI datasets. The infrastructure specific impact score ($lcia_{infra}$) is multiplied by the ratio 
+between the ESM lifetime ($n_{ESM}$) and the LCI dataset lifetime ($n_{LCI}$) to ensure that the annual impact in the 
+ESM is computed with the LCI dataset lifetime, thus resulting in the adjusted infrastructure specific impact score 
+($lcia_{infra}^{adj}$).
 
 $$
 lcia_{infra}^{adj}(j,k) = lcia_{infra}(j,k) \cdot \frac{n_{ESM}(j)}{n_{LCI}(j)} \quad \forall (j,k) \in TECH \times ENV
@@ -183,7 +185,7 @@ q^{adj}(ef, j) = q(ef, j) \cdot \frac{\eta_{LCI}(j)}{\eta_{ESM}(j)} \quad \foral
 $$
 
 - **Physical units**: The energy and material output flows may be expressed in different units in the ESM and the LCI 
-database. Specific LCIA scores are multiplied by a conversion factor, which converts the specific LCA 
+database. Specific impact scores are multiplied by a conversion factor, which converts the specific LCA 
 scores physical unit from [impact category unit / LCI output unit] to [impact category unit / ESM output unit]. 
 Conversion factors encompass LCI datasets assumptions such as capacity factors or vehicle load factors.
 
@@ -214,7 +216,10 @@ This aims to determine the maximum order of magnitude between the highest and lo
 to eventually facilitate the solver convergence.
 
 $$
-lcia_{infra}^{scaled}(j,k) = lcia_{infra}^{adj}(j,k) \cdot \dfrac{\max(lcia_{op}(j,k) \ | \ j \in TECH \ \cup \ RES)}{\max(lcia_{infra}(j,k) \ | \ j \in TECH)} \quad \forall (j,k) \in TECH \times ENV
+\begin{split}
+lcia_{infra}^{scaled}(j,k) & = lcia_{infra}^{adj}(j,k) \cdot \dfrac{\max(lcia_{op}(j,k) \ | \ j \in TECH \ \cup \ RES)}{\max(lcia_{infra}(j,k) \ | \ j \in TECH)} \\
+& \forall (j,k) \in TECH \times ENV
+\end{split}
 $$
 
 $$
@@ -222,13 +227,15 @@ lcia_{max}(k) = \max(lcia_{type,max}(j,k) \ | \ type \in \{infra, op\}, \ j \in 
 $$
 
 $$
-lcia_{type}^{norm}(j,k) = 
+\begin{split}
+lcia_{type}^{norm}(j,k) & = 
 \begin{cases}
     0 \text{ if } \dfrac{lcia_{type}^{(scaled)}(j,k)}{lcia_{max}(k)} \leq \epsilon \\
     \dfrac{lcia_{type}^{(scaled)}(j,k)}{lcia_{max}(k)} \cdot \dfrac{lcia_{infra,max}(k)}{lcia_{op,max}(k)} \text{ else}
 \end{cases}
-\quad \forall (j,k) \in TECH \ \cup \ RES \times ENV \\ 
-\quad \forall type \in \{infra, op\}
+& \forall (j,k) \in TECH \ \cup \ RES \times ENV \\ 
+& \forall type \in \{infra, op\}
+\end{split}
 $$
 
 ## Equations specification
@@ -243,7 +250,10 @@ $lcia^{norm}_{res}$), which are respectively computed from the operation and res
 with the annual operation (${F_t} \times t_{op}$). 
 
 $$
-{LCIA_{tot}}(k) = \sum_{j \in TECH} \left( {LCIA_{infra}}(j, k) + {LCIA_{op}}(j, k) \right) + \sum_{r \in RES} {LCIA_{op}}(r, k) \quad \forall k \in ENV
+\begin{split}
+{LCIA_{tot}}(k) & = \sum_{j \in TECH} \left( {LCIA_{infra}}(j, k) + {LCIA_{op}}(j, k) \right) + \sum_{r \in RES} {LCIA_{op}}(r, k) \\ 
+& \forall k \in ENV
+\end{split}
 $$
 
 $$
