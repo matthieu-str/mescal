@@ -32,12 +32,13 @@ bibliography: paper.bib
 ---
 
 # Summary
-`mescal` is a Python package that integrates Life-Cycle Assessment (LCA) indicators within Energy System Models 
-(ESM). `mescal` generates a set of LCA indicators 
-for each technology and resource of an ESM. These indicators may be employed in an ex-post analysis, or be 
-integrated as parameters in ESM to add environmental constraints or define environmental objective functions. 
-Furthermore, `mescal` updates the Life-Cycle Inventory (LCI) database with ESM results, thus allowing energy 
-modellers and LCA practitioners to include ESM projections in their sustainability analyses.
+Energy System Models (ESM) are widely used to design and assess energy transition scenarios. They help decision-makers 
+to project their policies and understand their impact on strongly interconnected energy systems. However, ESM typically
+lack environmental indicators, which are essential to assess the sustainability of energy transition scenarios.
+`mescal` is a Python package that integrates Life-Cycle Assessment (LCA) indicators within ESM. It allows energy modellers
+to include a wider set of environmental indicators within their models in a transparent and reproducible way.
+As a results, energy modellers and decision-makers can identify transition scenarios trade-offs and hot spots, thus
+enabling a more holistic sustainability assessment.
 
 # Statement of need
 ESM aim to support decision-makers to design and assess energy transition scenarios. In this work, we focus on 
@@ -134,7 +135,7 @@ is spatialized, i.e., if a geographic location has been attributed to elementary
 The types and quantities of the flows remain unchanged. The LCI database can be spatialized and its background 
 inventory can be regionalized using the `regioinvent` tool [@maximeagez2025].
 
-![Flowchart of the regionalization process.\label{fig:flowchart_regionalization}](docs/pics/regionalization_flowchart.png)
+![Flowchart of the regionalization process.\label{fig:flowchart_regionalization}](docs/pics/regionalization_flowchart.png) { width=75% }
 
 ## Double-counting removal
 Double-counting refers to the multiple occurrence of energy flows within the energy system supply chain, thus leading 
@@ -178,7 +179,7 @@ double-counting removal step, while the efficiency of the ESM process ($\eta_{ES
 is applied to a list of ESM technologies given by the user (`Efficiency.csv`), typically technologies involving a combustion process. 
 
 $$
-q^{adj}(ef) = q(ef) \cdot \frac{\eta_{LCI}}{\eta_{ESM}} \quad \forall ef \in EF \setminus \{\text{land, energy}\}
+q^{adj}(ef, j) = q(ef, j) \cdot \frac{\eta_{LCI}(j)}{\eta_{ESM}(j)} \quad \forall (ef, j) \in EF \setminus \{\text{land, energy}\} \times TECH
 $$
 
 - **Physical units**: The energy and material output flows may be expressed in different units in the ESM and the LCI 
@@ -213,15 +214,11 @@ This aims to determine the maximum order of magnitude between the highest and lo
 to eventually facilitate the solver convergence.
 
 $$
-lcia_{type,max}(k) = \max(lcia_{type}(j,k) \ | \ j \in TECH \ \cup \ RES) \quad \forall type \in \{infra, op\} \quad \forall k \in ENV
+lcia_{infra}^{scaled}(j,k) = lcia_{infra}^{adj}(j,k) \cdot \dfrac{\max(lcia_{op}(j,k) \ | \ j \in TECH \ \cup \ RES)}{\max(lcia_{infra}(j,k) \ | \ j \in TECH)} \quad \forall (j,k) \in TECH \times ENV
 $$
 
 $$
-lcia_{infra}^{scaled}(j,k) = lcia_{infra}^{adj}(j,k) \cdot \dfrac{lcia_{op,max}(k)}{lcia_{infra,max}(k)} \quad \forall (j,k) \in TECH \times ENV
-$$
-
-$$
-lcia_{max}(k) = \max(lcia_{type,max}(j,k) \ | \ type \in \{infra, op\}, \ j \in TECH \ \cup \ RES) \quad \forall k \in ENV
+lcia_{max}(k) = \max(lcia_{type,max}(j,k) \ | \ type \in \{infra, op\}, \ j \in TECH) \quad \forall k \in ENV
 $$
 
 $$
@@ -234,7 +231,6 @@ lcia_{type}^{norm}(j,k) =
 \quad \forall type \in \{infra, op\}
 $$
 
-
 ## Equations specification
 The following set of modelling equations is included in ESM.
 The environmental objective ${LCIA_{tot}}$ is defined as the sum of the impacts of the infrastructure, operation, 
@@ -244,10 +240,10 @@ from the infrastructure LCI dataset. The normalized specific impact is divided b
 ($n_{ESM}$), and scaled with the technology's installed capacity (${F}$). The operation and resource impacts are 
 respectively derived from the operation and resource normalized specific impacts ($lcia^{norm}_{op}$ and 
 $lcia^{norm}_{res}$), which are respectively computed from the operation and resource LCI datasets, and scaled 
-with the annual energy production (${F_t} \times t_{op}$). 
+with the annual operation (${F_t} \times t_{op}$). 
 
 $$
-{LCIA_{tot}}(k) = \sum_{j \in TECH} \left( {LCIA_{infra}}(j, k) + {LCIA_{op}}(j, k) \right) + \sum_{r \in RES} {LCIA_{res}}(r, k) \quad \forall k \in ENV
+{LCIA_{tot}}(k) = \sum_{j \in TECH} \left( {LCIA_{infra}}(j, k) + {LCIA_{op}}(j, k) \right) + \sum_{r \in RES} {LCIA_{op}}(r, k) \quad \forall k \in ENV
 $$
 
 $$
@@ -255,18 +251,14 @@ $$
 $$
 
 $$
-{LCIA_{op}}(j, k) = lcia_{op}^{norm}(j, k) \cdot \sum_{t \in T} {F_t}(j, t) \cdot t_{op}(t) \quad \forall (j, k) \in TECH \times ENV
-$$
-
-$$
-{LCIA_{res}}(r, k) = lcia_{op}^{norm}(r, k) \cdot \sum_{t \in T} {F_t}(r, t) \cdot t_{op}(t) \quad \forall (r, k) \in RES \times ENV
+{LCIA_{op}}(j, k) = lcia_{op}^{norm}(j, k) \cdot \sum_{t \in T} {F_t}(j, t) \cdot t_{op}(t) \quad \forall (j, k) \in TECH \cup RES \times ENV
 $$
 
 ## Integrating ESM results in the LCI database
 In ordre to update the LCI database with the ESM results, `mescal` overwrites the relevant LCI datasets, 
 i.e., LCI datasets that are in the sectoral and geographical scope of the ESM, such as markets for electricity, heat or 
 transport. The activities composing the market and their respective shares are determined using the ESM annual 
-production results and the `Mapping.csv` file .  
+operation results and the `Mapping.csv` file .  
 Updating the LCI database background inventory paves for the way for using `mescal` with myopic ESM, i.e., ESM 
 dividing the transition period into a sequence of consecutive optimization problems [@prina2020], through an iterative 
 3-step procedure: 1) run the ESM at time-step $t$, 2) update the LCI database with the ESM results at time-step $t$, 
@@ -277,26 +269,56 @@ and 3) update the LCA indicators with the updated LCI database for time-step $t+
 An [example notebook](https://github.com/matthieu-str/mescal/blob/master/examples/tutorial.ipynb) is available to illustrate the use of `mescal`.
 
 # Impact
-`mescal` enables the integration of environmental constraints in ESM and the environmental assessment of energy 
-transition scenarios. The use of LCA makes sustainability assessments of energy modellers more holistic, thus 
-highlighting the potential trade-offs, benefits, and adverse side effects of energy transition pathways among 
-the environmental and economic performance indicators.
-
+`mescal` offers a systematic methodology to hard-link ESM with LCA, thus enabling the integration of environmental
+constraints and objectives in ESM, and thus a flexible design and environmental assessment of energy transition scenarios. 
+The use of `mescal` ensures a transparent, reproducible, and thus comparable integration of LCA indicators in ESM.
+The use of LCA makes sustainability assessments of energy modellers more holistic, thus highlighting the potential trade-offs, 
+benefits, and adverse side effects of energy transition pathways among the environmental and economic performance indicators.
 `mescal` is aimed to be used by energy modellers who might not be LCA experts but want to enlarge the set of environmental 
-indicators in their model in a transparent and reproducible way. 
-Additionally, `mescal` can be used by LCA practitioners to generate prospective LCI datasets, e.g., prospective markets 
-for electricity, heat or transport that follow the projections of an ESM.
+indicators in their model in a transparent and reproducible way.
 
 As an example, `mescal` methodology has been applied by @schnidrig2024 with the _EnergyScope_ model [@moret2017] 
 to analyse environmental-economic trade-offs in Swiss energy system transitions.
 
 # Conclusion
-`mescal` is a Python package that bidirectionally couples LCA and ESM. It integrates LCA indicators in ESM to enlarge the set of
-sustainability indicators and thus better highlight trade-offs of energy transition pathways. Additionally, it integrates 
-the results of ESM back to the LCI database, thus allowing LCA practitioners to include ESM projections in their analyses. 
+`mescal` makes the integration of LCA indicators in ESM more transparent, reproducible, and comparable. 
+It aims to encourage energy modellers to consider a broader set of environmental indicators in their energy transition
+scenarios, thus enabling a more holistic sustainability assessment. 
 
 # Acknowledgements
 The authors gratefully acknowledge the financial support of the _Fonds de recherche du Québec - Nature et 
 Technologies_, the _Institut de l’énergie Trottier de Polytechnique Montréal_ and the _CREATE-SEED_ program.
+
+# Nomenclature 
+
+## Sets 
+| Symbol | Description                            |
+|--------|----------------------------------------|
+| $TECH$ | Set of ESM technologies                |
+| $RES$  | Set of ESM resources                   |
+| $T$    | Set of time periods                    |
+| $ENV$  | Set of environmental impact categories |
+
+## Parameters
+| Symbol              | Description                                                                         | Unit                                  |
+|---------------------|-------------------------------------------------------------------------------------|---------------------------------------|
+| $t_{op}(t)$         | Time period $t$ duration                                                            | hours                                 |
+| $n_{ESM}(j)$        | Lifetime of a technology $j$ in the ESM                                             | years                                 |
+| $n_{LCI}$           | Lifetime of a technology $j$ in the LCI dataset                                     | years                                 |
+| $lcia_{infra}(j,k)$ | Specific infrastructure impact of technology $j$ for impact category $k$            | impact category unit / capacity unit  |
+| $lcia_{op}(j/r,k)$  | Specific operation impact of technology $j$ or resource $r$ for impact category $k$ | impact category unit / operation unit |
+| $\eta_{LCI}(j)$     | Efficiency of technology $j$ in the operation LCI dataset                           | dimensionless                         |
+| $\eta_{ESM}(j)$     | Efficiency of technology $j$ in the ESM                                             | dimensionless                         |
+| $q(ef, j)$          | Amount of elementary flow $ef$ in the operation LCI dataset of technology $j$       | elementary flow unit                  |
+| $\epsilon$          | Threshold for the normalization of LCA indicators                                   | dimensionless                         |
+
+## Variables
+| Symbol              | Description                                                                           | Unit           |
+|---------------------|---------------------------------------------------------------------------------------|----------------|
+| $F(j)$              | Installed capacity of technology $j$                                                  | capacity unit  |
+| $F_t(j,t)$          | Operation of technology $j$ in time period $t$                                        | operation unit |
+| $LCIA_{tot}(k)$     | Normalized total impact of impact category $k$                                        | dimensionless  |
+| $LCIA_{infra}(j,k)$ | Normalized infrastructure impact of technology $j$ for impact category $k$            | dimensionless  |
+| $LCIA_{op}(j/r,k)$  | Normalized operation impact of technology $j$ or resource $r$ for impact category $k$ | dimensionless  |
 
 # References
