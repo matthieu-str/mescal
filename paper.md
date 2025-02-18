@@ -166,10 +166,10 @@ infrastructure impact scores to integrate the difference of lifetime between ESM
 infrastructure LCI datasets. The infrastructure specific impact score ($lcia_{infra}$) is multiplied by the ratio 
 between the ESM lifetime ($n_{ESM}$) and the LCI dataset lifetime ($n_{LCI}$) (`Lifetime.csv`) to ensure that the annual impact in the 
 ESM is computed with the LCI dataset lifetime, thus resulting in the adjusted infrastructure specific impact score 
-($lcia_{infra}^{adj}$ in \autoref{eq:lcia_infra_adj}).
+($lcia_{infra}^{adj}$ in Eq. (1)).
 
 $$
-lcia_{infra}^{adj}(j,k) = lcia_{infra}(j,k) \cdot \frac{n_{ESM}(j)}{n_{LCI}(j)} \quad \forall (j,k) \in TECH \times ENV\label{eq:lcia_infra_adj}
+lcia_{infra}^{adj}(j,k) = lcia_{infra}(j,k) \cdot \frac{n_{ESM}(j)}{n_{LCI}(j)} \quad \forall (j,k) \in TECH \times ENV \tag{1}
 $$
 
 - **Technologies efficiency**: Efficiencies of technologies in the ESM and LCI database should be harmonized, 
@@ -179,13 +179,13 @@ the amount of direct emissions. `mescal` resolves this issue by adjusting the am
 to the efficiency difference. Except land occupation, land transformation and energy elementary flows, the amounts ($q$) 
 of all elementary flows in the operation LCI datasets foregrounds are adjusted using the ratio between 
 the LCI dataset ($\eta_{LCI}$) and the ESM ($\eta_{ESM}$) efficiencies, thus resulting in adjusted direct emissions 
-amounts ($q^{adj}$ in \autoref{eq:q_adj}). 
+amounts ($q^{adj}$ in Eq. (2)). 
 The efficiency of the operation LCI dataset ($\eta_{LCI}$) is computed using the quantity of fuel that was removed during the 
 double-counting removal step, while the efficiency of the ESM process ($\eta_{ESM}$) is computed from `ESM.csv`. This transformation 
 is applied to a list of relevant ESM technologies (`Efficiency.csv`), e.g., technologies involving a combustion process.
 
 $$
-q^{adj}(ef, j) = q(ef, j) \cdot \frac{\eta_{LCI}(j)}{\eta_{ESM}(j)} \quad \forall (ef, j) \in EF \setminus \{\text{land, energy}\} \times TECH\label{eq:q_adj}
+q^{adj}(ef, j) = q(ef, j) \cdot \frac{\eta_{LCI}(j)}{\eta_{ESM}(j)} \quad \forall (ef, j) \in EF \setminus \{\text{land, energy}\} \times TECH \tag{2}
 $$
 
 - **Physical units**: The product flows may be expressed in different units in the ESM and the LCI 
@@ -211,66 +211,66 @@ significant discrepancies in magnitude across impact categories. By aligning all
 magnitude, numerical stability is improved in the solving process. 
 Furthermore, considerable discrepancies in magnitude may be observed between infrastructure and operation LCA indicators 
 within the same impact category, as these are not expressed with the same physical unit. 
-Consequently, a scaling factor ($lcia_{op,max}(k) / lcia_{infra,max}(k)$ in \autoref{eq:lcia_infra_scaled}) is applied 
+Consequently, a scaling factor ($lcia_{op,max}(k) / lcia_{infra,max}(k)$ in Eq. (4)) is applied 
 to infrastructure LCA indicators, to ensure that both the highest infrastructure and operation indicators are normalized to 1. 
-The scaling factor invert is then applied to normalized infrastructure indicators (autoref{eq:lcia_type_norm}), 
+The scaling factor invert is then applied to normalized infrastructure indicators (Eq. (6)), 
 in order to keep the magnitude difference between operation and infrastructure LCA indicators in ESM. 
-Normalization is performed with the maximum indicator ($lcia_{max}$ in \autoref{eq:lcia_max}) of each impact category. 
-In addition, all normalized indicators ($lcia_{type}^{norm}$ in autoref{eq:lcia_type_norm}) that are below a threshold 
+Normalization is performed with the maximum indicator ($lcia_{max}$ in Eq. (3)) of each impact category. 
+In addition, all normalized indicators ($lcia_{type}^{norm}$ in Eq. (6)) that are below a threshold 
 ($\epsilon$) are set to zero. This aims to determine the maximum order of magnitude between the highest and lowest 
 indicators of an impact category, to eventually facilitate the solver convergence.
 
 $$
-\begin{split}\label{eq:lcia_type_max}
+\begin{split}
 lcia_{type,max}(k) & = \max(lcia_{type}(j,k) \ | \ j \in TECH \ \cup \ RES) \\
-& \forall type \in \{infra, op\} \quad \forall k \in ENV
+& \forall type \in \{infra, op\} \quad \forall k \in ENV \tag{3}
 \end{split}
 $$
 
 $$
-lcia_{infra}^{scaled}(j,k) = lcia_{infra}^{adj}(j,k) \cdot \dfrac{lcia_{op,max}(k)}{lcia_{infra,max}(k)} \forall (j,k) \in TECH \times ENV\label{eq:lcia_infra_scaled}
+lcia_{infra}^{scaled}(j,k) = lcia_{infra}^{adj}(j,k) \cdot \dfrac{lcia_{op,max}(k)}{lcia_{infra,max}(k)} \forall (j,k) \in TECH \times ENV \tag{4}
 $$
 
 $$
-lcia_{max}(k) = \max(lcia_{type,max}(j,k) \ | \ type \in \{infra, op\}, \ j \in TECH) \quad \forall k \in ENV\label{eq:lcia_max}
+lcia_{max}(k) = \max(lcia_{type,max}(j,k) \ | \ type \in \{infra, op\}, \ j \in TECH) \quad \forall k \in ENV \tag{5}
 $$
 
 $$
 lcia_{type}^{norm}(j,k) = 
 \begin{cases}
     0 \text{ if } \dfrac{lcia_{type}^{(scaled)}(j,k)}{lcia_{max}(k)} \leq \epsilon \\
-    \dfrac{lcia_{type}^{(scaled)}(j,k)}{lcia_{max}(k)} \cdot \dfrac{lcia_{infra,max}(k)}{lcia_{op,max}(k)} \text{ elif } type = infra\label{eq:lcia_type_norm} \\
+    \dfrac{lcia_{type}^{(scaled)}(j,k)}{lcia_{max}(k)} \cdot \dfrac{lcia_{infra,max}(k)}{lcia_{op,max}(k)} \text{ elif } type = infra \\
     \dfrac{lcia_{type}^{(scaled)}(j,k)}{lcia_{max}(k)} \text{ else}
 \end{cases}
 $$
 $$
-\forall (j,k) \in TECH \ \cup \ RES \times ENV \quad \forall type \in \{infra, op\}
+\forall (j,k) \in TECH \ \cup \ RES \times ENV \quad \forall type \in \{infra, op\} \tag{6}
 $$
 
 ## Equations specification
 The following set of modelling equations is included in ESM.
 The environmental objective ${LCIA_{tot}}$ is defined as the sum of the impacts of the infrastructure, operation, 
-and resource parts (\autoref{eq:lcia_tot}).
+and resource parts (Eq. (7)).
 The infrastructure impact is derived from the normalized specific impact ($lcia^{norm}_{infra}$), which is computed 
 from the infrastructure LCI dataset. The normalized specific impact is divided by the technology's lifetime in the ESM 
-($n_{ESM}$), and scaled with the technology's installed capacity (${F}$) (\autoref{eq:lcia_infra}). 
+($n_{ESM}$), and scaled with the technology's installed capacity (${F}$) (Eq. (8)). 
 The operation and resource impacts are respectively derived from the operation and resource normalized specific 
 impacts ($lcia^{norm}_{op}$), which are respectively computed from the operation and resource LCI datasets, and scaled 
-with the annual operation (${F_t} \times t_{op}$) (\autoref{eq:lcia_op}). 
+with the annual operation (${F_t} \times t_{op}$) (Eq. (9)).
 
 $$
 \begin{split}
-{LCIA_{tot}}(k) & = \sum_{j \in TECH} \left( {LCIA_{infra}}(j, k) + {LCIA_{op}}(j, k) \right) + \sum_{r \in RES} {LCIA_{op}}(r, k)\label{eq:lcia_tot} \\ 
-& \forall k \in ENV
+{LCIA_{tot}}(k) & = \sum_{j \in TECH} \left( {LCIA_{infra}}(j, k) + {LCIA_{op}}(j, k) \right) + \sum_{r \in RES} {LCIA_{op}}(r, k) \\ 
+& \forall k \in ENV \tag{7}
 \end{split}
 $$
 
 $$
-{LCIA_{infra}}(j, k) = lcia_{infra}^{norm}(j, k) \cdot {F}(j) \cdot \frac{1}{n_{ESM}(j)} \quad \forall (j, k) \in TECH \times ENV\label{eq:lcia_infra}
+{LCIA_{infra}}(j, k) = lcia_{infra}^{norm}(j, k) \cdot {F}(j) \cdot \frac{1}{n_{ESM}(j)} \quad \forall (j, k) \in TECH \times ENV \tag{8}
 $$
 
 $$
-{LCIA_{op}}(j, k) = lcia_{op}^{norm}(j, k) \cdot \sum_{t \in T} {F_t}(j, t) \cdot t_{op}(t) \quad \forall (j, k) \in TECH \cup RES \times ENV\label{eq:lcia_op}
+{LCIA_{op}}(j, k) = lcia_{op}^{norm}(j, k) \cdot \sum_{t \in T} {F_t}(j, t) \cdot t_{op}(t) \quad \forall (j, k) \in TECH \cup RES \times ENV \tag{9}
 $$
 
 ## Integrating ESM results in the LCI database
