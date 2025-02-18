@@ -76,6 +76,8 @@ Distributed under the terms of the [MIT license][License],
 If you encounter any problems,
 please [file an issue][Issue Tracker] along with a detailed description.
 
+## Support
+Contact [matthieu.souttre@polymtl.ca](mailto:matthieu.souttre@polymtl.ca)
 
 <!-- github-only -->
 
@@ -83,24 +85,3 @@ please [file an issue][Issue Tracker] along with a detailed description.
 [License]: https://opensource.org/licenses/MIT
 [Contributor Guide]: https://github.com/matthieu-str/mescal/blob/master/CONTRIBUTING.md
 [Issue Tracker]: https://github.com/matthieu-str/mescal/issues
-
-
-## Building the Documentation
-
-You can build the documentation locally by installing the documentation Conda environment:
-
-```bash
-conda env create -f docs/environment.yaml
-```
-
-activating the environment
-
-```bash
-conda activate sphinx_mescal
-```
-
-and [running the build command](https://www.sphinx-doc.org/en/master/man/sphinx-build.html#sphinx-build):
-
-```bash
-sphinx-build docs _build/html --builder=html --jobs=auto --write-all; open _build/html/index.html
-```
