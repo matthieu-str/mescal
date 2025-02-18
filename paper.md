@@ -169,9 +169,9 @@ ESM is computed with the LCI dataset lifetime, thus resulting in the adjusted in
 ($lcia_{infra}^{adj}$ in \autoref{eq:lcia_infra_adj}).
 
 $$
-\begin{equation}\label{eq:lcia_infra_adj}
-lcia_{infra}^{adj}(j,k) = lcia_{infra}(j,k) \cdot \frac{n_{ESM}(j)}{n_{LCI}(j)} \quad \forall (j,k) \in TECH \times ENV
-\end{equation}
+\begin{align}\label{eq:lcia_infra_adj}
+lcia_{infra}^{adj}(j,k) & = lcia_{infra}(j,k) \cdot \frac{n_{ESM}(j)}{n_{LCI}(j)} \quad \forall (j,k) \in TECH \times ENV
+\end{align}
 $$
 
 - **Technologies efficiency**: Efficiencies of technologies in the ESM and LCI database should be harmonized, 
@@ -187,9 +187,9 @@ double-counting removal step, while the efficiency of the ESM process ($\eta_{ES
 is applied to a list of relevant ESM technologies (`Efficiency.csv`), e.g., technologies involving a combustion process.
 
 $$
-\begin{equation}\label{eq:q_adj}
-q^{adj}(ef, j) = q(ef, j) \cdot \frac{\eta_{LCI}(j)}{\eta_{ESM}(j)} \quad \forall (ef, j) \in EF \setminus \{\text{land, energy}\} \times TECH
-\end{equation}
+\begin{align}\label{eq:q_adj}
+q^{adj}(ef, j) & = q(ef, j) \cdot \frac{\eta_{LCI}(j)}{\eta_{ESM}(j)} \quad \forall (ef, j) \in EF \setminus \{\text{land, energy}\} \times TECH
+\end{align}
 $$
 
 - **Physical units**: The product flows may be expressed in different units in the ESM and the LCI 
@@ -225,35 +225,31 @@ In addition, all normalized indicators ($lcia_{type}^{norm}$ in autoref{eq:lcia_
 indicators of an impact category, to eventually facilitate the solver convergence.
 
 $$
-\begin{equation}\label{eq:lcia_type_max}
-\begin{split}
+\begin{split}\label{eq:lcia_type_max}
 lcia_{type,max}(k) & = \max(lcia_{type}(j,k) \ | \ j \in TECH \ \cup \ RES) \\
 & \forall type \in \{infra, op\} \quad \forall k \in ENV
 \end{split}
-\end{equation}
 $$
 
 $$
-\begin{equation}\label{eq:lcia_infra_scaled}
+\begin{align}\label{eq:lcia_infra_scaled}
 lcia_{infra}^{scaled}(j,k) & = lcia_{infra}^{adj}(j,k) \cdot \dfrac{lcia_{op,max}(k)}{lcia_{infra,max}(k)} \forall (j,k) \in TECH \times ENV
-\end{equation}
+\end{align}
 $$
 
 $$
-\begin{equation}\label{eq:lcia_max}
-lcia_{max}(k) = \max(lcia_{type,max}(j,k) \ | \ type \in \{infra, op\}, \ j \in TECH) \quad \forall k \in ENV
-\end{equation}
+\begin{align}\label{eq:lcia_max}
+lcia_{max}(k) & = \max(lcia_{type,max}(j,k) \ | \ type \in \{infra, op\}, \ j \in TECH) \quad \forall k \in ENV
+\end{align}
 $$
 
 $$
-\begin{equation}\label{eq:lcia_type_norm}
 lcia_{type}^{norm}(j,k) = 
-\begin{cases}
+\begin{cases}\label{eq:lcia_type_norm}
     0 \text{ if } \dfrac{lcia_{type}^{(scaled)}(j,k)}{lcia_{max}(k)} \leq \epsilon \\
     \dfrac{lcia_{type}^{(scaled)}(j,k)}{lcia_{max}(k)} \cdot \dfrac{lcia_{infra,max}(k)}{lcia_{op,max}(k)} \text{ elif } type = infra \\
     \dfrac{lcia_{type}^{(scaled)}(j,k)}{lcia_{max}(k)} \text{ else}
 \end{cases}
-\end{equation}
 $$
 $$
 \forall (j,k) \in TECH \ \cup \ RES \times ENV \quad \forall type \in \{infra, op\}
@@ -271,24 +267,22 @@ impacts ($lcia^{norm}_{op}$), which are respectively computed from the operation
 with the annual operation (${F_t} \times t_{op}$) (\autoref{eq:lcia_op}). 
 
 $$
-\begin{equation}\label{eq:lcia_tot}
-\begin{split}
+\begin{split}\label{eq:lcia_tot}
 {LCIA_{tot}}(k) & = \sum_{j \in TECH} \left( {LCIA_{infra}}(j, k) + {LCIA_{op}}(j, k) \right) + \sum_{r \in RES} {LCIA_{op}}(r, k) \\ 
 & \forall k \in ENV
 \end{split}
-\end{equation}
 $$
 
 $$
-\begin{equation}\label{eq:lcia_infra}
-{LCIA_{infra}}(j, k) = lcia_{infra}^{norm}(j, k) \cdot {F}(j) \cdot \frac{1}{n_{ESM}(j)} \quad \forall (j, k) \in TECH \times ENV
-\end{equation}
+\begin{align}\label{eq:lcia_infra}
+{LCIA_{infra}}(j, k) & = lcia_{infra}^{norm}(j, k) \cdot {F}(j) \cdot \frac{1}{n_{ESM}(j)} \quad \forall (j, k) \in TECH \times ENV
+\end{align}
 $$
 
 $$
-\begin{equation}\label{eq:lcia_op}
-{LCIA_{op}}(j, k) = lcia_{op}^{norm}(j, k) \cdot \sum_{t \in T} {F_t}(j, t) \cdot t_{op}(t) \quad \forall (j, k) \in TECH \cup RES \times ENV
-\end{equation}
+\begin{align}\label{eq:lcia_op}
+{LCIA_{op}}(j, k) & = lcia_{op}^{norm}(j, k) \cdot \sum_{t \in T} {F_t}(j, t) \cdot t_{op}(t) \quad \forall (j, k) \in TECH \cup RES \times ENV
+\end{align}
 $$
 
 ## Integrating ESM results in the LCI database
