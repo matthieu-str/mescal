@@ -10,6 +10,9 @@ pd.options.mode.chained_assignment = None  # default='warn'
 def compute_impact_scores(
         self,
         methods: list[str],
+        specific_lcia_categories: list[str] = None,
+        specific_lcia_abbrev: list[str] = None,
+        impact_abbrev: pd.DataFrame = None,
         assessment_type: str = 'esm',
         activities_subject_to_double_counting: pd.DataFrame = None,
         overwrite: bool = True,
@@ -18,12 +21,17 @@ def compute_impact_scores(
     Compute the impact scores of the technologies and resources
 
     :param methods: list of life-cycle impact assessment methods for which LCA scores are computed
-    :param assessment_type: type of assessment, can be 'esm' for the full LCA database, or 'direct emissions' for the
-        computation of territorial emissions only
-    :param activities_subject_to_double_counting: activities that were subject to the double counting removal
+    :param specific_lcia_categories: restrict the impact assessment to specific LCIA categories
+    :param specific_lcia_abbrev: restrict the impact assessment to specific LCIA categories identified by their
+        abbreviation in the impact_abbrev file
+    :param impact_abbrev: dataframe containing the impact categories abbreviations
+    :param assessment_type: type of assessment, can be 'esm' for the computation of the energy system life-cycle
+        impacts, or 'direct emissions' for the computation of direct emissions only
+    :param activities_subject_to_double_counting: activities that were subject to the double counting removal.
+        Only needed if assessment_type is 'direct emissions'.
     :param overwrite: only relevant if assessment_type is 'direct emissions', if True, the direct emissions database
         will be overwritten if it exists
-    :return: impact scores of the technologies and resources for all impact categories of all LCIA methods
+    :return: impact scores of the technologies and resources for all selected impact categories
     """
     if assessment_type == 'direct emissions' and activities_subject_to_double_counting is None:
         raise ValueError('For territorial emissions computation, the activities_subject_to_double_counting dataframe '
@@ -31,6 +39,12 @@ def compute_impact_scores(
 
     if assessment_type != 'esm' and assessment_type != 'direct emissions':
         raise ValueError('The assessment type must be either "esm" or "direct emissions"')
+
+    if specific_lcia_categories is not None and specific_lcia_abbrev is not None:
+        raise ValueError('You cannot specify both specific_lcia_categories and specific_lcia_abbrev')
+
+    if specific_lcia_abbrev is not None and impact_abbrev is None:
+        raise ValueError('You must provide the impact_abbrev dataframe if you want to use specific_lcia_abbrev')
 
     # Store frequently accessed instance variables in local variables inside a method
     mapping = self.mapping
@@ -88,7 +102,21 @@ def compute_impact_scores(
         raise ValueError('The assessment type must be either "esm" or "direct emissions')
 
     activities_bw = {(i['database'], i['code']): i for i in activities}
+
     impact_categories = self.get_impact_categories(methods)
+
+    # Filtering impact categories if specific_lcia_categories or specific_lcia_abbrev is provided
+    if specific_lcia_abbrev is not None:
+        try:
+            impact_abbrev.Impact_category = impact_abbrev.Impact_category.apply(ast.literal_eval)
+        except ValueError:
+            pass
+        specific_lcia_categories_full = list(impact_abbrev[impact_abbrev.Abbrev.isin(specific_lcia_abbrev)].Impact_category)
+        specific_lcia_categories = [i[-1] for i in specific_lcia_categories_full]
+
+    if specific_lcia_categories is not None:
+        impact_categories = [i for i in impact_categories if i[-1] in specific_lcia_categories]
+
     bd.calculation_setups[calculation_setup_name] = {
         'inv': [{key: 1} for key in list(activities_bw.keys())],
         'ia': impact_categories

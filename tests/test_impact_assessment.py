@@ -79,8 +79,6 @@ technology_compositions = [
     ['TRAIN_FREIGHT_DIESEL', ['TRAIN_FREIGHT_DIESEL_LOC', 'TRAIN_FREIGHT_DIESEL_WAG']],
 ]
 
-methods = ['IMPACT World+ Damage 2.0.1_regionalized']
-
 unit_conversion = [
     ['TRAIN_FREIGHT_DIESEL_LOC', 'Construction', 2, 'unit', 'unit'],
     ['TRAIN_FREIGHT_DIESEL_WAG', 'Construction', 20, 'unit', 'unit'],
@@ -93,10 +91,17 @@ lifetime = [
     ['TRAIN_FREIGHT_DIESEL_WAG', None, 50],
 ]
 
+methods = ['IPCC 2021']
+
+impact_abbrev = [
+    ["('IPCC 2021', 'climate change', 'global warming potential (GWP100)')", "kg CO2-Eq", "CC", "CC"],
+]
+
 mapping = pd.DataFrame(mapping, columns=['Name', 'Type', 'Product', 'Activity', 'Location', 'Database', 'New_code'])
 technology_compositions = pd.DataFrame(technology_compositions, columns=['Name', 'Components'])
 unit_conversion = pd.DataFrame(unit_conversion, columns=['Name', 'Type', 'Value', 'LCA', 'ESM'])
 lifetime = pd.DataFrame(lifetime, columns=['Name', 'ESM', 'LCA'])
+impact_abbrev = pd.DataFrame(impact_abbrev, columns=['Impact_category', 'Unit', 'Abbrev', 'AoP'])
 
 
 @pytest.mark.tags("requires_ecoinvent")
@@ -118,13 +123,14 @@ def test_compute_impact_score():
 
     R = esm.compute_impact_scores(
         methods=methods,
+        impact_abbrev=impact_abbrev,
+        specific_lcia_abbrev=['CC'],
     )
 
     lcia_value = R[
-        (R.Impact_category == ('IMPACT World+ Damage 2.0.1_regionalized',
-                               'Ecosystem quality', 'Total ecosystem quality'))
+        (R.Impact_category == ('IPCC 2021', 'climate change', 'global warming potential (GWP100)'))
         & (R.Name == 'TRAIN_FREIGHT_DIESEL')
         & (R.Type == 'Construction')
         ].Value.iloc[0]
 
-    assert 61.12 <= lcia_value <= 61.13
+    assert 44.40 <= lcia_value <= 44.41
