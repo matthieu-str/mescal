@@ -41,7 +41,7 @@ As a result, energy modellers and decision-makers can identify transition scenar
 enabling a more holistic sustainability assessment.
 
 # Statement of need
-ESM aim to support decision-makers to design and assess energy transition scenarios. In this work, we focus on 
+ESM aims to support decision-makers to design and assess energy transition scenarios. In this work, we focus on 
 bottom-up models, which describe energy technologies with a high level of technical details [@herbst2012].
 Most ESM integrate carbon emissions in their modelling framework to propose and assess climate change mitigation scenarios.
 However, the environmental assessment of energy transition scenarios should not be limited to carbon emissions [@hellweg2023].
@@ -79,7 +79,7 @@ between ESM/IAM scenario variables and LCI datasets, `pathways` computes the env
 scenarios and provides insights about their trade-offs and hot spots. `pathways` allows a transparent and reproducible 
 assessment of energy transition scenarios. ESM/IAM results can be further included in a prospective LCI database using `premise`
 custom scenarios [@sacchi2022], thus making soft-linked coupling possible.
-However, such framework does not allow the endogenous integration of LCA indicators within ESM or IAM, 
+However, this framework does not allow for the endogenous integration of LCA indicators within ESM or IAM, 
 thus significantly limiting energy modellers ability to shape transition scenarios with LCA results.
 
 `mescal` aims to address this limitation, by enhancing the reproducibility and transparency of hard-linked coupling 
@@ -87,13 +87,13 @@ between LCA and ESM, thus allowing a better comparability among energy modellers
 sustainability metrics.
 
 # Description
-`mescal` reads four mandatory CSV files:
+`mescal` requires four mandatory CSV files:
 
 - `Mapping.csv`: the mapping between ESM technologies/resources and LCI datasets from a LCI 
 database, e.g., _ecoinvent_ [@wernet2016].
 
-- `ESM.csv`: the input and output energy vectors of ESM technologies, e.g., a gas boiler with 90% efficiency has a natural gas 
-input flow of 1.11 kWh and a heat output flow of 1 kWh.
+- `ESM.csv`: the input and output energy vectors of ESM technologies, e.g., a gas boiler with 90% efficiency has an 
+input of 1.11 kWh of natural gas and produces 1 kWh of heat.
 
 - `Conversion factors.csv`: the set of unit conversion factors between ESM technologies/resources and their mapped LCI datasets, 
 e.g., from GWh to MJ.
@@ -101,7 +101,7 @@ e.g., from GWh to MJ.
 - `CPC.csv`: the mapping between ESM energy vectors (e.g., electricity, heat, natural gas) and Central Product 
 Classification (CPC) categories [@unitednations2015].
 
-In addition, `mescal` reads several optional CSV files, including:
+In addition, `mescal` can use several optional CSV files, including:
 
 - `Lifetime.csv`: the lifetime of the ESM technologies in the ESM and in the LCI database.
 
@@ -120,7 +120,8 @@ Each technology or resource of the ESM is mapped with one or several LCI dataset
 Technologies are typically mapped with two LCI datasets: 1) an operation LCI dataset, which encompasses 
 the use phase of the technology's life-cycle, and 2) an infrastructure LCI dataset, which encompasses the 
 construction and dismantling phases of the technology's life-cycle. 
-The ESM resources are typically mapped with one operation LCI dataset, which encompass the resource extraction, 
+ESM resources (which can also be seen as energy imports) are technology inputs. 
+They are typically mapped with one operation LCI dataset, which encompasses the resource extraction, 
 processing, and transportation phases. Regarding LCI databases, `mescal` is suited for any version of the 
 _ecoinvent_ database [@wernet2016] and any prospective LCI database generated via `premise` [@sacchi2022].
 
@@ -142,9 +143,9 @@ inventory can be regionalized using the `regioinvent` library [@maximeagez2025].
 Double-counting refers to the multiple occurrence of energy flows within the energy system supply chain, thus leading 
 to an overestimation of environmental impacts. For instance, if a coal power plants produces electricity that is 
 later used in a heat pump, impacts of the electricity flow are counted twice: once in the coal power plant LCI dataset
-and once in the heat pump LCI dataset. @volkart2018 proposed a solution to the double-counting issue by 
-setting to zero all flows in the foreground inventory that were also modelled in the ESM. 
-This approach is implemented in `mescal` by identifying the flows to be nullified using their CPC 
+and once in the heat pump LCI dataset (input intermediary flow of electricity). 
+@volkart2018 proposed a solution to the double-counting issue by setting to zero all flows in the foreground inventory 
+that were also modelled in the ESM. This approach is implemented in `mescal` by identifying the flows to be nullified using their CPC 
 categories [@unitednations2015] (\autoref{fig:flowchart_double_counting}). In the previous example, the input electricity
 flow of the heat pump operation LCI dataset would be set to zero.
 
@@ -159,10 +160,10 @@ recursive algorithm exploring the market-type datasets backgrounds (\autoref{fig
 number of intermediary flows on the activity $act$.\label{fig:flowchart_background_search}](docs/pics/background_search_flowchart.png)
 
 ## ESM and LCI database harmonization
-`mescal` adjusts LCI datasets and impact scores to account for differences between the ESM and LCI database:
+`mescal` adjusts LCI datasets and specific impact scores to account for differences between the ESM and LCI database:
 
 - **Technologies lifetime**: Infrastructure LCA indicators are annual impacts, thus `mescal` adjusts the 
-infrastructure impact scores to integrate the difference of lifetime between ESM technologies and their 
+infrastructure specific impact scores to integrate the difference of lifetime between ESM technologies and their 
 infrastructure LCI datasets. The infrastructure specific impact score ($lcia_{infra}$) is multiplied by the ratio 
 between the ESM lifetime ($n_{ESM}$) and the LCI dataset lifetime ($n_{LCI}$) (`Lifetime.csv`) to ensure that the annual impact in the 
 ESM is computed with the LCI dataset lifetime, thus resulting in the adjusted infrastructure specific impact score 
@@ -181,15 +182,15 @@ of all elementary flows in the operation LCI datasets foregrounds are adjusted u
 the LCI dataset ($\eta_{LCI}$) and the ESM ($\eta_{ESM}$) efficiencies, thus resulting in adjusted direct emissions 
 amounts ($q^{adj}$ in Eq. (2)). 
 The efficiency of the operation LCI dataset ($\eta_{LCI}$) is computed using the quantity of fuel that was removed during the 
-double-counting removal step, while the efficiency of the ESM process ($\eta_{ESM}$) is computed from `ESM.csv`. This transformation 
-is applied to a list of relevant ESM technologies (`Efficiency.csv`), e.g., technologies involving a combustion process.
+double-counting removal step, while the efficiency of the ESM technology ($\eta_{ESM}$) is computed from `ESM.csv`. This transformation 
+is applied to a list of relevant ESM technologies (`Efficiency.csv`), e.g., technologies that involve a combustion process.
 
 $$
 q^{adj}(ef, j) = q(ef, j) \cdot \frac{\eta_{LCI}(j)}{\eta_{ESM}(j)} \quad \forall (ef, j) \in EF \setminus \{\text{land, energy}\} \times TECH \quad \text{(2)}
 $$
 
 - **Physical units**: The product flows may be expressed in different units in the ESM and the LCI 
-database. Specific impact scores are multiplied by a conversion factor, which converts the specific LCA 
+database. Specific impact scores are multiplied by a conversion factor, which converts the specific impact 
 scores physical unit from [impact category unit / LCI output unit] to [impact category unit / ESM output unit]. 
 Conversion factors encompass LCI datasets assumptions such as capacity factors or vehicle load factors (`Conversion factors.csv`).
 
@@ -202,20 +203,23 @@ set to zero during the double-counting removal step.
 `mescal` can compute LCA indicators using any set of impact assessment methods, e.g., IMPACT World+ [@bulle2019], ReCiPe 
 [@huijbregts2017] or Environmental Footprint (EF) [@europeancommission.jointresearchcentre.2018]. 
 Alternatively, a module computing only direct emissions has been developed to ease the comparison between territorial 
-emissions and life-cycle emissions. 
+emissions and life-cycle emissions. This module sets all foreground intermediary flows to zero, thus only considering
+direct emissions for the impact assessment. The equivalence between territorial emissions and direct emissions is based 
+on the assumption that all modeled direct emissions are located in the geography of interest. 
 
-## Normalization of LCA indicators 
-Prior to integration into ESM, LCA indicators are normalized. In the context of optimization, 
-normalization is beneficial in facilitating the solver's convergence, given that LCA indicators may exhibit 
-significant discrepancies in magnitude across impact categories. By aligning all metrics within a comparable order of 
-magnitude, numerical stability is improved in the solving process. 
-Furthermore, considerable discrepancies in magnitude may be observed between infrastructure and operation LCA indicators 
-within the same impact category, as these are not expressed with the same physical unit. 
+## Normalization of impact scores 
+Prior to integration into ESM, specific impact scores are normalized. In the context of optimization, 
+normalization is beneficial in facilitating the solver's convergence, given that specific impact scores may exhibit 
+significant discrepancies in magnitude across impact categories and technologies. By aligning all metrics within a 
+comparable order of magnitude, numerical stability is improved in the solving process. 
+Furthermore, considerable discrepancies in magnitude may be observed between infrastructure and operation specific impact scores 
+within the same impact category, as these are not expressed with the same physical unit (e.g., kg CO$_2$-eq/kW for 
+infrastructure and kg CO$_2$-eq/kWh for operation).
 Consequently, a scaling factor ($lcia_{op,max}(k) / lcia_{infra,max}(k)$ in Eq. (4)) is applied 
-to infrastructure LCA indicators, to ensure that both the highest infrastructure and operation indicators are normalized to 1. 
+to infrastructure specific impact scores, to ensure that both the highest infrastructure and operation indicators are normalized to 1. 
 The scaling factor invert is then applied to normalized infrastructure indicators (Eq. (6)), 
-in order to keep the magnitude difference between operation and infrastructure LCA indicators in ESM. 
-Normalization is performed with the maximum indicator ($lcia_{max}$ in Eq. (3)) of each impact category. 
+in order to keep the magnitude difference between operation and infrastructure specific impact scores in ESM. 
+Normalization is performed using the maximum indicator ($lcia_{max}$ in Eq. (3)) of each impact category. 
 In addition, all normalized indicators ($lcia_{type}^{norm}$ in Eq. (6)) that are below a threshold 
 ($\epsilon$) are set to zero. This aims to determine the maximum order of magnitude between the highest and lowest 
 indicators of an impact category, to eventually facilitate the solver convergence.
@@ -274,11 +278,11 @@ $$
 $$
 
 ## Integrating ESM results in the LCI database
-In ordre to update the LCI database with the ESM results, `mescal` overwrites the relevant LCI datasets, 
+In order to update the LCI database with the ESM results, `mescal` overwrites the relevant LCI datasets, 
 i.e., LCI datasets that are in the sectoral and geographical scope of the ESM, such as markets for electricity, heat or 
 transport. The activities composing the market and their respective shares are determined using the ESM annual 
 operation results and the `Mapping.csv` file .  
-Updating the LCI database background inventory paves for the way for using `mescal` with myopic ESM, i.e., ESM 
+Updating the LCI database background inventory paves the way for using `mescal` with myopic ESM, i.e., ESM 
 dividing the transition period into a sequence of consecutive optimization problems [@prina2020], through an iterative 
 3-step procedure: 1) run the ESM at time-step $t$, 2) update the LCI database with the ESM results at time-step $t$, 
 and 3) update the LCA indicators with the updated LCI database for time-step $t+1$.
@@ -324,8 +328,8 @@ Technologies_, the _Institut de l’énergie Trottier de Polytechnique Montréal
 | $t_{op}(t)$         | Time period $t$ duration                                                            | hours                                 |
 | $n_{ESM}(j)$        | Lifetime of a technology $j$ in the ESM                                             | years                                 |
 | $n_{LCI}$           | Lifetime of a technology $j$ in the LCI dataset                                     | years                                 |
-| $lcia_{infra}(j,k)$ | Specific infrastructure impact of technology $j$ for impact category $k$            | impact category unit / capacity unit  |
-| $lcia_{op}(j/r,k)$  | Specific operation impact of technology $j$ or resource $r$ for impact category $k$ | impact category unit / operation unit |
+| $lcia_{infra}(j,k)$ | Infrastructure specific impact of technology $j$ for impact category $k$            | impact category unit / capacity unit  |
+| $lcia_{op}(j/r,k)$  | Operation specific impact of technology $j$ or resource $r$ for impact category $k$ | impact category unit / operation unit |
 | $\eta_{LCI}(j)$     | Efficiency of technology $j$ in the operation LCI dataset                           | dimensionless                         |
 | $\eta_{ESM}(j)$     | Efficiency of technology $j$ in the ESM                                             | dimensionless                         |
 | $q(ef, j)$          | Amount of elementary flow $ef$ in the operation LCI dataset of technology $j$       | elementary flow unit                  |
