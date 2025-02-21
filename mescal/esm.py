@@ -158,7 +158,8 @@ class ESM:
     from .esm_back_to_lca import (
         create_new_database_with_esm_results,
         create_or_modify_activity_from_esm_results,
-        replace_mobility_end_use_type
+        replace_mobility_end_use_type,
+        connect_esm_results_to_database,
     )
     from .normalization import normalize_lca_metrics
     from .generate_lcia_obj_ampl import generate_mod_file_ampl
@@ -276,7 +277,7 @@ class ESM:
             return_database: bool = False,
             write_database: bool = True,
             write_double_counting_removal_reports: bool = True,
-    ) -> Database:
+    ) -> Database | None:
         """
         Create the ESM database after double counting removal. Three csv files summarizing the double-counting removal
         process are automatically saved in the results folder: double_counting_removal.csv (amount of removed
@@ -287,7 +288,7 @@ class ESM:
         :param write_database: if True, write the ESM database to Brightway
         :param write_double_counting_removal_reports: if True, write the double-counting removal reports in the results
             folder
-        :return: the ESM database if return_database is True
+        :return: the ESM database if return_database is True, None otherwise
         """
 
         try:
@@ -297,6 +298,9 @@ class ESM:
 
         if (self.efficiency is not None) & (self.unit_conversion is None):
             raise ValueError('Unit conversion file is needed for efficiency differences correction. Please provide it.')
+
+        if write_database is False and return_database is False:
+            raise ValueError('Please set either return_database or write_database to True.')
 
         # Adding current code to the mapping file
         self.mapping['Current_code'] = self.mapping.apply(lambda row: self.main_database.get_code(
@@ -530,18 +534,21 @@ class ESM:
         modify_inventory.py
 
         :param db: LCI database
-        :param db_type: type of LCI database, can be 'esm' or 'main'
+        :param db_type: type of LCI database, can be 'esm', 'esm results' or 'main'
         :return: None (activities are modified in the brightway project)
         """
 
         if db_type == 'esm':
             db_name = self.esm_db_name
             return_type = 'name'
+        elif db_type == 'esm results':
+            db_name = self.esm_db_name + '_results'
+            return_type = 'code'
         elif db_type == 'main':
             db_name = db.db_names
             return_type = 'code'
         else:
-            raise ValueError('db_type must be either "esm" or "main"')
+            raise ValueError('db_type must be either "esm", "esm results" or "main"')
 
         # Change carbon flow of DAC from biogenic to fossil
         dac_technologies = list(self.tech_specifics[self.tech_specifics.Specifics == 'DAC'].Name)
