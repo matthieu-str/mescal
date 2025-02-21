@@ -492,13 +492,13 @@ def change_flow_value(
     act = bd.Database(database_name).get(activity_code)
 
     if flow_type == 'biosphere':
-        for exc in act.biosphere():
+        for exc in [i for i in act.biosphere()]:
             if exc.input[1] == flow_code:
                 exc['amount'] = new_value
                 exc.save()
 
     elif flow_type == 'technosphere':
-        for exc in act.technosphere():
+        for exc in [i for i in act.technosphere()]:
             if exc.input[1] == flow_code:
                 exc['amount'] = new_value
                 exc.save()
