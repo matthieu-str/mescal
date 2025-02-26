@@ -33,6 +33,7 @@ dependencies = [
     "wurst",
     "pandas",
     "brightway2",
+    "plotly",
 ]
 
 [project.urls]
