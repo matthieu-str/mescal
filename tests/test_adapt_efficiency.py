@@ -284,6 +284,16 @@ dummy_db = [
                 'database': 'dummy_db'
             },
             {
+                'name': 'market for petrol, low-sulfur',
+                'product': 'petrol, low-sulfur',
+                'location': 'CH',
+                'amount': 0,  # removed during double-counting correction
+                'type': 'technosphere',
+                'code': '00003',
+                'unit': 'kilogram',
+                'database': 'dummy_db'
+            },
+            {
                 'name': 'Carbon monoxide, fossil',
                 'categories': ('air', 'non-urban air or from high stacks'),
                 'amount': 0.04,
@@ -447,7 +457,10 @@ removed_flows = [
     ['CAR_GASOLINE', 'transport, passenger car', 'market for transport, passenger car, gasoline, type II', 'CH',
      'dummy_db', '00006', 5e-6, 'unit', 'passenger car construction', 'passenger car', 'CH', 'dummy_db', '00002'],
     ['CAR_GASOLINE', 'transport, passenger car', 'market for transport, passenger car, gasoline, type II', 'CH',
-     'dummy_db', '00006', 0.04, 'kilogram', 'market for petrol, low-sulfur', 'petrol, low-sulfur', 'CH', 'dummy_db',
+     'dummy_db', '00006', 0.03, 'kilogram', 'market for petrol, low-sulfur', 'petrol, low-sulfur', 'CH', 'dummy_db',
+     '00003'],
+    ['CAR_GASOLINE', 'transport, passenger car', 'market for transport, passenger car, gasoline, type II', 'CH',
+     'dummy_db', '00006', 0.01, 'kilogram', 'market for petrol, low-sulfur', 'petrol, low-sulfur', 'CH', 'dummy_db',
      '00003'],
     ['CAR_PROPANE', 'transport, passenger car', 'market for transport, passenger car, gasoline, type I', 'CH',
      'dummy_db', '00001A', 5e-6, 'unit', 'passenger car construction', 'passenger car', 'CH', 'dummy_db', '00002'],
@@ -459,7 +472,7 @@ removed_flows = [
     ['CAR_BIODIESEL_B20', 'transport, passenger car', 'market for transport, passenger car, diesel', 'CH', 'dummy_db',
      '00001B', 0.06, 'kilogram', 'market for diesel', 'diesel', 'CH', 'dummy_db', '00010'],
 ]
-# CAR_GASOLINE: the "efficiency" in the LCI database is 1/0.05 km/kg for type I and 1/0.04 km/kg for type II
+# CAR_GASOLINE: the "efficiency" in the LCI database is 1/0.05 km/kg for type I and 1/(0.03+0.01) km/kg for type II
 # CAR_PROPANE: the right flow has not been found (gasoline instead of propane), so the efficiency should not be adjusted
 # CAR_BIODIESEL_B20: the "efficiency" in the LCI database is 1/0.06 km/kg
 
@@ -471,12 +484,12 @@ unit_conversion = [
     ['diesel', 'Other', 0.075, 'kilogram', 'kilowatt hour'],
 ]
 # CAR_GASOLINE: after unit conversion, the "efficiency" in the LCI db is 1/0.05 * 0.0829/0.667 pkm/kWh for type I
-# and 1/0.04 * 0.0829 / 0.667 pkm/kWh for type II
+# and 1/(0.03+0.01) * 0.0829 / 0.667 pkm/kWh for type II
 # CAR_BIODIESEL_B20: after unit conversion, the "efficiency" in the LCI db is 1/0.06 * 0.075/0.667 pkm/kWh
 
 double_counting_removal = [
-    ['CAR_GASOLINE', 'GASOLINE', 0.05 * 0.4 + 0.04 * 0.6],
-    ['CAR_GASOLINE', 'TRANSPORT_FUEL', 0.05 * 0.4 + 0.04 * 0.6],
+    ['CAR_GASOLINE', 'GASOLINE', 0.05 * 0.4 + (0.03 + 0.01) * 0.6],
+    ['CAR_GASOLINE', 'TRANSPORT_FUEL', 0.05 * 0.4 + (0.03 + 0.01) * 0.6],
     ['CAR_GASOLINE', 'CONSTRUCTION', 5e-6 * 0.4 + 5e-6 * 0.6],
     ['CAR_PROPANE', 'TRANSPORT_FUEL', 0.05],
     ['CAR_PROPANE', 'CONSTRUCTION', 5e-6],
@@ -519,17 +532,8 @@ def test_correct_esm_and_lca_efficiency_differences():
         write_efficiency_report=False,
     )
 
-    # updated_db = correct_esm_and_lca_efficiency_differences(
-    #     db=dummy_db,
-    #     model=model,
-    #     efficiency=efficiency,
-    #     mapping_esm_flows_to_CPC=mapping_esm_flows_to_CPC,
-    #     removed_flows=removed_flows,
-    #     unit_conversion=unit_conversion,
-    #     double_counting_removal=double_counting_removal,
-    # )
     updated_db_dict_code = esm.main_database.db_as_dict_code
-    efficiency_ratio = (1 / (0.05 * 0.4 + 0.04 * 0.6) * 0.0829 / 0.667) / (1 / 0.4)
+    efficiency_ratio = (1 / (0.05 * 0.4 + (0.03 + 0.01) * 0.6) * 0.0829 / 0.667) / (1 / 0.4)
 
     act_type_I = updated_db_dict_code['dummy_db', '00001']
     for bf in Dataset(act_type_I).get_biosphere_flows():

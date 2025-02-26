@@ -90,7 +90,7 @@ def correct_esm_and_lca_efficiency_differences(
 
     for i in range(len(efficiency)):
 
-        act_to_adapt_list = []
+        act_to_adapt_list = []  # there might be several activities to adapt for one technology in case of market
         tech = efficiency['Name'].iloc[i]
         flows_list = efficiency['Flow'].iloc[i]
 
@@ -109,7 +109,9 @@ def correct_esm_and_lca_efficiency_differences(
                         # if this flow (that was removed during double counting removal) is a fuel flow of the
                         # technology, the biosphere flows the activity will be adjusted
                         act_to_adapt = db_dict_code[main_act_database, main_act_code]
-                        act_to_adapt_list.append(act_to_adapt)
+                        if act_to_adapt not in act_to_adapt_list:
+                            # in case there are several fuel flows in the same activity
+                            act_to_adapt_list.append(act_to_adapt)
 
         if len(act_to_adapt_list) == 0:
             print(f'No flow of type(s) {flows_list} found for {tech}. The efficiency of this technology cannot be '
