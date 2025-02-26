@@ -146,10 +146,10 @@ def compute_impact_scores(
         R_long = R.melt(ignore_index=False, var_name='New_code').reset_index()
         R_long.rename(columns={'index': 'Impact_category', 'value': 'Value'}, inplace=True)
         R_long = R_long.merge(
-            right=activities_subject_to_double_counting[['Name', 'Activity code', 'Type']],
-            left_on='New_code',
-            right_on='Activity code'
-        ).drop(columns='Activity code')
+            right=mapping[mapping.Type == 'Operation'][['Name', 'New_code', 'Type']],
+            on='New_code',
+            how='left'
+        )
         return R_long
 
     R_tech_op = R[list(mapping[mapping.Type == 'Operation'].New_code)]
