@@ -80,18 +80,18 @@ def generate_mod_file_ampl(
             # Equation of LCIAs variables (construction scaling to F_Mult)
             f.write('# Construction\n'
                     'subject to lcia_constr_calc {id in INDICATORS, i in TECHNOLOGIES}:\n'
-                    f'  LCIA_constr[id,i] >= (1/refactor[id]) * lcia_constr[id,i] * F_Mult[i];\n\n')
+                    f'  LCIA_constr[id,i] = (1/refactor[id]) * lcia_constr[id,i] * F_Mult[i];\n\n')
 
         # Equation of LCIAs variables (operation scaling to F_Mult_t)
         f.write('# Operation\n'
                 f'subject to {metric_type.lower()}_op_calc {{id in INDICATORS, i in TECHNOLOGIES}}:\n'
-                f'  {metric_type}_op[id,i] >= {metric_type.lower()}_op[id,i] * sum {{t in PERIODS}} (t_op[t] * F_Mult_t[i, t]);\n\n')
+                f'  {metric_type}_op[id,i] = {metric_type.lower()}_op[id,i] * sum {{t in PERIODS}} (t_op[t] * F_Mult_t[i, t]);\n\n')
 
         if assessment_type == 'esm':
             # Equation of LCIAs variables (resources scaling to F_Mult_t)
             f.write('# Resources\n'
                     'subject to lcia_res_calc {id in INDICATORS, r in RESOURCES}:\n'
-                    '  LCIA_res[id,r] >= lcia_res[id,r] * sum {t in PERIODS} (t_op[t] * F_Mult_t[r, t]);\n\n')
+                    '  LCIA_res[id,r] = lcia_res[id,r] * sum {t in PERIODS} (t_op[t] * F_Mult_t[r, t]);\n\n')
 
         # Equation defining the total LCIA impact (sum over all technologies and resources)
         if assessment_type == 'esm':
