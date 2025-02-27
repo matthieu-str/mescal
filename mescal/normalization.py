@@ -103,10 +103,11 @@ def normalize_lca_metrics(
         specific_lcia_categories: list[str] = None,
         specific_lcia_abbrev: list[str] = None,
         assessment_type: str = 'esm',
+        max_per_cat: pd.DataFrame = None,
         path: str = 'results/',
         file_name: str = 'techs_lcia',
         metadata: dict = None,
-        output: str = 'write'
+        output: str = 'write',
 ) -> None | tuple[pd.DataFrame, dict]:
     """
     Create a .dat file containing the normalized LCA metrics for AMPL and a csv file containing the normalization
@@ -121,6 +122,8 @@ def normalize_lca_metrics(
     :param specific_lcia_abbrev: specific LCIA abbreviations to be used
     :param assessment_type: type of assessment, can be 'esm' for the full LCA database, or 'direct emissions' for the
         computation of territorial emissions only
+    :param max_per_cat: dataframe containing the maximum value of each AoP, needed if assessment_type is 'direct
+        emissions'
     :param impact_abbrev: dataframe containing the impact categories abbreviations
     :param metadata: dictionary containing the metadata. Can contain keys 'ecoinvent_version, 'year', 'spatialized',
         'regionalized', 'iam', 'ssp_rcp', 'lcia_method'.
@@ -128,6 +131,11 @@ def normalize_lca_metrics(
         both operations.
     :return: None or the normalized pandas dataframe and the refactor dictionary (depending on the value of 'output')
     """
+
+    if assessment_type == 'direct emissions' and max_per_cat is None:
+        raise ValueError("If assessment_type is 'direct emissions', max_per_cat must be provided. Run this method with "
+                         "assessment_type='esm' first to get the max_per_cat dataframe.")
+
     if assessment_type == 'esm':
         metric_type = 'lcia'
     elif assessment_type == 'direct emissions':
@@ -150,19 +158,28 @@ def normalize_lca_metrics(
 
     R = pd.merge(R, impact_abbrev, on='Impact_category')
 
-    refactor = {}
-    R_scaled = R[R['Type'] != 'Construction']
-    for aop in R['AoP'].unique():
-        # Scale the construction metrics to be at the same order of magnitude as the operation and resource metrics
-        lcia_op_max = R[((R['Type'] == 'Operation') |
-                         (R['Type'] == 'Resource')) & (R['AoP'] == aop)]['Value'].max()
-        lcia_constr_max = R[(R['Type'] == 'Construction') & (R['AoP'] == aop)]['Value'].max()
-        refactor[aop] = lcia_op_max / lcia_constr_max
-        R_constr_imp = R[(R['Type'] == 'Construction') & (R['AoP'] == aop)]
-        R_constr_imp['Value'] *= refactor[aop]
-        R_scaled = pd.concat([R_scaled, R_constr_imp])  # R matrix but with refactor applied to construction metrics
+    if assessment_type == 'esm':
+        refactor = {}
+        R_scaled = R[R['Type'] != 'Construction']
+        for aop in R['AoP'].unique():
+            # Scale the construction metrics to be at the same order of magnitude as the operation and resource metrics
+            lcia_op_max = R[((R['Type'] == 'Operation') |
+                             (R['Type'] == 'Resource')) & (R['AoP'] == aop)]['Value'].max()
+            lcia_constr_max = R[(R['Type'] == 'Construction') & (R['AoP'] == aop)]['Value'].max()
+            refactor[aop] = lcia_op_max / lcia_constr_max
+            R_constr_imp = R[(R['Type'] == 'Construction') & (R['AoP'] == aop)]
+            R_constr_imp['Value'] *= refactor[aop]
+            R_scaled = pd.concat([R_scaled, R_constr_imp])  # R matrix but with refactor applied to construction metrics
+            R_scaled['max_AoP'] = R_scaled.groupby('AoP')['Value'].transform('max')
 
-    R_scaled['max_AoP'] = R_scaled.groupby('AoP')['Value'].transform('max')
+    else:  # assessment_type == 'direct emissions'
+        refactor = None  # not needed for direct emissions as they are for operation datasets only
+        max_per_cat_dict = {}
+        for i in range(len(max_per_cat)):
+            max_per_cat_dict[max_per_cat['AoP'][i]] = max_per_cat['max_AoP'][i]
+        R_scaled = R.copy()
+        R_scaled['max_AoP'] = R_scaled.apply(lambda x: max_per_cat_dict[x['AoP']], axis=1)
+
     R_scaled['Value_norm'] = R_scaled['Value'] / R_scaled['max_AoP']
     R_scaled['Value_norm'] = R_scaled['Value_norm'].apply(lambda x: x if abs(x) > mip_gap else 0)
 
@@ -208,7 +225,8 @@ def normalize_lca_metrics(
                         f":= {R_scaled.Value_norm.iloc[i]}; # normalized {R_scaled.Unit.iloc[i]}\n")
 
         # To come back to the original values, we save the maximum value of each AoP
-        R_scaled[['Abbrev', 'AoP', 'max_AoP']].drop_duplicates().to_csv(f'{path}{file_name}_max.csv', index=False)
+        if assessment_type == 'esm':
+            R_scaled[['Abbrev', 'AoP', 'max_AoP']].drop_duplicates().to_csv(f'{path}{file_name}_max.csv', index=False)
 
         if output == 'both':
             return R_scaled, refactor
