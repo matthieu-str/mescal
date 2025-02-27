@@ -128,7 +128,11 @@ def normalize_lca_metrics(
         both operations.
     :return: None or the normalized pandas dataframe and the refactor dictionary (depending on the value of 'output')
     """
-    if assessment_type not in ['esm', 'direct emissions']:
+    if assessment_type == 'esm':
+        metric_type = 'lcia'
+    elif assessment_type == 'direct emissions':
+        metric_type = 'direct'
+    else:
         raise ValueError(f"Unknown assessment type: {assessment_type}. Must be 'esm' or 'direct emissions'.")
 
     if metadata is None:
@@ -200,7 +204,7 @@ def normalize_lca_metrics(
             # Declare the LCA indicators values
             for i in range(len(R_scaled)):
                 # Declaring the LCIA parameters
-                f.write(f"let lcia_{tech_type(R_scaled.Type.iloc[i])}['{R_scaled.Abbrev.iloc[i]}','{R_scaled.Name.iloc[i]}'] "
+                f.write(f"let {metric_type}_{tech_type(R_scaled.Type.iloc[i])}['{R_scaled.Abbrev.iloc[i]}','{R_scaled.Name.iloc[i]}'] "
                         f":= {R_scaled.Value_norm.iloc[i]}; # normalized {R_scaled.Unit.iloc[i]}\n")
 
         # To come back to the original values, we save the maximum value of each AoP

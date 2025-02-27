@@ -28,7 +28,12 @@ def generate_mod_file_ampl(
     :param metadata: dictionary containing the metadata to be written at the beginning of the file
     :return: None (writes the file)
     """
-    if assessment_type not in ['esm', 'direct emissions']:
+
+    if assessment_type == 'esm':
+        metric_type = 'LCIA'
+    elif assessment_type == 'direct emissions':
+        metric_type = 'DIRECT'
+    else:
         raise ValueError(f"Unknown assessment type: {assessment_type}. Must be 'esm' or 'direct emissions'.")
 
     if metadata is None:
@@ -64,24 +69,24 @@ def generate_mod_file_ampl(
                     'var LCIA_res {INDICATORS,RESOURCES};\n'
                     'var TotalLCIA {INDICATORS} >= 0;\n\n')
         elif assessment_type == 'direct emissions':
-            f.write('param lcia_op {INDICATORS,TECHNOLOGIES} default 0;\n'
-                    'var LCIA_op {INDICATORS,TECHNOLOGIES};\n'
-                    'var TotalLCIA {INDICATORS} >= 0;\n\n')
+            f.write('param direct_op {INDICATORS,TECHNOLOGIES} default 0;\n'
+                    'var DIRECT_op {INDICATORS,TECHNOLOGIES};\n'
+                    'var TotalDIRECT {INDICATORS} >= 0;\n\n')
 
         if assessment_type == 'esm':
             # Equation of LCIAs variables (construction scaling to F_Mult)
-            f.write('# LCIA construction\n'
+            f.write('# Construction\n'
                     'subject to lcia_constr_calc {id in INDICATORS, i in TECHNOLOGIES}:\n'
                     f'  LCIA_constr[id,i] >= (1/refactor[id]) * lcia_constr[id,i] * F_Mult[i];\n\n')
 
         # Equation of LCIAs variables (operation scaling to F_Mult_t)
-        f.write('# LCIA operation\n'
-                'subject to lcia_op_calc {id in INDICATORS, i in TECHNOLOGIES}:\n'
-                '  LCIA_op[id,i] >= lcia_op[id,i] * sum {t in PERIODS} (t_op[t] * F_Mult_t[i, t]);\n\n')
+        f.write('# Operation\n'
+                f'subject to {metric_type.lower()}_op_calc {{id in INDICATORS, i in TECHNOLOGIES}}:\n'
+                f'  {metric_type}_op[id,i] >= {metric_type.lower()}_op[id,i] * sum {{t in PERIODS}} (t_op[t] * F_Mult_t[i, t]);\n\n')
 
         if assessment_type == 'esm':
             # Equation of LCIAs variables (resources scaling to F_Mult_t)
-            f.write('# LCIA resources\n'
+            f.write('# Resources\n'
                     'subject to lcia_res_calc {id in INDICATORS, r in RESOURCES}:\n'
                     '  LCIA_res[id,r] >= lcia_res[id,r] * sum {t in PERIODS} (t_op[t] * F_Mult_t[r, t]);\n\n')
 
@@ -91,11 +96,11 @@ def generate_mod_file_ampl(
                     '  TotalLCIA[id] = sum {i in TECHNOLOGIES} (LCIA_constr[id,i] / lifetime[i]  '
                     '+ LCIA_op[id,i]) + sum{r in RESOURCES} (LCIA_res[id,r]);\n\n')
         elif assessment_type == 'direct emissions':
-            f.write('subject to totalLCIA_calc_r {id in INDICATORS}:\n'
-                    '  TotalLCIA[id] = sum {i in TECHNOLOGIES} LCIA_op[id,i];\n\n')
+            f.write('subject to totalDIRECT_calc_r {id in INDICATORS}:\n'
+                    '  TotalDIRECT[id] = sum {i in TECHNOLOGIES} DIRECT_op[id,i];\n\n')
 
         # Declaring the total LCIA amount variables
         for abbrev in list(impact_abbrev.Abbrev):
-            f.write(f'var TotalLCIA_{abbrev};\n'
-                    f'subject to LCIA_{abbrev}_cal:\n'
-                    f"  TotalLCIA_{abbrev} = TotalLCIA['{abbrev}'] + TotalCost*1e-6;\n\n")
+            f.write(f'var Total{metric_type}_{abbrev};\n'
+                    f'subject to {metric_type}_{abbrev}_cal:\n'
+                    f"  Total{metric_type}_{abbrev} = Total{metric_type}['{abbrev}'] + TotalCost*1e-6;\n\n")
