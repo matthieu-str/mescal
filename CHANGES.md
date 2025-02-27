@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Corrected error occurring in `correct_esm_and_lca_efficiency_differences` (in `adapt_efficiency.py`) when several input fuel flows were present in an operation LCI dataset.
 - The `mapping_ecoinvent_version_ipynb` notebook (to change the ecoinvent version of your mapping file) has been updated to work with version 3.10.1 of ecoinvent.
+- Variables and parameters naming for direct emissions indicators in the AMPL files (in `normalization.py` and `generate_lcia_obj_ampl.py`) has been updated to be more explicit.
 
 ### Removed
 - The `spatialized_database` argument of the `ESM` class was removed. It is not set to True if `spatialized_biosphere_db` is not None.
