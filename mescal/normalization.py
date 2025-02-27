@@ -206,11 +206,11 @@ def normalize_lca_metrics(
                 f.write(f"# LCIA method: {metadata['lcia_method']}\n")
             f.write("\n")
 
-            # Set of LCA indicators and AoPs
-            f.write(f"set INDICATORS := {' '.join(R_scaled['Abbrev'].unique())};\n\n")
-
-            # Declare the refactor parameters values
             if assessment_type == 'esm':
+                # Set of LCA indicators and AoPs
+                f.write(f"set INDICATORS := {' '.join(R_scaled['Abbrev'].unique())};\n\n")
+
+                # Declare the refactor parameters values
                 f.write('# Parameters to set the operation and infrastructure indicators at the same order of '
                         'magnitude\n')
                 for cat in R_scaled['Abbrev'].unique():

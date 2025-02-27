@@ -55,15 +55,16 @@ def generate_mod_file_ampl(
             f.write(f'# LCIA method: {metadata["lcia_method"]}\n')
         f.write('\n')
 
-        # Set of LCA indicators
-        f.write('set INDICATORS;\n\n')
+        if assessment_type == 'esm':
+            # Set of LCA indicators
+            f.write('set INDICATORS;\n\n')
 
         # Declaring the LCIA parameters and variables
         if assessment_type == 'esm':
             f.write('param lcia_constr {INDICATORS,TECHNOLOGIES} default 0;\n'
                     'param lcia_op {INDICATORS,TECHNOLOGIES} default 0;\n'
                     'param lcia_res {INDICATORS, RESOURCES} default 0;\n'
-                    'param limit {INDICATORS} default 1e10;\n'
+                    'param limit_lcia {INDICATORS} default 1e10;\n'
                     'param refactor {INDICATORS} default 1;\n'
                     'var LCIA_constr {INDICATORS,TECHNOLOGIES};\n'
                     'var LCIA_op {INDICATORS,TECHNOLOGIES};\n'
@@ -71,7 +72,7 @@ def generate_mod_file_ampl(
                     'var TotalLCIA {INDICATORS} >= 0;\n\n')
         elif assessment_type == 'direct emissions':
             f.write('param direct_op {INDICATORS,TECHNOLOGIES} default 0;\n'
-                    'param limit {INDICATORS} default 1e10;\n'
+                    'param limit_direct {INDICATORS} default 1e10;\n'
                     'var DIRECT_op {INDICATORS,TECHNOLOGIES};\n'
                     'var TotalDIRECT {INDICATORS} >= 0;\n\n')
 
@@ -103,7 +104,7 @@ def generate_mod_file_ampl(
 
         # Equation putting a limit to the total LCIA impact
         f.write(f'subject to total{metric_type}_limit {{id in INDICATORS}}:\n'
-                f'  Total{metric_type}[id] <= limit[id];\n\n')
+                f'  Total{metric_type}[id] <= limit_{metric_type.lower()}[id];\n\n')
 
         # Declaring the total LCIA amount variables
         for abbrev in list(impact_abbrev.Abbrev):
