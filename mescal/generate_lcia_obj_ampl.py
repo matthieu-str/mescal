@@ -63,6 +63,7 @@ def generate_mod_file_ampl(
             f.write('param lcia_constr {INDICATORS,TECHNOLOGIES} default 0;\n'
                     'param lcia_op {INDICATORS,TECHNOLOGIES} default 0;\n'
                     'param lcia_res {INDICATORS, RESOURCES} default 0;\n'
+                    'param limit {INDICATORS} default 1e10;\n'
                     'param refactor {INDICATORS} default 1;\n'
                     'var LCIA_constr {INDICATORS,TECHNOLOGIES};\n'
                     'var LCIA_op {INDICATORS,TECHNOLOGIES};\n'
@@ -70,6 +71,7 @@ def generate_mod_file_ampl(
                     'var TotalLCIA {INDICATORS} >= 0;\n\n')
         elif assessment_type == 'direct emissions':
             f.write('param direct_op {INDICATORS,TECHNOLOGIES} default 0;\n'
+                    'param limit {INDICATORS} default 1e10;\n'
                     'var DIRECT_op {INDICATORS,TECHNOLOGIES};\n'
                     'var TotalDIRECT {INDICATORS} >= 0;\n\n')
 
@@ -98,6 +100,10 @@ def generate_mod_file_ampl(
         elif assessment_type == 'direct emissions':
             f.write('subject to totalDIRECT_calc_r {id in INDICATORS}:\n'
                     '  TotalDIRECT[id] = sum {i in TECHNOLOGIES} DIRECT_op[id,i];\n\n')
+
+        # Equation putting a limit to the total LCIA impact
+        f.write(f'subject to total{metric_type}_limit {{id in INDICATORS}}:\n'
+                f'  Total{metric_type}[id] <= limit[id];\n\n')
 
         # Declaring the total LCIA amount variables
         for abbrev in list(impact_abbrev.Abbrev):
