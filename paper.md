@@ -143,7 +143,7 @@ inventory can be regionalized using the `regioinvent` library [@maximeagez2025].
 Double-counting refers to the multiple occurrence of energy flows within the energy system supply chain, thus leading 
 to an overestimation of environmental impacts. For instance, if a coal power plants produces electricity that is 
 later used in a heat pump, impacts of the electricity flow are counted twice: once in the coal power plant LCI dataset
-and once in the heat pump LCI dataset (input intermediary flow of electricity). 
+and once in the heat pump LCI dataset (through the input intermediary flow of electricity). 
 @volkart2018 proposed a solution to the double-counting issue by setting to zero all flows in the foreground inventory 
 that were also modelled in the ESM. This approach is implemented in `mescal` by identifying the flows to be nullified using their CPC 
 categories [@unitednations2015] (\autoref{fig:flowchart_double_counting}). In the previous example, the input electricity
@@ -162,7 +162,7 @@ number of intermediary flows on the activity $act$.\label{fig:flowchart_backgrou
 ## ESM and LCI database harmonization
 `mescal` adjusts LCI datasets and specific impact scores to account for differences between the ESM and LCI database:
 
-- **Technologies lifetime**: Infrastructure LCA indicators are annual impacts, thus `mescal` adjusts the 
+- **Technologies lifetime**: Infrastructure LCA indicators correspond to annual impacts, thus `mescal` adjusts the 
 infrastructure specific impact scores to integrate the difference of lifetime between ESM technologies and their 
 infrastructure LCI datasets. The infrastructure specific impact score ($lcia_{infra}$) is multiplied by the ratio 
 between the ESM lifetime ($n_{ESM}$) and the LCI dataset lifetime ($n_{LCI}$) (`Lifetime.csv`) to ensure that the annual impact in the 
@@ -192,37 +192,41 @@ $$
 - **Physical units**: The product flows may be expressed in different units in the ESM and the LCI 
 database. Specific impact scores are multiplied by a conversion factor, which converts the specific impact 
 scores physical unit from [impact category unit / LCI output unit] to [impact category unit / ESM output unit]. 
-Conversion factors encompass LCI datasets assumptions such as capacity factors or vehicle load factors (`Conversion factors.csv`).
+Conversion factors account for LCI datasets assumptions such as capacity factors or vehicle load factors (`Conversion factors.csv`).
 
 - **Generation of new LCI datasets**: `mescal` generates new LCI datasets by operating modifications on existing ones, 
 to enhance their alignment with the corresponding ESM technology. For example, biodiesel-fuelled mobility LCI datasets
-are created by replacing direct fossil carbon emissions by biogenic carbon emissions, while the fossil diesel input is 
-set to zero during the double-counting removal step. 
+are created by replacing direct fossil carbon emissions by biogenic carbon emissions in fossil diesel-fuelled mobility 
+LCI datasets, while the fossil diesel input is set to zero during the double-counting removal step. 
 
 ## Life-Cycle Impact Assessment
-`mescal` can compute LCA indicators using any set of impact assessment methods, e.g., IMPACT World+ [@bulle2019], ReCiPe 
+`mescal` computes LCA scores using any set of impact assessment methods, e.g., IMPACT World+ [@bulle2019], ReCiPe 
 [@huijbregts2017] or Environmental Footprint (EF) [@europeancommission.jointresearchcentre.2018]. 
 Alternatively, a module computing only direct emissions has been developed to ease the comparison between territorial 
 emissions and life-cycle emissions. This module sets all foreground intermediary flows to zero, thus only considering
-direct emissions for the impact assessment. The equivalence between territorial emissions and direct emissions is based 
-on the assumption that all modeled direct emissions are located in the geography of interest. 
+direct emissions for the impact assessment. The results from the background search process 
+(\autoref{fig:flowchart_background_search}) obtained during the double-counting removal step are re-used to determine 
+direct emissions of market-type LCI datasets. 
+The equivalence between territorial emissions and direct emissions is based on the assumption that all modeled direct 
+emissions are located in the geography of interest. 
 
 ## Normalization of impact scores 
 Prior to integration into ESM, specific impact scores are normalized. In the context of optimization, 
 normalization is beneficial in facilitating the solver's convergence, given that specific impact scores may exhibit 
 significant discrepancies in magnitude across impact categories and technologies. By aligning all metrics within a 
-comparable order of magnitude, numerical stability is improved in the solving process. 
-Furthermore, considerable discrepancies in magnitude may be observed between infrastructure and operation specific impact scores 
-within the same impact category, as these are not expressed with the same physical unit (e.g., kg CO$_2$-eq/kW for 
-infrastructure and kg CO$_2$-eq/kWh for operation).
-Consequently, a scaling factor ($lcia_{op,max}(k) / lcia_{infra,max}(k)$ in Eq. (4)) is applied 
-to infrastructure specific impact scores, to ensure that both the highest infrastructure and operation indicators are normalized to 1. 
-The scaling factor invert is then applied to normalized infrastructure indicators (Eq. (6)), 
-in order to keep the magnitude difference between operation and infrastructure specific impact scores in ESM. 
+comparable order of magnitude, numerical stability is improved in the solving process.
 Normalization is performed using the maximum indicator ($lcia_{max}$ in Eq. (3)) of each impact category. 
 In addition, all normalized indicators ($lcia_{type}^{norm}$ in Eq. (6)) that are below a threshold 
-($\epsilon$) are set to zero. This aims to determine the maximum order of magnitude between the highest and lowest 
+$\epsilon$ (in absolute values) are set to zero. This aims to determine the maximum order of magnitude between the highest and lowest 
 indicators of an impact category, to eventually facilitate the solver convergence.
+But, considerable discrepancies in magnitude may be observed between infrastructure and operation specific impact scores 
+within the same impact category, as these are not expressed with the same physical unit (e.g., kg CO$_2$-eq/kW for 
+infrastructure and kg CO$_2$-eq/kWh for operation). This might result in a significant fraction of specific impact scores
+being set to zero after comparison with the threshold $\epsilon$.
+To address this issue, a scaling factor ($lcia_{op,max}(k) / lcia_{infra,max}(k)$ in Eq. (4)) is applied 
+to infrastructure specific impact scores, to ensure that both the maximum infrastructure and operation indicators are normalized to 1. 
+The scaling factor inverse is then applied to normalized infrastructure indicators (Eq. (6)), 
+in order to keep the magnitude difference between operation and infrastructure specific impact scores in ESM. 
 
 $$
 \begin{split}
@@ -242,7 +246,7 @@ $$
 $$
 lcia_{type}^{norm}(j,k) = 
 \begin{cases}
-    0 \text{ if } \dfrac{lcia_{type}^{(scaled)}(j,k)}{lcia_{max}(k)} \leq \epsilon \\
+    0 \text{ if } \left| \dfrac{lcia_{type}^{(scaled)}(j,k)}{lcia_{max}(k)} \right| \leq \epsilon \\
     \dfrac{lcia_{type}^{(scaled)}(j,k)}{lcia_{max}(k)} \cdot \dfrac{lcia_{infra,max}(k)}{lcia_{op,max}(k)} \text{ elif } type = infra \\
     \dfrac{lcia_{type}^{(scaled)}(j,k)}{lcia_{max}(k)} \text{ else}
 \end{cases}
@@ -253,13 +257,13 @@ $$
 
 ## Equations specification
 The following set of modelling equations is included in ESM.
-The environmental objective ${LCIA_{tot}}$ is defined as the sum of the impacts of the infrastructure, operation, 
+The environmental objective ${LCIA_{tot}}$ is defined as the sum of the impact scores of the infrastructure, operation, 
 and resource parts (Eq. (7)).
-The infrastructure impact is derived from the normalized specific impact ($lcia^{norm}_{infra}$), which is computed 
-from the infrastructure LCI dataset. The normalized specific impact is divided by the technology's lifetime in the ESM 
+The infrastructure impact score is derived from the normalized specific impact ($lcia^{norm}_{infra}$), which is computed 
+from the infrastructure LCI dataset. The normalized specific impact score is divided by the technology's lifetime in the ESM 
 ($n_{ESM}$), and scaled with the technology's installed capacity (${F}$) (Eq. (8)). 
-The operation and resource impacts are respectively derived from the operation and resource normalized specific 
-impacts ($lcia^{norm}_{op}$), which are respectively computed from the operation and resource LCI datasets, and scaled 
+The operation and resource impact scores are respectively derived from the operation and resource normalized specific 
+impacts scores ($lcia^{norm}_{op}$), which are respectively computed from the operation and resource LCI datasets, and scaled 
 with the annual operation (${F_t} \times t_{op}$) (Eq. (9)).
 
 $$
@@ -281,7 +285,7 @@ $$
 In order to update the LCI database with the ESM results, `mescal` overwrites the relevant LCI datasets, 
 i.e., LCI datasets that are in the sectoral and geographical scope of the ESM, such as markets for electricity, heat or 
 transport. The activities composing the market and their respective shares are determined using the ESM annual 
-operation results and the `Mapping.csv` file .  
+operation results and the `Mapping.csv` file.  
 Updating the LCI database background inventory paves the way for using `mescal` with myopic ESM, i.e., ESM 
 dividing the transition period into a sequence of consecutive optimization problems [@prina2020], through an iterative 
 3-step procedure: 1) run the ESM at time-step $t$, 2) update the LCI database with the ESM results at time-step $t$, 
@@ -323,25 +327,25 @@ Technologies_, the _Institut de l’énergie Trottier de Polytechnique Montréal
 | $ENV$  | Set of environmental impact categories |
 
 ## Parameters
-| Symbol              | Description                                                                         | Unit                                  |
-|---------------------|-------------------------------------------------------------------------------------|---------------------------------------|
-| $t_{op}(t)$         | Time period $t$ duration                                                            | hours                                 |
-| $n_{ESM}(j)$        | Lifetime of a technology $j$ in the ESM                                             | years                                 |
-| $n_{LCI}$           | Lifetime of a technology $j$ in the LCI dataset                                     | years                                 |
-| $lcia_{infra}(j,k)$ | Infrastructure specific impact of technology $j$ for impact category $k$            | impact category unit / capacity unit  |
-| $lcia_{op}(j/r,k)$  | Operation specific impact of technology $j$ or resource $r$ for impact category $k$ | impact category unit / operation unit |
-| $\eta_{LCI}(j)$     | Efficiency of technology $j$ in the operation LCI dataset                           | dimensionless                         |
-| $\eta_{ESM}(j)$     | Efficiency of technology $j$ in the ESM                                             | dimensionless                         |
-| $q(ef, j)$          | Amount of elementary flow $ef$ in the operation LCI dataset of technology $j$       | elementary flow unit                  |
-| $\epsilon$          | Threshold for the normalization of LCA indicators                                   | dimensionless                         |
+| Symbol              | Description                                                                               | Unit                                  |
+|---------------------|-------------------------------------------------------------------------------------------|---------------------------------------|
+| $t_{op}(t)$         | Time period $t$ duration                                                                  | hours                                 |
+| $n_{ESM}(j)$        | Lifetime of a technology $j$ in the ESM                                                   | years                                 |
+| $n_{LCI}$           | Lifetime of a technology $j$ in the LCI dataset                                           | years                                 |
+| $lcia_{infra}(j,k)$ | Infrastructure specific impact score of technology $j$ for impact category $k$            | impact category unit / capacity unit  |
+| $lcia_{op}(j/r,k)$  | Operation specific impact score of technology $j$ or resource $r$ for impact category $k$ | impact category unit / operation unit |
+| $\eta_{ESM}(j)$     | Efficiency of technology $j$ in the ESM                                                   | dimensionless                         |
+| $\eta_{LCI}(j)$     | Efficiency of technology $j$ in the operation LCI dataset                                 | dimensionless                         |
+| $q(ef, j)$          | Amount of elementary flow $ef$ in the operation LCI dataset of technology $j$             | elementary flow unit                  |
+| $\epsilon$          | Threshold for the normalization of specific impact scores                                 | dimensionless                         |
 
 ## Variables
-| Symbol              | Description                                                                           | Unit           |
-|---------------------|---------------------------------------------------------------------------------------|----------------|
-| $F(j)$              | Installed capacity of technology $j$                                                  | capacity unit  |
-| $F_t(j,t)$          | Operation of technology $j$ in time period $t$                                        | operation unit |
-| $LCIA_{tot}(k)$     | Normalized total impact of impact category $k$                                        | dimensionless  |
-| $LCIA_{infra}(j,k)$ | Normalized infrastructure impact of technology $j$ for impact category $k$            | dimensionless  |
-| $LCIA_{op}(j/r,k)$  | Normalized operation impact of technology $j$ or resource $r$ for impact category $k$ | dimensionless  |
+| Symbol              | Description                                                                                 | Unit           |
+|---------------------|---------------------------------------------------------------------------------------------|----------------|
+| $F(j)$              | Installed capacity of technology $j$                                                        | capacity unit  |
+| $F_t(j,t)$          | Operation of technology $j$ in time period $t$                                              | operation unit |
+| $LCIA_{tot}(k)$     | Normalized total impact score of impact category $k$                                        | dimensionless  |
+| $LCIA_{infra}(j,k)$ | Normalized infrastructure impact score of technology $j$ for impact category $k$            | dimensionless  |
+| $LCIA_{op}(j/r,k)$  | Normalized operation impact score of technology $j$ or resource $r$ for impact category $k$ | dimensionless  |
 
 # References
