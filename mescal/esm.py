@@ -30,6 +30,7 @@ class ESM:
 
             # Optional inputs
             main_database_name: str = None,
+            biosphere_db_name: str = None,
             technology_compositions: pd.DataFrame = None,
             results_path_file: str = 'results/',
             tech_specifics: pd.DataFrame = None,
@@ -56,6 +57,7 @@ class ESM:
         :param esm_db_name: name of the ESM database to be written in Brightway
         :param main_database_name: name of the main database (e.g., 'ecoinvent-3.9.1-cutoff') if main_database
             is an aggregation of the main database and complementary databases
+        :param biosphere_db_name: name of the (not spatialized) biosphere database. Default is 'biosphere3'.
         :param results_path_file: path to your result folder
         :param regionalize_foregrounds: if True, regionalize the ESM database foreground
         :param accepted_locations: list of ecoinvent locations to keep without modification in case of regionalization
@@ -77,6 +79,7 @@ class ESM:
         self.main_database = main_database
         self.main_database_name = main_database_name if main_database_name is not None else \
             (main_database.db_names if type(main_database.db_names) is str else main_database.db_names[0])
+        self.biosphere_db_name = biosphere_db_name if biosphere_db_name is not None else 'biosphere3'
         self.esm_db_name = esm_db_name
         self.results_path_file = results_path_file
         self.regionalize_foregrounds = regionalize_foregrounds
@@ -537,6 +540,7 @@ class ESM:
         :param db_type: type of LCI database, can be 'esm', 'esm results' or 'main'
         :return: None (activities are modified in the brightway project)
         """
+        biosphere_db_name = self.biosphere_db_name
 
         if db_type == 'esm':
             db_name = self.esm_db_name
@@ -556,9 +560,17 @@ class ESM:
             activity_name_or_code = self.get_activity_name_or_code(tech=tech, return_type=return_type)
             if activity_name_or_code in [act[return_type] for act in db.db_as_list]:
                 if return_type == 'name':
-                    change_dac_biogenic_carbon_flow(db_name=db_name, activity_name=activity_name_or_code)
+                    change_dac_biogenic_carbon_flow(
+                        db_name=db_name,
+                        activity_name=activity_name_or_code,
+                        biosphere_db_name=biosphere_db_name,
+                    )
                 elif return_type == 'code':
-                    change_dac_biogenic_carbon_flow(db_name=db_name, activity_code=activity_name_or_code)
+                    change_dac_biogenic_carbon_flow(
+                        db_name=db_name,
+                        activity_code=activity_name_or_code,
+                        biosphere_db_name=biosphere_db_name,
+                    )
 
         # Change carbon flows of biofuel mobility technologies
         biofuel_mob_tech = self.tech_specifics[self.tech_specifics.Specifics == 'Biofuel'][
@@ -571,12 +583,14 @@ class ESM:
                         db_name=db_name,
                         activity_name=activity_name_or_code,
                         biogenic_ratio=float(biogenic_ratio),
+                        biosphere_db_name=biosphere_db_name,
                     )
                 elif return_type == 'code':
                     change_fossil_carbon_flows_of_biofuels(
                         db_name=db_name,
                         activity_code=activity_name_or_code,
                         biogenic_ratio=float(biogenic_ratio),
+                        biosphere_db_name=biosphere_db_name,
                     )
 
         # Adjust carbon flows by a constant factor for some technologies

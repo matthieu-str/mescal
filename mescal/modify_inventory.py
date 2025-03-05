@@ -4,7 +4,8 @@ import bw2data as bd
 def change_dac_biogenic_carbon_flow(
         db_name: str,
         activity_name: str = None,
-        activity_code: str = None
+        activity_code: str = None,
+        biosphere_db_name: str = None,
 ) -> None:
     """
     Change the biogenic carbon flow of premise DAC technologies to a fossil carbon flow
@@ -13,8 +14,12 @@ def change_dac_biogenic_carbon_flow(
     :param activity_name: name of the activity to be changed (to use only if the name of the activity is unique in the
         database)
     :param activity_code: code of the activity to be changed
+    :param biosphere_db_name: name of the biosphere database. Default is 'biosphere3'. 
     :return: None (changes are saved in the database)
     """
+    if biosphere_db_name is None:
+        biosphere_db_name = 'biosphere3'
+    
     if activity_name is not None:
         act = [i for i in bd.Database(db_name).search(activity_name, limit=1000) if (
             (activity_name == i.as_dict()['name'])
@@ -41,7 +46,7 @@ def change_dac_biogenic_carbon_flow(
         uptake_flow.as_dict()['name'] = 'Carbon dioxide, fossil'
         uptake_flow.as_dict()['categories'] = ('air',)
         uptake_flow.as_dict()['code'] = '349b29d1-3e58-4c66-98b9-9d1a076efd2e'
-        uptake_flow.as_dict()['input'] = ('biosphere3', '349b29d1-3e58-4c66-98b9-9d1a076efd2e')
+        uptake_flow.as_dict()['input'] = (biosphere_db_name, '349b29d1-3e58-4c66-98b9-9d1a076efd2e')
         uptake_flow.as_dict()['amount'] *= -1.0  # carbon captured (negative emission)
         uptake_flow.as_dict()['comment'] = (f"Modified from {old_name_uptake} to Carbon dioxide, fossil. Amount "
                                             f"multiplied by -1. ") + uptake_flow.as_dict().get('comment', "")
@@ -52,7 +57,7 @@ def change_dac_biogenic_carbon_flow(
         leak_flow.as_dict()['name'] = 'Carbon dioxide, fossil'
         leak_flow.as_dict()['categories'] = ('air',)
         leak_flow.as_dict()['code'] = '349b29d1-3e58-4c66-98b9-9d1a076efd2e'
-        leak_flow.as_dict()['input'] = ('biosphere3', '349b29d1-3e58-4c66-98b9-9d1a076efd2e')
+        leak_flow.as_dict()['input'] = (biosphere_db_name, '349b29d1-3e58-4c66-98b9-9d1a076efd2e')
         leak_flow.as_dict()['comment'] = (f"Modified from {old_name_leak} to Carbon dioxide, fossil. "
                                           + uptake_flow.as_dict().get('comment', ""))
         leak_flow.save()
@@ -64,7 +69,7 @@ def change_dac_biogenic_carbon_flow(
         uptake_flow.as_dict()['name'] = 'Carbon dioxide, fossil'
         uptake_flow.as_dict()['categories'] = ('air',)
         uptake_flow.as_dict()['code'] = '349b29d1-3e58-4c66-98b9-9d1a076efd2e'
-        uptake_flow.as_dict()['input'] = ('biosphere3', '349b29d1-3e58-4c66-98b9-9d1a076efd2e')
+        uptake_flow.as_dict()['input'] = (biosphere_db_name, '349b29d1-3e58-4c66-98b9-9d1a076efd2e')
         uptake_flow.as_dict()['amount'] *= -1.0  # carbon captured (negative emission)
         uptake_flow.as_dict()['comment'] = (f"Modified from {old_name_uptake} to Carbon dioxide, fossil. Amount "
                                             f"multiplied by -1. ") + uptake_flow.as_dict().get('comment', "")
@@ -80,7 +85,8 @@ def change_fossil_carbon_flows_of_biofuels(
         db_name: str,
         activity_name: str = None,
         activity_code: str = None,
-        biogenic_ratio: float = 1
+        biogenic_ratio: float = 1,
+        biosphere_db_name: str = None,
 ) -> None:
     """
 
@@ -89,8 +95,12 @@ def change_fossil_carbon_flows_of_biofuels(
         database)
     :param activity_code: code of the activity to be changed
     :param biogenic_ratio: fraction of biogenic carbon in the biofuel. Default is 1 (100% biogenic).
+    :param biosphere_db_name: name of the biosphere database. Default is 'biosphere3'.
     :return: None (changes are saved in the database)
     """
+    if biosphere_db_name is None:
+        biosphere_db_name = 'biosphere3'
+    
     if activity_name is not None:
         act = [i for i in bd.Database(db_name).search(activity_name, limit=1000) if (
             (activity_name == i.as_dict()['name'])
@@ -107,10 +117,10 @@ def change_fossil_carbon_flows_of_biofuels(
 
             new_bf_name = bf.as_dict()['name'].replace('fossil', 'non-fossil')
 
-            new_biosphere_act = [bio_act for bio_act in bd.Database('biosphere3').search(new_bf_name, limit=1000) if (
+            new_biosphere_act = [bio_act for bio_act in bd.Database(biosphere_db_name).search(new_bf_name, limit=1000) if (
                     (bio_act['name'] == new_bf_name)
                     & (bio_act['categories'] == bf.as_dict()['categories'])
-            )][0]  # looking for the equivalent non-fossil flow in biosphere3
+            )][0]  # looking for the equivalent non-fossil flow in the biosphere database
 
             # change the amount of the fossil flow
             total_amount = bf.as_dict()['amount']
@@ -227,6 +237,7 @@ def add_carbon_dioxide_flow(
         amount: float,
         activity_name: str = None,
         activity_code: str = None,
+        biosphere_db_name: str = None,
 ) -> None:
     """
     Add a carbon dioxide flow to an activity
@@ -236,8 +247,12 @@ def add_carbon_dioxide_flow(
         database)
     :param activity_code: code of the activity to be changed
     :param amount: amount of the carbon dioxide flow
+    :param biosphere_db_name: name of the biosphere database. Default is 'biosphere3'.
     :return: None (changes are saved in the database)
     """
+    if biosphere_db_name is None:
+        biosphere_db_name = 'biosphere3'
+    
     if activity_name is not None:
         act = [i for i in bd.Database(db_name).search(activity_name, limit=1000) if (
             (activity_name == i.as_dict()['name'])
@@ -247,7 +262,7 @@ def add_carbon_dioxide_flow(
     else:
         raise ValueError("Either 'activity_name' or 'activity_code' should be provided")
 
-    co2_flow = [bio_act for bio_act in bd.Database('biosphere3').search('Carbon dioxide, fossil', limit=1000) if (
+    co2_flow = [bio_act for bio_act in bd.Database(biosphere_db_name).search('Carbon dioxide, fossil', limit=1000) if (
         (bio_act['name'] == 'Carbon dioxide, fossil')
         & (bio_act['categories'] == ('air',))
     )][0]
