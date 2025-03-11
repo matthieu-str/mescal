@@ -116,7 +116,7 @@ def normalize_lca_metrics(
     :param path: path to results folder
     :param file_name: name of the .dat file
     :param R: dataframe containing the LCA indicators results
-    :param mip_gap: values lowed than the MIP gap (normalized values) are set to 0
+    :param mip_gap: normalized values that are lower than the MIP gap are set to 0 (to improve numerical stability)
     :param lcia_methods: LCIA method to be used
     :param specific_lcia_categories: specific LCIA categories to be used
     :param specific_lcia_abbrev: specific LCIA abbreviations to be used
