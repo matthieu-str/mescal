@@ -8,4 +8,4 @@ DATA_DIR = Path(__file__).resolve().parent / "data"
 DIR_DATABASE_CACHE = Path.cwd() / "export" / "cache"
 
 # Main brightway project name (used for tests)
-BW_PROJECT_NAME = "ecoinvent3.9.1A"
+BW_PROJECT_NAME = "ecoinvent3.9.1"
