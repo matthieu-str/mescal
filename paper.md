@@ -97,7 +97,7 @@ configuration.
 
 $$
 \begin{split}
-{LCIA_{tot}}(k) & = \sum_{j \in TECH} \left( {LCIA_{infra}}(j, k) + {LCIA_{op}}(j, k) \right) + \sum_{r \in RES} {LCIA_{op}}(r, k) 
+{LCIA_{tot}}(k) & = \sum_{j \in TECH} \left( {LCIA_{infra}}(j, k) + {LCIA_{op}}(j, k) \right) + \sum_{r \in RES} {LCIA_{op}}(r, k) \\
 & \forall k \in ENV
 \end{split}
 $$
