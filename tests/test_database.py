@@ -231,20 +231,16 @@ mapping_product_to_CPC = pd.DataFrame(data=mapping_product_to_CPC, columns=['Nam
 @pytest.mark.tags("requires_ecoinvent")
 def test_database():
     bd.projects.set_current(BW_PROJECT_NAME)
-    db = Database(db_names="ecoinvent-3.9.1-cutoff")
 
-    # test loading
-    assert len(db.db_as_list) == 21238
-    assert db.db_as_list[0]['database'] == 'ecoinvent-3.9.1-cutoff'
-
-    multiple_dbs = Database(db_names=["ecoinvent-3.9.1-cutoff", "regional delivery_truck"])
-    assert len(multiple_dbs.db_as_list) == 21238 + 935
-    assert set([x['database'] for x in multiple_dbs.db_as_list]) == {'ecoinvent-3.9.1-cutoff', 'regional delivery_truck'}
+    multiple_dbs = Database(db_names=["ecoinvent-3.9.1-cutoff", "ecoinvent_cutoff_3.9.1_image_SSP2-Base_2050"])
+    assert len(multiple_dbs.db_as_list) == 21238 + 32527
+    assert set([x['database'] for x in multiple_dbs.db_as_list]) == {'ecoinvent-3.9.1-cutoff',
+                                                                     'ecoinvent_cutoff_3.9.1_image_SSP2-Base_2050'}
 
     new_db = Database(db_as_list=dummy_esm_db+dummy_esm_db_2)
     new_db.relink(  # test the relink method
         name_database_unlink='ecoinvent-3.9.1-cutoff',
-        database_relink_as_list=Database('ecoinvent_cutoff_3.9.1_image_SSP2-Base_2020').db_as_list,
+        database_relink_as_list=Database('ecoinvent_cutoff_3.9.1_image_SSP2-Base_2050').db_as_list,
         name_new_db='new_dummy_esm_db',  # testing the change_name method
         write=True,  # testing the write_to_brightway method
     )
@@ -254,7 +250,7 @@ def test_database():
     assert new_db.db_as_list[0]['database'] == 'new_dummy_esm_db'
     dependencies = new_db.dependencies()
     assert 'ecoinvent-3.9.1-cutoff' not in dependencies
-    assert 'ecoinvent_cutoff_3.9.1_image_SSP2-Base_2020' in dependencies
+    assert 'ecoinvent_cutoff_3.9.1_image_SSP2-Base_2050' in dependencies
 
 
 @pytest.mark.tags("workflow")
