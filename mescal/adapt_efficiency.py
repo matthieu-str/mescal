@@ -198,12 +198,15 @@ def get_lca_input_flow_unit_or_product(
                     if act_exc['reference product'] == 'fuel':
                         if 'cng' in act_exc['name']:
                             name_list.append('natural gas')
+                        elif 'methane' in act_exc['name']:
+                            name_list.append('natural gas')
                         elif 'diesel' in act_exc['name']:
                             name_list.append('diesel')
                         elif 'hydrogen' in act_exc['name']:
                             name_list.append('hydrogen')
                         else:
-                            raise ValueError(f'Unknown fuel type for flow {row.Flow} in {row.Name}')
+                            raise ValueError(f'Unknown fuel type in carculator for flow {row.Flow} in {row.Name}: '
+                                             f'{act_exc["name"]}')
                     else:
                         name_list.append(act_exc['reference product'].split(',')[0])
                     unit_list.append(act_exc['unit'])
