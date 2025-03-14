@@ -139,7 +139,12 @@ class Database:
     def __len__(self):
         return len(self.db_as_list)
 
-    from .CPC import add_product_or_activity_CPC_category, add_CPC_categories
+    from .CPC import (
+        add_product_or_activity_CPC_category,
+        add_CPC_categories,
+        add_CPC_categories_based_on_existing_activities,
+        save_mapping_between_products_and_CPC_categories,
+    )
 
     def load(self, create_pickle: bool = False) -> list[dict]:
         """

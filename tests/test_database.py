@@ -51,6 +51,36 @@ dummy_ds = {
 
 dummy_esm_db = [
     {
+        "name": "TRAIN_FREIGHT_H2_LOC, Construction",
+        "reference product": "hydrogen-fuelled locomotive",
+        "location": "RER",
+        "database": "dummy_esm_db",
+        "unit": "unit",
+        "code": "00005",
+        "exchanges": [
+            {
+                "name": "TRAIN_FREIGHT_H2_LOC, Construction",
+                "product": "hydrogen-fuelled",
+                "location": "RER",
+                "database": "dummy_esm_db",
+                "type": "production",
+                "amount": 1,
+                "unit": "unit",
+                "code": "00005"
+            },
+            {
+                "name": "locomotive production",
+                "product": "locomotive",
+                "location": "RER",
+                "database": "ecoinvent-3.9.1-cutoff",
+                "type": "technosphere",
+                "amount": 1,
+                "unit": "unit",
+                "code": '54c4d94036d1e4d8e930bbe55332f066',
+            }
+        ],
+    },
+    {
         "name": "TRAIN_FREIGHT_DIESEL_LOC, Construction",
         "reference product": "locomotive",
         "location": "RER",
@@ -217,15 +247,15 @@ mapping = [
     ['Tech 1', 'Operation', 'carbon dioxide, captured from atmosphere', 'DAC_LT, Operation', 'GLO', 'dummy_esm_db_dac'],
     ['Tech 2', 'Operation', 'transport, passenger car', 'CAR_BIODIESEL, Operation', 'GLO', 'dummy_esm_db_dac'],
     ['Tech 3', 'Construction', 'locomotive', 'TRAIN_FREIGHT_DIESEL_LOC, Construction', 'RER', 'dummy_esm_db'],
+    ['Tech 4', 'Construction', 'hydrogen-fuelled locomotive', 'TRAIN_FREIGHT_H2_LOC, Construction', 'RER', 'dummy_esm_db'],
 ]
 
-mapping_product_to_CPC = [
-    ['locomotive', '0001: Locomotives', 'equals', 'Product'],
-    ['goods wagon', '0002: Railway or tramway goods', 'equals', 'Product'],
+mapping_new_product_to_CPC = [
+    ['hydrogen-fuelled locomotive', '0001: Locomotives', 'equals', 'Product'],
 ]
 
 mapping = pd.DataFrame(data=mapping, columns=['Name', 'Type', 'Product', 'Activity', 'Location', 'Database'])
-mapping_product_to_CPC = pd.DataFrame(data=mapping_product_to_CPC, columns=['Name', 'CPC', 'Search type', 'Where'])
+mapping_new_product_to_CPC = pd.DataFrame(data=mapping_new_product_to_CPC, columns=['Name', 'CPC', 'Search type', 'Where'])
 
 
 @pytest.mark.tags("requires_ecoinvent")
@@ -246,7 +276,7 @@ def test_database():
     )
 
     new_db = Database(db_names='new_dummy_esm_db')
-    assert len(new_db.db_as_list) == 4
+    assert len(new_db.db_as_list) == 5
     assert new_db.db_as_list[0]['database'] == 'new_dummy_esm_db'
     dependencies = new_db.dependencies()
     assert 'ecoinvent-3.9.1-cutoff' not in dependencies
@@ -257,14 +287,15 @@ def test_database():
 def test_CPC():
     db = Database(db_as_list=dummy_esm_db)
     db.add_CPC_categories(
-        mapping_product_to_CPC=mapping_product_to_CPC,
+        mapping_new_products_to_CPC=mapping_new_product_to_CPC,
     )
-    if db.db_as_list[0]['name'] == 'TRAIN_FREIGHT_DIESEL_LOC, Construction':
-        assert dict(db.db_as_list[0]['classifications'])['CPC'] == '0001: Locomotives'
-        assert dict(db.db_as_list[1]['classifications'])['CPC'] == '0002: Railway or tramway goods'
-    else:
-        assert dict(db.db_as_list[0]['classifications'])['CPC'] == '0002: Railway or tramway goods'
-        assert dict(db.db_as_list[1]['classifications'])['CPC'] == '0001: Locomotives'
+    for ds in db.db_as_list:
+        if ds['name'] == 'TRAIN_FREIGHT_H2_LOC, Construction':  # new product
+            assert dict(ds['classifications'])['CPC'] == "0001: Locomotives"
+        elif ds['name'] == 'TRAIN_FREIGHT_DIESEL_LOC, Construction':  # existing product
+            assert dict(ds['classifications'])['CPC'] == "4951: Rail locomotives and locomotive tenders"
+        else:  # existing product
+            assert dict(ds['classifications'])['CPC'] == "49533: Railway or tramway goods vans and wagons, not self-propelled"
 
 
 @pytest.mark.tags("requires_ecoinvent")
@@ -283,10 +314,14 @@ def test_complementary_database():
     )
 
     complement_db = Database(db_names='dummy_complement_db')
-    assert len(complement_db.db_as_list) == 3
+    assert len(complement_db.db_as_list) == 4
     assert complement_db.db_as_list[0]['database'] == 'dummy_complement_db'
-    assert set([i['name'] for i in complement_db.db_as_list]) == {'DAC_LT, Operation', 'CAR_BIODIESEL, Operation',
-                                                                  'TRAIN_FREIGHT_DIESEL_LOC, Construction'}
+    assert set([i['name'] for i in complement_db.db_as_list]) == {
+        'DAC_LT, Operation',
+        'CAR_BIODIESEL, Operation',
+        'TRAIN_FREIGHT_DIESEL_LOC, Construction',
+        'TRAIN_FREIGHT_H2_LOC, Construction',
+    }
 
 
 @pytest.mark.tags("workflow")
@@ -302,9 +337,9 @@ def test_add_sub_databases():
     db1 = Database(db_as_list=dummy_esm_db)
     db2 = Database(db_as_list=dummy_esm_db_2)
     db = db1 + db2
-    assert len(db) == 4
+    assert len(db) == 5
 
     db = db - db2
-    assert len(db) == 2
+    assert len(db) == 3
     for act in db1.db_as_list:
         assert act in db.db_as_list
