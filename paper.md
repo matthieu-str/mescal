@@ -27,18 +27,21 @@ affiliations:
   - name: CIRAIG, Institute for Sustainable Energy, University of Applied Sciences Western Switzerland, Rue de l’Industrie 23, Sion, 1950, Switzerland
     index: 3
 
-date: 21 March 2025
+date: 24 March 2025
 bibliography: paper.bib
 ---
 
 # Summary
 Energy System Models (ESM) are widely used to design and assess energy transition scenarios. They help decision-makers 
 to project their policies and understand their impact on strongly interconnected energy systems. However, ESM typically
-lack environmental indicators, which are essential to assess the sustainability of energy transition scenarios.
+lack a set of comprehensive environmental indicators beyond carbon emissions, which are essential to assess the 
+sustainability of energy transition scenarios.
 `mescal` is a Python package that integrates Life-Cycle Assessment (LCA) indicators in ESM. It allows energy modellers
-to include a wider set of environmental indicators within their models in a transparent and reproducible way.
-As a result, energy modellers and decision-makers can identify transition scenarios trade-offs and hot spots, thus
-enabling a more holistic sustainability assessment.
+to expand the scope of analysis, encompassing indirect impacts from the infrastructure, and to include a wider set of 
+environmental indicators in a transparent and reproducible way.
+As a result, `mescal` enhances the capability of ESM in supporting decision-making by providing a more comprehensive 
+sustainability assessment, facilitating the identification of environmental hot spots and trade-offs in energy transition
+scenarios.
 
 # Statement of need
 ESM aims to support decision-makers in designing and assessing energy transition scenarios. In this work, we focus on 
@@ -88,12 +91,12 @@ scenarios and provides insights about their trade-offs and hot spots. `pathways`
 assessment of energy transition scenarios. ESM/IAM results can be further included in a prospective LCI database using `premise`
 custom scenarios [@sacchi2022], thus making soft-linked coupling possible.
 However, this framework is limited to ex-post analyses and does not allow for the endogenous integration of LCA 
-indicators within ESM or IAM, thus significantly limiting energy modellers' ability to shape transition scenarios 
-with LCA results.
+indicators within ESM or IAM, and therefore prevents modellers to perform multi-objective optimization. 
+This significantly limits energy modellers' ability to shape transition scenarios with LCA results.
 
 `mescal` aims to address this limitation, by enhancing the reproducibility and transparency of hard-linked coupling 
-between LCA and ESM, thus allowing a better comparability among energy modellers envisioning to enlarge their set of 
-sustainability metrics.
+between LCA and any ESM, thus allowing a better comparability among energy modellers envisioning to expand their set of 
+sustainability metrics and the scope of the analysis, including indirect emissions and impacts from the infrastructure.
 
 # Description
 Starting from a mapping between ESM technologies/resources and LCI datasets from a LCI database, `mescal` performs 
@@ -340,7 +343,8 @@ based on LCA indicators.
 The use of `mescal` ensures a transparent, reproducible, and thus comparable integration of LCA indicators in ESM.
 The use of LCA makes sustainability assessments of energy modellers more holistic, thus highlighting the potential trade-offs, 
 benefits, and adverse side effects of energy transition pathways among the environmental and economic performance indicators.
-`mescal` is intended to be used by energy modellers who might not be LCA experts but want to enlarge the set of environmental 
+`mescal` is intended to be used by energy modellers who might not be LCA experts but want to expand the scope of analysis, 
+encompassing both the indirect emissions from the infrastructure and a comprehensive set of environmental 
 indicators in their model in a transparent and reproducible way.
 
 Updating the LCI database with ESM results paves the way for using `mescal` with both snapshot and myopic pathway ESM
@@ -360,7 +364,8 @@ to analyse environmental-economic trade-offs in Swiss energy system transitions.
 
 # Conclusion
 `mescal` makes the integration of LCA indicators in ESM more transparent, reproducible, and comparable. 
-It aims to encourage energy modellers to consider a broader set of environmental indicators in their energy transition
+It aims to encourage energy modellers to consider the full life-cycle inventory of the energy system (infrastructure, 
+operation, end-of-life, etc.) and a broader set of environmental indicators in their energy transition
 scenarios, thus enabling a more holistic sustainability assessment. 
 
 # Acknowledgements
