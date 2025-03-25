@@ -45,6 +45,7 @@ maxdepth: 1
 self
 content/usage
 content/methods
+content/glossary
 content/api/index
 content/codeofconduct
 content/contributing
