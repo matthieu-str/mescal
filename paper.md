@@ -102,12 +102,13 @@ sustainability metrics and the scope of the analysis, including indirect emissio
 Starting from a mapping between ESM technologies/resources and LCI datasets from a LCI database, `mescal` performs 
 the LCI and LCIA steps of LCA to pre-compute LCA impact scores that are then integrated in the ESM (\autoref{fig:workflow}). 
 Pre-computed LCA impact scores are used to compute the total environmental impact ($LCIA_{tot}$) of the modelled energy system 
-configuration, including impacts coming from both infrastructure ($LCIA_{infra}$) and operation ($LCIA_{op}$).
+configuration, including impacts coming from the ESM technologies ($TECH$) and resources ($RES$) including both 
+infrastructure ($LCIA_{infra}$) and operation ($LCIA_{op}$).
 
 $$
 \begin{split}
 {LCIA_{tot}}(k) & = \sum_{j \in TECH} \left( {LCIA_{infra}}(j, k) + {LCIA_{op}}(j, k) \right) + \sum_{r \in RES} {LCIA_{op}}(r, k) \\
-& \forall k \in ENV
+& \forall k \in ENV \quad \text{(1)}
 \end{split}
 $$
 
@@ -207,10 +208,10 @@ infrastructure specific impact scores to integrate the difference of lifetime be
 infrastructure LCI datasets. `mescal` multiplies the infrastructure specific impact score ($lcia_{infra}$) with the ratio 
 between the ESM lifetime ($n_{ESM}$) and the LCI dataset lifetime ($n_{LCI}$) (`Lifetime.csv`) to ensure that the annual impact in the 
 ESM is computed with the LCI dataset lifetime, thus resulting in the adjusted infrastructure specific impact score 
-($lcia_{infra}^{adj}$ in Eq. (1)).
+($lcia_{infra}^{adj}$ in Eq. (2)).
 
 $$
-lcia_{infra}^{adj}(j,k) = lcia_{infra}(j,k) \cdot \frac{n_{ESM}(j)}{n_{LCI}(j)} \quad \forall (j,k) \in TECH \times ENV \quad \text{(1)}
+lcia_{infra}^{adj}(j,k) = lcia_{infra}(j,k) \cdot \frac{n_{ESM}(j)}{n_{LCI}(j)} \quad \forall (j,k) \in TECH \times ENV \quad \text{(2)}
 $$
 
 - **Technologies efficiency**: Efficiencies of technologies in the ESM and LCI database should be harmonized, 
@@ -220,14 +221,14 @@ the amount of direct emissions. `mescal` resolves this issue by adjusting the am
 to the efficiency difference. Except land occupation, land transformation and energy elementary flows, the amounts ($q$) 
 of all elementary flows in the operation LCI datasets foregrounds are adjusted using the ratio between 
 the LCI dataset ($\eta_{LCI}$) and the ESM ($\eta_{ESM}$) efficiencies, thus resulting in adjusted direct emissions 
-amounts ($q^{adj}$ in Eq. (2)). 
+amounts ($q^{adj}$ in Eq. (3)). 
 The efficiency of the operation LCI dataset ($\eta_{LCI}$) is computed using the quantity of fuel that was removed during the 
 double-counting removal step, while the efficiency of the ESM technology ($\eta_{ESM}$) is computed from `ESM.csv`. 
 `mescal` applies this transformation to a list of relevant ESM technologies (`Efficiency.csv`), e.g., technologies that 
 involve a combustion process.
 
 $$
-q^{adj}(ef, j) = q(ef, j) \cdot \frac{\eta_{LCI}(j)}{\eta_{ESM}(j)} \quad \forall (ef, j) \in EF \setminus \{land, energy\} \times TECH \quad \text{(2)}
+q^{adj}(ef, j) = q(ef, j) \cdot \frac{\eta_{LCI}(j)}{\eta_{ESM}(j)} \quad \forall (ef, j) \in EF \setminus \{land, energy\} \times TECH \quad \text{(3)}
 $$
 
 - **Physical units**: The product flows may be expressed in different units in the ESM and the LCI 
@@ -257,35 +258,35 @@ Prior to integration into ESM, `mescal` normalizes the specific impact scores. I
 normalization is beneficial in facilitating the solver's convergence, given that specific impact scores may exhibit 
 significant discrepancies in magnitude across impact categories and technologies. By aligning all metrics within a 
 comparable order of magnitude, numerical stability is improved in the solving process.
-`mescal` performs normalization using the maximum indicator ($lcia_{max}$ in Eq. (3)) of each impact category.
+`mescal` performs normalization using the maximum indicator ($lcia_{max}$ in Eq. (4)) of each impact category.
 
 `mescal` can control the difference in order of magnitude between the highest and lowest specific impact scores of each impact 
 category, to eventually facilitate the solver convergence. To achieve this, `mescal` sets to zero all normalized
-specific impact scores ($lcia_{type}^{norm}$ in Eq. (6)) that are below a threshold $\epsilon$ (in absolute values).
+specific impact scores ($lcia_{type}^{norm}$ in Eq. (7)) that are below a threshold $\epsilon$ (in absolute values).
 This feature can be deactivated by setting $\epsilon$ to zero.
 
 Also, considerable discrepancies in magnitude may be observed between infrastructure and operation specific impact scores 
 within the same impact category, as these are not expressed with the same physical unit (e.g., kg CO$_2$-eq/kW for 
 infrastructure and kg CO$_2$-eq/kWh for operation). This might result in a significant fraction of specific impact scores
 being set to zero after comparison with the threshold $\epsilon$.
-To be able to address this issue, `mescal` applies a scaling factor ($lcia_{op,max}(k) / lcia_{infra,max}(k)$ in Eq. (4))
+To be able to address this issue, `mescal` applies a scaling factor ($lcia_{op,max}(k) / lcia_{infra,max}(k)$ in Eq. (5))
 to infrastructure specific impact scores, to ensure that both the maximum infrastructure and operation indicators are normalized to 1. 
-`mescal` then applies the scaling factor inverse to normalized infrastructure indicators (Eq. (6)), 
+`mescal` then applies the scaling factor inverse to normalized infrastructure indicators (Eq. (7)), 
 in order to keep the magnitude difference between operation and infrastructure specific impact scores in the ESM. 
 
 $$
 \begin{split}
 lcia_{type,max}(k) & = \max(lcia_{type}(j,k) \ | \ j \in TECH \ \cup \ RES) \\
-& \forall type \in \{infra, op\} \quad \forall k \in ENV \quad \text{(3)}
+& \forall type \in \{infra, op\} \quad \forall k \in ENV \quad \text{(4)}
 \end{split}
 $$
 
 $$
-lcia_{infra}^{scaled}(j,k) = lcia_{infra}^{adj}(j,k) \cdot \dfrac{lcia_{op,max}(k)}{lcia_{infra,max}(k)} \forall (j,k) \in TECH \times ENV \quad \text{(4)}
+lcia_{infra}^{scaled}(j,k) = lcia_{infra}^{adj}(j,k) \cdot \dfrac{lcia_{op,max}(k)}{lcia_{infra,max}(k)} \forall (j,k) \in TECH \times ENV \quad \text{(5)}
 $$
 
 $$
-lcia_{max}(k) = \max(lcia_{type,max}(j,k) \ | \ type \in \{infra, op\}, \ j \in TECH) \quad \forall k \in ENV \quad \text{(5)}
+lcia_{max}(k) = \max(lcia_{type,max}(j,k) \ | \ type \in \{infra, op\}, \ j \in TECH) \quad \forall k \in ENV \quad \text{(6)}
 $$
 
 $$
@@ -297,24 +298,24 @@ lcia_{type}^{norm}(j,k) =
 \end{cases}
 $$
 $$
-\forall (j,k) \in TECH \ \cup \ RES \times ENV \quad \forall type \in \{infra, op\} \quad \text{(6)}
+\forall (j,k) \in TECH \ \cup \ RES \times ENV \quad \forall type \in \{infra, op\} \quad \text{(7)}
 $$
 
 ## Equations specification
 The following set of modelling equations is included in ESM.
 The environmental objective ${LCIA_{tot}}$ is defined as the sum of the impact scores of the infrastructure, operation, 
-and resource parts (Eq. (7)).
+and resource parts (Eq. (1)).
 The infrastructure impact score is derived from the normalized specific impacts ($lcia^{norm}_{infra}$), which are computed 
 from the infrastructure LCI datasets. The normalized specific impact scores are divided by the technologies' lifetime in the ESM 
 ($n_{ESM}$), and scaled with the technologies' installed capacity (${F}$) (Eq. (8)). 
 The operation and resource impact scores are respectively derived from the operation and resource normalized specific 
 impact scores ($lcia^{norm}_{op}$), which are respectively computed from the operation and resource LCI datasets, and scaled 
-with the annual operations (${F_t} \times t_{op}$) (Eq. (9)).
+with the annual operations (${F_t} \times t_{op}$) (Eq. (9)). For convenience, we recall Eq. (1):
 
 $$
 \begin{split}
 {LCIA_{tot}}(k) & = \sum_{j \in TECH} \left( {LCIA_{infra}}(j, k) + {LCIA_{op}}(j, k) \right) + \sum_{r \in RES} {LCIA_{op}}(r, k) \\ 
-& \forall k \in ENV \quad \text{(7)}
+& \forall k \in ENV \quad \text{Rep. (1)}
 \end{split}
 $$
 
@@ -329,8 +330,11 @@ $$
 ## Integrating ESM results in the LCI database
 In order to update the LCI database with the ESM results, `mescal` overwrites the relevant LCI datasets, 
 i.e., LCI datasets that are in the sectoral and geographical scope of the ESM, such as markets for electricity, heat or 
-transport. The processes composing the markets and their respective shares are determined using the ESM annual 
-operation results and the `Mapping.csv` file.
+transport. The technologies composing the markets and their respective shares are determined using the ESM annual 
+operation results contained in the `Results.csv` file and mapped back to LCI datasets using the `Mapping.csv` file.
+
+The `Results.csv` file typically contains additional results such as ESM technologies installed capacities, 
+environmental impact scores, and the system total cost.
 
 ## Example notebook
 
@@ -347,17 +351,28 @@ benefits, and adverse side effects of energy transition pathways among the envir
 encompassing both the indirect emissions from the infrastructure and a comprehensive set of environmental 
 indicators in their model in a transparent and reproducible way.
 
-Updating the LCI database with ESM results paves the way for using `mescal` with both snapshot and myopic pathway ESM
-within iterative procedures.
+Updating the LCI database with ESM results paves the way for using `mescal` with both snapshot (i.e., stationary) 
+and transition pathway (i.e., dynamic) ESM within iterative procedures.
 Snapshot ESM evaluate the energy system configuration and operation over a timespan, during which the energy system 
 remains unchanged [@codinagirones2015]. An iterative feedback loop can be established between ESM and `mescal` 
 to adjust LCA pre-computed impact scores with the latest ESM results. Convergence is reached when LCA impact scores are 
-stable between two consecutive iterations, thus providing a consistent environmental assessment of the energy system
-(i.e., without relying on the LCI database assumptions regarding the energy system under study). 
+stable between two consecutive iterations, thus providing a consistent stationary environmental assessment of the 
+energy system. In other word, the environmental assessment is performed without relying on the LCI database assumptions 
+regarding the energy system under study, but rather with the obtained energy configuration as an input.
 
 Myopic pathway ESM divide the transition period into a sequence of consecutive optimization problems [@prina2020]. 
-`mescal` can be used through a 3-step procedure: 1) run the ESM at time-step $t$, 2) update the LCI database 
+`mescal` can be used through the following iterative procedure: 1) run the ESM at time-step $t$, 2) update the LCI database 
 with the ESM results at time-step $t$, and 3) update the LCA indicators with the updated LCI database for time-step $t+1$.
+This underlies that newly added infrastructure at time step $t+1$ are build with the energy configuration of time 
+step $t$ as an input.
+
+Perfect-foresight pathway ESM optimizes the whole transition period at once, thus assuming that decision-makers 
+have a complete knowledge of future information [@prina2020]. A similar procedure to the snapshot ESM can be applied,
+where the LCA indicators for all time steps are updated with the ESM results at the end of the optimization process.
+In this case, convergence is reached when the LCA impact scores of all time steps are stable between two consecutive 
+iterations. Likewise to the myopic pathway ESM, newly added infrastructure are build with the energy configuration of the
+previous time step. Additionally, the obtained solution is a global optimum, e.g., minimal carbon emissions over the 
+whole transition period, whereas the myopic pathway ESM provide sub-optimal solutions.
 
 As an example, `mescal` methodology has been applied by @schnidrig2024 with _EnergyScope_ [@moret2017] 
 to analyse environmental-economic trade-offs in Swiss energy system transitions.
