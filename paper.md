@@ -258,7 +258,7 @@ Prior to integration into ESM, `mescal` normalizes the specific impact scores. I
 normalization is beneficial in facilitating the solver's convergence, given that specific impact scores may exhibit 
 significant discrepancies in magnitude across impact categories and technologies. By aligning all metrics within a 
 comparable order of magnitude, numerical stability is improved in the solving process.
-`mescal` performs normalization using the maximum indicator ($lcia_{max}$ in Eq. (4)) of each impact category.
+`mescal` performs normalization using the maximum indicator ($lcia_{max}$ in Eq. (6)) of each impact category.
 
 `mescal` can control the difference in order of magnitude between the highest and lowest specific impact scores of each impact 
 category, to eventually facilitate the solver convergence. To achieve this, `mescal` sets to zero all normalized
