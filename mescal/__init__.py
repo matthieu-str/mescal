@@ -34,7 +34,7 @@ __all__ = (
     "change_flow_value",
 )
 
-__version__ = "1.1.2"
+__version__ = "1.1.3"
 
 from .database import Database, Dataset
 from .esm import ESM
