@@ -114,19 +114,31 @@ def change_fossil_carbon_flows_of_biofuels(
 
     for bf in biosphere_flows:
         if bf.as_dict()['name'] in ['Carbon dioxide, fossil', 'Carbon monoxide, fossil', 'Methane, fossil']:
-            if bf.as_dict()['categories'] == ('air', 'lower stratosphere + upper troposphere'):
-                # The "Carbon dioxide, non-fossil" elementary flow does not exist in the biosphere database
-                # for the category ('air', 'lower stratosphere + upper troposphere')
-                new_bf_categories = ('air', 'urban air close to ground')
-            else:
-                new_bf_categories = bf.as_dict()['categories']
 
+            new_bf_categories = bf.as_dict()['categories']
             new_bf_name = bf.as_dict()['name'].replace('fossil', 'non-fossil')
 
-            new_biosphere_act = [bio_act for bio_act in bd.Database(biosphere_db_name).search(new_bf_name, limit=1000) if (
+            new_biosphere_act_list = [bio_act for bio_act in bd.Database(biosphere_db_name).search(new_bf_name, limit=1000) if (
                     (bio_act['name'] == new_bf_name)
                     & (bio_act['categories'] == new_bf_categories)
-            )][0]  # looking for the equivalent non-fossil flow in the biosphere database
+            )]  # looking for the equivalent non-fossil flow in the biosphere database
+
+            if len(new_biosphere_act_list) == 1:
+                new_biosphere_act = new_biosphere_act_list[0]
+
+            elif (len(new_biosphere_act_list) == 0
+                  and bf.as_dict()['categories'] == ('air', 'lower stratosphere + upper troposphere')):
+                # The "Carbon dioxide, non-fossil" elementary flow does not exist in the biosphere database
+                # for the category ('air', 'lower stratosphere + upper troposphere') in ecoinvent 3.10 and before
+                new_bf_categories = ('air', 'urban air close to ground')  # we consider this category as a proxy
+                new_biosphere_act = [bio_act for bio_act in bd.Database(biosphere_db_name).search(new_bf_name, limit=1000) if (
+                        (bio_act['name'] == new_bf_name)
+                        & (bio_act['categories'] == new_bf_categories)
+                )][0]
+
+            else:
+                raise ValueError(f'No biogenic flow found in the biosphere database with name {new_bf_name} and '
+                                 f'categories {new_bf_categories}.')
 
             # change the amount of the fossil flow
             total_amount = bf.as_dict()['amount']
