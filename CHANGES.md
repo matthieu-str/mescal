@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.3] - 2025-03-29
+
+### Added
+- A mapping between existing _ecoinvent_ products and their CPC categories (`data/mapping_existing_products_to_CPC.json`) and a method to add CPC categories, when missing, based on this mapping (`add_CPC_categories_based_on_existing_activities` in `CPC.py`).
+- Handling error due to missing category ('air', 'lower stratosphere + upper troposphere') for "Carbon dioxide, non-fossil" in ecoinvent 3.10 and before.
+
 ## [1.1.2] - 2025-03-11
 
 ### Added
