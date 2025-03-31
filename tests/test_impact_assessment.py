@@ -121,10 +121,11 @@ def test_compute_impact_score():
         mapping_esm_flows_to_CPC_cat=pd.DataFrame(),
     )
 
-    R = esm.compute_impact_scores(
+    R, df_contrib_results = esm.compute_impact_scores(
         methods=methods,
         impact_abbrev=impact_abbrev,
         specific_lcia_abbrev=['CC'],
+        contribution_analysis=True,
     )
 
     lcia_value = R[
@@ -134,3 +135,14 @@ def test_compute_impact_score():
         ].Value.iloc[0]
 
     assert 44.40 <= lcia_value <= 44.41
+
+    max_contrib = df_contrib_results[
+        (df_contrib_results.impact_category == ('IPCC 2021', 'climate change', 'global warming potential (GWP100)'))
+        & (df_contrib_results.act_name == 'TRAIN_FREIGHT_DIESEL')
+        & (df_contrib_results.act_type == 'Construction')
+        & (df_contrib_results.score == df_contrib_results.score.max())
+    ]
+
+    assert max_contrib.ef_name.iloc[0] == 'Carbon dioxide, fossil'
+    assert max_contrib.ef_categories.iloc[0] == ('air', 'non-urban air or from high stacks')
+    assert 17.42 <= max_contrib.score.iloc[0] <= 17.43
