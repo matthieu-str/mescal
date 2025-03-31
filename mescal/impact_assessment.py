@@ -269,7 +269,7 @@ def compute_impact_scores(
                                                            df_contrib_analysis_results_constr['LCA'])
             df_contrib_analysis_results_constr['amount'] = (df_contrib_analysis_results_constr['amount'] /
                                                             df_contrib_analysis_results_constr['LCA'])
-            df_contrib_analysis_results_constr.drop(columns=['LCA'], inplace=True)
+            df_contrib_analysis_results_constr.drop(columns=['Name', 'LCA'], inplace=True)
 
     # Reading the list of subcomponents as a list (and not as a string)
     try:
@@ -281,7 +281,8 @@ def compute_impact_scores(
     N_subcomp_max = max(len(i) for i in self.technology_compositions.Components)
 
     self.technology_compositions['Type'] = len(self.technology_compositions) * ['Construction']
-    # Associate new code to composition of technologies
+    # Associate new code to composition of technologies (this code does not correspond to any activity in the database,
+    # it is only used as an identifier for the user)
     self.technology_compositions['New_code'] = self.technology_compositions.apply(lambda row: random_code(), axis=1)
 
     for i in range(len(self.technology_compositions)):
@@ -362,7 +363,7 @@ def compute_impact_scores(
         df_contrib_analysis_results_constr['amount'] = (df_contrib_analysis_results_constr['amount']
                                                         * df_contrib_analysis_results_constr['Value'])
 
-        df_contrib_analysis_results_constr.drop(columns=['Value'], inplace=True)
+        df_contrib_analysis_results_constr.drop(columns=['Value', 'Name', 'Type'], inplace=True)
 
     if lifetime is None:
         pass
@@ -389,6 +390,8 @@ def compute_impact_scores(
                                                            df_contrib_analysis_results_constr['ESM'])
             df_contrib_analysis_results_constr['amount'] = (df_contrib_analysis_results_constr['amount'] *
                                                             df_contrib_analysis_results_constr['ESM'])
+
+            df_contrib_analysis_results_constr.drop(columns=['Name', 'ESM'], inplace=True)
 
     name_to_new_code = pd.concat([mapping[['Name', 'Type', 'New_code']],
                                   self.technology_compositions[['Name', 'Type', 'New_code']]])
@@ -643,13 +646,18 @@ class MultiLCA_with_contribution_analysis(object):
                            i[2].as_dict()['database']] for i in top_contributors],
                     columns=['score', 'amount', 'ef_name', 'ef_categories', 'ef_code', 'ef_database']
                 )
-                df_res['impact_category'] = len(df_res) * [self.methods[col]]
 
-                act = list(fu_all.keys())[row]
-                df_res['act_database'] = len(df_res) * [act[0]]
-                df_res['act_code'] = len(df_res) * [act[1]]
+                # Drop rows where the score is zero
+                df_res.drop(df_res[df_res['score'] == 0].index, inplace=True)
 
-                df_res_list.append(df_res)
+                if len(df_res) > 0:
+                    df_res['impact_category'] = len(df_res) * [self.methods[col]]
+
+                    act = list(fu_all.keys())[row]
+                    df_res['act_database'] = len(df_res) * [act[0]]
+                    df_res['act_code'] = len(df_res) * [act[1]]
+
+                    df_res_list.append(df_res)
 
         self.df_res_concat = pd.concat(df_res_list, ignore_index=True)
 
