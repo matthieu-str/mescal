@@ -183,10 +183,26 @@ class ESM:
         techno_compositions = self.technology_compositions
         tech_specifics = self.tech_specifics
 
+        dict_df_names = {
+            'model': model,
+            'mapping': mapping,
+            'mapping_esm_flows_to_CPC_cat': mapping_esm_flows_to_CPC_cat,
+            'unit_conversion': unit_conversion,
+            'efficiency': efficiency,
+            'lifetime': lifetime,
+            'tech_specifics': tech_specifics,
+            'technology_compositions': techno_compositions,
+        }
+
         try:
             self.technology_compositions.Components = self.technology_compositions.Components.apply(ast.literal_eval)
         except ValueError:
             pass
+
+        # Check for duplicates in all dataframes
+        for df_name, df in dict_df_names.items():
+            if df.duplicated().any():
+                print(f"Warning: there are duplicates in the {df_name} dataframe. Please check your inputs.")
 
         # Check if the technologies and resources in the model file are in the mapping file
         set_in_model_and_not_in_mapping = set()
@@ -274,6 +290,18 @@ class ESM:
             print(f"List of technologies that are in the tech_specifics file but not in the mapping file "
                   f"(this will not be a problem in the workflow).\n")
             print(f"--> {sorted(set_in_tech_specifics_and_not_in_mapping)}\n")
+
+        # Check that sub-technologies in the technology_compositions file are in the mapping file
+        set_sub_techs_not_in_mapping = set()
+        for tech in list(techno_compositions.Name):
+            sub_techs = [sub_tech for sub_tech in self.technology_compositions.Components
+                         if sub_tech not in list(mapping.Name)]
+            if len(sub_techs) > 0:
+                set_sub_techs_not_in_mapping.add(tech)
+        if len(set_sub_techs_not_in_mapping) > 0:
+            print(f"List of technologies that are in the technology_compositions file but not in the mapping file "
+                  f"(this will not be a problem in the workflow).\n")
+            print(f"--> {sorted(set_sub_techs_not_in_mapping)}\n")
 
     def create_esm_database(
             self,
