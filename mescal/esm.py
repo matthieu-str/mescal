@@ -201,8 +201,14 @@ class ESM:
 
         # Check for duplicates in all dataframes
         for df_name, df in dict_df_names.items():
-            if df.duplicated().any():
-                print(f"Warning: there are duplicates in the {df_name} dataframe. Please check your inputs.")
+            if df_name == 'technology_compositions':
+                df['Components_tuple_temp'] = df.Components.apply(tuple)
+                if df.duplicated(subset=['Name', 'Components_tuple_temp']).any():
+                    print(f"Warning: there are duplicates in the {df_name} dataframe. Please check your inputs.")
+                df.drop(columns=['Components_tuple_temp'], inplace=True)
+            else:
+                if df.duplicated().any():
+                    print(f"Warning: there are duplicates in the {df_name} dataframe. Please check your inputs.")
 
         # Check if the technologies and resources in the model file are in the mapping file
         set_in_model_and_not_in_mapping = set()
