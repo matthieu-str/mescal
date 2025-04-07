@@ -298,14 +298,13 @@ class ESM:
             print(f"--> {sorted(set_in_tech_specifics_and_not_in_mapping)}\n")
 
         # Check that sub-technologies in the technology_compositions file are in the mapping file
-        set_sub_techs_not_in_mapping = set()
-        for tech in list(techno_compositions.Name):
-            sub_techs = [sub_tech for sub_tech in self.technology_compositions.Components
-                         if sub_tech not in list(mapping.Name)]
-            if len(sub_techs) > 0:
-                set_sub_techs_not_in_mapping.add(tech)
+        set_sub_techs_not_in_mapping = [
+            sub_tech for sub_tech_list in self.technology_compositions.Components for sub_tech in sub_tech_list
+            if sub_tech not in list(mapping[mapping.Type == 'Construction'].Name.unique())
+        ]
         if len(set_sub_techs_not_in_mapping) > 0:
-            print(f"List of technologies that are in the technology_compositions file but not in the mapping file "
+            set_sub_techs_not_in_mapping = set(set_sub_techs_not_in_mapping)
+            print(f"List of sub-technologies that are in the technology_compositions file but not in the mapping file "
                   f"(this will not be a problem in the workflow).\n")
             print(f"--> {sorted(set_sub_techs_not_in_mapping)}\n")
 
