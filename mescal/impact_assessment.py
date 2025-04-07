@@ -109,9 +109,9 @@ def compute_impact_scores(
                 if exc['type'] == 'production':
                     exc['database'] = esm_direct_emissions_db_name
                     if 'input' in exc:
-                        exc['input'][0] = esm_direct_emissions_db_name
+                        exc['input'] = (esm_direct_emissions_db_name, exc['input'][1])
                 if 'output' in exc:
-                    exc['output'][0] = esm_direct_emissions_db_name
+                    exc['output'] = (esm_direct_emissions_db_name, exc['output'][1])
                 # if exc['type'] == 'technosphere':
                 #     exc['amount'] *= 1e-10  # set technosphere exchanges to 0
 
@@ -456,9 +456,9 @@ def aggregate_direct_emissions_activities(
                     exc['name'] = f'{tech}, Operation'
                     exc['database'] = esm_direct_emissions_db_name
                     if 'input' in exc:
-                        exc['input'][0] = esm_direct_emissions_db_name
+                        exc['input'] = (esm_direct_emissions_db_name, exc['input'][1])
                 if 'output' in exc:
-                    exc['output'][0] = esm_direct_emissions_db_name
+                    exc['output'] = (esm_direct_emissions_db_name, exc['output'][1])
 
         # In the case of forced background check, we keep only the main activity, and remove the other ones
         elif tech in self.activities_background_search:
@@ -471,9 +471,9 @@ def aggregate_direct_emissions_activities(
                             exc['name'] = f'{tech}, Operation'
                             exc['database'] = esm_direct_emissions_db_name
                             if 'input' in exc:
-                                exc['input'][0] = esm_direct_emissions_db_name
+                                exc['input'] = (esm_direct_emissions_db_name, exc['input'][1])
                         if 'output' in exc:
-                            exc['output'][0] = esm_direct_emissions_db_name
+                            exc['output'] = (esm_direct_emissions_db_name, exc['output'][1])
                 else:  # remove activity from database
                     direct_emissions_db = [j for j in direct_emissions_db if j['code'] != activities['Activity code'].iloc[i]]
 
