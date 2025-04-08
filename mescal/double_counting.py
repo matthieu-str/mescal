@@ -3,6 +3,7 @@ import ast
 from .database import Dataset
 from .utils import random_code
 import pandas as pd
+from tqdm import tqdm
 
 
 def background_search(
@@ -326,7 +327,7 @@ def double_counting_removal(
         for x in v:
             mapping_CPC_to_esm_flows_dict.setdefault(x, []).append(k)
 
-    for i in range(len(df_op)):
+    for i in tqdm(range(len(df_op))):
         tech = df_op['Name'].iloc[i]  # name of ES technology
         # print(tech)
 

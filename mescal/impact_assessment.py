@@ -4,6 +4,7 @@ import bw2analyzer as ba
 import pandas as pd
 import ast
 import numpy as np
+from tqdm import tqdm
 from .utils import random_code
 from .database import Database
 
@@ -149,15 +150,12 @@ def compute_impact_scores(
         'ia': impact_categories
     }
 
-    if contribution_analysis:
-        multilca = MultiLCA_with_contribution_analysis(
-            cs_name=calculation_setup_name,
-            limit=contribution_analysis_limit,
-            limit_type=contribution_analysis_limit_type
-        )
-
-    else:
-        multilca = bc.MultiLCA(calculation_setup_name)  # computes the LCA scores
+    multilca = MultiLCA(  # computes the LCA scores
+        cs_name=calculation_setup_name,
+        contribution_analysis=contribution_analysis,
+        limit=contribution_analysis_limit,
+        limit_type=contribution_analysis_limit_type
+    )
 
     R = pd.DataFrame(
         multilca.results,
@@ -580,7 +578,7 @@ def bw2_compat_annotated_top_emissions(lca, names=True, **kwargs):
     return results
 
 
-class MultiLCA_with_contribution_analysis(object):
+class MultiLCA(object):
     """
     Adaptation of the `MultiLCA` class from the `bw2calc` package in order to perform contribution analysis.
 
@@ -591,11 +589,12 @@ class MultiLCA_with_contribution_analysis(object):
         columns of LCIA methods. Ordering is the same as in the `calculation_setup`.
     """
 
-    def __init__(self, cs_name, limit, limit_type, log_config=None):
+    def __init__(self, cs_name, contribution_analysis, limit, limit_type, log_config=None):
         """
         Initialize the MultiLCA_with_contribution_analysis class.
 
         :param cs_name: name of the calculation setup to use
+        :param contribution_analysis: if True, the function will perform contribution analysis
         :param limit: number of values to return (if limit_type is 'number'), or percentage cutoff (if limit_type is
             'percent')
         :param limit_type: contribution analysis limit type, can be 'percent' or 'number'
@@ -612,9 +611,11 @@ class MultiLCA_with_contribution_analysis(object):
                 "{} is not a known `calculation_setup`.".format(cs_name)
             )
 
+        self.contribution_analysis = contribution_analysis
         self.limit = limit
         self.limit_type = limit_type
         df_res_list = []
+
         self.func_units = cs['inv']
         self.methods = cs['ia']
         fu_all = self.all
@@ -628,38 +629,40 @@ class MultiLCA_with_contribution_analysis(object):
             self.lca.switch_method(method)
             self.method_matrices.append(self.lca.characterization_matrix)
 
-        for row, func_unit in enumerate(self.func_units):
+        for row, func_unit in tqdm(enumerate(self.func_units)):
             self.lca.redo_lci(func_unit)
             for col, cf_matrix in enumerate(self.method_matrices):
                 self.lca.characterization_matrix = cf_matrix
                 self.lca.lcia_calculation()
                 self.results[row, col] = self.lca.score
 
-                top_contributors = bw2_compat_annotated_top_emissions(
-                    self.lca,
-                    limit=self.limit,
-                    limit_type=self.limit_type
-                )
+                if contribution_analysis:
+                    top_contributors = bw2_compat_annotated_top_emissions(
+                        self.lca,
+                        limit=self.limit,
+                        limit_type=self.limit_type
+                    )
 
-                df_res = pd.DataFrame(
-                    data=[[i[0], i[1], i[2].as_dict()['name'], i[2].as_dict()['categories'], i[2].as_dict()['code'],
-                           i[2].as_dict()['database']] for i in top_contributors],
-                    columns=['score', 'amount', 'ef_name', 'ef_categories', 'ef_code', 'ef_database']
-                )
+                    df_res = pd.DataFrame(
+                        data=[[i[0], i[1], i[2].as_dict()['name'], i[2].as_dict()['categories'], i[2].as_dict()['code'],
+                               i[2].as_dict()['database']] for i in top_contributors],
+                        columns=['score', 'amount', 'ef_name', 'ef_categories', 'ef_code', 'ef_database']
+                    )
 
-                # Drop rows where the score is zero
-                df_res.drop(df_res[df_res['score'] == 0].index, inplace=True)
+                    # Drop rows where the score is zero
+                    df_res.drop(df_res[df_res['score'] == 0].index, inplace=True)
 
-                if len(df_res) > 0:
-                    df_res['impact_category'] = len(df_res) * [self.methods[col]]
+                    if len(df_res) > 0:
+                        df_res['impact_category'] = len(df_res) * [self.methods[col]]
 
-                    act = list(fu_all.keys())[row]
-                    df_res['act_database'] = len(df_res) * [act[0]]
-                    df_res['act_code'] = len(df_res) * [act[1]]
+                        act = list(fu_all.keys())[row]
+                        df_res['act_database'] = len(df_res) * [act[0]]
+                        df_res['act_code'] = len(df_res) * [act[1]]
 
-                    df_res_list.append(df_res)
+                        df_res_list.append(df_res)
 
-        self.df_res_concat = pd.concat(df_res_list, ignore_index=True)
+        if contribution_analysis:
+            self.df_res_concat = pd.concat(df_res_list, ignore_index=True)
 
     @property
     def all(self):

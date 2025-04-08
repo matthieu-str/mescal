@@ -114,8 +114,10 @@ def correct_esm_and_lca_efficiency_differences(
                             act_to_adapt_list.append(act_to_adapt)
 
         if len(act_to_adapt_list) == 0:
-            print(f'No flow of type(s) {flows_list} found for {tech}. The efficiency of this technology cannot be '
-                  f'adjusted.')
+            self.logger.warning(
+                f'No flow of type(s) {flows_list} found for {tech}. The efficiency of this technology cannot be '
+                f'adjusted.'
+            )
 
         for act in act_to_adapt_list:
             efficiency_ratio = efficiency['efficiency_ratio'].iloc[i]
@@ -150,7 +152,7 @@ def compute_efficiency_esm(
             # This allows the user to put a fuel that is not an input in the ESM but in the LCI dataset in the
             # efficiency file. This is useful in case of mismatch (different fuel consumed between ESM nd LCI dataset).
             # However, direct emissions must then be adjusted (tech_specifics file).
-            print(f'Warning: flow of type {flow} found for {row.Name} in efficiency file, but not in model file.')
+            self.logger.warning(f'Flow of type {flow} found for {row.Name} in efficiency file, but not in model file.')
             input_amount += 0
     if input_amount == 0:
         raise ValueError(f'No flow of type(s) {flows_list} found for {row.Name} in the model file')
@@ -215,21 +217,22 @@ def get_lca_input_flow_unit_or_product(
         if len(set(unit_list)) > 1:
             raise ValueError(f'Several units possible for flow {row.Flow} in {row.Name}: {set(unit_list)}')
         elif len(set(unit_list)) == 0:
-            print(
+            self.logger.warning(
                 f'No flow found for type(s) {row.Flow} in {row.Name}. The efficiency of this technology cannot be '
-                f'adjusted.')
+                f'adjusted.'
+            )
             return None
         else:
             return list(set(unit_list))[0]
 
     elif output_type == 'product':
         if len(set(name_list)) > 1:
-            print(
+            self.logger.warning(
                 f'Several names possible for the same type of flow in {row.Name}: {set(name_list)}. '
                 f'Kept the first one.')
             return list(set(name_list))[0]
         elif len(set(name_list)) == 0:
-            print(
+            self.logger.warning(
                 f'No flow found for type(s) {row.Flow} in {row.Name}. The efficiency of this technology cannot be '
                 f'adjusted.')
             return None
@@ -267,8 +270,8 @@ def adapt_biosphere_flows_to_efficiency_difference(
     return act
 
 
-@staticmethod
 def get_lca_input_quantity(
+        self,
         row: pd.Series,
         double_counting_removal: pd.DataFrame
 ) -> float:
@@ -287,7 +290,7 @@ def get_lca_input_quantity(
             amount += double_counting_removal[(double_counting_removal.Name == row.Name)
                                               & (double_counting_removal.Flow == flow)].Amount.values[0]
         except IndexError:
-            print(f'No flow of type {flow} has been removed in {row.Name}.')
+            self.logger.warning(f'No flow of type {flow} has been removed in {row.Name}.')
             amount += 0
     else:
         return amount

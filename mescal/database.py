@@ -3,6 +3,7 @@ import wurst
 import copy
 import bw2data as bd
 import pandas as pd
+import logging
 from .caching import cache_database, load_db
 from .utils import premise_changing_names, random_code
 from .filesystem_constants import DIR_DATABASE_CACHE
@@ -100,6 +101,17 @@ class Database:
         :param db_as_list: List of dictionaries of the LCI database.
         :param create_pickle: if True, create a pickle file to store the database. Only used if db_names is provided.
         """
+        # set up logging tool
+        self.logger = logging.getLogger('Database')
+        self.logger.setLevel(logging.INFO)
+        self.logger.handlers = []
+        formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+        ch = logging.StreamHandler()
+        ch.setLevel(logging.DEBUG)
+        ch.setFormatter(formatter)
+        self.logger.addHandler(ch)
+        self.logger.propagate = False
+
         if db_as_list is not None:
             self.db_as_list = db_as_list
             self.db_names = list(set([i['database'] for i in db_as_list]))
@@ -160,10 +172,10 @@ class Database:
                 raise ValueError(f"{self.db_names} is not a registered database")
             elif os.path.isfile(DIR_DATABASE_CACHE / f'{self.db_names}.pickle'):
                 db = load_db(self.db_names)
-                print(f"Loaded {self.db_names} from pickle!")
+                self.logger.info(f"Loaded {self.db_names} from pickle!")
             else:
                 db = wurst.extract_brightway2_databases(self.db_names, add_identifiers=True)
-                print(f"Loaded {self.db_names} from brightway!")
+                self.logger.info(f"Loaded {self.db_names} from brightway!")
                 if create_pickle:
                     cache_database(db, self.db_names)
         else:
@@ -455,10 +467,10 @@ class Database:
         if new_db_name in list(bd.databases):  # if the database already exists
             if overwrite:
                 del bd.databases[new_db_name]
-                print(f"Previous {new_db_name} will be overwritten!")
+                self.logger.info(f"Previous {new_db_name} will be overwritten!")
             else:
-                print(f"{new_db_name} already exists in Brightway. To overwrite it, set 'overwrite' to True or delete "
-                      f"it manually")
+                self.logger.info(f"{new_db_name} already exists in Brightway. To overwrite it, set 'overwrite' to "
+                                 f"True or delete it manually")
                 return
         else:
             pass
@@ -470,7 +482,7 @@ class Database:
         self.wurst_to_brightway(database_type)
         db = {(i['database'], i['code']): i for i in self.db_as_list}
         bw_database.write(db)
-        print(f"{new_db_name} written to Brightway!")
+        self.logger.info(f"{new_db_name} written to Brightway!")
 
     def delete(self) -> None:
         """
@@ -530,9 +542,9 @@ class Database:
             else:
                 missing_flows.append((act_name, act_prod, act_loc, act_database))
         if len(missing_flows) > 0:
-            print(f'Some flows could be not found in the database: {missing_flows}')
+            self.logger.warning(f'Some flows could be not found in the database: {missing_flows}')
         else:
-            print('Mapping successfully linked to the database')
+            self.logger.info('Mapping successfully linked to the database')
         return missing_flows
 
     def dependencies(self) -> list[str]:
@@ -623,7 +635,7 @@ class Database:
                     premise_db_dict_name[(new_activity, new_product, new_location, name_premise_db)]
 
                 except KeyError:
-                    print(f"No inventory in the premise database for {esm_tech_name, act_type}")
+                    self.logger.info(f"No inventory in the premise database for {esm_tech_name, act_type}")
                     complement_premise.append((esm_tech_name, act_type))
                     tech_premise.loc[i] = [esm_tech_name, act_type, product, activity, new_location, database]
 
@@ -677,7 +689,7 @@ class Database:
         if (len(complement_db) > 0) & (write_database == True):
             Database(db_as_list=complement_db).write_to_brightway(complement_db_name)
         else:
-            print(f"The complementary database did not have to be created")
+            self.logger.info(f"The complementary database did not have to be created")
 
         tech_premise.reset_index(inplace=True, drop=True)
         tech_premise_adjusted = pd.DataFrame(columns=tech_premise.columns)

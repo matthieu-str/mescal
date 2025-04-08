@@ -192,12 +192,13 @@ def change_location_activity(
                 return loc
 
     if activity_type == 'technosphere':
-        print(f'No location found in your ranking for {product} - {activity}')
+        self.logger.warning(f'No location found in your ranking for {product} - {activity}. '
+                            f'Have to keep the initial location: {location}')
         self.best_loc_in_ranking[(product, activity, database)] = location
     elif activity_type == 'biosphere':
-        print(f'No location found in your ranking for {activity} - {categories}')
+        self.logger.warning(f'No location found in your ranking for {activity} - {categories}. '
+                            f'Have to keep the initial location: {location}')
         self.best_loc_in_ranking[(activity, categories, database)] = location
-    print(f'--> Have to keep the initial location: {location}')
 
     return location
 

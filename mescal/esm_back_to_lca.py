@@ -146,7 +146,8 @@ def create_new_database_with_esm_results(
             # Modifies the written database according to specifications in tech_specifics.csv
             self.modify_written_activities(db=esm_results_db, db_type='esm results')
         else:
-            print('The techs_specifics.csv file has not been applied because the database has not been written.')
+            self.logger.info('The techs_specifics.csv file has not been applied because the database has not been '
+                             'written.')
 
 
 def connect_esm_results_to_database(
@@ -539,8 +540,8 @@ def create_or_modify_activity_from_esm_results(
                         [tech, activity_prod, activity_name, activity_location, esm_results_db_name, activity_new_code]
                     )
             else:
-                print(f'The technology {tech} is not in the mapping file. '
-                      f'It cannot be considered in the result LCI dataset.')
+                self.logger.warning(f'The technology {tech} is not in the mapping file. '
+                                    f'It cannot be considered in the result LCI dataset.')
 
     exchanges.append(
         {
