@@ -5,11 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.4] - 2025-04-09
+
+### Added
+- Contribution analysis of elementary flows in the `MultiLCA` class of `compute_impact_scores` (in `impact_assessment.py`) by setting `contribution_analysis` to True.
+- Use of [`logging`](https://docs.python.org/3/library/logging.html) and [`tqdm`](https://tqdm.github.io/) for improved logging and progress tracking in the `create_esm_database` function (in `double_counting.py`), `compute_impact_scores` function (in `impact_assessment.py`), and `create_new_database_with_esm_results`, `connect_esm_results_to_database` functions (in `esm_back_to_lca.py`).
+- Check for duplicates in input dataframes in the `check_inputs` function (in `esm.py`).
+
+### Changed
+- Corrected tuple item assignment for creating the direct emissions database in `compute_impact_scores` (in `impact_assessment.py`).
+
 ## [1.1.3] - 2025-03-29
 
 ### Added
 - A mapping between existing _ecoinvent_ products and their CPC categories (`data/mapping_existing_products_to_CPC.json`) and a method to add CPC categories, when missing, based on this mapping (`add_CPC_categories_based_on_existing_activities` in `CPC.py`).
-- Handling error due to missing category ('air', 'lower stratosphere + upper troposphere') for "Carbon dioxide, non-fossil" in ecoinvent 3.10 and before.
+- Handling error due to missing category ('air', 'lower stratosphere + upper troposphere') for "Carbon dioxide, non-fossil" in _ecoinvent_ 3.10 and earlier.
 
 ## [1.1.2] - 2025-03-11
 
