@@ -5,6 +5,7 @@ import pandas as pd
 import ast
 import copy
 import bw2data as bd
+from tqdm import tqdm
 
 
 def create_new_database_with_esm_results(
@@ -53,7 +54,7 @@ def create_new_database_with_esm_results(
     perform_d_c = []
 
     # Create the new LCI datasets from the ESM results
-    for i in range(len(flows)):
+    for i in tqdm(range(len(flows))):
 
         original_activity_prod = flows.Product.iloc[i]
         original_activity_name = flows.Activity.iloc[i]
@@ -205,7 +206,7 @@ def connect_esm_results_to_database(
     )]
 
     # Plugging the new activity in the database
-    for i in range(len(flows)):
+    for i in tqdm(range(len(flows))):
 
         original_activity_name = flows.Activity.iloc[i]
         activity_prod = flows.Product.iloc[i]
