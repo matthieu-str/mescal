@@ -48,96 +48,96 @@ BIOMASS_GAS_FB_H2_CCS_PLANT,Construction,synthetic gas factory,synthetic gas fac
 BIOMASS_GAS_FB_H2_CCS_TANK,Construction,"liquid storage tank, chemicals, organics","market for liquid storage tank, chemicals, organics",GLO,/unit,ecoinvent3.8 cut-off
 BIOMASS_GAS_FB_H2_PLANT,Construction,synthetic gas factory,synthetic gas factory construction,RoW,/unit,ecoinvent3.8 cut-off
 BIOMASS_GAS_FB_H2_TANK,Construction,"liquid storage tank, chemicals, organics","market for liquid storage tank, chemicals, organics",GLO,/unit,ecoinvent3.8 cut-off
-BUS_BIODIESEL_B100_SD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m double deck urban bus, EURO-VI",RER,/person*km,lci-buses
 BUS_BIODIESEL_B100_SD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m double deck urban bus, EURO-VI",RER,/unit,lci-buses
+BUS_BIODIESEL_B100_SD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m double deck urban bus, EURO-VI",RER,/person*km,lci-buses
 BUS_BIODIESEL_B20_SD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m double deck urban bus, EURO-VI",RER,/person*km,lci-buses
 BUS_BIODIESEL_B20_SD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m double deck urban bus, EURO-VI",RER,/unit,lci-buses
-BUS_CNG_SD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, compressed gas, 13m double deck urban bus, EURO-VI",RER,/person*km,lci-buses
 BUS_CNG_SD,Construction,"Passenger bus, EURO-VI","Passenger bus, compressed gas, 13m double deck urban bus, EURO-VI",RER,/unit,lci-buses
-BUS_DIESEL_SD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m double deck urban bus, EURO-VI",RER,/person*km,lci-buses
+BUS_CNG_SD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, compressed gas, 13m double deck urban bus, EURO-VI",RER,/person*km,lci-buses
 BUS_DIESEL_SD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m double deck urban bus, EURO-VI",RER,/unit,lci-buses
+BUS_DIESEL_SD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m double deck urban bus, EURO-VI",RER,/person*km,lci-buses
 BUS_EV_SD,Construction,Passenger bus,"Passenger bus, battery electric - overnight charging, 13m double deck urban bus",RER,/unit,lci-buses
 BUS_EV_SD,Operation,"transport, passenger bus","transport, passenger bus, battery electric - overnight charging, 13m double deck urban bus",RER,/person*km,lci-buses
-BUS_FC_H2_SD,Construction,Passenger bus,"Passenger bus, fuel cell electric, 13m double deck urban bus",RER,/unit,lci-buses
 BUS_FC_H2_SD,Operation,"transport, passenger bus","transport, passenger bus, fuel cell electric, 13m double deck urban bus",RER,/person*km,lci-buses
+BUS_FC_H2_SD,Construction,Passenger bus,"Passenger bus, fuel cell electric, 13m double deck urban bus",RER,/unit,lci-buses
 BUS_GASOLINE_SD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m double deck urban bus, EURO-VI",RER,/person*km,lci-buses
 BUS_GASOLINE_SD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m double deck urban bus, EURO-VI",RER,/unit,lci-buses
 BUS_HY_DIESEL_SD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel hybrid, 13m double deck urban bus, EURO-VI",RER,/person*km,lci-buses
 BUS_HY_DIESEL_SD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel hybrid, 13m double deck urban bus, EURO-VI",RER,/unit,lci-buses
-BUS_PROPANE_SD,Construction,"Passenger bus, EURO-VI","Passenger bus, compressed gas, 13m double deck urban bus, EURO-VI",RER,/unit,lci-buses
 BUS_PROPANE_SD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, compressed gas, 13m double deck urban bus, EURO-VI",RER,/person*km,lci-buses
-CAR_BIODIESEL_B100_ELD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Medium, EURO-6ab",RER,/km,lci-pass_cars
+BUS_PROPANE_SD,Construction,"Passenger bus, EURO-VI","Passenger bus, compressed gas, 13m double deck urban bus, EURO-VI",RER,/unit,lci-buses
 CAR_BIODIESEL_B100_ELD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Medium, EURO-6ab",RER,/unit,lci-pass_cars
-CAR_BIODIESEL_B100_LD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Medium, EURO-6ab",RER,/km,lci-pass_cars
+CAR_BIODIESEL_B100_ELD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Medium, EURO-6ab",RER,/km,lci-pass_cars
 CAR_BIODIESEL_B100_LD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Medium, EURO-6ab",RER,/unit,lci-pass_cars
+CAR_BIODIESEL_B100_LD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Medium, EURO-6ab",RER,/km,lci-pass_cars
 CAR_BIODIESEL_B100_MD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Medium, EURO-6ab",RER,/unit,lci-pass_cars
 CAR_BIODIESEL_B100_MD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Medium, EURO-6ab",RER,/km,lci-pass_cars
-CAR_BIODIESEL_B100_SD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Medium, EURO-6ab",RER,/unit,lci-pass_cars
 CAR_BIODIESEL_B100_SD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Medium, EURO-6ab",RER,/km,lci-pass_cars
-CAR_BIODIESEL_B20_ELD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Medium, EURO-6ab",RER,/km,lci-pass_cars
+CAR_BIODIESEL_B100_SD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Medium, EURO-6ab",RER,/unit,lci-pass_cars
 CAR_BIODIESEL_B20_ELD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Medium, EURO-6ab",RER,/unit,lci-pass_cars
+CAR_BIODIESEL_B20_ELD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Medium, EURO-6ab",RER,/km,lci-pass_cars
 CAR_BIODIESEL_B20_LD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Medium, EURO-6ab",RER,/km,lci-pass_cars
 CAR_BIODIESEL_B20_LD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Medium, EURO-6ab",RER,/unit,lci-pass_cars
 CAR_BIODIESEL_B20_MD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Medium, EURO-6ab",RER,/km,lci-pass_cars
 CAR_BIODIESEL_B20_MD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Medium, EURO-6ab",RER,/unit,lci-pass_cars
 CAR_BIODIESEL_B20_SD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Medium, EURO-6ab",RER,/unit,lci-pass_cars
 CAR_BIODIESEL_B20_SD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Medium, EURO-6ab",RER,/km,lci-pass_cars
-CAR_CNG_ELD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, compressed gas, Medium, EURO-6ab",RER,/km,lci-pass_cars
 CAR_CNG_ELD,Construction,"Passenger car, EURO-6ab","Passenger car, compressed gas, Medium, EURO-6ab",RER,/unit,lci-pass_cars
+CAR_CNG_ELD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, compressed gas, Medium, EURO-6ab",RER,/km,lci-pass_cars
 CAR_CNG_LD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, compressed gas, Medium, EURO-6ab",RER,/km,lci-pass_cars
 CAR_CNG_LD,Construction,"Passenger car, EURO-6ab","Passenger car, compressed gas, Medium, EURO-6ab",RER,/unit,lci-pass_cars
 CAR_CNG_MD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, compressed gas, Medium, EURO-6ab",RER,/km,lci-pass_cars
 CAR_CNG_MD,Construction,"Passenger car, EURO-6ab","Passenger car, compressed gas, Medium, EURO-6ab",RER,/unit,lci-pass_cars
 CAR_CNG_SD,Construction,"Passenger car, EURO-6ab","Passenger car, compressed gas, Medium, EURO-6ab",RER,/unit,lci-pass_cars
 CAR_CNG_SD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, compressed gas, Medium, EURO-6ab",RER,/km,lci-pass_cars
-CAR_DIESEL_ELD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Medium, EURO-6ab",RER,/unit,lci-pass_cars
 CAR_DIESEL_ELD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Medium, EURO-6ab",RER,/km,lci-pass_cars
+CAR_DIESEL_ELD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Medium, EURO-6ab",RER,/unit,lci-pass_cars
 CAR_DIESEL_LD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Medium, EURO-6ab",RER,/km,lci-pass_cars
 CAR_DIESEL_LD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Medium, EURO-6ab",RER,/unit,lci-pass_cars
-CAR_DIESEL_MD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Medium, EURO-6ab",RER,/unit,lci-pass_cars
 CAR_DIESEL_MD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Medium, EURO-6ab",RER,/km,lci-pass_cars
+CAR_DIESEL_MD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Medium, EURO-6ab",RER,/unit,lci-pass_cars
 CAR_DIESEL_SD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Medium, EURO-6ab",RER,/unit,lci-pass_cars
 CAR_DIESEL_SD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Medium, EURO-6ab",RER,/km,lci-pass_cars
-CAR_ETOH_E10_ELD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline, Medium, EURO-6ab",RER,/km,lci-pass_cars
 CAR_ETOH_E10_ELD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline, Medium, EURO-6ab",RER,/unit,lci-pass_cars
+CAR_ETOH_E10_ELD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline, Medium, EURO-6ab",RER,/km,lci-pass_cars
 CAR_ETOH_E10_LD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline, Medium, EURO-6ab",RER,/km,lci-pass_cars
 CAR_ETOH_E10_LD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline, Medium, EURO-6ab",RER,/unit,lci-pass_cars
-CAR_ETOH_E10_MD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline, Medium, EURO-6ab",RER,/km,lci-pass_cars
 CAR_ETOH_E10_MD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline, Medium, EURO-6ab",RER,/unit,lci-pass_cars
+CAR_ETOH_E10_MD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline, Medium, EURO-6ab",RER,/km,lci-pass_cars
 CAR_ETOH_E10_SD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline, Medium, EURO-6ab",RER,/unit,lci-pass_cars
 CAR_ETOH_E10_SD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline, Medium, EURO-6ab",RER,/km,lci-pass_cars
 CAR_ETOH_E85_ELD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline, Medium, EURO-6ab",RER,/km,lci-pass_cars
 CAR_ETOH_E85_ELD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline, Medium, EURO-6ab",RER,/unit,lci-pass_cars
-CAR_ETOH_E85_LD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline, Medium, EURO-6ab",RER,/unit,lci-pass_cars
 CAR_ETOH_E85_LD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline, Medium, EURO-6ab",RER,/km,lci-pass_cars
+CAR_ETOH_E85_LD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline, Medium, EURO-6ab",RER,/unit,lci-pass_cars
 CAR_ETOH_E85_MD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline, Medium, EURO-6ab",RER,/km,lci-pass_cars
 CAR_ETOH_E85_MD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline, Medium, EURO-6ab",RER,/unit,lci-pass_cars
-CAR_ETOH_E85_SD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline, Medium, EURO-6ab",RER,/unit,lci-pass_cars
 CAR_ETOH_E85_SD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline, Medium, EURO-6ab",RER,/km,lci-pass_cars
-CAR_EV_ELD,Operation,"transport, passenger car","transport, passenger car, battery electric, Medium",RER,/km,lci-pass_cars
+CAR_ETOH_E85_SD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline, Medium, EURO-6ab",RER,/unit,lci-pass_cars
 CAR_EV_ELD,Construction,Passenger car,"Passenger car, battery electric, Medium",RER,/unit,lci-pass_cars
+CAR_EV_ELD,Operation,"transport, passenger car","transport, passenger car, battery electric, Medium",RER,/km,lci-pass_cars
 CAR_EV_LD,Operation,"transport, passenger car","transport, passenger car, battery electric, Medium",RER,/km,lci-pass_cars
 CAR_EV_LD,Construction,Passenger car,"Passenger car, battery electric, Medium",RER,/unit,lci-pass_cars
 CAR_EV_MD,Operation,"transport, passenger car","transport, passenger car, battery electric, Medium",RER,/km,lci-pass_cars
 CAR_EV_MD,Construction,Passenger car,"Passenger car, battery electric, Medium",RER,/unit,lci-pass_cars
 CAR_EV_SD,Operation,"transport, passenger car","transport, passenger car, battery electric, Medium",RER,/km,lci-pass_cars
 CAR_EV_SD,Construction,Passenger car,"Passenger car, battery electric, Medium",RER,/unit,lci-pass_cars
-CAR_FC_H2_ELD,Construction,Passenger car,"Passenger car, fuel cell electric, Medium",RER,/unit,lci-pass_cars
 CAR_FC_H2_ELD,Operation,"transport, passenger car","transport, passenger car, fuel cell electric, Medium",RER,/km,lci-pass_cars
-CAR_FC_H2_LD,Construction,Passenger car,"Passenger car, fuel cell electric, Medium",RER,/unit,lci-pass_cars
+CAR_FC_H2_ELD,Construction,Passenger car,"Passenger car, fuel cell electric, Medium",RER,/unit,lci-pass_cars
 CAR_FC_H2_LD,Operation,"transport, passenger car","transport, passenger car, fuel cell electric, Medium",RER,/km,lci-pass_cars
-CAR_FC_H2_MD,Construction,Passenger car,"Passenger car, fuel cell electric, Medium",RER,/unit,lci-pass_cars
+CAR_FC_H2_LD,Construction,Passenger car,"Passenger car, fuel cell electric, Medium",RER,/unit,lci-pass_cars
 CAR_FC_H2_MD,Operation,"transport, passenger car","transport, passenger car, fuel cell electric, Medium",RER,/km,lci-pass_cars
-CAR_FC_H2_SD,Construction,Passenger car,"Passenger car, fuel cell electric, Medium",RER,/unit,lci-pass_cars
+CAR_FC_H2_MD,Construction,Passenger car,"Passenger car, fuel cell electric, Medium",RER,/unit,lci-pass_cars
 CAR_FC_H2_SD,Operation,"transport, passenger car","transport, passenger car, fuel cell electric, Medium",RER,/km,lci-pass_cars
-CAR_GASOLINE_ELD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline, Medium, EURO-6ab",RER,/unit,lci-pass_cars
+CAR_FC_H2_SD,Construction,Passenger car,"Passenger car, fuel cell electric, Medium",RER,/unit,lci-pass_cars
 CAR_GASOLINE_ELD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline, Medium, EURO-6ab",RER,/km,lci-pass_cars
-CAR_GASOLINE_LD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline, Medium, EURO-6ab",RER,/unit,lci-pass_cars
+CAR_GASOLINE_ELD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline, Medium, EURO-6ab",RER,/unit,lci-pass_cars
 CAR_GASOLINE_LD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline, Medium, EURO-6ab",RER,/km,lci-pass_cars
+CAR_GASOLINE_LD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline, Medium, EURO-6ab",RER,/unit,lci-pass_cars
 CAR_GASOLINE_MD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline, Medium, EURO-6ab",RER,/km,lci-pass_cars
 CAR_GASOLINE_MD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline, Medium, EURO-6ab",RER,/unit,lci-pass_cars
-CAR_GASOLINE_SD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline, Medium, EURO-6ab",RER,/km,lci-pass_cars
 CAR_GASOLINE_SD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline, Medium, EURO-6ab",RER,/unit,lci-pass_cars
+CAR_GASOLINE_SD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline, Medium, EURO-6ab",RER,/km,lci-pass_cars
 CAR_HEV_ELD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline hybrid, Medium, EURO-6ab",RER,/km,lci-pass_cars
 CAR_HEV_ELD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline hybrid, Medium, EURO-6ab",RER,/unit,lci-pass_cars
 CAR_HEV_LD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline hybrid, Medium, EURO-6ab",RER,/km,lci-pass_cars
@@ -150,67 +150,67 @@ CAR_MEOH_ELD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline, Me
 CAR_MEOH_ELD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline, Medium, EURO-6ab",RER,/km,lci-pass_cars
 CAR_MEOH_LD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline, Medium, EURO-6ab",RER,/unit,lci-pass_cars
 CAR_MEOH_LD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline, Medium, EURO-6ab",RER,/km,lci-pass_cars
-CAR_MEOH_MD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline, Medium, EURO-6ab",RER,/unit,lci-pass_cars
 CAR_MEOH_MD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline, Medium, EURO-6ab",RER,/km,lci-pass_cars
+CAR_MEOH_MD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline, Medium, EURO-6ab",RER,/unit,lci-pass_cars
 CAR_MEOH_SD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline, Medium, EURO-6ab",RER,/unit,lci-pass_cars
 CAR_MEOH_SD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline, Medium, EURO-6ab",RER,/km,lci-pass_cars
-CAR_PHEV_ELD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, plugin gasoline hybrid, Medium, EURO-6ab",RER,/km,lci-pass_cars
 CAR_PHEV_ELD,Construction,"Passenger car, EURO-6ab","Passenger car, plugin gasoline hybrid, Medium, EURO-6ab",RER,/unit,lci-pass_cars
-CAR_PHEV_LD,Construction,"Passenger car, EURO-6ab","Passenger car, plugin gasoline hybrid, Medium, EURO-6ab",RER,/unit,lci-pass_cars
+CAR_PHEV_ELD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, plugin gasoline hybrid, Medium, EURO-6ab",RER,/km,lci-pass_cars
 CAR_PHEV_LD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, plugin gasoline hybrid, Medium, EURO-6ab",RER,/km,lci-pass_cars
+CAR_PHEV_LD,Construction,"Passenger car, EURO-6ab","Passenger car, plugin gasoline hybrid, Medium, EURO-6ab",RER,/unit,lci-pass_cars
 CAR_PHEV_MD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, plugin gasoline hybrid, Medium, EURO-6ab",RER,/km,lci-pass_cars
 CAR_PHEV_MD,Construction,"Passenger car, EURO-6ab","Passenger car, plugin gasoline hybrid, Medium, EURO-6ab",RER,/unit,lci-pass_cars
 CAR_PHEV_SD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, plugin gasoline hybrid, Medium, EURO-6ab",RER,/km,lci-pass_cars
 CAR_PHEV_SD,Construction,"Passenger car, EURO-6ab","Passenger car, plugin gasoline hybrid, Medium, EURO-6ab",RER,/unit,lci-pass_cars
-CAR_PROPANE_ELD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, compressed gas, Medium, EURO-6ab",RER,/km,lci-pass_cars
 CAR_PROPANE_ELD,Construction,"Passenger car, EURO-6ab","Passenger car, compressed gas, Medium, EURO-6ab",RER,/unit,lci-pass_cars
+CAR_PROPANE_ELD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, compressed gas, Medium, EURO-6ab",RER,/km,lci-pass_cars
 CAR_PROPANE_LD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, compressed gas, Medium, EURO-6ab",RER,/km,lci-pass_cars
 CAR_PROPANE_LD,Construction,"Passenger car, EURO-6ab","Passenger car, compressed gas, Medium, EURO-6ab",RER,/unit,lci-pass_cars
-CAR_PROPANE_MD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, compressed gas, Medium, EURO-6ab",RER,/km,lci-pass_cars
 CAR_PROPANE_MD,Construction,"Passenger car, EURO-6ab","Passenger car, compressed gas, Medium, EURO-6ab",RER,/unit,lci-pass_cars
-CAR_PROPANE_SD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, compressed gas, Medium, EURO-6ab",RER,/km,lci-pass_cars
+CAR_PROPANE_MD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, compressed gas, Medium, EURO-6ab",RER,/km,lci-pass_cars
 CAR_PROPANE_SD,Construction,"Passenger car, EURO-6ab","Passenger car, compressed gas, Medium, EURO-6ab",RER,/unit,lci-pass_cars
-CCGT,Construction,"NGCC power plant, 400MWe","market for gas power plant, combined cycle, 400MW electrical",GLO,/unit,Carma CCS
+CAR_PROPANE_SD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, compressed gas, Medium, EURO-6ab",RER,/km,lci-pass_cars
 CCGT,Operation,"electricity, high voltage","electricity production, at natural gas-fired combined cycle power plant",RER,/kWh,Carma CCS
-CCGT_CC,Operation,"electricity, high voltage","electricity production, at natural gas-fired combined cycle power plant, post, pipeline 200km, storage 1000m",RER,/kWh,Carma CCS
+CCGT,Construction,"NGCC power plant, 400MWe","market for gas power plant, combined cycle, 400MW electrical",GLO,/unit,Carma CCS
 CCGT_CC,Construction,"NGCC power plant, 400MWe","market for gas power plant, combined cycle, 400MW electrical",GLO,/unit,Carma CCS
-CEMENT_PROD,Operation,"cement, alternative constituents 21-35%","cement production, alternative constituents 21-35%",CH,/kg,ecoinvent3.8 cut-off
+CCGT_CC,Operation,"electricity, high voltage","electricity production, at natural gas-fired combined cycle power plant, post, pipeline 200km, storage 1000m",RER,/kWh,Carma CCS
 CEMENT_PROD,Construction,cement factory,cement factory construction,CH,/unit,ecoinvent3.8 cut-off
+CEMENT_PROD,Operation,"cement, alternative constituents 21-35%","cement production, alternative constituents 21-35%",CH,/kg,ecoinvent3.8 cut-off
 CEMENT_PROD_HP,Operation,"cement, alternative constituents 21-35%","cement production, alternative constituents 21-35%",CH,/kg,ecoinvent3.8 cut-off
 CEMENT_PROD_HP,Construction,cement factory,cement factory construction,CH,/unit,ecoinvent3.8 cut-off
 CO2_METHANOL,Operation,methanol,methanol production,GLO,/kg,ecoinvent3.8 cut-off
 CO2_METHANOL,Construction,methanol factory,methanol factory construction,GLO,/unit,ecoinvent3.8 cut-off
 CO2_STO,Construction,"liquid storage tank, chemicals, organics","market for liquid storage tank, chemicals, organics",GLO,/unit,ecoinvent3.8 cut-off
-CO2_TO_DIESEL,Operation,"Diesel, synthetic","Diesel production, synthetic, Fischer Tropsch process, hydrogen from electrolysis, energy allocation",RER,/kg,synfuel from electrolysis
 CO2_TO_DIESEL,Construction,petroleum refinery,petroleum refinery construction,RoW,/unit,ecoinvent3.8 cut-off
-CO2_TO_JETFUELS,Operation,"kerosene, synthetic","kerosene production, from methanol, hydrogen from electrolysis, CO2 from cement plant, energy allocation",RER,/kg,cement CCS-CCU
+CO2_TO_DIESEL,Operation,"Diesel, synthetic","Diesel production, synthetic, Fischer Tropsch process, hydrogen from electrolysis, energy allocation",RER,/kg,synfuel from electrolysis
 CO2_TO_JETFUELS,Construction,petroleum refinery,petroleum refinery construction,RER,/unit,ecoinvent3.8 cut-off
-COACH_BIODIESEL_B100_ELD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,/person*km,lci-buses
+CO2_TO_JETFUELS,Operation,"kerosene, synthetic","kerosene production, from methanol, hydrogen from electrolysis, CO2 from cement plant, energy allocation",RER,/kg,cement CCS-CCU
 COACH_BIODIESEL_B100_ELD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,/unit,lci-buses
+COACH_BIODIESEL_B100_ELD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,/person*km,lci-buses
 COACH_BIODIESEL_B100_LD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,/person*km,lci-buses
 COACH_BIODIESEL_B100_LD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,/unit,lci-buses
-COACH_BIODIESEL_B100_MD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,/unit,lci-buses
 COACH_BIODIESEL_B100_MD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,/person*km,lci-buses
+COACH_BIODIESEL_B100_MD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,/unit,lci-buses
 COACH_BIODIESEL_B20_ELD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,/person*km,lci-buses
 COACH_BIODIESEL_B20_ELD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,/unit,lci-buses
-COACH_BIODIESEL_B20_LD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,/unit,lci-buses
 COACH_BIODIESEL_B20_LD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,/person*km,lci-buses
-COACH_BIODIESEL_B20_MD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,/unit,lci-buses
+COACH_BIODIESEL_B20_LD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,/unit,lci-buses
 COACH_BIODIESEL_B20_MD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,/person*km,lci-buses
-COACH_CNG_ELD,Construction,"Passenger bus, EURO-VI","Passenger bus, compressed gas, 13m single deck coach bus, EURO-VI",RER,/unit,lci-buses
+COACH_BIODIESEL_B20_MD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,/unit,lci-buses
 COACH_CNG_ELD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, compressed gas, 13m single deck coach bus, EURO-VI",RER,/person*km,lci-buses
+COACH_CNG_ELD,Construction,"Passenger bus, EURO-VI","Passenger bus, compressed gas, 13m single deck coach bus, EURO-VI",RER,/unit,lci-buses
 COACH_CNG_LD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, compressed gas, 13m single deck coach bus, EURO-VI",RER,/person*km,lci-buses
 COACH_CNG_LD,Construction,"Passenger bus, EURO-VI","Passenger bus, compressed gas, 13m single deck coach bus, EURO-VI",RER,/unit,lci-buses
-COACH_CNG_MD,Construction,"Passenger bus, EURO-VI","Passenger bus, compressed gas, 13m single deck coach bus, EURO-VI",RER,/unit,lci-buses
 COACH_CNG_MD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, compressed gas, 13m single deck coach bus, EURO-VI",RER,/person*km,lci-buses
-COACH_DIESEL_ELD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,/unit,lci-buses
+COACH_CNG_MD,Construction,"Passenger bus, EURO-VI","Passenger bus, compressed gas, 13m single deck coach bus, EURO-VI",RER,/unit,lci-buses
 COACH_DIESEL_ELD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,/person*km,lci-buses
+COACH_DIESEL_ELD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,/unit,lci-buses
 COACH_DIESEL_LD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,/unit,lci-buses
 COACH_DIESEL_LD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,/person*km,lci-buses
 COACH_DIESEL_MD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,/unit,lci-buses
 COACH_DIESEL_MD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,/person*km,lci-buses
-COACH_ETOH_E10_ELD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,/unit,lci-buses
 COACH_ETOH_E10_ELD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,/person*km,lci-buses
+COACH_ETOH_E10_ELD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,/unit,lci-buses
 COACH_ETOH_E10_LD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,/unit,lci-buses
 COACH_ETOH_E10_LD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,/person*km,lci-buses
 COACH_ETOH_E10_MD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,/unit,lci-buses
@@ -221,22 +221,22 @@ COACH_EV_LD,Operation,"transport, passenger bus","transport, passenger bus, batt
 COACH_EV_LD,Construction,Passenger bus,"Passenger bus, battery electric - overnight charging, 13m single deck urban bus",RER,/unit,lci-buses
 COACH_EV_MD,Operation,"transport, passenger bus","transport, passenger bus, battery electric - overnight charging, 13m single deck urban bus",RER,/person*km,lci-buses
 COACH_EV_MD,Construction,Passenger bus,"Passenger bus, battery electric - overnight charging, 13m single deck urban bus",RER,/unit,lci-buses
-COACH_GASOLINE_ELD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,/unit,lci-buses
 COACH_GASOLINE_ELD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,/person*km,lci-buses
-COACH_GASOLINE_LD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,/unit,lci-buses
+COACH_GASOLINE_ELD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,/unit,lci-buses
 COACH_GASOLINE_LD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,/person*km,lci-buses
-COACH_GASOLINE_MD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,/unit,lci-buses
+COACH_GASOLINE_LD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,/unit,lci-buses
 COACH_GASOLINE_MD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,/person*km,lci-buses
+COACH_GASOLINE_MD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m single deck coach bus, EURO-VI",RER,/unit,lci-buses
 COACH_HY_DIESEL_ELD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel hybrid, 13m single deck coach bus, EURO-VI",RER,/unit,lci-buses
 COACH_HY_DIESEL_ELD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel hybrid, 13m single deck coach bus, EURO-VI",RER,/person*km,lci-buses
 COACH_HY_DIESEL_LD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel hybrid, 13m single deck coach bus, EURO-VI",RER,/unit,lci-buses
 COACH_HY_DIESEL_LD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel hybrid, 13m single deck coach bus, EURO-VI",RER,/person*km,lci-buses
-COACH_HY_DIESEL_MD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel hybrid, 13m single deck coach bus, EURO-VI",RER,/unit,lci-buses
 COACH_HY_DIESEL_MD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel hybrid, 13m single deck coach bus, EURO-VI",RER,/person*km,lci-buses
+COACH_HY_DIESEL_MD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel hybrid, 13m single deck coach bus, EURO-VI",RER,/unit,lci-buses
 COACH_PROPANE_ELD,Construction,"Passenger bus, EURO-VI","Passenger bus, compressed gas, 13m single deck coach bus, EURO-VI",RER,/unit,lci-buses
 COACH_PROPANE_ELD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, compressed gas, 13m single deck coach bus, EURO-VI",RER,/person*km,lci-buses
-COACH_PROPANE_LD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, compressed gas, 13m single deck coach bus, EURO-VI",RER,/person*km,lci-buses
 COACH_PROPANE_LD,Construction,"Passenger bus, EURO-VI","Passenger bus, compressed gas, 13m single deck coach bus, EURO-VI",RER,/unit,lci-buses
+COACH_PROPANE_LD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, compressed gas, 13m single deck coach bus, EURO-VI",RER,/person*km,lci-buses
 COACH_PROPANE_MD,Construction,"Passenger bus, EURO-VI","Passenger bus, compressed gas, 13m single deck coach bus, EURO-VI",RER,/unit,lci-buses
 COACH_PROPANE_MD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, compressed gas, 13m single deck coach bus, EURO-VI",RER,/person*km,lci-buses
 COAL_GAS_H2,Operation,"hydrogen, gaseous, 30 bar","hydrogen production, gaseous, 30 bar, from hard coal gasification and reforming, at coal gasification plant",RER,/kg,Hydrogen from coal Gasification
@@ -251,10 +251,10 @@ COAL_GAS_H2_CCS_PLANT,Construction,"chemical factory, organics","chemical factor
 COAL_GAS_H2_CCS_TANK,Construction,"liquid storage tank, chemicals, organics","liquid storage tank production, chemicals, organics",RoW,/unit,ecoinvent3.8 cut-off
 COAL_GAS_H2_PLANT,Construction,"chemical factory, organics","chemical factory construction, organics",RER,/unit,ecoinvent3.8 cut-off
 COAL_GAS_H2_TANK,Construction,"liquid storage tank, chemicals, organics","liquid storage tank production, chemicals, organics",RoW,/unit,ecoinvent3.8 cut-off
-COAL_IGCC,Construction,Hard coal IGCC power plant 450MW,Hard coal IGCC power plant 450MW,RER,/unit,Carma CCS
 COAL_IGCC,Operation,"electricity, high voltage","electricity production, at hard coal-fired IGCC power plant",RER,/kWh,Carma CCS
-COAL_IGCC_CC,Construction,Hard coal IGCC power plant 450MW,Hard coal IGCC power plant 450MW,RER,/unit,Carma CCS
+COAL_IGCC,Construction,Hard coal IGCC power plant 450MW,Hard coal IGCC power plant 450MW,RER,/unit,Carma CCS
 COAL_IGCC_CC,Operation,"electricity, high voltage","electricity production, at hard coal-fired IGCC power plant, pre, pipeline 200km, storage 1000m",RER,/kWh,Carma CCS
+COAL_IGCC_CC,Construction,Hard coal IGCC power plant 450MW,Hard coal IGCC power plant 450MW,RER,/unit,Carma CCS
 COAL_US,Operation,"electricity, high voltage","electricity production, at lignite-fired power plant, pulverised",RER,/kWh,Carma CCS
 COAL_US,Construction,lignite power plant,market for lignite power plant,GLO,/unit,ecoinvent3.8 cut-off
 COAL_US_CC,Operation,"electricity, high voltage","electricity production, at lignite-fired power plant, post, pipeline 200km, storage 1000m",RER,/kWh,Carma CCS
@@ -275,8 +275,8 @@ DAC_HT_PLANT_DECOM,Construction,direct air capture system,"treatment of direct a
 DAC_LT,Operation,"carbon dioxide, captured from atmosphere","carbon dioxide, captured from atmosphere, with a solvent-based direct air capture system, 1MtCO2",RER,/kg,direct air capture
 DAC_LT_PLANT,Construction,direct air capture system,"direct air capture system, solvent-based, 1MtCO2",RER,/unit,direct air capture
 DAC_LT_PLANT_DECOM,Construction,direct air capture system,"treatment of direct air capture system, solvent-based, 1MtCO2",RER,/unit,direct air capture
-DEC_ADVCOGEN_H2,Operation,"electricity, from residential heating system","electricity, residential, by conversion of hydrogen using fuel cell, PEM, allocated by exergy, distributed by pipeline, produced by Electrolysis, PEM using electricity from grid",CH,/kWh,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
 DEC_ADVCOGEN_H2,Construction,"fuel cell, polymer electrolyte membrane, 2kW electrical, future","fuel cell production, polymer electrolyte membrane, 2kW electrical, future",RoW,/unit,ecoinvent3.8 cut-off
+DEC_ADVCOGEN_H2,Operation,"electricity, from residential heating system","electricity, residential, by conversion of hydrogen using fuel cell, PEM, allocated by exergy, distributed by pipeline, produced by Electrolysis, PEM using electricity from grid",CH,/kWh,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
 DEC_BOILER_GAS,Operation,"heat, central or small-scale, natural gas","heat production, natural gas, at boiler modulating <100kW",RoW,/MJ,ecoinvent3.8 cut-off
 DEC_BOILER_GAS,Construction,gas boiler,gas boiler production,RoW,/unit,ecoinvent3.8 cut-off
 DEC_BOILER_OIL,Operation,"heat, central or small-scale, other than natural gas","heat production, light fuel oil, at boiler 10kW condensing, non-modulating",RoW,/MJ,ecoinvent3.8 cut-off
@@ -297,8 +297,8 @@ DEC_COGEN_WOOD_BOILER,Construction,"furnace, wood chips, hardwood storage area, 
 DEC_COGEN_WOOD_TURBINE,Construction,"heat and power co-generation unit, organic Rankine cycle, 200kW electrical","heat and power co-generation unit construction, organic Rankine cycle, 200kW electrical",GLO,/unit,ecoinvent3.8 cut-off
 DEC_DIRECT_ELEC,Construction,"auxiliary heating unit, electric, 5kW","auxiliary heating unit production, electric, 5kW",RoW,/unit,ecoinvent3.8 cut-off
 DEC_DIRECT_ELEC,Operation,"electricity, low voltage","market for electricity, low voltage",CH,/kWh,ecoinvent3.8 cut-off
-DEC_HP_ELEC,Construction,"heat pump, brine-water, 10kW","heat pump production, brine-water, 10kW",RoW,/unit,ecoinvent3.8 cut-off
 DEC_HP_ELEC,Operation,"heat, air-water heat pump 10kW","heat production, air-water heat pump 10kW",RoW,/MJ,ecoinvent3.8 cut-off
+DEC_HP_ELEC,Construction,"heat pump, brine-water, 10kW","heat pump production, brine-water, 10kW",RoW,/unit,ecoinvent3.8 cut-off
 DEC_SOLAR,Construction,"flat plate solar collector, Cu absorber","flat plate solar collector production, Cu absorber",RoW,/m2,ecoinvent3.8 cut-off
 DEC_THHP_GAS,Operation,"heat, future","heat production, natural gas, at diffusion absorption heat pump 4kW, future",CH,/MJ,ecoinvent3.8 cut-off
 DEC_THHP_GAS_HEX,Construction,"borehole heat exchanger, 150m","borehole heat exchanger production, 150m",CH,/unit,ecoinvent3.8 cut-off
@@ -335,27 +335,29 @@ DHN_TH_STORAGE,Construction,"thermal storage system, solar tower power plant, 20
 DIE_STO,Construction,"liquid storage tank, chemicals, organics","liquid storage tank production, chemicals, organics",RoW,/unit,ecoinvent3.8 cut-off
 DIRECT_USAGE,Operation,"carbon dioxide, stored","carbon dioxide compression, transport and storage",RER,/kg,direct air capture
 DOGR,Operation,"carbon dioxide, stored","carbon dioxide compression, transport and storage",RER,/kg,direct air capture
+EHP_H2_GRID,Construction,"pipeline, for hydrogen transmission","transmission pipeline for hydrogen, dedicated hydrogen pipeline",RER,/km,hydrogen-distribution
+EHP_NG_GRID,Construction,"pipeline, natural gas, high pressure distribution network","pipeline construction, natural gas, high pressure distribution network",RoW,/km,ecoinvent3.8 cut-off
 EHV_GRID,Construction,"transmission network, electricity, high voltage","transmission network construction, electricity, high voltage",RoW,/km,ecoinvent3.8 cut-off
 ELEC_STO,Construction,"battery, Li-ion, rechargeable, prismatic","market for battery, Li-ion, rechargeable, prismatic",GLO,/kg,ecoinvent3.8 cut-off
 EOR,Operation,"carbon dioxide, stored","carbon dioxide compression, transport and storage",RER,/kg,direct air capture
-ETHANE_CRACKING,Operation,ethane,natural gas liquids fractionation,GLO,/kg,ecoinvent3.8 cut-off
 ETHANE_CRACKING,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,/unit,ecoinvent3.8 cut-off
-ETHANE_OXIDATION,Operation,"acetic acid, without water, in 98% solution state","acetic acid production, product in 98% solution state",RoW,/kg,ecoinvent3.8 cut-off
+ETHANE_CRACKING,Operation,ethane,natural gas liquids fractionation,GLO,/kg,ecoinvent3.8 cut-off
 ETHANE_OXIDATION,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,/unit,ecoinvent3.8 cut-off
-ETHANE_TO_ETHYLENE,Operation,ethylene,"ethylene production, average",RoW,/kg,ecoinvent3.8 cut-off
+ETHANE_OXIDATION,Operation,"acetic acid, without water, in 98% solution state","acetic acid production, product in 98% solution state",RoW,/kg,ecoinvent3.8 cut-off
 ETHANE_TO_ETHYLENE,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,/unit,ecoinvent3.8 cut-off
-ETHANOL_TO_JETFUELS,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,/unit,ecoinvent3.8 cut-off
+ETHANE_TO_ETHYLENE,Operation,ethylene,"ethylene production, average",RoW,/kg,ecoinvent3.8 cut-off
 ETHANOL_TO_JETFUELS,Operation,"kerosene, synthetic","kerosene production, from methanol, hydrogen from coal gasification, energy allocation",RER,/kg,Methanol-based fuels from coal
+ETHANOL_TO_JETFUELS,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,/unit,ecoinvent3.8 cut-off
 ETHYLENE_POLYMERIZATION,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,/unit,ecoinvent3.8 cut-off
 ETHYLENE_POLYMERIZATION,Operation,ethylene,"ethylene production, average",RoW,/kg,ecoinvent3.8 cut-off
-FOOD_PROD,Operation,"sugar, from sugar beet",beet sugar production,RoW,/kg,ecoinvent3.8 cut-off
 FOOD_PROD,Construction,sugar refinery,sugar refinery construction,GLO,/unit,ecoinvent3.8 cut-off
+FOOD_PROD,Operation,"sugar, from sugar beet",beet sugar production,RoW,/kg,ecoinvent3.8 cut-off
 FOOD_PROD_HP,Construction,sugar refinery,sugar refinery construction,GLO,/unit,ecoinvent3.8 cut-off
 FOOD_PROD_HP,Operation,"sugar, from sugar beet",beet sugar production,RoW,/kg,ecoinvent3.8 cut-off
 FOOD_PROD_HR,Operation,"sugar, from sugar beet",beet sugar production,RoW,/kg,ecoinvent3.8 cut-off
 FOOD_PROD_HR,Construction,sugar refinery,sugar refinery construction,GLO,/unit,ecoinvent3.8 cut-off
-FT,Operation,"diesel, synthetic, vehicle grade","diesel production, synthetic, from Fischer Tropsch process, hydrogen from wood gasification, energy allocation, at fuelling station",RER,/kg,synfuel from wood gasification
 FT,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,/unit,ecoinvent3.8 cut-off
+FT,Operation,"diesel, synthetic, vehicle grade","diesel production, synthetic, from Fischer Tropsch process, hydrogen from wood gasification, energy allocation, at fuelling station",RER,/kg,synfuel from wood gasification
 GASIFICATION_H2,Operation,"hydrogen, gaseous, 25 bar","hydrogen production, gaseous, 25 bar, from heatpipe reformer gasification of woody biomass, at gasification plant",RER,/kg,Hydrogen from woody biomass gasification
 GASIFICATION_H2_PLANT,Construction,synthetic gas factory,synthetic gas factory construction,CH,/unit,ecoinvent3.8 cut-off
 GASIFICATION_H2_TANK,Construction,"liquid storage tank, chemicals, organics","market for liquid storage tank, chemicals, organics",GLO,/unit,ecoinvent3.8 cut-off
@@ -363,52 +365,54 @@ GASIFICATION_SNG,Operation,"syngas, RWGS, Production","syngas, RWGS, Production,
 GASIFICATION_SNG_PLANT,Construction,synthetic gas factory,synthetic gas factory construction,CH,/unit,ecoinvent3.8 cut-off
 GASIFICATION_SNG_TANK,Construction,"liquid storage tank, chemicals, organics","market for liquid storage tank, chemicals, organics",GLO,/unit,ecoinvent3.8 cut-off
 GASO_STO,Construction,"liquid storage tank, chemicals, organics","liquid storage tank production, chemicals, organics",RoW,/unit,ecoinvent3.8 cut-off
-GEOTHERMAL,Construction,"geothermal power plant, 5.5MWel",geothermal power plant construction,CH,/unit,ecoinvent3.8 cut-off
 GEOTHERMAL,Operation,"electricity, high voltage","electricity production, deep geothermal",CH,/kWh,ecoinvent3.8 cut-off
+GEOTHERMAL,Construction,"geothermal power plant, 5.5MWel",geothermal power plant construction,CH,/unit,ecoinvent3.8 cut-off
 H2_CCGT,Operation,"electricity, high voltage","electricity production, from hydrogen-fired one gigawatt gas turbine",RER,/kWh,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
 H2_CCGT,Construction,"gas power plant, combined cycle, 400MW electrical","gas power plant construction, combined cycle, 400MW electrical",RoW,/unit,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
 H2_COMP_HE,Operation,"hydrogen, gaseous","market for hydrogen, gaseous",GLO,/kg,ecoinvent3.8 cut-off
 H2_COMP_HE,Construction,"compressor, for hydrogen transmission",compressor assembly for transmission hydrogen pipeline,RER,unit,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
-H2_COMP_LM,Construction,"compressor, for hydrogen transmission",compressor assembly for transmission hydrogen pipeline,RER,unit,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
 H2_COMP_LM,Operation,"hydrogen, gaseous","market for hydrogen, gaseous",GLO,/kg,ecoinvent3.8 cut-off
+H2_COMP_LM,Construction,"compressor, for hydrogen transmission",compressor assembly for transmission hydrogen pipeline,RER,unit,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
 H2_COMP_MH,Operation,"hydrogen, gaseous","market for hydrogen, gaseous",GLO,/kg,ecoinvent3.8 cut-off
 H2_COMP_MH,Construction,"compressor, for hydrogen transmission",compressor assembly for transmission hydrogen pipeline,RER,unit,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
 H2_EXP_EH,Operation,"hydrogen, gaseous","market for hydrogen, gaseous",GLO,/kg,ecoinvent3.8 cut-off
-H2_EXP_EH_COGEN,Construction,"air input/output unit, heat and power co-generation unit, 160kW electrical","air input/output unit production, heat and power co-generation unit, 160kW electrical",RoW,/unit,ecoinvent3.8 cut-off
 H2_EXP_EH_COGEN,Operation,"hydrogen, gaseous","market for hydrogen, gaseous",GLO,/kg,ecoinvent3.8 cut-off
+H2_EXP_EH_COGEN,Construction,"air input/output unit, heat and power co-generation unit, 160kW electrical","air input/output unit production, heat and power co-generation unit, 160kW electrical",RoW,/unit,ecoinvent3.8 cut-off
 H2_EXP_HM,Operation,"hydrogen, gaseous","market for hydrogen, gaseous",GLO,/kg,ecoinvent3.8 cut-off
-H2_EXP_HM_COGEN,Construction,"air input/output unit, heat and power co-generation unit, 160kW electrical","air input/output unit production, heat and power co-generation unit, 160kW electrical",RoW,/unit,ecoinvent3.8 cut-off
 H2_EXP_HM_COGEN,Operation,"hydrogen, gaseous","market for hydrogen, gaseous",GLO,/kg,ecoinvent3.8 cut-off
+H2_EXP_HM_COGEN,Construction,"air input/output unit, heat and power co-generation unit, 160kW electrical","air input/output unit production, heat and power co-generation unit, 160kW electrical",RoW,/unit,ecoinvent3.8 cut-off
 H2_EXP_ML,Operation,"hydrogen, gaseous","market for hydrogen, gaseous",GLO,/kg,ecoinvent3.8 cut-off
-H2_EXP_ML_COGEN,Operation,"hydrogen, gaseous","market for hydrogen, gaseous",GLO,/kg,ecoinvent3.8 cut-off
 H2_EXP_ML_COGEN,Construction,"air input/output unit, heat and power co-generation unit, 160kW electrical","air input/output unit production, heat and power co-generation unit, 160kW electrical",RoW,/unit,ecoinvent3.8 cut-off
+H2_EXP_ML_COGEN,Operation,"hydrogen, gaseous","market for hydrogen, gaseous",GLO,/kg,ecoinvent3.8 cut-off
 H2_NG_CCGT,Construction,"NGCC power plant, 400MWe","market for gas power plant, combined cycle, 400MW electrical",GLO,/unit,Carma CCS
 H2_NG_CCGT,Operation,"electricity, high voltage","electricity production, at natural gas-fired combined cycle power plant",RER,/kWh,Carma CCS
 H2_NG_CCGT_CCS,Operation,"electricity, high voltage","electricity production, at natural gas-fired combined cycle power plant, post, pipeline 200km, storage 1000m",RER,/kWh,Carma CCS
 H2_NG_CCGT_CCS,Construction,"NGCC power plant, 400MWe","market for gas power plant, combined cycle, 400MW electrical",GLO,/unit,Carma CCS
 H2_STO,Construction,high pressure hydrogen storage tank,high pressure hydrogen storage tank,GLO,/kg,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
+HP_H2_GRID,Construction,"pipeline, for hydrogen transmission","transmission pipeline for hydrogen, dedicated hydrogen pipeline",RER,/km,hydrogen-distribution
+HP_NG_GRID,Construction,"pipeline, natural gas, high pressure distribution network","pipeline construction, natural gas, high pressure distribution network",RoW,/km,ecoinvent3.8 cut-off
 HT_LT_DEC,Operation,"heat, district or industrial, other than natural gas","market for heat, district or industrial, other than natural gas",CH,/MJ,ecoinvent3.8 cut-off
 HV_GRID,Construction,"transmission network, electricity, high voltage","transmission network construction, electricity, high voltage",RoW,/km,ecoinvent3.8 cut-off
 HYDRO_DAM,Construction,"hydropower plant, reservoir","hydropower plant construction, reservoir",CA-QC,/unit,ecoinvent3.8 cut-off
 HYDRO_DAM,Operation,"electricity, high voltage","electricity production, hydro, reservoir, non-alpine region",CA-QC,/kWh,ecoinvent3.8 cut-off
-HYDRO_GAS,Operation,"syngas, RWGS, Production","syngas, RWGS, Production, for Fischer Tropsch process, hydrogen from wood gasification",RER,/kg,synfuel from wood gasification
 HYDRO_GAS,Construction,synthetic gas factory,synthetic gas factory construction,CH,/unit,ecoinvent3.8 cut-off
+HYDRO_GAS,Operation,"syngas, RWGS, Production","syngas, RWGS, Production, for Fischer Tropsch process, hydrogen from wood gasification",RER,/kg,synfuel from wood gasification
 HYDRO_GAS_CHP,Operation,"syngas, RWGS, Production","syngas, RWGS, Production, for Fischer Tropsch process, hydrogen from wood gasification",RER,/kg,synfuel from wood gasification
 HYDRO_GAS_CHP_PLANT,Construction,synthetic gas factory,synthetic gas factory construction,CH,/unit,ecoinvent3.8 cut-off
 HYDRO_GAS_CHP_TURBINE,Construction,"heat and power co-generation unit, organic Rankine cycle, 200kW electrical","heat and power co-generation unit construction, organic Rankine cycle, 200kW electrical",GLO,/unit,ecoinvent3.8 cut-off
 HYDRO_RIVER,Construction,"hydropower plant, run-of-river","hydropower plant construction, run-of-river",CH,/unit,ecoinvent3.8 cut-off
 HYDRO_RIVER,Operation,"electricity, high voltage","electricity production, hydro, run-of-river",CH,/kWh,ecoinvent3.8 cut-off
-IND_BOILER_COAL,Operation,"heat, district or industrial, other than natural gas","heat production, at hard coal industrial furnace 1-10MW",RoW,/MJ,ecoinvent3.8 cut-off
 IND_BOILER_COAL,Construction,"industrial furnace, coal, 1-10MW","industrial furnace production, coal, 1-10MW",RoW,/unit,ecoinvent3.8 cut-off
+IND_BOILER_COAL,Operation,"heat, district or industrial, other than natural gas","heat production, at hard coal industrial furnace 1-10MW",RoW,/MJ,ecoinvent3.8 cut-off
 IND_BOILER_GAS,Construction,"industrial furnace, natural gas","industrial furnace production, natural gas",RoW,/unit,ecoinvent3.8 cut-off
 IND_BOILER_GAS,Operation,"heat, district or industrial, natural gas","heat production, natural gas, at industrial furnace >100kW",RoW,/MJ,ecoinvent3.8 cut-off
 IND_BOILER_OIL,Operation,"heat, district or industrial, other than natural gas","heat production, heavy fuel oil, at industrial furnace 1MW",CH,/MJ,ecoinvent3.8 cut-off
 IND_BOILER_OIL_PLANT,Construction,"industrial furnace, 1MW, oil","industrial furnace production, 1MW, oil",CH,/unit,ecoinvent3.8 cut-off
 IND_BOILER_OIL_TANK,Construction,"oil storage, 3000l","market for oil storage, 3000l",GLO,/unit,ecoinvent3.8 cut-off
-IND_BOILER_WASTE,Operation,"heat, district or industrial, other than natural gas","heat, from municipal waste incineration to generic market for heat district or industrial, other than natural gas",CH,/MJ,ecoinvent3.8 cut-off
 IND_BOILER_WASTE,Construction,municipal waste incineration facility,municipal waste incineration facility construction,RoW,/unit,ecoinvent3.8 cut-off
-IND_BOILER_WASTE_CC,Operation,"heat, district or industrial, other than natural gas","heat, from municipal waste incineration to generic market for heat district or industrial, other than natural gas",CH,/MJ,ecoinvent3.8 cut-off
+IND_BOILER_WASTE,Operation,"heat, district or industrial, other than natural gas","heat, from municipal waste incineration to generic market for heat district or industrial, other than natural gas",CH,/MJ,ecoinvent3.8 cut-off
 IND_BOILER_WASTE_CC,Construction,municipal waste incineration facility,municipal waste incineration facility construction,RoW,/unit,ecoinvent3.8 cut-off
+IND_BOILER_WASTE_CC,Operation,"heat, district or industrial, other than natural gas","heat, from municipal waste incineration to generic market for heat district or industrial, other than natural gas",CH,/MJ,ecoinvent3.8 cut-off
 IND_BOILER_WOOD,Construction,"furnace, wood chips, with silo, 1000kW","furnace production, wood chips, with silo, 1000kW",RoW,/unit,ecoinvent3.8 cut-off
 IND_BOILER_WOOD,Operation,"heat, district or industrial, other than natural gas","heat production, wood chips from industry, at furnace 1000kW",RoW,/MJ,ecoinvent3.8 cut-off
 IND_COGEN_GAS,Operation,"heat, district or industrial, natural gas","heat and power co-generation, natural gas, 1MW electrical, lean burn",CH,/MJ,ecoinvent3.8 cut-off
@@ -425,118 +429,122 @@ IND_COGEN_WOOD,Operation,"heat, district or industrial, other than natural gas",
 IND_COGEN_WOOD_DUST,Construction,"dust collector, electrostatic precipitator, for industrial use","market for dust collector, electrostatic precipitator, for industrial use",GLO,/unit,ecoinvent3.8 cut-off
 IND_COGEN_WOOD_PLANT,Construction,"furnace, wood chips, with silo, 5000kW","furnace production, wood chips, with silo, 5000kW",CH,/unit,ecoinvent3.8 cut-off
 IND_COGEN_WOOD_TURBINE,Construction,"heat and power co-generation unit, organic Rankine cycle, 1000kW electrical","market for heat and power co-generation unit, organic Rankine cycle, 1000kW electrical",GLO,/unit,ecoinvent3.8 cut-off
-IND_DIRECT_ELEC,Operation,"electricity, high voltage","market for electricity, high voltage",CH,/kWh,ecoinvent3.8 cut-off
 IND_DIRECT_ELEC,Construction,"auxiliary heating unit, electric, 5kW","auxiliary heating unit production, electric, 5kW",RoW,/unit,ecoinvent3.8 cut-off
-IND_HP_ELEC,Operation,"heat, air-water heat pump 10kW","heat production, air-water heat pump 10kW",RoW,/MJ,ecoinvent3.8 cut-off
+IND_DIRECT_ELEC,Operation,"electricity, high voltage","market for electricity, high voltage",CH,/kWh,ecoinvent3.8 cut-off
 IND_HP_ELEC,Construction,"heat pump, brine-water, 10kW","heat pump production, brine-water, 10kW",RoW,/unit,ecoinvent3.8 cut-off
+IND_HP_ELEC,Operation,"heat, air-water heat pump 10kW","heat production, air-water heat pump 10kW",RoW,/MJ,ecoinvent3.8 cut-off
 LCV_BIODIESEL_B100_MD,Construction,"truck, Euro-6","truck, diesel, 3.5t, 2020, Euro-6, urban delivery",CH,/unit,urban delivery_truck
 LCV_BIODIESEL_B100_MD,Operation,"transport, truck, Euro-6","transport, truck, diesel, 3.5t, 2020, Euro-6, urban delivery",CH,/metric ton*km,urban delivery_truck
-LCV_BIODIESEL_B100_SD,Construction,"truck, Euro-6","truck, diesel, 3.5t, 2020, Euro-6, urban delivery",CH,/unit,urban delivery_truck
 LCV_BIODIESEL_B100_SD,Operation,"transport, truck, Euro-6","transport, truck, diesel, 3.5t, 2020, Euro-6, urban delivery",CH,/metric ton*km,urban delivery_truck
-LCV_BIODIESEL_B20_MD,Construction,"truck, Euro-6","truck, diesel, 3.5t, 2020, Euro-6, urban delivery",CH,/unit,urban delivery_truck
+LCV_BIODIESEL_B100_SD,Construction,"truck, Euro-6","truck, diesel, 3.5t, 2020, Euro-6, urban delivery",CH,/unit,urban delivery_truck
 LCV_BIODIESEL_B20_MD,Operation,"transport, truck, Euro-6","transport, truck, diesel, 3.5t, 2020, Euro-6, urban delivery",CH,/metric ton*km,urban delivery_truck
+LCV_BIODIESEL_B20_MD,Construction,"truck, Euro-6","truck, diesel, 3.5t, 2020, Euro-6, urban delivery",CH,/unit,urban delivery_truck
 LCV_BIODIESEL_B20_SD,Construction,"truck, Euro-6","truck, diesel, 3.5t, 2020, Euro-6, urban delivery",CH,/unit,urban delivery_truck
 LCV_BIODIESEL_B20_SD,Operation,"transport, truck, Euro-6","transport, truck, diesel, 3.5t, 2020, Euro-6, urban delivery",CH,/metric ton*km,urban delivery_truck
-LCV_CNG_MD,Construction,"truck, Euro-6","truck, compressed gas, 3.5t, 2020, Euro-6, urban delivery",CH,/unit,urban delivery_truck
 LCV_CNG_MD,Operation,"transport, truck, Euro-6","transport, truck, compressed gas, 3.5t, 2020, Euro-6, urban delivery",CH,/metric ton*km,urban delivery_truck
-LCV_CNG_SD,Operation,"transport, truck, Euro-6","transport, truck, compressed gas, 3.5t, 2020, Euro-6, urban delivery",CH,/metric ton*km,urban delivery_truck
+LCV_CNG_MD,Construction,"truck, Euro-6","truck, compressed gas, 3.5t, 2020, Euro-6, urban delivery",CH,/unit,urban delivery_truck
 LCV_CNG_SD,Construction,"truck, Euro-6","truck, compressed gas, 3.5t, 2020, Euro-6, urban delivery",CH,/unit,urban delivery_truck
+LCV_CNG_SD,Operation,"transport, truck, Euro-6","transport, truck, compressed gas, 3.5t, 2020, Euro-6, urban delivery",CH,/metric ton*km,urban delivery_truck
 LCV_DIESEL_MD,Construction,"truck, Euro-6","truck, diesel, 3.5t, 2020, Euro-6, urban delivery",CH,/unit,urban delivery_truck
 LCV_DIESEL_MD,Operation,"transport, truck, Euro-6","transport, truck, diesel, 3.5t, 2020, Euro-6, urban delivery",CH,/metric ton*km,urban delivery_truck
-LCV_DIESEL_SD,Operation,"transport, truck, Euro-6","transport, truck, diesel, 3.5t, 2020, Euro-6, urban delivery",CH,/metric ton*km,urban delivery_truck
 LCV_DIESEL_SD,Construction,"truck, Euro-6","truck, diesel, 3.5t, 2020, Euro-6, urban delivery",CH,/unit,urban delivery_truck
+LCV_DIESEL_SD,Operation,"transport, truck, Euro-6","transport, truck, diesel, 3.5t, 2020, Euro-6, urban delivery",CH,/metric ton*km,urban delivery_truck
 LCV_EV_MD,Operation,"transport, truck","transport, truck, battery electric, NMC-622 battery, 3.5t, 2020, urban delivery",CH,/metric ton*km,urban delivery_truck
 LCV_EV_MD,Construction,truck,"truck, battery electric, NMC-622 battery, 3.5t, 2020, urban delivery",CH,/unit,urban delivery_truck
-LCV_EV_SD,Construction,truck,"truck, battery electric, NMC-622 battery, 3.5t, 2020, urban delivery",CH,/unit,urban delivery_truck
 LCV_EV_SD,Operation,"transport, truck","transport, truck, battery electric, NMC-622 battery, 3.5t, 2020, urban delivery",CH,/metric ton*km,urban delivery_truck
+LCV_EV_SD,Construction,truck,"truck, battery electric, NMC-622 battery, 3.5t, 2020, urban delivery",CH,/unit,urban delivery_truck
 LCV_FC_H2_MD,Operation,"transport, truck","transport, truck, fuel cell electric, 3.5t, 2020, urban delivery",CH,/metric ton*km,urban delivery_truck
 LCV_FC_H2_MD,Construction,truck,"truck, fuel cell electric, 3.5t, 2020, urban delivery",CH,/unit,urban delivery_truck
 LCV_FC_H2_SD,Operation,"transport, truck","transport, truck, fuel cell electric, 3.5t, 2020, urban delivery",CH,/metric ton*km,urban delivery_truck
 LCV_FC_H2_SD,Construction,truck,"truck, fuel cell electric, 3.5t, 2020, urban delivery",CH,/unit,urban delivery_truck
-LCV_GASOLINE_MD,Operation,"transport, truck, Euro-6","transport, truck, diesel, 3.5t, 2020, Euro-6, urban delivery",CH,/metric ton*km,urban delivery_truck
 LCV_GASOLINE_MD,Construction,"truck, Euro-6","truck, diesel, 3.5t, 2020, Euro-6, urban delivery",CH,/unit,urban delivery_truck
-LCV_GASOLINE_SD,Operation,"transport, truck, Euro-6","transport, truck, diesel, 3.5t, 2020, Euro-6, urban delivery",CH,/metric ton*km,urban delivery_truck
+LCV_GASOLINE_MD,Operation,"transport, truck, Euro-6","transport, truck, diesel, 3.5t, 2020, Euro-6, urban delivery",CH,/metric ton*km,urban delivery_truck
 LCV_GASOLINE_SD,Construction,"truck, Euro-6","truck, diesel, 3.5t, 2020, Euro-6, urban delivery",CH,/unit,urban delivery_truck
+LCV_GASOLINE_SD,Operation,"transport, truck, Euro-6","transport, truck, diesel, 3.5t, 2020, Euro-6, urban delivery",CH,/metric ton*km,urban delivery_truck
 LCV_PHEV_DIESEL_MD,Operation,"transport, truck, Euro-6","transport, truck, plugin diesel hybrid, 3.5t, 2020, Euro-6, urban delivery",CH,/metric ton*km,urban delivery_truck
 LCV_PHEV_DIESEL_MD,Construction,"truck, Euro-6","truck, plugin diesel hybrid, 3.5t, 2020, Euro-6, urban delivery",CH,/unit,urban delivery_truck
-LCV_PHEV_DIESEL_SD,Construction,"truck, Euro-6","truck, plugin diesel hybrid, 3.5t, 2020, Euro-6, urban delivery",CH,/unit,urban delivery_truck
 LCV_PHEV_DIESEL_SD,Operation,"transport, truck, Euro-6","transport, truck, plugin diesel hybrid, 3.5t, 2020, Euro-6, urban delivery",CH,/metric ton*km,urban delivery_truck
-LCV_PROPANE_MD,Construction,"truck, Euro-6","truck, compressed gas, 3.5t, 2020, Euro-6, urban delivery",CH,/unit,urban delivery_truck
+LCV_PHEV_DIESEL_SD,Construction,"truck, Euro-6","truck, plugin diesel hybrid, 3.5t, 2020, Euro-6, urban delivery",CH,/unit,urban delivery_truck
 LCV_PROPANE_MD,Operation,"transport, truck, Euro-6","transport, truck, compressed gas, 3.5t, 2020, Euro-6, urban delivery",CH,/metric ton*km,urban delivery_truck
-LCV_PROPANE_SD,Construction,"truck, Euro-6","truck, compressed gas, 3.5t, 2020, Euro-6, urban delivery",CH,/unit,urban delivery_truck
+LCV_PROPANE_MD,Construction,"truck, Euro-6","truck, compressed gas, 3.5t, 2020, Euro-6, urban delivery",CH,/unit,urban delivery_truck
 LCV_PROPANE_SD,Operation,"transport, truck, Euro-6","transport, truck, compressed gas, 3.5t, 2020, Euro-6, urban delivery",CH,/metric ton*km,urban delivery_truck
+LCV_PROPANE_SD,Construction,"truck, Euro-6","truck, compressed gas, 3.5t, 2020, Euro-6, urban delivery",CH,/unit,urban delivery_truck
+LP_H2_GRID,Construction,"pipeline, for hydrogen distribution","distribution pipeline for hydrogen, dedicated hydrogen pipeline",RER,/km,hydrogen-distribution
+LP_NG_GRID,Construction,"pipeline, natural gas, low pressure distribution network","pipeline construction, natural gas, low pressure distribution network",RoW,/km,ecoinvent3.8 cut-off
 LV_GRID,Construction,"distribution network, electricity, low voltage","distribution network construction, electricity, low voltage",RoW,/km,ecoinvent3.8 cut-off
-METATHESIS_PROPYLENE,Operation,propylene,propylene production,RoW,/kg,ecoinvent3.8 cut-off
 METATHESIS_PROPYLENE,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,/unit,ecoinvent3.8 cut-off
-METHANATION,Construction,synthetic gas factory,synthetic gas factory construction,CH,/unit,ecoinvent3.8 cut-off
+METATHESIS_PROPYLENE,Operation,propylene,propylene production,RoW,/kg,ecoinvent3.8 cut-off
 METHANATION,Operation,"methane, from electrochemical methanation","methane, from electrochemical methanation, with carbon from municipal waste incineration plant",RER,/kg,syngas
-METHANE_TO_METHANOL,Construction,methanol factory,methanol factory construction,GLO,/unit,ecoinvent3.8 cut-off
+METHANATION,Construction,synthetic gas factory,synthetic gas factory construction,CH,/unit,ecoinvent3.8 cut-off
 METHANE_TO_METHANOL,Operation,methanol,methanol production,GLO,/kg,ecoinvent3.8 cut-off
-METHANOL_CARBONYLATION,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,/unit,ecoinvent3.8 cut-off
+METHANE_TO_METHANOL,Construction,methanol factory,methanol factory construction,GLO,/unit,ecoinvent3.8 cut-off
 METHANOL_CARBONYLATION,Operation,"acetic acid, without water, in 98% solution state","acetic acid production, product in 98% solution state",RoW,/kg,ecoinvent3.8 cut-off
-METHANOL_FT,Construction,methanol factory,methanol factory construction,GLO,/unit,ecoinvent3.8 cut-off
+METHANOL_CARBONYLATION,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,/unit,ecoinvent3.8 cut-off
 METHANOL_FT,Operation,"methanol, from biomass","methanol production, from synthetic gas",CH,/kg,ecoinvent3.8 cut-off
+METHANOL_FT,Construction,methanol factory,methanol factory construction,GLO,/unit,ecoinvent3.8 cut-off
 METHANOL_TO_AROMATICS,Operation,xylene,xylene production,RER,/kg,ecoinvent3.8 cut-off
 METHANOL_TO_AROMATICS,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,/unit,ecoinvent3.8 cut-off
-METHANOL_TO_OLEFINS,Operation,n-olefins,n-olefins production,RoW,/kg,ecoinvent3.8 cut-off
 METHANOL_TO_OLEFINS,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,/unit,ecoinvent3.8 cut-off
+METHANOL_TO_OLEFINS,Operation,n-olefins,n-olefins production,RoW,/kg,ecoinvent3.8 cut-off
 MINES_STORAGE,Operation,"carbon dioxide, stored","carbon dioxide compression, transport and storage",RER,/kg,direct air capture
+MP_H2_GRID,Construction,"pipeline, for hydrogen distribution","distribution pipeline for hydrogen, dedicated hydrogen pipeline",RER,/km,hydrogen-distribution
+MP_NG_GRID,Construction,"pipeline, natural gas, low pressure distribution network","pipeline construction, natural gas, low pressure distribution network",RoW,/km,ecoinvent3.8 cut-off
 MV_GRID,Construction,"distribution network, electricity, low voltage","distribution network construction, electricity, low voltage",RoW,/km,ecoinvent3.8 cut-off
 NEW_HYDRO_DAM,Construction,"hydropower plant, reservoir","hydropower plant construction, reservoir",CA-QC,/unit,ecoinvent3.8 cut-off
 NEW_HYDRO_DAM,Operation,"electricity, high voltage","electricity production, hydro, reservoir, non-alpine region",CA-QC,/kWh,ecoinvent3.8 cut-off
 NEW_HYDRO_RIVER,Construction,"hydropower plant, run-of-river","hydropower plant construction, run-of-river",RoW,/unit,ecoinvent3.8 cut-off
 NEW_HYDRO_RIVER,Operation,"electricity, high voltage","electricity production, hydro, run-of-river",RoW,/kWh,ecoinvent3.8 cut-off
-NG_COMP_HE,Construction,"air compressor, screw-type compressor, 300kW","air compressor production, screw-type compressor, 300kW",RoW,/unit,ecoinvent3.8 cut-off
 NG_COMP_HE,Operation,"natural gas, high pressure","market for natural gas, high pressure",CH,/m3,ecoinvent3.8 cut-off
+NG_COMP_HE,Construction,"air compressor, screw-type compressor, 300kW","air compressor production, screw-type compressor, 300kW",RoW,/unit,ecoinvent3.8 cut-off
 NG_COMP_LM,Operation,"natural gas, low pressure","market for natural gas, low pressure",CH,/m3,ecoinvent3.8 cut-off
 NG_COMP_LM,Construction,"air compressor, screw-type compressor, 4kW","air compressor production, screw-type compressor, 4kW",RoW,/unit,ecoinvent3.8 cut-off
-NG_COMP_MH,Operation,"natural gas, medium pressure, vehicle grade","market for natural gas, medium pressure, vehicle grade",GLO,/m3,ecoinvent3.8 cut-off
 NG_COMP_MH,Construction,"air compressor, screw-type compressor, 300kW","air compressor production, screw-type compressor, 300kW",RoW,/unit,ecoinvent3.8 cut-off
+NG_COMP_MH,Operation,"natural gas, medium pressure, vehicle grade","market for natural gas, medium pressure, vehicle grade",GLO,/m3,ecoinvent3.8 cut-off
 NG_EXP_EH,Operation,"natural gas, high pressure","market for natural gas, high pressure",CH,/m3,ecoinvent3.8 cut-off
-NG_EXP_EH_COGEN,Construction,"air input/output unit, heat and power co-generation unit, 160kW electrical","air input/output unit production, heat and power co-generation unit, 160kW electrical",RoW,/unit,ecoinvent3.8 cut-off
 NG_EXP_EH_COGEN,Operation,"natural gas, high pressure","market for natural gas, high pressure",CH,/m3,ecoinvent3.8 cut-off
+NG_EXP_EH_COGEN,Construction,"air input/output unit, heat and power co-generation unit, 160kW electrical","air input/output unit production, heat and power co-generation unit, 160kW electrical",RoW,/unit,ecoinvent3.8 cut-off
 NG_EXP_HM,Operation,"natural gas, high pressure","market for natural gas, high pressure",CH,/m3,ecoinvent3.8 cut-off
 NG_EXP_HM_COGEN,Construction,"air input/output unit, heat and power co-generation unit, 160kW electrical","air input/output unit production, heat and power co-generation unit, 160kW electrical",RoW,/unit,ecoinvent3.8 cut-off
 NG_EXP_HM_COGEN,Operation,"natural gas, high pressure","market for natural gas, high pressure",CH,/m3,ecoinvent3.8 cut-off
 NG_EXP_ML,Operation,"natural gas, medium pressure, vehicle grade","market for natural gas, medium pressure, vehicle grade",GLO,/m3,ecoinvent3.8 cut-off
 NG_EXP_ML_COGEN,Construction,"air input/output unit, heat and power co-generation unit, 160kW electrical","air input/output unit production, heat and power co-generation unit, 160kW electrical",RoW,/unit,ecoinvent3.8 cut-off
 NG_EXP_ML_COGEN,Operation,"natural gas, medium pressure, vehicle grade","market for natural gas, medium pressure, vehicle grade",GLO,/m3,ecoinvent3.8 cut-off
-NG_PYROLYSIS_PLASMA,Operation,"hydrogen, gaseous, 100 bar","hydrogen production, gaseous, 100 bar, from methane pyrolysis",RER,/kg,h2_pyrolysis
 NG_PYROLYSIS_PLASMA,Construction,"air compressor, screw-type compressor, 4kW","market for air compressor, screw-type compressor, 4kW",GLO,/unit,ecoinvent3.8 cut-off
-NG_PYROLYSIS_THERMAL,Construction,"air compressor, screw-type compressor, 4kW","market for air compressor, screw-type compressor, 4kW",GLO,/unit,ecoinvent3.8 cut-off
+NG_PYROLYSIS_PLASMA,Operation,"hydrogen, gaseous, 100 bar","hydrogen production, gaseous, 100 bar, from methane pyrolysis",RER,/kg,h2_pyrolysis
 NG_PYROLYSIS_THERMAL,Operation,"hydrogen, gaseous, 100 bar","hydrogen production, gaseous, 100 bar, from methane pyrolysis",RER,/kg,h2_pyrolysis
+NG_PYROLYSIS_THERMAL,Construction,"air compressor, screw-type compressor, 4kW","market for air compressor, screw-type compressor, 4kW",GLO,/unit,ecoinvent3.8 cut-off
 NG_REFORMING,Operation,"hydrogen, gaseous, 25 bar","hydrogen production, steam methane reforming of natural gas, 25 bar",CH,/kg,hydrogen-smr-natgas
 NG_REFORMING_PLANT,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,/unit,ecoinvent3.8 cut-off
 NG_REFORMING_TANK,Construction,"liquid storage tank, chemicals, organics","market for liquid storage tank, chemicals, organics",GLO,/unit,ecoinvent3.8 cut-off
 NG_STO,Construction,"liquid storage tank, chemicals, organics","liquid storage tank production, chemicals, organics",RoW,/unit,ecoinvent3.8 cut-off
-NUCLEAR,Operation,"electricity, high voltage","electricity production, nuclear, pressure water reactor",RoW,/kWh,ecoinvent3.8 cut-off
 NUCLEAR,Construction,"nuclear power plant, pressure water reactor, 1000MW","nuclear power plant construction, pressure water reactor, 1000MW",RoW,/unit,ecoinvent3.8 cut-off
+NUCLEAR,Operation,"electricity, high voltage","electricity production, nuclear, pressure water reactor",RoW,/kWh,ecoinvent3.8 cut-off
 OCGT_LARGE,Operation,"electricity, medium voltage","natural gas, burned in gas turbine, for compressor station",CA-QC,/kWh,ecoinvent3.8 cut-off
 OCGT_LARGE,Construction,"gas turbine, 10MW electrical","market for gas turbine, 10MW electrical",GLO,/unit,ecoinvent3.8 cut-off
 OCGT_SMALL,Operation,"electricity, medium voltage","natural gas, burned in gas turbine, for compressor station",CA-QC,/kWh,ecoinvent3.8 cut-off
 OCGT_SMALL,Construction,"gas turbine, 10MW electrical","market for gas turbine, 10MW electrical",GLO,/unit,ecoinvent3.8 cut-off
-PAFC,Operation,"electricity, from residential heating system","electricity, residential, by conversion of hydrogen using fuel cell, PEM, allocated by exergy, distributed by pipeline, produced by Electrolysis, PEM using electricity from grid",CH,kilowatt hour,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
 PAFC,Construction,"fuel cell system, 1 kWe, proton exchange membrane (PEM)","fuel cell system assembly, 1 kWe, proton exchange membrane (PEM)",GLO,/unit,fuel_cell
-PAPER_MAKING,Construction,"paper mill, integrated","paper mill construction, integrated",RoW,/unit,ecoinvent3.8 cut-off
+PAFC,Operation,"electricity, from residential heating system","electricity, residential, by conversion of hydrogen using fuel cell, PEM, allocated by exergy, distributed by pipeline, produced by Electrolysis, PEM using electricity from grid",CH,kilowatt hour,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
 PAPER_MAKING,Operation,"paper, newsprint","paper production, newsprint, recycled",RoW,/kg,ecoinvent3.8 cut-off
+PAPER_MAKING,Construction,"paper mill, integrated","paper mill construction, integrated",RoW,/unit,ecoinvent3.8 cut-off
 PAPER_MAKING_HP,Construction,"paper mill, integrated","paper mill construction, integrated",RoW,/unit,ecoinvent3.8 cut-off
 PAPER_MAKING_HP,Operation,"paper, newsprint","paper production, newsprint, recycled",RoW,/kg,ecoinvent3.8 cut-off
-PAPER_MAKING_HR,Construction,"paper mill, integrated","paper mill construction, integrated",RoW,/unit,ecoinvent3.8 cut-off
 PAPER_MAKING_HR,Operation,"paper, newsprint","paper production, newsprint, recycled",RoW,/kg,ecoinvent3.8 cut-off
+PAPER_MAKING_HR,Construction,"paper mill, integrated","paper mill construction, integrated",RoW,/unit,ecoinvent3.8 cut-off
 PEMFC,Construction,"fuel cell system, 1 kWe, proton exchange membrane (PEM)","fuel cell system assembly, 1 kWe, proton exchange membrane (PEM)",GLO,/unit,fuel_cell
 PEM_ELECTROLYSIS,Operation,"hydrogen, gaseous, 30 bar","hydrogen production, gaseous, 30 bar, from PEM electrolysis, from grid electricity",RER,/kg,h2_electrolysis
 PEM_ELECTROLYSIS_PLANT,Construction,"electrolyzer, 1MWe, PEM, Balance of Plant","electrolyzer production, 1MWe, PEM, Balance of Plant",RER,/unit,h2_electrolysis
 PEM_ELECTROLYSIS_PLANT_DECOM,Construction,"used fuel cell balance of plant, 1MWe, PEM","treatment of fuel cell balance of plant, 1MWe, PEM",RER,/unit,h2_electrolysis
 PEM_ELECTROLYSIS_STACK,Construction,"electrolyzer, 1MWe, PEM, Stack","electrolyzer production, 1MWe, PEM, Stack",RER,/unit,h2_electrolysis
 PEM_ELECTROLYSIS_STACK_DECOM,Construction,"used fuel cell stack, 1MWe, PEM","treatment of fuel cell stack, 1MWe, PEM",RER,/unit,h2_electrolysis
-PET_FORMATION,Operation,"polyethylene terephthalate, granulate, amorphous","polyethylene terephthalate production, granulate, amorphous",RER,/kg,ecoinvent3.8 cut-off
 PET_FORMATION,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,/unit,ecoinvent3.8 cut-off
+PET_FORMATION,Operation,"polyethylene terephthalate, granulate, amorphous","polyethylene terephthalate production, granulate, amorphous",RER,/kg,ecoinvent3.8 cut-off
 PLANE_FREIGHT_ELD,Construction,"aircraft, dedicated freight, medium haul","market for aircraft, dedicated freight, medium haul",GLO,/unit,ecoinvent3.8 cut-off
 PLANE_FREIGHT_ELD,Operation,"transport, freight, aircraft, medium haul","transport, freight, aircraft, dedicated freight, medium haul",GLO,/metric ton*km,ecoinvent3.8 cut-off
 PLANE_LH_ELD,Operation,"transport, passenger aircraft, very short haul","transport, passenger aircraft, very short haul",GLO,/person*km,ecoinvent3.8 cut-off
 PLANE_LH_ELD,Construction,"aircraft, passenger, very short haul","market for aircraft, passenger, very short haul",GLO,/unit,ecoinvent3.8 cut-off
-PLANE_SH_LD,Construction,"aircraft, passenger, medium haul","market for aircraft, passenger, medium haul",GLO,/unit,ecoinvent3.8 cut-off
 PLANE_SH_LD,Operation,"transport, passenger aircraft, medium haul","transport, passenger aircraft, medium haul",GLO,/person*km,ecoinvent3.8 cut-off
+PLANE_SH_LD,Construction,"aircraft, passenger, medium haul","market for aircraft, passenger, medium haul",GLO,/unit,ecoinvent3.8 cut-off
 POLYPROPYLENE_PP,Operation,"polypropylene, granulate","polypropylene production, granulate",RoW,/kg,ecoinvent3.8 cut-off
 POLYPROPYLENE_PP,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,/unit,ecoinvent3.8 cut-off
 PV,Operation,"electricity, low voltage","electricity production, photovoltaic, residential",CH,/kWh,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
@@ -545,72 +553,72 @@ PVC_FORMATION,Construction,"chemical factory, organics","chemical factory constr
 PVC_FORMATION,Operation,"polyvinylchloride, bulk polymerised","polyvinylchloride production, bulk polymerisation",RoW,/kg,ecoinvent3.8 cut-off
 PYROLYSIS,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,/unit,ecoinvent3.8 cut-off
 PYROLYSIS,Operation,light fuel oil,"light fuel oil production, from waste polyethylene",CH,/kg,ecoinvent3.8 cut-off
-SCHOOLBUS_BIODIESEL_B100_SD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m single deck urban bus, EURO-VI",RER,/person*km,lci-buses
 SCHOOLBUS_BIODIESEL_B100_SD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m single deck urban bus, EURO-VI",RER,/unit,lci-buses
-SCHOOLBUS_BIODIESEL_B20_SD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m single deck urban bus, EURO-VI",RER,/person*km,lci-buses
+SCHOOLBUS_BIODIESEL_B100_SD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m single deck urban bus, EURO-VI",RER,/person*km,lci-buses
 SCHOOLBUS_BIODIESEL_B20_SD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m single deck urban bus, EURO-VI",RER,/unit,lci-buses
-SCHOOLBUS_CNG_SD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, compressed gas, 13m single deck urban bus, EURO-VI",RER,/person*km,lci-buses
+SCHOOLBUS_BIODIESEL_B20_SD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m single deck urban bus, EURO-VI",RER,/person*km,lci-buses
 SCHOOLBUS_CNG_SD,Construction,"Passenger bus, EURO-VI","Passenger bus, compressed gas, 13m single deck urban bus, EURO-VI",RER,/unit,lci-buses
-SCHOOLBUS_DIESEL_SD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m single deck urban bus, EURO-VI",RER,/person*km,lci-buses
+SCHOOLBUS_CNG_SD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, compressed gas, 13m single deck urban bus, EURO-VI",RER,/person*km,lci-buses
 SCHOOLBUS_DIESEL_SD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m single deck urban bus, EURO-VI",RER,/unit,lci-buses
-SCHOOLBUS_ETOH_E10_SD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m single deck urban bus, EURO-VI",RER,/person*km,lci-buses
+SCHOOLBUS_DIESEL_SD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m single deck urban bus, EURO-VI",RER,/person*km,lci-buses
 SCHOOLBUS_ETOH_E10_SD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m single deck urban bus, EURO-VI",RER,/unit,lci-buses
-SCHOOLBUS_EV_SD,Operation,"transport, passenger bus","transport, passenger bus, battery electric - overnight charging, 13m single deck urban bus",RER,/person*km,lci-buses
+SCHOOLBUS_ETOH_E10_SD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m single deck urban bus, EURO-VI",RER,/person*km,lci-buses
 SCHOOLBUS_EV_SD,Construction,Passenger bus,"Passenger bus, battery electric - overnight charging, 13m single deck urban bus",RER,/unit,lci-buses
+SCHOOLBUS_EV_SD,Operation,"transport, passenger bus","transport, passenger bus, battery electric - overnight charging, 13m single deck urban bus",RER,/person*km,lci-buses
 SCHOOLBUS_GASOLINE_SD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m single deck urban bus, EURO-VI",RER,/person*km,lci-buses
 SCHOOLBUS_GASOLINE_SD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m single deck urban bus, EURO-VI",RER,/unit,lci-buses
-SCHOOLBUS_HY_DIESEL_SD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel hybrid, 13m single deck urban bus, EURO-VI",RER,/person*km,lci-buses
 SCHOOLBUS_HY_DIESEL_SD,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel hybrid, 13m single deck urban bus, EURO-VI",RER,/unit,lci-buses
+SCHOOLBUS_HY_DIESEL_SD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel hybrid, 13m single deck urban bus, EURO-VI",RER,/person*km,lci-buses
 SCHOOLBUS_PROPANE_SD,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, compressed gas, 13m single deck urban bus, EURO-VI",RER,/person*km,lci-buses
 SCHOOLBUS_PROPANE_SD,Construction,"Passenger bus, EURO-VI","Passenger bus, compressed gas, 13m single deck urban bus, EURO-VI",RER,/unit,lci-buses
-SEMI_LH_BIODIESEL_B100_ELD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 26t gross weight, EURO-VI, long haul",RER,/metric ton*km,lci-long_haul_trucks
 SEMI_LH_BIODIESEL_B100_ELD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, diesel, 26t gross weight, EURO-VI, long haul",RER,/unit,lci-long_haul_trucks
-SEMI_LH_BIODIESEL_B100_LD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 26t gross weight, EURO-VI, long haul",RER,/metric ton*km,lci-long_haul_trucks
+SEMI_LH_BIODIESEL_B100_ELD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 26t gross weight, EURO-VI, long haul",RER,/metric ton*km,lci-long_haul_trucks
 SEMI_LH_BIODIESEL_B100_LD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, diesel, 26t gross weight, EURO-VI, long haul",RER,/unit,lci-long_haul_trucks
-SEMI_LH_BIODIESEL_B20_ELD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, diesel, 26t gross weight, EURO-VI, long haul",RER,/unit,lci-long_haul_trucks
+SEMI_LH_BIODIESEL_B100_LD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 26t gross weight, EURO-VI, long haul",RER,/metric ton*km,lci-long_haul_trucks
 SEMI_LH_BIODIESEL_B20_ELD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 26t gross weight, EURO-VI, long haul",RER,/metric ton*km,lci-long_haul_trucks
-SEMI_LH_BIODIESEL_B20_LD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, diesel, 26t gross weight, EURO-VI, long haul",RER,/unit,lci-long_haul_trucks
+SEMI_LH_BIODIESEL_B20_ELD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, diesel, 26t gross weight, EURO-VI, long haul",RER,/unit,lci-long_haul_trucks
 SEMI_LH_BIODIESEL_B20_LD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 26t gross weight, EURO-VI, long haul",RER,/metric ton*km,lci-long_haul_trucks
+SEMI_LH_BIODIESEL_B20_LD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, diesel, 26t gross weight, EURO-VI, long haul",RER,/unit,lci-long_haul_trucks
 SEMI_LH_CNG_ELD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, compressed gas, 26t gross weight, EURO-VI, long haul",RER,/metric ton*km,lci-long_haul_trucks
 SEMI_LH_CNG_ELD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, compressed gas, 26t gross weight, EURO-VI, long haul",RER,/unit,lci-long_haul_trucks
-SEMI_LH_CNG_LD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, compressed gas, 26t gross weight, EURO-VI, long haul",RER,/metric ton*km,lci-long_haul_trucks
 SEMI_LH_CNG_LD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, compressed gas, 26t gross weight, EURO-VI, long haul",RER,/unit,lci-long_haul_trucks
-SEMI_LH_DIESEL_ELD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 26t gross weight, EURO-VI, long haul",RER,/metric ton*km,lci-long_haul_trucks
+SEMI_LH_CNG_LD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, compressed gas, 26t gross weight, EURO-VI, long haul",RER,/metric ton*km,lci-long_haul_trucks
 SEMI_LH_DIESEL_ELD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, diesel, 26t gross weight, EURO-VI, long haul",RER,/unit,lci-long_haul_trucks
+SEMI_LH_DIESEL_ELD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 26t gross weight, EURO-VI, long haul",RER,/metric ton*km,lci-long_haul_trucks
 SEMI_LH_DIESEL_LD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel, 26t gross weight, EURO-VI, long haul",RER,/metric ton*km,lci-long_haul_trucks
 SEMI_LH_DIESEL_LD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, diesel, 26t gross weight, EURO-VI, long haul",RER,/unit,lci-long_haul_trucks
-SEMI_LH_EV_ELD,Operation,"transport, freight, lorry","transport, freight, lorry, battery electric, 26t gross weight, long haul",RER,/metric ton*km,lci-long_haul_trucks
 SEMI_LH_EV_ELD,Construction,Medium duty truck,"Medium duty truck, battery electric, 26t gross weight, long haul",RER,/unit,lci-long_haul_trucks
-SEMI_LH_EV_LD,Operation,"transport, freight, lorry","transport, freight, lorry, battery electric, 26t gross weight, long haul",RER,/metric ton*km,lci-long_haul_trucks
+SEMI_LH_EV_ELD,Operation,"transport, freight, lorry","transport, freight, lorry, battery electric, 26t gross weight, long haul",RER,/metric ton*km,lci-long_haul_trucks
 SEMI_LH_EV_LD,Construction,Medium duty truck,"Medium duty truck, battery electric, 26t gross weight, long haul",RER,/unit,lci-long_haul_trucks
-SEMI_LH_FC_H2_ELD,Operation,"transport, freight, lorry","transport, freight, lorry, fuel cell electric, 26t gross weight, long haul",RER,/metric ton*km,lci-long_haul_trucks
+SEMI_LH_EV_LD,Operation,"transport, freight, lorry","transport, freight, lorry, battery electric, 26t gross weight, long haul",RER,/metric ton*km,lci-long_haul_trucks
 SEMI_LH_FC_H2_ELD,Construction,Medium duty truck,"Medium duty truck, fuel cell electric, 26t gross weight, long haul",RER,/unit,lci-long_haul_trucks
-SEMI_LH_FC_H2_LD,Operation,"transport, freight, lorry","transport, freight, lorry, fuel cell electric, 26t gross weight, long haul",RER,/metric ton*km,lci-long_haul_trucks
+SEMI_LH_FC_H2_ELD,Operation,"transport, freight, lorry","transport, freight, lorry, fuel cell electric, 26t gross weight, long haul",RER,/metric ton*km,lci-long_haul_trucks
 SEMI_LH_FC_H2_LD,Construction,Medium duty truck,"Medium duty truck, fuel cell electric, 26t gross weight, long haul",RER,/unit,lci-long_haul_trucks
-SEMI_LH_HY_DIESEL_ELD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel hybrid, 26t gross weight, EURO-VI, long haul",RER,/metric ton*km,lci-long_haul_trucks
+SEMI_LH_FC_H2_LD,Operation,"transport, freight, lorry","transport, freight, lorry, fuel cell electric, 26t gross weight, long haul",RER,/metric ton*km,lci-long_haul_trucks
 SEMI_LH_HY_DIESEL_ELD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, diesel hybrid, 26t gross weight, EURO-VI, long haul",RER,/unit,lci-long_haul_trucks
+SEMI_LH_HY_DIESEL_ELD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel hybrid, 26t gross weight, EURO-VI, long haul",RER,/metric ton*km,lci-long_haul_trucks
 SEMI_LH_HY_DIESEL_LD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, diesel hybrid, 26t gross weight, EURO-VI, long haul",RER,/unit,lci-long_haul_trucks
 SEMI_LH_HY_DIESEL_LD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, diesel hybrid, 26t gross weight, EURO-VI, long haul",RER,/metric ton*km,lci-long_haul_trucks
 SEMI_LH_PROPANE_ELD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, compressed gas, 26t gross weight, EURO-VI, long haul",RER,/metric ton*km,lci-long_haul_trucks
 SEMI_LH_PROPANE_ELD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, compressed gas, 26t gross weight, EURO-VI, long haul",RER,/unit,lci-long_haul_trucks
 SEMI_LH_PROPANE_LD,Operation,"transport, freight, lorry, EURO-VI","transport, freight, lorry, compressed gas, 26t gross weight, EURO-VI, long haul",RER,/metric ton*km,lci-long_haul_trucks
 SEMI_LH_PROPANE_LD,Construction,"Medium duty truck, EURO-VI","Medium duty truck, compressed gas, 26t gross weight, EURO-VI, long haul",RER,/unit,lci-long_haul_trucks
-SEMI_SH_BIODIESEL_B100_MD,Construction,"truck, Euro-6","truck, diesel, 26t, 2020, Euro-6, regional delivery",CH,/unit,regional delivery_truck
 SEMI_SH_BIODIESEL_B100_MD,Operation,"transport, truck, Euro-6","transport, truck, diesel, 26t, 2020, Euro-6, regional delivery",CH,/metric ton*km,regional delivery_truck
-SEMI_SH_BIODIESEL_B20_MD,Construction,"truck, Euro-6","truck, diesel, 26t, 2020, Euro-6, regional delivery",CH,/unit,regional delivery_truck
+SEMI_SH_BIODIESEL_B100_MD,Construction,"truck, Euro-6","truck, diesel, 26t, 2020, Euro-6, regional delivery",CH,/unit,regional delivery_truck
 SEMI_SH_BIODIESEL_B20_MD,Operation,"transport, truck, Euro-6","transport, truck, diesel, 26t, 2020, Euro-6, regional delivery",CH,/metric ton*km,regional delivery_truck
+SEMI_SH_BIODIESEL_B20_MD,Construction,"truck, Euro-6","truck, diesel, 26t, 2020, Euro-6, regional delivery",CH,/unit,regional delivery_truck
 SEMI_SH_CNG_MD,Operation,"transport, truck, Euro-6","transport, truck, compressed gas, 26t, 2020, Euro-6, regional delivery",CH,/metric ton*km,regional delivery_truck
 SEMI_SH_CNG_MD,Construction,"truck, Euro-6","truck, compressed gas, 26t, 2020, Euro-6, regional delivery",CH,/unit,regional delivery_truck
-SEMI_SH_DIESEL_MD,Construction,"truck, Euro-6","truck, diesel, 26t, 2020, Euro-6, regional delivery",CH,/unit,regional delivery_truck
 SEMI_SH_DIESEL_MD,Operation,"transport, truck, Euro-6","transport, truck, diesel, 26t, 2020, Euro-6, regional delivery",CH,/metric ton*km,regional delivery_truck
-SEMI_SH_EV_MD,Operation,"transport, truck","transport, truck, battery electric, NMC-622 battery, 26t, 2020, regional delivery",CH,/metric ton*km,regional delivery_truck
+SEMI_SH_DIESEL_MD,Construction,"truck, Euro-6","truck, diesel, 26t, 2020, Euro-6, regional delivery",CH,/unit,regional delivery_truck
 SEMI_SH_EV_MD,Construction,truck,"truck, battery electric, NMC-622 battery, 26t, 2020, regional delivery",CH,/unit,regional delivery_truck
-SEMI_SH_FC_H2_MD,Operation,"transport, truck","transport, truck, fuel cell electric, 26t, 2020, regional delivery",CH,/metric ton*km,regional delivery_truck
+SEMI_SH_EV_MD,Operation,"transport, truck","transport, truck, battery electric, NMC-622 battery, 26t, 2020, regional delivery",CH,/metric ton*km,regional delivery_truck
 SEMI_SH_FC_H2_MD,Construction,truck,"truck, fuel cell electric, 26t, 2020, regional delivery",CH,/unit,regional delivery_truck
+SEMI_SH_FC_H2_MD,Operation,"transport, truck","transport, truck, fuel cell electric, 26t, 2020, regional delivery",CH,/metric ton*km,regional delivery_truck
 SEMI_SH_HY_DIESEL_MD,Operation,"transport, truck, Euro-6","transport, truck, diesel hybrid, 26t, 2020, Euro-6, regional delivery",CH,/metric ton*km,regional delivery_truck
 SEMI_SH_HY_DIESEL_MD,Construction,"truck, Euro-6","truck, diesel hybrid, 26t, 2020, Euro-6, regional delivery",CH,/unit,regional delivery_truck
-SEMI_SH_PROPANE_MD,Operation,"transport, truck, Euro-6","transport, truck, compressed gas, 26t, 2020, Euro-6, regional delivery",CH,/metric ton*km,regional delivery_truck
 SEMI_SH_PROPANE_MD,Construction,"truck, Euro-6","truck, compressed gas, 26t, 2020, Euro-6, regional delivery",CH,/unit,regional delivery_truck
+SEMI_SH_PROPANE_MD,Operation,"transport, truck, Euro-6","transport, truck, compressed gas, 26t, 2020, Euro-6, regional delivery",CH,/metric ton*km,regional delivery_truck
 SMART_PROCESS,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,/unit,ecoinvent3.8 cut-off
 SMART_PROCESS,Operation,styrene,styrene production,RoW,/kg,ecoinvent3.8 cut-off
 SMR,Operation,"hydrogen, gaseous, 25 bar","hydrogen production, steam methane reforming of natural gas, 25 bar",CH,/kg,hydrogen-smr-natgas
@@ -627,54 +635,54 @@ SOEC_ELECTROLYSIS_STACK,Construction,"electrolyzer, 1MWe, SOEC, Stack","electrol
 SOEC_ELECTROLYSIS_STACK_DECOM,Construction,"used fuel cell stack, 1MWe, SOEC","treatment of fuel cell stack, 1MWe, SOEC",RER,/unit,h2_electrolysis
 SOFC,Construction,"fuel cell, stack solid oxide, 125kW electrical, future","fuel cell production, stack solid oxide, 125kW electrical, future",CH,/unit,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
 SOFC,Operation,"electricity, from residential heating system","electricity, residential, by conversion of hydrogen using fuel cell, SOFC, allocated by exergy, distributed by pipeline, produced by Electrolysis, PEM using electricity from grid",CH,/kWh,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
-STEEL_MAKING,Operation,"steel, chromium steel 18/8","market for steel, chromium steel 18/8",GLO,/kg,ecoinvent3.8 cut-off
 STEEL_MAKING,Construction,aluminium casting facility,aluminium casting facility construction,RoW,/unit,ecoinvent3.8 cut-off
-STEEL_MAKING_HP,Construction,aluminium casting facility,aluminium casting facility construction,RoW,/unit,ecoinvent3.8 cut-off
+STEEL_MAKING,Operation,"steel, chromium steel 18/8","market for steel, chromium steel 18/8",GLO,/kg,ecoinvent3.8 cut-off
 STEEL_MAKING_HP,Operation,"steel, chromium steel 18/8","market for steel, chromium steel 18/8",GLO,/kg,ecoinvent3.8 cut-off
+STEEL_MAKING_HP,Construction,aluminium casting facility,aluminium casting facility construction,RoW,/unit,ecoinvent3.8 cut-off
 STEEL_MAKING_HR,Operation,"steel, chromium steel 18/8","market for steel, chromium steel 18/8",GLO,/kg,ecoinvent3.8 cut-off
 STEEL_MAKING_HR,Construction,aluminium casting facility,aluminium casting facility construction,RoW,/unit,ecoinvent3.8 cut-off
-STYRENE_POLYMERIZATION,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,/unit,ecoinvent3.8 cut-off
 STYRENE_POLYMERIZATION,Operation,"polystyrene, expandable","polystyrene production, expandable",RoW,/kg,ecoinvent3.8 cut-off
-SUV_BIODIESEL_B100_ELD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Large SUV, EURO-6ab",RER,/unit,lci-pass_cars
+STYRENE_POLYMERIZATION,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,/unit,ecoinvent3.8 cut-off
 SUV_BIODIESEL_B100_ELD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Large SUV, EURO-6ab",RER,/person*km,lci-pass_cars
+SUV_BIODIESEL_B100_ELD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Large SUV, EURO-6ab",RER,/unit,lci-pass_cars
 SUV_BIODIESEL_B100_LD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Large SUV, EURO-6ab",RER,/unit,lci-pass_cars
 SUV_BIODIESEL_B100_LD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Large SUV, EURO-6ab",RER,/person*km,lci-pass_cars
-SUV_BIODIESEL_B100_MD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Large SUV, EURO-6ab",RER,/unit,lci-pass_cars
 SUV_BIODIESEL_B100_MD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Large SUV, EURO-6ab",RER,/person*km,lci-pass_cars
+SUV_BIODIESEL_B100_MD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Large SUV, EURO-6ab",RER,/unit,lci-pass_cars
 SUV_BIODIESEL_B100_SD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Large SUV, EURO-6ab",RER,/unit,lci-pass_cars
 SUV_BIODIESEL_B100_SD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Large SUV, EURO-6ab",RER,/person*km,lci-pass_cars
 SUV_BIODIESEL_B20_ELD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Large SUV, EURO-6ab",RER,/person*km,lci-pass_cars
 SUV_BIODIESEL_B20_ELD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Large SUV, EURO-6ab",RER,/unit,lci-pass_cars
 SUV_BIODIESEL_B20_LD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Large SUV, EURO-6ab",RER,/person*km,lci-pass_cars
 SUV_BIODIESEL_B20_LD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Large SUV, EURO-6ab",RER,/unit,lci-pass_cars
-SUV_BIODIESEL_B20_MD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Large SUV, EURO-6ab",RER,/person*km,lci-pass_cars
 SUV_BIODIESEL_B20_MD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Large SUV, EURO-6ab",RER,/unit,lci-pass_cars
-SUV_BIODIESEL_B20_SD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Large SUV, EURO-6ab",RER,/person*km,lci-pass_cars
+SUV_BIODIESEL_B20_MD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Large SUV, EURO-6ab",RER,/person*km,lci-pass_cars
 SUV_BIODIESEL_B20_SD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Large SUV, EURO-6ab",RER,/unit,lci-pass_cars
+SUV_BIODIESEL_B20_SD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Large SUV, EURO-6ab",RER,/person*km,lci-pass_cars
 SUV_CNG_ELD,Construction,"Passenger car, EURO-6ab","Passenger car, compressed gas, Large SUV, EURO-6ab",RER,/unit,lci-pass_cars
 SUV_CNG_ELD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, compressed gas, Large SUV, EURO-6ab",RER,/person*km,lci-pass_cars
-SUV_CNG_LD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, compressed gas, Large SUV, EURO-6ab",RER,/person*km,lci-pass_cars
 SUV_CNG_LD,Construction,"Passenger car, EURO-6ab","Passenger car, compressed gas, Large SUV, EURO-6ab",RER,/unit,lci-pass_cars
-SUV_CNG_MD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, compressed gas, Large SUV, EURO-6ab",RER,/person*km,lci-pass_cars
+SUV_CNG_LD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, compressed gas, Large SUV, EURO-6ab",RER,/person*km,lci-pass_cars
 SUV_CNG_MD,Construction,"Passenger car, EURO-6ab","Passenger car, compressed gas, Large SUV, EURO-6ab",RER,/unit,lci-pass_cars
+SUV_CNG_MD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, compressed gas, Large SUV, EURO-6ab",RER,/person*km,lci-pass_cars
 SUV_CNG_SD,Construction,"Passenger car, EURO-6ab","Passenger car, compressed gas, Large SUV, EURO-6ab",RER,/unit,lci-pass_cars
 SUV_CNG_SD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, compressed gas, Large SUV, EURO-6ab",RER,/person*km,lci-pass_cars
 SUV_DIESEL_ELD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Large SUV, EURO-6ab",RER,/person*km,lci-pass_cars
 SUV_DIESEL_ELD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Large SUV, EURO-6ab",RER,/unit,lci-pass_cars
-SUV_DIESEL_LD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Large SUV, EURO-6ab",RER,/unit,lci-pass_cars
 SUV_DIESEL_LD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Large SUV, EURO-6ab",RER,/person*km,lci-pass_cars
+SUV_DIESEL_LD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Large SUV, EURO-6ab",RER,/unit,lci-pass_cars
 SUV_DIESEL_MD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Large SUV, EURO-6ab",RER,/person*km,lci-pass_cars
 SUV_DIESEL_MD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Large SUV, EURO-6ab",RER,/unit,lci-pass_cars
-SUV_DIESEL_SD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Large SUV, EURO-6ab",RER,/person*km,lci-pass_cars
 SUV_DIESEL_SD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Large SUV, EURO-6ab",RER,/unit,lci-pass_cars
-SUV_ETOH_E10_ELD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Large SUV, EURO-6ab",RER,/person*km,lci-pass_cars
+SUV_DIESEL_SD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Large SUV, EURO-6ab",RER,/person*km,lci-pass_cars
 SUV_ETOH_E10_ELD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Large SUV, EURO-6ab",RER,/unit,lci-pass_cars
+SUV_ETOH_E10_ELD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Large SUV, EURO-6ab",RER,/person*km,lci-pass_cars
 SUV_ETOH_E10_LD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Large SUV, EURO-6ab",RER,/person*km,lci-pass_cars
 SUV_ETOH_E10_LD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Large SUV, EURO-6ab",RER,/unit,lci-pass_cars
 SUV_ETOH_E10_MD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Large SUV, EURO-6ab",RER,/person*km,lci-pass_cars
 SUV_ETOH_E10_MD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Large SUV, EURO-6ab",RER,/unit,lci-pass_cars
-SUV_ETOH_E10_SD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Large SUV, EURO-6ab",RER,/person*km,lci-pass_cars
 SUV_ETOH_E10_SD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Large SUV, EURO-6ab",RER,/unit,lci-pass_cars
+SUV_ETOH_E10_SD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Large SUV, EURO-6ab",RER,/person*km,lci-pass_cars
 SUV_ETOH_E85_ELD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Large SUV, EURO-6ab",RER,/person*km,lci-pass_cars
 SUV_ETOH_E85_ELD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Large SUV, EURO-6ab",RER,/unit,lci-pass_cars
 SUV_ETOH_E85_LD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Large SUV, EURO-6ab",RER,/person*km,lci-pass_cars
@@ -683,20 +691,20 @@ SUV_ETOH_E85_MD,Operation,"transport, passenger car, EURO-6ab","transport, passe
 SUV_ETOH_E85_MD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Large SUV, EURO-6ab",RER,/unit,lci-pass_cars
 SUV_ETOH_E85_SD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Large SUV, EURO-6ab",RER,/person*km,lci-pass_cars
 SUV_ETOH_E85_SD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Large SUV, EURO-6ab",RER,/unit,lci-pass_cars
-SUV_EV_ELD,Construction,Passenger car,"Passenger car, battery electric, Large SUV",RER,/unit,lci-pass_cars
 SUV_EV_ELD,Operation,"transport, passenger car","transport, passenger car, battery electric, Large SUV",RER,/person*km,lci-pass_cars
+SUV_EV_ELD,Construction,Passenger car,"Passenger car, battery electric, Large SUV",RER,/unit,lci-pass_cars
 SUV_EV_LD,Operation,"transport, passenger car","transport, passenger car, battery electric, Large SUV",RER,/person*km,lci-pass_cars
 SUV_EV_LD,Construction,Passenger car,"Passenger car, battery electric, Large SUV",RER,/unit,lci-pass_cars
-SUV_EV_MD,Construction,Passenger car,"Passenger car, battery electric, Large SUV",RER,/unit,lci-pass_cars
 SUV_EV_MD,Operation,"transport, passenger car","transport, passenger car, battery electric, Large SUV",RER,/person*km,lci-pass_cars
+SUV_EV_MD,Construction,Passenger car,"Passenger car, battery electric, Large SUV",RER,/unit,lci-pass_cars
 SUV_EV_SD,Operation,"transport, passenger car","transport, passenger car, battery electric, Large SUV",RER,/person*km,lci-pass_cars
 SUV_EV_SD,Construction,Passenger car,"Passenger car, battery electric, Large SUV",RER,/unit,lci-pass_cars
 SUV_FC_H2_ELD,Operation,"transport, passenger car","transport, passenger car, fuel cell electric, Large SUV",RER,/person*km,lci-pass_cars
 SUV_FC_H2_ELD,Construction,Passenger car,"Passenger car, fuel cell electric, Large SUV",RER,/unit,lci-pass_cars
 SUV_FC_H2_LD,Operation,"transport, passenger car","transport, passenger car, fuel cell electric, Large SUV",RER,/person*km,lci-pass_cars
 SUV_FC_H2_LD,Construction,Passenger car,"Passenger car, fuel cell electric, Large SUV",RER,/unit,lci-pass_cars
-SUV_FC_H2_MD,Operation,"transport, passenger car","transport, passenger car, fuel cell electric, Large SUV",RER,/person*km,lci-pass_cars
 SUV_FC_H2_MD,Construction,Passenger car,"Passenger car, fuel cell electric, Large SUV",RER,/unit,lci-pass_cars
+SUV_FC_H2_MD,Operation,"transport, passenger car","transport, passenger car, fuel cell electric, Large SUV",RER,/person*km,lci-pass_cars
 SUV_FC_H2_SD,Operation,"transport, passenger car","transport, passenger car, fuel cell electric, Large SUV",RER,/person*km,lci-pass_cars
 SUV_FC_H2_SD,Construction,Passenger car,"Passenger car, fuel cell electric, Large SUV",RER,/unit,lci-pass_cars
 SUV_GASOLINE_ELD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline, Large SUV, EURO-6ab",RER,/unit,lci-pass_cars
