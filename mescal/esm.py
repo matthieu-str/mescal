@@ -362,6 +362,10 @@ class ESM:
         if write_database is False and return_database is False:
             raise ValueError('Please set either return_database or write_database to True.')
 
+        if write_database is False and len(self.tech_specifics) > 0:
+            raise ValueError('The database must be written to Brightway to apply technologies specifics. '
+                             'Please set write_database to True.')
+
         # Adding current code to the mapping file
         self.mapping['Current_code'] = self.mapping.apply(lambda row: self.main_database.get_code(
             product=row['Product'],
@@ -476,8 +480,11 @@ class ESM:
             self.logger.info(f"Database written in {round(t2_mod_inv - t1_mod_inv, 1)} seconds")
 
         if return_database:
-            esm_db = Database(
-                db_as_list=[act for act in self.main_database.db_as_list if act['database'] == self.esm_db_name])
+            if write_database:
+                esm_db = Database(db_names=self.esm_db_name)  # accounts for modifications from tech_specifics.csv file
+            else:
+                esm_db = Database(
+                    db_as_list=[act for act in self.main_database.db_as_list if act['database'] == self.esm_db_name])
 
             self.main_database = self.main_database - esm_db  # Remove ESM database from the main database
             return esm_db
@@ -591,7 +598,7 @@ class ESM:
         modify_inventory.py
 
         :param db: LCI database
-        :param db_type: type of LCI database, can be 'esm', 'esm results' or 'main'
+        :param db_type: type of LCI database can be 'esm', 'esm results' or 'main'
         :return: None (activities are modified in the brightway project)
         """
         biosphere_db_name = self.biosphere_db_name
