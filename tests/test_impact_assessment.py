@@ -7,6 +7,36 @@ from mescal.filesystem_constants import BW_PROJECT_NAME
 
 dummy_esm_db = [
     {
+        "name": "BATTERY, Construction",
+        "reference product": "battery, Li-ion, LFP, rechargeable, prismatic",
+        "location": "GLO",
+        "database": "dummy_esm_db",
+        "unit": "kilogram",
+        "code": "00000",
+        "exchanges": [
+            {
+                "name": "BATTERY, Construction",
+                "product": "battery, Li-ion, LFP, rechargeable, prismatic",
+                "location": "GLO",
+                "database": "dummy_esm_db",
+                "type": "production",
+                "amount": 1,
+                "unit": "kilogram",
+                "code": "00000"
+            },
+            {
+                "name": "market for battery, Li-ion, LFP, rechargeable, prismatic",
+                "product": "battery, Li-ion, LFP, rechargeable, prismatic",
+                "location": "GLO",
+                "database": "ecoinvent-3.9.1-cutoff",
+                "type": "technosphere",
+                "amount": 1,
+                "unit": "kilogram",
+                "code": 'f22991a7a4e1d7ecfa81cdd7453e83d2',
+            }
+        ]
+    },
+    {
         "name": "TRAIN_FREIGHT_DIESEL_LOC, Construction",
         "reference product": "locomotive",
         "location": "RER",
@@ -69,6 +99,8 @@ dummy_esm_db = [
 ]
 
 mapping = [
+    ['BATTERY', 'Construction', 'battery, Li-ion, LFP, rechargeable, prismatic',
+     'market for battery, Li-ion, LFP, rechargeable, prismatic', 'GLO', 'ecoinvent-3.9.1-cutoff', '00000'],
     ['TRAIN_FREIGHT_DIESEL_LOC', 'Construction', 'locomotive', 'locomotive production', 'RER',
      'ecoinvent-3.9.1-cutoff', '00001'],
     ['TRAIN_FREIGHT_DIESEL_WAG', 'Construction', 'goods wagon', 'goods wagon production', 'RER',
@@ -80,12 +112,14 @@ technology_compositions = [
 ]
 
 unit_conversion = [
+    ['BATTERY', 'Construction', 10, 'kilogram', 'kilowatt hour'],
     ['TRAIN_FREIGHT_DIESEL_LOC', 'Construction', 2, 'unit', 'unit'],
     ['TRAIN_FREIGHT_DIESEL_WAG', 'Construction', 20, 'unit', 'unit'],
     ['TRAIN_FREIGHT_DIESEL', 'Construction', 2.5e-5, 'unit', 'ton kilometer per hour'],
 ]
 
 lifetime = [
+    ['BATTERY', 30, 20],
     ['TRAIN_FREIGHT_DIESEL', 40, None],
     ['TRAIN_FREIGHT_DIESEL_LOC', None, 50],
     ['TRAIN_FREIGHT_DIESEL_WAG', None, 50],
@@ -128,21 +162,46 @@ def test_compute_impact_score():
         contribution_analysis=True,
     )
 
-    lcia_value = R[
+    lcia_value_train = R[
         (R.Impact_category == ('IPCC 2021', 'climate change', 'global warming potential (GWP100)'))
         & (R.Name == 'TRAIN_FREIGHT_DIESEL')
         & (R.Type == 'Construction')
         ].Value.iloc[0]
 
-    assert 44.40 <= lcia_value <= 44.41
+    assert 44.40 <= lcia_value_train <= 44.41
 
-    max_contrib = df_contrib_results[
+    contrib_train = df_contrib_results[
         (df_contrib_results.impact_category == ('IPCC 2021', 'climate change', 'global warming potential (GWP100)'))
         & (df_contrib_results.act_name == 'TRAIN_FREIGHT_DIESEL')
         & (df_contrib_results.act_type == 'Construction')
-        & (df_contrib_results.score == df_contrib_results.score.max())
     ]
 
-    assert max_contrib.ef_name.iloc[0] == 'Carbon dioxide, fossil'
-    assert max_contrib.ef_categories.iloc[0] == ('air', 'non-urban air or from high stacks')
-    assert 17.42 <= max_contrib.score.iloc[0] <= 17.43
+    max_contrib_train = contrib_train[
+        (contrib_train.score == contrib_train.score.max())
+    ]
+
+    assert max_contrib_train.ef_name.iloc[0] == 'Carbon dioxide, fossil'
+    assert max_contrib_train.ef_categories.iloc[0] == ('air', 'non-urban air or from high stacks')
+    assert 17.42 <= max_contrib_train.score.iloc[0] <= 17.43
+
+    lcia_value_batt = R[
+        (R.Impact_category == ('IPCC 2021', 'climate change', 'global warming potential (GWP100)'))
+        & (R.Name == 'BATTERY')
+        & (R.Type == 'Construction')
+        ].Value.iloc[0]
+
+    assert 167.60 <= lcia_value_batt <= 167.61
+
+    contrib_batt = df_contrib_results[
+        (df_contrib_results.impact_category == ('IPCC 2021', 'climate change', 'global warming potential (GWP100)'))
+        & (df_contrib_results.act_name == 'BATTERY')
+        & (df_contrib_results.act_type == 'Construction')
+    ]
+
+    max_contrib_batt = contrib_batt[
+        (contrib_batt.score == contrib_batt.score.max())
+    ]
+
+    assert max_contrib_batt.ef_name.iloc[0] == 'Carbon dioxide, fossil'
+    assert max_contrib_batt.ef_categories.iloc[0] == ('air', 'non-urban air or from high stacks')
+    assert 98.78 <= max_contrib_batt.score.iloc[0] <= 98.79

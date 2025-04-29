@@ -342,26 +342,26 @@ def compute_impact_scores(
             )
 
     if contribution_analysis:
-        df_contrib_analysis_results_constr = pd.concat(  # concatenate the contribution analysis results
-            [df_contrib_analysis_results_constr]+df_comp_list,
-            ignore_index=True
-        )
+        df_comp_all = pd.concat(df_comp_list)  # concatenate composition results in a single dataframe
 
-        df_contrib_analysis_results_constr = pd.merge(
-            left=df_contrib_analysis_results_constr,
+        df_comp_all = pd.merge(  # adding the unit conversion factors to the dataframe
+            left=df_comp_all,
             right=unit_conversion[['Name', 'Type', 'Value']],
             left_on=['act_name', 'act_type'],
             right_on=['Name', 'Type'],
             how='left',
         )
 
-        # Multiply the score and amount columns by the conversion factor
-        df_contrib_analysis_results_constr['score'] = (df_contrib_analysis_results_constr['score']
-                                                       * df_contrib_analysis_results_constr['Value'])
-        df_contrib_analysis_results_constr['amount'] = (df_contrib_analysis_results_constr['amount']
-                                                        * df_contrib_analysis_results_constr['Value'])
+        # Multiply the score and amount columns by the conversion factor in the composition dataframe
+        df_comp_all['score'] = (df_comp_all['score'] * df_comp_all['Value'])
+        df_comp_all['amount'] = (df_comp_all['amount'] * df_comp_all['Value'])
 
-        df_contrib_analysis_results_constr.drop(columns=['Value', 'Name', 'Type'], inplace=True)
+        df_comp_all.drop(columns=['Value', 'Name', 'Type'], inplace=True)
+
+        df_contrib_analysis_results_constr = pd.concat(  # concatenate the contribution analysis results
+            [df_contrib_analysis_results_constr, df_comp_all],
+            ignore_index=True
+        )
 
     if lifetime is None:
         pass
