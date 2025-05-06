@@ -257,8 +257,8 @@ def adapt_biosphere_flows_to_efficiency_difference(
     :return: the adapted LCI dataset
     """
     for exc in Dataset(act).get_biosphere_flows():
-        if exc['unit'] in ['square meter-year', 'square meter', 'megajoule']:
-            # we exclude land occupation, land transformation and energy elementary flows
+        if exc['unit'] in ['square meter-year', 'square meter']:
+            # we exclude land occupation, land transformation elementary flows
             pass
         else:
             exc['amount'] *= efficiency_ratio
