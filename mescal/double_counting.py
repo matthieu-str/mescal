@@ -388,7 +388,7 @@ def double_counting_removal(
             perform_d_c, db_dict_code, db_dict_name, db_as_list = self.background_search(
                 act=new_act_op,
                 k=0,
-                k_lim=10,
+                k_lim=self.max_depth_double_counting_search,
                 amount=1,
                 explore_type='market',
                 ESM_inputs=ESM_inputs,

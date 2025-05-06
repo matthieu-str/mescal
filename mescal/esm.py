@@ -42,6 +42,7 @@ class ESM:
             spatialized_biosphere_db: Database = None,
             efficiency: pd.DataFrame = None,
             lifetime: pd.DataFrame = None,
+            max_depth_double_counting_search: int = 10,
     ):
         """
         Initialize the ESM database creation
@@ -68,6 +69,8 @@ class ESM:
         :param efficiency: dataframe containing the ESM technologies to correct regarding efficiency differences
             between the ESM and LCI database
         :param lifetime: dataframe containing the lifetime of the ESM technologies
+        :param max_depth_double_counting_search: maximum recursion depth of the double-counting background search
+            algorithm
         """
 
         # set up logging tool
@@ -103,6 +106,7 @@ class ESM:
         self.efficiency = efficiency
         self.unit_conversion = unit_conversion
         self.lifetime = lifetime
+        self.max_depth_double_counting_search = max_depth_double_counting_search
 
     def __repr__(self):
         n_tech = self.mapping[(self.mapping['Type'] == 'Construction') | (self.mapping['Type'] == 'Operation')].shape[0]
