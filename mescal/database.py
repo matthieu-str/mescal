@@ -542,7 +542,7 @@ class Database:
             else:
                 missing_flows.append((act_name, act_prod, act_loc, act_database))
         if len(missing_flows) > 0:
-            self.logger.warning(f'Some flows could be not found in the database: {missing_flows}')
+            self.logger.warning(f'Some flows could not be found in the database: {missing_flows}')
         else:
             self.logger.info('Mapping successfully linked to the database')
         return missing_flows
