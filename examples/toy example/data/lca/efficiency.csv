@@ -1,0 +1,6 @@
+﻿Name,Flow
+CCGT,['NG']
+CCGT_CC,['NG']
+COAL_IGCC,['COAL']
+COAL_IGCC_CC,['COAL']
+NUCLEAR,['URANIUM']

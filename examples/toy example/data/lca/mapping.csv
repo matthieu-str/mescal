@@ -1,0 +1,22 @@
+Name,Type,Product,Activity,Location,Unit,Database
+PV,Operation,"electricity, low voltage","electricity production, photovoltaic, 570kWp open ground installation, multi-Si",RoW,kilowatt hour,ecoinvent_cutoff_3.10.1_image_SSP2-Base_2050
+PV,Construction,"photovoltaic plant, 570kWp, multi-Si, on open ground","market for photovoltaic plant, 570kWp, multi-Si, on open ground",GLO,unit,ecoinvent_cutoff_3.10.1_image_SSP2-Base_2050
+WIND_ONSHORE,Operation,"electricity, high voltage","electricity production, wind, 1-3MW turbine, onshore",RoW,kilowatt hour,ecoinvent_cutoff_3.10.1_image_SSP2-Base_2050
+WIND_ONSHORE_CONNECTION,Construction,"wind turbine network connection, 2MW, onshore","wind turbine network connection construction, 2MW, onshore",GLO,unit,ecoinvent_cutoff_3.10.1_image_SSP2-Base_2050
+WIND_ONSHORE_TURBINE,Construction,"wind turbine, 2MW, onshore","wind turbine construction, 2MW, onshore",GLO,unit,ecoinvent_cutoff_3.10.1_image_SSP2-Base_2050
+NUCLEAR,Operation,"electricity, high voltage","electricity production, nuclear, pressure water reactor",RoW,kilowatt hour,ecoinvent_cutoff_3.10.1_image_SSP2-Base_2050
+NUCLEAR,Construction,"nuclear power plant, pressure water reactor, 1000MW","market for nuclear power plant, pressure water reactor, 1000MW",GLO,unit,ecoinvent_cutoff_3.10.1_image_SSP2-Base_2050
+CCGT,Operation,"electricity, high voltage","electricity production, at natural gas-fired combined cycle power plant",RER,kilowatt hour,ecoinvent_cutoff_3.10.1_image_SSP2-Base_2050
+CCGT,Construction,"NGCC power plant, 400MWe","market for gas power plant, combined cycle, 400MW electrical",GLO,unit,ecoinvent_cutoff_3.10.1_image_SSP2-Base_2050
+CCGT_CC,Construction,"NGCC power plant, 400MWe","market for gas power plant, combined cycle, 400MW electrical",GLO,unit,ecoinvent_cutoff_3.10.1_image_SSP2-Base_2050
+CCGT_CC,Operation,"electricity, high voltage","electricity production, at natural gas-fired combined cycle power plant, post, pipeline 200km, storage 1000m",RER,kilowatt hour,ecoinvent_cutoff_3.10.1_image_SSP2-Base_2050
+COAL_IGCC,Operation,"electricity, high voltage","electricity production, at hard coal-fired IGCC power plant",RER,kilowatt hour,ecoinvent_cutoff_3.10.1_image_SSP2-Base_2050
+COAL_IGCC,Construction,hard coal IGCC power plant 450MW,hard coal IGCC power plant 450MW,RER,unit,ecoinvent_cutoff_3.10.1_image_SSP2-Base_2050
+COAL_IGCC_CC,Operation,"electricity, high voltage","electricity production, at hard coal-fired IGCC power plant, pre, pipeline 200km, storage 1000m",RER,kilowatt hour,ecoinvent_cutoff_3.10.1_image_SSP2-Base_2050
+COAL_IGCC_CC,Construction,hard coal IGCC power plant 450MW,hard coal IGCC power plant 450MW,RER,unit,ecoinvent_cutoff_3.10.1_image_SSP2-Base_2050
+BATTERY,Construction,"battery, Li-ion, LFP, rechargeable, prismatic","battery production, Li-ion, LFP, rechargeable, prismatic",RoW,kilogram,ecoinvent_cutoff_3.10.1_image_SSP2-Base_2050
+GRID,Construction,"transmission network, electricity, high voltage direct current land cable","transmission network construction, electricity, high voltage direct current land cable",RoW,kilometer,ecoinvent_cutoff_3.10.1_image_SSP2-Base_2050
+COAL,Resource,hard coal,market for hard coal,RoW,kilogram,ecoinvent_cutoff_3.10.1_image_SSP2-Base_2050
+NG,Resource,"natural gas, high pressure","market for natural gas, high pressure",RoW,cubic meter,ecoinvent_cutoff_3.10.1_image_SSP2-Base_2050
+URANIUM,Resource,"nuclear fuel element, for pressure water reactor, UO2 4.2% & MOX","market for nuclear fuel element, for pressure water reactor, UO2 4.2% & MOX",GLO,kilogram,ecoinvent_cutoff_3.10.1_image_SSP2-Base_2050
+ELECTRICITY,Flow,"electricity, high voltage","market for electricity, high voltage",SA,kilowatt hour,ecoinvent_cutoff_3.10.1_image_SSP2-Base_2050

@@ -1,0 +1,77 @@
+set PERIODS := 1 2 3 4 5 6 7 8 9 10 11 12;
+set SECTORS := HOUSEHOLDS SERVICES INDUSTRY TRANSPORTATION AGRICULTURE;
+set END_USES_INPUT :=  ELECTRICITY LIGHTING HEAT_LOW_T_SC;
+set END_USES_CATEGORIES :=  ELECTRICITY;
+set RESOURCES :=  COAL NG URANIUM RES_SOLAR RES_WIND_ONSHORE;
+set END_USES_TYPES_OF_CATEGORY["ELECTRICITY"] := ELECTRICITY;
+set TECHNOLOGIES_OF_END_USES_TYPE["ELECTRICITY"] :=  PV WIND_ONSHORE CCGT CCGT_CC COAL_IGCC COAL_IGCC_CC NUCLEAR;
+set PV_TECH  := PV;
+set INFRASTRUCTURE := BATTERY GRID;
+
+let end_uses_demand_year['ELECTRICITY','HOUSEHOLDS'] := 4e3 * 0.6 ;
+let end_uses_demand_year['HEAT_LOW_T_SC','HOUSEHOLDS'] := 4e3 * 0.3 ;
+let end_uses_demand_year['LIGHTING','HOUSEHOLDS'] := 4e3 * 0.1 ;
+
+for{t in PERIODS}{
+	let c_op['NG',t] := 0.0459 ; # MCAD/GWh
+	let c_op['COAL',t] := 0.0399 ; # MCAD/GWh
+	let c_op['URANIUM',t] := 0.0054 ; # MCAD/GWh
+}
+
+let t_op[1] := 744 ; # 
+let t_op[2] := 672 ; # 
+let t_op[3] := 744 ; # 
+let t_op[4] := 720 ; # 
+let t_op[5] := 744 ; # 
+let t_op[6] := 720 ; # 
+let t_op[7] := 744 ; # 
+let t_op[8] := 744 ; # 
+let t_op[9] := 720 ; # 
+let t_op[10] := 744 ; # 
+let t_op[11] := 720 ; # 
+let t_op[12] := 744 ; # 
+
+let i_rate := 0.05 ; #
+
+let lighting_month[1] := 0.124 ; # 
+let lighting_month[2] := 0.102 ; # 
+let lighting_month[3] := 0.0918 ; # 
+let lighting_month[4] := 0.0708 ; # 
+let lighting_month[5] := 0.0588 ; # 
+let lighting_month[6] := 0.0438 ; # 
+let lighting_month[7] := 0.0408 ; # 
+let lighting_month[8] := 0.0398 ; # 
+let lighting_month[9] := 0.0678 ; # 
+let lighting_month[10] := 0.1048 ; # 
+let lighting_month[11] := 0.1238 ; # 
+let lighting_month[12] := 0.1318 ; #
+
+let cooling_month[1] := 0 ; #
+let cooling_month[2] := 0 ; # 
+let cooling_month[3] := 0 ; # 
+let cooling_month[4] := 0 ; # 
+let cooling_month[5] := 0.058 ;
+let cooling_month[6] := 0.203 ;
+let cooling_month[7] := 0.484 ;
+let cooling_month[8] := 0.246 ;
+let cooling_month[9] := 0.009 ;
+let cooling_month[10] := 0 ; # 
+let cooling_month[11] := 0 ; # 
+let cooling_month[12] := 0 ; #
+
+let layers_in_out['RES_SOLAR', 'RES_SOLAR'] := 1 ;
+let layers_in_out['RES_WIND_ONSHORE', 'RES_WIND_ONSHORE'] := 1 ;
+let layers_in_out['COAL', 'COAL'] := 1 ;
+let layers_in_out['NG', 'NG'] := 1 ;
+let layers_in_out['URANIUM', 'URANIUM'] := 1 ;
+
+let trl_min := 1 ; # 
+let trl_max := 9 ; #
+
+let avail['RES_SOLAR'] := 1e6 ; #
+let avail['RES_WIND_ONSHORE'] := 1e6 ; #
+let avail['COAL'] := 1e6 ; #
+let avail['NG'] := 1e6 ; #
+
+let f_max['PV'] := 10 ; #
+let f_max['WIND_ONSHORE'] := 3 ; #
