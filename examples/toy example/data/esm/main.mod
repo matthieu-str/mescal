@@ -159,5 +159,5 @@ subject to trl_choice{i in TECHNOLOGIES: trl[i]>trl_max or trl[i]<trl_min}:
 subject to battery:
 	F_Mult["BATTERY"]=0.3*(F_Mult["PV"] + F_Mult["WIND_ONSHORE"]);
 
-subject to extra_grid:
-	F_Mult ["GRID"] = 1 + (9400 / c_inv["GRID"]) * (F_Mult ["WIND_ONSHORE"] + F_Mult ["PV"]) / (f_max ["WIND_ONSHORE"] + f_max ["PV"]);
+# subject to extra_grid:
+#	F_Mult ["GRID"] = 1 + (9400 / c_inv["GRID"]) * (F_Mult ["WIND_ONSHORE"] + F_Mult ["PV"]) / (f_max ["WIND_ONSHORE"] + f_max ["PV"]);
