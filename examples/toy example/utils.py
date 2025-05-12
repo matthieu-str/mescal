@@ -201,6 +201,7 @@ def plot_technologies_contribution(
         esm_results_f_mult: pd.DataFrame,
         tech_to_show_list: list,
         save_fig: bool = False,
+        show_legend: bool = False,
 ):
 
     if cat == 'Total cost':
@@ -230,12 +231,25 @@ def plot_technologies_contribution(
         color='Name',
         barmode='stack',
         labels={'Run': 'Objective function', 'Name': 'Energy technology or resource', cat: f'{cat} [{unit_ind_dict[cat]}/cap]'},
-        height=400,
-        width=550,
+        height=370,
+        width=390,
     )
 
     fig.for_each_trace(lambda t: t.update(marker_color=color_dict.get(t.name, '#000000')))
     # fig.update_layout(template='plotly_white')
+
+    if not show_legend:
+        fig.update_layout(showlegend=False)
+    else:
+        fig.update_layout(
+            legend=dict(
+                orientation="h",  # Horizontal legend
+                yanchor="bottom",
+                y=-0.2,  # Adjusts the vertical position
+                xanchor="center",
+                x=0.5  # Centers the legend horizontally
+            )
+        )
 
     if save_fig:  # save as pdf
         fig.write_image(f"./figures/soo_tech_contrib_{cat.lower().replace(' ', '_').replace(',','')}.pdf")
