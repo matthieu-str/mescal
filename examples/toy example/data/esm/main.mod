@@ -140,7 +140,7 @@ subject to op_cost_calc {i in RESOURCES}:
 
 # [Eq. 1.1]	
 subject to totalcost_cal:
-	TotalCost = sum {i in TECHNOLOGIES} (tau [i] * C_inv [i] + C_maint [i]);
+	TotalCost = sum {i in TECHNOLOGIES} (tau [i] * C_inv [i] + C_maint [i]) + sum {j in RESOURCES} C_op [j] ;
 
 # Only for saving data
 subject to production{i in TECHNOLOGIES, t in PERIODS}:
