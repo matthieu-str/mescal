@@ -5,9 +5,39 @@ from energyscope.models import Model
 from energyscope.energyscope import Energyscope
 from energyscope.result import postprocessing
 import plotly.express as px
+import plotly.io as pio
+
+pio.templates["custom"] = pio.templates["plotly_white"]
+pio.templates["custom"].layout.font.family = "Arial"
+pio.templates["custom"].layout.font.color = "black"
+pio.templates["custom"].layout.xaxis.color = "black"
+pio.templates["custom"].layout.xaxis.showline = True
+pio.templates["custom"].layout.xaxis.linecolor = "black"
+pio.templates["custom"].layout.xaxis.ticks = "outside"
+pio.templates["custom"].layout.xaxis.tickcolor = "black"
+pio.templates["custom"].layout.yaxis.color = "black"
+pio.templates["custom"].layout.yaxis.showline = True
+pio.templates["custom"].layout.yaxis.linecolor = "black"
+pio.templates["custom"].layout.yaxis.ticks = "outside"
+pio.templates["custom"].layout.yaxis.tickcolor = "black"
+pio.templates["custom"].layout.xaxis.mirror = True
+pio.templates["custom"].layout.yaxis.mirror = True
+pio.templates.default = "custom"
 
 path_model = './data/esm/' # Path to the energy system model
 path_model_lca = './data/esm/lca/'
+
+max_per_cat = pd.read_csv(path_model_lca + 'techs_lca_max.csv')
+max_ccs = max_per_cat[max_per_cat['Abbrev'] == 'm_CCS']['max_AoP'].values[0]
+max_tthh = max_per_cat[max_per_cat['Abbrev'] == 'TTHH']['max_AoP'].values[0]
+max_tteq = max_per_cat[max_per_cat['Abbrev'] == 'TTEQ']['max_AoP'].values[0]
+
+max_ind_dict = {
+    'TotalCost': 1,
+    'TotalLCIA_m_CCS': max_ccs,
+    'TotalLCIA_TTHH': max_tthh,
+    'TotalLCIA_TTEQ': max_tteq,
+}
 
 N_cap = 2e5  # number of people on Tatooine
 
@@ -18,11 +48,25 @@ obj_name_dict = {
     'TotalLCIA_TTEQ': 'Total ecosystem quality',
 }
 
+obj_code_dict = {
+    'TotalCost': 'TC',
+    'TotalLCIA_m_CCS': 'CCST',
+    'TotalLCIA_TTHH': 'TTHH',
+    'TotalLCIA_TTEQ': 'TTEQ',
+}
+
+unit_ind_dict = {
+    'Total cost': 'credits',
+    'Climate change, short term': 't CO<sub>2</sub>-eq',
+    'Total human health': 'DALY',
+    'Total ecosystem quality': 'PDF.m<sup>2</sup>.yr',
+}
+
 tech_name_dict = {
-    'CCGT': 'Combined cycle gas turbine',
-    'CCGT_CC': 'Combined cycle gas turbine with carbon capture and storage',
-    'COAL_IGCC': 'Integrated gasification combined cycle',
-    'COAL_IGCC_CC': 'Integrated gasification combined cycle with carbon capture and storage',
+    'CCGT': 'CCGT',
+    'CCGT_CC': 'CCGT with CCS',
+    'COAL_IGCC': 'IGCC',
+    'COAL_IGCC_CC': 'IGCC with CCS',
     'NUCLEAR': 'Nuclear',
     'PV': 'Photovoltaic',
     'WIND_ONSHORE': 'Onshore wind',
@@ -34,11 +78,11 @@ tech_name_dict = {
 }
 
 color_dict = {
-    'Combined cycle gas turbine': '#b0b0b0',  # Silver Grey
-    'Combined cycle gas turbine with carbon capture and storage': '#d3d3d3',  # Light Silver
+    'CCGT': '#808080',  # Medium Grey
+    'CCGT with CCS': '#dcdcdc',  # Very Light Grey (Gainsboro)
     'Coal': '#8c564b',                      # Brownish Red
-    'Integrated gasification combined cycle': '#d62728',  # Vivid Red
-    'Integrated gasification combined cycle with carbon capture and storage': '#ff9896',  # Light Coral
+    'IGCC': '#d62728',  # Vivid Red
+    'IGCC with CCS': '#ff9896',  # Light Coral
     'Natural gas': '#505050',               # Charcoal Grey
     'Nuclear': '#2ca02c',                   # Green
     'Uranium': '#98df8a',                   # Light Green
@@ -156,6 +200,7 @@ def plot_technologies_contribution(
         esm_results_annual_res: pd.DataFrame,
         esm_results_f_mult: pd.DataFrame,
         tech_to_show_list: list,
+        save_fig: bool = False,
 ):
 
     if cat == 'Total cost':
@@ -169,9 +214,14 @@ def plot_technologies_contribution(
         esm_results_f_mult[['Name', 'Run', cat]],
     ]).groupby(['Name', 'Run']).sum().reset_index()
 
-    esm_results_total['Run'] = esm_results_total['Run'].apply(lambda x: obj_name_dict[x])
+    esm_results_total['Run'] = esm_results_total['Run'].apply(lambda x: obj_code_dict[x])
     esm_results_total.drop(esm_results_total[~esm_results_total['Name'].isin(tech_to_show_list)].index, inplace=True)
     esm_results_total['Name'] = esm_results_total['Name'].apply(lambda x: tech_name_dict[x])
+
+    esm_results_total[cat] = esm_results_total[cat] / N_cap
+    esm_results_total[cat] *= 1e6
+    if cat == 'Climate change, short term':  # from kg CO2 eq to t CO2 eq
+        esm_results_total[cat] = esm_results_total[cat] * 1e-3
 
     fig = px.bar(
         esm_results_total,
@@ -179,10 +229,15 @@ def plot_technologies_contribution(
         y=cat,
         color='Name',
         barmode='stack',
-        labels={'Run': 'Objective function', 'Name': 'Energy technology or resource'},
+        labels={'Run': 'Objective function', 'Name': 'Energy technology or resource', cat: f'{cat} [{unit_ind_dict[cat]}/cap]'},
+        height=400,
+        width=550,
     )
 
     fig.for_each_trace(lambda t: t.update(marker_color=color_dict.get(t.name, '#000000')))
-    fig.update_layout(template='plotly_white')
+    # fig.update_layout(template='plotly_white')
+
+    if save_fig:  # save as pdf
+        fig.write_image(f"./figures/soo_tech_contrib_{cat.lower().replace(' ', '_').replace(',','')}.pdf")
 
     fig.show()
