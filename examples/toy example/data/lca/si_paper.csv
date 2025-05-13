@@ -1,0 +1,21 @@
+Technology,Life cycle phase,LCI dataset product,LCI dataset activity,LCI dataset location,Conversion factor,LCA unit,ESM unit,Assumptions and Sources
+Photovoltaic,Operation,"electricity, low voltage","electricity production, photovoltaic, 570kWp open ground installation, multi-Si",RoW,1.0,kilowatt hour,kilowatt hour,
+Photovoltaic,Construction,"photovoltaic plant, 570kWp, multi-Si, on open ground","market for photovoltaic plant, 570kWp, multi-Si, on open ground",GLO,0.0017543859649122807,unit,kilowatt,570 kWp \cite{wernet_ecoinvent_2016}
+Onshore wind,Operation,"electricity, high voltage","electricity production, wind, 1-3MW turbine, onshore",RoW,1.0,kilowatt hour,kilowatt hour,
+Onshore wind (connection part),Construction,"wind turbine network connection, 2MW, onshore","wind turbine network connection construction, 2MW, onshore",GLO,1.0,unit,unit,
+Onshore wind (turbine part),Construction,"wind turbine, 2MW, onshore","wind turbine construction, 2MW, onshore",GLO,1.0,unit,unit,
+Nuclear,Operation,"electricity, high voltage","electricity production, nuclear, pressure water reactor",RoW,1.0,kilowatt hour,kilowatt hour,
+Nuclear,Construction,"nuclear power plant, pressure water reactor, 1000MW","market for nuclear power plant, pressure water reactor, 1000MW",GLO,1e-06,unit,kilowatt,1 GW \cite{wernet_ecoinvent_2016}
+CCGT,Operation,"electricity, high voltage","electricity production, at natural gas-fired combined cycle power plant",RER,1.0,kilowatt hour,kilowatt hour,
+CCGT,Construction,"NGCC power plant, 400MWe","market for gas power plant, combined cycle, 400MW electrical",GLO,2.5e-06,unit,kilowatt,400 MW \cite{wernet_ecoinvent_2016}
+CCGT with CCS,Construction,"NGCC power plant, 400MWe","market for gas power plant, combined cycle, 400MW electrical",GLO,2.5e-06,unit,kilowatt,400 MW \cite{wernet_ecoinvent_2016}
+CCGT with CCS,Operation,"electricity, high voltage","electricity production, at natural gas-fired combined cycle power plant, post, pipeline 200km, storage 1000m",RER,1.0,kilowatt hour,kilowatt hour,
+IGCC,Operation,"electricity, high voltage","electricity production, at hard coal-fired IGCC power plant",RER,1.0,kilowatt hour,kilowatt hour,
+IGCC,Construction,hard coal IGCC power plant 450MW,hard coal IGCC power plant 450MW,RER,2.222222222222222e-06,unit,kilowatt,450 MW \cite{wernet_ecoinvent_2016}
+IGCC with CCS,Operation,"electricity, high voltage","electricity production, at hard coal-fired IGCC power plant, pre, pipeline 200km, storage 1000m",RER,1.0,kilowatt hour,kilowatt hour,
+IGCC with CCS,Construction,hard coal IGCC power plant 450MW,hard coal IGCC power plant 450MW,RER,2.222222222222222e-06,unit,kilowatt,450 MW \cite{wernet_ecoinvent_2016}
+Battery,Construction,"battery, Li-ion, LFP, rechargeable, prismatic","battery production, Li-ion, LFP, rechargeable, prismatic",RoW,8.638297872340425,kilogram,kilowatt hour,203 kg for 23.5 kWh \cite{dai2017update}
+Grid,Construction,"transmission network, electricity, high voltage direct current land cable","transmission network construction, electricity, high voltage direct current land cable",RoW,2.3e-05,kilometer,kilowatt,"Typical power size connected to the high-voltage electricity grid: $P_{HV}$ = 500 MW, mean high-voltage electricity grid transportation length: $l_{HV}$ = 11.5 km \cite{schnidrig_role_2023}"
+Coal,Resource,hard coal,market for hard coal,RoW,0.12898602651379434,kilogram,kilowatt hour,27.91 MJ/kg \cite{wernet_ecoinvent_2016}
+Natural gas,Resource,"natural gas, high pressure","market for natural gas, high pressure",RoW,0.09230769230769231,cubic meter,kilowatt hour,39 MJ/m3 \cite{wernet_ecoinvent_2016}
+Uranium,Resource,"nuclear fuel element, for pressure water reactor, UO2 4.2% & MOX","market for nuclear fuel element, for pressure water reactor, UO2 4.2% & MOX",GLO,9.230769230769231e-07,kilogram,kilowatt hour,3900 GJ/kg \cite{world_nuclear_association_heat_nodate}
