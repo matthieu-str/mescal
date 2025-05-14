@@ -113,6 +113,7 @@ class ESM:
         self.double_counting_removal_amount = None
         self.double_counting_removal_count = None
         self.df_activities_subject_to_double_counting = None
+        self.esm_results_db_name = self.esm_db_name + '_results'
 
 
     def __repr__(self):

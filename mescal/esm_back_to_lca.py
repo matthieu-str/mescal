@@ -47,7 +47,7 @@ def create_new_database_with_esm_results(
     if new_end_use_types is None:
         new_end_use_types = pd.DataFrame(columns=['Name', 'Search type', 'Old', 'New'])
 
-    esm_results_db_name = f"{self.esm_db_name}_results"
+    esm_results_db_name = self.esm_results_db_name
     flows = mapping[mapping.Type == 'Flow']
 
     already_done = []
