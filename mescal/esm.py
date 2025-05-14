@@ -37,7 +37,7 @@ class ESM:
             tech_specifics: pd.DataFrame = None,
             regionalize_foregrounds: bool = False,
             accepted_locations: list[str] = None,
-            esm_location: str = None,
+            esm_location: str = 'GLO',
             locations_ranking: list[str] = None,
             spatialized_biosphere_db: Database = None,
             efficiency: pd.DataFrame = None,
@@ -98,7 +98,7 @@ class ESM:
         self.esm_db_name = esm_db_name
         self.results_path_file = results_path_file
         self.regionalize_foregrounds = regionalize_foregrounds
-        self.accepted_locations = accepted_locations
+        self.accepted_locations = accepted_locations if accepted_locations is not None else [esm_location]
         self.esm_location = esm_location
         self.locations_ranking = locations_ranking
         self.spatialized_database = True if spatialized_biosphere_db is not None else False
