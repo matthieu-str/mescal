@@ -20,7 +20,7 @@ def correct_esm_and_lca_efficiency_differences(
     unit_conversion = self.unit_conversion
     mapping_esm_flows_to_CPC_cat = self.mapping_esm_flows_to_CPC_cat
     removed_flows = self.df_flows_set_to_zero
-    double_counting_removal = self.double_counting_removal_amount
+    double_counting_removal_amount = self.double_counting_removal_amount
 
     try:
         efficiency.Flow = efficiency.Flow.apply(ast.literal_eval)
@@ -48,7 +48,7 @@ def correct_esm_and_lca_efficiency_differences(
     efficiency['LCA input quantity'] = efficiency.apply(
         self.get_lca_input_quantity,
         axis=1,
-        double_counting_removal=double_counting_removal
+        double_counting_removal_amount=double_counting_removal_amount
     )
     efficiency.drop(efficiency[efficiency['LCA input quantity'] == 0].index, inplace=True)
     efficiency = efficiency.merge(
@@ -267,22 +267,22 @@ def adapt_biosphere_flows_to_efficiency_difference(
 def get_lca_input_quantity(
         self,
         row: pd.Series,
-        double_counting_removal: pd.DataFrame
+        double_counting_removal_amount: pd.DataFrame
 ) -> float:
     """
     Retrieve the quantity of the flow removed from the double counting removal report
 
     :param row: series containing the name of the ESM technology and the name of the ESM flow to check for efficiency
         difference
-    :param double_counting_removal: dataframe containing the scaled amounts removed during double counting removal
+    :param double_counting_removal_amount: dataframe containing the scaled amounts removed during double counting removal
     :return: quantity of the flow removed
     """
     amount = 0
     flows_list = row.Flow
     for flow in flows_list:
         try:
-            amount += double_counting_removal[(double_counting_removal.Name == row.Name)
-                                              & (double_counting_removal.Flow == flow)].Amount.values[0]
+            amount += double_counting_removal_amount[(double_counting_removal_amount.Name == row.Name)
+                                              & (double_counting_removal_amount.Flow == flow)].Amount.values[0]
         except IndexError:
             self.logger.warning(f'No flow of type {flow} has been removed in {row.Name}.')
             amount += 0
