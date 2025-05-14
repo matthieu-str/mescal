@@ -18,7 +18,7 @@ def background_search(
         db_dict_code: dict,
         db_dict_name: dict,
         db_as_list: list[dict],
-        create_new_db: bool = True
+        db_type: str = 'esm',
 ) -> tuple[list[list], dict, dict, list[dict]]:
     """
     Explores the tree of the market activity with a recursive approach and write the activities to actually check for
@@ -34,7 +34,7 @@ def background_search(
     :param db_dict_code: LCI database as dictionary of activities with (database, code) as key
     :param db_dict_name: LCI database as dictionary of activities with (name, reference product, location, database) as key
     :param db_as_list: LCI database as list of activities
-    :param create_new_db: if True, create a new database
+    :param db_type: type of database to use, either 'esm' or 'esm results'
     :return: list of activities to check for double counting,
         dictionary of activities with code as key,
         dictionary of activities with name as key,
@@ -42,7 +42,12 @@ def background_search(
     """
 
     # Store frequently accessed instance variables in local variables inside a method if they don't need to be modified
-    esm_db_name = self.esm_db_name
+    if db_type == 'esm':
+        esm_db_name = self.esm_db_name
+    elif db_type == 'esm results':
+        esm_db_name = self.esm_results_db_name
+    else:
+        raise ValueError('db_type should be either "esm" or "esm results"')
 
     if explore_type == 'market':
         # we want to test whether the activity is a market (if yes, we explore the background),
@@ -130,7 +135,7 @@ def background_search(
     # If one condition was fulfilled, we continue to explore the tree.
     if condition:
         for flow in technosphere_flows:
-            if (create_new_db is True) & (flow['database'] == esm_db_name):
+            if flow['database'] == esm_db_name:
                 # this means that the same activity is several times in the tree, thus inducing an infinite loop
                 pass
             else:
@@ -140,30 +145,27 @@ def background_search(
                         if 'CPC' in dict(techno_act['classifications']):
                             CPC_cat_new = dict(techno_act['classifications'])['CPC']
                             if CPC_cat == CPC_cat_new:
-                                if create_new_db:
-                                    # Modify and save the activity in the ESM database
-                                    new_act = copy.deepcopy(techno_act)
-                                    new_code = random_code()
-                                    new_act['database'] = esm_db_name
-                                    new_act['code'] = new_code
-                                    prod_flow = Dataset(new_act).get_production_flow()
-                                    prod_flow['code'] = new_code
-                                    prod_flow['database'] = esm_db_name
-                                    db_as_list.append(new_act)
-                                    db_dict_name[(
-                                        new_act['name'],
-                                        new_act['reference product'],
-                                        new_act['location'],
-                                        new_act['database']
-                                    )] = new_act
-                                    db_dict_code[(new_act['database'], new_act['code'])] = new_act
+                                # Modify and save the activity in the ESM database
+                                new_act = copy.deepcopy(techno_act)
+                                new_code = random_code()
+                                new_act['database'] = esm_db_name
+                                new_act['code'] = new_code
+                                prod_flow = Dataset(new_act).get_production_flow()
+                                prod_flow['code'] = new_code
+                                prod_flow['database'] = esm_db_name
+                                db_as_list.append(new_act)
+                                db_dict_name[(
+                                    new_act['name'],
+                                    new_act['reference product'],
+                                    new_act['location'],
+                                    new_act['database']
+                                )] = new_act
+                                db_dict_code[(new_act['database'], new_act['code'])] = new_act
 
-                                    # Modify the flow between the activity and its inventory
-                                    flow['database'] = esm_db_name
-                                    flow['code'] = new_code
-                                    flow['input'] = (esm_db_name, new_code)
-                                else:
-                                    new_act = techno_act
+                                # Modify the flow between the activity and its inventory
+                                flow['database'] = esm_db_name
+                                flow['code'] = new_code
+                                flow['input'] = (esm_db_name, new_code)
 
                                 if k < k_lim:  # we continue until maximum depth is reached:
                                     perform_d_c, db_dict_code, db_dict_name, db_as_list = self.background_search(
@@ -177,7 +179,7 @@ def background_search(
                                         db_dict_code=db_dict_code,
                                         db_dict_name=db_dict_name,
                                         db_as_list=db_as_list,
-                                        create_new_db=create_new_db,
+                                        db_type=db_type,
                                     )
                                     # adding 1 to the current depth k and multiply amount by the flow's amount
                                 else:
@@ -200,29 +202,26 @@ def background_search(
                         techno_act = db_dict_code[(flow['database'], flow['code'])]
                         if 'classifications' in techno_act.keys():
                             if 'CPC' in dict(techno_act['classifications']):
-                                if create_new_db:
-                                    new_act = copy.deepcopy(techno_act)
-                                    new_code = random_code()
-                                    new_act['database'] = esm_db_name
-                                    new_act['code'] = new_code
-                                    prod_flow = Dataset(new_act).get_production_flow()
-                                    prod_flow['code'] = new_code
-                                    prod_flow['database'] = esm_db_name
-                                    db_as_list.append(new_act)
-                                    db_dict_name[(
-                                        new_act['name'],
-                                        new_act['reference product'],
-                                        new_act['location'],
-                                        new_act['database']
-                                    )] = new_act
-                                    db_dict_code[(new_act['database'], new_act['code'])] = new_act
+                                new_act = copy.deepcopy(techno_act)
+                                new_code = random_code()
+                                new_act['database'] = esm_db_name
+                                new_act['code'] = new_code
+                                prod_flow = Dataset(new_act).get_production_flow()
+                                prod_flow['code'] = new_code
+                                prod_flow['database'] = esm_db_name
+                                db_as_list.append(new_act)
+                                db_dict_name[(
+                                    new_act['name'],
+                                    new_act['reference product'],
+                                    new_act['location'],
+                                    new_act['database']
+                                )] = new_act
+                                db_dict_code[(new_act['database'], new_act['code'])] = new_act
 
-                                    # Modify the flow between the activity and its inventory and save it
-                                    flow['database'] = esm_db_name
-                                    flow['code'] = new_code
-                                    flow['input'] = (esm_db_name, new_code)
-                                else:
-                                    new_act = techno_act
+                                # Modify the flow between the activity and its inventory and save it
+                                flow['database'] = esm_db_name
+                                flow['code'] = new_code
+                                flow['input'] = (esm_db_name, new_code)
 
                                 if k < k_lim:  # we continue until maximum depth is reached:
                                     perform_d_c, db_dict_code, db_dict_name, db_as_list = self.background_search(
@@ -236,7 +235,7 @@ def background_search(
                                         db_dict_code=db_dict_code,
                                         db_dict_name=db_dict_name,
                                         db_as_list=db_as_list,
-                                        create_new_db=create_new_db,
+                                        db_type=db_type,
                                     )
                                     # here we want to check whether the next activity is a market or not, if not,
                                     # the activity will be added for double counting
@@ -263,7 +262,7 @@ def double_counting_removal(
         df_op: pd.DataFrame,
         N: int,
         ESM_inputs: list[str] or str = 'all',
-        create_new_db: bool = True,
+        db_type: str = 'esm',
 ) -> tuple[list[list], dict, list[list]]:
     """
     Remove double counting in the ESM database and write it in the Brightway project
@@ -271,7 +270,7 @@ def double_counting_removal(
     :param df_op: operation mapping file
     :param N: number of columns of the original mapping file
     :param ESM_inputs: list of the ESM flows to perform double counting removal on
-    :param create_new_db: if True, create a new database
+    :param db_type: type of database to use, either 'esm' or 'esm results'
     :return: list of removed flows, dictionary of removed quantities, list of activities subject to double counting
     """
     # Store frequently accessed instance variables in local variables inside a method.
@@ -363,7 +362,7 @@ def double_counting_removal(
         # identification of the activity in ecoinvent database
         act_op = db_dict_code[(database_op, current_code_op)]
 
-        if create_new_db:
+        if db_type == 'esm':
             # Copy the activity and change the database (no new activity in original ecoinvent database)
             new_code = df_op['New_code'].iloc[i]  # new code defined previously
             new_act_op = copy.deepcopy(act_op)
@@ -396,10 +395,10 @@ def double_counting_removal(
                 db_dict_code=db_dict_code,
                 db_dict_name=db_dict_name,
                 db_as_list=db_as_list,
-                create_new_db=create_new_db,
+                db_type=db_type,
             )  # list of activities to perform double counting removal on
 
-        if create_new_db:
+        if db_type == 'esm':
             new_act_op['name'] = f'{tech}, Operation'  # saving name after market identification
             prod_flow = Dataset(new_act_op).get_production_flow()
             prod_flow['name'] = f'{tech}, Operation'
@@ -517,7 +516,7 @@ def double_counting_removal(
                     act_flow['code'],
                 ])
 
-                if create_new_db:
+                if db_type == 'esm':
                     if 'OWN_CONSTRUCTION' in res_categories:
                         # replace construction flow input by the one added before in the ESM database
                         # (for validation purposes)
@@ -562,7 +561,7 @@ def double_counting_removal(
                         db_dict_code=db_dict_code,
                         db_dict_name=db_dict_name,
                         db_as_list=db_as_list,
-                        create_new_db=create_new_db
+                        db_type=db_type,
                     )
 
             id_d_c += 1

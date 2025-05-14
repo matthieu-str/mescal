@@ -122,7 +122,7 @@ def create_new_database_with_esm_results(
             df_op=double_counting_act,
             N=N,
             ESM_inputs=['OWN_CONSTRUCTION', 'CONSTRUCTION'],
-            create_new_db=False,
+            db_type='esm results',
         )
 
     # Injecting local variables into the instance variables
