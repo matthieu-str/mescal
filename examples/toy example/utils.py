@@ -251,6 +251,10 @@ def plot_technologies_contribution(
             )
         )
 
+    fig.update_layout(
+        margin=dict(l=20, r=20, t=20, b=20),  # left, right, top, bottom
+    )
+
     if save_fig:  # save as pdf
         fig.write_image(f"./figures/soo_tech_contrib_{cat.lower().replace(' ', '_').replace(',','')}.pdf")
 
