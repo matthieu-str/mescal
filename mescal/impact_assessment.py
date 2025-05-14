@@ -23,7 +23,6 @@ def compute_impact_scores(
         specific_lcia_abbrev: list[str] = None,
         impact_abbrev: pd.DataFrame = None,
         assessment_type: str = 'esm',
-        activities_subject_to_double_counting: pd.DataFrame = None,
         overwrite: bool = True,
         contribution_analysis: bool = False,
         contribution_analysis_limit_type: str = 'percent',
@@ -39,8 +38,6 @@ def compute_impact_scores(
     :param impact_abbrev: dataframe containing the impact categories abbreviations
     :param assessment_type: type of assessment, can be 'esm' for the computation of the energy system life-cycle
         impacts, or 'direct emissions' for the computation of direct emissions only
-    :param activities_subject_to_double_counting: activities that were subject to the double counting removal.
-        Only needed if assessment_type is 'direct emissions'.
     :param overwrite: only relevant if assessment_type is 'direct emissions', if True, the direct emissions database
         will be overwritten if it exists
     :param contribution_analysis: if True, the function will return the contribution analysis on elementary flows.
@@ -51,6 +48,8 @@ def compute_impact_scores(
     :return: impact scores dataframe of the technologies and resources for all selected impact categories, and
         contribution analysis dataframe (if contribution_analysis is True)
     """
+    activities_subject_to_double_counting = self.df_activities_subject_to_double_counting
+
     if assessment_type == 'direct emissions' and activities_subject_to_double_counting is None:
         raise ValueError('For territorial emissions computation, the activities_subject_to_double_counting dataframe '
                          'must be provided')

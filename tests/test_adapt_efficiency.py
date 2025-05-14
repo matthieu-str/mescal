@@ -526,9 +526,9 @@ def test_correct_esm_and_lca_efficiency_differences():
         efficiency=efficiency,
     )
 
+    esm.df_flows_set_to_zero = removed_flows
+    esm.double_counting_removal_amount = double_counting_removal
     esm.correct_esm_and_lca_efficiency_differences(
-        removed_flows=removed_flows,
-        double_counting_removal=double_counting_removal,
         write_efficiency_report=False,
     )
 

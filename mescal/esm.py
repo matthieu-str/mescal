@@ -108,6 +108,13 @@ class ESM:
         self.lifetime = lifetime
         self.max_depth_double_counting_search = max_depth_double_counting_search
 
+        # Initialize attributes used within mescal
+        self.df_flows_set_to_zero = None
+        self.double_counting_removal_amount = None
+        self.double_counting_removal_count = None
+        self.df_activities_subject_to_double_counting = None
+
+
     def __repr__(self):
         n_tech = self.mapping[(self.mapping['Type'] == 'Construction') | (self.mapping['Type'] == 'Operation')].shape[0]
         n_res = self.mapping[self.mapping['Type'] == 'Resource'].shape[0]
@@ -447,14 +454,21 @@ class ESM:
             double_counting_removal_count[double_counting_removal_count.Amount == 0].index, inplace=True
         )
 
+        df_activities_subject_to_double_counting = pd.DataFrame(
+            data=activities_subject_to_double_counting,
+            columns=['Name', 'Activity name', 'Activity code', 'Amount']
+        )
+
+        self.double_counting_removal_count = double_counting_removal_count
+        self.double_counting_removal_amount = double_counting_removal_amount
+        self.df_flows_set_to_zero = df_flows_set_to_zero
+        self.df_activities_subject_to_double_counting = df_activities_subject_to_double_counting
+
         if self.efficiency is not None:
             self.logger.info(f"Starting to correct efficiency differences")
             t1_eff = time.time()
             if self.efficiency is not None:
-                self.correct_esm_and_lca_efficiency_differences(
-                    removed_flows=df_flows_set_to_zero,
-                    double_counting_removal=double_counting_removal_amount,
-                )
+                self.correct_esm_and_lca_efficiency_differences()
             t2_eff = time.time()
             self.logger.info(f"Efficiency differences corrected in {round(t2_eff - t1_eff, 1)} seconds")
 
@@ -464,10 +478,7 @@ class ESM:
             double_counting_removal_count.to_csv(f"{self.results_path_file}double_counting_removal_count.csv",
                                                  index=False)
             df_flows_set_to_zero.to_csv(f"{self.results_path_file}removed_flows_list.csv", index=False)
-            pd.DataFrame(
-                data=activities_subject_to_double_counting,
-                columns=['Name', 'Activity name', 'Activity code', 'Amount']
-            ).to_csv(f"{self.results_path_file}activities_subject_to_double_counting.csv", index=False)
+            df_activities_subject_to_double_counting.to_csv(f"{self.results_path_file}activities_subject_to_double_counting.csv", index=False)
 
         if write_database:
             self.logger.info(f"Starting to write database")

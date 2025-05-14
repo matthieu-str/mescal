@@ -5,17 +5,11 @@ from .database import Dataset
 
 def correct_esm_and_lca_efficiency_differences(
         self,
-        removed_flows: pd.DataFrame,
-        double_counting_removal: pd.DataFrame,
         write_efficiency_report: bool = True,
 ) -> None:
     """
     Correct the efficiency differences between ESM technologies and their construction LCI datasets
 
-    :param removed_flows: dataframe containing the name, code and amount of removed flows during double counting
-        removal
-    :param double_counting_removal: dataframe containing the scaled amounts of removed flows during double counting
-        removal
     :param write_efficiency_report: if True, write the efficiency differences in a csv file
     :return: None
     """
@@ -25,6 +19,8 @@ def correct_esm_and_lca_efficiency_differences(
     efficiency = self.efficiency
     unit_conversion = self.unit_conversion
     mapping_esm_flows_to_CPC_cat = self.mapping_esm_flows_to_CPC_cat
+    removed_flows = self.df_flows_set_to_zero
+    double_counting_removal = self.double_counting_removal_amount
 
     try:
         efficiency.Flow = efficiency.Flow.apply(ast.literal_eval)
@@ -121,7 +117,7 @@ def correct_esm_and_lca_efficiency_differences(
 
         for act in act_to_adapt_list:
             efficiency_ratio = efficiency['efficiency_ratio'].iloc[i]
-            act = self.adapt_biosphere_flows_to_efficiency_difference(act, efficiency_ratio, tech)
+            act = self.adapt_biosphere_flows_to_efficiency_difference(act, efficiency_ratio)
 
     if write_efficiency_report:
         # saving the efficiency differences in a csv file
@@ -246,14 +242,12 @@ def get_lca_input_flow_unit_or_product(
 def adapt_biosphere_flows_to_efficiency_difference(
         act: dict,
         efficiency_ratio: float,
-        tech: str
 ) -> dict:
     """
     Adapt the biosphere flows of an activity to correct the efficiency difference between ESM and LCA
 
     :param act: LCI dataset to adapt
     :param efficiency_ratio: ratio between the LCA and ESM efficiencies
-    :param tech: name of the technology in the ESM
     :return: the adapted LCI dataset
     """
     for exc in Dataset(act).get_biosphere_flows():
