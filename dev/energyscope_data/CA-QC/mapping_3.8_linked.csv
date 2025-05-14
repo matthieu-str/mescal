@@ -892,7 +892,7 @@ URANIUM,Resource,"nuclear fuel element, for pressure water reactor, UO2 4.2% & M
 WASTE,Resource,municipal solid waste,market for municipal solid waste,CA-QC,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
 WASTE_BIO,Resource,biowaste,market for biowaste,RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
 WASTE_FOS,Resource,refinery sludge,market for refinery sludge,RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
-WET_BIOMASS,Resource,"wood chips, wet, measured as dry mass","market for wood chips, wet, measured as dry mass",CA-QC,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
+WET_BIOMASS,Resource,"manure, solid, cattle","market for manure, solid, cattle",GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
 WOOD,Resource,"wood chips, dry, measured as dry mass","market for wood chips, dry, measured as dry mass",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
 XYLENE,Resource,xylene,market for xylene,RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
 ACETIC_ACID,Flow,"acetic acid, without water, in 98% solution state","market for acetic acid, without water, in 98% solution state",GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
@@ -952,6 +952,6 @@ STYRENE,Flow,styrene,market for styrene,GLO,ecoinvent_cutoff_3.8_remind_SSP2-Bas
 TOLUENE,Flow,"toluene, liquid","market for toluene, liquid",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
 URANIUM,Flow,"nuclear fuel element, for pressure water reactor, UO2 4.2% & MOX","market for nuclear fuel element, for pressure water reactor, UO2 4.2% & MOX",GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
 WASTE,Flow,municipal solid waste,market for municipal solid waste,CA-QC,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
-WET_BIOMASS,Flow,"wood chips, wet, measured as dry mass","market for wood chips, wet, measured as dry mass",CA-QC,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
+WET_BIOMASS,Flow,"manure, solid, cattle","market for manure, solid, cattle",GLO,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
 WOOD,Flow,"wood chips, dry, measured as dry mass","market for wood chips, dry, measured as dry mass",RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020
 XYLENE,Flow,xylene,market for xylene,RoW,ecoinvent_cutoff_3.8_remind_SSP2-Base_2020

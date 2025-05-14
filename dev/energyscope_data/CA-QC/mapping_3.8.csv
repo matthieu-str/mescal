@@ -892,7 +892,7 @@ URANIUM,Resource,"nuclear fuel element, for pressure water reactor, UO2 4.2% & M
 WASTE,Resource,municipal solid waste,market for municipal solid waste,RoW,/kg,ecoinvent3.8 cut-off
 WASTE_BIO,Resource,biowaste,market for biowaste,CH,/kg,ecoinvent3.8 cut-off
 WASTE_FOS,Resource,refinery sludge,market for refinery sludge,CH,/kg,ecoinvent3.8 cut-off
-WET_BIOMASS,Resource,"wood chips, wet, measured as dry mass","market for wood chips, wet, measured as dry mass",CA-QC,/kg,ecoinvent3.8 cut-off
+WET_BIOMASS,Resource,"manure, solid, cattle","market for manure, solid, cattle",GLO,/kg,ecoinvent3.8 cut-off
 WOOD,Resource,"wood chips, dry, measured as dry mass","market for wood chips, dry, measured as dry mass",RER,/kg,ecoinvent3.8 cut-off
 XYLENE,Resource,xylene,market for xylene,RoW,/kg,ecoinvent3.8 cut-off
 ACETIC_ACID,Flow,"acetic acid, without water, in 98% solution state","market for acetic acid, without water, in 98% solution state",GLO,/kg,ecoinvent3.8 cut-off
@@ -952,6 +952,6 @@ STYRENE,Flow,styrene,market for styrene,GLO,/kg,ecoinvent3.8 cut-off
 TOLUENE,Flow,"toluene, liquid","market for toluene, liquid",RoW,/kg,ecoinvent3.8 cut-off
 URANIUM,Flow,"nuclear fuel element, for pressure water reactor, UO2 4.2% & MOX","market for nuclear fuel element, for pressure water reactor, UO2 4.2% & MOX",GLO,/kg,ecoinvent3.8 cut-off
 WASTE,Flow,municipal solid waste,market for municipal solid waste,CA-QC,/kg,ecoinvent3.8 cut-off
-WET_BIOMASS,Flow,"wood chips, wet, measured as dry mass","market for wood chips, wet, measured as dry mass",CA-QC,/kg,ecoinvent3.8 cut-off
+WET_BIOMASS,Flow,"manure, solid, cattle","market for manure, solid, cattle",GLO,/kg,ecoinvent3.8 cut-off
 WOOD,Flow,"wood chips, dry, measured as dry mass","market for wood chips, dry, measured as dry mass",RoW,/kg,ecoinvent3.8 cut-off
 XYLENE,Flow,xylene,market for xylene,RoW,/kg,ecoinvent3.8 cut-off
