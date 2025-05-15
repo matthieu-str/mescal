@@ -118,14 +118,25 @@ def create_new_database_with_esm_results(
     self.mapping = mapping
     self.main_database.db_as_list = db_as_list
 
-    self.logger.info("Removing double-counted construction flows...")
     if remove_background_construction_flows:
         # Double-counting removal of background construction flows
+        self.logger.info("Removing double-counted construction flows...")
         flows_set_to_zero, ei_removal, activities_subject_to_double_counting = self.double_counting_removal(
             df_op=double_counting_act,
             N=N,
             ESM_inputs=['OWN_CONSTRUCTION', 'CONSTRUCTION'],
             db_type='esm results',
+        )
+    elif harmonize_with_esm:
+        # if we do not want to remove construction flows, but we want to harmonize the database with the ESM,
+        # the background processes of markets should be recorded in the ESM results database following the
+        # background search algorithm of the double-counting removal procedure. However, flows are NOT removed
+        # during this process.
+        flows_set_to_zero, ei_removal, activities_subject_to_double_counting = self.double_counting_removal(
+            df_op=double_counting_act,
+            N=N,
+            ESM_inputs=['OWN_CONSTRUCTION', 'CONSTRUCTION'],
+            db_type='esm results wo dcr',
         )
 
     if harmonize_with_esm:

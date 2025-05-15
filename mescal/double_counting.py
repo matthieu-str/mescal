@@ -34,7 +34,7 @@ def background_search(
     :param db_dict_code: LCI database as dictionary of activities with (database, code) as key
     :param db_dict_name: LCI database as dictionary of activities with (name, reference product, location, database) as key
     :param db_as_list: LCI database as list of activities
-    :param db_type: type of database to use, either 'esm' or 'esm results'
+    :param db_type: type of database to use, either 'esm', 'esm results' or 'esm results wo dcr'
     :return: list of activities to check for double counting,
         dictionary of activities with code as key,
         dictionary of activities with name as key,
@@ -44,10 +44,10 @@ def background_search(
     # Store frequently accessed instance variables in local variables inside a method if they don't need to be modified
     if db_type == 'esm':
         esm_db_name = self.esm_db_name
-    elif db_type == 'esm results':
+    elif db_type in ['esm results', 'esm results wo dcr']:
         esm_db_name = self.esm_results_db_name
     else:
-        raise ValueError('db_type should be either "esm" or "esm results"')
+        raise ValueError('db_type should be either "esm", "esm results", or "esm results wo dcr"')
 
     if explore_type == 'market':
         # we want to test whether the activity is a market (if yes, we explore the background),
@@ -184,11 +184,12 @@ def background_search(
                                     # adding 1 to the current depth k and multiply amount by the flow's amount
                                 else:
                                     # if the limit is reached, we consider the last activity for double counting removal
-                                    new_act['comment'] = (f"Subject to double-counting removal ({explore_type}). "
-                                                          + new_act.get('comment', ''))
-                                    perform_d_c.append(
-                                        [new_act['name'], new_act['code'], amount * flow['amount'], k + 1, ESM_inputs]
-                                    )
+                                    if db_type != 'esm results wo dcr':
+                                        new_act['comment'] = (f"Subject to double-counting removal ({explore_type}). "
+                                                              + new_act.get('comment', ''))
+                                        perform_d_c.append(
+                                            [new_act['name'], new_act['code'], amount * flow['amount'], k + 1, ESM_inputs]
+                                        )
                     else:
                         pass
                 elif explore_type == 'background_removal':
@@ -241,10 +242,11 @@ def background_search(
                                     # the activity will be added for double counting
                                 else:
                                     # if the limit is reached, we consider the last activity for double counting removal
-                                    new_act['comment'] = (f"Subject to double-counting removal ({explore_type}). "
-                                                          + new_act.get('comment', ''))
-                                    perform_d_c.append([new_act['name'], new_act['code'],
-                                                        amount * flow['amount'], k + 1, ESM_inputs])
+                                    if db_type != 'esm results wo dcr':
+                                        new_act['comment'] = (f"Subject to double-counting removal ({explore_type}). "
+                                                              + new_act.get('comment', ''))
+                                        perform_d_c.append([new_act['name'], new_act['code'],
+                                                            amount * flow['amount'], k + 1, ESM_inputs])
                             else:
                                 raise ValueError(f"No CPC cat: ({techno_act['database']}, {techno_act['code']})")
                         else:
@@ -252,8 +254,9 @@ def background_search(
         return perform_d_c, db_dict_code, db_dict_name, db_as_list
 
     else:  # the activity is not a market, thus it is added to the list for double-counting removal
-        act['comment'] = f"Subject to double-counting removal ({explore_type}). " + act.get('comment', '')
-        perform_d_c.append([act['name'], act['code'], amount, k, ESM_inputs])
+        if db_type != 'esm results wo dcr':
+            act['comment'] = f"Subject to double-counting removal ({explore_type}). " + act.get('comment', '')
+            perform_d_c.append([act['name'], act['code'], amount, k, ESM_inputs])
         return perform_d_c, db_dict_code, db_dict_name, db_as_list
 
 
@@ -270,7 +273,7 @@ def double_counting_removal(
     :param df_op: operation mapping file
     :param N: number of columns of the original mapping file
     :param ESM_inputs: list of the ESM flows to perform double counting removal on
-    :param db_type: type of database to use, either 'esm' or 'esm results'
+    :param db_type: type of database to use, either 'esm', 'esm results' or 'esm results wo dcr'
     :return: list of removed flows, dictionary of removed quantities, list of activities subject to double counting
     """
     # Store frequently accessed instance variables in local variables inside a method.
@@ -381,8 +384,11 @@ def double_counting_removal(
             new_act_op = act_op
 
         if tech in no_background_search_list:
-            new_act_op['comment'] = f"Subject to double-counting removal. " + new_act_op.get('comment', '')
-            perform_d_c = [[new_act_op['name'], new_act_op['code'], 1, 0, ESM_inputs]]
+            if db_type != 'esm results wo dcr':
+                new_act_op['comment'] = f"Subject to double-counting removal. " + new_act_op.get('comment', '')
+                perform_d_c = [[new_act_op['name'], new_act_op['code'], 1, 0, ESM_inputs]]
+            else:
+                perform_d_c = []
         else:
             perform_d_c, db_dict_code, db_dict_name, db_as_list = self.background_search(
                 act=new_act_op,
