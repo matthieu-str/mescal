@@ -179,7 +179,7 @@ class ESM:
         correct_esm_and_lca_efficiency_differences,
         compute_efficiency_esm,
         get_lca_input_flow_unit_or_product,
-        adapt_biosphere_flows_to_efficiency_difference,
+        adapt_flows_to_efficiency_difference,
         get_lca_input_quantity,
     )
     from .esm_back_to_lca import (

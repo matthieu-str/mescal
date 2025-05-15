@@ -92,6 +92,7 @@ def correct_esm_and_lca_efficiency_differences(
     for i in range(len(efficiency)):
 
         act_to_adapt_list = []  # there might be several activities to adapt for one technology in case of market
+        techno_flows_to_correct_dict = {}
         tech = efficiency['Name'].iloc[i]
         flows_list = efficiency['Flow'].iloc[i]
 
@@ -154,6 +155,10 @@ def correct_esm_and_lca_efficiency_differences(
                         if act_to_adapt not in act_to_adapt_list and act_to_adapt is not None:
                             # in case there are several fuel flows in the same activity
                             act_to_adapt_list.append(act_to_adapt)
+                            if (act_to_adapt['database'], act_to_adapt['code']) in techno_flows_to_correct_dict.keys():
+                                techno_flows_to_correct_dict[(act_to_adapt['database'], act_to_adapt['code'])] += [(act_exc['database'], act_exc['code'])]
+                            else:
+                                techno_flows_to_correct_dict[(act_to_adapt['database'], act_to_adapt['code'])] = [(act_exc['database'], act_exc['code'])]
 
         if len(act_to_adapt_list) == 0:
             if db_type == 'esm':
@@ -164,7 +169,8 @@ def correct_esm_and_lca_efficiency_differences(
 
         for act in act_to_adapt_list:
             efficiency_ratio = efficiency['efficiency_ratio'].iloc[i]
-            act = self.adapt_biosphere_flows_to_efficiency_difference(act, efficiency_ratio)
+            techno_flows_to_correct = techno_flows_to_correct_dict[(act['database'], act['code'])]
+            act = self.adapt_flows_to_efficiency_difference(act, efficiency_ratio, techno_flows_to_correct)
 
     if write_efficiency_report:
         # saving the efficiency differences in a csv file
@@ -286,15 +292,17 @@ def get_lca_input_flow_unit_or_product(
         raise ValueError(f'output_type must be either "unit" or "product"')
 
 @staticmethod
-def adapt_biosphere_flows_to_efficiency_difference(
+def adapt_flows_to_efficiency_difference(
         act: dict,
         efficiency_ratio: float,
+        techno_flows_to_correct: list[tuple[str, str]],
 ) -> dict:
     """
     Adapt the biosphere flows of an activity to correct the efficiency difference between ESM and LCA
 
     :param act: LCI dataset to adapt
     :param efficiency_ratio: ratio between the LCA and ESM efficiencies
+    :param techno_flows_to_correct: list of (database, code) tuples to correct among the technosphere flows
     :return: the adapted LCI dataset
     """
     for exc in Dataset(act).get_biosphere_flows():
@@ -306,8 +314,15 @@ def adapt_biosphere_flows_to_efficiency_difference(
             exc['comment'] = (f'EF multiplied by {round(efficiency_ratio, 4)} (efficiency). '
                               + exc.get('comment', ''))
 
-    act['comment'] = (f'Biosphere flows adjusted by a factor {round(efficiency_ratio, 4)} to correct efficiency '
-                      f'difference between ESM and LCA. ' + act.get('comment', ''))
+    for exc in Dataset(act).get_technosphere_flows():
+        if (exc['database'], exc['code']) in techno_flows_to_correct:
+            exc['amount'] *= efficiency_ratio
+            exc['comment'] = (f'TF multiplied by {round(efficiency_ratio, 4)} (efficiency). '
+                              + exc.get('comment', ''))
+
+    act['comment'] = (f'Biosphere and fuel flows adjusted by a factor {round(efficiency_ratio, 4)} to correct '
+                      f'efficiency difference between ESM and LCA. ' + act.get('comment', ''))
+
     return act
 
 
