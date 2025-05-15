@@ -623,7 +623,7 @@ class ESM:
             db_name = self.esm_db_name
             return_type = 'name'
         elif db_type == 'esm results':
-            db_name = self.esm_db_name + '_results'
+            db_name = self.esm_results_db_name
             return_type = 'code'
         elif db_type == 'main':
             db_name = db.db_names

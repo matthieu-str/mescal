@@ -17,6 +17,7 @@ def create_new_database_with_esm_results(
         write_database: bool = True,
         remove_background_construction_flows: bool = True,
         harmonize_with_esm: bool = True,
+        esm_results_db_name: str = None,
 ) -> Database | None:
     """
     Create a new database with the ESM results
@@ -33,6 +34,7 @@ def create_new_database_with_esm_results(
         database.
     :param harmonize_with_esm: if True, apply the efficiency correction and the changes specified in the
         techs_specifics.csv file
+    :param esm_results_db_name: name of the new database with the ESM results
     :return: database of the ESM results if return_database is True, else None
     """
 
@@ -47,6 +49,9 @@ def create_new_database_with_esm_results(
         tech_to_remove_layers = pd.DataFrame(columns=['Layers', 'Technologies'])
     if new_end_use_types is None:
         new_end_use_types = pd.DataFrame(columns=['Name', 'Search type', 'Old', 'New'])
+
+    if esm_results_db_name is not None:
+        self.esm_results_db_name = esm_results_db_name
 
     esm_results_db_name = self.esm_results_db_name
     flows = mapping[mapping.Type == 'Flow']
@@ -204,7 +209,7 @@ def connect_esm_results_to_database(
     if new_db_name is None and create_new_db is True:
         new_db_name = self.main_database.db_names + f'_with_esm_results_for_{self.esm_location}'
 
-    esm_results_db_name = self.esm_db_name + '_results'
+    esm_results_db_name = self.esm_results_db_name
 
     # Store frequently accessed instance variables in local variables inside a method
     db_dict_name = self.main_database.db_as_dict_name
@@ -388,7 +393,7 @@ def create_or_modify_activity_from_esm_results(
     db_as_list = self.main_database.db_as_list
     unit_conversion = self.unit_conversion
     model = self.model
-    esm_results_db_name = self.esm_db_name + '_results'
+    esm_results_db_name = self.esm_results_db_name
 
     # Check if the original activity is in the database for the location under study
     if (original_activity_name, original_activity_prod, esm_location, original_activity_database) in db_dict_name:
