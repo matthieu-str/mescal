@@ -16,7 +16,7 @@ def create_new_database_with_esm_results(
         return_database: bool = False,
         write_database: bool = True,
         remove_background_construction_flows: bool = True,
-        apply_tech_specifics_changes: bool = True,
+        harmonize_with_esm: bool = True,
 ) -> Database | None:
     """
     Create a new database with the ESM results
@@ -31,7 +31,8 @@ def create_new_database_with_esm_results(
         the ESM and LCI database, in order to not count the infrastructure impacts several times over several
         time-steps. It should be set to False if the new database is meant to be shared or used as a standalone
         database.
-    :param apply_tech_specifics_changes: if True, apply the changes specified in the techs_specifics.csv file
+    :param harmonize_with_esm: if True, apply the efficiency correction and the changes specified in the
+        techs_specifics.csv file
     :return: database of the ESM results if return_database is True, else None
     """
 
@@ -54,6 +55,7 @@ def create_new_database_with_esm_results(
     perform_d_c = []
 
     # Create the new LCI datasets from the ESM results
+    self.logger.info("Creating new LCI datasets from the ESM results...")
     for i in tqdm(range(len(flows))):
 
         original_activity_prod = flows.Product.iloc[i]
@@ -116,6 +118,7 @@ def create_new_database_with_esm_results(
     self.mapping = mapping
     self.main_database.db_as_list = db_as_list
 
+    self.logger.info("Removing double-counted construction flows...")
     if remove_background_construction_flows:
         # Double-counting removal of background construction flows
         flows_set_to_zero, ei_removal, activities_subject_to_double_counting = self.double_counting_removal(
@@ -124,6 +127,17 @@ def create_new_database_with_esm_results(
             ESM_inputs=['OWN_CONSTRUCTION', 'CONSTRUCTION'],
             db_type='esm results',
         )
+
+    if harmonize_with_esm:
+        # Add ESM database to the main database (to retrieve the corrected datasets)
+        esm_db = Database(self.esm_db_name)
+        self.main_database = self.main_database + esm_db
+
+        self.logger.info("Correcting efficiency differences between ESM and LCI datasets...")
+        self.correct_esm_and_lca_efficiency_differences(db_type='esm results', write_efficiency_report=False)
+
+        # Remove the ESM database from the main database
+        self.main_database = self.main_database - esm_db
 
     # Injecting local variables into the instance variables
     self.main_database.db_as_list = db_as_list
@@ -142,7 +156,7 @@ def create_new_database_with_esm_results(
 
     self.main_database = self.main_database - esm_results_db
 
-    if apply_tech_specifics_changes:
+    if harmonize_with_esm:
         if write_database:
             # Modifies the written database according to specifications in tech_specifics.csv
             self.modify_written_activities(db=esm_results_db, db_type='esm results')

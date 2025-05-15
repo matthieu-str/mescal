@@ -6,21 +6,26 @@ from .database import Dataset
 def correct_esm_and_lca_efficiency_differences(
         self,
         write_efficiency_report: bool = True,
+        db_type: str = 'esm',
 ) -> None:
     """
     Correct the efficiency differences between ESM technologies and their construction LCI datasets
 
     :param write_efficiency_report: if True, write the efficiency differences in a csv file
+    :param db_type: type of database to use for the efficiency correction, can be either 'esm' or 'esm results'
     :return: None
     """
 
     # Store frequently accessed instance variables in local variables inside a method if they don't need to be modified
     db_dict_code = self.main_database.db_as_dict_code
+    db_dict_name = self.main_database.db_as_dict_name
+    mapping = self.mapping
     efficiency = self.efficiency
     unit_conversion = self.unit_conversion
     mapping_esm_flows_to_CPC_cat = self.mapping_esm_flows_to_CPC_cat
     removed_flows = self.df_flows_set_to_zero
     double_counting_removal_amount = self.double_counting_removal_amount
+    esm_results_db_name = self.esm_results_db_name
 
     try:
         efficiency.Flow = efficiency.Flow.apply(ast.literal_eval)
@@ -104,16 +109,58 @@ def correct_esm_and_lca_efficiency_differences(
                     if dict(act_exc['classifications'])['CPC'] in CPC_list:
                         # if this flow (that was removed during double counting removal) is a fuel flow of the
                         # technology, the biosphere flows the activity will be adjusted
-                        act_to_adapt = db_dict_code[main_act_database, main_act_code]
-                        if act_to_adapt not in act_to_adapt_list:
+                        if db_type == 'esm':
+                            act_to_adapt = db_dict_code[main_act_database, main_act_code]
+                        elif db_type == 'esm results':
+                            act_in_esm_db = db_dict_code[main_act_database, main_act_code]
+                            if act_in_esm_db['name'] == f'{tech}, Operation':
+                                act_in_esm_db_name = mapping[(mapping.Name == tech) & (mapping.Type == 'Operation')]['Activity'].iloc[0]
+                                if (
+                                    f"{act_in_esm_db_name} ({tech})",
+                                    act_in_esm_db['reference product'],
+                                    act_in_esm_db['location'],
+                                    esm_results_db_name,
+                                ) not in db_dict_name.keys():
+                                    # If the technology is not in the ESM results database, it means that its annual
+                                    # production was null. Thus, we do not need to correct its efficiency.
+                                    act_to_adapt = None
+                                else:
+                                    act_to_adapt = db_dict_name[(
+                                        f"{act_in_esm_db_name} ({tech})",
+                                        act_in_esm_db['reference product'],
+                                        act_in_esm_db['location'],
+                                        esm_results_db_name,
+                                    )]
+                            else:
+                                if (
+                                    act_in_esm_db['name'],
+                                    act_in_esm_db['reference product'],
+                                    act_in_esm_db['location'],
+                                    esm_results_db_name,
+                                ) not in db_dict_name.keys():
+                                    # If the technology is not in the ESM results database, it means that its annual
+                                    # production was null. Thus, we do not need to correct its efficiency.
+                                    act_to_adapt = None
+                                else:
+                                    act_to_adapt = db_dict_name[(
+                                        act_in_esm_db['name'],
+                                        act_in_esm_db['reference product'],
+                                        act_in_esm_db['location'],
+                                        esm_results_db_name,
+                                    )]
+                        else:
+                            raise ValueError(f'db_type must be either "esm" or "esm results"')
+
+                        if act_to_adapt not in act_to_adapt_list and act_to_adapt is not None:
                             # in case there are several fuel flows in the same activity
                             act_to_adapt_list.append(act_to_adapt)
 
         if len(act_to_adapt_list) == 0:
-            self.logger.warning(
-                f'No flow of type(s) {flows_list} found for {tech}. The efficiency of this technology cannot be '
-                f'adjusted.'
-            )
+            if db_type == 'esm':
+                self.logger.warning(
+                    f'No flow of type(s) {flows_list} found for {tech}. The efficiency of this technology cannot be '
+                    f'adjusted.'
+                )
 
         for act in act_to_adapt_list:
             efficiency_ratio = efficiency['efficiency_ratio'].iloc[i]
