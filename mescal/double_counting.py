@@ -196,10 +196,10 @@ def background_search(
                     if (
                             (flow['amount'] > 0)
                             & (flow['unit'] not in ['unit', 'megajoule', 'kilowatt hour', 'ton kilometer'])
-                            & (flow['product'] not in ['tap water'])
+                            & (flow['product'] not in ['tap water', 'water, deionised'])
                     ):
-                        # we do not consider construction, transport and energy flows (we typically target fuel flows
-                        # in kg or m3) as well as negative flows
+                        # we do not consider construction, transport, water and energy flows (we typically target fuel
+                        # flows in kg or m3) as well as negative flows
                         techno_act = db_dict_code[(flow['database'], flow['code'])]
                         if 'classifications' in techno_act.keys():
                             if 'CPC' in dict(techno_act['classifications']):
@@ -549,9 +549,15 @@ def double_counting_removal(
             # This is not applied to construction datasets, which should be found the foreground inventory.
             missing_ES_inputs = []
             for cat in ES_inputs:
-                if ((tech in list(background_search_act.keys()))
+                if (
+                        (tech in list(background_search_act.keys()))
                         & (cat not in ['CONSTRUCTION', 'OWN_CONSTRUCTION', 'DECOMMISSIONING'])
-                        & (ei_removal[tech][cat]['amount'] == 0) & (ei_removal[tech][cat]['count'] == 0)):
+                        # The two following conditions mean that the background search would stop when some
+                        # intermediary flows have already been found for a given esm flow, but some other
+                        # similar and relevant flows, further in the process tree, might also be there.
+                        # & (ei_removal[tech][cat]['amount'] == 0)
+                        # & (ei_removal[tech][cat]['count'] == 0)
+                ):
                     missing_ES_inputs.append(cat)
 
             if len(missing_ES_inputs) > 0:
