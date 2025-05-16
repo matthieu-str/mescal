@@ -198,6 +198,8 @@ class ESM:
         :return: None
         """
         # Check if the inputs are consistent
+        main_database_name = self.main_database_name
+        biosphere_db_name = self.biosphere_db_name
         model = self.model
         mapping = self.mapping
         mapping_esm_flows_to_CPC_cat = self.mapping_esm_flows_to_CPC_cat
@@ -206,6 +208,12 @@ class ESM:
         lifetime = self.lifetime
         techno_compositions = self.technology_compositions
         tech_specifics = self.tech_specifics
+
+        if main_database_name not in list(bd.databases):
+            self.logger.error(f"Main database {main_database_name} not found in your brightway project")
+
+        if biosphere_db_name not in list(bd.databases):
+            self.logger.error(f"Biosphere database {biosphere_db_name} not found in your brightway project")
 
         dict_df_names = {
             'model': model,
