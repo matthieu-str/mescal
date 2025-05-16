@@ -25,7 +25,7 @@ class Plot:
         :param df_impact_scores: dataframe of LCA indicators obtained with the compute_impact_scores method of the ESM
             class.
         :param esm_results_tech: dataframe of ESM results for technologies. It should have the following columns: 'Run'
-            (iteration number), 'Name' (technology name), 'Installed capacity' (installed capacity of the technology),
+            (iteration number), 'Name' (technology name), 'Capacity' (installed capacity of the technology),
             'Production' (annual production of the technology).
         :param esm_results_res: dataframe of ESM results for resources. It should have the following columns: 'Run'
         (iteration number), 'Name' (resource name), 'Import' (annual import of the resource).
@@ -590,7 +590,7 @@ class Plot:
         esm_results_tech = esm_results_tech[esm_results_tech['Run'] == n_run]
         esm_results_res = esm_results_res[esm_results_res['Run'] == n_run]
 
-        df_constr = R[R.Type == 'Construction'].merge(esm_results_tech[['Name', 'Installed capacity']],
+        df_constr = R[R.Type == 'Construction'].merge(esm_results_tech[['Name', 'Capacity']],
                                                       on=['Name'], how='left')
         df_op = R[R.Type == 'Operation'].merge(esm_results_tech[['Name', 'Production']], on=['Name'], how='left')
         df_res = R[R.Type == 'Resource'].merge(esm_results_res[['Name', 'Import']], on=['Name'], how='left')
@@ -598,9 +598,9 @@ class Plot:
         if self.lifetime is not None:
             # The construction impacts are divided by the lifetime to get the annual impact
             df_constr = df_constr.merge(self.lifetime, on='Name', how='left')
-            df_constr['Impact'] = df_constr['Value'] * df_constr['Installed capacity'] / df_constr['ESM']
+            df_constr['Impact'] = df_constr['Value'] * df_constr['Capacity'] / df_constr['ESM']
         else:
-            df_constr['Impact'] = df_constr['Value'] * df_constr['Installed capacity']
+            df_constr['Impact'] = df_constr['Value'] * df_constr['Capacity']
 
         df_op['Impact'] = df_op['Value'] * df_op['Production']
         df_res['Impact'] = df_res['Value'] * df_res['Import']
