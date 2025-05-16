@@ -404,6 +404,7 @@ def test_create_new_database_with_esm_results():
         esm_results=esm_results,
         return_database=True,
         write_database=False,
+        harmonize_with_esm=False,
     )
 
     full_db = esm_with_res_db + esm.main_database
