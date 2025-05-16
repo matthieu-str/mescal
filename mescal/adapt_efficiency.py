@@ -155,10 +155,14 @@ def correct_esm_and_lca_efficiency_differences(
                         if act_to_adapt not in act_to_adapt_list and act_to_adapt is not None:
                             # in case there are several fuel flows in the same activity
                             act_to_adapt_list.append(act_to_adapt)
-                            if (act_to_adapt['database'], act_to_adapt['code']) in techno_flows_to_correct_dict.keys():
-                                techno_flows_to_correct_dict[(act_to_adapt['database'], act_to_adapt['code'])] += [(act_exc['database'], act_exc['code'])]
-                            else:
-                                techno_flows_to_correct_dict[(act_to_adapt['database'], act_to_adapt['code'])] = [(act_exc['database'], act_exc['code'])]
+                            techno_flows_to_correct_dict[
+                                (act_to_adapt['database'], act_to_adapt['code'])
+                            ] = []
+
+                        if act_to_adapt is not None:
+                            techno_flows_to_correct_dict[
+                                (act_to_adapt['database'], act_to_adapt['code'])
+                            ] += [(act_exc['database'], act_exc['code'])]
 
         if len(act_to_adapt_list) == 0:
             if db_type == 'esm':
