@@ -187,6 +187,7 @@ class ESM:
         create_or_modify_activity_from_esm_results,
         replace_mobility_end_use_type,
         connect_esm_results_to_database,
+        correct_esm_and_lca_capacity_factor_differences,
     )
     from .normalization import normalize_lca_metrics
     from .generate_lcia_obj_ampl import generate_mod_file_ampl

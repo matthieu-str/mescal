@@ -149,8 +149,9 @@ def create_new_database_with_esm_results(
         esm_db = Database(self.esm_db_name)
         self.main_database = self.main_database + esm_db
 
-        self.logger.info("Correcting efficiency differences between ESM and LCI datasets...")
+        self.logger.info("Correcting efficiency and capacity factor differences between ESM and LCI datasets...")
         self.correct_esm_and_lca_efficiency_differences(db_type='esm results', write_efficiency_report=False)
+        self.correct_esm_and_lca_capacity_factor_differences(esm_results=esm_results, write_cp_report=True)
 
         # Remove the ESM database from the main database
         self.main_database = self.main_database - esm_db
@@ -617,6 +618,123 @@ def create_or_modify_activity_from_esm_results(
 
     return perform_d_c
 
+def correct_esm_and_lca_capacity_factor_differences(
+        self,
+        esm_results: pd.DataFrame,
+        write_cp_report: bool = True,
+) -> None:
+
+    db_dict_name = self.main_database.db_as_dict_name
+    mapping = self.mapping
+    esm_results_db_name = self.esm_results_db_name
+    df_flows_set_to_zero = self.df_flows_set_to_zero
+    unit_conversion = self.unit_conversion
+    lifetime = self.lifetime
+
+    capacity_factor_report_list = []
+
+    for tech in df_flows_set_to_zero.Name.unique():
+
+        act_to_adapt_list = []
+        techno_flows_to_correct_dict = {}
+
+        unit_conversion_factor_constr = unit_conversion[
+            (unit_conversion.Name == tech)
+            & (unit_conversion.Type == 'Construction')
+            ]['Value'].iloc[0]
+        lifetime_lca = lifetime[(lifetime.Name == tech)]['LCA'].iloc[0]
+        annual_production = esm_results[(esm_results.Name == tech)]['Production'].iloc[0]
+        installed_capacity = esm_results[(esm_results.Name == tech)]['Capacity'].iloc[0]
+
+        # TODO: take into account the case of compositions (components unit conversion factors to include)
+        amount_constr_esm = installed_capacity * unit_conversion_factor_constr / (lifetime_lca * annual_production)
+
+        df_removed_construction_flows = df_flows_set_to_zero[
+            (df_flows_set_to_zero.Name == tech)
+            & (df_flows_set_to_zero.Unit == 'unit')
+        ]
+
+        for idx, row in df_removed_construction_flows.iterrows():
+
+            if row['Activity'] == f'{tech}, Operation':
+                act_name = mapping[(mapping.Name == tech) & (mapping.Type == 'Operation')]['Activity'].iloc[0]
+
+                if (
+                        f"{act_name} ({tech})",
+                        row['Product'],
+                        row['Location'],
+                        esm_results_db_name,
+                ) in db_dict_name:
+                    act_to_adapt = db_dict_name[(
+                        f"{act_name} ({tech})",
+                        row['Product'],
+                        row['Location'],
+                        esm_results_db_name,
+                    )]
+                else:
+                    act_to_adapt = None
+
+            else:
+                if (
+                        row['Activity'],
+                        row['Product'],
+                        row['Location'],
+                        esm_results_db_name,
+                ) in db_dict_name:
+                    act_to_adapt = db_dict_name[(
+                        row['Activity'],
+                        row['Product'],
+                        row['Location'],
+                        esm_results_db_name,
+                    )]
+                else:
+                    act_to_adapt = None
+
+            if act_to_adapt is not None and act_to_adapt not in act_to_adapt_list:
+                act_to_adapt_list.append(act_to_adapt)
+                techno_flows_to_correct_dict[
+                    (act_to_adapt['database'], act_to_adapt['code'])
+                ] = []
+
+            if act_to_adapt is not None:
+                act_exc = db_dict_name[(
+                    row['Removed flow activity'],
+                    row['Removed flow product'],
+                    row['Removed flow location'],
+                    row['Removed flow database'],
+                )]
+                techno_flows_to_correct_dict[
+                    (act_to_adapt['database'], act_to_adapt['code'])
+                ] += [(act_exc['database'], act_exc['code'])]
+
+        for act in act_to_adapt_list:
+
+            for exc in Dataset(act).get_technosphere_flows():
+                if (exc['database'], exc['code']) in techno_flows_to_correct_dict[(act['database'], act['code'])]:
+                    amount_constr_lca = exc['amount']
+                    exc['amount'] = amount_constr_esm
+                    exc['comment'] = (f'TF multiplied by {round(amount_constr_esm / amount_constr_lca, 4)} (capacity '
+                                      f'factor). ' + exc.get('comment', ''))
+
+                    capacity_factor_report_list.append([
+                        tech,
+                        exc['name'],
+                        exc['product'],
+                        exc['location'],
+                        exc['database'],
+                        exc['code'],
+                        amount_constr_lca,
+                        amount_constr_esm,
+                    ])
+
+            act['comment'] = (f'Infrastructure flows have been harmonized with the ESM to account for capacity factor '
+                              f'differences. ') + act.get('comment', '')
+
+    if write_cp_report:
+        pd.DataFrame(
+            data=capacity_factor_report_list,
+            columns=['Name', 'Product', 'Activity', 'Location', 'Database', 'Code', 'Amount LCA', 'Amount ESM'],
+        ).to_csv(f"{self.results_path_file}capacity_factor_differences.csv", index=False)
 
 @staticmethod
 def replace_mobility_end_use_type(row: pd.Series, new_end_use_types: pd.DataFrame) -> str:
