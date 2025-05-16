@@ -631,6 +631,16 @@ def correct_esm_and_lca_capacity_factor_differences(
     unit_conversion = self.unit_conversion
     lifetime = self.lifetime
 
+    # readings lists as lists and not strings
+    try:
+        self.technology_compositions.Components = self.technology_compositions.Components.apply(ast.literal_eval)
+    except ValueError:
+        pass
+
+    technology_compositions_dict = {key: value for key, value in dict(zip(
+        self.technology_compositions.Name, self.technology_compositions.Components
+    )).items()}
+
     capacity_factor_report_list = []
 
     for tech in df_flows_set_to_zero.Name.unique():
@@ -638,16 +648,29 @@ def correct_esm_and_lca_capacity_factor_differences(
         act_to_adapt_list = []
         techno_flows_to_correct_dict = {}
 
-        unit_conversion_factor_constr = unit_conversion[
-            (unit_conversion.Name == tech)
-            & (unit_conversion.Type == 'Construction')
-            ]['Value'].iloc[0]
-        lifetime_lca = lifetime[(lifetime.Name == tech)]['LCA'].iloc[0]
-        annual_production = esm_results[(esm_results.Name == tech)]['Production'].iloc[0]
-        installed_capacity = esm_results[(esm_results.Name == tech)]['Capacity'].iloc[0]
+        if tech not in technology_compositions_dict.keys():  # if the technology is not a composition
+            # simple technologies are seen as compositions of one technology
+            technology_compositions_dict[tech] = [tech]
 
-        # TODO: take into account the case of compositions (components unit conversion factors to include)
-        amount_constr_esm = installed_capacity * unit_conversion_factor_constr / (lifetime_lca * annual_production)
+        for sub_comp in technology_compositions_dict[tech]:
+
+            unit_conversion_factor_constr = unit_conversion[
+                (unit_conversion.Name == sub_comp)
+                & (unit_conversion.Type == 'Construction')
+                ]['Value'].iloc[0]
+            if sub_comp != tech:
+                unit_conversion_factor_constr *= unit_conversion[
+                    (unit_conversion.Name == tech)
+                    & (unit_conversion.Type == 'Construction')
+                ]['Value'].iloc[0]
+            lifetime_lca = lifetime[(lifetime.Name == sub_comp)]['LCA'].iloc[0]
+            annual_production = esm_results[(esm_results.Name == tech)]['Production'].iloc[0]
+            installed_capacity = esm_results[(esm_results.Name == tech)]['Capacity'].iloc[0]
+
+            # amount_constr_esm is the amount of infrastructure unit to be used in the operation LCI dataset
+            # given the annual production and installed cpacity results of the ESM. This value can significantly differ
+            # from the original value in the operation LCI dataset, due to differences in assumptions and operating modes.
+            amount_constr_esm = installed_capacity * unit_conversion_factor_constr / (lifetime_lca * annual_production)
 
         df_removed_construction_flows = df_flows_set_to_zero[
             (df_flows_set_to_zero.Name == tech)
@@ -671,7 +694,7 @@ def correct_esm_and_lca_capacity_factor_differences(
                         row['Location'],
                         esm_results_db_name,
                     )]
-                else:
+                else:  # i.e., the technology is not used in the ESM configuration
                     act_to_adapt = None
 
             else:
@@ -687,10 +710,10 @@ def correct_esm_and_lca_capacity_factor_differences(
                         row['Location'],
                         esm_results_db_name,
                     )]
-                else:
+                else:  # i.e., the technology is not used in the ESM configuration
                     act_to_adapt = None
 
-            if act_to_adapt is not None and act_to_adapt not in act_to_adapt_list:
+            if act_to_adapt is not None and act_to_adapt not in act_to_adapt_list:  # avoid to apply correction several times
                 act_to_adapt_list.append(act_to_adapt)
                 techno_flows_to_correct_dict[
                     (act_to_adapt['database'], act_to_adapt['code'])
@@ -711,8 +734,8 @@ def correct_esm_and_lca_capacity_factor_differences(
 
             for exc in Dataset(act).get_technosphere_flows():
                 if (exc['database'], exc['code']) in techno_flows_to_correct_dict[(act['database'], act['code'])]:
-                    amount_constr_lca = exc['amount']
-                    exc['amount'] = amount_constr_esm
+                    amount_constr_lca = exc['amount']  # original infrastructure amount in the operation LCI dataset
+                    exc['amount'] = amount_constr_esm  # we replace the latter by the one derived from ESM results
                     exc['comment'] = (f'TF multiplied by {round(amount_constr_esm / amount_constr_lca, 4)} (capacity '
                                       f'factor). ' + exc.get('comment', ''))
 
@@ -725,7 +748,7 @@ def correct_esm_and_lca_capacity_factor_differences(
                         exc['code'],
                         amount_constr_lca,
                         amount_constr_esm,
-                    ])
+                    ])  # reporting capaicty factors differences
 
             act['comment'] = (f'Infrastructure flows have been harmonized with the ESM to account for capacity factor '
                               f'differences. ') + act.get('comment', '')
