@@ -9,7 +9,8 @@ def correct_esm_and_lca_efficiency_differences(
         db_type: str = 'esm',
 ) -> None:
     """
-    Correct the efficiency differences between ESM technologies and their construction LCI datasets
+    Correct the efficiency differences between ESM technologies and their operation LCI datasets. This method can be
+    used during the creation of the ESM database and during the creation of the ESM results database.
 
     :param write_efficiency_report: if True, write the efficiency differences in a csv file
     :param db_type: type of database to use for the efficiency correction, can be either 'esm' or 'esm results'

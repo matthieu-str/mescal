@@ -22,7 +22,8 @@ def create_new_database_with_esm_results(
     """
     Create a new database with the ESM results
 
-    :param esm_results: results of the ESM in terms of annual production
+    :param esm_results: results of the ESM in terms of annual production and installed capacity. It should contain the
+        columns 'Name', 'Production', and 'Capacity'.
     :param tech_to_remove_layers: technologies to remove from the result LCI datasets
     :param new_end_use_types: adapt end use types to fit the results LCI datasets mapping
     :param return_database: if True, return the new database
@@ -380,7 +381,8 @@ def create_or_modify_activity_from_esm_results(
     :param original_activity_name: name of the original activity
     :param original_activity_database: database of the original activity
     :param flows: mapping file between ESM flows and LCI datasets
-    :param esm_results: file of the ESM results in terms of annual production
+    :param esm_results: results of the ESM in terms of annual production and installed capacity. It should contain the
+        columns 'Name', 'Production', and 'Capacity'.
     :param tech_to_remove_layers: technologies to remove from the result LCI datasets
     :param new_end_use_types: adapt end use types to fit the results LCI datasets mapping
     :return: list of activities to perform double counting removal
@@ -623,6 +625,16 @@ def correct_esm_and_lca_capacity_factor_differences(
         esm_results: pd.DataFrame,
         write_cp_report: bool = True,
 ) -> None:
+    '''
+    Correct the differences of capacity factors between ESM technologies and their operation LCI datasets
+    during the creation of the ESM results database. Concretely, it changes the amount of the construction input flow
+    in the operation LCI dataset.
+
+    :param esm_results: results of the ESM in terms of annual production and installed capacity. It should contain the
+        columns 'Name', 'Production', and 'Capacity'.
+    :param write_cp_report: if True, save a csv file reporting capacity factors differences in the results folder
+    :return: None
+    '''
 
     db_dict_name = self.main_database.db_as_dict_name
     mapping = self.mapping
@@ -668,7 +680,7 @@ def correct_esm_and_lca_capacity_factor_differences(
             installed_capacity = esm_results[(esm_results.Name == tech)]['Capacity'].iloc[0]
 
             # amount_constr_esm is the amount of infrastructure unit to be used in the operation LCI dataset
-            # given the annual production and installed cpacity results of the ESM. This value can significantly differ
+            # given the annual production and installed capacity results of the ESM. This value can significantly differ
             # from the original value in the operation LCI dataset, due to differences in assumptions and operating modes.
             amount_constr_esm = installed_capacity * unit_conversion_factor_constr / (lifetime_lca * annual_production)
 
@@ -748,7 +760,7 @@ def correct_esm_and_lca_capacity_factor_differences(
                         exc['code'],
                         amount_constr_lca,
                         amount_constr_esm,
-                    ])  # reporting capaicty factors differences
+                    ])  # reporting capacity factors differences
 
             act['comment'] = (f'Infrastructure flows have been harmonized with the ESM to account for capacity factor '
                               f'differences. ') + act.get('comment', '')
