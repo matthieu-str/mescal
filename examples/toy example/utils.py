@@ -55,6 +55,13 @@ obj_code_dict = {
     'TotalLCIA_TTEQ': 'TTEQ',
 }
 
+full_name_ind = {
+    'Total cost': 'Total cost',
+    'Climate change, short term': 'Climate change, short term',
+    'Total human health': 'Human health damage',
+    'Total ecosystem quality': 'Ecosystem quality damage',
+}
+
 unit_ind_dict = {
     'Total cost': 'credits',
     'Climate change, short term': 't CO<sub>2</sub>-eq',
@@ -91,6 +98,46 @@ color_dict = {
     'Battery': '#9467bd',                   # Dark Purple
     'Grid': '#17becf'                       # Steel Blue
 }
+
+impact_category_hh_colors = {
+    'Climate change, human health, long term': '#0072B2',  # Dark blue
+    'Climate change, human health, short term': '#56B4E9',  # Light blue
+    'Human toxicity cancer, long term': '#D55E00',  # Burnt orange
+    'Human toxicity cancer, short term': '#E69F00',  # Orange
+    'Human toxicity non-cancer, long term': '#CC79A7',  # Magenta
+    'Human toxicity non-cancer, short term': '#F7CAE0',  # Light pink
+    'Ionizing radiations, human health': '#999933',  # Olive green
+    'Ozone layer depletion': '#00CED1',  # Dark turquoise
+    'Particulate matter formation': '#7F7F7F',  # Medium grey
+    'Photochemical ozone formation, human health': '#9E5BBA',  # Soft violet
+    'Water availability, human health': '#009E73',  # Teal green
+}
+
+impact_category_eq_colors = {
+    'Climate change, ecosystem quality, long term': '#0072B2',  # Dark blue
+    'Climate change, ecosystem quality, short term': '#56B4E9',  # Light blue
+    'Fisheries impact': '#1B9E77',  # Sea green
+    'Freshwater acidification': '#8DA0CB',  # Periwinkle
+    'Freshwater ecotoxicity, long term': '#984EA3',  # Dark purple
+    'Freshwater ecotoxicity, short term': '#DDA0DD',  # Plum
+    'Freshwater eutrophication': '#A6CEE3',  # Light cyan
+    'Ionizing radiations, ecosystem quality': '#999933',  # Olive green
+    'Land occupation, biodiversity': '#A65628',  # Rust brown
+    'Land transformation, biodiversity': '#E6AB02',  # Mustard yellow
+    'Marine acidification, long term': '#377EB8',  # Blue
+    'Marine acidification, short term': '#ADD8E6',  # Light blue
+    'Marine ecotoxicity, long term': '#984EA3',  # Dark purple
+    'Marine ecotoxicity, short term': '#DDA0DD',  # Plum
+    'Marine eutrophication': '#1B9E77',  # Sea green
+    'Photochemical ozone formation, ecosystem quality': '#9E5BBA',  # Soft violet
+    'Terrestrial acidification': '#FDB462',  # Light orange
+    'Terrestrial ecotoxicity, long term': '#BC80BD',  # Lavender
+    'Terrestrial ecotoxicity, short term': '#F7CAE0',  # Light pink
+    'Thermally polluted water': '#E377C2',  # Pink
+    'Water availability, freshwater ecosystem': '#009E73',  # Teal green
+    'Water availability, terrestrial ecosystem': '#66C2A5',  # Light teal
+}
+
 
 def run_esm(
         objective_function: str = 'TotalCost',
@@ -152,10 +199,10 @@ def get_impact_scores(
         df_impact_scores.Impact_category = df_impact_scores.Impact_category.apply(lambda x: ast.literal_eval(x))
 
     df_lifetime = df_results.parameters['lifetime'].reset_index()
-    df_f_mult = df_results.variables['F_Mult'].reset_index()
+    df_f_mult = df_results.variables['F_Mult'].reset_index().drop(columns=['Run'])
     df_f_mult = df_f_mult.merge(df_lifetime[['index', 'lifetime']], on='index', how='left')
-    df_annual_prod = df_results.variables['Annual_Prod'].reset_index()
-    df_annual_res = df_results.variables['Annual_Res'].reset_index()
+    df_annual_prod = df_results.variables['Annual_Prod'].reset_index().drop(columns=['Run'])
+    df_annual_res = df_results.variables['Annual_Res'].reset_index().drop(columns=['Run'])
     df_tech_cost = df_results.postprocessing['df_annual'].reset_index()[['level_0', 'C_maint', 'C_inv_an']]
     df_res_cost = df_results.variables['C_op'].reset_index()
 
@@ -230,7 +277,7 @@ def plot_technologies_contribution(
         y=cat,
         color='Name',
         barmode='stack',
-        labels={'Run': 'Objective function', 'Name': 'Energy technology or resource', cat: f'{cat} [{unit_ind_dict[cat]}/cap]'},
+        labels={'Run': 'Objective function', 'Name': 'Energy technology or resource', cat: f'{full_name_ind[cat]} [{unit_ind_dict[cat]}/cap]'},
         height=370,
         width=390,
     )
