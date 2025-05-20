@@ -306,3 +306,137 @@ def plot_technologies_contribution(
         fig.write_image(f"./figures/soo_tech_contrib_{cat.lower().replace(' ', '_').replace(',','')}.pdf")
 
     fig.show()
+
+
+def plot_ef_contributions(
+        df_contrib_analysis_ef: pd.DataFrame,
+        esm_results_f_mult: pd.DataFrame,
+        esm_results_annual_prod: pd.DataFrame,
+        esm_results_annual_res: pd.DataFrame,
+        main_variables_results: pd.DataFrame,
+        aop: str,
+        cutoff: float = 0.01,
+        save_fig: bool = False,
+):
+    if aop == 'Total ecosystem quality':
+        impact_category = ('IMPACT World+ Damage 2.1 for ecoinvent v3.10', 'Ecosystem quality', 'Total ecosystem quality')
+        short_name = 'TotalLCIA_TTEQ'
+    elif aop == 'Total human health':
+        impact_category = ('IMPACT World+ Damage 2.1 for ecoinvent v3.10', 'Human health', 'Total human health')
+        short_name = 'TotalLCIA_TTHH'
+    else:
+        raise ValueError("aop must be 'Total ecosystem quality' or 'Total human health'")
+
+    contrib_analysis_ef = df_contrib_analysis_ef.copy(deep=True)
+
+    if type(contrib_analysis_ef.impact_category.iloc[0]) is str:
+        contrib_analysis_ef['impact_category'] = contrib_analysis_ef['impact_category'].apply(lambda x: ast.literal_eval(x))
+    
+    contrib_analysis_ef['score'] = contrib_analysis_ef['score'] * 1e6 / N_cap
+    contrib_analysis_ef['amount'] = contrib_analysis_ef['amount'] * 1e6 / N_cap
+    
+    contrib_analysis_ef = contrib_analysis_ef[
+        contrib_analysis_ef['impact_category'] == impact_category
+    ].groupby(['act_name', 'act_type', 'ef_name']).sum(['score', 'amount']).reset_index()
+    
+    contrib_analysis_ef_constr = pd.merge(
+        contrib_analysis_ef[contrib_analysis_ef['act_type'] == 'Construction'][['act_name', 'ef_name', 'score', 'amount']],
+        esm_results_f_mult[['Name', 'Run', 'F_Mult', 'lifetime']],
+        how='right',
+        left_on=['act_name'],
+        right_on=['Name'],
+    ).drop(columns=['act_name'])
+    
+    contrib_analysis_ef_op = pd.merge(
+        contrib_analysis_ef[contrib_analysis_ef['act_type'] == 'Operation'][['act_name', 'ef_name', 'score', 'amount']],
+        esm_results_annual_prod[['Name', 'Run', 'Annual_Prod']],
+        how='right',
+        left_on=['act_name'],
+        right_on=['Name'],
+    ).drop(columns=['act_name'])
+    
+    contrib_analysis_ef_res = pd.merge(
+        contrib_analysis_ef[contrib_analysis_ef['act_type'] == 'Resource'][['act_name', 'ef_name', 'score', 'amount']],
+        esm_results_annual_res[['Name', 'Run', 'Annual_Res']],
+        how='right',
+        left_on=['act_name'],
+        right_on=['Name'],
+    ).drop(columns=['act_name'])
+    
+    contrib_analysis_ef_constr['scaled_impact'] = (
+            contrib_analysis_ef_constr['score'] * contrib_analysis_ef_constr['F_Mult'] / contrib_analysis_ef_constr['lifetime']
+    )
+    contrib_analysis_ef_constr = contrib_analysis_ef_constr[contrib_analysis_ef_constr['scaled_impact'] != 0]
+
+    contrib_analysis_ef_op['scaled_impact'] = contrib_analysis_ef_op['score'] * contrib_analysis_ef_op['Annual_Prod']
+    contrib_analysis_ef_op = contrib_analysis_ef_op[contrib_analysis_ef_op['scaled_impact'] != 0]
+
+    contrib_analysis_ef_res['scaled_impact'] = contrib_analysis_ef_res['score'] * contrib_analysis_ef_res['Annual_Res']
+    contrib_analysis_ef_res = contrib_analysis_ef_res[contrib_analysis_ef_res['scaled_impact'] != 0]
+    
+    contrib_analysis_ef_full = pd.concat([
+        contrib_analysis_ef_constr[['Run', 'ef_name', 'scaled_impact']],
+        contrib_analysis_ef_op[['Run', 'ef_name', 'scaled_impact']],
+        contrib_analysis_ef_res[['Run', 'ef_name', 'scaled_impact']]
+    ]).groupby(['Run', 'ef_name']).sum().reset_index()
+    
+    # Concatenate the contributions from land occupation, land transformation and water
+    contrib_analysis_ef_full['ef_name'] = contrib_analysis_ef_full['ef_name'].apply(
+        lambda x: 'Land ' + x.split(', ')[0].lower() if x.startswith('Transformation') or x.startswith('Occupation') else x
+    )
+    contrib_analysis_ef_full['ef_name'] = contrib_analysis_ef_full['ef_name'].apply(
+        lambda x: x.split(', ')[0] if x.startswith('Water') else x
+    )
+
+    contrib_analysis_ef_full = contrib_analysis_ef_full.groupby(['Run', 'ef_name']).sum().reset_index()
+    
+    df_total = main_variables_results[['Objective', short_name]]
+    df_total[short_name] = df_total[short_name] * max_ind_dict[short_name] * 1e6 / N_cap
+    df_total.rename(columns={'Objective': 'Run', short_name: 'total_impact'}, inplace=True)
+    
+    contrib_analysis_ef_full = pd.merge(contrib_analysis_ef_full, df_total, on='Run', how='left')
+
+    # cut-off criteria
+    contrib_analysis_ef_full['scaled_impact_perc'] = contrib_analysis_ef_full['scaled_impact'] / contrib_analysis_ef_full['total_impact']
+    contrib_analysis_ef_full = contrib_analysis_ef_full[abs(contrib_analysis_ef_full['scaled_impact_perc']) > cutoff]
+    
+    # add an 'other' row for the difference between sum of contributions and total
+    contrib_analysis_ef_rest = pd.merge(
+        contrib_analysis_ef_full.groupby(['Run']).sum().reset_index()[['Run', 'scaled_impact']],
+        df_total,
+        on='Run',
+        how='left',
+    )
+
+    contrib_analysis_ef_rest['scaled_impact'] = contrib_analysis_ef_rest['total_impact'] - contrib_analysis_ef_rest['scaled_impact']
+    contrib_analysis_ef_rest['ef_name'] = 'Other'
+    
+    contrib_analysis_ef_full = pd.concat([contrib_analysis_ef_full, contrib_analysis_ef_rest])
+    
+    contrib_analysis_ef_full['Run'] = contrib_analysis_ef_full['Run'].apply(lambda x: obj_code_dict[x])
+    
+    fig = px.bar(
+        contrib_analysis_ef_full.sort_values('scaled_impact', ascending=False),
+        x='Run',
+        y='scaled_impact',
+        color='ef_name',
+        barmode='stack',
+        labels={
+            'ef_name': 'Elementary flow',
+            'scaled_impact': f'{full_name_ind[obj_name_dict[short_name]]} [{unit_ind_dict[obj_name_dict[short_name]]}/cap]',
+            'Run': 'Objective function',
+        },
+        width=550,
+        height=350,
+    )
+
+    fig.update_layout(legend_traceorder='reversed')
+
+    fig.update_layout(
+        margin=dict(l=20, r=20, t=20, b=20),  # left, right, top, bottom
+    )
+
+    if save_fig:
+        fig.write_image(f"./figures/soo_ef_contrib_{aop.replace('Total ', '').replace(' ', '_')}.pdf")
+
+    fig.show()
