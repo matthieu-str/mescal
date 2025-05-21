@@ -138,6 +138,37 @@ impact_category_eq_colors = {
     'Water availability, terrestrial ecosystem': '#66C2A5',  # Light teal
 }
 
+elementary_flow_colors = {
+    # Greenhouse gases
+    'Carbon dioxide, fossil': '#0072B2',  # Dark blue
+    'Methane, fossil': '#56B4E9',         # Light blue
+    'Tetrafluoromethane': '#4682B4',      # Steel blue
+
+    # Air pollutants
+    'Sulfur dioxide': '#999933',          # Olive green
+    'Nitrogen oxides': '#D55E00',         # Burnt orange
+    'Particulate Matter, < 2.5 um': '#7F7F7F',  # Medium grey
+
+    # Metals and ions
+    'Aluminium III': '#A9A9A9',           # Dark grey
+    'Chromium III': '#696969',            # Dim grey
+    'Chromium VI': '#8B8B8B',             # Slightly lighter grey
+    'Copper ion': '#B87333',              # Copper
+    'Iron ion': '#8B0000',                # Dark red
+    'Lead II': '#6E6E6E',                 # Graphite grey
+    'Mercury II': '#5E5E5E',              # Charcoal grey
+    'Cadmium II': '#B0C4DE',              # Light steel blue
+    'Silver I': '#C0C0C0',                # Silver
+
+    # Land/water
+    'Land occupation': '#A65628',         # Rust brown
+    'Land transformation': '#E6AB02',     # Mustard yellow
+    'Water': '#009E73',                   # Teal green
+
+    # Catch-all
+    'Other': '#D9B382',                   # Light tan
+}
+
 
 def run_esm(
         objective_function: str = 'TotalCost',
@@ -435,6 +466,8 @@ def plot_ef_contributions(
     fig.update_layout(
         margin=dict(l=20, r=20, t=20, b=20),  # left, right, top, bottom
     )
+
+    fig.for_each_trace(lambda t: t.update(marker_color=elementary_flow_colors.get(t.name, '#000000')))
 
     if save_fig:
         fig.write_image(f"./figures/soo_ef_contrib_{aop.replace('Total ', '').replace(' ', '_')}.pdf")
