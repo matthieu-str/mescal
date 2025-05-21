@@ -425,7 +425,15 @@ class Database:
             relink_db = Database(name_database_relink)
         else:
             raise ValueError("'name_database_relink' or 'database_relink_as_list' must be provided")
-        name_database_relink = relink_db.db_names[0]
+
+        if name_database_relink is None:
+            if isinstance(relink_db.db_names, str):
+                name_database_relink = relink_db.db_names
+            else:
+                if len(relink_db.db_names) > 1:
+                    raise ValueError('More than one database to relink, please provide a name')
+                else:
+                    name_database_relink = relink_db.db_names[0]
         db_relink_dict_code = relink_db.list_to_dict('code')
 
         if name_new_db is None:
