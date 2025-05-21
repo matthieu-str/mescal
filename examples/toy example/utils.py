@@ -6,6 +6,9 @@ from energyscope.energyscope import Energyscope
 from energyscope.result import postprocessing
 import plotly.express as px
 import plotly.io as pio
+import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches
+import numpy as np
 
 pio.templates["custom"] = pio.templates["plotly_white"]
 pio.templates["custom"].layout.font.family = "Arial"
@@ -67,6 +70,13 @@ unit_ind_dict = {
     'Climate change, short term': 't CO<sub>2</sub>-eq',
     'Total human health': 'DALY',
     'Total ecosystem quality': 'PDF.m<sup>2</sup>.yr',
+}
+
+unit_ind_mpl_dict = {
+    'Total cost': 'credits',
+    'Climate change, short term': 't CO$_2$-eq',
+    'Total human health': 'DALY',
+    'Total ecosystem quality': 'PDF.m$^2$.yr',
 }
 
 tech_name_dict = {
@@ -272,6 +282,8 @@ def get_impact_scores(
         return df_annual_prod
 
 
+plt.rcParams['hatch.linewidth'] = 0.5  # Set hatch line width to 0.5
+
 def plot_technologies_contribution(
         cat: str,
         esm_results_annual_prod: pd.DataFrame,
@@ -287,11 +299,18 @@ def plot_technologies_contribution(
         esm_results_annual_res['Total cost'] = esm_results_annual_res['C_op']
         esm_results_annual_prod['Total cost'] = 0
 
-    esm_results_total = pd.concat([
-        esm_results_annual_prod[['Name', 'Run', cat]],
-        esm_results_annual_res[['Name', 'Run', cat]],
-        esm_results_f_mult[['Name', 'Run', cat]],
-    ]).groupby(['Name', 'Run']).sum().reset_index()
+    if cat != 'Total cost':
+        esm_results_total = pd.concat([
+            esm_results_annual_prod[['Name', 'Run', cat, f'{cat} (direct)']],
+            esm_results_annual_res[['Name', 'Run', cat, f'{cat} (direct)']],
+            esm_results_f_mult[['Name', 'Run', cat, f'{cat} (direct)']],
+        ]).groupby(['Name', 'Run']).sum().reset_index()
+    else:
+        esm_results_total = pd.concat([
+            esm_results_annual_prod[['Name', 'Run', cat]],
+            esm_results_annual_res[['Name', 'Run', cat]],
+            esm_results_f_mult[['Name', 'Run', cat]],
+        ]).groupby(['Name', 'Run']).sum().reset_index()
 
     esm_results_total['Run'] = esm_results_total['Run'].apply(lambda x: obj_code_dict[x])
     esm_results_total.drop(esm_results_total[~esm_results_total['Name'].isin(tech_to_show_list)].index, inplace=True)
@@ -302,41 +321,89 @@ def plot_technologies_contribution(
     if cat == 'Climate change, short term':  # from kg CO2 eq to t CO2 eq
         esm_results_total[cat] = esm_results_total[cat] * 1e-3
 
-    fig = px.bar(
-        esm_results_total,
-        x='Run',
-        y=cat,
-        color='Name',
-        barmode='stack',
-        labels={'Run': 'Objective function', 'Name': 'Energy technology or resource', cat: f'{full_name_ind[cat]} [{unit_ind_dict[cat]}/cap]'},
-        height=370,
-        width=390,
-    )
+    if cat != 'Total cost':
+        esm_results_total[f'{cat} (direct)'] = esm_results_total[f'{cat} (direct)'] / N_cap
+        esm_results_total[f'{cat} (direct)'] *= 1e6
+        if cat == 'Climate change, short term':  # from kg CO2 eq to t CO2 eq
+            esm_results_total[f'{cat} (direct)'] = esm_results_total[f'{cat} (direct)'] * 1e-3
 
-    fig.for_each_trace(lambda t: t.update(marker_color=color_dict.get(t.name, '#000000')))
-    # fig.update_layout(template='plotly_white')
+    # Pivot for stacking
+    data_pivot = esm_results_total.pivot(index='Run', columns='Name', values=cat).fillna(0)
 
-    if not show_legend:
-        fig.update_layout(showlegend=False)
-    else:
-        fig.update_layout(
-            legend=dict(
-                orientation="h",  # Horizontal legend
-                yanchor="bottom",
-                y=-0.2,  # Adjusts the vertical position
-                xanchor="center",
-                x=0.5  # Centers the legend horizontally
+    if cat != 'Total cost':
+        direct_pivot = esm_results_total.pivot(index='Run', columns='Name', values=f'{cat} (direct)').fillna(0)
+
+    # Desired order
+    run_order = ['TC', 'TTEQ', 'TTHH', 'CCST']
+
+    # Reorder the index
+    data_pivot = data_pivot.reindex(run_order)
+
+    if cat != 'Total cost':
+        direct_pivot = direct_pivot.reindex(run_order)
+
+    fig, ax = plt.subplots(figsize=(4.5, 4))
+    bottom = np.zeros(len(data_pivot))
+    x = np.arange(len(data_pivot.index))
+
+    for i, tech in enumerate(data_pivot.columns):
+        values = data_pivot[tech].values
+        if cat != 'Total cost':
+            direct_values = direct_pivot[tech].values
+            remainder = values - direct_values
+            # Plot direct (hatch)
+            bars_direct = ax.bar(
+                x, direct_values, bottom=bottom,
+                color=color_dict.get(tech, '#000000'),
+                label=None,
+                edgecolor='black',
+                linewidth=0.5,
+                hatch='//',
             )
+            # Plot remainder (no hatch)
+            bars_remainder = ax.bar(
+                x, remainder, bottom=bottom + direct_values,
+                color=color_dict.get(tech, '#000000'),
+                label=tech,
+                edgecolor='black',
+                linewidth=0.5,
+            )
+            bottom += values
+        else:
+            bars = ax.bar(
+                x, values, bottom=bottom,
+                color=color_dict.get(tech, '#000000'),
+                label=tech,
+                edgecolor='black',
+                linewidth=0.5,
+            )
+            bottom += values
+
+    if cat != 'Total cost':
+        hatch_proxy = mpatches.Patch(
+            facecolor='white', edgecolor='black', hatch='//', linewidth=0.5, label='Covered in ESM'
         )
+        legend = ax.legend([hatch_proxy], ['Covered in ESM'], loc='upper right', frameon=True)
+        legend.get_frame().set_edgecolor('white')
+    elif show_legend:
+        legend = ax.legend()
+        legend.get_frame().set_edgecolor('white')
 
-    fig.update_layout(
-        margin=dict(l=20, r=20, t=20, b=20),  # left, right, top, bottom
-    )
+    ax.set_xticks(x)
+    ax.set_xticklabels(data_pivot.index)
+    ax.set_xlabel('Objective function')
+    ax.set_ylabel(f"{full_name_ind[cat]} [{unit_ind_mpl_dict[cat]}/cap]")
 
-    if save_fig:  # save as pdf
-        fig.write_image(f"./figures/soo_tech_contrib_{cat.lower().replace(' ', '_').replace(',','')}.pdf")
+    # Increase y-axis range with margin (e.g., 10% above max)
+    ymax = bottom.max() * 1.05
+    ax.set_ylim(0, ymax)
 
-    fig.show()
+    if show_legend:
+        ax.legend()
+    plt.tight_layout()
+    if save_fig:
+        plt.savefig(f'./figures/soo_tech_contrib_{cat.lower().replace(" ", "_").replace(",", "")}.pdf')
+    plt.show()
 
 
 def plot_ef_contributions(
