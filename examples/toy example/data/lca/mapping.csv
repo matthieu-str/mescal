@@ -19,4 +19,6 @@ GRID,Construction,"transmission network, electricity, high voltage direct curren
 COAL,Resource,hard coal,market for hard coal,RoW,kilogram,ecoinvent_cutoff_3.10.1_image_SSP2-Base_2050
 NG,Resource,"natural gas, high pressure","market for natural gas, high pressure",RoW,cubic meter,ecoinvent_cutoff_3.10.1_image_SSP2-Base_2050
 URANIUM,Resource,"nuclear fuel element, for pressure water reactor, UO2 4.2% & MOX","market for nuclear fuel element, for pressure water reactor, UO2 4.2% & MOX",GLO,kilogram,ecoinvent_cutoff_3.10.1_image_SSP2-Base_2050
-ELECTRICITY,Flow,"electricity, high voltage","market for electricity, high voltage",SA,kilowatt hour,ecoinvent_cutoff_3.10.1_image_SSP2-Base_2050
+ELECTRICITY,Flow,"electricity, high voltage","market group for electricity, high voltage",World,kilowatt hour,ecoinvent_cutoff_3.10.1_image_SSP2-Base_2050
+ELECTRICITY,Flow,"electricity, medium voltage","market group for electricity, medium voltage",World,kilowatt hour,ecoinvent_cutoff_3.10.1_image_SSP2-Base_2050
+ELECTRICITY,Flow,"electricity, low voltage","market group for electricity, low voltage",World,kilowatt hour,ecoinvent_cutoff_3.10.1_image_SSP2-Base_2050
