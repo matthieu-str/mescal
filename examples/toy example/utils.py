@@ -540,3 +540,56 @@ def plot_ef_contributions(
         fig.write_image(f"./figures/soo_ef_contrib_{aop.replace('Total ', '').replace(' ', '_')}.pdf")
 
     fig.show()
+
+
+def plot_energy_system_configuration(
+        type: str,
+        df_res: pd.DataFrame,
+        save_fig: bool = False,
+):
+    df = df_res[~df_res['Name'].isin(['GRID', 'BATTERY'])]
+    df["Run"] = df["Run"].apply(lambda x: obj_code_dict[x])
+    df["Name"] = df["Name"].apply(
+        lambda x: tech_name_dict[x] if x in tech_name_dict.keys() else x)
+
+    if type == 'capacity':
+        y = 'F_Mult'
+        file_name = 'soo_installed_capacities'
+        legend = 'Installed capacity [GW]'
+    elif type == 'production':
+        y = 'Annual_Prod'
+        file_name = 'soo_annual_production'
+        legend = 'Annual production [GWh]'
+    else:
+        raise ValueError("type must be 'capacity' or 'production'")
+
+    fig = px.bar(
+        df,
+        color='Name',
+        y=y,
+        x='Run',
+        barmode='stack',
+        labels={
+            y: legend,
+            'Name': 'Technology',
+            'Run': 'Objective function',
+        },
+        width=350,
+        height=310,
+        category_orders={'Run': ['TC', 'TTEQ', 'TTHH', 'CCST']},  # desired order
+    )
+
+    fig.update_layout(legend_traceorder='reversed')
+    fig.update_layout(showlegend=False)
+
+    fig.update_layout(
+        margin=dict(l=20, r=20, t=20, b=20),  # left, right, top, bottom
+    )
+    fig.update_traces(marker_line_color='black', marker_line_width=0.5)
+
+    fig.for_each_trace(lambda t: t.update(marker_color=color_dict.get(t.name, '#000000')))
+
+    if save_fig:
+        fig.write_image(f"./figures/{file_name}.pdf")
+
+    fig.show()
