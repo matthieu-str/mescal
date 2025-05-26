@@ -232,6 +232,24 @@ def run_esm(
         return results
 
 
+def update_scenario_file(
+        run: str,
+        df_f_mult: pd.DataFrame,
+):
+
+    with open(path_model + 'scenario.dat', 'r') as f:
+        lines = f.readlines()
+
+    existing_capacities = df_f_mult[df_f_mult['Run'] == run][['Name', 'F_Mult']]
+    for i in range(len(existing_capacities)):
+        tech = existing_capacities.iloc[i]['Name']
+        cap = existing_capacities.iloc[i]['F_Mult']
+        lines[i] = f"let f_min['{tech}'] := {cap} ;\n"
+
+    with open(path_model + 'scenario.dat', 'w') as f:
+        f.writelines(lines)
+
+
 def get_impact_scores(
         impact_category: tuple or list[tuple],
         df_impact_scores: pd.DataFrame,
