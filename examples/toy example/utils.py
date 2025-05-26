@@ -182,26 +182,34 @@ elementary_flow_colors = {
 
 def run_esm(
         objective_function: str = 'TotalCost',
-        returns: str = 'results'
+        scenario: bool = False,
+        returns: str = 'results',
 ):
 
     with open(path_model + 'objective_function.mod', 'w') as f:
         f.write(f'minimize obj: {objective_function};')
 
+    mod_files = [
+        path_model + 'main.mod',
+        path_model_lca + 'objectives_lca.mod',
+        path_model_lca + 'objectives_lca_direct.mod',
+        path_model + 'objective_function.mod',
+    ]
+
+    dat_files = [
+        path_model + 'data.dat',
+        path_model + 'techs.dat',
+        path_model_lca + 'techs_lca.dat',
+        path_model_lca + 'techs_lca_direct.dat',
+    ]
+
+    if scenario:
+        dat_files.append(path_model + 'scenario.dat')
+
     # Initialize the model with .mod and .dat files
     model = Model(
-        mod_files=[
-            path_model + 'main.mod',
-            path_model_lca + 'objectives_lca.mod',
-            path_model_lca + 'objectives_lca_direct.mod',
-            path_model + 'objective_function.mod',
-        ],
-        dat_files=[
-            path_model + 'data.dat',
-            path_model + 'techs.dat',
-            path_model_lca + 'techs_lca.dat',
-            path_model_lca + 'techs_lca_direct.dat',
-        ],
+        mod_files=mod_files,
+        dat_files=dat_files,
     )
 
     # Define the solver options
