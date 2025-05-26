@@ -630,3 +630,122 @@ def plot_energy_system_configuration(
         fig.write_image(f"./figures/{file_name}.pdf")
 
     fig.show()
+
+
+def harmonization_level(run):
+    if 'esm_harmonized' in run:
+        return 'ESM-H'
+    elif 'esm_not_harmonized' in run:
+        return 'ESM-NH'
+    elif 'base' in run:
+        return 'Base'
+    else:
+        raise ValueError('Unknown run')
+    
+
+def plot_energy_system_configuration_second_iteration(
+        df_res: pd.DataFrame,
+        type: str = 'capacity',
+        save_fig: bool = False,
+):
+
+    if type == 'capacity':
+        type_var = 'F_Mult'
+        show_var = 'F_Mult_new'
+        y_label_name = 'New installed capacity [GW]'
+        file_name = 'soo_installed_capacities_second_iteration'
+    elif type == 'production':
+        type_var = 'Annual_Prod'
+        show_var = 'Annual_Prod'
+        y_label_name = 'Total annual production [GWh]'
+        file_name = 'soo_annual_production_second_iteration'
+    else:
+        raise ValueError("type must be 'capacity' or 'production'")
+
+    run_first_it = ['TotalCost', 'TotalLCIA_m_CCS', 'TotalLCIA_TTHH', 'TotalLCIA_TTEQ']
+    run_second_it = [i for i in df_res.Run.unique() if i not in run_first_it]
+
+    df_res = df_res[~df_res.Name.isin(['BATTERY', 'GRID'])]
+    
+    df_res_sec_iter = df_res[df_res.Run.isin(run_second_it)]
+    df_res_sec_iter['Background database'] = df_res_sec_iter.Run.apply(harmonization_level)
+
+    df_res_sec_iter['Run'] = df_res_sec_iter['Run'].apply(lambda x: x.replace('_base', ''))
+    df_res_sec_iter['Run'] = df_res_sec_iter['Run'].apply(lambda x: x.replace('_esm_harmonized', ''))
+    df_res_sec_iter['Run'] = df_res_sec_iter['Run'].apply(lambda x: x.replace('_esm_not_harmonized', ''))
+
+    df_res_sec_iter = df_res_sec_iter.merge(
+        df_res[df_res.Run.isin(run_first_it)][['Run', 'Name', type_var]],
+        on=['Run', 'Name'],
+        how='left',
+        suffixes=('', '_existing')
+    )
+    df_res_sec_iter[f'{type_var}_new'] = df_res_sec_iter[type_var] - df_res_sec_iter[f'{type_var}_existing']
+
+    df_res_sec_iter['Run'] = df_res_sec_iter['Run'].apply(lambda x: obj_code_dict[x] if x in obj_code_dict else x)
+    df_res_sec_iter['Name'] = df_res_sec_iter['Name'].apply(lambda x: tech_name_dict[x] if x in tech_name_dict else x)
+    
+    names = df_res_sec_iter['Name'].unique()
+    backgrounds = df_res_sec_iter['Background database'].unique()
+    runs = df_res_sec_iter['Run'].unique()
+
+    data = np.zeros((len(runs), len(backgrounds), len(names)))
+    for i, run in enumerate(runs):
+        for j, bg in enumerate(backgrounds):
+            for k, name in enumerate(names):
+                val = df_res_sec_iter[
+                    (df_res_sec_iter['Run'] == run) &
+                    (df_res_sec_iter['Background database'] == bg) &
+                    (df_res_sec_iter['Name'] == name)
+                    ][show_var]
+                data[i, j, k] = val.values[0] if not val.empty else 0
+
+    fig, ax = plt.subplots(figsize=(5, 4.5))
+    bar_width = 0.2
+    desired_order = ['TC', 'TTEQ', 'TTHH', 'CCST']
+    runs = [run for run in desired_order if run in runs]
+    x = np.arange(len(runs))
+    ax.set_xticks(x)
+    ax.set_xticklabels(runs)
+
+    for j, bg in enumerate(backgrounds):
+        bottom = np.zeros(len(runs))
+        for k, name in enumerate(names):
+            ax.bar(
+                x + (j - 1) * bar_width,
+                data[:, j, k],
+                bar_width,
+                bottom=bottom,
+                color=color_dict.get(name, '#000000'),
+                label=name if j == 0 else None,
+                edgecolor='black',
+                linewidth=0.5,
+            )
+            bottom += data[:, j, k]
+        # Add background label below bars
+        for i, run in enumerate(runs):
+            xpos = x[i] + (j - 1) * bar_width
+            ax.text(
+                xpos,
+                -max(data.flatten()) * 0.05,
+                bg,
+                ha='center',
+                va='top',
+                fontsize=9,
+                rotation=90,
+            )
+
+    ax.set_xticks(x)
+    ax.tick_params(axis='x', length=0)
+    ax.set_xticklabels(runs)
+    ax.set_xlabel('Objective function', labelpad=10)
+    ax.set_ylabel(y_label_name)
+    y_max = ax.get_ylim()[1]
+    ax.set_ylim(0, y_max * 1.05)
+
+    ax.tick_params(axis='x', pad=55)
+
+    plt.tight_layout()
+    if save_fig:
+        plt.savefig(f'./figures/{file_name}.pdf')
+    plt.show()
