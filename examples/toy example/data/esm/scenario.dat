@@ -1,0 +1,14 @@
+let f_min['BATTERY'] := 0.7415835490183701 ;
+let f_min['CCGT'] := 0.0 ;
+let f_min['CCGT_CC'] := 0.4585669570523746 ;
+let f_min['COAL_IGCC'] := 0.0 ;
+let f_min['COAL_IGCC_CC'] := 0.0 ;
+let f_min['GRID'] := 0.0 ;
+let f_min['NUCLEAR'] := 0.0 ;
+let f_min['PV'] := 0.0 ;
+let f_min['WIND_ONSHORE'] := 2.471945163394567 ;
+
+
+let end_uses_demand_year['ELECTRICITY','HOUSEHOLDS'] := 1e3 * 0.7 ;
+let end_uses_demand_year['HEAT_LOW_T_SC','HOUSEHOLDS'] := 1e3 * 0.2 ;
+let end_uses_demand_year['LIGHTING','HOUSEHOLDS'] := 1e3 * 0.1 ;
