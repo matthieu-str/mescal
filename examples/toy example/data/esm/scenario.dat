@@ -9,6 +9,6 @@ let f_min['PV'] := 0.0 ;
 let f_min['WIND_ONSHORE'] := 2.471945163394567 ;
 
 
-let end_uses_demand_year['ELECTRICITY','HOUSEHOLDS'] := 1e3 * 0.7 ;
-let end_uses_demand_year['HEAT_LOW_T_SC','HOUSEHOLDS'] := 1e3 * 0.2 ;
-let end_uses_demand_year['LIGHTING','HOUSEHOLDS'] := 1e3 * 0.1 ;
+let end_uses_demand_year['ELECTRICITY','INDUSTRY'] := 1e3 * 0.7 ;
+let end_uses_demand_year['HEAT_LOW_T_SC','INDUSTRY'] := 1e3 * 0.2 ;
+let end_uses_demand_year['LIGHTING','INDUSTRY'] := 1e3 * 0.1 ;
