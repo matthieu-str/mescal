@@ -183,6 +183,7 @@ elementary_flow_colors = {
 def run_esm(
         objective_function: str = 'TotalCost',
         scenario: bool = False,
+        lca_metrics_background: str = 'base',
         returns: str = 'results',
 ):
 
@@ -192,16 +193,26 @@ def run_esm(
     mod_files = [
         path_model + 'main.mod',
         path_model_lca + 'objectives_lca.mod',
-        path_model_lca + 'objectives_lca_direct.mod',
         path_model + 'objective_function.mod',
     ]
 
     dat_files = [
         path_model + 'data.dat',
         path_model + 'techs.dat',
-        path_model_lca + 'techs_lca.dat',
-        path_model_lca + 'techs_lca_direct.dat',
     ]
+
+    if lca_metrics_background == 'base':
+        dat_files.append(path_model_lca + 'techs_lca.dat')
+        dat_files.append(path_model_lca + 'techs_lca_direct.dat')
+        mod_files.append(path_model_lca + 'objectives_lca_direct.mod')
+    elif lca_metrics_background == 'esm_not_harmonized':
+        run = objective_function.replace("Total", "").replace("LCIA_", "").lower()
+        dat_files.append(path_model_lca + f'esm_results/techs_lca_{run}_wo_harmonization.dat')
+    elif lca_metrics_background == 'esm_harmonized':
+        run = objective_function.replace("Total", "").replace("LCIA_", "").lower()
+        dat_files.append(path_model_lca + f'esm_results/techs_lca_{run}.dat')
+    else:
+        raise ValueError("lca_metrics_background must be 'base', 'esm_not_harmonized' or 'esm_harmonized'")
 
     if scenario:
         dat_files.append(path_model + 'scenario.dat')
