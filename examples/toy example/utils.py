@@ -319,34 +319,34 @@ def get_impact_scores(
         return df_annual_prod
 
 
-plt.rcParams['hatch.linewidth'] = 0.5  # Set hatch line width to 0.5
-
-def plot_technologies_contribution(
+def aggregate_phases_results(
         cat: str,
         esm_results_annual_prod: pd.DataFrame,
         esm_results_annual_res: pd.DataFrame,
         esm_results_f_mult: pd.DataFrame,
         tech_to_show_list: list,
-        save_fig: bool = False,
-        show_legend: bool = False,
 ):
-
     if cat == 'Total cost':
         esm_results_f_mult['Total cost'] = esm_results_f_mult['C_inv_an'] + esm_results_f_mult['C_maint']
         esm_results_annual_res['Total cost'] = esm_results_annual_res['C_op']
         esm_results_annual_prod['Total cost'] = 0
 
+    col_to_keep = ['Name', 'Run', cat]
     if cat != 'Total cost':
+        col_to_keep.append(f'{cat} (direct)')
+
+    if 'Background database' in esm_results_f_mult.columns:
+        col_to_keep.append('Background database')
         esm_results_total = pd.concat([
-            esm_results_annual_prod[['Name', 'Run', cat, f'{cat} (direct)']],
-            esm_results_annual_res[['Name', 'Run', cat, f'{cat} (direct)']],
-            esm_results_f_mult[['Name', 'Run', cat, f'{cat} (direct)']],
-        ]).groupby(['Name', 'Run']).sum().reset_index()
+            esm_results_annual_prod[col_to_keep],
+            esm_results_annual_res[col_to_keep],
+            esm_results_f_mult[col_to_keep],
+        ]).groupby(['Name', 'Run', 'Background database']).sum().reset_index()
     else:
         esm_results_total = pd.concat([
-            esm_results_annual_prod[['Name', 'Run', cat]],
-            esm_results_annual_res[['Name', 'Run', cat]],
-            esm_results_f_mult[['Name', 'Run', cat]],
+            esm_results_annual_prod[col_to_keep],
+            esm_results_annual_res[col_to_keep],
+            esm_results_f_mult[col_to_keep],
         ]).groupby(['Name', 'Run']).sum().reset_index()
 
     esm_results_total['Run'] = esm_results_total['Run'].apply(lambda x: obj_code_dict[x])
@@ -363,6 +363,29 @@ def plot_technologies_contribution(
         esm_results_total[f'{cat} (direct)'] *= 1e6
         if cat == 'Climate change, short term':  # from kg CO2 eq to t CO2 eq
             esm_results_total[f'{cat} (direct)'] = esm_results_total[f'{cat} (direct)'] * 1e-3
+
+    return esm_results_total
+
+
+plt.rcParams['hatch.linewidth'] = 0.5  # Set hatch line width to 0.5
+
+def plot_technologies_contribution(
+        cat: str,
+        esm_results_annual_prod: pd.DataFrame,
+        esm_results_annual_res: pd.DataFrame,
+        esm_results_f_mult: pd.DataFrame,
+        tech_to_show_list: list,
+        save_fig: bool = False,
+        show_legend: bool = False,
+):
+
+    esm_results_total = aggregate_phases_results(
+        cat,
+        esm_results_annual_prod,
+        esm_results_annual_res,
+        esm_results_f_mult,
+        tech_to_show_list,
+    )
 
     # Pivot for stacking
     data_pivot = esm_results_total.pivot(index='Run', columns='Name', values=cat).fillna(0)
@@ -640,18 +663,19 @@ def harmonization_level(run):
     elif 'base' in run:
         return 'Base'
     else:
-        raise ValueError('Unknown run')
+        raise ValueError(f'Unknown run {run}')
     
 
-def plot_energy_system_configuration_second_iteration(
+def plot_technologies_contribution_second_iteration(
         df_res: pd.DataFrame,
         type: str = 'capacity',
         save_fig: bool = False,
+        cat: str = None,
 ):
 
     if type == 'capacity':
         type_var = 'F_Mult'
-        show_var = 'F_Mult_new'
+        show_var = 'F_Mult'
         y_label_name = 'New installed capacity [GW]'
         file_name = 'soo_installed_capacities_second_iteration'
     elif type == 'production':
@@ -659,35 +683,52 @@ def plot_energy_system_configuration_second_iteration(
         show_var = 'Annual_Prod'
         y_label_name = 'Total annual production [GWh]'
         file_name = 'soo_annual_production_second_iteration'
+    elif type == 'impact':
+        if cat is None:
+            raise ValueError("cat must be defined for impact type")
+        else:
+            type_var = None
+            show_var = cat
+            y_label_name = f'{full_name_ind[cat]} [{unit_ind_mpl_dict[cat]}/cap]'
+            file_name = f"soo_{cat.replace(' ', '_').replace(',', '').lower()}_second_iteration"
     else:
-        raise ValueError("type must be 'capacity' or 'production'")
+        raise ValueError("type must be 'impact', 'capacity' or 'production'")
 
     run_first_it = ['TotalCost', 'TotalLCIA_m_CCS', 'TotalLCIA_TTHH', 'TotalLCIA_TTEQ']
     run_second_it = [i for i in df_res.Run.unique() if i not in run_first_it]
 
-    df_res = df_res[~df_res.Name.isin(['BATTERY', 'GRID'])]
-    
-    df_res_sec_iter = df_res[df_res.Run.isin(run_second_it)]
-    df_res_sec_iter['Background database'] = df_res_sec_iter.Run.apply(harmonization_level)
+    if type != 'impact':
+        df_res = df_res[~df_res.Name.isin(['BATTERY', 'GRID'])]
 
-    df_res_sec_iter['Run'] = df_res_sec_iter['Run'].apply(lambda x: x.replace('_base', ''))
-    df_res_sec_iter['Run'] = df_res_sec_iter['Run'].apply(lambda x: x.replace('_esm_harmonized', ''))
-    df_res_sec_iter['Run'] = df_res_sec_iter['Run'].apply(lambda x: x.replace('_esm_not_harmonized', ''))
+        df_res_sec_iter = df_res[df_res.Run.isin(run_second_it)]
+        df_res_sec_iter['Background database'] = df_res_sec_iter.Run.apply(harmonization_level)
 
-    df_res_sec_iter = df_res_sec_iter.merge(
-        df_res[df_res.Run.isin(run_first_it)][['Run', 'Name', type_var]],
-        on=['Run', 'Name'],
-        how='left',
-        suffixes=('', '_existing')
-    )
-    df_res_sec_iter[f'{type_var}_new'] = df_res_sec_iter[type_var] - df_res_sec_iter[f'{type_var}_existing']
+        df_res_sec_iter['Run'] = df_res_sec_iter['Run'].apply(lambda x: x.replace('_base', ''))
+        df_res_sec_iter['Run'] = df_res_sec_iter['Run'].apply(lambda x: x.replace('_esm_harmonized', ''))
+        df_res_sec_iter['Run'] = df_res_sec_iter['Run'].apply(lambda x: x.replace('_esm_not_harmonized', ''))
 
-    df_res_sec_iter['Run'] = df_res_sec_iter['Run'].apply(lambda x: obj_code_dict[x] if x in obj_code_dict else x)
-    df_res_sec_iter['Name'] = df_res_sec_iter['Name'].apply(lambda x: tech_name_dict[x] if x in tech_name_dict else x)
+        df_res_sec_iter = df_res_sec_iter.merge(
+            df_res[df_res.Run.isin(run_first_it)][['Run', 'Name', type_var]],
+            on=['Run', 'Name'],
+            how='left',
+            suffixes=('', '_existing')
+        )
+        df_res_sec_iter[f'{type_var}_new'] = df_res_sec_iter[type_var] - df_res_sec_iter[f'{type_var}_existing']
+
+        df_res_sec_iter['Run'] = df_res_sec_iter['Run'].apply(lambda x: obj_code_dict[x] if x in obj_code_dict else x)
+        df_res_sec_iter['Name'] = df_res_sec_iter['Name'].apply(lambda x: tech_name_dict[x] if x in tech_name_dict else x)
+
+    else:
+        df_res_sec_iter = df_res.copy()
     
     names = df_res_sec_iter['Name'].unique()
     backgrounds = df_res_sec_iter['Background database'].unique()
     runs = df_res_sec_iter['Run'].unique()
+
+    desired_order_runs = ['TC', 'TTEQ', 'TTHH', 'CCST']
+    runs = [run for run in desired_order_runs if run in runs]
+    desired_order_backgrounds = ['Base', 'ESM-NH', 'ESM-H']
+    backgrounds = [bg for bg in desired_order_backgrounds if bg in backgrounds]
 
     data = np.zeros((len(runs), len(backgrounds), len(names)))
     for i, run in enumerate(runs):
@@ -700,10 +741,8 @@ def plot_energy_system_configuration_second_iteration(
                     ][show_var]
                 data[i, j, k] = val.values[0] if not val.empty else 0
 
-    fig, ax = plt.subplots(figsize=(5, 4.5))
+    fig, ax = plt.subplots(figsize=(4.3, 4.5))
     bar_width = 0.2
-    desired_order = ['TC', 'TTEQ', 'TTHH', 'CCST']
-    runs = [run for run in desired_order if run in runs]
     x = np.arange(len(runs))
     ax.set_xticks(x)
     ax.set_xticklabels(runs)
