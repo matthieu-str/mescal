@@ -1,6 +1,7 @@
 import pandas as pd
 import ast
 from .database import Dataset
+from pathlib import Path
 
 
 def correct_esm_and_lca_efficiency_differences(
@@ -179,6 +180,7 @@ def correct_esm_and_lca_efficiency_differences(
 
     if write_efficiency_report:
         # saving the efficiency differences in a csv file
+        Path(self.results_path_file).mkdir(parents=True, exist_ok=True)  # Create the folder if it does not exist
         efficiency.to_csv(f'{self.results_path_file}efficiency_differences.csv', index=False)
 
 
