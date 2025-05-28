@@ -465,6 +465,17 @@ def plot_technologies_contribution(
         plt.savefig(f'./figures/soo_tech_contrib_{cat.lower().replace(" ", "_").replace(",", "")}.pdf')
     plt.show()
 
+    if cat != 'Total cost':
+        df = pd.merge(
+            data_pivot.sum(axis=1).rename('Life-cycle'),
+            direct_pivot.sum(axis=1).rename('Direct'),
+            left_index=True,
+            right_index=True,
+        )
+        df['Covered in ESM'] = df['Direct'] / df['Life-cycle']
+
+        return df
+
 
 def plot_ef_contributions(
         df_contrib_analysis_ef: pd.DataFrame,
@@ -788,3 +799,14 @@ def plot_technologies_contribution_second_iteration(
     if save_fig:
         plt.savefig(f'./figures/{file_name}.pdf')
     plt.show()
+
+    if cat is not None:
+        df = df_res_sec_iter[['Name', 'Run', 'Background database', cat]]
+        df = df.pivot_table(
+            index='Run',
+            columns='Background database',
+            values=cat,
+            aggfunc='sum',
+        )
+        df['Harmonization effect'] = (df['ESM-H'] - df['ESM-NH']) / df['ESM-NH']
+        return df['Harmonization effect']
