@@ -78,6 +78,7 @@ def compute_impact_scores(
     esm_db_name = self.esm_db_name
     unit_conversion = self.unit_conversion
     lifetime = self.lifetime
+    technology_compositions = self.technology_compositions
 
     esm_db = Database(db_names=esm_db_name)
     esm_db_dict_code = esm_db.db_as_dict_code
@@ -270,26 +271,26 @@ def compute_impact_scores(
 
     # Reading the list of subcomponents as a list (and not as a string)
     try:
-        self.technology_compositions.Components = self.technology_compositions.Components.apply(ast.literal_eval)
+        technology_compositions.Components = technology_compositions.Components.apply(ast.literal_eval)
     except ValueError:
         pass
 
     # Maximum length of list of subcomponents
-    N_subcomp_max = max(len(i) for i in self.technology_compositions.Components)
+    N_subcomp_max = max(len(i) for i in technology_compositions.Components)
 
-    self.technology_compositions['Type'] = len(self.technology_compositions) * ['Construction']
+    technology_compositions['Type'] = len(technology_compositions) * ['Construction']
     # Associate new code to composition of technologies (this code does not correspond to any activity in the database,
     # it is only used as an identifier for the user)
-    self.technology_compositions['New_code'] = self.technology_compositions.apply(lambda row: random_code(), axis=1)
+    technology_compositions['New_code'] = technology_compositions.apply(lambda row: random_code(), axis=1)
 
-    for i in range(len(self.technology_compositions)):
-        for j in range(len(self.technology_compositions.Components.iloc[i])):
-            self.technology_compositions.loc[i, 'Component_' + str(j + 1)] = self.technology_compositions.Components.iloc[i][j]
+    for i in range(len(technology_compositions)):
+        for j in range(len(technology_compositions.Components.iloc[i])):
+            technology_compositions.loc[i, 'Component_' + str(j + 1)] = technology_compositions.Components.iloc[i][j]
 
     # Find the new codes of the subcomponents
     for i in range(1, N_subcomp_max + 1):
-        self.technology_compositions = pd.merge(
-            left=self.technology_compositions,
+        technology_compositions = pd.merge(
+            left=technology_compositions,
             right=mapping[mapping.Type == 'Construction'][['Name', 'New_code']],
             left_on=f'Component_{i}',
             right_on='Name',
@@ -298,15 +299,15 @@ def compute_impact_scores(
         ).drop(columns=f'Name_component_{i}')
 
     df_comp_list = []  # list to store the contribution analysis results for each technology composition
-    for i in range(len(self.technology_compositions)):
-        tech_name = self.technology_compositions.iloc[i].Name
-        subcomp_list = self.technology_compositions.iloc[i].Components
-        new_code_composition = self.technology_compositions.iloc[i].New_code
+    for i in range(len(technology_compositions)):
+        tech_name = technology_compositions.iloc[i].Name
+        subcomp_list = technology_compositions.iloc[i].Components
+        new_code_composition = technology_compositions.iloc[i].New_code
         R_tech_constr[new_code_composition] = len(impact_categories) * [0]  # initialize the new column
 
         for j in range(1, len(subcomp_list) + 1):
             R_tech_constr[new_code_composition] += R_tech_constr[
-                self.technology_compositions.iloc[i][f'New_code_component_{j}']
+                technology_compositions.iloc[i][f'New_code_component_{j}']
             ]  # sum up the impacts of the subcomponents
 
         R_tech_constr[new_code_composition] *= float(
@@ -315,7 +316,7 @@ def compute_impact_scores(
                 & (unit_conversion.Type == 'Construction')].Value.iloc[0]
         )  # multiply the composition column with its unit conversion factor
 
-        R_tech_constr.drop(columns=[self.technology_compositions.iloc[i][f'New_code_component_{j}']
+        R_tech_constr.drop(columns=[technology_compositions.iloc[i][f'New_code_component_{j}']
                                     for j in range(1, len(subcomp_list) + 1)], inplace=True)
         # remove subcomponents from dataframe
 
@@ -367,7 +368,7 @@ def compute_impact_scores(
     else:
         lifetime_esm_code = pd.merge(pd.concat([
             mapping[mapping.Type == 'Construction'][['Name', 'New_code']],
-            self.technology_compositions[['Name', 'New_code']]]), lifetime,
+            technology_compositions[['Name', 'New_code']]]), lifetime,
             on='Name'
         )
         lifetime_esm_code = pd.Series(data=lifetime_esm_code.ESM.values, index=lifetime_esm_code.New_code)
@@ -391,7 +392,7 @@ def compute_impact_scores(
             df_contrib_analysis_results_constr.drop(columns=['Name', 'ESM'], inplace=True)
 
     name_to_new_code = pd.concat([mapping[['Name', 'Type', 'New_code']],
-                                  self.technology_compositions[['Name', 'Type', 'New_code']]])
+                                  technology_compositions[['Name', 'Type', 'New_code']]])
 
     R_long = pd.concat([R_tech_constr, R_tech_op, R_res], axis=1).melt(ignore_index=False, var_name='New_code')
     R_long = R_long.reset_index().merge(right=name_to_new_code, on='New_code')
