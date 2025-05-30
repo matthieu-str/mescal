@@ -799,3 +799,101 @@ def is_process_activity(row: pd.Series, process_list: list[str]) -> int:
         return -1
     else:
         return 0
+
+class TransitionESM(ESM):
+    """
+    The TransitionESM class inherits from the ESM class and is used to create the ESM databases, impact score
+    dataframes, .dat files, etc. corresponding to all time steps of a transition ESM.
+    """
+
+    def __init__(self, time_steps: list[dict], *args, **kwargs):
+        """
+        Initialize the TransitionESM class.
+
+        :param time_steps: List of dictionaries, each containing parameters for a time step in the transition ESM.
+        """
+        super().__init__(
+            model=time_steps[0]['model'],
+            main_database=time_steps[0]['main_database'],
+            *args,
+            **kwargs,
+        )
+
+        self.time_steps = time_steps
+        self.N_time_steps = len(time_steps)
+
+    def create_esm_database(self, *args, **kwargs):
+
+        list_mapping_time_steps = []
+
+        # Store the original ESM variable values
+        original_esm_db_name = self.esm_db_name
+        original_results_path_file = self.results_path_file
+
+        year = self.time_steps[0]['year']
+        self.esm_db_name += f'_{year}'
+        self.results_path_file += f'{year}/'
+
+        for i in range(self.N_time_steps):  # Iterate over all time steps
+
+            time_step = self.time_steps[i]
+
+            # Update the ESM variable values for the current time step
+            self.esm_db_name = self.esm_db_name.replace(str(year), str(time_step['year']))
+            self.mapping['Database'] = self.mapping['Database'].replace(
+                self.main_database_name,
+                time_step['main_database'].db_names
+            )
+            self.results_path_file = self.results_path_file.replace(str(year), str(time_step['year']))
+
+            year = time_step['year']
+            self.model = time_step['model']
+            self.main_database = time_step['main_database']
+            self.main_database_name = self.main_database.db_names
+
+            super().create_esm_database(*args, **kwargs)  # create the ESM database for the current time step
+
+            mapping_copy = self.mapping.copy()
+            mapping_copy['Year'] = year
+            list_mapping_time_steps.append(mapping_copy)  # Store the mapping with new codes for each time step
+
+        self.mapping = pd.concat(list_mapping_time_steps, ignore_index=True)  # Concatenate all mappings
+
+        # Restore the original ESM variable values
+        self.esm_db_name = original_esm_db_name
+        self.results_path_file = original_results_path_file
+
+    def compute_impact_scores(self, *args, **kwargs):
+
+        list_impact_scores_time_steps = []
+
+        # Store the original ESM variable values
+        original_esm_db_name = self.esm_db_name
+        mapping_all_time_steps = self.mapping.copy()
+
+        year = self.time_steps[0]['year']
+        self.esm_db_name += f'_{year}'
+
+        for i in range(self.N_time_steps):
+
+            time_step = self.time_steps[i]
+
+            # Update the ESM variable values for the current time step
+            self.esm_db_name = self.esm_db_name.replace(str(year), str(time_step['year']))
+
+            year = time_step['year']
+            self.main_database = time_step['main_database']
+            self.main_database_name = self.main_database.db_names
+            self.mapping = mapping_all_time_steps[mapping_all_time_steps['Year'] == year].copy()
+
+            impact_scores = super().compute_impact_scores(*args, **kwargs)  # Compute impact scores for the current time step
+            impact_scores['Year'] = year
+            list_impact_scores_time_steps.append(impact_scores)
+
+        impact_scores = pd.concat(list_impact_scores_time_steps, ignore_index=True)
+
+        # Restore the original ESM variable values
+        self.mapping = mapping_all_time_steps
+        self.esm_db_name = original_esm_db_name
+
+        return impact_scores
