@@ -114,6 +114,7 @@ class ESM:
         self.double_counting_removal_count = None
         self.df_activities_subject_to_double_counting = None
         self.esm_results_db_name = self.esm_db_name + '_results'
+        self.pathway = False
 
 
     def __repr__(self):
@@ -189,7 +190,7 @@ class ESM:
         connect_esm_results_to_database,
         correct_esm_and_lca_capacity_factor_differences,
     )
-    from .normalization import normalize_lca_metrics
+    from .normalization import normalize_lca_metrics, tech_type
     from .generate_lcia_obj_ampl import generate_mod_file_ampl
 
     def check_inputs(self) -> None:
@@ -821,6 +822,7 @@ class PathwayESM(ESM):
 
         self.time_steps = time_steps
         self.N_time_steps = len(time_steps)
+        self.pathway = True
 
     def create_esm_database(self, *args, **kwargs):
 

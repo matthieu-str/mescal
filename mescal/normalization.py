@@ -3,6 +3,7 @@ import ast
 from pathlib import Path
 
 
+@staticmethod
 def tech_type(tech: str) -> str:
     """
     Returns the short name of the technology type
@@ -94,8 +95,8 @@ def restrict_lcia_metrics(
     return df
 
 
-@staticmethod
 def normalize_lca_metrics(
+        self,
         R: pd.DataFrame,
         mip_gap: float,
         impact_abbrev: pd.DataFrame,
@@ -197,7 +198,7 @@ def normalize_lca_metrics(
             if 'regionalized' in metadata:
                 f.write(f"# Regionalized database: {metadata['regionalized']}\n")
             if 'year' in metadata:
-                f.write(f"# Selected year in premise: {metadata['year']}\n")
+                f.write(f"# Selected year(s) in premise: {metadata['year']}\n")
             if 'iam' in metadata:
                 f.write(f"# Selected IAM in premise: {metadata['iam']}\n")
             if 'ssp_rcp' in metadata:
@@ -207,6 +208,9 @@ def normalize_lca_metrics(
             f.write("\n")
 
             if assessment_type == 'esm':
+                # Set of years (only for pathway ESM)
+                f.write(f"set YEARS := {' '.join([str(x) for x in R_scaled['Year'].unique()])};\n")
+
                 # Set of LCA indicators and AoPs
                 f.write(f"set INDICATORS := {' '.join(R_scaled['Abbrev'].unique())};\n\n")
 
@@ -221,8 +225,13 @@ def normalize_lca_metrics(
             # Declare the LCA indicators values
             for i in range(len(R_scaled)):
                 # Declaring the LCIA parameters
-                f.write(f"let {metric_type}_{tech_type(R_scaled.Type.iloc[i])}['{R_scaled.Abbrev.iloc[i]}','{R_scaled.Name.iloc[i]}'] "
-                        f":= {R_scaled.Value_norm.iloc[i]}; # normalized {R_scaled.Unit.iloc[i]}\n")
+                if self.pathway:
+                    f.write(f"let {metric_type}_{self.tech_type(R_scaled.Type.iloc[i])}['{R_scaled.Abbrev.iloc[i]}',"
+                            f"'{R_scaled.Name.iloc[i]}',{R_scaled.Year.iloc[i]}] := {R_scaled.Value_norm.iloc[i]}; "
+                            f"# normalized {R_scaled.Unit.iloc[i]}\n")
+                else:
+                    f.write(f"let {metric_type}_{tech_type(R_scaled.Type.iloc[i])}['{R_scaled.Abbrev.iloc[i]}','{R_scaled.Name.iloc[i]}'] "
+                            f":= {R_scaled.Value_norm.iloc[i]}; # normalized {R_scaled.Unit.iloc[i]}\n")
 
         # To come back to the original values, we save the maximum value of each AoP
         if assessment_type == 'esm':
