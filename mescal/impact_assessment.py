@@ -25,9 +25,9 @@ def compute_impact_scores(
         assessment_type: str = 'esm',
         overwrite: bool = True,
         contribution_analysis: str = None,
-        contribution_analysis_limit_type: str = 'percent',
-        contribution_analysis_limit: float = 0.01,
-) -> pd.DataFrame | tuple[pd.DataFrame, pd.DataFrame]:
+        contribution_analysis_limit_type: str = 'number',
+        contribution_analysis_limit: float or int = 5,
+) -> tuple[pd.DataFrame, None] | tuple[pd.DataFrame, pd.DataFrame]:
     """
     Compute the impact scores of the technologies and resources
 
@@ -48,13 +48,13 @@ def compute_impact_scores(
     :param contribution_analysis_limit: number of values to return (if limit_type is 'number'), or percentage cutoff
         (if limit_type is 'percent'). Default is 0.01.
     :return: impact scores dataframe of the technologies and resources for all selected impact categories, and
-        contribution analysis dataframe (if contribution_analysis is True)
+        contribution analysis dataframe (would be None if contribution_analysis is None).
     """
-    activities_subject_to_double_counting = self.df_activities_subject_to_double_counting
 
-    if assessment_type == 'direct emissions' and activities_subject_to_double_counting is None:
-        raise ValueError('For territorial emissions computation, the activities_subject_to_double_counting dataframe '
-                         'must be provided')
+    if assessment_type == 'direct emissions' and self.df_activities_subject_to_double_counting is None:
+        self.df_activities_subject_to_double_counting = pd.read_csv(f"{self.results_path_file}activities_subject_to_double_counting.csv")
+
+    activities_subject_to_double_counting = self.df_activities_subject_to_double_counting
 
     if assessment_type != 'esm' and assessment_type != 'direct emissions':
         raise ValueError('The assessment type must be either "esm" or "direct emissions"')
@@ -225,7 +225,7 @@ def compute_impact_scores(
         if contribution_analysis is not None:
             return R_long, df_contrib_analysis_results
         else:
-            return R_long
+            return R_long, None
 
     R_tech_op = R[list(mapping[mapping.Type == 'Operation'].New_code)]
     R_tech_constr = R[list(mapping[mapping.Type == 'Construction'].New_code)]
@@ -411,7 +411,7 @@ def compute_impact_scores(
         return R_long, df_contrib_analysis_results
 
     else:
-        return R_long
+        return R_long, None
 
 
 @staticmethod
