@@ -800,15 +800,15 @@ def is_process_activity(row: pd.Series, process_list: list[str]) -> int:
     else:
         return 0
 
-class TransitionESM(ESM):
+class PathwayESM(ESM):
     """
-    The TransitionESM class inherits from the ESM class and is used to create the ESM databases, impact score
+    The PathwayESM class inherits from the ESM class and is used to create the ESM databases, impact score
     dataframes, .dat files, etc. corresponding to all time steps of a transition ESM.
     """
 
     def __init__(self, time_steps: list[dict], *args, **kwargs):
         """
-        Initialize the TransitionESM class.
+        Initialize the PathwayESM class.
 
         :param time_steps: List of dictionaries, each containing parameters for a time step in the transition ESM.
         """
@@ -866,13 +866,16 @@ class TransitionESM(ESM):
     def compute_impact_scores(self, *args, **kwargs):
 
         list_impact_scores_time_steps = []
+        list_contrib_analysis_time_steps = []
 
         # Store the original ESM variable values
         original_esm_db_name = self.esm_db_name
         mapping_all_time_steps = self.mapping.copy()
+        original_results_path_file = self.results_path_file
 
         year = self.time_steps[0]['year']
         self.esm_db_name += f'_{year}'
+        self.results_path_file += f'{year}/'
 
         for i in range(self.N_time_steps):
 
@@ -880,20 +883,33 @@ class TransitionESM(ESM):
 
             # Update the ESM variable values for the current time step
             self.esm_db_name = self.esm_db_name.replace(str(year), str(time_step['year']))
+            self.results_path_file = self.results_path_file.replace(str(year), str(time_step['year']))
+            self.df_activities_subject_to_double_counting = pd.read_csv(f"{self.results_path_file}activities_subject_to_double_counting.csv")
 
             year = time_step['year']
             self.main_database = time_step['main_database']
             self.main_database_name = self.main_database.db_names
             self.mapping = mapping_all_time_steps[mapping_all_time_steps['Year'] == year].copy()
 
-            impact_scores = super().compute_impact_scores(*args, **kwargs)  # Compute impact scores for the current time step
+            # Compute impact scores for the current time step
+            impact_scores, contrib_analysis = super().compute_impact_scores(*args, **kwargs)
             impact_scores['Year'] = year
             list_impact_scores_time_steps.append(impact_scores)
 
+            if contrib_analysis is not None:
+                contrib_analysis['Year'] = year
+                list_contrib_analysis_time_steps.append(contrib_analysis)
+
         impact_scores = pd.concat(list_impact_scores_time_steps, ignore_index=True)
+
+        if len(list_contrib_analysis_time_steps) > 0:
+            contrib_analysis = pd.concat(list_contrib_analysis_time_steps, ignore_index=True)
+        else:
+            contrib_analysis = None
 
         # Restore the original ESM variable values
         self.mapping = mapping_all_time_steps
         self.esm_db_name = original_esm_db_name
+        self.results_path_file = original_results_path_file
 
-        return impact_scores
+        return impact_scores, contrib_analysis
