@@ -24,7 +24,7 @@ def compute_impact_scores(
         impact_abbrev: pd.DataFrame = None,
         assessment_type: str = 'esm',
         overwrite: bool = True,
-        contribution_analysis: bool = False,
+        contribution_analysis: str = None,
         contribution_analysis_limit_type: str = 'percent',
         contribution_analysis_limit: float = 0.01,
 ) -> pd.DataFrame | tuple[pd.DataFrame, pd.DataFrame]:
@@ -40,7 +40,9 @@ def compute_impact_scores(
         impacts, or 'direct emissions' for the computation of direct emissions only
     :param overwrite: only relevant if assessment_type is 'direct emissions', if True, the direct emissions database
         will be overwritten if it exists
-    :param contribution_analysis: if True, the function will return the contribution analysis on elementary flows.
+    :param contribution_analysis: if 'emissions', the function will return the contribution analysis of top elementary
+        flows. If 'processes', the function will return the contribution analysis of top processes.
+        If 'both', it will return both.
     :param contribution_analysis_limit_type: contribution analysis limit type, can be 'percent' or 'number'.
         Default is 'percent'.
     :param contribution_analysis_limit: number of values to return (if limit_type is 'number'), or percentage cutoff
@@ -63,7 +65,9 @@ def compute_impact_scores(
     if specific_lcia_abbrev is not None and impact_abbrev is None:
         raise ValueError('You must provide the impact_abbrev dataframe if you want to use specific_lcia_abbrev')
 
-    if contribution_analysis is True:
+    if contribution_analysis is not None:
+        if contribution_analysis not in ['emissions', 'processes', 'both']:
+            raise ValueError('The contribution_analysis must be either "emissions" or "processes"')
         if contribution_analysis_limit_type not in ['percent', 'number']:
             raise ValueError('The contribution_analysis_limit_type must be either "percent" or "number"')
         if contribution_analysis_limit_type == 'percent':
@@ -176,7 +180,7 @@ def compute_impact_scores(
 
     R = R * unit_conversion_code[R.columns]  # multiply each column by its unit conversion factor
 
-    if contribution_analysis:
+    if contribution_analysis is not None:
         df_contrib_analysis_results = multilca.df_res_concat
 
         df_contrib_analysis_results = pd.merge(  # adding the Name and Type columns to the dataframe
@@ -218,7 +222,7 @@ def compute_impact_scores(
             how='left'
         )
 
-        if contribution_analysis:
+        if contribution_analysis is not None:
             return R_long, df_contrib_analysis_results
         else:
             return R_long
@@ -227,7 +231,7 @@ def compute_impact_scores(
     R_tech_constr = R[list(mapping[mapping.Type == 'Construction'].New_code)]
     R_res = R[list(mapping[mapping.Type == 'Resource'].New_code)]
 
-    if contribution_analysis:
+    if contribution_analysis is not None:
         df_contrib_analysis_results_op = df_contrib_analysis_results[
             df_contrib_analysis_results['act_type'] == 'Operation']
         df_contrib_analysis_results_constr = df_contrib_analysis_results[
@@ -253,7 +257,7 @@ def compute_impact_scores(
         # divide each column (construction only) by its lifetime
         R_tech_constr = R_tech_constr / lifetime_lca_code[R_tech_constr.columns]
 
-        if contribution_analysis:
+        if contribution_analysis is not None:
             df_contrib_analysis_results_constr = pd.merge(
                 left=df_contrib_analysis_results_constr,
                 right=lifetime[['Name', 'LCA']],
@@ -320,14 +324,14 @@ def compute_impact_scores(
                                     for j in range(1, len(subcomp_list) + 1)], inplace=True)
         # remove subcomponents from dataframe
 
-        if contribution_analysis:
+        if contribution_analysis is not None:
             # sum up the contributions of the subcomponents
             df_subcomp = df_contrib_analysis_results_constr[
                 df_contrib_analysis_results_constr['act_name'].isin(subcomp_list)
             ]
 
             df_comp = df_subcomp.groupby([
-                'ef_name', 'ef_categories', 'ef_code', 'ef_database', 'impact_category', 'act_database', 'act_type'
+                'code', 'database', 'impact_category', 'act_database', 'act_type'
             ]).agg({
                 'score': 'sum',
                 'amount': 'sum',
@@ -341,7 +345,7 @@ def compute_impact_scores(
                 df_subcomp.index, inplace=True
             )
 
-    if contribution_analysis:
+    if contribution_analysis is not None:
         df_comp_all = pd.concat(df_comp_list)  # concatenate composition results in a single dataframe
 
         df_comp_all = pd.merge(  # adding the unit conversion factors to the dataframe
@@ -374,7 +378,7 @@ def compute_impact_scores(
         lifetime_esm_code = pd.Series(data=lifetime_esm_code.ESM.values, index=lifetime_esm_code.New_code)
         R_tech_constr = R_tech_constr * lifetime_esm_code[R_tech_constr.columns]  # multiply by lifetime of ESM
 
-        if contribution_analysis:
+        if contribution_analysis is not None:
             df_contrib_analysis_results_constr = pd.merge(
                 left=df_contrib_analysis_results_constr,
                 right=lifetime[['Name', 'ESM']],
@@ -398,7 +402,7 @@ def compute_impact_scores(
     R_long = R_long.reset_index().merge(right=name_to_new_code, on='New_code')
     R_long.rename(columns={'index': 'Impact_category', 'value': 'Value'}, inplace=True)
 
-    if contribution_analysis:
+    if contribution_analysis is not None:
         df_contrib_analysis_results = pd.concat(
             [df_contrib_analysis_results_constr, df_contrib_analysis_results_op, df_contrib_analysis_results_res],
             ignore_index=True,
@@ -578,6 +582,27 @@ def bw2_compat_annotated_top_emissions(lca, names=True, **kwargs):
     return results
 
 
+def bw2_compat_annotated_top_processes(lca, names=True, **kwargs):
+    """
+    Get list of most damaging processes in an LCA, sorted by ``abs(direct impact)``.
+
+    Returns a list of tuples: ``(lca score, supply, activity)``. If ``names`` is False, they return the process
+        key as the last element.
+    """
+    # This is a temporary fix, until https://github.com/brightway-lca/brightway2-analyzer/issues/27
+
+    ra, rp, rb = lca.reverse_dict()
+    results = [
+        (score, lca.supply_array[int(index)], ra[int(index)])
+        for score, index in ba.ContributionAnalysis().top_processes(
+            lca.characterized_inventory, **kwargs
+        )
+    ]
+    if names:
+        results = [(x[0], x[1], bd.get_activity(x[2])) for x in results]
+    return results
+
+
 class MultiLCA(object):
     """
     Adaptation of the `MultiLCA` class from the `bw2calc` package in order to perform contribution analysis.
@@ -636,7 +661,7 @@ class MultiLCA(object):
                 self.lca.lcia_calculation()
                 self.results[row, col] = self.lca.score
 
-                if contribution_analysis:
+                if contribution_analysis in ['emissions', 'both']:
                     top_contributors = bw2_compat_annotated_top_emissions(
                         self.lca,
                         limit=self.limit,
@@ -644,9 +669,8 @@ class MultiLCA(object):
                     )
 
                     df_res = pd.DataFrame(
-                        data=[[i[0], i[1], i[2].as_dict()['name'], i[2].as_dict()['categories'], i[2].as_dict()['code'],
-                               i[2].as_dict()['database']] for i in top_contributors],
-                        columns=['score', 'amount', 'ef_name', 'ef_categories', 'ef_code', 'ef_database']
+                        data=[[i[0], i[1], i[2].as_dict()['code'], i[2].as_dict()['database']] for i in top_contributors],
+                        columns=['score', 'amount', 'code', 'database'],
                     )
 
                     # Drop rows where the score is zero
@@ -661,7 +685,31 @@ class MultiLCA(object):
 
                         df_res_list.append(df_res)
 
-        if contribution_analysis:
+                if contribution_analysis in ['processes', 'both']:
+                    top_contributors = bw2_compat_annotated_top_processes(
+                        self.lca,
+                        limit=self.limit,
+                        limit_type=self.limit_type
+                    )
+
+                    df_res = pd.DataFrame(
+                        data=[[i[0], i[1], i[2].as_dict()['code'], i[2].as_dict()['database']] for i in top_contributors],
+                        columns=['score', 'amount', 'code', 'database'],
+                    )
+
+                    # Drop rows where the score is zero
+                    df_res.drop(df_res[df_res['score'] == 0].index, inplace=True)
+
+                    if len(df_res) > 0:
+                        df_res['impact_category'] = len(df_res) * [self.methods[col]]
+
+                        act = list(fu_all.keys())[row]
+                        df_res['act_database'] = len(df_res) * [act[0]]
+                        df_res['act_code'] = len(df_res) * [act[1]]
+
+                        df_res_list.append(df_res)
+
+        if contribution_analysis is not None:
             self.df_res_concat = pd.concat(df_res_list, ignore_index=True)
 
     @property
