@@ -137,6 +137,9 @@ unit_conversion = pd.DataFrame(unit_conversion, columns=['Name', 'Type', 'Value'
 lifetime = pd.DataFrame(lifetime, columns=['Name', 'ESM', 'LCA'])
 impact_abbrev = pd.DataFrame(impact_abbrev, columns=['Impact_category', 'Unit', 'Abbrev', 'AoP'])
 
+def get_emissions_info(row):
+    flow = bd.Database(row['database']).get(row['code'])
+    return flow.as_dict()['name'], flow.as_dict()['categories']
 
 @pytest.mark.tags("requires_ecoinvent")
 def test_compute_impact_score():
@@ -159,7 +162,12 @@ def test_compute_impact_score():
         methods=methods,
         impact_abbrev=impact_abbrev,
         specific_lcia_abbrev=['CC'],
-        contribution_analysis=True,
+        contribution_analysis="emissions",
+    )
+
+    df_contrib_results[['ef_name', 'ef_categories']] = pd.DataFrame(
+        df_contrib_results.apply(lambda x: get_emissions_info(x), axis=1).tolist(),
+        index=df_contrib_results.index
     )
 
     lcia_value_train = R[

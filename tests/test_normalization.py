@@ -1,6 +1,6 @@
 import pandas as pd
-from mescal.normalization import normalize_lca_metrics
 import pytest
+from mescal import *
 
 R = [
     [('IMPACT World+ Damage 2.0.1_regionalized', 'Ecosystem quality', 'Total ecosystem quality'), '00000', 1000,
@@ -31,7 +31,20 @@ impact_abbrev = pd.DataFrame(impact_abbrev, columns=['Impact_category', 'Unit', 
 
 @pytest.mark.tags("workflow")
 def test_normalize_lca_metrics():
-    R_normalized, refactor = normalize_lca_metrics(
+
+    esm = ESM(
+        mapping=pd.DataFrame(),
+        technology_compositions=pd.DataFrame(),
+        unit_conversion=pd.DataFrame(),
+        lifetime=pd.DataFrame(),
+        main_database=Database(db_as_list=[]),
+        main_database_name='',
+        esm_db_name='dummy_esm_db',
+        model=pd.DataFrame(),
+        mapping_esm_flows_to_CPC_cat=pd.DataFrame(),
+    )
+
+    R_normalized, refactor = esm.normalize_lca_metrics(
         R=R,
         mip_gap=1e-6,
         lcia_methods=['IMPACT World+ Damage 2.0.1_regionalized'],
