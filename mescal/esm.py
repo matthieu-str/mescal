@@ -998,3 +998,81 @@ class PathwayESM(ESM):
         self.results_path_file = original_results_path_file
 
         return impact_scores, contrib_analysis
+
+    def create_new_database_with_esm_results(self, return_database: bool = False, *args, **kwargs) -> Database | None:
+
+        all_esm_results_databases = Database(db_as_list=[])
+
+        if 'Current_code' not in self.mapping.columns:
+            self.get_original_code()
+        if 'New_code' not in self.mapping.columns:
+            self.get_new_code()
+
+        # Store the original ESM variable values
+        original_esm_db_name = self.esm_db_name
+        original_esm_results_db_name = self.esm_results_db_name
+        mapping_all_time_steps = self.mapping.copy()
+        original_results_path_file = self.results_path_file
+
+        year = self.time_steps[0]['year']
+        self.esm_db_name += f'_{year}'
+        self.esm_results_db_name += f'_{year}'
+        self.results_path_file += f'{year}/'
+
+        for i in range(self.N_time_steps):
+            time_step = self.time_steps[i]
+
+            # Update the ESM variable values for the current time step
+            self.esm_db_name = self.esm_db_name.replace(str(year), str(time_step['year']))
+            self.esm_results_db_name =self.esm_results_db_name.replace(str(year), str(time_step['year']))
+            self.results_path_file = self.results_path_file.replace(str(year), str(time_step['year']))
+            self.df_flows_set_to_zero = pd.read_csv(f'{self.results_path_file}removed_flows_list.csv')
+            self.double_counting_removal_amount = pd.read_csv(f'{self.results_path_file}double_counting_removal.csv')
+
+            year = time_step['year']
+            self.main_database = time_step['main_database']
+            self.model = time_step['model']
+            self.main_database_name = self.main_database.db_names
+            self.mapping = mapping_all_time_steps[mapping_all_time_steps['Year'] == year].copy()
+
+            if return_database:
+                esm_results_db = super().create_new_database_with_esm_results(return_database=return_database,*args, **kwargs)
+                all_esm_results_databases += esm_results_db
+            else:
+                super().create_new_database_with_esm_results(return_database=return_database, *args, **kwargs)
+
+        # Restore the original ESM variable values
+        self.mapping = mapping_all_time_steps
+        self.esm_db_name = original_esm_db_name
+        self.esm_results_db_name = original_esm_results_db_name
+        self.results_path_file = original_results_path_file
+
+        if return_database:
+            return all_esm_results_databases
+
+    def connect_esm_results_to_database(self, *args, **kwargs) -> None:
+
+        # Store the original ESM variable values
+        original_esm_results_db_name = self.esm_results_db_name
+        mapping_all_time_steps = self.mapping.copy()
+
+        year = self.time_steps[0]['year']
+        self.esm_results_db_name += f'_{year}'
+
+        for i in range(self.N_time_steps):
+            time_step = self.time_steps[i]
+
+            # Update the ESM variable values for the current time step
+            self.esm_results_db_name = self.esm_results_db_name.replace(str(year), str(time_step['year']))
+
+            year = time_step['year']
+            self.main_database = time_step['main_database']
+            self.model = time_step['model']
+            self.main_database_name = self.main_database.db_names
+            self.mapping = mapping_all_time_steps[mapping_all_time_steps['Year'] == year].copy()
+
+            super().connect_esm_results_to_database(*args, **kwargs)
+
+        # Restore the original ESM variable values
+        self.mapping = mapping_all_time_steps
+        self.esm_results_db_name = original_esm_results_db_name
