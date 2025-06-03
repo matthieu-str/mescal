@@ -927,18 +927,23 @@ class PathwayESM(ESM):
             self.main_database_name = self.main_database.db_names
             self.mapping = mapping_all_time_steps[mapping_all_time_steps['Year'] == year].copy()
 
-            mapping_copy = self.mapping.copy()
-            mapping_copy['Year'] = year
-            list_mapping_time_steps.append(mapping_copy)  # Store the mapping with new codes for each time step
-
-        self.mapping = pd.concat(list_mapping_time_steps, ignore_index=True)  # Concatenate all mappings
+            # create the ESM database for the current time step
+            if return_database:
+                esm_db = super().create_esm_database(return_database=return_database, *args, **kwargs)
+                all_esm_databases += esm_db  # Sum all ESM databases created for each time step
+            else:
+                super().create_esm_database(return_database=return_database, *args, **kwargs)
 
         # Restore the original ESM variable values
         self.esm_db_name = original_esm_db_name
         self.results_path_file = original_results_path_file
         self.mapping = mapping_all_time_steps
 
-    def compute_impact_scores(self, *args, **kwargs):
+        if return_database:
+            # returns the sum of all ESM databases created for each time step
+            return all_esm_databases
+
+    def compute_impact_scores(self, *args, **kwargs) -> tuple[pd.DataFrame, pd.DataFrame | None]:
 
         list_impact_scores_time_steps = []
         list_contrib_analysis_time_steps = []
