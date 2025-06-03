@@ -215,9 +215,6 @@ def normalize_lca_metrics(
             f.write("\n")
 
             if assessment_type == 'esm':
-                # Set of years (only for pathway ESM)
-                if self.pathway:
-                    f.write(f"set YEARS := {' '.join([str(x) for x in R_scaled['Year'].unique()])};\n")
 
                 # Set of LCA indicators and units
                 f.write(f"set INDICATORS := {' '.join(R_scaled['Abbrev'].unique())};\n\n")

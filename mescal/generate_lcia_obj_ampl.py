@@ -59,10 +59,6 @@ def generate_mod_file_ampl(
 
         if assessment_type == 'esm':
 
-            # Set of years (pathway ESM)
-            if self.pathway:
-                f.write(f'set YEARS;\n')
-
             # Set of LCA indicators
             f.write('set INDICATORS;\n\n')
 
