@@ -743,6 +743,48 @@ class ESM:
         elif return_type == 'code':
             return self.mapping[(self.mapping.Name == tech) & (self.mapping.Type == phase)].New_code.iloc[0]
 
+    def get_original_code(self) -> None:
+        """
+        Creates the Current_code column in the mapping DataFrame, which contains the original code from the main database.
+
+        :return: None
+        """
+        main_db_as_dict_name = self.main_database.db_as_dict_name
+        self.mapping['Current_code'] = self.mapping.apply(lambda x: main_db_as_dict_name[(
+            x['Activity'],
+            x['Product'],
+            x['Location'],
+            x['Database'],
+        )]['code'], axis=1)
+
+    def get_new_code(self) -> None:
+        """
+        Creates the New_code column in the mapping DataFrame, which contains the new code from the ESM database.
+
+        :return: None
+        """
+        esm_db_name = self.esm_db_name
+        esm_location = self.esm_location
+        esm_db = Database(esm_db_name)
+        esm_db_as_dict_name = esm_db.db_as_dict_name
+        if self.regionalize_foregrounds:
+            self.mapping['New_code'] = self.mapping.apply(lambda x: esm_db_as_dict_name[(
+                f"{x['Name']}, "
+                f"{x['Type']}",
+                x['Product'],
+                esm_location,
+                esm_db_name,
+            )]['code'] if x['Type'] in ['Construction', 'Operation', 'Resource'] else None, axis=1)
+        else:
+            self.mapping['New_code'] = self.mapping.apply(
+                lambda x: esm_db_as_dict_name[(
+                    f"{x['Name']}, "
+                    f"{x['Type']}",
+                    x['Product'],
+                    x['Location'],
+                    esm_db_name,
+                )]['code'] if x['Type'] in ['Construction', 'Operation', 'Resource'] else None, axis=1)
+
 
 def has_construction(row: pd.Series, no_construction_list: list[str]) -> int:
     """

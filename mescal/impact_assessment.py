@@ -27,7 +27,7 @@ def compute_impact_scores(
         contribution_analysis: str = None,
         contribution_analysis_limit_type: str = 'number',
         contribution_analysis_limit: float or int = 5,
-) -> tuple[pd.DataFrame, None] | tuple[pd.DataFrame, pd.DataFrame]:
+) -> tuple[pd.DataFrame, pd.DataFrame | None]:
     """
     Compute the impact scores of the technologies and resources
 
@@ -76,6 +76,11 @@ def compute_impact_scores(
         if contribution_analysis_limit_type == 'number':
             if contribution_analysis_limit < 0 or isinstance(contribution_analysis_limit, int) is False:
                 raise ValueError('The contribution_analysis_limit must be a positive integer if limit_type is "number"')
+
+    if 'Current_code' not in self.mapping.columns:
+        self.get_original_code()
+    if 'New_code' not in self.mapping.columns:
+        self.get_new_code()
 
     # Store frequently accessed instance variables in local variables inside a method
     mapping = self.mapping

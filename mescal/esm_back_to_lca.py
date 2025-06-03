@@ -42,6 +42,16 @@ def create_new_database_with_esm_results(
     if return_database is False and write_database is False:
         raise ValueError('The new database should be either returned or written.')
 
+    if self.df_flows_set_to_zero is None:
+        self.df_flows_set_to_zero = pd.read_csv(f'{self.results_path_file}removed_flows_list.csv')
+    if self.double_counting_removal_amount is None:
+        self.double_counting_removal_amount = pd.read_csv(f'{self.results_path_file}double_counting_removal.csv')
+
+    if 'Current_code' not in self.mapping.columns:
+        self.get_original_code()
+    if 'New_code' not in self.mapping.columns:
+        self.get_new_code()
+
     # Store frequently accessed instance variables in local variables inside a method
     mapping = self.mapping
     esm_location = self.esm_location
