@@ -115,6 +115,7 @@ class ESM:
         self.df_activities_subject_to_double_counting = None
         self.esm_results_db_name = self.esm_db_name + '_results'
         self.pathway = False
+        self.esm_db = None
 
 
     def __repr__(self):
@@ -495,25 +496,25 @@ class ESM:
             self.logger.info(f"Starting to write database")
             t1_mod_inv = time.time()
 
-            esm_db = Database(
+            self.esm_db = Database(
                 db_as_list=[act for act in self.main_database.db_as_list if act['database'] == self.esm_db_name])
-            esm_db.write_to_brightway(self.esm_db_name)
+            self.esm_db.write_to_brightway(self.esm_db_name)
 
             # Modify the written database according to the tech_specifics.csv file
-            self.modify_written_activities(db=esm_db)
+            self.modify_written_activities(db=self.esm_db)
 
             t2_mod_inv = time.time()
             self.logger.info(f"Database written in {round(t2_mod_inv - t1_mod_inv, 1)} seconds")
 
         if return_database:
             if write_database:
-                esm_db = Database(db_names=self.esm_db_name)  # accounts for modifications from tech_specifics.csv file
+                self.esm_db = Database(db_names=self.esm_db_name)  # accounts for modifications from tech_specifics.csv file
             else:
-                esm_db = Database(
+                self.esm_db = Database(
                     db_as_list=[act for act in self.main_database.db_as_list if act['database'] == self.esm_db_name])
 
-            self.main_database = self.main_database - esm_db  # Remove ESM database from the main database
-            return esm_db
+            self.main_database = self.main_database - self.esm_db  # Remove ESM database from the main database
+            return self.esm_db
 
         self.main_database = self.main_database - Database(
             db_as_list=[act for act in self.main_database.db_as_list if act['database'] == self.esm_db_name])
@@ -765,7 +766,10 @@ class ESM:
         """
         esm_db_name = self.esm_db_name
         esm_location = self.esm_location
-        esm_db = Database(esm_db_name)
+        if self.esm_db is not None:
+            esm_db = self.esm_db
+        else:
+            esm_db = Database(esm_db_name)
         esm_db_as_dict_name = esm_db.db_as_dict_name
         if self.regionalize_foregrounds:
             self.mapping['New_code'] = self.mapping.apply(lambda x: esm_db_as_dict_name[(
@@ -948,11 +952,6 @@ class PathwayESM(ESM):
         list_impact_scores_time_steps = []
         list_contrib_analysis_time_steps = []
 
-        if 'Current_code' not in self.mapping.columns:
-            self.get_original_code()
-        if 'New_code' not in self.mapping.columns:
-            self.get_new_code()
-
         # Store the original ESM variable values
         original_esm_db_name = self.esm_db_name
         mapping_all_time_steps = self.mapping.copy()
@@ -968,6 +967,7 @@ class PathwayESM(ESM):
 
             # Update the ESM variable values for the current time step
             self.esm_db_name = self.esm_db_name.replace(str(year), str(time_step['year']))
+            self.esm_db = Database(db_names=self.esm_db_name)
             self.results_path_file = self.results_path_file.replace(str(year), str(time_step['year']))
             self.df_activities_subject_to_double_counting = pd.read_csv(f"{self.results_path_file}activities_subject_to_double_counting.csv")
 

@@ -157,7 +157,10 @@ def create_new_database_with_esm_results(
 
     if harmonize_with_esm:
         # Add ESM database to the main database (to retrieve the corrected datasets)
-        esm_db = Database(self.esm_db_name)
+        if self.esm_db is not None:
+            esm_db = self.esm_db
+        else:
+            esm_db = Database(self.esm_db_name)
         self.main_database = self.main_database + esm_db
 
         self.logger.info("Correcting efficiency and capacity factor differences between ESM and LCI datasets...")

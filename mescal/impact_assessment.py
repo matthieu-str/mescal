@@ -77,6 +77,13 @@ def compute_impact_scores(
             if contribution_analysis_limit < 0 or isinstance(contribution_analysis_limit, int) is False:
                 raise ValueError('The contribution_analysis_limit must be a positive integer if limit_type is "number"')
 
+    if self.esm_db is not None:
+        esm_db = self.esm_db
+    else:
+        self.esm_db = Database(db_names=self.esm_db_name)
+        esm_db = self.esm_db
+    esm_db_dict_code = esm_db.db_as_dict_code
+
     if 'Current_code' not in self.mapping.columns:
         self.get_original_code()
     if 'New_code' not in self.mapping.columns:
@@ -88,9 +95,6 @@ def compute_impact_scores(
     unit_conversion = self.unit_conversion
     lifetime = self.lifetime
     technology_compositions = self.technology_compositions
-
-    esm_db = Database(db_names=esm_db_name)
-    esm_db_dict_code = esm_db.db_as_dict_code
 
     if assessment_type == 'esm':
         calculation_setup_name = 'impact_scores'
