@@ -73,7 +73,6 @@ def generate_mod_file_ampl(
                         'param lcia_op {INDICATORS,TECHNOLOGIES,YEARS} default 0;\n'
                         'param lcia_res {INDICATORS,RESOURCES,YEARS} default 0;\n'
                         'param limit_lcia {INDICATORS,YEARS} default 1e10;\n'
-                        'param refactor {INDICATORS} default 1;\n'
                         'var LCIA_constr {INDICATORS,TECHNOLOGIES,YEARS};\n'
                         'var LCIA_op {INDICATORS,TECHNOLOGIES,YEARS};\n'
                         'var LCIA_res {INDICATORS,RESOURCES,YEARS};\n'
@@ -88,7 +87,7 @@ def generate_mod_file_ampl(
                 # Equation of LCIAs variables (construction scaling to F_Mult)
                 f.write('# Construction\n'
                         'subject to lcia_constr_calc {id in INDICATORS, i in TECHNOLOGIES, y in YEARS}:\n'
-                        f'  LCIA_constr[id,i,y] = (1/refactor[id]) * lcia_constr[id,i,y] * F_Mult[i,y];\n\n')
+                        f'  LCIA_constr[id,i,y] = lcia_constr[id,i,y] * F_Mult[i,y];\n\n')
 
             # Equation of LCIAs variables (operation scaling to F_Mult_t)
             f.write('# Operation\n'
@@ -126,7 +125,6 @@ def generate_mod_file_ampl(
                         'param lcia_op {INDICATORS,TECHNOLOGIES} default 0;\n'
                         'param lcia_res {INDICATORS,RESOURCES} default 0;\n'
                         'param limit_lcia {INDICATORS} default 1e10;\n'
-                        'param refactor {INDICATORS} default 1;\n'
                         'var LCIA_constr {INDICATORS,TECHNOLOGIES};\n'
                         'var LCIA_op {INDICATORS,TECHNOLOGIES};\n'
                         'var LCIA_res {INDICATORS,RESOURCES};\n'
@@ -141,7 +139,7 @@ def generate_mod_file_ampl(
                 # Equation of LCIAs variables (construction scaling to F_Mult)
                 f.write('# Construction\n'
                         'subject to lcia_constr_calc {id in INDICATORS, i in TECHNOLOGIES}:\n'
-                        f'  LCIA_constr[id,i] = (1/refactor[id]) * lcia_constr[id,i] * F_Mult[i];\n\n')
+                        f'  LCIA_constr[id,i] = lcia_constr[id,i] * F_Mult[i];\n\n')
 
             # Equation of LCIAs variables (operation scaling to F_Mult_t)
             f.write('# Operation\n'
