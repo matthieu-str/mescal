@@ -866,13 +866,48 @@ class PathwayESM(ESM):
         self.N_time_steps = len(time_steps)
         self.pathway = True
 
-    def create_esm_database(self, *args, **kwargs):
+        list_mapping_time_steps = []
+        for i in range(self.N_time_steps):  # Iterate over all time steps
+            time_step = self.time_steps[i]
+
+            self.mapping['Database'] = self.mapping['Database'].replace(
+                self.main_database_name,
+                time_step['main_database'].db_names
+            )
+
+            mapping_copy = self.mapping.copy()
+            mapping_copy['Year'] = time_step['year']
+            list_mapping_time_steps.append(mapping_copy)  # Store the mapping with new codes for each time step
+
+        self.mapping = pd.concat(list_mapping_time_steps, ignore_index=True)  # Concatenate all mappings
+
+    def change_location_mapping_file(self) -> None:
 
         list_mapping_time_steps = []
+        mapping_all_time_steps = self.mapping.copy()
+
+        for i in range(self.N_time_steps):  # Iterate over all time steps
+            time_step = self.time_steps[i]
+            year = time_step['year']
+            self.mapping = mapping_all_time_steps[mapping_all_time_steps['Year'] == year].copy()
+            self.main_database = time_step['main_database']
+
+            super().change_location_mapping_file()
+
+            mapping_copy = self.mapping.copy()
+            list_mapping_time_steps.append(mapping_copy)  # Store the mapping with new codes for each time step
+
+        self.mapping = pd.concat(list_mapping_time_steps, ignore_index=True)  # Concatenate all mappings
+
+
+    def create_esm_database(self, return_database: bool = False, *args, **kwargs) -> Database | None:
+
+        all_esm_databases = Database(db_as_list=[])
 
         # Store the original ESM variable values
         original_esm_db_name = self.esm_db_name
         original_results_path_file = self.results_path_file
+        mapping_all_time_steps = self.mapping.copy()
 
         year = self.time_steps[0]['year']
         self.esm_db_name += f'_{year}'
@@ -884,18 +919,13 @@ class PathwayESM(ESM):
 
             # Update the ESM variable values for the current time step
             self.esm_db_name = self.esm_db_name.replace(str(year), str(time_step['year']))
-            self.mapping['Database'] = self.mapping['Database'].replace(
-                self.main_database_name,
-                time_step['main_database'].db_names
-            )
             self.results_path_file = self.results_path_file.replace(str(year), str(time_step['year']))
 
             year = time_step['year']
             self.model = time_step['model']
             self.main_database = time_step['main_database']
             self.main_database_name = self.main_database.db_names
-
-            super().create_esm_database(*args, **kwargs)  # create the ESM database for the current time step
+            self.mapping = mapping_all_time_steps[mapping_all_time_steps['Year'] == year].copy()
 
             mapping_copy = self.mapping.copy()
             mapping_copy['Year'] = year
@@ -906,6 +936,7 @@ class PathwayESM(ESM):
         # Restore the original ESM variable values
         self.esm_db_name = original_esm_db_name
         self.results_path_file = original_results_path_file
+        self.mapping = mapping_all_time_steps
 
     def compute_impact_scores(self, *args, **kwargs):
 
