@@ -199,7 +199,7 @@ def connect_esm_results_to_database(
         new_db_name: str = None,
         specific_db_name: str = None,
         locations: list[str] or str = None,
-):
+) -> None:
     """
     Connect new LCI datasets obtained from the ESM results to the main database
 

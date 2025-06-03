@@ -948,6 +948,11 @@ class PathwayESM(ESM):
         list_impact_scores_time_steps = []
         list_contrib_analysis_time_steps = []
 
+        if 'Current_code' not in self.mapping.columns:
+            self.get_original_code()
+        if 'New_code' not in self.mapping.columns:
+            self.get_new_code()
+
         # Store the original ESM variable values
         original_esm_db_name = self.esm_db_name
         mapping_all_time_steps = self.mapping.copy()
