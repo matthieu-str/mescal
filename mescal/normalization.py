@@ -182,11 +182,14 @@ def normalize_lca_metrics(
         R_scaled['max_unit'] = R_scaled.apply(lambda x: max_per_cat_dict[x['Unit']], axis=1)
 
     R_scaled['Value_norm'] = R_scaled['Value'] / R_scaled['max_unit']
-    R_scaled_constr = R_scaled[R_scaled['Type'] == 'Construction']
-    R_scaled_op = R_scaled[R_scaled['Type'] != 'Construction']
-    R_scaled_op['Value_norm'] = R_scaled_op['Value_norm'].apply(lambda x: 0 if abs(x) < mip_gap else x)
-    R_scaled_constr['Value_norm'] = R_scaled_constr.apply(lambda x: 0 if abs(x['Value_norm']) < mip_gap else x['Value_norm'] / refactor[x['Unit']], axis=1)
-    R_scaled = pd.concat([R_scaled_op, R_scaled_constr])
+    if assessment_type == 'esm':
+        R_scaled_constr = R_scaled[R_scaled['Type'] == 'Construction']
+        R_scaled_op = R_scaled[R_scaled['Type'] != 'Construction']
+        R_scaled_op['Value_norm'] = R_scaled_op['Value_norm'].apply(lambda x: 0 if abs(x) < mip_gap else x)
+        R_scaled_constr['Value_norm'] = R_scaled_constr.apply(lambda x: 0 if abs(x['Value_norm']) < mip_gap else x['Value_norm'] / refactor[x['Unit']], axis=1)
+        R_scaled = pd.concat([R_scaled_op, R_scaled_constr])
+    else:  # assessment_type == 'direct emissions'
+        R_scaled['Value_norm'] = R_scaled['Value_norm'].apply(lambda x: 0 if abs(x) < mip_gap else x)
 
     if (output == 'write') | (output == 'both'):
 
@@ -213,7 +216,8 @@ def normalize_lca_metrics(
 
             if assessment_type == 'esm':
                 # Set of years (only for pathway ESM)
-                f.write(f"set YEARS := {' '.join([str(x) for x in R_scaled['Year'].unique()])};\n")
+                if self.pathway:
+                    f.write(f"set YEARS := {' '.join([str(x) for x in R_scaled['Year'].unique()])};\n")
 
                 # Set of LCA indicators and units
                 f.write(f"set INDICATORS := {' '.join(R_scaled['Abbrev'].unique())};\n\n")
