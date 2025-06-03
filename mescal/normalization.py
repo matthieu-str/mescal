@@ -123,7 +123,7 @@ def normalize_lca_metrics(
     :param specific_lcia_abbrev: specific LCIA abbreviations to be used
     :param assessment_type: type of assessment, can be 'esm' for the full LCA database, or 'direct emissions' for the
         computation of territorial emissions only
-    :param max_per_cat: dataframe containing the maximum value of each AoP, needed if assessment_type is 'direct
+    :param max_per_cat: dataframe containing the maximum value of each impact unit, needed if assessment_type is 'direct
         emissions'
     :param impact_abbrev: dataframe containing the impact categories abbreviations
     :param metadata: dictionary containing the metadata. Can contain keys 'ecoinvent_version, 'year', 'spatialized',
@@ -162,26 +162,26 @@ def normalize_lca_metrics(
     if assessment_type == 'esm':
         refactor = {}
         R_scaled = R[R['Type'] != 'Construction']
-        for aop in R['AoP'].unique():
+        for unit in R['Unit'].unique():
             # Scale the construction metrics to be at the same order of magnitude as the operation and resource metrics
             lcia_op_max = R[((R['Type'] == 'Operation') |
-                             (R['Type'] == 'Resource')) & (R['AoP'] == aop)]['Value'].max()
-            lcia_constr_max = R[(R['Type'] == 'Construction') & (R['AoP'] == aop)]['Value'].max()
-            refactor[aop] = lcia_op_max / lcia_constr_max
-            R_constr_imp = R[(R['Type'] == 'Construction') & (R['AoP'] == aop)]
-            R_constr_imp['Value'] *= refactor[aop]
+                             (R['Type'] == 'Resource')) & (R['Unit'] == unit)]['Value'].max()
+            lcia_constr_max = R[(R['Type'] == 'Construction') & (R['Unit'] == unit)]['Value'].max()
+            refactor[unit] = lcia_op_max / lcia_constr_max
+            R_constr_imp = R[(R['Type'] == 'Construction') & (R['Unit'] == unit)]
+            R_constr_imp['Value'] *= refactor[unit]
             R_scaled = pd.concat([R_scaled, R_constr_imp])  # R matrix but with refactor applied to construction metrics
-            R_scaled['max_AoP'] = R_scaled.groupby('AoP')['Value'].transform('max')
+            R_scaled['max_unit'] = R_scaled.groupby('Unit')['Value'].transform('max')
 
     else:  # assessment_type == 'direct emissions'
         refactor = None  # not needed for direct emissions as they are for operation datasets only
         max_per_cat_dict = {}
         for i in range(len(max_per_cat)):
-            max_per_cat_dict[max_per_cat['AoP'][i]] = max_per_cat['max_AoP'][i]
+            max_per_cat_dict[max_per_cat['Unit'][i]] = max_per_cat['max_unit'][i]
         R_scaled = R.copy()
-        R_scaled['max_AoP'] = R_scaled.apply(lambda x: max_per_cat_dict[x['AoP']], axis=1)
+        R_scaled['max_unit'] = R_scaled.apply(lambda x: max_per_cat_dict[x['Unit']], axis=1)
 
-    R_scaled['Value_norm'] = R_scaled['Value'] / R_scaled['max_AoP']
+    R_scaled['Value_norm'] = R_scaled['Value'] / R_scaled['max_unit']
     R_scaled['Value_norm'] = R_scaled['Value_norm'].apply(lambda x: x if abs(x) > mip_gap else 0)
 
     if (output == 'write') | (output == 'both'):
@@ -211,15 +211,15 @@ def normalize_lca_metrics(
                 # Set of years (only for pathway ESM)
                 f.write(f"set YEARS := {' '.join([str(x) for x in R_scaled['Year'].unique()])};\n")
 
-                # Set of LCA indicators and AoPs
+                # Set of LCA indicators and units
                 f.write(f"set INDICATORS := {' '.join(R_scaled['Abbrev'].unique())};\n\n")
 
                 # Declare the refactor parameters values
                 f.write('# Parameters to set the operation and infrastructure indicators at the same order of '
                         'magnitude\n')
                 for cat in R_scaled['Abbrev'].unique():
-                    aop = R[R['Abbrev'] == cat]['AoP'].iloc[0]
-                    f.write(f"let refactor['{cat}'] := {refactor[aop]};\n")
+                    unit = R[R['Abbrev'] == cat]['Unit'].iloc[0]
+                    f.write(f"let refactor['{cat}'] := {refactor[unit]};\n")
                 f.write('\n')
 
             # Declare the LCA indicators values
@@ -233,9 +233,9 @@ def normalize_lca_metrics(
                     f.write(f"let {metric_type}_{tech_type(R_scaled.Type.iloc[i])}['{R_scaled.Abbrev.iloc[i]}','{R_scaled.Name.iloc[i]}'] "
                             f":= {R_scaled.Value_norm.iloc[i]}; # normalized {R_scaled.Unit.iloc[i]}\n")
 
-        # To come back to the original values, we save the maximum value of each AoP
+        # To come back to the original values, we save the maximum value of each unit
         if assessment_type == 'esm':
-            R_scaled[['Abbrev', 'AoP', 'max_AoP']].drop_duplicates().to_csv(f'{path}{file_name}_max.csv', index=False)
+            R_scaled[['Abbrev', 'Unit', 'max_unit']].drop_duplicates().to_csv(f'{path}{file_name}_max.csv', index=False)
 
         if output == 'both':
             return R_scaled, refactor
