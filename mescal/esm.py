@@ -946,7 +946,11 @@ class PathwayESM(ESM):
             # returns the sum of all ESM databases created for each time step
             return all_esm_databases
 
-    def compute_impact_scores(self, *args, **kwargs) -> tuple[pd.DataFrame, pd.DataFrame | None]:
+    def compute_impact_scores(
+            self,
+            esm_db_name: str = None,
+            *args, **kwargs
+    ) -> tuple[pd.DataFrame, pd.DataFrame | None]:
 
         list_impact_scores_time_steps = []
         list_contrib_analysis_time_steps = []
@@ -957,7 +961,10 @@ class PathwayESM(ESM):
         original_results_path_file = self.results_path_file
 
         year = self.time_steps[0]['year']
-        self.esm_db_name += f'_{year}'
+        if esm_db_name is not None:
+            self.esm_db_name = esm_db_name
+        else:
+            self.esm_db_name += f'_{year}'
         self.results_path_file += f'{year}/'
 
         for i in range(len(self.time_steps)):
@@ -998,7 +1005,11 @@ class PathwayESM(ESM):
 
         return impact_scores, contrib_analysis
 
-    def create_new_database_with_esm_results(self, return_database: bool = False, *args, **kwargs) -> Database | None:
+    def create_new_database_with_esm_results(
+            self,
+            return_database: bool = False,
+            *args, **kwargs
+    ) -> Database | None:
 
         all_esm_results_databases = Database(db_as_list=[])
 
@@ -1045,14 +1056,21 @@ class PathwayESM(ESM):
         if return_database:
             return all_esm_results_databases
 
-    def connect_esm_results_to_database(self, *args, **kwargs) -> None:
+    def connect_esm_results_to_database(
+            self,
+            esm_results_db_name: str = None,
+            *args, **kwargs
+    ) -> None:
 
         # Store the original ESM variable values
         original_esm_results_db_name = self.esm_results_db_name
         mapping_all_time_steps = self.mapping.copy()
 
         year = self.time_steps[0]['year']
-        self.esm_results_db_name += f'_{year}'
+        if esm_results_db_name is not None:
+            self.esm_results_db_name = esm_results_db_name
+        else:
+            self.esm_results_db_name += f'_{year}'
 
         for i in range(self.N_time_steps):
             time_step = self.time_steps[i]
