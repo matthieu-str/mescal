@@ -31,9 +31,9 @@ path_model = './data/esm/' # Path to the energy system model
 path_model_lca = './data/esm/lca/'
 
 max_per_cat = pd.read_csv(path_model_lca + 'techs_lca_max.csv')
-max_ccs = max_per_cat[max_per_cat['Abbrev'] == 'm_CCS']['max_AoP'].values[0]
-max_tthh = max_per_cat[max_per_cat['Abbrev'] == 'TTHH']['max_AoP'].values[0]
-max_tteq = max_per_cat[max_per_cat['Abbrev'] == 'TTEQ']['max_AoP'].values[0]
+max_ccs = max_per_cat[max_per_cat['Abbrev'] == 'm_CCS']['max_unit'].values[0]
+max_tthh = max_per_cat[max_per_cat['Abbrev'] == 'TTHH']['max_unit'].values[0]
+max_tteq = max_per_cat[max_per_cat['Abbrev'] == 'TTEQ']['max_unit'].values[0]
 
 max_ind_dict = {
     'TotalCost': 1,
@@ -206,10 +206,10 @@ def run_esm(
         dat_files.append(path_model_lca + 'techs_lca_direct.dat')
         mod_files.append(path_model_lca + 'objectives_lca_direct.mod')
     elif lca_metrics_background == 'esm_not_harmonized':
-        run = objective_function.replace("Total", "").replace("LCIA_", "").lower()
+        run = objective_function.replace("Total", "").replace("LCIA_", "").replace('[2050]', '').lower()
         dat_files.append(path_model_lca + f'esm_results/techs_lca_{run}_wo_harmonization.dat')
     elif lca_metrics_background == 'esm_harmonized':
-        run = objective_function.replace("Total", "").replace("LCIA_", "").lower()
+        run = objective_function.replace("Total", "").replace("LCIA_", "").replace('[2050]', '').lower()
         dat_files.append(path_model_lca + f'esm_results/techs_lca_{run}.dat')
     else:
         raise ValueError("lca_metrics_background must be 'base', 'esm_not_harmonized' or 'esm_harmonized'")
@@ -278,40 +278,35 @@ def get_impact_scores(
 
     df_lifetime = df_results.parameters['lifetime'].reset_index()
     df_f_mult = df_results.variables['F_Mult'].reset_index().drop(columns=['Run'])
-    df_f_mult = df_f_mult.merge(df_lifetime[['index', 'lifetime']], on='index', how='left')
+    df_f_mult = df_f_mult.merge(df_lifetime[['index', 'lifetime']], left_on='index0', right_on='index', how='left').drop(columns='index')
     df_annual_prod = df_results.variables['Annual_Prod'].reset_index().drop(columns=['Run'])
     df_annual_res = df_results.variables['Annual_Res'].reset_index().drop(columns=['Run'])
-    df_tech_cost = df_results.postprocessing['df_annual'].reset_index()[['level_0', 'C_maint', 'C_inv_an']]
+    df_tech_cost = pd.merge(df_results.variables['C_maint']['C_maint'].reset_index(), df_results.variables['C_inv']['C_in'].reset_index(), on=['index0', 'index1'], how='outer')
+    df_tech_cost = df_tech_cost.merge(df_results.parameters['tau'].reset_index(), left_on='index0', right_on='index', how='left').drop(columns='index')
+    df_tech_cost['C_inv_an'] = df_tech_cost['C_in'] * df_tech_cost['tau']
     df_res_cost = df_results.variables['C_op'].reset_index()
 
-    df_f_mult = df_f_mult.merge(df_tech_cost, left_on='index', right_on='level_0', how='left').drop(columns=['level_0'])
-    df_annual_res = df_annual_res.merge(df_res_cost, on='index', how='left')
-
-    df_sectors = df_results.postprocessing['df_annual'].reset_index()[['level_0', 'Category']]
-    df_f_mult = df_f_mult.merge(df_sectors, left_on='index', right_on='level_0', how='left')
-    df_annual_prod = df_annual_prod.merge(df_sectors, left_on='index', right_on='level_0', how='left')
-
-    df_f_mult.drop(columns=['level_0'], inplace=True)
-    df_annual_prod.drop(columns=['level_0'], inplace=True)
+    df_f_mult = df_f_mult.merge(df_tech_cost, on=['index0', 'index1'], how='left')
+    df_annual_res = df_annual_res.merge(df_res_cost, on=['index0', 'index1'], how='left')
 
     for cat in impact_category:
         impact_scores_cat = df_impact_scores[df_impact_scores.Impact_category == cat]
 
         if assessment_type == 'esm':
-            df_f_mult = df_f_mult.merge(impact_scores_cat[impact_scores_cat.Type == 'Construction'][['Name', 'Value']],
-                                        left_on='index', right_on='Name', how='left')
+            df_f_mult = df_f_mult.merge(impact_scores_cat[impact_scores_cat.Type == 'Construction'][['Name', 'Value', 'Year']],
+                                        left_on=['index0', 'index1'], right_on=['Name', 'Year'], how='left')
             df_f_mult[cat[-1]] = df_f_mult.F_Mult * df_f_mult.Value / df_f_mult.lifetime
-            df_f_mult.drop(columns=['Name', 'Value'], inplace=True)
+            df_f_mult.drop(columns=['Name', 'Value', 'Year'], inplace=True)
 
-            df_annual_res = df_annual_res.merge(impact_scores_cat[impact_scores_cat.Type == 'Resource'][['Name', 'Value']],
-                                                left_on='index', right_on='Name', how='left')
+            df_annual_res = df_annual_res.merge(impact_scores_cat[impact_scores_cat.Type == 'Resource'][['Name', 'Value', 'Year']],
+                                                left_on=['index0', 'index1'], right_on=['Name', 'Year'], how='left')
             df_annual_res[cat[-1]] = df_annual_res.Annual_Res * df_annual_res.Value
-            df_annual_res.drop(columns=['Name', 'Value'], inplace=True)
+            df_annual_res.drop(columns=['Name', 'Value', 'Year'], inplace=True)
 
-        df_annual_prod = df_annual_prod.merge(impact_scores_cat[impact_scores_cat.Type == 'Operation'][['Name', 'Value']],
-                                              left_on='index', right_on='Name', how='left')
+        df_annual_prod = df_annual_prod.merge(impact_scores_cat[impact_scores_cat.Type == 'Operation'][['Name', 'Value', 'Year']],
+                                              left_on=['index0', 'index1'], right_on=['Name', 'Year'], how='left')
         df_annual_prod[cat[-1]] = df_annual_prod.Annual_Prod * df_annual_prod.Value
-        df_annual_prod.drop(columns=['Name', 'Value'], inplace=True)
+        df_annual_prod.drop(columns=['Name', 'Value', 'Year'], inplace=True)
 
     if assessment_type == 'esm':
         return df_f_mult, df_annual_prod, df_annual_res
