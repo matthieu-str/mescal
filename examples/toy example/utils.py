@@ -266,6 +266,7 @@ def get_impact_scores(
         df_impact_scores: pd.DataFrame,
         df_results: energyscope.result.Result,
         assessment_type: str = 'esm',
+        specific_year: int = None,
 ) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame] or pd.DataFrame:
 
     if isinstance(impact_category, tuple):
@@ -288,6 +289,11 @@ def get_impact_scores(
 
     df_f_mult = df_f_mult.merge(df_tech_cost, on=['index0', 'index1'], how='left')
     df_annual_res = df_annual_res.merge(df_res_cost, on=['index0', 'index1'], how='left')
+
+    if specific_year is not None:
+        df_f_mult = df_f_mult[df_f_mult['index1'] == specific_year]
+        df_annual_prod = df_annual_prod[df_annual_prod['index1'] == specific_year]
+        df_annual_res = df_annual_res[df_annual_res['index1'] == specific_year]
 
     for cat in impact_category:
         impact_scores_cat = df_impact_scores[df_impact_scores.Impact_category == cat]
