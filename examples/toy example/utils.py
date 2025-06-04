@@ -207,10 +207,10 @@ def run_esm(
         mod_files.append(path_model_lca + 'objectives_lca_direct.mod')
     elif lca_metrics_background == 'esm_not_harmonized':
         run = objective_function.replace("Total", "").replace("LCIA_", "").replace('[2050]', '').lower()
-        dat_files.append(path_model_lca + f'esm_results/techs_lca_{run}_wo_harmonization.dat')
+        dat_files.append(path_model_lca + f'esm_results/techs_lca_{run.replace("[2060]", "")}_wo_harmonization.dat')
     elif lca_metrics_background == 'esm_harmonized':
         run = objective_function.replace("Total", "").replace("LCIA_", "").replace('[2050]', '').lower()
-        dat_files.append(path_model_lca + f'esm_results/techs_lca_{run}.dat')
+        dat_files.append(path_model_lca + f'esm_results/techs_lca_{run.replace("[2060]", "")}.dat')
     else:
         raise ValueError("lca_metrics_background must be 'base', 'esm_not_harmonized' or 'esm_harmonized'")
 
