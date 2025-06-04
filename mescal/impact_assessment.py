@@ -84,8 +84,6 @@ def compute_impact_scores(
         esm_db = self.esm_db
     esm_db_dict_code = esm_db.db_as_dict_code
 
-    if 'Current_code' not in self.mapping.columns:
-        self.get_original_code()
     if 'New_code' not in self.mapping.columns:
         self.get_new_code()
 
