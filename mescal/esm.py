@@ -1003,11 +1003,6 @@ class PathwayESM(ESM):
 
         all_esm_results_databases = Database(db_as_list=[])
 
-        if 'Current_code' not in self.mapping.columns:
-            self.get_original_code()
-        if 'New_code' not in self.mapping.columns:
-            self.get_new_code()
-
         # Store the original ESM variable values
         original_esm_db_name = self.esm_db_name
         original_esm_results_db_name = self.esm_results_db_name
@@ -1024,6 +1019,7 @@ class PathwayESM(ESM):
 
             # Update the ESM variable values for the current time step
             self.esm_db_name = self.esm_db_name.replace(str(year), str(time_step['year']))
+            self.esm_db = Database(db_names=self.esm_db_name)
             self.esm_results_db_name =self.esm_results_db_name.replace(str(year), str(time_step['year']))
             self.results_path_file = self.results_path_file.replace(str(year), str(time_step['year']))
             self.df_flows_set_to_zero = pd.read_csv(f'{self.results_path_file}removed_flows_list.csv')
