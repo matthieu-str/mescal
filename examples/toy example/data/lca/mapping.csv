@@ -2,7 +2,7 @@ Name,Type,Product,Activity,Location,Unit,Database
 PV,Operation,"electricity, low voltage","electricity production, photovoltaic, 570kWp open ground installation, multi-Si",RoW,kilowatt hour,ecoinvent_cutoff_3.10.1_image_SSP2-Base_2050
 PV,Construction,"photovoltaic plant, 570kWp, multi-Si, on open ground","market for photovoltaic plant, 570kWp, multi-Si, on open ground",GLO,unit,ecoinvent_cutoff_3.10.1_image_SSP2-Base_2050
 WIND_ONSHORE,Operation,"electricity, high voltage","electricity production, wind, 1-3MW turbine, onshore",RoW,kilowatt hour,ecoinvent_cutoff_3.10.1_image_SSP2-Base_2050
-WIND_ONSHORE_CONNECTION,Construction,"wind turbine network connection, 2MW, onshore","wind turbine network connection construction, 2MW, onshore",GLO,unit,ecoinvent_cutoff_3.10.1_image_SSP2-Base_2050
+WIND_ONSHORE_CONNECTION,Construction,"wind turbine network connection, 2MW, onshore","wind turbine network connection construction, 2MW, onshore",RoW,unit,ecoinvent_cutoff_3.10.1_image_SSP2-Base_2050
 WIND_ONSHORE_TURBINE,Construction,"wind turbine, 2MW, onshore","wind turbine construction, 2MW, onshore",GLO,unit,ecoinvent_cutoff_3.10.1_image_SSP2-Base_2050
 NUCLEAR,Operation,"electricity, high voltage","electricity production, nuclear, pressure water reactor",RoW,kilowatt hour,ecoinvent_cutoff_3.10.1_image_SSP2-Base_2050
 NUCLEAR,Construction,"nuclear power plant, pressure water reactor, 1000MW","market for nuclear power plant, pressure water reactor, 1000MW",GLO,unit,ecoinvent_cutoff_3.10.1_image_SSP2-Base_2050
