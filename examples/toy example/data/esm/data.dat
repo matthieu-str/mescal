@@ -1,3 +1,4 @@
+set YEARS := 2050 2060;
 set PERIODS := 1 2 3 4 5 6 7 8 9 10 11 12;
 set SECTORS := HOUSEHOLDS INDUSTRY;
 set END_USES_INPUT :=  ELECTRICITY LIGHTING HEAT_LOW_T_SC;
@@ -8,14 +9,22 @@ set TECHNOLOGIES_OF_END_USES_TYPE["ELECTRICITY"] :=  PV WIND_ONSHORE CCGT CCGT_C
 set PV_TECH  := PV;
 set INFRASTRUCTURE := BATTERY GRID;
 
-let end_uses_demand_year['ELECTRICITY','HOUSEHOLDS'] := 4e3 * 0.6 ;
-let end_uses_demand_year['HEAT_LOW_T_SC','HOUSEHOLDS'] := 4e3 * 0.3 ;
-let end_uses_demand_year['LIGHTING','HOUSEHOLDS'] := 4e3 * 0.1 ;
+let end_uses_demand_year['ELECTRICITY','HOUSEHOLDS',2050] := 4e3 * 0.6 ;
+let end_uses_demand_year['HEAT_LOW_T_SC','HOUSEHOLDS',2050] := 4e3 * 0.3 ;
+let end_uses_demand_year['LIGHTING','HOUSEHOLDS',2050] := 4e3 * 0.1 ;
 
-for{t in PERIODS}{
-	let c_op['NG',t] := 0.0459 ; # MCAD/GWh
-	let c_op['COAL',t] := 0.0399 ; # MCAD/GWh
-	let c_op['URANIUM',t] := 0.0054 ; # MCAD/GWh
+let end_uses_demand_year['ELECTRICITY','HOUSEHOLDS',2060] := 4e3 * 0.6 ;
+let end_uses_demand_year['HEAT_LOW_T_SC','HOUSEHOLDS',2060] := 4e3 * 0.3 ;
+let end_uses_demand_year['LIGHTING','HOUSEHOLDS',2060] := 4e3 * 0.1 ;
+
+let end_uses_demand_year['ELECTRICITY','INDUSTRY',2060] := 1e3 * 0.7 ;
+let end_uses_demand_year['HEAT_LOW_T_SC','INDUSTRY',2060] := 1e3 * 0.2 ;
+let end_uses_demand_year['LIGHTING','INDUSTRY',2060] := 1e3 * 0.1 ;
+
+for{t in PERIODS, y in YEARS}{
+	let c_op['NG',t,y] := 0.0459 ; # MCAD/GWh
+	let c_op['COAL',t,y] := 0.0399 ; # MCAD/GWh
+	let c_op['URANIUM',t,y] := 0.0054 ; # MCAD/GWh
 }
 
 let t_op[1] := 744 ; # 
@@ -59,16 +68,21 @@ let cooling_month[10] := 0 ; #
 let cooling_month[11] := 0 ; # 
 let cooling_month[12] := 0 ; #
 
-let layers_in_out['RES_SOLAR', 'RES_SOLAR'] := 1 ;
-let layers_in_out['RES_WIND_ONSHORE', 'RES_WIND_ONSHORE'] := 1 ;
-let layers_in_out['COAL', 'COAL'] := 1 ;
-let layers_in_out['NG', 'NG'] := 1 ;
-let layers_in_out['URANIUM', 'URANIUM'] := 1 ;
+for {y in YEARS}{
+	let layers_in_out['RES_SOLAR', 'RES_SOLAR',y] := 1 ;
+	let layers_in_out['RES_WIND_ONSHORE', 'RES_WIND_ONSHORE',y] := 1 ;
+	let layers_in_out['COAL','COAL',y] := 1 ;
+	let layers_in_out['NG','NG',y] := 1 ;
+	let layers_in_out['URANIUM','URANIUM',y] := 1 ;
+}
+
 
 let trl_min := 1 ; # 
 let trl_max := 9 ; #
 
-let avail['RES_SOLAR'] := 1e6 ; #
-let avail['RES_WIND_ONSHORE'] := 1e6 ; #
-let avail['COAL'] := 1e6 ; #
-let avail['NG'] := 1e6 ; #
+for {y in YEARS}{
+	let avail['RES_SOLAR',y] := 1e6 ; #
+	let avail['RES_WIND_ONSHORE',y] := 1e6 ; #
+	let avail['COAL',y] := 1e6 ; #
+	let avail['NG',y] := 1e6 ; #
+}

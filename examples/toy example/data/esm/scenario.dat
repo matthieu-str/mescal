@@ -7,12 +7,3 @@ let f_min['GRID'] := 0.0 ;
 let f_min['NUCLEAR'] := 0.0 ;
 let f_min['PV'] := 0.0 ;
 let f_min['WIND_ONSHORE'] := 0.0 ;
-
-
-let end_uses_demand_year['ELECTRICITY','INDUSTRY'] := 1e3 * 0.7 ;
-let end_uses_demand_year['HEAT_LOW_T_SC','INDUSTRY'] := 1e3 * 0.2 ;
-let end_uses_demand_year['LIGHTING','INDUSTRY'] := 1e3 * 0.1 ;
-
-let end_uses_demand_year['ELECTRICITY','HOUSEHOLDS'] := 0 ;
-let end_uses_demand_year['HEAT_LOW_T_SC','HOUSEHOLDS'] := 0 ;
-let end_uses_demand_year['LIGHTING','HOUSEHOLDS'] := 0 ;

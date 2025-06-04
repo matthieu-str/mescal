@@ -1,1 +1,1 @@
-minimize obj: TotalLCIA_m_CCS;
+minimize obj: TotalLCIA_TTEQ[2050];

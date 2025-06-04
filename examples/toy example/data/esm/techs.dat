@@ -1,7 +1,13 @@
-let layers_in_out['PV','ELECTRICITY'] := 1.0 ;
-let layers_in_out['PV','RES_SOLAR'] := -1.0 ;
-let c_inv['PV'] := 1764.38 ;
-let c_maint['PV'] := 18.33 ;
+let layers_in_out['PV','ELECTRICITY',2050] := 1.0 ;
+let layers_in_out['PV','RES_SOLAR',2050] := -1.0 ;
+let c_inv['PV',2050] := 1764.38 ;
+let c_maint['PV',2050] := 18.33 ;
+
+let layers_in_out['PV','ELECTRICITY',2060] := 1.0 ;
+let layers_in_out['PV','RES_SOLAR',2060] := -1.0 ;
+let c_inv['PV',2060] := 1764.38 ;
+let c_maint['PV',2060] := 18.33 ;
+
 let c_p['PV'] := 1 ;
 let c_p_t['PV',1] := 0.35 ;
 let c_p_t['PV',2] := 0.37 ;
@@ -19,10 +25,16 @@ let lifetime['PV'] := 25.0 ;
 let ref_size['PV'] := 0.01 ;
 let trl['PV'] := 9.0 ;
 
-let layers_in_out['WIND_ONSHORE','ELECTRICITY'] := 1.0 ;
-let layers_in_out['WIND_ONSHORE','RES_WIND_ONSHORE'] := -1.0 ;
-let c_inv['WIND_ONSHORE'] := 2471.53 ;
-let c_maint['WIND_ONSHORE'] := 67.973 ;
+let layers_in_out['WIND_ONSHORE','ELECTRICITY',2050] := 1.0 ;
+let layers_in_out['WIND_ONSHORE','RES_WIND_ONSHORE',2050] := -1.0 ;
+let c_inv['WIND_ONSHORE',2050] := 2471.53 ;
+let c_maint['WIND_ONSHORE',2050] := 67.973 ;
+
+let layers_in_out['WIND_ONSHORE','ELECTRICITY',2060] := 1.0 ;
+let layers_in_out['WIND_ONSHORE','RES_WIND_ONSHORE',2060] := -1.0 ;
+let c_inv['WIND_ONSHORE',2060] := 2471.53 ;
+let c_maint['WIND_ONSHORE',2060] := 67.973 ;
+
 let c_p['WIND_ONSHORE'] := 1 ;
 let c_p_t['WIND_ONSHORE',1] := 0.25 ;
 let c_p_t['WIND_ONSHORE',2] := 0.22 ;
@@ -40,55 +52,87 @@ let lifetime['WIND_ONSHORE'] := 25.0 ;
 let ref_size['WIND_ONSHORE'] := 0.003 ;
 let trl['WIND_ONSHORE'] := 9.0 ;
 
-let layers_in_out['NUCLEAR','ELECTRICITY'] := 1.0 ;
-let layers_in_out['NUCLEAR','URANIUM'] := -2.7 ;
-let c_inv['NUCLEAR'] := 7769.928 ;
-let c_maint['NUCLEAR'] := 246.679 ;
+let layers_in_out['NUCLEAR','ELECTRICITY',2050] := 1.0 ;
+let layers_in_out['NUCLEAR','URANIUM',2050] := -2.7 ;
+let c_inv['NUCLEAR',2050] := 7769.928 ;
+let c_maint['NUCLEAR',2050] := 246.679 ;
+
+let layers_in_out['NUCLEAR','ELECTRICITY',2060] := 1.0 ;
+let layers_in_out['NUCLEAR','URANIUM',2060] := -2.7 ;
+let c_inv['NUCLEAR',2060] := 7769.928 ;
+let c_maint['NUCLEAR',2060] := 246.679 ;
+
 let c_p['NUCLEAR'] := 0.9 ;
 let lifetime['NUCLEAR'] := 40.0 ;
 let ref_size['NUCLEAR'] := 1.6 ;
 let trl['NUCLEAR'] := 9.0 ;
 
-let layers_in_out['CCGT','ELECTRICITY'] := 1.0 ;
-let layers_in_out['CCGT','NG'] := -1.587 ;
-let c_inv['CCGT'] := 1838.494 ;
-let c_maint['CCGT'] := 56.925 ;
+let layers_in_out['CCGT','ELECTRICITY',2050] := 1.0 ;
+let layers_in_out['CCGT','NG',2050] := -1.587 ;
+let c_inv['CCGT',2050] := 1838.494 ;
+let c_maint['CCGT',2050] := 56.925 ;
+
+let layers_in_out['CCGT','ELECTRICITY',2060] := 1.0 ;
+let layers_in_out['CCGT','NG',2060] := -1.587 ;
+let c_inv['CCGT',2060] := 1838.494 ;
+let c_maint['CCGT',2060] := 56.925 ;
+
 let c_p['CCGT'] := 0.45 ;
 let lifetime['CCGT'] := 25.0 ;
 let ref_size['CCGT'] := 0.5 ;
 let trl['CCGT'] := 9.0 ;
 
-let layers_in_out['CCGT_CC','ELECTRICITY'] := 1.0 ;
-let layers_in_out['CCGT_CC','NG'] := -1.754 ;
-let c_inv['CCGT_CC'] := 2465.021 ;
-let c_maint['CCGT_CC'] := 58.479 ;
+let layers_in_out['CCGT_CC','ELECTRICITY',2050] := 1.0 ;
+let layers_in_out['CCGT_CC','NG',2050] := -1.754 ;
+let c_inv['CCGT_CC',2050] := 2465.021 ;
+let c_maint['CCGT_CC',2050] := 58.479 ;
+
+let layers_in_out['CCGT_CC','ELECTRICITY',2060] := 1.0 ;
+let layers_in_out['CCGT_CC','NG',2060] := -1.754 ;
+let c_inv['CCGT_CC',2060] := 2465.021 ;
+let c_maint['CCGT_CC',2060] := 58.479 ;
+
 let c_p['CCGT_CC'] := 0.85 ;
 let lifetime['CCGT_CC'] := 25.0 ;
 let ref_size['CCGT_CC'] := 0.5 ;
 let trl['CCGT_CC'] := 9.0 ;
 
-let layers_in_out['COAL_IGCC','COAL'] := -2.065 ;
-let layers_in_out['COAL_IGCC','ELECTRICITY'] := 1.0 ;
-let c_inv['COAL_IGCC'] := 5002.321 ;
-let c_maint['COAL_IGCC'] := 128.542 ;
+let layers_in_out['COAL_IGCC','COAL',2050] := -2.065 ;
+let layers_in_out['COAL_IGCC','ELECTRICITY',2050] := 1.0 ;
+let c_inv['COAL_IGCC',2050] := 5002.321 ;
+let c_maint['COAL_IGCC',2050] := 128.542 ;
+
+let layers_in_out['COAL_IGCC','COAL',2060] := -2.065 ;
+let layers_in_out['COAL_IGCC','ELECTRICITY',2060] := 1.0 ;
+let c_inv['COAL_IGCC',2060] := 5002.321 ;
+let c_maint['COAL_IGCC',2060] := 128.542 ;
+
 let c_p['COAL_IGCC'] := 0.778 ;
 let lifetime['COAL_IGCC'] := 35.0 ;
 let ref_size['COAL_IGCC'] := 0.488 ;
 let trl['COAL_IGCC'] := 9.0 ;
 
-let layers_in_out['COAL_IGCC_CC','COAL'] := -2.58 ;
-let layers_in_out['COAL_IGCC_CC','ELECTRICITY'] := 1.0 ;
-let c_inv['COAL_IGCC_CC'] := 7704.925 ;
-let c_maint['COAL_IGCC_CC'] := 173.274 ;
+let layers_in_out['COAL_IGCC_CC','COAL',2050] := -2.58 ;
+let layers_in_out['COAL_IGCC_CC','ELECTRICITY',2050] := 1.0 ;
+let c_inv['COAL_IGCC_CC',2050] := 7704.925 ;
+let c_maint['COAL_IGCC_CC',2050] := 173.274 ;
+
+let layers_in_out['COAL_IGCC_CC','COAL',2060] := -2.58 ;
+let layers_in_out['COAL_IGCC_CC','ELECTRICITY',2060] := 1.0 ;
+let c_inv['COAL_IGCC_CC',2060] := 7704.925 ;
+let c_maint['COAL_IGCC_CC',2060] := 173.274 ;
+
 let c_p['COAL_IGCC_CC'] := 0.8 ;
 let lifetime['COAL_IGCC_CC'] := 35.0 ;
 let ref_size['COAL_IGCC_CC'] := 0.498 ;
 let trl['COAL_IGCC_CC'] := 9.0 ;
 
-let c_inv['BATTERY'] := 386.598 ;
+let c_inv['BATTERY',2050] := 386.598 ;
+let c_inv['BATTERY',2060] := 386.598 ;
 let lifetime['BATTERY'] := 25.0 ;
 let trl['BATTERY'] := 9 ;
 
-let c_inv['GRID'] := 61100 ;
+let c_inv['GRID',2050] := 61100 ;
+let c_inv['GRID',2060] := 61100 ;
 let lifetime['GRID'] := 80 ;
 let trl['GRID'] := 9 ;
