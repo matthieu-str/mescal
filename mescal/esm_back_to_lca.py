@@ -179,7 +179,6 @@ def create_new_database_with_esm_results(
 
     if write_database:
         esm_results_db.write_to_brightway(esm_results_db_name)
-        self.connect_esm_results_to_database(create_new_db=False, specific_db_name=esm_results_db_name)
 
     if return_database:
         self.main_database = self.main_database - esm_results_db
