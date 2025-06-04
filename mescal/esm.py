@@ -1072,15 +1072,17 @@ class PathwayESM(ESM):
         else:
             self.esm_results_db_name += f'_{year}'
 
-        for i in range(self.N_time_steps):
-            time_step = self.time_steps[i]
+        for i in range(len(self.time_steps)-1):  # Iterate over all time steps except the last one
+            current_time_step = self.time_steps[i]
+            next_time_step = self.time_steps[i+1]
 
             # Update the ESM variable values for the current time step
-            self.esm_results_db_name = self.esm_results_db_name.replace(str(year), str(time_step['year']))
+            self.esm_results_db_name = self.esm_results_db_name.replace(str(year), str(current_time_step['year']))
 
-            year = time_step['year']
-            self.main_database = time_step['main_database']
-            self.model = time_step['model']
+            # Results of time step i are injected in the database of time step i + 1
+            year = current_time_step['year']
+            self.main_database = next_time_step['main_database']
+            self.model = current_time_step['model']
             self.main_database_name = self.main_database.db_names
             self.mapping = mapping_all_time_steps[mapping_all_time_steps['Year'] == year].copy()
 
