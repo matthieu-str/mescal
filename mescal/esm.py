@@ -867,11 +867,10 @@ class PathwayESM(ESM):
         )
 
         self.time_steps = time_steps
-        self.N_time_steps = len(time_steps)
         self.pathway = True
 
         list_mapping_time_steps = []
-        for i in range(self.N_time_steps):  # Iterate over all time steps
+        for i in range(len(self.time_steps)):  # Iterate over all time steps
             time_step = self.time_steps[i]
 
             self.mapping['Database'] = self.mapping['Database'].replace(
@@ -890,7 +889,7 @@ class PathwayESM(ESM):
         list_mapping_time_steps = []
         mapping_all_time_steps = self.mapping.copy()
 
-        for i in range(self.N_time_steps):  # Iterate over all time steps
+        for i in range(len(self.time_steps)):  # Iterate over all time steps
             time_step = self.time_steps[i]
             year = time_step['year']
             self.mapping = mapping_all_time_steps[mapping_all_time_steps['Year'] == year].copy()
@@ -917,7 +916,7 @@ class PathwayESM(ESM):
         self.esm_db_name += f'_{year}'
         self.results_path_file += f'{year}/'
 
-        for i in range(self.N_time_steps):  # Iterate over all time steps
+        for i in range(len(self.time_steps)):  # Iterate over all time steps
 
             time_step = self.time_steps[i]
 
@@ -961,7 +960,7 @@ class PathwayESM(ESM):
         self.esm_db_name += f'_{year}'
         self.results_path_file += f'{year}/'
 
-        for i in range(self.N_time_steps):
+        for i in range(len(self.time_steps)):
 
             time_step = self.time_steps[i]
 
@@ -1014,7 +1013,7 @@ class PathwayESM(ESM):
         self.esm_results_db_name += f'_{year}'
         self.results_path_file += f'{year}/'
 
-        for i in range(self.N_time_steps):
+        for i in range(len(self.time_steps)):
             time_step = self.time_steps[i]
 
             # Update the ESM variable values for the current time step
