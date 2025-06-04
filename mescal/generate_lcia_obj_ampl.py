@@ -112,7 +112,7 @@ def generate_mod_file_ampl(
             # Declaring the total LCIA amount variables
             for abbrev in list(impact_abbrev.Abbrev):
                 f.write(f'var Total{metric_type}_{abbrev}{{y in YEARS}};\n'
-                        f'subject to {metric_type}_{abbrev}_cal:\n'
+                        f'subject to {metric_type}_{abbrev}_cal{{y in YEARS}}:\n'
                         f"  Total{metric_type}_{abbrev}[y] = Total{metric_type}['{abbrev}',y] + TotalCost[y]*1e-6;\n\n")
         else:
             # Declaring the LCIA parameters and variables
