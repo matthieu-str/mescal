@@ -859,12 +859,34 @@ class PathwayESM(ESM):
 
         :param time_steps: List of dictionaries, each containing parameters for a time step in the transition ESM.
         """
-        super().__init__(
-            model=time_steps[0]['model'],
-            main_database=time_steps[0]['main_database'],
-            *args,
-            **kwargs,
-        )
+        if 'model' in time_steps[0] and 'lifetime' in time_steps[0]:
+            super().__init__(
+                model=time_steps[0]['model'],
+                lifetime=time_steps[0]['lifetime'],
+                main_database=time_steps[0]['main_database'],
+                *args,
+                **kwargs,
+            )
+        elif 'lifetime' in time_steps[0]:
+            super().__init__(
+                lifetime=time_steps[0]['lifetime'],
+                main_database=time_steps[0]['main_database'],
+                *args,
+                **kwargs,
+            )
+        elif 'model' in time_steps[0]:
+            super().__init__(
+                model=time_steps[0]['model'],
+                main_database=time_steps[0]['main_database'],
+                *args,
+                **kwargs,
+            )
+        else:
+            super().__init__(
+                main_database=time_steps[0]['main_database'],
+                *args,
+                **kwargs,
+            )
 
         self.time_steps = time_steps
         self.pathway = True
@@ -925,7 +947,8 @@ class PathwayESM(ESM):
             self.results_path_file = self.results_path_file.replace(str(year), str(time_step['year']))
 
             year = time_step['year']
-            self.model = time_step['model']
+            if 'model' in time_step:
+                self.model = time_step['model']
             self.main_database = time_step['main_database']
             self.main_database_name = self.main_database.db_names
             self.mapping = mapping_all_time_steps[mapping_all_time_steps['Year'] == year].copy()
@@ -974,6 +997,8 @@ class PathwayESM(ESM):
             # Update the ESM variable values for the current time step
             self.esm_db_name = self.esm_db_name.replace(str(year), str(time_step['year']))
             self.esm_db = Database(db_names=self.esm_db_name)
+            if 'lifetime' in time_step:
+                self.lifetime = time_step['lifetime']
             self.results_path_file = self.results_path_file.replace(str(year), str(time_step['year']))
             self.df_activities_subject_to_double_counting = pd.read_csv(f"{self.results_path_file}activities_subject_to_double_counting.csv")
 
@@ -1028,6 +1053,8 @@ class PathwayESM(ESM):
             time_step = self.time_steps[i]
 
             # Update the ESM variable values for the current time step
+            if 'lifetime' in time_step:
+                self.lifetime = time_step['lifetime']
             self.esm_db_name = self.esm_db_name.replace(str(year), str(time_step['year']))
             self.esm_db = Database(db_names=self.esm_db_name)
             self.esm_results_db_name =self.esm_results_db_name.replace(str(year), str(time_step['year']))
