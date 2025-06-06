@@ -620,12 +620,28 @@ def create_or_modify_activity_from_esm_results(
         }
     )
 
+    total_production_amount_original_activity = 0
     for exc in original_activity['exchanges']:
         if exc['unit'] not in [original_activity_unit, 'unit']:
             # Add flows to the new activity that are not production or construction flows
             exchanges.append(exc)
-        else:
-            pass
+        if exc['type'] == 'technosphere' and exc['unit'] == original_activity_unit:
+            total_production_amount_original_activity += exc['amount']
+
+    losses_original_activity = total_production_amount_original_activity - 1
+    if losses_original_activity > 0:  # add a loss coefficient
+        exchanges.append(
+            {
+                'amount': losses_original_activity,
+                'code': new_code,
+                'type': 'technosphere',
+                'name': original_activity_name,
+                'product': original_activity_prod,
+                'unit': original_activity_unit,
+                'location': esm_location,
+                'database': esm_results_db_name,
+            }
+        )
 
     new_activity = {
         'database': esm_results_db_name,
