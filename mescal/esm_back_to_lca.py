@@ -201,6 +201,7 @@ def connect_esm_results_to_database(
         new_db_name: str = None,
         specific_db_name: str = None,
         locations: list[str] or str = None,
+        update_exchanges_based_on_activity_name: bool = True,
 ) -> None:
     """
     Connect new LCI datasets obtained from the ESM results to the main database
@@ -211,6 +212,8 @@ def connect_esm_results_to_database(
     :param specific_db_name: if you want to connect another database than the main database
     :param locations: list of locations to be considered for connection with the ESM results database.
         If None, only the ESM location is considered. If 'all', all locations are considered.
+    :param update_exchanges_based_on_activity_name: if True, update similar flows based on the activity and product 
+        names, if False, update similar flows based on the product name only.
     :return: None (copies and/or modifies the main database)
     """
 
@@ -308,7 +311,8 @@ def connect_esm_results_to_database(
                         for exc in Dataset(act).get_technosphere_flows():
                             if (
                                     ((exc['name'] == original_activity_name)
-                                     | (exc['name'] == original_activity_name.replace('market', 'market group')))
+                                     | (exc['name'] == original_activity_name.replace('market', 'market group')) 
+                                     | (not update_exchanges_based_on_activity_name))
                                     & (exc['product'] == activity_prod)
                                     & (exc['database'] != esm_results_db_name)
                             ):
@@ -323,7 +327,8 @@ def connect_esm_results_to_database(
                         for exc in [i for i in act_bw.technosphere()]:
                             if (
                                     ((exc['name'] == original_activity_name)
-                                     | (exc['name'] == original_activity_name.replace('market', 'market group')))
+                                     | (exc['name'] == original_activity_name.replace('market', 'market group')) 
+                                     | (not update_exchanges_based_on_activity_name))
                                     & (exc['product'] == activity_prod)
                                     & ((exc['database'] != esm_results_db_name)
                                        | (exc['input'][0] != esm_results_db_name))
