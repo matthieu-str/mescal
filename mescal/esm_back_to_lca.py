@@ -254,7 +254,7 @@ def connect_esm_results_to_database(
 
     # Activities of the ESM region
     if locations == 'all':
-        activities_of_esm_region = [a for a in db_as_list]
+        activities_of_esm_region = db_as_list
     else:
         activities_of_esm_region = [
             a for loc in locations
@@ -304,7 +304,7 @@ def connect_esm_results_to_database(
             ]
 
             for act in activities_of_esm_region:
-                if act['name'] == original_activity_name:
+                if act['name'] == original_activity_name and act['location'] == esm_location:
                     pass  # we do not want the new activity to be an input of itself
                 else:
                     if create_new_db:
@@ -351,7 +351,7 @@ def connect_esm_results_to_database(
                     ]
                     downstream_consumers = Dataset(original_activity).get_downstream_consumers(db_as_list)
                     for act in downstream_consumers:
-                        if act['name'] == original_activity_name:
+                        if act['name'] == original_activity_name and act['location'] == esm_location:
                             pass  # we do not want the new activity to be an input of itself
                         else:
                             if create_new_db:
@@ -365,6 +365,8 @@ def connect_esm_results_to_database(
                                         exc['code'] = new_activity['code']
                                         exc['database'] = esm_results_db_name
                                         exc['input'] = (esm_results_db_name, new_activity['code'])
+                                        exc['location'] = esm_location
+
                             else:
                                 act_bw = bd.Database(act['database']).get(act['code'])
                                 k = 0  # exchange modification counter
@@ -380,6 +382,7 @@ def connect_esm_results_to_database(
                                         exc['code'] = new_activity['code']
                                         exc['database'] = esm_results_db_name
                                         exc['input'] = (esm_results_db_name, new_activity['code'])
+                                        exc['location'] = esm_location
                                         exc.save()
 
                                 if k > 0:  # if exchanges have been modified
