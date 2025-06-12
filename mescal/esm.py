@@ -905,6 +905,7 @@ class PathwayESM(ESM):
             list_mapping_time_steps.append(mapping_copy)  # Store the mapping with new codes for each time step
 
         self.mapping = pd.concat(list_mapping_time_steps, ignore_index=True)  # Concatenate all mappings
+        self.mapping.drop_duplicates(inplace=True)  # Remove duplicates for the current time step
 
     def change_location_mapping_file(self) -> None:
 
