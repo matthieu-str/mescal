@@ -99,7 +99,7 @@ def generate_mod_file_ampl(
             # Equation defining the total LCIA impact (sum over all technologies and resources)
             if assessment_type == 'esm':
                 f.write('subject to totalLCIA_calc_r {id in INDICATORS, y in YEARS}:\n'
-                        '  TotalLCIA[id,y] = sum {i in TECHNOLOGIES} (LCIA_constr[id,i,y] / lifetime[i]  '
+                        '  TotalLCIA[id,y] = sum {i in TECHNOLOGIES} (LCIA_constr[id,i,y] / lifetime[i,y]  '
                         '+ LCIA_op[id,i,y]) + sum{r in RESOURCES} (LCIA_res[id,r,y]);\n\n')
             elif assessment_type == 'direct emissions':
                 f.write('subject to totalDIRECT_calc_r {id in INDICATORS, y in YEARS}:\n'
