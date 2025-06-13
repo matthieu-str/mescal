@@ -32,7 +32,7 @@ param layers_in_out {RESOURCES union TECHNOLOGIES, LAYERS, YEARS} default 0;
 param ref_size {TECHNOLOGIES} >= 0 default 0.001; # f_ref: reference size of each technology, expressed in the same units as the layers_in_out table. Refers to main output (heat for cogen technologies). storage level [GWh] for STORAGE_TECH
 param c_inv {TECHNOLOGIES,YEARS} >= 0 default 0.000001; # Specific investment cost [MCHF/GW].[MCHF/GWh] for STORAGE_TECH
 param c_maint {TECHNOLOGIES,YEARS} >= 0 default 0; # O&M cost [MCHF/GW/year]: O&M cost does not include resource (fuel) cost. [MCHF/GWh] for STORAGE_TECH
-param lifetime {TECHNOLOGIES} >= 0 default 20; # n: lifetime [years]
+param lifetime {TECHNOLOGIES,YEARS} >= 0 default 20; # n: lifetime [years]
 param f_max {TECHNOLOGIES} >= 0 default 300000; # Maximum feasible installed capacity [GW], refers to main output. storage level [GWh] for STORAGE_TECH
 param f_min {TECHNOLOGIES} >= 0 default 0; # Minimum feasible installed capacity [GW], refers to main output. storage level [GWh] for STORAGE_TECH
 param fmax_perc {TECHNOLOGIES} >= 0, <= 1 default 1; # value in [0,1]: this is to fix that a technology can at max produce a certain % of the total output of its sector over the entire year
@@ -41,7 +41,7 @@ param fmax_perc_mob {TECHNOLOGIES} >= 0, <= 1 default 1; # value in [0,1]: this 
 param fmin_perc_mob {TECHNOLOGIES} >= 0, <= 1 default 0; # value in [0,1]: this is to fix that a technology can at min produce a certain % of the total output of its sector over the entire year
 param c_p_t {TECHNOLOGIES, PERIODS} >= 0, <= 1 default 1; # capacity factor of each technology and resource, defined on monthly basis. Different than 1 if F_Mult_t (t) <= c_p_t (t) * F_Mult
 param c_p {TECHNOLOGIES} >= 0, <= 1 default 1; # capacity factor of each technology, defined on annual basis. Different than 1 if sum {t in PERIODS} F_Mult_t (t) * t_op (t) <= c_p * F_Mult
-param tau {i in TECHNOLOGIES} := i_rate * (1 + i_rate)^lifetime [i] / (((1 + i_rate)^lifetime [i]) - 1); # Annualisation factor for each different technology
+param tau {i in TECHNOLOGIES, y in YEARS} := i_rate * (1 + i_rate)^lifetime [i,y] / (((1 + i_rate)^lifetime [i,y]) - 1); # Annualisation factor for each different technology
 param trl {TECHNOLOGIES} >=0 default 9; # Technology Readiness Level
 
 # Attributes of RESOURCES
@@ -141,7 +141,7 @@ subject to op_cost_calc {i in RESOURCES, y in YEARS}:
 
 # [Eq. 1.1]	
 subject to totalcost_cal{y in YEARS}:
-	TotalCost[y] = sum {i in TECHNOLOGIES} (tau [i] * C_inv [i,y] + C_maint [i,y]) + sum {j in RESOURCES} C_op [j,y] ;
+	TotalCost[y] = sum {i in TECHNOLOGIES} (tau [i,y] * C_inv [i,y] + C_maint [i,y]) + sum {j in RESOURCES} C_op [j,y] ;
 
 # Only for saving data
 subject to production{i in TECHNOLOGIES, t in PERIODS, y in YEARS}:
@@ -162,6 +162,3 @@ subject to battery{y in YEARS}:
 
 # subject to extra_grid:
 #	F_Mult ["GRID"] = 1 + (9400 / c_inv["GRID"]) * (F_Mult ["WIND_ONSHORE"] + F_Mult ["PV"]) / (f_max ["WIND_ONSHORE"] + f_max ["PV"]);
-
-subject to years_linkage{i in TECHNOLOGIES}:
-	F_Mult[i,2060] >= F_Mult[i,2050]
