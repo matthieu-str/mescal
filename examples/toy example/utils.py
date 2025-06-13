@@ -203,8 +203,6 @@ def run_esm(
 
     if lca_metrics_background == 'base':
         dat_files.append(path_model_lca + 'techs_lca.dat')
-        dat_files.append(path_model_lca + 'techs_lca_direct.dat')
-        mod_files.append(path_model_lca + 'objectives_lca_direct.mod')
     elif lca_metrics_background == 'esm_not_harmonized':
         run = objective_function.replace("Total", "").replace("LCIA_", "").replace('[2050]', '').lower()
         dat_files.append(path_model_lca + f'esm_results/techs_lca_{run.replace("[2060]", "")}_wo_harmonization.dat')
@@ -279,11 +277,11 @@ def get_impact_scores(
 
     df_lifetime = df_results.parameters['lifetime'].reset_index()
     df_f_mult = df_results.variables['F_Mult'].reset_index().drop(columns=['Run'])
-    df_f_mult = df_f_mult.merge(df_lifetime[['index', 'lifetime']], left_on='index0', right_on='index', how='left').drop(columns='index')
+    df_f_mult = df_f_mult.merge(df_lifetime[['index0', 'index1', 'lifetime']], on=['index0', 'index1'], how='left')
     df_annual_prod = df_results.variables['Annual_Prod'].reset_index().drop(columns=['Run'])
     df_annual_res = df_results.variables['Annual_Res'].reset_index().drop(columns=['Run'])
     df_tech_cost = pd.merge(df_results.variables['C_maint']['C_maint'].reset_index(), df_results.variables['C_inv']['C_in'].reset_index(), on=['index0', 'index1'], how='outer')
-    df_tech_cost = df_tech_cost.merge(df_results.parameters['tau'].reset_index(), left_on='index0', right_on='index', how='left').drop(columns='index')
+    df_tech_cost = df_tech_cost.merge(df_results.parameters['tau'].reset_index(), on=['index0', 'index1'], how='left')
     df_tech_cost['C_inv_an'] = df_tech_cost['C_in'] * df_tech_cost['tau']
     df_res_cost = df_results.variables['C_op'].reset_index()
 
