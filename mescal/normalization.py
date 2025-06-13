@@ -109,7 +109,8 @@ def normalize_lca_metrics(
         file_name: str = 'techs_lcia',
         metadata: dict = None,
         output: str = 'write',
-) -> None | tuple[pd.DataFrame, dict]:
+        skip_normalization: bool = False,
+) -> None | pd.DataFrame:
     """
     Create a .dat file containing the normalized LCA metrics for AMPL and a csv file containing the normalization
     factors
@@ -130,7 +131,9 @@ def normalize_lca_metrics(
         'regionalized', 'iam', 'ssp_rcp', 'lcia_method'.
     :param output: if 'write', writes the .dat file in 'path', if 'return', normalizes pandas dataframe, if 'both' does
         both operations.
-    :return: None or the normalized pandas dataframe and the refactor dictionary (depending on the value of 'output')
+    :param skip_normalization: if True, skips the normalization step and only writes the .dat file with the original
+        values.
+    :return: None or the normalized pandas dataframe (depending on the value of 'output')
     """
 
     if assessment_type == 'direct emissions' and max_per_cat is None:
@@ -159,37 +162,44 @@ def normalize_lca_metrics(
 
     R = pd.merge(R, impact_abbrev, on='Impact_category')
 
-    if assessment_type == 'esm':
-        refactor = {}
-        R_scaled = R[R['Type'] != 'Construction']
-        for unit in R['Unit'].unique():
-            # Scale the construction metrics to be at the same order of magnitude as the operation and resource metrics
-            lcia_op_max = R[((R['Type'] == 'Operation') |
-                             (R['Type'] == 'Resource')) & (R['Unit'] == unit)]['Value'].max()
-            lcia_constr_max = R[(R['Type'] == 'Construction') & (R['Unit'] == unit)]['Value'].max()
-            refactor[unit] = lcia_op_max / lcia_constr_max
-            R_constr_imp = R[(R['Type'] == 'Construction') & (R['Unit'] == unit)]
-            R_constr_imp['Value'] *= refactor[unit]
-            R_scaled = pd.concat([R_scaled, R_constr_imp])  # R matrix but with refactor applied to construction metrics
-            R_scaled['max_unit'] = R_scaled.groupby('Unit')['Value'].transform('max')
-
-    else:  # assessment_type == 'direct emissions'
-        refactor = None  # not needed for direct emissions as they are for operation datasets only
-        max_per_cat_dict = {}
-        for i in range(len(max_per_cat)):
-            max_per_cat_dict[max_per_cat['Unit'][i]] = max_per_cat['max_unit'][i]
+    if skip_normalization:
         R_scaled = R.copy()
-        R_scaled['max_unit'] = R_scaled.apply(lambda x: max_per_cat_dict[x['Unit']], axis=1)
+        R_scaled['Value_norm'] = R_scaled['Value']
+        norm_unit = ''
 
-    R_scaled['Value_norm'] = R_scaled['Value'] / R_scaled['max_unit']
-    if assessment_type == 'esm':
-        R_scaled_constr = R_scaled[R_scaled['Type'] == 'Construction']
-        R_scaled_op = R_scaled[R_scaled['Type'] != 'Construction']
-        R_scaled_op['Value_norm'] = R_scaled_op['Value_norm'].apply(lambda x: 0 if abs(x) < mip_gap else x)
-        R_scaled_constr['Value_norm'] = R_scaled_constr.apply(lambda x: 0 if abs(x['Value_norm']) < mip_gap else x['Value_norm'] / refactor[x['Unit']], axis=1)
-        R_scaled = pd.concat([R_scaled_op, R_scaled_constr])
-    else:  # assessment_type == 'direct emissions'
-        R_scaled['Value_norm'] = R_scaled['Value_norm'].apply(lambda x: 0 if abs(x) < mip_gap else x)
+    else:
+        norm_unit = 'normalized'
+        if assessment_type == 'esm':
+            refactor = {}
+            R_scaled = R[R['Type'] != 'Construction']
+            for unit in R['Unit'].unique():
+                # Scale the construction metrics to be at the same order of magnitude as the operation and resource metrics
+                lcia_op_max = R[((R['Type'] == 'Operation') |
+                                 (R['Type'] == 'Resource')) & (R['Unit'] == unit)]['Value'].max()
+                lcia_constr_max = R[(R['Type'] == 'Construction') & (R['Unit'] == unit)]['Value'].max()
+                refactor[unit] = lcia_op_max / lcia_constr_max
+                R_constr_imp = R[(R['Type'] == 'Construction') & (R['Unit'] == unit)]
+                R_constr_imp['Value'] *= refactor[unit]
+                R_scaled = pd.concat([R_scaled, R_constr_imp])  # R matrix but with refactor applied to construction metrics
+                R_scaled['max_unit'] = R_scaled.groupby('Unit')['Value'].transform('max')
+
+        else:  # assessment_type == 'direct emissions'
+            refactor = None  # not needed for direct emissions as they are for operation datasets only
+            max_per_cat_dict = {}
+            for i in range(len(max_per_cat)):
+                max_per_cat_dict[max_per_cat['Unit'][i]] = max_per_cat['max_unit'][i]
+            R_scaled = R.copy()
+            R_scaled['max_unit'] = R_scaled.apply(lambda x: max_per_cat_dict[x['Unit']], axis=1)
+
+        R_scaled['Value_norm'] = R_scaled['Value'] / R_scaled['max_unit']
+        if assessment_type == 'esm':
+            R_scaled_constr = R_scaled[R_scaled['Type'] == 'Construction']
+            R_scaled_op = R_scaled[R_scaled['Type'] != 'Construction']
+            R_scaled_op['Value_norm'] = R_scaled_op['Value_norm'].apply(lambda x: 0 if abs(x) < mip_gap else x)
+            R_scaled_constr['Value_norm'] = R_scaled_constr.apply(lambda x: 0 if abs(x['Value_norm']) < mip_gap else x['Value_norm'] / refactor[x['Unit']], axis=1)
+            R_scaled = pd.concat([R_scaled_op, R_scaled_constr])
+        else:  # assessment_type == 'direct emissions'
+            R_scaled['Value_norm'] = R_scaled['Value_norm'].apply(lambda x: 0 if abs(x) < mip_gap else x)
 
     if (output == 'write') | (output == 'both'):
 
@@ -225,20 +235,21 @@ def normalize_lca_metrics(
                 if self.pathway:
                     f.write(f"let {metric_type}_{self.tech_type(R_scaled.Type.iloc[i])}['{R_scaled.Abbrev.iloc[i]}',"
                             f"'{R_scaled.Name.iloc[i]}',{R_scaled.Year.iloc[i]}] := {R_scaled.Value_norm.iloc[i]}; "
-                            f"# normalized {R_scaled.Unit.iloc[i]}\n")
+                            f"#{norm_unit} {R_scaled.Unit.iloc[i]}\n")
                 else:
                     f.write(f"let {metric_type}_{tech_type(R_scaled.Type.iloc[i])}['{R_scaled.Abbrev.iloc[i]}','{R_scaled.Name.iloc[i]}'] "
-                            f":= {R_scaled.Value_norm.iloc[i]}; # normalized {R_scaled.Unit.iloc[i]}\n")
+                            f":= {R_scaled.Value_norm.iloc[i]}; #{norm_unit} {R_scaled.Unit.iloc[i]}\n")
 
-        # To come back to the original values, we save the maximum value of each unit
-        if assessment_type == 'esm':
-            R_scaled[['Abbrev', 'Unit', 'max_unit']].drop_duplicates().to_csv(f'{path}{file_name}_max.csv', index=False)
+        if not skip_normalization:
+            # To come back to the original values, we save the maximum value of each unit
+            if assessment_type == 'esm':
+                R_scaled[['Abbrev', 'Unit', 'max_unit']].drop_duplicates().to_csv(f'{path}{file_name}_max.csv', index=False)
 
         if output == 'both':
-            return R_scaled, refactor
+            return R_scaled
 
     elif output == 'return':
-        return R_scaled, refactor
+        return R_scaled
 
     else:
         raise ValueError(f"The output parameter must be either 'write', 'return' or 'both'")
