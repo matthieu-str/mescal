@@ -27,7 +27,7 @@ def regionalize_activity_foreground(
         new_act = copy.deepcopy(act)
 
     # Imports and exports are special cases for which we do not regionalize
-    elif act['name'] in self.import_export_list:
+    elif act['name'].split(',')[0] in self.import_export_list:
         new_act = copy.deepcopy(act)
 
     else:
