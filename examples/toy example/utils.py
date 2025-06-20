@@ -63,6 +63,10 @@ full_name_ind = {
     'Climate change, short term': 'Climate change, short term',
     'Total human health': 'Human health damage',
     'Total ecosystem quality': 'Ecosystem quality damage',
+    'TC': 'Total cost',
+    'CCST': 'Climate change, short term',
+    'TTHH': 'Total human health',
+    'TTEQ': 'Total ecosystem quality',
 }
 
 unit_ind_dict = {
@@ -70,6 +74,13 @@ unit_ind_dict = {
     'Climate change, short term': 't CO<sub>2</sub>-eq',
     'Total human health': 'DALY',
     'Total ecosystem quality': 'PDF.m<sup>2</sup>.yr',
+}
+
+unit_ind_txt_dict = {
+    'Total cost': '$',
+    'Climate change, short term': 't CO2-eq',
+    'Total human health': 'DALY',
+    'Total ecosystem quality': 'PDF.m2.yr',
 }
 
 unit_ind_mpl_dict = {
@@ -451,7 +462,7 @@ def plot_technologies_contribution(
     ax.set_xticks(x)
     ax.set_xticklabels(data_pivot.index)
     ax.set_xlabel('Objective function')
-    ax.set_ylabel(f"{full_name_ind[cat]} [{unit_ind_mpl_dict[cat]}/cap]")
+    ax.set_ylabel(f"{full_name_ind[cat]} [{unit_ind_mpl_dict[cat]}/(cap.yr)]")
 
     # Increase y-axis range with margin (e.g., 10% above max)
     ymax = bottom.max() * 1.05
@@ -591,7 +602,7 @@ def plot_ef_contributions(
         barmode='stack',
         labels={
             'ef_name': 'Elementary flow',
-            'scaled_impact': f'{full_name_ind[obj_name_dict[short_name]]} [{unit_ind_dict[obj_name_dict[short_name]]}/cap]',
+            'scaled_impact': f'{full_name_ind[obj_name_dict[short_name]]} [{unit_ind_dict[obj_name_dict[short_name]]}/(cap.yr)]',
             'Run': 'Objective function',
         },
         width=550,
@@ -611,12 +622,14 @@ def plot_ef_contributions(
 
     fig.show()
 
+    return contrib_analysis_ef_full
+
 
 def plot_energy_system_configuration(
         type: str,
         df_res: pd.DataFrame,
         save_fig: bool = False,
-):
+) -> pd.DataFrame:
     df = df_res[~df_res['Name'].isin(['GRID', 'BATTERY'])]
     df["Run"] = df["Run"].apply(lambda x: obj_code_dict[x])
     df["Name"] = df["Name"].apply(
@@ -663,6 +676,10 @@ def plot_energy_system_configuration(
         fig.write_image(f"./figures/{file_name}.pdf")
 
     fig.show()
+    if type == 'capacity':
+        return df[df.F_Mult != 0][['Name', 'Run', 'F_Mult']]
+    elif type == 'production':
+        return df[df.Annual_Prod != 0][['Name', 'Run', 'Annual_Prod']]
 
 
 def harmonization_level(run):
@@ -699,7 +716,7 @@ def plot_technologies_contribution_second_iteration(
         else:
             type_var = None
             show_var = cat
-            y_label_name = f'{full_name_ind[cat]} [{unit_ind_mpl_dict[cat]}/cap]'
+            y_label_name = f'{full_name_ind[cat]} [{unit_ind_mpl_dict[cat]}/(cap.yr)]'
             file_name = f"soo_{cat.replace(' ', '_').replace(',', '').lower()}_second_iteration"
     else:
         raise ValueError("type must be 'impact', 'capacity' or 'production'")
@@ -809,3 +826,5 @@ def plot_technologies_contribution_second_iteration(
         )
         df['Harmonization effect'] = (df['ESM-H'] - df['ESM-NH']) / df['ESM-NH']
         return df['Harmonization effect']
+    else:
+        return df_res_sec_iter
