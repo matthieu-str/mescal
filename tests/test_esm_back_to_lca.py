@@ -400,6 +400,9 @@ def test_create_new_database_with_esm_results():
         main_database=Database(db_as_list=dummy_db),
     )
 
+    esm.df_flows_set_to_zero = pd.DataFrame()  # not needed for this test
+    esm.double_counting_removal_amount = pd.DataFrame()  # not needed for this test
+
     esm_with_res_db = esm.create_new_database_with_esm_results(
         esm_results=esm_results,
         return_database=True,
