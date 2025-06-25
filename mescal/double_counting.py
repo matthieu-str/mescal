@@ -530,6 +530,7 @@ def double_counting_removal(
                             if code == act_constr_list[idx]['code']:
                                 new_code_constr = mapping_constr[mapping_constr.Name == sub_comp].New_code.iloc[0]
                                 flow['database'], flow['code'] = esm_db_name, new_code_constr
+                                flow['name'] = f'{sub_comp}, Construction'
 
                 # add the removed amount in the ei_removal dict for post-analysis
                 for cat in res_categories:
