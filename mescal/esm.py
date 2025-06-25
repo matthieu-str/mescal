@@ -850,14 +850,22 @@ def is_process_activity(row: pd.Series, process_list: list[str]) -> int:
 class PathwayESM(ESM):
     """
     The PathwayESM class inherits from the ESM class and is used to create the ESM databases, impact score
-    dataframes, .dat files, etc. corresponding to all time steps of a transition ESM.
+    dataframes, .dat files, etc. corresponding to all time steps of a pathway ESM.
     """
 
-    def __init__(self, time_steps: list[dict], *args, **kwargs):
+    def __init__(
+            self,
+            time_steps: list[dict],
+            operation_metrics_for_all_time_steps: bool = False,
+            *args, **kwargs
+    ):
         """
         Initialize the PathwayESM class.
 
-        :param time_steps: List of dictionaries, each containing parameters for a time step in the transition ESM.
+        :param time_steps: List of dictionaries, each containing parameters for a time step in the pathway ESM.
+        :param operation_metrics_for_all_time_steps: if True, the operation metrics for technologies that were
+            installed in previous time steps (i.e., with a different efficiency that the one of the current year)
+            are added to each yearly database.
         """
         if 'model' in time_steps[0] and 'lifetime' in time_steps[0]:
             super().__init__(
@@ -890,18 +898,25 @@ class PathwayESM(ESM):
 
         self.time_steps = time_steps
         self.pathway = True
+        self.operation_metrics_for_all_time_steps = operation_metrics_for_all_time_steps
+
+        # TODO: order time_steps by year
 
         list_mapping_time_steps = []
-        for i in range(len(self.time_steps)):  # Iterate over all time steps
-            time_step = self.time_steps[i]
+
+        mapping_copy = self.mapping.copy()
+        mapping_copy['Year'] = self.time_steps[0]['year']
+        list_mapping_time_steps.append(mapping_copy)
+
+        for i in range(1, len(self.time_steps)):  # Iterate over all time steps but the first one
 
             self.mapping['Database'] = self.mapping['Database'].replace(
-                self.main_database_name,
-                time_step['main_database'].db_names
+                self.time_steps[i-1]['main_database'].db_names,
+                self.time_steps[i]['main_database'].db_names,
             )
 
             mapping_copy = self.mapping.copy()
-            mapping_copy['Year'] = time_step['year']
+            mapping_copy['Year'] = self.time_steps[i]['year']
             list_mapping_time_steps.append(mapping_copy)  # Store the mapping with new codes for each time step
 
         self.mapping = pd.concat(list_mapping_time_steps, ignore_index=True)  # Concatenate all mappings
@@ -926,7 +941,12 @@ class PathwayESM(ESM):
         self.mapping = pd.concat(list_mapping_time_steps, ignore_index=True)  # Concatenate all mappings
 
 
-    def create_esm_database(self, return_database: bool = False, *args, **kwargs) -> Database | None:
+    def create_esm_database(
+            self,
+            return_database: bool = False,
+            write_database: bool = True,
+            *args, **kwargs
+    ) -> Database | None:
 
         all_esm_databases = Database(db_as_list=[])
 
@@ -938,6 +958,9 @@ class PathwayESM(ESM):
         year = self.time_steps[0]['year']
         self.esm_db_name += f'_{year}'
         self.results_path_file += f'{year}/'
+
+        if self.operation_metrics_for_all_time_steps and len(self.time_steps) == 1:
+            raise ValueError("You must have at least two time steps to set 'operation_metrics_for_all_time_steps' to True.")
 
         for i in range(len(self.time_steps)):  # Iterate over all time steps
 
@@ -955,20 +978,123 @@ class PathwayESM(ESM):
             self.mapping = mapping_all_time_steps[mapping_all_time_steps['Year'] == year].copy()
 
             # create the ESM database for the current time step
-            if return_database:
-                esm_db = super().create_esm_database(return_database=return_database, *args, **kwargs)
-                all_esm_databases += esm_db  # Sum all ESM databases created for each time step
+            if self.operation_metrics_for_all_time_steps:
+                esm_db = super().create_esm_database(
+                    return_database=True,
+                    write_database=False,
+                    *args, **kwargs
+                )
+                all_esm_databases += esm_db  # concatenate all ESM databases created for each time step
+
+            elif return_database:
+                esm_db = super().create_esm_database(
+                    return_database=return_database,
+                    write_database=write_database,
+                    *args, **kwargs
+                )
+                all_esm_databases += esm_db  # concatenate all ESM databases created for each time step
+
             else:
-                super().create_esm_database(return_database=return_database, *args, **kwargs)
+                super().create_esm_database(
+                    return_database=return_database,
+                    write_database=write_database,
+                    *args, **kwargs
+                )
 
         # Restore the original ESM variable values
         self.esm_db_name = original_esm_db_name
         self.results_path_file = original_results_path_file
         self.mapping = mapping_all_time_steps
 
+        # add operation metrics for all time steps if requested
+        if self.operation_metrics_for_all_time_steps:
+            all_esm_databases = self.add_operation_metrics_for_all_time_steps(
+                all_esm_databases=all_esm_databases,
+                write_database=write_database,
+            )
+
         if return_database:
-            # returns the sum of all ESM databases created for each time step
+            # returns the concatenation of all ESM databases created for each time step
             return all_esm_databases
+
+    def add_operation_metrics_for_all_time_steps(
+            self,
+            all_esm_databases: Database,
+            write_database: bool,
+    ) -> Database:
+
+        # Store the original ESM variable values
+        original_esm_db_name = self.esm_db_name
+
+        year = self.time_steps[0]['year']
+        self.esm_db_name += f'_{year}'
+
+        if write_database:
+            # Load the completed ESM database for the current year
+            esm_db_current_year = Database(
+                db_as_list=[i for i in all_esm_databases.db_as_list if i['database'] == self.esm_db_name])
+
+            # Write the ESM database for the current year to Brightway
+            esm_db_current_year.write_to_brightway(self.esm_db_name)
+
+        for i in range(1, len(self.time_steps)):  # Iterate over all time steps but the first one
+            current_year = self.time_steps[i]['year']
+            previous_year = self.time_steps[i-1]['year']
+            main_database_current_year = self.time_steps[i]['main_database']
+            main_database_name_current_year = main_database_current_year.db_names
+            main_database_previous_year = self.time_steps[i-1]['main_database']
+            main_database_name_previous_year = main_database_previous_year.db_names
+
+            # Load the ESM database for the previous year (operation datasets only)
+            esm_db_previous_year = Database(db_as_list=[
+                i for i in copy.deepcopy(all_esm_databases.db_as_list) if
+                (i['database'] == self.esm_db_name)
+                & (', Construction' not in i['name'])  # Exclude construction activities
+                & (', Resource' not in i['name'])  # Exclude resource activities
+            ])
+
+            # Rename datasets in the previous year ESM database
+            for act in esm_db_previous_year.db_as_list:
+                if act['name'].endswith(', Operation'):
+                    act['name'] = act['name'].replace(', Operation', f', Operation ({previous_year})')
+
+            # Update the ESM variable values for the current time step
+            self.esm_db_name = self.esm_db_name.replace(str(previous_year), str(current_year))
+
+            esm_db_previous_year.relink(
+                name_database_unlink=main_database_name_previous_year,
+                name_database_relink=main_database_name_current_year,
+                database_relink_as_list=main_database_current_year.db_as_list,
+                based_on='name',
+            )
+
+            # Change database name in the previous year ESM database
+            for act in esm_db_previous_year.db_as_list:
+                act['database'] = self.esm_db_name
+                for exc in act['exchanges']:
+                    if (
+                            (', Construction' not in exc['name'])
+                            & (exc['amount'] != 0)
+                            & (exc['database'] == self.esm_db_name.replace(str(current_year), str(previous_year)))
+                    ):
+                        exc['database'] = self.esm_db_name
+                        if 'input' in exc.keys():
+                            exc['input'] = (self.esm_db_name, exc['input'][1])
+
+            # Add the relinked previous year ESM database (operation datasets only) to the current year ESM database
+            all_esm_databases += esm_db_previous_year
+
+            # Load the completed ESM database for the current year
+            esm_db_current_year = Database(db_as_list=[i for i in all_esm_databases.db_as_list if i['database'] == self.esm_db_name])
+
+            if write_database:
+                # Write the ESM database for the current year to Brightway
+                esm_db_current_year.write_to_brightway(self.esm_db_name)
+
+        # Restore the original ESM variable values
+        self.esm_db_name = original_esm_db_name
+
+        return all_esm_databases
 
     def compute_impact_scores(
             self,
@@ -1007,6 +1133,8 @@ class PathwayESM(ESM):
             self.main_database = time_step['main_database']
             self.main_database_name = self.main_database.db_names
             self.mapping = mapping_all_time_steps[mapping_all_time_steps['Year'] == year].copy()
+
+            # TODO: add operation datasets of previous time steps if operation_metrics_for_all_time_steps is True
 
             # Compute impact scores for the current time step
             impact_scores, contrib_analysis = super().compute_impact_scores(*args, **kwargs)
