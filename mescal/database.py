@@ -406,6 +406,7 @@ class Database:
             name_database_relink: str = None,
             database_relink_as_list: list[dict] = None,
             name_new_db: str = None,
+            based_on: str = 'code',
             write: bool = False,
     ) -> None:
         """
@@ -415,6 +416,8 @@ class Database:
         :param name_database_relink: name of the database to relink
         :param database_relink_as_list: list of dictionaries of the database to relink
         :param name_new_db: name of the new database, if None, the original database is overwritten (if write is True)
+        :param based_on: can be 'code' or 'name', if 'code', the relinking is done based on the code of the activities,
+            if 'name', the relinking is done based on the name, product, location and database of the activities.
         :param write: if True, write the new database to Brightway
         :return: None
         """
@@ -431,26 +434,52 @@ class Database:
                 name_database_relink = relink_db.db_names
             else:
                 if len(relink_db.db_names) > 1:
-                    raise ValueError('More than one database to relink, please provide a name')
+                    raise ValueError(f'More than one database to relink: {relink_db.db_names}. '
+                                     f'Please provide a unique database name.')
                 else:
                     name_database_relink = relink_db.db_names[0]
-        db_relink_dict_code = relink_db.list_to_dict('code')
+
+        if based_on == 'code':
+            db_relink_dict = relink_db.list_to_dict('code')
+        elif based_on == 'name':
+            db_relink_dict = relink_db.list_to_dict('name')
+        else:
+            raise ValueError("based_on must be either 'code' or 'name'")
 
         if name_new_db is None:
             name_new_db = self.db_as_list[0]['database']
         for act in self.db_as_list:
             for exc in act['exchanges']:
                 if exc['database'] == name_database_unlink:
-                    if (name_database_relink, exc['code']) in db_relink_dict_code:
-                        exc['database'] = name_database_relink
-                    else:
-                        raise ValueError(f"Flow {exc['code']} not found in database {name_database_relink}")
-                if 'input' in exc.keys():
-                    if exc['input'][0] == name_database_unlink:
-                        if (name_database_relink, exc['input'][1]) in db_relink_dict_code:
-                            exc['input'] = (name_database_relink, exc['input'][1])
+                    if based_on == 'code':
+                        if (name_database_relink, exc['code']) in db_relink_dict:
+                            exc['database'] = name_database_relink
                         else:
-                            raise ValueError(f"Flow {exc['input'][1]} not found in database {name_database_relink}")
+                            raise ValueError(f"Flow {exc['code']} not found in database {name_database_relink}")
+                    elif based_on == 'name':
+                        if (exc['name'], exc['product'], exc['location'], name_database_relink) in db_relink_dict:
+                            new_exc = db_relink_dict[(exc['name'], exc['product'], exc['location'], name_database_relink)]
+                            exc['database'] = name_database_relink
+                            exc['code'] = new_exc['code']
+                        else:
+                            raise ValueError(f"Flow ({exc['product']}-{exc['name']}-{exc['location']}) not found "
+                                             f"in database {name_database_relink}")
+
+                if 'input' in exc.keys():
+                    if based_on == 'code':
+                        if exc['input'][0] == name_database_unlink:
+                            if (name_database_relink, exc['input'][1]) in db_relink_dict:
+                                exc['input'] = (name_database_relink, exc['input'][1])
+                            else:
+                                raise ValueError(f"Flow {exc['input'][1]} not found in database {name_database_relink}")
+                    elif based_on == 'name':
+                        if exc['input'][0] == name_database_unlink:
+                            if (exc['name'], exc['product'], exc['location'], name_database_relink) in db_relink_dict:
+                                new_exc = db_relink_dict[(exc['name'], exc['product'], exc['location'], name_database_relink)]
+                                exc['input'] = (name_database_relink, new_exc['code'])
+                            else:
+                                raise ValueError(f"Flow ({exc['product']}-{exc['name']}-{exc['location']}) not found "
+                                                 f"in database {name_database_relink}")
         if write:
             self.write_to_brightway(name_new_db)
 
