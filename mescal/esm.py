@@ -115,6 +115,8 @@ class ESM:
         self.df_activities_subject_to_double_counting = None
         self.esm_results_db_name = self.esm_db_name + '_results'
         self.pathway = False
+        self.operation_metrics_for_all_time_steps = False
+        self.year = None
         self.esm_db = None
 
 
@@ -771,24 +773,62 @@ class ESM:
         else:
             esm_db = Database(esm_db_name)
         esm_db_as_dict_name = esm_db.db_as_dict_name
-        if self.regionalize_foregrounds:
-            self.mapping['New_code'] = self.mapping.apply(lambda x: esm_db_as_dict_name[(
-                f"{x['Name']}, "
-                f"{x['Type']}",
-                x['Product'],
-                esm_location,
-                esm_db_name,
-            )]['code'] if x['Type'] in ['Construction', 'Operation', 'Resource'] else None, axis=1)
-        else:
+        if self.operation_metrics_for_all_time_steps:
             self.mapping['New_code'] = self.mapping.apply(
-                lambda x: esm_db_as_dict_name[(
-                    f"{x['Name']}, "
-                    f"{x['Type']}",
+                lambda x: self.get_new_code_previous_years(x, esm_db_as_dict_name)
+                if x['Type'] in ['Construction', 'Operation', 'Resource'] else None, axis=1)
+        else:
+            if self.regionalize_foregrounds:
+                self.mapping['New_code'] = self.mapping.apply(lambda x: esm_db_as_dict_name[(
+                    f"{x['Name']}, {x['Type']}",
                     x['Product'],
-                    x['Location'],
+                    esm_location,
                     esm_db_name,
                 )]['code'] if x['Type'] in ['Construction', 'Operation', 'Resource'] else None, axis=1)
+            else:
+                self.mapping['New_code'] = self.mapping.apply(
+                    lambda x: esm_db_as_dict_name[(
+                        f"{x['Name']}, {x['Type']}",
+                        x['Product'],
+                        x['Location'],
+                        esm_db_name,
+                    )]['code'] if x['Type'] in ['Construction', 'Operation', 'Resource'] else None, axis=1)
 
+    def get_new_code_previous_years(self, row, esm_db_as_dict_name) -> str:
+        if self.regionalize_foregrounds:
+            if row['Year'] == self.year:
+                return esm_db_as_dict_name[(
+                    f"{row['Name']}, {row['Type']}",
+                    row['Product'],
+                    self.esm_location,
+                    self.esm_db_name,
+                )]['code']
+            elif row['Year'] < self.year:
+                return esm_db_as_dict_name[(
+                    f"{row['Name']}, {row['Type']} ({row['Year']})",
+                    row['Product'],
+                    self.esm_location,
+                    self.esm_db_name,
+                )]['code']
+            else:
+                raise ValueError(f"Year of the following row is greater than the current year {self.year}: {row}")
+        else:
+            if row['Year'] == self.year:
+                return esm_db_as_dict_name[(
+                    f"{row['Name']}, {row['Type']}",
+                    row['Product'],
+                    row['Location'],
+                    self.esm_db_name,
+                )]['code']
+            elif row['Year'] < self.year:
+                return esm_db_as_dict_name[(
+                    f"{row['Name']}, {row['Type']} ({row['Year']})",
+                    row['Product'],
+                    row['Location'],
+                    self.esm_db_name,
+                )]['code']
+            else:
+                raise ValueError(f"Year of the following row is greater than the current year {self.year}: {row}")
 
 def has_construction(row: pd.Series, no_construction_list: list[str]) -> int:
     """
@@ -898,6 +938,7 @@ class PathwayESM(ESM):
 
         self.time_steps = time_steps
         self.pathway = True
+        self.year = None
         self.operation_metrics_for_all_time_steps = operation_metrics_for_all_time_steps
 
         # TODO: order time_steps by year
@@ -1110,39 +1151,62 @@ class PathwayESM(ESM):
         mapping_all_time_steps = self.mapping.copy()
         original_results_path_file = self.results_path_file
 
-        year = self.time_steps[0]['year']
+        self.year = self.time_steps[0]['year']
         if esm_db_name is not None:
             self.esm_db_name = esm_db_name
         else:
-            self.esm_db_name += f'_{year}'
-        self.results_path_file += f'{year}/'
+            self.esm_db_name += f'_{self.year}'
+        self.results_path_file += f'{self.year}/'
 
         for i in range(len(self.time_steps)):
 
             time_step = self.time_steps[i]
 
             # Update the ESM variable values for the current time step
-            self.esm_db_name = self.esm_db_name.replace(str(year), str(time_step['year']))
+            self.esm_db_name = self.esm_db_name.replace(str(self.year), str(time_step['year']))
             self.esm_db = Database(db_names=self.esm_db_name)
             if 'lifetime' in time_step:
                 self.lifetime = time_step['lifetime']
-            self.results_path_file = self.results_path_file.replace(str(year), str(time_step['year']))
+            self.results_path_file = self.results_path_file.replace(str(self.year), str(time_step['year']))
             self.df_activities_subject_to_double_counting = pd.read_csv(f"{self.results_path_file}activities_subject_to_double_counting.csv")
 
-            year = time_step['year']
+            self.year = time_step['year']
             self.main_database = time_step['main_database']
             self.main_database_name = self.main_database.db_names
-            self.mapping = mapping_all_time_steps[mapping_all_time_steps['Year'] == year].copy()
 
-            # TODO: add operation datasets of previous time steps if operation_metrics_for_all_time_steps is True
+            if self.operation_metrics_for_all_time_steps:
+                self.mapping = mapping_all_time_steps[
+                    (mapping_all_time_steps['Year'] == self.year)
+                    | ((mapping_all_time_steps['Year'] < self.year) & (mapping_all_time_steps['Type'] == 'Operation'))
+                ].copy()
+            else:
+                self.mapping = mapping_all_time_steps[mapping_all_time_steps['Year'] == self.year].copy()
 
             # Compute impact scores for the current time step
             impact_scores, contrib_analysis = super().compute_impact_scores(*args, **kwargs)
-            impact_scores['Year'] = year
+            impact_scores['Year'] = self.year
+
+            if self.operation_metrics_for_all_time_steps:
+                impact_scores = impact_scores.merge(self.mapping[['New_code', 'Year']], on='New_code', suffixes=('', '_inst'))
+                # impact_scores['Name'] = impact_scores.apply(
+                #     lambda x: f'{x["Name"]} ({x["Year_inst"]})' if x["Year_inst"] < x["Year"] else x["Name"], axis=1)
+
             list_impact_scores_time_steps.append(impact_scores)
 
             if contrib_analysis is not None:
-                contrib_analysis['Year'] = year
+                contrib_analysis['Year'] = self.year
+
+                if self.operation_metrics_for_all_time_steps:
+                    contrib_analysis = contrib_analysis.merge(
+                        self.mapping[['New_code', 'Year']],
+                        left_on='act_code',
+                        right_on='New_code',
+                        suffixes=('', '_inst')
+                    )
+                    # contrib_analysis['act_name'] = contrib_analysis.apply(
+                    #     lambda x: f'{x["act_name"]} ({x["Year_inst"]})' if x["Year_inst"] < x["Year"] else x["act_name"],
+                    #     axis=1)
+
                 list_contrib_analysis_time_steps.append(contrib_analysis)
 
         impact_scores = pd.concat(list_impact_scores_time_steps, ignore_index=True)
