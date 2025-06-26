@@ -497,7 +497,7 @@ def create_or_modify_activity_from_esm_results(
     for tech in end_use_tech_list:
 
         if tech in list(esm_results.Name.unique()):
-            amount = esm_results[esm_results.Name == tech].Production.iloc[0]
+            amount = sum(esm_results[esm_results.Name == tech].Production)
 
         else:  # if the technology is not in the ESM results, we assume that its production is null
             amount = 0
@@ -520,95 +520,120 @@ def create_or_modify_activity_from_esm_results(
 
     for tech in end_use_tech_list:
         if tech in list(esm_results.Name.unique()):
-            amount = esm_results[esm_results.Name == tech].Production.iloc[0]
+            if self.operation_metrics_for_all_time_steps:
+                amount_per_year = {}
+                amount = 0
+                for year in [None] if self.list_of_years == [None] else [y for y in self.list_of_years if y <= self.year]:
+                    amount_per_year[year] = sum(esm_results[
+                                                    (esm_results.Name == tech)
+                                                    & (esm_results['Year_inst'] == year)
+                                                ].Production)
+                    amount += amount_per_year[year]
+            else:
+                amount = sum(esm_results[esm_results.Name == tech].Production)
         else:
             amount = 0
         if amount == 0:
             pass
         else:
-            if tech in list(
-                    mapping[(mapping.Type == 'Operation') | (mapping.Type == 'Resource')].Name.unique()):
-                (activity_name, activity_prod, activity_database,
-                 activity_location, activity_current_code, activity_new_code) = mapping[
-                    (mapping.Name == tech)
-                    & ((mapping.Type == 'Operation') | (mapping.Type == 'Resource'))
-                    ][['Activity', 'Product', 'Database', 'Location', 'Current_code', 'New_code']].values[0]
+            if not self.operation_metrics_for_all_time_steps:
+                mapping.Year = None
 
-                activity = db_dict_code[activity_database, activity_current_code]
-                activity_unit = activity['unit']
+            for year in [None] if self.list_of_years == [None] else [y for y in self.list_of_years if y <= self.year]:
 
-                if activity_unit != original_activity_unit:
-                    if original_activity_prod.split(',')[0] == 'transport':
-                        conversion_factor = unit_conversion[
-                            (unit_conversion.Name == tech)
-                            & (unit_conversion.ESM == original_activity_unit)
-                            & (unit_conversion.LCA == activity_unit)
-                            ].Value.values
+                if self.operation_metrics_for_all_time_steps:
+                    amount = amount_per_year[year]
+
+                if tech in list(
+                        mapping[
+                            ((mapping.Type == 'Operation') | (mapping.Type == 'Resource'))
+                            & (mapping.Year == year)
+                        ].Name.unique()):
+                    (activity_name, activity_prod, activity_database,
+                     activity_location, activity_current_code, activity_new_code) = mapping[
+                        (mapping.Name == tech)
+                        & ((mapping.Type == 'Operation') | (mapping.Type == 'Resource'))
+                        & (mapping.Year == year)
+                        ][['Activity', 'Product', 'Database', 'Location', 'Current_code', 'New_code']].values[0]
+
+                    activity = db_dict_code[activity_database, activity_current_code]
+                    activity_unit = activity['unit']
+
+                    if activity_unit != original_activity_unit:
+                        if original_activity_prod.split(',')[0] == 'transport':
+                            conversion_factor = unit_conversion[
+                                (unit_conversion.Name == tech)
+                                & (unit_conversion.ESM == original_activity_unit)
+                                & (unit_conversion.LCA == activity_unit)
+                                ].Value.values
+                        else:
+                            conversion_factor = unit_conversion[
+                                (unit_conversion.Name == original_activity_prod.split(',')[0])
+                                & (unit_conversion.ESM == original_activity_unit)
+                                & (unit_conversion.LCA == activity_unit)
+                                ].Value.values
+                        if len(list(set(conversion_factor))) == 0:
+                            raise ValueError(f'The unit conversion factor between {activity_unit} and '
+                                             f'{original_activity_unit} for {original_activity_prod.split(",")[0]} '
+                                             f'is not in the unit conversion file.')
+                        elif len(list(set(conversion_factor))) > 1:
+                            raise ValueError(f'Multiple possible conversion factors between {activity_unit} and '
+                                             f'{original_activity_unit} for {original_activity_prod.split(",")[0]}')
+                        else:
+                            amount *= conversion_factor[0]
                     else:
-                        conversion_factor = unit_conversion[
-                            (unit_conversion.Name == original_activity_prod.split(',')[0])
-                            & (unit_conversion.ESM == original_activity_unit)
-                            & (unit_conversion.LCA == activity_unit)
-                            ].Value.values
-                    if len(list(set(conversion_factor))) == 0:
-                        raise ValueError(f'The unit conversion factor between {activity_unit} and '
-                                         f'{original_activity_unit} for {original_activity_prod.split(",")[0]} '
-                                         f'is not in the unit conversion file.')
-                    elif len(list(set(conversion_factor))) > 1:
-                        raise ValueError(f'Multiple possible conversion factors between {activity_unit} and '
-                                         f'{original_activity_unit} for {original_activity_prod.split(",")[0]}')
+                        conversion_factor = 1.0
+
+                    if prod_flow_amount == -1.0:  # for waste activities
+                        amount *= -1.0
+
+                    # Create new activity for the new exchange (because one activity may correspond to several ESM
+                    # technologies, which might be adjusted later)
+                    new_act = copy.deepcopy(activity)
+                    if year is not None:
+                        new_act['name'] += f' ({tech}, {year})'
                     else:
-                        amount *= conversion_factor[0]
+                        new_act['name'] += f' ({tech})'
+                    new_act['code'] = activity_new_code
+                    new_act['database'] = esm_results_db_name
+                    prod_flow = Dataset(new_act).get_production_flow()
+                    prod_flow['name'] = new_act['name']
+                    prod_flow['code'] = activity_new_code
+                    prod_flow['database'] = esm_results_db_name
+
+                    if self.regionalize_foregrounds:
+                        # Regionalize the foreground of the new activity
+                        new_act = self.regionalize_activity_foreground(act=new_act)
+
+                    db_as_list.append(new_act)
+                    db_dict_name[(
+                        new_act['name'],
+                        new_act['reference product'],
+                        new_act['location'],
+                        new_act['database']
+                    )] = new_act
+                    db_dict_code[(new_act['database'], new_act['code'])] = new_act
+
+                    new_exc = {
+                        'amount': amount / total_amount,
+                        'code': activity_new_code,
+                        'type': 'technosphere',
+                        'name': new_act['name'],
+                        'product': activity_prod,
+                        'unit': activity_unit,
+                        'location': new_act['location'],
+                        'database': esm_results_db_name,
+                        'comment': f'{tech}, {conversion_factor}',
+                    }
+                    exchanges.append(new_exc)
+                    if tech in list(mapping[mapping.Type == 'Operation'].Name.unique()):
+                        # we only perform double counting removal for the operation activities
+                        perform_d_c.append(
+                            [tech, activity_prod, activity_name, activity_location, esm_results_db_name, activity_new_code]
+                        )
                 else:
-                    conversion_factor = 1.0
-
-                if prod_flow_amount == -1.0:  # for waste activities
-                    amount *= -1.0
-
-                # Create new activity for the new exchange (because one activity may correspond to several ESM
-                # technologies, which might be adjusted later)
-                new_act = copy.deepcopy(activity)
-                new_act['name'] += f' ({tech})'
-                new_act['code'] = activity_new_code
-                new_act['database'] = esm_results_db_name
-                prod_flow = Dataset(new_act).get_production_flow()
-                prod_flow['name'] = new_act['name']
-                prod_flow['code'] = activity_new_code
-                prod_flow['database'] = esm_results_db_name
-
-                if self.regionalize_foregrounds:
-                    # Regionalize the foreground of the new activity
-                    new_act = self.regionalize_activity_foreground(act=new_act)
-
-                db_as_list.append(new_act)
-                db_dict_name[(
-                    new_act['name'],
-                    new_act['reference product'],
-                    new_act['location'],
-                    new_act['database']
-                )] = new_act
-                db_dict_code[(new_act['database'], new_act['code'])] = new_act
-
-                new_exc = {
-                    'amount': amount / total_amount,
-                    'code': activity_new_code,
-                    'type': 'technosphere',
-                    'name': new_act['name'],
-                    'product': activity_prod,
-                    'unit': activity_unit,
-                    'location': new_act['location'],
-                    'database': esm_results_db_name,
-                    'comment': f'{tech}, {conversion_factor}',
-                }
-                exchanges.append(new_exc)
-                if tech in list(mapping[mapping.Type == 'Operation'].Name.unique()):
-                    # we only perform double counting removal for the operation activities
-                    perform_d_c.append(
-                        [tech, activity_prod, activity_name, activity_location, esm_results_db_name, activity_new_code]
-                    )
-            else:
-                self.logger.warning(f'The technology {tech} is not in the mapping file. '
-                                    f'It cannot be considered in the result LCI dataset.')
+                    self.logger.warning(f'The technology {tech} is not in the mapping file. '
+                                        f'It cannot be considered in the result LCI dataset.')
 
     exchanges.append(
         {
@@ -706,113 +731,136 @@ def correct_esm_and_lca_capacity_factor_differences(
 
     for tech in df_flows_set_to_zero.Name.unique():
 
-        act_to_adapt_list = []
-        techno_flows_to_correct_dict = {}
+        if not self.operation_metrics_for_all_time_steps:
+            mapping.Year = None
+            esm_results.Year = None
+            esm_results.Year_inst = None
 
-        if tech not in technology_compositions_dict.keys():  # if the technology is not a composition
-            # simple technologies are seen as compositions of one technology
-            technology_compositions_dict[tech] = [tech]
+        for year in [None] if self.list_of_years == [None] else [y for y in self.list_of_years if y <= self.year]:
 
-        for sub_comp in technology_compositions_dict[tech]:
+            if len(esm_results[(esm_results.Name == tech) & (esm_results.Year_inst == year)]) == 0:
+                continue
 
-            unit_conversion_factor_constr = unit_conversion[
-                (unit_conversion.Name == sub_comp)
-                & (unit_conversion.Type == 'Construction')
-                ]['Value'].iloc[0]
-            if sub_comp != tech:
-                unit_conversion_factor_constr *= unit_conversion[
-                    (unit_conversion.Name == tech)
+            act_to_adapt_list = []
+            techno_flows_to_correct_dict = {}
+
+            if tech not in technology_compositions_dict.keys():  # if the technology is not a composition
+                # simple technologies are seen as compositions of one technology
+                technology_compositions_dict[tech] = [tech]
+
+            for sub_comp in technology_compositions_dict[tech]:
+
+                unit_conversion_factor_constr = unit_conversion[
+                    (unit_conversion.Name == sub_comp)
                     & (unit_conversion.Type == 'Construction')
-                ]['Value'].iloc[0]
-            lifetime_lca = lifetime[(lifetime.Name == sub_comp)]['LCA'].iloc[0]
-            annual_production = esm_results[(esm_results.Name == tech)]['Production'].iloc[0]
-            installed_capacity = esm_results[(esm_results.Name == tech)]['Capacity'].iloc[0]
+                    ]['Value'].iloc[0]
+                if sub_comp != tech:
+                    unit_conversion_factor_constr *= unit_conversion[
+                        (unit_conversion.Name == tech)
+                        & (unit_conversion.Type == 'Construction')
+                    ]['Value'].iloc[0]
+                lifetime_lca = lifetime[(lifetime.Name == sub_comp)]['LCA'].iloc[0]
+                annual_production = esm_results[
+                    (esm_results.Name == tech)
+                    & (esm_results.Year_inst == year)
+                    & (esm_results.Year == self.year)
+                ]['Production'].iloc[0]
+                installed_capacity = esm_results[
+                    (esm_results.Name == tech)
+                    & (esm_results.Year_inst == year)
+                    & (esm_results.Year == self.year)
+                ]['Capacity'].iloc[0]
 
-            # amount_constr_esm is the amount of infrastructure unit to be used in the operation LCI dataset
-            # given the annual production and installed capacity results of the ESM. This value can significantly differ
-            # from the original value in the operation LCI dataset, due to differences in assumptions and operating modes.
-            amount_constr_esm = installed_capacity * unit_conversion_factor_constr / (lifetime_lca * annual_production)
+                # amount_constr_esm is the amount of infrastructure unit to be used in the operation LCI dataset
+                # given the annual production and installed capacity results of the ESM. This value can significantly differ
+                # from the original value in the operation LCI dataset, due to differences in assumptions and operating modes.
+                amount_constr_esm = installed_capacity * unit_conversion_factor_constr / (lifetime_lca * annual_production)
 
-        df_removed_construction_flows = df_flows_set_to_zero[
-            (df_flows_set_to_zero.Name == tech)
-            & (df_flows_set_to_zero.Unit == 'unit')
-        ]
+            df_removed_construction_flows = df_flows_set_to_zero[
+                (df_flows_set_to_zero.Name == tech)
+                & (df_flows_set_to_zero.Unit == 'unit')
+            ]
 
-        for idx, row in df_removed_construction_flows.iterrows():
+            for idx, row in df_removed_construction_flows.iterrows():
 
-            if row['Activity'] == f'{tech}, Operation':
-                act_name = mapping[(mapping.Name == tech) & (mapping.Type == 'Operation')]['Activity'].iloc[0]
+                if row['Activity'] == f'{tech}, Operation':
+                    act_name = mapping[(mapping.Name == tech) & (mapping.Type == 'Operation')]['Activity'].iloc[0]
 
-                if (
-                        f"{act_name} ({tech})",
-                        row['Product'],
-                        row['Location'],
-                        esm_results_db_name,
-                ) in db_dict_name:
-                    act_to_adapt = db_dict_name[(
-                        f"{act_name} ({tech})",
-                        row['Product'],
-                        row['Location'],
-                        esm_results_db_name,
+                    if self.operation_metrics_for_all_time_steps:
+                        act_name += f' ({tech}, {year})'
+                    else:
+                        act_name += f' ({tech})'
+
+                    if (
+                            act_name,
+                            row['Product'],
+                            row['Location'],
+                            esm_results_db_name,
+                    ) in db_dict_name:
+                        act_to_adapt = db_dict_name[(
+                            act_name,
+                            row['Product'],
+                            row['Location'],
+                            esm_results_db_name,
+                        )]
+                    else:  # i.e., the technology is not used in the ESM configuration
+                        act_to_adapt = None
+
+                else:
+                    if (
+                            row['Activity'],
+                            row['Product'],
+                            row['Location'],
+                            esm_results_db_name,
+                    ) in db_dict_name:
+                        act_to_adapt = db_dict_name[(
+                            row['Activity'],
+                            row['Product'],
+                            row['Location'],
+                            esm_results_db_name,
+                        )]
+                    else:  # i.e., the technology is not used in the ESM configuration
+                        act_to_adapt = None
+
+                if act_to_adapt is not None and act_to_adapt not in act_to_adapt_list:  # avoid to apply correction several times
+                    act_to_adapt_list.append(act_to_adapt)
+                    techno_flows_to_correct_dict[
+                        (act_to_adapt['database'], act_to_adapt['code'])
+                    ] = []
+
+                if act_to_adapt is not None:
+                    act_exc = db_dict_name[(
+                        row['Removed flow activity'],
+                        row['Removed flow product'],
+                        row['Removed flow location'],
+                        row['Removed flow database'],
                     )]
-                else:  # i.e., the technology is not used in the ESM configuration
-                    act_to_adapt = None
+                    techno_flows_to_correct_dict[
+                        (act_to_adapt['database'], act_to_adapt['code'])
+                    ] += [(act_exc['database'], act_exc['code'])]
 
-            else:
-                if (
-                        row['Activity'],
-                        row['Product'],
-                        row['Location'],
-                        esm_results_db_name,
-                ) in db_dict_name:
-                    act_to_adapt = db_dict_name[(
-                        row['Activity'],
-                        row['Product'],
-                        row['Location'],
-                        esm_results_db_name,
-                    )]
-                else:  # i.e., the technology is not used in the ESM configuration
-                    act_to_adapt = None
+            for act in act_to_adapt_list:
 
-            if act_to_adapt is not None and act_to_adapt not in act_to_adapt_list:  # avoid to apply correction several times
-                act_to_adapt_list.append(act_to_adapt)
-                techno_flows_to_correct_dict[
-                    (act_to_adapt['database'], act_to_adapt['code'])
-                ] = []
+                for exc in Dataset(act).get_technosphere_flows():
+                    if (exc['database'], exc['code']) in techno_flows_to_correct_dict[(act['database'], act['code'])]:
+                        amount_constr_lca = exc['amount']  # original infrastructure amount in the operation LCI dataset
+                        exc['amount'] = amount_constr_esm  # we replace the latter by the one derived from ESM results
+                        exc['comment'] = (f'TF multiplied by {round(amount_constr_esm / amount_constr_lca, 4)} (capacity '
+                                          f'factor). ' + exc.get('comment', ''))
 
-            if act_to_adapt is not None:
-                act_exc = db_dict_name[(
-                    row['Removed flow activity'],
-                    row['Removed flow product'],
-                    row['Removed flow location'],
-                    row['Removed flow database'],
-                )]
-                techno_flows_to_correct_dict[
-                    (act_to_adapt['database'], act_to_adapt['code'])
-                ] += [(act_exc['database'], act_exc['code'])]
+                        capacity_factor_report_list.append([
+                            tech,
+                            exc['name'],
+                            exc['product'],
+                            exc['location'],
+                            exc['database'],
+                            exc['code'],
+                            amount_constr_lca,
+                            amount_constr_esm,
+                        ])  # reporting capacity factors differences
 
-        for act in act_to_adapt_list:
-
-            for exc in Dataset(act).get_technosphere_flows():
-                if (exc['database'], exc['code']) in techno_flows_to_correct_dict[(act['database'], act['code'])]:
-                    amount_constr_lca = exc['amount']  # original infrastructure amount in the operation LCI dataset
-                    exc['amount'] = amount_constr_esm  # we replace the latter by the one derived from ESM results
-                    exc['comment'] = (f'TF multiplied by {round(amount_constr_esm / amount_constr_lca, 4)} (capacity '
-                                      f'factor). ' + exc.get('comment', ''))
-
-                    capacity_factor_report_list.append([
-                        tech,
-                        exc['name'],
-                        exc['product'],
-                        exc['location'],
-                        exc['database'],
-                        exc['code'],
-                        amount_constr_lca,
-                        amount_constr_esm,
-                    ])  # reporting capacity factors differences
-
-            act['comment'] = (f'Infrastructure flows have been harmonized with the ESM to account for capacity factor '
-                              f'differences. ') + act.get('comment', '')
+                act['comment'] = (f'Infrastructure flows have been harmonized with the ESM to account for capacity factor '
+                                  f'differences. ') + act.get('comment', '')
 
     if write_cp_report:
         pd.DataFrame(
