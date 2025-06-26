@@ -233,7 +233,14 @@ def normalize_lca_metrics(
             for i in range(len(R_scaled)):
                 # Declaring the LCIA parameters
                 if self.pathway:
-                    f.write(f"let {metric_type}_{self.tech_type(R_scaled.Type.iloc[i])}['{R_scaled.Abbrev.iloc[i]}',"
+                    if self.operation_metrics_for_all_time_steps:
+                        f.write(
+                            f"let {metric_type}_{self.tech_type(R_scaled.Type.iloc[i])}['{R_scaled.Abbrev.iloc[i]}',"
+                            f"'{R_scaled.Name.iloc[i]}',{R_scaled.Year.iloc[i]},{R_scaled.Year_inst.iloc[i]}] "
+                            f":= {R_scaled.Value_norm.iloc[i]}; #{norm_unit} {R_scaled.Unit.iloc[i]}\n")
+                    else:
+                        f.write(
+                            f"let {metric_type}_{self.tech_type(R_scaled.Type.iloc[i])}['{R_scaled.Abbrev.iloc[i]}',"
                             f"'{R_scaled.Name.iloc[i]}',{R_scaled.Year.iloc[i]}] := {R_scaled.Value_norm.iloc[i]}; "
                             f"#{norm_unit} {R_scaled.Unit.iloc[i]}\n")
                 else:
