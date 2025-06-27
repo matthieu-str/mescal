@@ -6,7 +6,7 @@ import pandas as pd
 from tqdm import tqdm
 
 
-def background_search(
+def _background_search(
         self,
         act: dict,
         k: int,
@@ -168,7 +168,7 @@ def background_search(
                                 flow['input'] = (esm_db_name, new_code)
 
                                 if k < k_lim:  # we continue until maximum depth is reached:
-                                    perform_d_c, db_dict_code, db_dict_name, db_as_list = self.background_search(
+                                    perform_d_c, db_dict_code, db_dict_name, db_as_list = self._background_search(
                                         act=new_act,
                                         k=k + 1,
                                         k_lim=k_lim,
@@ -225,7 +225,7 @@ def background_search(
                                 flow['input'] = (esm_db_name, new_code)
 
                                 if k < k_lim:  # we continue until maximum depth is reached:
-                                    perform_d_c, db_dict_code, db_dict_name, db_as_list = self.background_search(
+                                    perform_d_c, db_dict_code, db_dict_name, db_as_list = self._background_search(
                                         act=new_act,
                                         k=k+1,
                                         k_lim=k_lim,
@@ -260,7 +260,7 @@ def background_search(
         return perform_d_c, db_dict_code, db_dict_name, db_as_list
 
 
-def double_counting_removal(
+def _double_counting_removal(
         self,
         df_op: pd.DataFrame,
         N: int,
@@ -390,7 +390,7 @@ def double_counting_removal(
             else:
                 perform_d_c = []
         else:
-            perform_d_c, db_dict_code, db_dict_name, db_as_list = self.background_search(
+            perform_d_c, db_dict_code, db_dict_name, db_as_list = self._background_search(
                 act=new_act_op,
                 k=0,
                 k_lim=self.max_depth_double_counting_search,
@@ -431,7 +431,7 @@ def double_counting_removal(
 
             if regionalize_foregrounds:
                 db_as_list.remove(new_act_op_d_c)
-                new_act_op_d_c = self.regionalize_activity_foreground(act=new_act_op_d_c)
+                new_act_op_d_c = self._regionalize_activity_foreground(act=new_act_op_d_c)
                 db_as_list.append(new_act_op_d_c)
                 db_dict_name[
                     (new_act_op_d_c['name'], new_act_op_d_c['reference product'],
@@ -563,7 +563,7 @@ def double_counting_removal(
 
             if len(missing_ES_inputs) > 0:
                 if k_deep <= background_search_act[tech]:
-                    perform_d_c, db_dict_code, db_dict_name, db_as_list = self.background_search(
+                    perform_d_c, db_dict_code, db_dict_name, db_as_list = self._background_search(
                         act=new_act_op_d_c,
                         k=k_deep,
                         k_lim=background_search_act[tech] - 1,

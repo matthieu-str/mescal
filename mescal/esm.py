@@ -133,7 +133,7 @@ class ESM:
         model_pivot.fillna(0, inplace=True)
         mapping_op = pd.merge(mapping_op, model_pivot, on='Name', how='left')
         mapping_op['CONSTRUCTION'] = mapping_op.shape[0] * [0]
-        mapping_op = self.add_technology_specifics(mapping_op)
+        mapping_op = self._add_technology_specifics(mapping_op)
         return mapping_op
 
     @property
@@ -169,32 +169,32 @@ class ESM:
 
     # Import methods from other files
     from .regionalization import (
-        regionalize_activity_foreground,
-        change_location_activity,
+        _regionalize_activity_foreground,
+        _change_location_activity,
         change_location_mapping_file
     )
-    from .double_counting import double_counting_removal, background_search
+    from .double_counting import _double_counting_removal, _background_search
     from .impact_assessment import (
         compute_impact_scores,
-        get_impact_categories,
-        is_empty,
-        aggregate_direct_emissions_activities
+        _get_impact_categories,
+        _is_empty,
+        _aggregate_direct_emissions_activities
     )
     from .adapt_efficiency import (
-        correct_esm_and_lca_efficiency_differences,
-        compute_efficiency_esm,
-        get_lca_input_flow_unit_or_product,
-        adapt_flows_to_efficiency_difference,
-        get_lca_input_quantity,
+        _correct_esm_and_lca_efficiency_differences,
+        _compute_efficiency_esm,
+        _get_lca_input_flow_unit_or_product,
+        _adapt_flows_to_efficiency_difference,
+        _get_lca_input_quantity,
     )
     from .esm_back_to_lca import (
         create_new_database_with_esm_results,
-        create_or_modify_activity_from_esm_results,
-        replace_mobility_end_use_type,
+        _create_or_modify_activity_from_esm_results,
+        _replace_mobility_end_use_type,
         connect_esm_results_to_database,
-        correct_esm_and_lca_capacity_factor_differences,
+        _correct_esm_and_lca_capacity_factor_differences,
     )
-    from .normalization import normalize_lca_metrics, tech_type
+    from .normalization import normalize_lca_metrics, _tech_type
     from .generate_lcia_obj_ampl import generate_mod_file_ampl
 
     def check_inputs(self) -> None:
@@ -408,8 +408,8 @@ class ESM:
         # Add construction and resource activities to the database (which do not need double counting removal)
         self.logger.info("Starting to add construction and resource activities database")
         t1_add = time.time()
-        self.add_activities_to_database(act_type='Construction')
-        self.add_activities_to_database(act_type='Resource')
+        self._add_activities_to_database(act_type='Construction')
+        self._add_activities_to_database(act_type='Resource')
         t2_add = time.time()
         self.logger.info(f"Construction and resource activities added to the database in {round(t2_add - t1_add, 1)} "
                          f"seconds")
@@ -420,7 +420,7 @@ class ESM:
             flows_set_to_zero,
             ei_removal,
             activities_subject_to_double_counting
-        ) = self.double_counting_removal(df_op=self.mapping_op, N=N, ESM_inputs='all')
+        ) = self._double_counting_removal(df_op=self.mapping_op, N=N, ESM_inputs='all')
         t2_dc = time.time()
         self.logger.info(f"Double-counting removal done in {round(t2_dc - t1_dc, 1)} seconds")
 
@@ -483,7 +483,7 @@ class ESM:
             self.logger.info(f"Starting to correct efficiency differences")
             t1_eff = time.time()
             if self.efficiency is not None:
-                self.correct_esm_and_lca_efficiency_differences()
+                self._correct_esm_and_lca_efficiency_differences()
             t2_eff = time.time()
             self.logger.info(f"Efficiency differences corrected in {round(t2_eff - t1_eff, 1)} seconds")
 
@@ -504,7 +504,7 @@ class ESM:
             self.esm_db.write_to_brightway(self.esm_db_name)
 
             # Modify the written database according to the tech_specifics.csv file
-            self.modify_written_activities(db=self.esm_db)
+            self._modify_written_activities(db=self.esm_db)
 
             t2_mod_inv = time.time()
             self.logger.info(f"Database written in {round(t2_mod_inv - t1_mod_inv, 1)} seconds")
@@ -522,7 +522,7 @@ class ESM:
         self.main_database = self.main_database - Database(
             db_as_list=[act for act in self.main_database.db_as_list if act['database'] == self.esm_db_name])
 
-    def add_technology_specifics(
+    def _add_technology_specifics(
             self,
             mapping_op: pd.DataFrame,
     ) -> pd.DataFrame:
@@ -554,7 +554,7 @@ class ESM:
 
         return mapping_op
 
-    def add_activities_to_database(
+    def _add_activities_to_database(
             self,
             act_type: str,
     ) -> None:
@@ -570,7 +570,7 @@ class ESM:
         db_as_dict_code = self.main_database.db_as_dict_code
 
         for i in range(len(mapping_type)):
-            ds = self.create_new_activity(
+            ds = self._create_new_activity(
                 name=mapping_type['Name'].iloc[i],
                 act_type=act_type,
                 current_code=mapping_type['Current_code'].iloc[i],
@@ -581,7 +581,7 @@ class ESM:
             db_as_list.append(ds)
         self.main_database.db_as_list = db_as_list
 
-    def create_new_activity(
+    def _create_new_activity(
             self,
             name: str,
             act_type: str,
@@ -614,11 +614,11 @@ class ESM:
         prod_flow['database'] = self.esm_db_name
 
         if self.regionalize_foregrounds:
-            new_act = self.regionalize_activity_foreground(act=new_act)
+            new_act = self._regionalize_activity_foreground(act=new_act)
 
         return new_act
 
-    def modify_written_activities(
+    def _modify_written_activities(
             self,
             db: Database,
             db_type: str = 'esm',
@@ -648,7 +648,7 @@ class ESM:
         # Change carbon flow of DAC from biogenic to fossil
         dac_technologies = list(self.tech_specifics[self.tech_specifics.Specifics == 'DAC'].Name)
         for tech in dac_technologies:
-            activity_name_or_code = self.get_activity_name_or_code(tech=tech, return_type=return_type)
+            activity_name_or_code = self._get_activity_name_or_code(tech=tech, return_type=return_type)
             if activity_name_or_code in [act[return_type] for act in db.db_as_list]:
                 if return_type == 'name':
                     change_dac_biogenic_carbon_flow(
@@ -667,7 +667,7 @@ class ESM:
         biofuel_mob_tech = self.tech_specifics[self.tech_specifics.Specifics == 'Biofuel'][
             ['Name', 'Amount']].values.tolist()
         for tech, biogenic_ratio in biofuel_mob_tech:
-            activity_name_or_code = self.get_activity_name_or_code(tech=tech, return_type=return_type)
+            activity_name_or_code = self._get_activity_name_or_code(tech=tech, return_type=return_type)
             if activity_name_or_code in [act[return_type] for act in db.db_as_list]:
                 if return_type == 'name':
                     change_fossil_carbon_flows_of_biofuels(
@@ -688,7 +688,7 @@ class ESM:
         carbon_flows_correction_tech = self.tech_specifics[self.tech_specifics.Specifics == 'Carbon flows'][
             ['Name', 'Amount']].values.tolist()
         for tech, factor in carbon_flows_correction_tech:
-            activity_name_or_code = self.get_activity_name_or_code(tech=tech, return_type=return_type)
+            activity_name_or_code = self._get_activity_name_or_code(tech=tech, return_type=return_type)
             if activity_name_or_code in [act[return_type] for act in db.db_as_list]:
                 if return_type == 'name':
                     change_direct_carbon_emissions_by_factor(
@@ -707,7 +707,7 @@ class ESM:
         add_carbon_capture_tech = self.tech_specifics[self.tech_specifics.Specifics == 'Add CC'][
             ['Name', 'Amount']].values.tolist()
         for tech, type_and_ratio in add_carbon_capture_tech:
-            activity_name_or_code = self.get_activity_name_or_code(tech=tech, return_type=return_type)
+            activity_name_or_code = self._get_activity_name_or_code(tech=tech, return_type=return_type)
             if activity_name_or_code in [act[return_type] for act in db.db_as_list]:
                 if return_type == 'name':
                     type_and_ratio = type_and_ratio.split(', ')
@@ -728,7 +728,7 @@ class ESM:
                         capture_ratio=float(type_and_ratio[1]),
                     )
 
-    def get_activity_name_or_code(
+    def _get_activity_name_or_code(
             self,
             tech: str,
             return_type: str,
@@ -747,7 +747,7 @@ class ESM:
         elif return_type == 'code':
             return self.mapping[(self.mapping.Name == tech) & (self.mapping.Type == phase)].New_code.iloc[0]
 
-    def get_original_code(self) -> None:
+    def _get_original_code(self) -> None:
         """
         Creates the Current_code column in the mapping DataFrame, which contains the original code from the main database.
 
@@ -761,7 +761,7 @@ class ESM:
             x['Database'],
         )]['code'], axis=1)
 
-    def get_new_code(self) -> None:
+    def _get_new_code(self) -> None:
         """
         Creates the New_code column in the mapping DataFrame, which contains the new code from the ESM database.
 
@@ -776,7 +776,7 @@ class ESM:
         esm_db_as_dict_name = esm_db.db_as_dict_name
         if self.operation_metrics_for_all_time_steps:
             self.mapping['New_code'] = self.mapping.apply(
-                lambda x: self.get_new_code_previous_years(x, esm_db_as_dict_name)
+                lambda x: self._get_new_code_previous_years(x, esm_db_as_dict_name)
                 if x['Type'] in ['Construction', 'Operation', 'Resource'] else None, axis=1)
         else:
             if self.regionalize_foregrounds:
@@ -795,7 +795,7 @@ class ESM:
                         esm_db_name,
                     )]['code'] if x['Type'] in ['Construction', 'Operation', 'Resource'] else None, axis=1)
 
-    def get_new_code_previous_years(self, row, esm_db_as_dict_name) -> str:
+    def _get_new_code_previous_years(self, row, esm_db_as_dict_name) -> str:
         if self.regionalize_foregrounds:
             if row['Year'] == self.year:
                 return esm_db_as_dict_name[(
@@ -1051,7 +1051,7 @@ class PathwayESM(ESM):
 
         # add operation metrics for all time steps if requested
         if self.operation_metrics_for_all_time_steps:
-            all_esm_databases = self.add_operation_metrics_for_all_time_steps(
+            all_esm_databases = self._add_operation_metrics_for_previous_time_steps(
                 all_esm_databases=all_esm_databases,
                 write_database=write_database,
             )
@@ -1060,7 +1060,7 @@ class PathwayESM(ESM):
             # returns the concatenation of all ESM databases created for each time step
             return all_esm_databases
 
-    def add_operation_metrics_for_all_time_steps(
+    def _add_operation_metrics_for_previous_time_steps(
             self,
             all_esm_databases: Database,
             write_database: bool,

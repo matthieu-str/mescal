@@ -114,7 +114,7 @@ def test_regionalize_activity_foreground():
         main_database=Database(db_as_list=dummy_db),
     )
     esm.best_loc_in_ranking = {}  # reset the best location in ranking (possibly set by previous tests)
-    regionalized_act = esm.regionalize_activity_foreground(act=act)
+    regionalized_act = esm._regionalize_activity_foreground(act=act)
 
     for exc in regionalized_act['exchanges']:
         if exc['type'] == 'technosphere':

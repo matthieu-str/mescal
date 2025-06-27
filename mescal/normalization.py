@@ -4,7 +4,7 @@ from pathlib import Path
 
 
 @staticmethod
-def tech_type(tech: str) -> str:
+def _tech_type(tech: str) -> str:
     """
     Returns the short name of the technology type
 
@@ -235,16 +235,16 @@ def normalize_lca_metrics(
                 if self.pathway:
                     if self.operation_metrics_for_all_time_steps:
                         f.write(
-                            f"let {metric_type}_{self.tech_type(R_scaled.Type.iloc[i])}['{R_scaled.Abbrev.iloc[i]}',"
+                            f"let {metric_type}_{self._tech_type(R_scaled.Type.iloc[i])}['{R_scaled.Abbrev.iloc[i]}',"
                             f"'{R_scaled.Name.iloc[i]}',{R_scaled.Year.iloc[i]},{R_scaled.Year_inst.iloc[i]}] "
                             f":= {R_scaled.Value_norm.iloc[i]}; #{norm_unit} {R_scaled.Unit.iloc[i]}\n")
                     else:
                         f.write(
-                            f"let {metric_type}_{self.tech_type(R_scaled.Type.iloc[i])}['{R_scaled.Abbrev.iloc[i]}',"
+                            f"let {metric_type}_{self._tech_type(R_scaled.Type.iloc[i])}['{R_scaled.Abbrev.iloc[i]}',"
                             f"'{R_scaled.Name.iloc[i]}',{R_scaled.Year.iloc[i]}] := {R_scaled.Value_norm.iloc[i]}; "
                             f"#{norm_unit} {R_scaled.Unit.iloc[i]}\n")
                 else:
-                    f.write(f"let {metric_type}_{tech_type(R_scaled.Type.iloc[i])}['{R_scaled.Abbrev.iloc[i]}','{R_scaled.Name.iloc[i]}'] "
+                    f.write(f"let {metric_type}_{self._tech_type(R_scaled.Type.iloc[i])}['{R_scaled.Abbrev.iloc[i]}','{R_scaled.Name.iloc[i]}'] "
                             f":= {R_scaled.Value_norm.iloc[i]}; #{norm_unit} {R_scaled.Unit.iloc[i]}\n")
 
         if not skip_normalization:

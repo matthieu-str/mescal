@@ -48,9 +48,9 @@ def create_new_database_with_esm_results(
         self.double_counting_removal_amount = pd.read_csv(f'{self.results_path_file}double_counting_removal.csv')
 
     if 'Current_code' not in self.mapping.columns:
-        self.get_original_code()
+        self._get_original_code()
     if 'New_code' not in self.mapping.columns:
-        self.get_new_code()
+        self._get_new_code()
 
     # Store frequently accessed instance variables in local variables inside a method
     mapping = self.mapping
@@ -87,7 +87,7 @@ def create_new_database_with_esm_results(
             pass
 
         else:
-            new_perform_d_c = self.create_or_modify_activity_from_esm_results(
+            new_perform_d_c = self._create_or_modify_activity_from_esm_results(
                 original_activity_prod=original_activity_prod,
                 original_activity_name=original_activity_name,
                 original_activity_database=original_activity_database,
@@ -128,7 +128,7 @@ def create_new_database_with_esm_results(
 
     double_counting_act = pd.merge(double_counting_act, model, on='Name', how='left')
     double_counting_act['CONSTRUCTION'] = double_counting_act.shape[0] * [0]
-    double_counting_act = self.add_technology_specifics(double_counting_act)
+    double_counting_act = self._add_technology_specifics(double_counting_act)
 
     # Injecting local variables into the instance variables
     self.mapping = mapping
@@ -137,7 +137,7 @@ def create_new_database_with_esm_results(
     if remove_background_construction_flows:
         # Double-counting removal of background construction flows
         self.logger.info("Removing double-counted construction flows...")
-        flows_set_to_zero, ei_removal, activities_subject_to_double_counting = self.double_counting_removal(
+        flows_set_to_zero, ei_removal, activities_subject_to_double_counting = self._double_counting_removal(
             df_op=double_counting_act,
             N=N,
             ESM_inputs=['OWN_CONSTRUCTION', 'CONSTRUCTION'],
@@ -148,7 +148,7 @@ def create_new_database_with_esm_results(
         # the background processes of markets should be recorded in the ESM results database following the
         # background search algorithm of the double-counting removal procedure. However, flows are NOT removed
         # during this process.
-        flows_set_to_zero, ei_removal, activities_subject_to_double_counting = self.double_counting_removal(
+        flows_set_to_zero, ei_removal, activities_subject_to_double_counting = self._double_counting_removal(
             df_op=double_counting_act,
             N=N,
             ESM_inputs=['OWN_CONSTRUCTION', 'CONSTRUCTION'],
@@ -164,8 +164,8 @@ def create_new_database_with_esm_results(
         self.main_database = self.main_database + esm_db
 
         self.logger.info("Correcting efficiency and capacity factor differences between ESM and LCI datasets...")
-        self.correct_esm_and_lca_efficiency_differences(db_type='esm results', write_efficiency_report=False)
-        self.correct_esm_and_lca_capacity_factor_differences(esm_results=esm_results, write_cp_report=True)
+        self._correct_esm_and_lca_efficiency_differences(db_type='esm results', write_efficiency_report=False)
+        self._correct_esm_and_lca_capacity_factor_differences(esm_results=esm_results, write_cp_report=True)
 
         # Remove the ESM database from the main database
         self.main_database = self.main_database - esm_db
@@ -189,7 +189,7 @@ def create_new_database_with_esm_results(
     if harmonize_with_esm:
         if write_database:
             # Modifies the written database according to specifications in tech_specifics.csv
-            self.modify_written_activities(db=esm_results_db, db_type='esm results')
+            self._modify_written_activities(db=esm_results_db, db_type='esm results')
         else:
             self.logger.info('The techs_specifics.csv file has not been applied because the database has not been '
                              'written.')
@@ -397,7 +397,7 @@ def connect_esm_results_to_database(
         Database(db_as_list=db_as_list).write_to_brightway(new_db_name)
 
 
-def create_or_modify_activity_from_esm_results(
+def _create_or_modify_activity_from_esm_results(
         self,
         original_activity_prod: str,
         original_activity_name: str,
@@ -445,7 +445,7 @@ def create_or_modify_activity_from_esm_results(
             wurst.equals('database', original_activity_database)
         ])][0]
 
-        original_activity = self.regionalize_activity_foreground(act=original_activity)
+        original_activity = self._regionalize_activity_foreground(act=original_activity)
 
     new_code = random_code()
     original_activity_unit = original_activity['unit']
@@ -455,7 +455,7 @@ def create_or_modify_activity_from_esm_results(
     unit_conversion['LCA'] = unit_conversion['LCA'].apply(ecoinvent_unit_convention)
     unit_conversion['ESM'] = unit_conversion['ESM'].apply(ecoinvent_unit_convention)
 
-    model['Flow'] = model.apply(lambda x: replace_mobility_end_use_type(
+    model['Flow'] = model.apply(lambda x: _replace_mobility_end_use_type(
         row=x,
         new_end_use_types=new_end_use_types
     ), axis=1)
@@ -613,7 +613,7 @@ def create_or_modify_activity_from_esm_results(
 
                     if self.regionalize_foregrounds:
                         # Regionalize the foreground of the new activity
-                        new_act = self.regionalize_activity_foreground(act=new_act)
+                        new_act = self._regionalize_activity_foreground(act=new_act)
 
                     db_as_list.append(new_act)
                     db_dict_name[(
@@ -704,7 +704,7 @@ def create_or_modify_activity_from_esm_results(
 
     return perform_d_c
 
-def correct_esm_and_lca_capacity_factor_differences(
+def _correct_esm_and_lca_capacity_factor_differences(
         self,
         esm_results: pd.DataFrame,
         write_cp_report: bool = True,
@@ -880,7 +880,7 @@ def correct_esm_and_lca_capacity_factor_differences(
         ).to_csv(f"{self.results_path_file}capacity_factor_differences.csv", index=False)
 
 @staticmethod
-def replace_mobility_end_use_type(row: pd.Series, new_end_use_types: pd.DataFrame) -> str:
+def _replace_mobility_end_use_type(row: pd.Series, new_end_use_types: pd.DataFrame) -> str:
     """
     Reformat the end use type of the mobility technologies
 

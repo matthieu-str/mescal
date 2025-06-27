@@ -4,7 +4,7 @@ from .database import Dataset
 from pathlib import Path
 
 
-def correct_esm_and_lca_efficiency_differences(
+def _correct_esm_and_lca_efficiency_differences(
         self,
         write_efficiency_report: bool = True,
         db_type: str = 'esm',
@@ -36,25 +36,25 @@ def correct_esm_and_lca_efficiency_differences(
 
     if db_type == 'esm':
         efficiency['ESM efficiency'] = efficiency.apply(
-            self.compute_efficiency_esm,
+            self._compute_efficiency_esm,
             axis=1,
         )
         efficiency['LCA input unit'] = efficiency.apply(
-            self.get_lca_input_flow_unit_or_product,
+            self._get_lca_input_flow_unit_or_product,
             axis=1,
             output_type='unit',
             removed_flows=removed_flows
         )
         efficiency.drop(efficiency[efficiency['LCA input unit'].isnull()].index, inplace=True)
         efficiency['LCA input product'] = efficiency.apply(
-            self.get_lca_input_flow_unit_or_product,
+            self._get_lca_input_flow_unit_or_product,
             axis=1,
             output_type='product',
             removed_flows=removed_flows
         )
         efficiency.drop(efficiency[efficiency['LCA input product'].isnull()].index, inplace=True)
         efficiency['LCA input quantity'] = efficiency.apply(
-            self.get_lca_input_quantity,
+            self._get_lca_input_quantity,
             axis=1,
             double_counting_removal_amount=double_counting_removal_amount
         )
@@ -204,7 +204,7 @@ def correct_esm_and_lca_efficiency_differences(
                 else:
                     efficiency_ratio = efficiency['efficiency_ratio'].iloc[i]
                 techno_flows_to_correct = techno_flows_to_correct_dict[(act['database'], act['code'])]
-                act = self.adapt_flows_to_efficiency_difference(act, efficiency_ratio, techno_flows_to_correct)
+                act = self._adapt_flows_to_efficiency_difference(act, efficiency_ratio, techno_flows_to_correct)
 
     if write_efficiency_report:
         # saving the efficiency differences in a csv file
@@ -212,7 +212,7 @@ def correct_esm_and_lca_efficiency_differences(
         efficiency.to_csv(f'{self.results_path_file}efficiency_differences.csv', index=False)
 
 
-def compute_efficiency_esm(
+def _compute_efficiency_esm(
         self,
         row: pd.Series,
 ) -> float:
@@ -243,7 +243,7 @@ def compute_efficiency_esm(
     return -1.0 / input_amount  # had negative sign as it is an input
 
 
-def get_lca_input_flow_unit_or_product(
+def _get_lca_input_flow_unit_or_product(
         self,
         row: pd.Series,
         output_type: str,
@@ -327,7 +327,7 @@ def get_lca_input_flow_unit_or_product(
         raise ValueError(f'output_type must be either "unit" or "product"')
 
 @staticmethod
-def adapt_flows_to_efficiency_difference(
+def _adapt_flows_to_efficiency_difference(
         act: dict,
         efficiency_ratio: float,
         techno_flows_to_correct: list[tuple[str, str]],
@@ -361,7 +361,7 @@ def adapt_flows_to_efficiency_difference(
     return act
 
 
-def get_lca_input_quantity(
+def _get_lca_input_quantity(
         self,
         row: pd.Series,
         double_counting_removal_amount: pd.DataFrame

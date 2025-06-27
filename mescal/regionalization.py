@@ -3,7 +3,7 @@ from .database import Database, Dataset
 import wurst
 
 
-def regionalize_activity_foreground(
+def _regionalize_activity_foreground(
         self,
         act: dict,
 ) -> dict:
@@ -57,7 +57,7 @@ def regionalize_activity_foreground(
             if techno_act_location in accepted_locations:
                 continue
 
-            new_location = self.change_location_activity(
+            new_location = self._change_location_activity(
                 product=techno_act_product,
                 activity=techno_act_name,
                 location=techno_act_location,
@@ -85,7 +85,7 @@ def regionalize_activity_foreground(
                     if current_loc in accepted_locations:
                         continue
                     generic_name = ', '.join(flow['name'].split(', ')[:-1])
-                    new_location = self.change_location_activity(
+                    new_location = self._change_location_activity(
                         activity=generic_name,
                         categories=flow['categories'],
                         location=current_loc,
@@ -109,7 +109,7 @@ def regionalize_activity_foreground(
     return new_act
 
 
-def change_location_activity(
+def _change_location_activity(
         self,
         activity: str,
         location: str,
@@ -225,7 +225,7 @@ def change_location_mapping_file(self) -> None:
             ])][0]['location']  # picks one location randomly
             mapping.at[i, 'Location'] = location
 
-    mapping['Location'] = mapping.apply(lambda row: self.change_location_activity(
+    mapping['Location'] = mapping.apply(lambda row: self._change_location_activity(
         esm_tech_name=row['Name'],
         product=row['Product'],
         activity=row['Activity'],

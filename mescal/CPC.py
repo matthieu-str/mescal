@@ -47,7 +47,7 @@ def add_CPC_categories(
     else:
         raise ValueError('Mapping for new products must be either a pandas DataFrame or a path towards a csv file')
 
-    self.add_CPC_categories_based_on_existing_activities(mapping_existing_products_to_CPC)
+    self._add_CPC_categories_based_on_existing_activities(mapping_existing_products_to_CPC)
 
     for i in range(len(mapping_new_products_to_CPC)):
         if mapping_new_products_to_CPC.Where.iloc[i] == 'Product':
@@ -60,7 +60,7 @@ def add_CPC_categories(
         name = mapping_new_products_to_CPC.Name.iloc[i]
         CPC_category = mapping_new_products_to_CPC.CPC.iloc[i]
         search_type = mapping_new_products_to_CPC["Search type"].iloc[i]
-        self.add_product_or_activity_CPC_category(name, CPC_category, search_type, key)
+        self._add_product_or_activity_CPC_category(name, CPC_category, search_type, key)
 
     if write:
         if new_db_name is None:
@@ -68,7 +68,7 @@ def add_CPC_categories(
         self.write_to_brightway(new_db_name)
 
 
-def add_product_or_activity_CPC_category(self, name: str, CPC_category: str, search_type: str, key: str) -> None:
+def _add_product_or_activity_CPC_category(self, name: str, CPC_category: str, search_type: str, key: str) -> None:
     """
     Add a CPC category to a set of activities in a LCI database
 
@@ -96,7 +96,7 @@ def add_product_or_activity_CPC_category(self, name: str, CPC_category: str, sea
                 pass  # if all activities already have a CPC category, we do not overwrite it
 
 
-def add_CPC_categories_based_on_existing_activities(self, mapping_existing_products_to_cpc) -> None:
+def _add_CPC_categories_based_on_existing_activities(self, mapping_existing_products_to_cpc) -> None:
     """
     Add CPC categories to a database based on existing activities
 
@@ -115,7 +115,7 @@ def add_CPC_categories_based_on_existing_activities(self, mapping_existing_produ
                 ds['classifications'] += [('CPC', mapping_existing_products_to_cpc[product])]
 
 
-def save_mapping_between_products_and_CPC_categories(
+def _save_mapping_between_products_and_CPC_categories(
         self,
         return_dict: bool = False,
         save_dict: bool = True,

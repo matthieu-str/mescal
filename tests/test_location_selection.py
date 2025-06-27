@@ -68,7 +68,7 @@ def test_change_location_activity():
         esm_location="FR",
     )
 
-    updated_location = esm.change_location_activity(
+    updated_location = esm._change_location_activity(
         activity="market for electricity, low voltage",
         product="electricity, low voltage",
         location="DE",
@@ -93,7 +93,7 @@ def test_change_location_activity_biosphere():
         esm_location="FR",
     )
 
-    updated_location = esm.change_location_activity(
+    updated_location = esm._change_location_activity(
         activity="Water",
         categories=('water',),
         location="GLO",

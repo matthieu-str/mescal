@@ -85,7 +85,7 @@ def compute_impact_scores(
     esm_db_dict_code = esm_db.db_as_dict_code
 
     if 'New_code' not in self.mapping.columns:
-        self.get_new_code()
+        self._get_new_code()
 
     # Store frequently accessed instance variables in local variables inside a method
     mapping = self.mapping
@@ -127,7 +127,7 @@ def compute_impact_scores(
                 # if exc['type'] == 'technosphere':
                 #     exc['amount'] *= 1e-10  # set technosphere exchanges to 0
 
-        direct_emissions_db = self.aggregate_direct_emissions_activities(
+        direct_emissions_db = self._aggregate_direct_emissions_activities(
             esm_db=esm_db,
             direct_emissions_db=activities,
             activities_subject_to_double_counting=activities_subject_to_double_counting,
@@ -142,7 +142,7 @@ def compute_impact_scores(
 
     activities_bw = {(i['database'], i['code']): i for i in activities}
 
-    impact_categories = self.get_impact_categories(methods)
+    impact_categories = self._get_impact_categories(methods)
 
     # Filtering impact categories if specific_lcia_categories or specific_lcia_abbrev is provided
     if specific_lcia_abbrev is not None:
@@ -253,7 +253,7 @@ def compute_impact_scores(
     if lifetime is None:
         pass
     else:
-        lifetime['LCA'] = lifetime.apply(lambda row: self.is_empty(row), axis=1)
+        lifetime['LCA'] = lifetime.apply(lambda row: self._is_empty(row), axis=1)
         lifetime_lca_code = pd.merge(
             left=mapping[mapping.Type == 'Construction'][['Name', 'New_code']],
             right=lifetime,
@@ -422,7 +422,7 @@ def compute_impact_scores(
 
 
 @staticmethod
-def get_impact_categories(methods: list[str]) -> list[str]:
+def _get_impact_categories(methods: list[str]) -> list[str]:
     """
     Get all impact categories from a list of methods
 
@@ -432,7 +432,7 @@ def get_impact_categories(methods: list[str]) -> list[str]:
     return [i for i in bd.methods if i[0] in methods]
 
 
-def aggregate_direct_emissions_activities(
+def _aggregate_direct_emissions_activities(
         self,
         esm_db: Database,
         direct_emissions_db: list[dict],
@@ -528,7 +528,7 @@ def aggregate_direct_emissions_activities(
     return Database(db_as_list=direct_emissions_db)
 
 
-def is_empty(self, row: pd.Series) -> float:
+def _is_empty(self, row: pd.Series) -> float:
     """
     Fill empty cells with the ESM value if the technology is not in the technology compositions file
 
@@ -541,7 +541,7 @@ def is_empty(self, row: pd.Series) -> float:
         return row.LCA
 
 
-def add_virtual_technosphere_flow(
+def _add_virtual_technosphere_flow(
         act: dict,
         exc_act: dict,
         amount: float

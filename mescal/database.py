@@ -207,10 +207,10 @@ class Database:
         return len(self.db_as_list)
 
     from .CPC import (
-        add_product_or_activity_CPC_category,
+        _add_product_or_activity_CPC_category,
         add_CPC_categories,
-        add_CPC_categories_based_on_existing_activities,
-        save_mapping_between_products_and_CPC_categories,
+        _add_CPC_categories_based_on_existing_activities,
+        _save_mapping_between_products_and_CPC_categories,
     )
 
     def load(self, create_pickle: bool = False) -> list[dict]:
