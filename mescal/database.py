@@ -81,6 +81,61 @@ class Dataset:
                     continue
         return consumers
 
+    def relink(
+            self,
+            name_database_unlink: str,
+            name_database_relink: str = None,
+            database_relink_as_list: list[dict] = None,
+            except_units: list[str] = None,
+    ) -> None:
+        """
+        Relink the exchanges of an activity from one database to another.
+
+        :param name_database_unlink: name of the database to unlink from
+        :param name_database_relink: name of the database to relink to. If None, the database name is taken from
+            the `database_relink_as_list` parameter.
+        :param database_relink_as_list: list of dictionaries of the database to relink to. If None, the database name
+            is taken from the `name_database_relink` parameter.
+        :param except_units: list of units to exclude from the relinking. If None, all units are relinked.
+        :return: None
+        """
+
+        if except_units is None:
+            except_units = []
+
+        if database_relink_as_list is not None:
+            relink_db = Database(db_as_list=database_relink_as_list)
+        elif name_database_relink is not None:
+            relink_db = Database(name_database_relink)
+        else:
+            raise ValueError("'name_database_relink' or 'database_relink_as_list' must be provided")
+
+        if name_database_relink is None:
+            if isinstance(relink_db.db_names, str):
+                name_database_relink = relink_db.db_names
+            else:
+                if len(relink_db.db_names) > 1:
+                    raise ValueError(f'More than one database to relink: {relink_db.db_names}. '
+                                     f'Please provide a unique database name.')
+                else:
+                    name_database_relink = relink_db.db_names[0]
+
+        relink_db_dict_name = relink_db.list_to_dict('name')
+
+        for exc in self.act['exchanges']:
+            if exc['unit'] in except_units:
+                continue
+
+            if exc['database'] == name_database_unlink:
+                if (exc['name'], exc['product'], exc['location'], name_database_relink) in relink_db_dict_name:
+                    new_exc = relink_db_dict_name[(exc['name'], exc['product'], exc['location'], name_database_relink)]
+                    exc['database'] = name_database_relink
+                    exc['code'] = new_exc['code']
+                    exc['input'] = (name_database_relink, new_exc['code'])
+                else:
+                    raise ValueError(f"Flow ({exc['product']}-{exc['name']}-{exc['location']}) not found "
+                                     f"in database {name_database_relink}")
+
 
 class Database:
     """
