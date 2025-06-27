@@ -204,7 +204,7 @@ def test_create_esm_database():
             assert exc['amount'] == 0  # electricity flow has to be removed
         elif exc['name'] == 'refrigerant R134a production':
             assert exc['amount'] == 3e-2  # refrigerant flow has to be kept
-        elif exc['name'] == 'heat pump production':
+        elif exc['name'] == 'HEAT_PUMP, Construction':
             assert exc['amount'] == 0  # construction flow has to be removed
         else:
-            raise ValueError("Unexpected technosphere exchange")
+            raise ValueError(f"Unexpected technosphere exchange: {exc}")
