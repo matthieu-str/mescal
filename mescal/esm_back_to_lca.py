@@ -590,8 +590,18 @@ def create_or_modify_activity_from_esm_results(
                     # Create new activity for the new exchange (because one activity may correspond to several ESM
                     # technologies, which might be adjusted later)
                     new_act = copy.deepcopy(activity)
+
                     if year is not None:
                         new_act['name'] += f' ({tech}, {year})'
+                        if year != self.year:
+                            Dataset(new_act).relink(
+                                name_database_unlink = [i['main_database'].db_names for i in self.time_steps
+                                                        if i['year'] == year][0],
+                                name_database_relink = [i['main_database'].db_names for i in self.time_steps
+                                                        if i['year'] == self.year][0],
+                                database_relink_as_list = db_as_list,
+                                except_units = ['unit'],
+                            )
                     else:
                         new_act['name'] += f' ({tech})'
                     new_act['code'] = activity_new_code
@@ -779,6 +789,7 @@ def correct_esm_and_lca_capacity_factor_differences(
             df_removed_construction_flows = df_flows_set_to_zero[
                 (df_flows_set_to_zero.Name == tech)
                 & (df_flows_set_to_zero.Unit == 'unit')
+                & (df_flows_set_to_zero.Year == year)
             ]
 
             for idx, row in df_removed_construction_flows.iterrows():

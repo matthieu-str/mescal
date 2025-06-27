@@ -1248,6 +1248,10 @@ class PathwayESM(ESM):
         self.esm_results_db_name += f'_{self.year}'
         self.results_path_file += f'{self.year}/'
 
+        self.main_database = Database(db_as_list=[])  # Initialize main_database to empty Database
+        self.esm_db = Database(db_as_list=[])  # Initialize esm_db to empty Database
+        self.df_flows_set_to_zero = pd.DataFrame()  # Initialize df_flows_set_to_zero to empty DataFrame
+
         for i in range(len(self.time_steps)):
             time_step = self.time_steps[i]
 
@@ -1255,27 +1259,28 @@ class PathwayESM(ESM):
             if 'lifetime' in time_step:
                 self.lifetime = time_step['lifetime']
             self.esm_db_name = self.esm_db_name.replace(str(self.year), str(time_step['year']))
-            self.esm_db = Database(db_names=self.esm_db_name)
             self.esm_results_db_name = self.esm_results_db_name.replace(str(self.year), str(time_step['year']))
             self.results_path_file = self.results_path_file.replace(str(self.year), str(time_step['year']))
-            self.df_flows_set_to_zero = pd.read_csv(f'{self.results_path_file}removed_flows_list.csv')
             self.double_counting_removal_amount = pd.read_csv(f'{self.results_path_file}double_counting_removal.csv')
 
             self.year = time_step['year']
-            self.main_database = time_step['main_database']
             self.model = time_step['model']
-            self.main_database_name = self.main_database.db_names
+            self.main_database_name = time_step['main_database'].db_names
+
+            df_flows_set_to_zero = pd.read_csv(f'{self.results_path_file}removed_flows_list.csv')
+            df_flows_set_to_zero['Year'] = self.year
+            self.df_flows_set_to_zero = pd.concat([self.df_flows_set_to_zero, df_flows_set_to_zero], ignore_index=True)
 
             if self.operation_metrics_for_all_time_steps:
+                self.main_database += time_step['main_database']
+                self.esm_db += Database(db_names=self.esm_db_name)
                 self.mapping = mapping_all_time_steps[
                     (mapping_all_time_steps['Year'] == self.year)
                     | ((mapping_all_time_steps['Year'] < self.year) & (mapping_all_time_steps['Type'] == 'Operation'))
                     ].copy()
-                self.mapping['Database'] = self.mapping['Database'].replace(
-                    self.time_steps[i-1]['main_database'].db_names,
-                    self.time_steps[i]['main_database'].db_names,
-                )
             else:
+                self.main_database = time_step['main_database']
+                self.esm_db = Database(db_names=self.esm_db_name)
                 self.mapping = mapping_all_time_steps[mapping_all_time_steps['Year'] == self.year].copy()
 
             if return_database:
