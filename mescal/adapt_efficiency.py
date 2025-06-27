@@ -109,7 +109,8 @@ def correct_esm_and_lca_efficiency_differences(
 
     for i in range(len(efficiency)):
 
-        for year in [None] if self.list_of_years == [None] else [y for y in self.list_of_years if y <= self.year]:
+        for year in [None] if (self.list_of_years == [None] or db_type == 'esm') \
+                else [y for y in self.list_of_years if y <= self.year]:
 
             act_to_adapt_list = []  # there might be several activities to adapt for one technology in case of market
             techno_flows_to_correct_dict = {}
@@ -198,7 +199,7 @@ def correct_esm_and_lca_efficiency_differences(
                         f'adjusted.'
                     )
             for act in act_to_adapt_list:
-                if self.operation_metrics_for_all_time_steps:
+                if self.operation_metrics_for_all_time_steps and db_type == 'esm results':
                     efficiency_ratio = efficiency[f'efficiency_ratio ({year})'].iloc[i]
                 else:
                     efficiency_ratio = efficiency['efficiency_ratio'].iloc[i]
