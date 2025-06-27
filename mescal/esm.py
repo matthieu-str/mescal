@@ -998,9 +998,9 @@ class PathwayESM(ESM):
         original_results_path_file = self.results_path_file
         mapping_all_time_steps = self.mapping.copy()
 
-        year = self.time_steps[0]['year']
-        self.esm_db_name += f'_{year}'
-        self.results_path_file += f'{year}/'
+        self.year = self.time_steps[0]['year']
+        self.esm_db_name += f'_{self.year}'
+        self.results_path_file += f'{self.year}/'
 
         if self.operation_metrics_for_all_time_steps and len(self.time_steps) == 1:
             raise ValueError("You must have at least two time steps to set 'operation_metrics_for_all_time_steps' to True.")
@@ -1010,15 +1010,15 @@ class PathwayESM(ESM):
             time_step = self.time_steps[i]
 
             # Update the ESM variable values for the current time step
-            self.esm_db_name = self.esm_db_name.replace(str(year), str(time_step['year']))
-            self.results_path_file = self.results_path_file.replace(str(year), str(time_step['year']))
+            self.esm_db_name = self.esm_db_name.replace(str(self.year), str(time_step['year']))
+            self.results_path_file = self.results_path_file.replace(str(self.year), str(time_step['year']))
 
-            year = time_step['year']
+            self.year = time_step['year']
             if 'model' in time_step:
                 self.model = time_step['model']
             self.main_database = time_step['main_database']
             self.main_database_name = self.main_database.db_names
-            self.mapping = mapping_all_time_steps[mapping_all_time_steps['Year'] == year].copy()
+            self.mapping = mapping_all_time_steps[mapping_all_time_steps['Year'] == self.year].copy()
 
             # create the ESM database for the current time step
             if self.operation_metrics_for_all_time_steps:
