@@ -1269,9 +1269,10 @@ class PathwayESM(ESM):
 
             df_flows_set_to_zero = pd.read_csv(f'{self.results_path_file}removed_flows_list.csv')
             df_flows_set_to_zero['Year'] = self.year
-            self.df_flows_set_to_zero = pd.concat([self.df_flows_set_to_zero, df_flows_set_to_zero], ignore_index=True)
 
             if self.operation_metrics_for_all_time_steps:
+                self.df_flows_set_to_zero = pd.concat([self.df_flows_set_to_zero, df_flows_set_to_zero],
+                                                      ignore_index=True)
                 self.main_database += time_step['main_database']
                 self.esm_db += Database(db_names=self.esm_db_name)
                 self.mapping = mapping_all_time_steps[
@@ -1279,6 +1280,7 @@ class PathwayESM(ESM):
                     | ((mapping_all_time_steps['Year'] < self.year) & (mapping_all_time_steps['Type'] == 'Operation'))
                     ].copy()
             else:
+                self.df_flows_set_to_zero = df_flows_set_to_zero
                 self.main_database = time_step['main_database']
                 self.esm_db = Database(db_names=self.esm_db_name)
                 self.mapping = mapping_all_time_steps[mapping_all_time_steps['Year'] == self.year].copy()
