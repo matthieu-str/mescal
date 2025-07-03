@@ -94,6 +94,7 @@ def _correct_esm_and_lca_efficiency_differences(
 
     elif db_type == 'esm results':
         efficiency = pd.read_csv(f'{self.results_path_file}efficiency_differences.csv')
+        efficiency['Flow'] = efficiency['Flow'].apply(lambda x: ast.literal_eval(x) if isinstance(x, str) else x)
 
         if self.operation_metrics_for_all_time_steps:
             # Convert the 'Flow' column to string to be able to merge
@@ -102,10 +103,9 @@ def _correct_esm_and_lca_efficiency_differences(
             self.efficiency = pd.merge(self.efficiency, efficiency[['Name', 'Flow', 'efficiency_ratio']],
                                   on=['Name', 'Flow'], how='left')
             self.efficiency.rename(columns={'efficiency_ratio': f'efficiency_ratio ({self.year})'}, inplace=True)
+            # Convert the 'Flow' column back to list
             self.efficiency['Flow'] = self.efficiency['Flow'].apply(lambda x: ast.literal_eval(x) if isinstance(x, str) else x)
             efficiency = self.efficiency
-            # Convert the 'Flow' column back to list
-
 
     for i in range(len(efficiency)):
 
