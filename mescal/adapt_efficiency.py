@@ -109,7 +109,7 @@ def _correct_esm_and_lca_efficiency_differences(
 
     for i in range(len(efficiency)):
 
-        for year in [None] if (self.list_of_years == [None] or db_type == 'esm') \
+        for year in [self.year] if (not self.operation_metrics_for_all_time_steps or db_type == 'esm') \
                 else [y for y in self.list_of_years if y <= self.year]:
 
             act_to_adapt_list = []  # there might be several activities to adapt for one technology in case of market

@@ -526,7 +526,7 @@ def _create_or_modify_activity_from_esm_results(
             if self.operation_metrics_for_all_time_steps:
                 amount_per_year = {}
                 amount = 0
-                for year in [None] if self.list_of_years == [None] else [y for y in self.list_of_years if y <= self.year]:
+                for year in [y for y in self.list_of_years if y <= self.year]:
                     amount_per_year[year] = sum(esm_results[
                                                     (esm_results.Name == tech)
                                                     & (esm_results['Year_inst'] == year)
@@ -539,10 +539,11 @@ def _create_or_modify_activity_from_esm_results(
         if amount == 0:
             pass
         else:
-            if not self.operation_metrics_for_all_time_steps:
+            if not self.pathway:
                 mapping.Year = None
 
-            for year in [None] if self.list_of_years == [None] else [y for y in self.list_of_years if y <= self.year]:
+            for year in [self.year] if not self.operation_metrics_for_all_time_steps \
+                    else [y for y in self.list_of_years if y <= self.year]:
 
                 if self.operation_metrics_for_all_time_steps:
                     amount = amount_per_year[year]
@@ -550,13 +551,13 @@ def _create_or_modify_activity_from_esm_results(
                 if tech in list(
                         mapping[
                             ((mapping.Type == 'Operation') | (mapping.Type == 'Resource'))
-                            & (mapping.Year == year)
+                            & (True if not self.pathway else mapping.Year == year)
                         ].Name.unique()):
                     (activity_name, activity_prod, activity_database,
                      activity_location, activity_current_code, activity_new_code) = mapping[
                         (mapping.Name == tech)
                         & ((mapping.Type == 'Operation') | (mapping.Type == 'Resource'))
-                        & (mapping.Year == year)
+                        & (True if not self.pathway else mapping.Year == year)
                         ][['Activity', 'Product', 'Database', 'Location', 'Current_code', 'New_code']].values[0]
 
                     activity = db_dict_code[activity_database, activity_current_code]
@@ -594,7 +595,7 @@ def _create_or_modify_activity_from_esm_results(
                     # technologies, which might be adjusted later)
                     new_act = copy.deepcopy(activity)
 
-                    if year is not None:
+                    if self.operation_metrics_for_all_time_steps:
                         new_act['name'] += f' ({tech}, {year})'
                         if year != self.year:
                             Dataset(new_act).relink(
@@ -744,14 +745,19 @@ def _correct_esm_and_lca_capacity_factor_differences(
 
     for tech in df_flows_set_to_zero.Name.unique():
 
-        if not self.operation_metrics_for_all_time_steps:
+        if not self.pathway:
             mapping.Year = None
             esm_results.Year = None
+        if not self.operation_metrics_for_all_time_steps:
             esm_results.Year_inst = None
 
-        for year in [None] if self.list_of_years == [None] else [y for y in self.list_of_years if y <= self.year]:
+        for year in [self.year] if not self.operation_metrics_for_all_time_steps \
+                else [y for y in self.list_of_years if y <= self.year]:
 
-            if len(esm_results[(esm_results.Name == tech) & (esm_results.Year_inst == year)]) == 0:
+            if len(esm_results[
+                       (esm_results.Name == tech)
+                       & (True if not self.operation_metrics_for_all_time_steps else esm_results.Year_inst == year)
+                   ]) == 0:
                 continue
 
             act_to_adapt_list = []
@@ -775,13 +781,13 @@ def _correct_esm_and_lca_capacity_factor_differences(
                 lifetime_lca = lifetime[(lifetime.Name == sub_comp)]['LCA'].iloc[0]
                 annual_production = esm_results[
                     (esm_results.Name == tech)
-                    & (esm_results.Year_inst == year)
-                    & (esm_results.Year == self.year)
+                    & (True if not self.operation_metrics_for_all_time_steps else esm_results.Year_inst == year)
+                    & (True if not self.pathway else esm_results.Year == self.year)
                 ]['Production'].iloc[0]
                 installed_capacity = esm_results[
                     (esm_results.Name == tech)
-                    & (esm_results.Year_inst == year)
-                    & (esm_results.Year == self.year)
+                    & (True if not self.operation_metrics_for_all_time_steps else esm_results.Year_inst == year)
+                    & (True if not self.pathway else esm_results.Year == self.year)
                 ]['Capacity'].iloc[0]
 
                 # amount_constr_esm is the amount of infrastructure unit to be used in the operation LCI dataset
@@ -792,7 +798,7 @@ def _correct_esm_and_lca_capacity_factor_differences(
             df_removed_construction_flows = df_flows_set_to_zero[
                 (df_flows_set_to_zero.Name == tech)
                 & (df_flows_set_to_zero.Unit == 'unit')
-                & (df_flows_set_to_zero.Year == year)
+                & (True if not self.pathway else df_flows_set_to_zero.Year == year)
             ]
 
             for idx, row in df_removed_construction_flows.iterrows():
