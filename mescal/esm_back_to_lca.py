@@ -112,6 +112,7 @@ def create_new_database_with_esm_results(
         data=perform_d_c,
         columns=['Name', 'Product', 'Activity', 'Location', 'Database', 'Current_code']
     )
+    double_counting_act.drop_duplicates(inplace=True)  # remove potential duplicates
 
     # Adding current code to the mapping file
     mapping['Current_code'] = mapping.apply(lambda row: self.main_database.get_code(
@@ -143,7 +144,7 @@ def create_new_database_with_esm_results(
             ESM_inputs=['OWN_CONSTRUCTION', 'CONSTRUCTION'],
             db_type='esm results',
         )
-    elif harmonize_with_esm:
+    elif harmonize_with_esm and not remove_background_construction_flows:
         # if we do not want to remove construction flows, but we want to harmonize the database with the ESM,
         # the background processes of markets should be recorded in the ESM results database following the
         # background search algorithm of the double-counting removal procedure. However, flows are NOT removed
@@ -163,9 +164,11 @@ def create_new_database_with_esm_results(
             esm_db = Database(self.esm_db_name)
         self.main_database = self.main_database + esm_db
 
-        self.logger.info("Correcting efficiency and capacity factor differences between ESM and LCI datasets...")
+        self.logger.info("Correcting efficiency differences between ESM and LCI datasets...")
         self._correct_esm_and_lca_efficiency_differences(db_type='esm results', write_efficiency_report=False)
-        self._correct_esm_and_lca_capacity_factor_differences(esm_results=esm_results, write_cp_report=True)
+        if not remove_background_construction_flows:
+            self.logger.info("Correcting capacity factor differences between ESM and LCI datasets...")
+            self._correct_esm_and_lca_capacity_factor_differences(esm_results=esm_results, write_cp_report=True)
 
         # Remove the ESM database from the main database
         self.main_database = self.main_database - esm_db
@@ -858,6 +861,8 @@ def _correct_esm_and_lca_capacity_factor_differences(
                         exc['amount'] = amount_constr_esm  # we replace the latter by the one derived from ESM results
                         exc['comment'] = (f'TF multiplied by {round(amount_constr_esm / amount_constr_lca, 4)} (capacity '
                                           f'factor). ' + exc.get('comment', ''))
+                        if amount_constr_lca == 0:
+                            print(act['name'], exc['name'])
 
                         capacity_factor_report_list.append([
                             tech,
