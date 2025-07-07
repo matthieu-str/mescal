@@ -769,16 +769,29 @@ def _correct_esm_and_lca_capacity_factor_differences(
 
             for sub_comp in technology_compositions_dict[tech]:
 
-                unit_conversion_factor_constr = unit_conversion[
-                    (unit_conversion.Name == sub_comp)
-                    & (unit_conversion.Type == 'Construction')
-                    ]['Value'].iloc[0]
+                try:
+                    unit_conversion_factor_constr = unit_conversion[
+                        (unit_conversion.Name == sub_comp)
+                        & (unit_conversion.Type == 'Construction')
+                        ]['Value'].iloc[0]
+                except IndexError:
+                    self.logger.warning(f'No unit conversion factor for construction found for {sub_comp}. '
+                                        f'The potential capacity factor difference cannot be corrected.')
+                    continue
+
                 if sub_comp != tech:
                     unit_conversion_factor_constr *= unit_conversion[
                         (unit_conversion.Name == tech)
                         & (unit_conversion.Type == 'Construction')
                     ]['Value'].iloc[0]
+
                 lifetime_lca = lifetime[(lifetime.Name == sub_comp)]['LCA'].iloc[0]
+                if pd.isna(lifetime_lca):
+                    self.logger.warning(f'No LCA lifetime for {sub_comp}. Please provide a lifetime for this technology '
+                                        f'in the lifetime csv file. Until then, the capacity factor difference cannot '
+                                        f'be corrected.')
+                    continue
+
                 annual_production = esm_results[
                     (esm_results.Name == tech)
                     & (True if not self.operation_metrics_for_all_time_steps else esm_results.Year_inst == year)
