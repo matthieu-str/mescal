@@ -1061,7 +1061,10 @@ class PathwayESM(ESM):
             if 'model' in time_step:
                 self.model = time_step['model']
             self.main_database = time_step['main_database']
-            self.main_database_name = self.main_database.db_names
+            if 'main_database_name' in time_step:
+                self.main_database_name = time_step['main_database_name']
+            else:
+                self.main_database_name = self.main_database.db_names
             self.mapping = mapping_all_time_steps[mapping_all_time_steps['Year'] == self.year].copy()
 
             # create the ESM database for the current time step
@@ -1218,7 +1221,10 @@ class PathwayESM(ESM):
 
             self.year = time_step['year']
             self.main_database = time_step['main_database']
-            self.main_database_name = self.main_database.db_names
+            if 'main_database_name' in time_step:
+                self.main_database_name = time_step['main_database_name']
+            else:
+                self.main_database_name = self.main_database.db_names
 
             if self.operation_metrics_for_all_time_steps:
                 self.mapping = mapping_all_time_steps[
@@ -1309,7 +1315,10 @@ class PathwayESM(ESM):
 
             self.year = time_step['year']
             self.model = time_step['model']
-            self.main_database_name = time_step['main_database'].db_names
+            if 'main_database_name' in time_step:
+                self.main_database_name = time_step['main_database_name']
+            else:
+                self.main_database_name = self.main_database.db_names
 
             df_flows_set_to_zero = pd.read_csv(f'{self.results_path_file}removed_flows_list.csv')
             df_flows_set_to_zero['Year'] = self.year
@@ -1379,7 +1388,10 @@ class PathwayESM(ESM):
             year = current_time_step['year']
             self.main_database = next_time_step['main_database']
             self.model = current_time_step['model']
-            self.main_database_name = self.main_database.db_names
+            if 'main_database_name' in next_time_step:
+                self.main_database_name = next_time_step['main_database_name']
+            else:
+                self.main_database_name = self.main_database.db_names
             self.mapping = mapping_all_time_steps[mapping_all_time_steps['Year'] == year].copy()
 
             super().connect_esm_results_to_database(*args, **kwargs)
