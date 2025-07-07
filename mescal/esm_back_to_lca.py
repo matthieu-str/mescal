@@ -57,7 +57,9 @@ def create_new_database_with_esm_results(
     esm_location = self.esm_location
 
     if tech_to_remove_layers is None:
-        tech_to_remove_layers = pd.DataFrame(columns=['Layers', 'Technologies'])
+        self.tech_to_remove_layers = pd.DataFrame(columns=['Layers', 'Technologies'])
+    else:
+        self.tech_to_remove_layers = tech_to_remove_layers
     if new_end_use_types is None:
         new_end_use_types = pd.DataFrame(columns=['Name', 'Search type', 'Old', 'New'])
 
@@ -93,7 +95,6 @@ def create_new_database_with_esm_results(
                 original_activity_database=original_activity_database,
                 flows=flows,
                 esm_results=esm_results,
-                tech_to_remove_layers=tech_to_remove_layers,
                 new_end_use_types=new_end_use_types,
             )
 
@@ -407,7 +408,6 @@ def _create_or_modify_activity_from_esm_results(
         original_activity_database: str,
         flows: pd.DataFrame,
         esm_results: pd.DataFrame,
-        tech_to_remove_layers: pd.DataFrame,
         new_end_use_types: pd.DataFrame,
 ) -> list[list[str]]:
     """
@@ -419,7 +419,6 @@ def _create_or_modify_activity_from_esm_results(
     :param flows: mapping file between ESM flows and LCI datasets
     :param esm_results: results of the ESM in terms of annual production and installed capacity. It should contain the
         columns 'Name', 'Production', and 'Capacity'.
-    :param tech_to_remove_layers: technologies to remove from the result LCI datasets
     :param new_end_use_types: adapt end use types to fit the results LCI datasets mapping
     :return: list of activities to perform double counting removal
     """
@@ -433,6 +432,7 @@ def _create_or_modify_activity_from_esm_results(
     unit_conversion = self.unit_conversion
     model = self.model
     esm_results_db_name = self.esm_results_db_name
+    tech_to_remove_layers = self.tech_to_remove_layers
 
     # Check if the original activity is in the database for the location under study
     if (original_activity_name, original_activity_prod, esm_location, original_activity_database) in db_dict_name:
@@ -730,6 +730,7 @@ def _correct_esm_and_lca_capacity_factor_differences(
     df_flows_set_to_zero = self.df_flows_set_to_zero
     unit_conversion = self.unit_conversion
     lifetime = self.lifetime
+    tech_to_remove_layers = self.tech_to_remove_layers
 
     # readings lists as lists and not strings
     try:
@@ -758,6 +759,11 @@ def _correct_esm_and_lca_capacity_factor_differences(
                        (esm_results.Name == tech)
                        & (True if not self.operation_metrics_for_all_time_steps else esm_results.Year_inst == year)
                    ]) == 0:
+                # if the technology is not in the ESM results, we skip it
+                continue
+
+            elif tech in [tec for sublist in tech_to_remove_layers.Technologies for tec in sublist]:
+                # if the technology is in the list of technologies to remove, we skip it
                 continue
 
             act_to_adapt_list = []

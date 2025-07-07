@@ -119,6 +119,7 @@ class ESM:
         self.year = None
         self.list_of_years = [None]
         self.esm_db = None
+        self.tech_to_remove_layers = None
 
 
     def __repr__(self):
@@ -945,9 +946,11 @@ class PathwayESM(ESM):
             *args, **kwargs
     ):
         """
-        Initialize the PathwayESM class.
+        Initialize the PathwayESM class. See ESM.__init__ for full argument documentation.
 
         :param time_steps: List of dictionaries, each containing parameters for a time step in the pathway ESM.
+            A time step should contain at least the 'year' and 'main_database' keys, and optionally
+            'main_database_name', 'model' and 'lifetime'.
         :param operation_metrics_for_all_time_steps: if True, the operation metrics for technologies that were
             installed in previous time steps (i.e., with a different efficiency that the one of the current year)
             are added to each yearly database.
