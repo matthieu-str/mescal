@@ -751,7 +751,7 @@ class ESM:
         """
         Creates the Current_code column in the mapping DataFrame, which contains the original code from the main database.
 
-        :return: None
+        :return: None (updates the mapping DataFrame)
         """
         main_db_as_dict_name = self.main_database.db_as_dict_name
         self.mapping['Current_code'] = self.mapping.apply(lambda x: main_db_as_dict_name[(
@@ -765,10 +765,9 @@ class ESM:
         """
         Creates the New_code column in the mapping DataFrame, which contains the new code from the ESM database.
 
-        :return: None
+        :return: None (updates the mapping DataFrame)
         """
         esm_db_name = self.esm_db_name
-        esm_location = self.esm_location
         if self.esm_db is not None:
             esm_db = self.esm_db
         else:
@@ -779,40 +778,85 @@ class ESM:
                 lambda x: self._get_new_code_previous_years(x, esm_db_as_dict_name)
                 if x['Type'] in ['Construction', 'Operation', 'Resource'] else None, axis=1)
         else:
-            if self.regionalize_foregrounds:
-                self.mapping['New_code'] = self.mapping.apply(lambda x: esm_db_as_dict_name[(
-                    f"{x['Name']}, {x['Type']}",
-                    x['Product'],
-                    esm_location,
-                    esm_db_name,
-                )]['code'] if x['Type'] in ['Construction', 'Operation', 'Resource'] else None, axis=1)
-            else:
-                self.mapping['New_code'] = self.mapping.apply(
-                    lambda x: esm_db_as_dict_name[(
-                        f"{x['Name']}, {x['Type']}",
-                        x['Product'],
-                        x['Location'],
-                        esm_db_name,
-                    )]['code'] if x['Type'] in ['Construction', 'Operation', 'Resource'] else None, axis=1)
+            self.mapping['New_code'] = self.mapping.apply(
+                lambda x: self._get_new_code_iteration(x, esm_db_as_dict_name)
+                if x['Type'] in ['Construction', 'Operation', 'Resource'] else None, axis=1)
 
-    def _get_new_code_previous_years(self, row, esm_db_as_dict_name) -> str:
+    def _get_new_code_iteration(self, row: pd.Series, esm_db_as_dict_name: dict) -> str:
+        """
+        Function to iterate over the rows of the mapping DataFrame and get the new code for each activity.
+
+        :param row: row of the mapping DataFrame
+        :param esm_db_as_dict_name: dictionary of the ESM database with (name, product, location, database) as key
+        :return: code of the activity in the ESM database
+        """
         if self.regionalize_foregrounds:
-            if row['Year'] == self.year:
+            try:
                 return esm_db_as_dict_name[(
                     f"{row['Name']}, {row['Type']}",
                     row['Product'],
                     self.esm_location,
                     self.esm_db_name,
                 )]['code']
-            elif row['Year'] < self.year:
+            except KeyError:
                 return esm_db_as_dict_name[(
-                    f"{row['Name']}, {row['Type']} ({row['Year']})",
+                    f"{row['Name']}, {row['Type']}",
                     row['Product'],
-                    self.esm_location,
+                    row['Location'],
                     self.esm_db_name,
                 )]['code']
-            else:
-                raise ValueError(f"Year of the following row is greater than the current year {self.year}: {row}")
+        else:
+            return self.esm_db.db_as_dict_name[(
+                f"{row['Name']}, {row['Type']}",
+                row['Product'],
+                row['Location'],
+                self.esm_db_name,
+            )]['code']
+
+    def _get_new_code_previous_years(self, row: pd.Series, esm_db_as_dict_name: dict) -> str:
+        """
+        Function to iterate over the rows of the mapping DataFrame and get the new code for each activity,
+        considering the year of the activity. This is used when operation metrics for all time steps are required.
+
+        :param row: row of the mapping DataFrame
+        :param esm_db_as_dict_name: dictionary of the ESM database with (name, product, location, database) as key
+        :return: code of the activity in the ESM database
+        """
+        if self.regionalize_foregrounds:
+            try:
+                if row['Year'] == self.year:
+                    return esm_db_as_dict_name[(
+                        f"{row['Name']}, {row['Type']}",
+                        row['Product'],
+                        self.esm_location,
+                        self.esm_db_name,
+                    )]['code']
+                elif row['Year'] < self.year:
+                    return esm_db_as_dict_name[(
+                        f"{row['Name']}, {row['Type']} ({row['Year']})",
+                        row['Product'],
+                        self.esm_location,
+                        self.esm_db_name,
+                    )]['code']
+                else:
+                    raise ValueError(f"Year of the following row is greater than the current year {self.year}: {row}")
+            except KeyError:
+                if row['Year'] == self.year:
+                    return esm_db_as_dict_name[(
+                        f"{row['Name']}, {row['Type']}",
+                        row['Product'],
+                        row['Location'],
+                        self.esm_db_name,
+                    )]['code']
+                elif row['Year'] < self.year:
+                    return esm_db_as_dict_name[(
+                        f"{row['Name']}, {row['Type']} ({row['Year']})",
+                        row['Product'],
+                        row['Location'],
+                        self.esm_db_name,
+                    )]['code']
+                else:
+                    raise ValueError(f"Year of the following row is greater than the current year {self.year}: {row}")
         else:
             if row['Year'] == self.year:
                 return esm_db_as_dict_name[(
