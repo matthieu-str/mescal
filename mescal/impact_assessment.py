@@ -67,7 +67,7 @@ def compute_impact_scores(
 
     if contribution_analysis is not None:
         if contribution_analysis not in ['emissions', 'processes', 'both']:
-            raise ValueError('The contribution_analysis must be either "emissions" or "processes"')
+            raise ValueError('The contribution_analysis must be either "emissions", "processes" or "both"')
         if contribution_analysis_limit_type not in ['percent', 'number']:
             raise ValueError('The contribution_analysis_limit_type must be either "percent" or "number"')
         if contribution_analysis_limit_type == 'percent':
