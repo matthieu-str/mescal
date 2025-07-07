@@ -746,6 +746,8 @@ def _correct_esm_and_lca_capacity_factor_differences(
 
     for tech in df_flows_set_to_zero.Name.unique():
 
+        skip_tech = False
+
         if not self.pathway:
             mapping.Year = None
             esm_results.Year = None
@@ -754,6 +756,9 @@ def _correct_esm_and_lca_capacity_factor_differences(
 
         for year in [self.year] if not self.operation_metrics_for_all_time_steps \
                 else [y for y in self.list_of_years if y <= self.year]:
+
+            if skip_tech:
+                continue
 
             if len(esm_results[
                        (esm_results.Name == tech)
@@ -773,6 +778,8 @@ def _correct_esm_and_lca_capacity_factor_differences(
                 # simple technologies are seen as compositions of one technology
                 technology_compositions_dict[tech] = [tech]
 
+            amount_constr_per_subcomp = {}
+
             for sub_comp in technology_compositions_dict[tech]:
 
                 try:
@@ -783,6 +790,7 @@ def _correct_esm_and_lca_capacity_factor_differences(
                 except IndexError:
                     self.logger.warning(f'No unit conversion factor for construction found for {sub_comp}. '
                                         f'The potential capacity factor difference cannot be corrected.')
+                    skip_tech = True
                     continue
 
                 if sub_comp != tech:
@@ -796,6 +804,7 @@ def _correct_esm_and_lca_capacity_factor_differences(
                     self.logger.warning(f'No LCA lifetime for {sub_comp}. Please provide a lifetime for this technology '
                                         f'in the lifetime csv file. Until then, the capacity factor difference cannot '
                                         f'be corrected.')
+                    skip_tech = True
                     continue
 
                 annual_production = esm_results[
@@ -803,6 +812,7 @@ def _correct_esm_and_lca_capacity_factor_differences(
                     & (True if not self.operation_metrics_for_all_time_steps else esm_results.Year_inst == year)
                     & (True if not self.pathway else esm_results.Year == self.year)
                 ]['Production'].iloc[0]
+
                 installed_capacity = esm_results[
                     (esm_results.Name == tech)
                     & (True if not self.operation_metrics_for_all_time_steps else esm_results.Year_inst == year)
@@ -813,6 +823,10 @@ def _correct_esm_and_lca_capacity_factor_differences(
                 # given the annual production and installed capacity results of the ESM. This value can significantly differ
                 # from the original value in the operation LCI dataset, due to differences in assumptions and operating modes.
                 amount_constr_esm = installed_capacity * unit_conversion_factor_constr / (lifetime_lca * annual_production)
+                amount_constr_per_subcomp[sub_comp] = amount_constr_esm
+
+            if skip_tech:
+                continue
 
             df_removed_construction_flows = df_flows_set_to_zero[
                 (df_flows_set_to_zero.Name == tech)
@@ -881,25 +895,33 @@ def _correct_esm_and_lca_capacity_factor_differences(
             for act in act_to_adapt_list:
 
                 for exc in Dataset(act).get_technosphere_flows():
+                    i = 0
                     if (exc['database'], exc['code']) in techno_flows_to_correct_dict[(act['database'], act['code'])]:
-                        amount_constr_lca = exc['amount']  # original infrastructure amount in the operation LCI dataset
-                        exc['amount'] = amount_constr_esm  # we replace the latter by the one derived from ESM results
-                        exc['comment'] = (f'TF multiplied by {round(amount_constr_esm / amount_constr_lca, 4)} (capacity '
-                                          f'factor). ' + exc.get('comment', ''))
-                        if amount_constr_lca == 0:
-                            print(act['name'], exc['name'])
+                        for sub_comp in technology_compositions_dict[tech]:
+                            if exc['product'] == mapping[(mapping.Name == sub_comp)
+                                                         & (mapping.Type == 'Construction')].Product.iloc[0]:
+                                i+=1
+                                amount_constr_esm = amount_constr_per_subcomp[sub_comp]
+                                amount_constr_lca = exc['amount']  # original infrastructure amount in the operation LCI dataset
+                                exc['amount'] = amount_constr_esm  # we replace the latter by the one derived from ESM results
+                                exc['comment'] = (f'TF multiplied by {round(amount_constr_esm / amount_constr_lca, 4)} (capacity '
+                                                  f'factor). ' + exc.get('comment', ''))
+                                if amount_constr_lca == 0:
+                                    print(act['name'], exc['name'])
 
-                        capacity_factor_report_list.append([
-                            tech,
-                            exc['name'],
-                            exc['product'],
-                            exc['location'],
-                            exc['database'],
-                            exc['code'],
-                            amount_constr_lca,
-                            amount_constr_esm,
-                        ])  # reporting capacity factors differences
-
+                                capacity_factor_report_list.append([
+                                    tech,
+                                    exc['name'],
+                                    exc['product'],
+                                    exc['location'],
+                                    exc['database'],
+                                    exc['code'],
+                                    amount_constr_lca,
+                                    amount_constr_esm,
+                                ])  # reporting capacity factors differences
+                    if i > 1:
+                        self.logger.warning(f"Exchange {exc['name']} in activity {act['name']} has matched with several "
+                                         f"sub-components of technology {tech}. Please revise your mapping file.")
                 act['comment'] = (f'Infrastructure flows have been harmonized with the ESM to account for capacity factor '
                                   f'differences. ') + act.get('comment', '')
 
