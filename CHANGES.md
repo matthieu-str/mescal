@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] - 2025-07-08
+
+### Added
+- `PathwayESM` class (in `esm.py`) to create databases and impact score dataframes for all ESM time steps at once.
+- Contribution analysis of processes in `compute_impact_scores` (in `impact_assessment.py`) by setting `contribution_analysis` to `processes`.
+- `max_depth_double_counting_search` argument in the `ESM` class to limit the depth of the search in the double-counting removal process (in `double_counting.py`).
+- Harmonization of efficiency and capacity factor with the ESM in the ESM results database (in `esm_back_to_lca.py` and `adapt_efficiency.py`).
+- Loss coefficient (based on the one of the original dataset) for datasets in the ESM results database (in `esm_back_to_lca.py`).
+
+### Changed
+- Corrected unit conversion for elementary flows contribution analysis in `compute_impact_scores` (in `impact_assessment.py`).
+- Improved double-counting removal process for market-type activities in the ESM results database (i.e., removal of infrastructure flows) (in `esm_back_to_lca.py` and `double_counting.py`).
+- If specified in `tech_specifics`, double-counting removal during background search is allowed even if a flows has already been set to zero (in `double_counting.py`).
+- Relinking of the main database with the ESM results database can be based on activity names and/or product names, and for a user-defined set of geographies `locations` (in `esm_back_to_lca.py`).
+- Default `esm_location` is GLO and default `accepted_locations` is [`esm_location`] in the `ESM` class (in `esm.py`).
+
 ## [1.1.4] - 2025-04-09
 
 ### Added

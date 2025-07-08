@@ -6,6 +6,7 @@ __all__ = (
 
     # esm.py
     "ESM",
+    "PathwayESM",
 
     # database.py
     "Database",
@@ -34,10 +35,10 @@ __all__ = (
     "change_flow_value",
 )
 
-__version__ = "1.1.4"
+__version__ = "1.2.0"
 
 from .database import Database, Dataset
-from .esm import ESM
+from .esm import ESM, PathwayESM
 from .plot import Plot
 from .utils import *
 from .change_ecoinvent import *
