@@ -244,12 +244,15 @@ def connect_esm_results_to_database(
         specific_db = Database(db_names=specific_db_name)
         db_as_list = specific_db.db_as_list
         if specific_db_name == esm_results_db_name:
-            esm_results_db_dict_name = specific_db.db_as_dict_name
+            esm_results_db = specific_db
+            esm_results_db_dict_name = esm_results_db.db_as_dict_name
         else:
-            esm_results_db_dict_name = Database(db_names=esm_results_db_name).db_as_dict_name
+            esm_results_db = Database(db_names=esm_results_db_name)
+            esm_results_db_dict_name = esm_results_db.db_as_dict_name
     else:
         db_as_list = self.main_database.db_as_list
-        esm_results_db_dict_name = Database(db_names=esm_results_db_name).db_as_dict_name
+        esm_results_db = Database(db_names=esm_results_db_name)
+        esm_results_db_dict_name = esm_results_db.db_as_dict_name
     esm_location = self.esm_location
     mapping = self.mapping
 
@@ -398,7 +401,9 @@ def connect_esm_results_to_database(
 
     if create_new_db:
         # Write the new database
-        Database(db_as_list=db_as_list).write_to_brightway(new_db_name)
+        new_db = Database(db_as_list=db_as_list)
+        new_db = new_db - esm_results_db
+        new_db.write_to_brightway(new_db_name)
 
 
 def _create_or_modify_activity_from_esm_results(
