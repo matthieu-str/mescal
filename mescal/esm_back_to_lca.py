@@ -183,6 +183,12 @@ def create_new_database_with_esm_results(
 
     if write_database:
         esm_results_db.write_to_brightway(esm_results_db_name)
+        self.logger.info("Relinking the energy flows of the ESM results database to itself...")
+        self.connect_esm_results_to_database(
+            create_new_db=False,
+            esm_results_db_name=esm_results_db_name,
+            specific_db_name=esm_results_db_name,
+        )
 
     if return_database:
         self.main_database = self.main_database - esm_results_db
@@ -926,7 +932,7 @@ def _correct_esm_and_lca_capacity_factor_differences(
                                 ])  # reporting capacity factors differences
                     if i > 1:
                         self.logger.warning(f"Exchange {exc['name']} in activity {act['name']} has matched with several "
-                                         f"sub-components of technology {tech}. Please revise your mapping file.")
+                                         f"sub-components of technology {tech}.")
                 act['comment'] = (f'Infrastructure flows have been harmonized with the ESM to account for capacity factor '
                                   f'differences. ') + act.get('comment', '')
 

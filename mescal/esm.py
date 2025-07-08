@@ -1367,6 +1367,7 @@ class PathwayESM(ESM):
     def connect_esm_results_to_database(
             self,
             esm_results_db_name: str = None,
+            specific_db_name: str = None,
             *args, **kwargs
     ) -> None:
 
@@ -1380,24 +1381,28 @@ class PathwayESM(ESM):
         else:
             self.esm_results_db_name += f'_{year}'
 
-        for i in range(len(self.time_steps)-1):  # Iterate over all time steps except the last one
-            current_time_step = self.time_steps[i]
-            next_time_step = self.time_steps[i+1]
+        if specific_db_name is not None:
+            super().connect_esm_results_to_database(specific_db_name=specific_db_name, *args, **kwargs)
 
-            # Update the ESM variable values for the current time step
-            self.esm_results_db_name = self.esm_results_db_name.replace(str(year), str(current_time_step['year']))
+        else:
+            for i in range(len(self.time_steps)-1):  # Iterate over all time steps except the last one
+                current_time_step = self.time_steps[i]
+                next_time_step = self.time_steps[i+1]
 
-            # Results of time step i are injected in the database of time step i + 1
-            year = current_time_step['year']
-            self.main_database = next_time_step['main_database']
-            self.model = current_time_step['model']
-            if 'main_database_name' in next_time_step:
-                self.main_database_name = next_time_step['main_database_name']
-            else:
-                self.main_database_name = self.main_database.db_names
-            self.mapping = mapping_all_time_steps[mapping_all_time_steps['Year'] == year].copy()
+                # Update the ESM variable values for the current time step
+                self.esm_results_db_name = self.esm_results_db_name.replace(str(year), str(current_time_step['year']))
 
-            super().connect_esm_results_to_database(*args, **kwargs)
+                # Results of time step i are injected in the database of time step i + 1
+                year = current_time_step['year']
+                self.main_database = next_time_step['main_database']
+                self.model = current_time_step['model']
+                if 'main_database_name' in next_time_step:
+                    self.main_database_name = next_time_step['main_database_name']
+                else:
+                    self.main_database_name = self.main_database.db_names
+                self.mapping = mapping_all_time_steps[mapping_all_time_steps['Year'] == year].copy()
+
+                super().connect_esm_results_to_database(*args, **kwargs)
 
         # Restore the original ESM variable values
         self.mapping = mapping_all_time_steps
