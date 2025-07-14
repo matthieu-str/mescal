@@ -76,17 +76,17 @@ dummy_db = [
                 "name": "market for electricity, low voltage",
                 "product": "electricity, low voltage",
                 "unit": "kilowatt hour",
-                "amount": 0.05,
+                "amount": 0.01,
                 "type": "technosphere",
                 "location": "CH",
                 "database": "ecoinvent-3.9.1-cutoff",
-                "code": "44444",
+                "code": "a44444",
             },
             {
                 "name": "refrigerant R134a production",
                 "product": "refrigerant R134a",
                 "unit": "cubic meter",
-                "amount": 3e-2,
+                "amount": 3e-6,
                 "type": "technosphere",
                 "location": "CH",
                 "database": "ecoinvent-3.9.1-cutoff",
@@ -96,7 +96,7 @@ dummy_db = [
                 "name": "heat pump production",
                 "product": "heat pump",
                 "unit": "unit",
-                "amount": 1e-8,
+                "amount": 1e-6,
                 "type": "technosphere",
                 "database": "ecoinvent-3.9.1-cutoff",
                 "code": "00000",
@@ -109,7 +109,7 @@ dummy_db = [
         "location": "CH",
         "unit": "kilowatt hour",
         "database": "ecoinvent-3.9.1-cutoff",
-        "code": "44444",
+        "code": "a44444",
         "classifications": [("CPC", "1000: Electricity")],
         "exchanges": [
             {
@@ -119,7 +119,7 @@ dummy_db = [
                 "amount": 1,
                 "type": "production",
                 "database": "ecoinvent-3.9.1-cutoff",
-                "code": "44444",
+                "code": "a44444",
             }
         ]
     },
@@ -203,7 +203,7 @@ def test_create_esm_database():
         if exc['name'] == 'market for electricity, low voltage':
             assert exc['amount'] == 0  # electricity flow has to be removed
         elif exc['name'] == 'refrigerant R134a production':
-            assert exc['amount'] == 3e-2  # refrigerant flow has to be kept
+            assert exc['amount'] == 3e-6  # refrigerant flow has to be kept
         elif exc['name'] == 'HEAT_PUMP, Construction':
             assert exc['amount'] == 0  # construction flow has to be removed
         else:
