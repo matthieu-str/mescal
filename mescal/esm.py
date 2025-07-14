@@ -120,6 +120,7 @@ class ESM:
         self.list_of_years = [None]
         self.esm_db = None
         self.tech_to_remove_layers = None
+        self.efficiency_differences_report = None
 
 
     def __repr__(self):

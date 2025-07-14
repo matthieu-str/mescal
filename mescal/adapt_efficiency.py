@@ -93,7 +93,10 @@ def _correct_esm_and_lca_efficiency_differences(
         efficiency['efficiency_ratio'] = efficiency['LCA efficiency'] / efficiency['ESM efficiency']
 
     elif db_type == 'esm results':
-        efficiency = pd.read_csv(f'{self.results_path_file}efficiency_differences.csv')
+        if self.efficiency_differences_report is None:
+            efficiency = pd.read_csv(f'{self.results_path_file}efficiency_differences.csv')
+        else:
+            efficiency = self.efficiency_differences_report
         efficiency['Flow'] = efficiency['Flow'].apply(lambda x: ast.literal_eval(x) if isinstance(x, str) else x)
 
         if self.operation_metrics_for_all_time_steps:
