@@ -95,6 +95,77 @@ dummy_esm_db = [
                 "code": '4b775f75ed40167082fd41f85e19e978',
             }
         ],
+    },
+    {
+        "name": "market for transport, passenger car",
+        "reference product": "transport, passenger car",
+        "location": "RER",
+        "database": "dummy_esm_db",
+        "unit": "kilometer",
+        "code": "00003",
+        "exchanges": [
+            {
+                "name": "market for transport, passenger car",
+                "product": "transport, passenger car",
+                "location": "RER",
+                "database": "dummy_esm_db",
+                "type": "production",
+                "amount": 1,
+                "unit": "kilometer",
+                "code": "00003"
+
+            },
+            {
+                "name": "transport, passenger car, large size, natural gas, EURO 5",
+                "product": "transport, passenger car, large size, natural gas, EURO 5",
+                "location": "RER",
+                "database": "dummy_esm_db",
+                "type": "technosphere",
+                "amount": 0.6,
+                "unit": "kilometer",
+                "code": 'f23495ddccfa8259de6b05281820685b',
+            },
+            {
+                "name": "transport, passenger car, large size, diesel, EURO 5",
+                "product": "transport, passenger car, large size, diesel, EURO 5",
+                "location": "RER",
+                "database": "dummy_esm_db",
+                "type": "technosphere",
+                "amount": 0.4,
+                "unit": "kilometer",
+                "code": 'f093a4b83a46eff40c7fe72e1d6a81b7',
+            }
+        ]
+    },
+    {
+        "name": "CAR, Operation",
+        "reference product": "transport, passenger car",
+        "location": "RER",
+        "database": "dummy_esm_db",
+        "unit": "kilometer",
+        "code": "00004",
+        "exchanges": [
+            {
+                "name": "CAR, Operation",
+                "product": "transport, passenger car",
+                "location": "RER",
+                "database": "dummy_esm_db",
+                "type": "production",
+                "amount": 1,
+                "unit": "kilometer",
+                "code": "00004"
+            },
+            {
+                "name": "market for transport, passenger car",
+                "product": "transport, passenger car",
+                "location": "RER",
+                "database": "dummy_esm_db",
+                "type": "technosphere",
+                "amount": 1,
+                "unit": "kilometer",
+                "code": '00003',
+            }
+        ]
     }
 ]
 
@@ -105,6 +176,8 @@ mapping = [
      'ecoinvent-3.9.1-cutoff', '00001'],
     ['TRAIN_FREIGHT_DIESEL_WAG', 'Construction', 'goods wagon', 'goods wagon production', 'RER',
      'ecoinvent-3.9.1-cutoff', '00002'],
+    ['CAR', 'Operation', 'transport, passenger car', 'market for transport, passenger car', 'RER', 'dummy_esm_db',
+     '00004'],
 ]
 
 technology_compositions = [
@@ -116,6 +189,12 @@ unit_conversion = [
     ['TRAIN_FREIGHT_DIESEL_LOC', 'Construction', 2, 'unit', 'unit'],
     ['TRAIN_FREIGHT_DIESEL_WAG', 'Construction', 20, 'unit', 'unit'],
     ['TRAIN_FREIGHT_DIESEL', 'Construction', 2.5e-5, 'unit', 'ton kilometer per hour'],
+    ['CAR', 'Operation', 0.67, 'kilometer', 'person kilometer'],
+]
+
+activities_subject_to_double_counting = [
+    ['CAR', 'transport, passenger car, large size, natural gas, EURO 5', 'f23495ddccfa8259de6b05281820685b', 0.6],
+    ['CAR', 'transport, passenger car, large size, diesel, EURO 5', 'f093a4b83a46eff40c7fe72e1d6a81b7', 0.4],
 ]
 
 lifetime = [
@@ -123,6 +202,7 @@ lifetime = [
     ['TRAIN_FREIGHT_DIESEL', 40, None],
     ['TRAIN_FREIGHT_DIESEL_LOC', None, 50],
     ['TRAIN_FREIGHT_DIESEL_WAG', None, 50],
+    ['CAR', 15, 10],
 ]
 
 methods = ['IPCC 2021']
@@ -134,6 +214,7 @@ impact_abbrev = [
 mapping = pd.DataFrame(mapping, columns=['Name', 'Type', 'Product', 'Activity', 'Location', 'Database', 'New_code'])
 technology_compositions = pd.DataFrame(technology_compositions, columns=['Name', 'Components'])
 unit_conversion = pd.DataFrame(unit_conversion, columns=['Name', 'Type', 'Value', 'LCA', 'ESM'])
+activities_subject_to_double_counting = pd.DataFrame(activities_subject_to_double_counting, columns=['Name', 'Activity name', 'Activity code', 'Amount'])
 lifetime = pd.DataFrame(lifetime, columns=['Name', 'ESM', 'LCA'])
 impact_abbrev = pd.DataFrame(impact_abbrev, columns=['Impact_category', 'Unit', 'Abbrev', 'AoP'])
 
@@ -145,6 +226,25 @@ def get_emissions_info(row):
 def test_compute_impact_score():
 
     bd.projects.set_current(BW_PROJECT_NAME)
+    ei_db=Database('ecoinvent-3.9.1-cutoff')
+
+    # add the car datasets to the dummy db
+    ds_ng_car = [i for i in ei_db.db_as_list if i['code'] == 'f23495ddccfa8259de6b05281820685b'][0]
+    ds_diesel_car = [i for i in ei_db.db_as_list if i['code'] == 'f093a4b83a46eff40c7fe72e1d6a81b7'][0]
+
+    ds_ng_car['database'] = 'dummy_esm_db'
+    ds_diesel_car['database'] = 'dummy_esm_db'
+
+    for exc in ds_ng_car['exchanges']:
+        if exc['type'] == 'production':
+            exc['database'] = 'dummy_esm_db'
+    for exc in ds_diesel_car['exchanges']:
+        if exc['type'] == 'production':
+            exc['database'] = 'dummy_esm_db'
+
+    dummy_esm_db.append(ds_ng_car)
+    dummy_esm_db.append(ds_diesel_car)
+
     Database(db_as_list=dummy_esm_db).write_to_brightway('dummy_esm_db')
 
     esm = ESM(
@@ -152,12 +252,13 @@ def test_compute_impact_score():
         technology_compositions=technology_compositions,
         unit_conversion=unit_conversion,
         lifetime=lifetime,
-        main_database=Database('ecoinvent-3.9.1-cutoff'),
+        main_database=ei_db,
         esm_db_name='dummy_esm_db',
         model=pd.DataFrame(),
         mapping_esm_flows_to_CPC_cat=pd.DataFrame(),
     )
 
+    # Life-cycle emissions
     R, df_contrib_results = esm.compute_impact_scores(
         methods=methods,
         impact_abbrev=impact_abbrev,
@@ -213,3 +314,22 @@ def test_compute_impact_score():
     assert max_contrib_batt.ef_name.iloc[0] == 'Carbon dioxide, fossil'
     assert max_contrib_batt.ef_categories.iloc[0] == ('air', 'non-urban air or from high stacks')
     assert 98.78 <= max_contrib_batt.score.iloc[0] <= 98.79
+
+    # Direct emissions module
+    esm.df_activities_subject_to_double_counting = activities_subject_to_double_counting
+
+    R_direct, direct_df_contrib_results = esm.compute_impact_scores(
+        assessment_type="direct emissions",
+        methods=methods,
+        impact_abbrev=impact_abbrev,
+        specific_lcia_abbrev=['CC'],
+        contribution_analysis=None,
+    )
+
+    direct_gwp_car = R_direct[
+        (R_direct.Impact_category == ('IPCC 2021', 'climate change', 'global warming potential (GWP100)'))
+        & (R_direct.Name == 'CAR')
+        & (R_direct.Type == 'Operation')
+    ].Value.iloc[0]
+
+    assert 0.1336 <= direct_gwp_car <= 0.1337
