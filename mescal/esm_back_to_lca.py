@@ -16,7 +16,8 @@ def create_new_database_with_esm_results(
         return_database: bool = False,
         write_database: bool = True,
         remove_background_construction_flows: bool = True,
-        harmonize_with_esm: bool = True,
+        harmonize_efficiency_with_esm: bool = True,
+        harmonize_capacity_factor_with_esm: bool = False,
         esm_results_db_name: str = None,
 ) -> Database | None:
     """
@@ -33,14 +34,20 @@ def create_new_database_with_esm_results(
         the ESM and LCI database, in order to not count the infrastructure impacts several times over several
         time-steps. It should be set to False if the new database is meant to be shared or used as a standalone
         database.
-    :param harmonize_with_esm: if True, apply the efficiency correction and the changes specified in the
-        techs_specifics.csv file
+    :param harmonize_efficiency_with_esm: if True, apply the efficiency correction to harmonize the LCI datasets with
+        the ESM assumptions
+    :param harmonize_capacity_factor_with_esm: if True, apply the capacity factor correction to harmonize the LCI
+        datasets with the ESM assumptions. It should be set to False if the background construction flows are removed.
     :param esm_results_db_name: name of the new database with the ESM results
     :return: database of the ESM results if return_database is True, else None
     """
 
     if return_database is False and write_database is False:
         raise ValueError('The new database should be either returned or written.')
+
+    if harmonize_capacity_factor_with_esm and remove_background_construction_flows:
+        raise ValueError('The harmonization of capacity factors with the ESM results cannot be performed '
+                         'if the background construction flows are removed. Please set one of the two to False.')
 
     if self.df_flows_set_to_zero is None:
         self.df_flows_set_to_zero = pd.read_csv(f'{self.results_path_file}removed_flows_list.csv')
@@ -145,7 +152,8 @@ def create_new_database_with_esm_results(
             ESM_inputs=['OWN_CONSTRUCTION', 'CONSTRUCTION'],
             db_type='esm results',
         )
-    elif harmonize_with_esm and not remove_background_construction_flows:
+
+    elif (harmonize_efficiency_with_esm or harmonize_capacity_factor_with_esm) and not remove_background_construction_flows:
         # if we do not want to remove construction flows, but we want to harmonize the database with the ESM,
         # the background processes of markets should be recorded in the ESM results database following the
         # background search algorithm of the double-counting removal procedure. However, flows are NOT removed
@@ -157,7 +165,7 @@ def create_new_database_with_esm_results(
             db_type='esm results wo dcr',
         )
 
-    if harmonize_with_esm:
+    if harmonize_efficiency_with_esm:
         # Add ESM database to the main database (to retrieve the corrected datasets)
         if self.esm_db is not None:
             esm_db = self.esm_db
@@ -167,12 +175,13 @@ def create_new_database_with_esm_results(
 
         self.logger.info("Correcting efficiency differences between ESM and LCI datasets...")
         self._correct_esm_and_lca_efficiency_differences(db_type='esm results', write_efficiency_report=False)
-        if not remove_background_construction_flows:
-            self.logger.info("Correcting capacity factor differences between ESM and LCI datasets...")
-            self._correct_esm_and_lca_capacity_factor_differences(esm_results=esm_results, write_cp_report=True)
 
         # Remove the ESM database from the main database
         self.main_database = self.main_database - esm_db
+
+    if harmonize_capacity_factor_with_esm:
+        self.logger.info("Correcting capacity factor differences between ESM and LCI datasets...")
+        self._correct_esm_and_lca_capacity_factor_differences(esm_results=esm_results, write_cp_report=True)
 
     # Injecting local variables into the instance variables
     self.main_database.db_as_list = db_as_list
@@ -196,13 +205,11 @@ def create_new_database_with_esm_results(
 
     self.main_database = self.main_database - esm_results_db
 
-    if harmonize_with_esm:
-        if write_database:
-            # Modifies the written database according to specifications in tech_specifics.csv
-            self._modify_written_activities(db=esm_results_db, db_type='esm results')
-        else:
-            self.logger.info('The techs_specifics.csv file has not been applied because the database has not been '
-                             'written.')
+    if write_database:
+        # Modifies the written database according to specifications in tech_specifics.csv
+        self._modify_written_activities(db=esm_results_db, db_type='esm results')
+    else:
+        self.logger.info('The techs_specifics.csv file has not been applied because the database has not been written.')
 
 
 def connect_esm_results_to_database(
