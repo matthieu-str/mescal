@@ -121,6 +121,7 @@ class ESM:
         self.esm_db = None
         self.tech_to_remove_layers = None
         self.efficiency_differences_report = None
+        self.products_without_a_cpc_category = set()
 
 
     def __repr__(self):
@@ -425,6 +426,14 @@ class ESM:
         ) = self._double_counting_removal(df_op=self.mapping_op, N=N, ESM_inputs='all')
         t2_dc = time.time()
         self.logger.info(f"Double-counting removal done in {round(t2_dc - t1_dc, 1)} seconds")
+
+        if len(self.products_without_a_cpc_category) > 0:
+            self.logger.error(
+                f'Some products in your foreground inventory do not have a CPC category, please map them in a '
+                f'mapping_new_products_to_CPC dataframe, and give the latter as an argument of the add_CPC_categories '
+                f'method of the Database class. Here is the list of products without a CPC category: '
+                f'{self.products_without_a_cpc_category}'
+            )
 
         df_flows_set_to_zero = pd.DataFrame(
             data=flows_set_to_zero,

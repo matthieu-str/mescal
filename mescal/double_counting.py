@@ -62,7 +62,9 @@ def _background_search(
     if 'CPC' in dict(act['classifications']).keys():  # we have a CPC category
         CPC_cat = dict(act['classifications'])['CPC']
     else:
-        raise ValueError(f'No CPC category in the activity ({act["database"]}, {act["code"]})')
+        self.products_without_a_cpc_category.add(act["reference product"])
+        self.logger.warning(f'Product {act["reference product"]} has no CPC category.')
+        CPC_cat = 'None'
 
     technosphere_flows = Dataset(act).get_technosphere_flows()  # technosphere flows of the activity
     technosphere_flows_act = [db_dict_code[(flow['database'], flow['code'])] for flow in
@@ -248,9 +250,11 @@ def _background_search(
                                         perform_d_c.append([new_act['name'], new_act['code'],
                                                             amount * flow['amount'], k + 1, ESM_inputs])
                             else:
-                                raise ValueError(f"No CPC cat: ({techno_act['database']}, {techno_act['code']})")
+                                self.products_without_a_cpc_category.add(techno_act["reference product"])
+                                self.logger.warning(f'Product {techno_act["reference product"]} has no CPC category.')
                         else:
-                            raise ValueError(f"No CPC cat: ({techno_act['database']}, {techno_act['code']})")
+                            self.products_without_a_cpc_category.add(techno_act["reference product"])
+                            self.logger.warning(f'Product {techno_act["reference product"]} has no CPC category.')
         return perform_d_c, db_dict_code, db_dict_name, db_as_list
 
     else:  # the activity is not a market, thus it is added to the list for double-counting removal
