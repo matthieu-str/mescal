@@ -565,8 +565,8 @@ def _double_counting_removal(
                         # The two following conditions mean that the background search would stop when some
                         # intermediary flows have already been found for a given esm flow, but some other
                         # similar and relevant flows, further in the process tree, might also be there.
-                        # & (ei_removal[tech][cat]['amount'] == 0)
-                        # & (ei_removal[tech][cat]['count'] == 0)
+                        & ((ei_removal[tech][cat]['amount'] == 0) | (not self.stop_background_search_when_first_flow_found))
+                        & ((ei_removal[tech][cat]['count'] == 0) | (not self.stop_background_search_when_first_flow_found))
                 ):
                     missing_ES_inputs.append(cat)
 

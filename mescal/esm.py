@@ -43,6 +43,7 @@ class ESM:
             efficiency: pd.DataFrame = None,
             lifetime: pd.DataFrame = None,
             max_depth_double_counting_search: int = 10,
+            stop_background_search_when_first_flow_found: bool = False,
     ):
         """
         Initialize the ESM database creation
@@ -71,6 +72,10 @@ class ESM:
         :param lifetime: dataframe containing the lifetime of the ESM technologies
         :param max_depth_double_counting_search: maximum recursion depth of the double-counting background search
             algorithm
+        :param stop_background_search_when_first_flow_found: if True, the background search for double-counting removal
+            (only applied to 'Background search' technologies in tech_specifics) stops once a flow of the targeted
+            category is found. If False, the background search continues until all flows of the targeted category are
+            found within the given number of background layers to explore.
         """
 
         # set up logging tool
@@ -107,6 +112,7 @@ class ESM:
         self.unit_conversion = unit_conversion
         self.lifetime = lifetime
         self.max_depth_double_counting_search = max_depth_double_counting_search
+        self.stop_background_search_when_first_flow_found = stop_background_search_when_first_flow_found
 
         # Initialize attributes used within mescal
         self.df_flows_set_to_zero = None
