@@ -14,10 +14,12 @@ biogas,"17200: Coal gas, water gas, producer gas and similar gases, other than p
 "carbon dioxide, in chemical industry",34210b: Carbon dioxide and monoxide,equals,Product
 "carbon dioxide, liquid",34210b: Carbon dioxide and monoxide,equals,Product
 "carbon dioxide, stored",34210b: Carbon dioxide and monoxide,equals,Product
+carbon dioxide storage,34210b: Carbon dioxide and monoxide,contains,Product
 "carbon monoxide, from RWGS",34210b: Carbon dioxide and monoxide,equals,Product
 "chemical factory, organics",53269: Other constructions for manufacturing,equals,Product
 "compressor, for hydrogen transmission",43230: Air or vacuum pumps; air or other gas compressors,equals,Product
 "construction, hard coal IGCC power plant 450MW",53262: Power plants,equals,Product
+"drilling, deep borehole",86219: Support services to other mining,equals,Product
 diesel,33370: Fuel oils n.e.c.,equals,Product
 "diesel, low-sulfur",33370: Fuel oils n.e.c.,equals,Product
 "diesel, synthetic",33370: Fuel oils n.e.c.,equals,Product
@@ -44,7 +46,6 @@ forest residue,23140: Other cereal grain products (including corn flakes),equals
 fuel supply for cng vehicles,"12020: Natural gas, liquefied or in the gaseous state",contains,Activity
 fuel supply for diesel vehicles,33370: Fuel oils n.e.c.,contains,Activity
 fuel supply for hydrogen vehicles,"34210: Hydrogen, nitrogen, oxygen, carbon dioxide and rare gases; inorganic oxygen compounds of non-metals n.e.c.",contains,Activity
-fuel supply for methane vehicles,"12020: Natural gas, liquefied or in the gaseous state",contains,Activity
 "fuel cell system, 1 kWe, proton exchange membrane (PEM)",46410: Primary cells and primary batteries,equals,Product
 geothermal heat plant,"43913: Refrigerating and freezing equipment and heat pumps, except household type equipment",equals,Product
 hard coal IGCC power plant 450MW,53262: Power plants,equals,Product
@@ -64,6 +65,7 @@ methanol,"34139: Other alcohols, phenols, phenol-alcohols, and their halogenated
 "methanol, purified","34139: Other alcohols, phenols, phenol-alcohols, and their halogenated, sulphonated, nitrated or nitrosated derivativ[…]",equals,Product
 "methanol, unpurified","34139: Other alcohols, phenols, phenol-alcohols, and their halogenated, sulphonated, nitrated or nitrosated derivativ[…]",equals,Product
 "NGCC power plant, 400MWe",53262: Power plants,equals,Product
+"naphtha, synthetic",33330: Naphtha,equals,Product
 nickel-based catalyst for methanation,"415: Semi-finished products of copper, nickel, aluminium, lead, zinc and tin or their alloys",equals,Product
 passenger bus,49112: Public-transport type passenger motor vehicles,equals,Product
 "Passenger bus, EURO-VI",49112: Public-transport type passenger motor vehicles,equals,Product
