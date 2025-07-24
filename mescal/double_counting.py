@@ -357,7 +357,12 @@ def _double_counting_removal(
 
                 act_constr = db_dict_code[(database_constr, current_code_constr)]
                 act_constr_list.append(act_constr)
-                CPC_constr = dict(act_constr['classifications'])['CPC']
+                try:
+                    CPC_constr = dict(act_constr['classifications'])['CPC']
+                except KeyError:
+                    self.products_without_a_cpc_category.add(act_constr["reference product"])
+                    self.logger.warning(f'Product {act_constr["reference product"]} has no CPC category.')
+                    CPC_constr = 'None'
                 CPC_constr_list.append(CPC_constr)
                 mapping_esm_flows_to_CPC_dict['OWN_CONSTRUCTION'] += [CPC_constr]
                 mapping_CPC_to_esm_flows_dict[CPC_constr] = ['OWN_CONSTRUCTION']
