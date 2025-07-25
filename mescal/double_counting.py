@@ -508,6 +508,11 @@ def _double_counting_removal(
 
                 flow = technosphere_inputs[n]
 
+                if flow['amount'] < 0 and flow['unit'] != 'unit':
+                    # we keep waste flows (but not infrastructure decommissioning flows, which should be contained
+                    # in the infrastructure LCI dataset)
+                    continue
+
                 # Keep track of the amount in the original activity as a comment
                 old_amount = flow['amount']
                 flow['comment'] = f'Original amount: {old_amount}. ' + flow.get('comment', '')
