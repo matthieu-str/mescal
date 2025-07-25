@@ -79,12 +79,31 @@ def _regionalize_activity_foreground(
         if spatialized_database:
             spatialized_biosphere_db_name = [i for i in spatialized_biosphere_db.db_as_list][0]['database']
             biosphere_flows = Dataset(new_act).get_biosphere_flows()
+
             for flow in biosphere_flows:
                 if flow['database'] == spatialized_biosphere_db_name:  # if the biosphere flow is regionalized
-                    current_loc = flow['name'].split(', ')[-1]
+                    flow_name = flow['name']
+                    current_loc = None
+                    generic_name = None
+
+                    for i in range(1, flow_name.count(', ') + 1):
+                        try_current_loc = ', '.join(flow_name.split(', ')[-i:])
+                        try_generic_name = ', '.join(flow_name.split(', ')[:-i])
+                        if try_current_loc in self.locations_list:
+                            current_loc = try_current_loc
+                            generic_name = try_generic_name
+                            break
+
+                    if current_loc is None:
+                        self.logger.warning(
+                            f'Could not regionalize biosphere flow {flow_name} in {flow["database"]}. '
+                            f'No location found in the name.'
+                        )
+                        continue
+
                     if current_loc in accepted_locations:
                         continue
-                    generic_name = ', '.join(flow['name'].split(', ')[:-1])
+
                     new_location = self._change_location_activity(
                         activity=generic_name,
                         categories=flow['categories'],

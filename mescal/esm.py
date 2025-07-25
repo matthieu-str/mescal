@@ -128,6 +128,7 @@ class ESM:
         self.tech_to_remove_layers = None
         self.efficiency_differences_report = None
         self.products_without_a_cpc_category = set()
+        self.locations_list = list(set([i['location'] for i in self.main_database.db_as_list]))
 
 
     def __repr__(self):
