@@ -10,6 +10,7 @@ def add_CPC_categories(
         mapping_new_products_to_CPC: pd.DataFrame or str = 'default',
         new_db_name: str = None,
         write: bool = False,
+        overwrite_existing_CPC: bool = False,
 ) -> None:
     """
     Add CPC categories to a database, and write it as a new database if asked
@@ -21,6 +22,8 @@ def add_CPC_categories(
         default mapping will be used.
     :param new_db_name: name of the new database (only required if write is True)
     :param write: if True, write the new database in the Brightway project
+    :param overwrite_existing_CPC: if True, overwrite existing CPC categories in the database with the ones of the
+        mapping_new_products_to_CPC mapping (default is False, i.e., do not overwrite existing CPC categories)
     :return: None
     """
 
@@ -60,7 +63,7 @@ def add_CPC_categories(
         name = mapping_new_products_to_CPC.Name.iloc[i]
         CPC_category = mapping_new_products_to_CPC.CPC.iloc[i]
         search_type = mapping_new_products_to_CPC["Search type"].iloc[i]
-        self._add_product_or_activity_CPC_category(name, CPC_category, search_type, key)
+        self._add_product_or_activity_CPC_category(name, CPC_category, search_type, key, overwrite_existing_CPC)
 
     if write:
         if new_db_name is None:
@@ -68,7 +71,14 @@ def add_CPC_categories(
         self.write_to_brightway(new_db_name)
 
 
-def _add_product_or_activity_CPC_category(self, name: str, CPC_category: str, search_type: str, key: str) -> None:
+def _add_product_or_activity_CPC_category(
+        self,
+        name: str,
+        CPC_category: str,
+        search_type: str,
+        key: str,
+        overwrite_existing_CPC: bool,
+) -> None:
     """
     Add a CPC category to a set of activities in a LCI database
 
@@ -77,6 +87,7 @@ def _add_product_or_activity_CPC_category(self, name: str, CPC_category: str, se
     :param search_type: type of search, it can be 'equals' (i.e., exact name matching) or 'contains' (i.e., name is
         in the activity name or product name)
     :param key: searching key, it can be 'name' or 'reference product'
+    :param overwrite_existing_CPC: if True, overwrite existing CPC categories in the database with the ones of the mapping
     :return: None
     """
     if search_type == 'equals':
@@ -93,13 +104,21 @@ def _add_product_or_activity_CPC_category(self, name: str, CPC_category: str, se
             if 'CPC' not in dict(act['classifications']):
                 act['classifications'] += [('CPC', CPC_category)]
             else:
-                pass  # if all activities already have a CPC category, we do not overwrite it
+                if overwrite_existing_CPC:
+                    dict(act['classifications'])['CPC'] = CPC_category  # overwrite the existing CPC category
+                else:
+                    pass  # if the activities already has a CPC category, we do not overwrite it
 
 
-def _add_CPC_categories_based_on_existing_activities(self, mapping_existing_products_to_cpc) -> None:
+def _add_CPC_categories_based_on_existing_activities(
+        self,
+        mapping_existing_products_to_cpc: dict,
+) -> None:
     """
     Add CPC categories to a database based on existing activities
 
+    :param mapping_existing_products_to_cpc: dictionary mapping existing products to CPC categories. The latter has been
+        generated using the _save_mapping_between_products_and_CPC_categories method.
     :return: None
     """
     for ds in self.db_as_list:
