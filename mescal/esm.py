@@ -183,7 +183,7 @@ class ESM:
         _change_location_activity,
         change_location_mapping_file
     )
-    from .double_counting import _double_counting_removal, _background_search
+    from .double_counting import _double_counting_removal, _background_search, validation_double_counting
     from .impact_assessment import (
         compute_impact_scores,
         _get_impact_categories,
@@ -192,7 +192,7 @@ class ESM:
     )
     from .adapt_efficiency import (
         _correct_esm_and_lca_efficiency_differences,
-        _compute_efficiency_esm,
+        _get_esm_input_quantity,
         _get_lca_input_flow_unit_or_product,
         _adapt_flows_to_efficiency_difference,
         _get_lca_input_quantity,

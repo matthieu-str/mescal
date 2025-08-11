@@ -599,3 +599,52 @@ def _double_counting_removal(
     self.main_database.db_as_list = db_as_list
 
     return flows_set_to_zero, ei_removal, activities_subject_to_double_counting
+
+def validation_double_counting(
+        self,
+        return_validation_report: bool = True,
+        save_validation_report: bool = False,
+) -> None or pd.DataFrame:
+    """
+    Generate a validation report for the double-counting removal process: comparison of quantities removed in LCI
+    datasets vs quantities in ESM flows. LCI datasets quantities are converted in ESM units (both in terms of inputs
+    and outputs, i.e., quantities of input fuels per functional unit).
+
+    :param return_validation_report: if True, returns a DataFrame with the validation report
+    :param save_validation_report: if True, saves the validation report as a CSV file
+    :return: None or DataFrame with the validation report if return_validation_report is True
+    """
+    validation_d_c = self._correct_esm_and_lca_efficiency_differences(
+        write_efficiency_report=False,
+        return_efficiency_report=True,
+        db_type='validation',
+    )
+
+    validation_d_c.Flow = validation_d_c.Flow.replace("['", "")
+    validation_d_c.Flow = validation_d_c.Flow.replace("']", "")
+
+    validation_d_c['Input difference (ESM unit)'] = validation_d_c['ESM input quantity (ESM unit)'] - validation_d_c['LCA input quantity (ESM unit)']
+    validation_d_c['Input difference (%)'] = 100 * validation_d_c['Input difference (ESM unit)'] / validation_d_c['ESM input quantity (ESM unit)']
+
+    validation_d_c = validation_d_c[[
+        'Name',
+        'Flow',
+        'LCA input product',
+        'ESM input quantity (ESM unit)',
+        'LCA input quantity (ESM unit)',
+        'Input difference (ESM unit)',
+        'Input difference (%)',
+        'LCA input quantity (LCA unit)',
+        'ESM input unit',
+        'LCA input unit',
+        'Input conversion factor',
+        'ESM output unit',
+        'LCA output unit',
+        'Output conversion factor',
+    ]]
+
+    if save_validation_report:
+        validation_d_c.to_csv(f'{self.results_path_file}validation_double_counting.csv', index=False)
+
+    if return_validation_report:
+        return validation_d_c

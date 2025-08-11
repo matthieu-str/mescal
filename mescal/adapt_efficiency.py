@@ -6,16 +6,19 @@ from pathlib import Path
 
 def _correct_esm_and_lca_efficiency_differences(
         self,
+        return_efficiency_report: bool = False,
         write_efficiency_report: bool = True,
         db_type: str = 'esm',
-) -> None:
+) -> None or pd.DataFrame:
     """
     Correct the efficiency differences between ESM technologies and their operation LCI datasets. This method can be
     used during the creation of the ESM database and during the creation of the ESM results database.
 
     :param write_efficiency_report: if True, write the efficiency differences in a csv file
-    :param db_type: type of database to use for the efficiency correction, can be either 'esm' or 'esm results'
-    :return: None
+    :param return_efficiency_report: if True, return the efficiency differences pandas DataFrame
+    :param db_type: type of database to use for the efficiency correction, can be either 'esm', 'esm results' or
+        'validation'
+    :return: None or pandas DataFrame if return_efficiency_report is True
     """
 
     # Store frequently accessed instance variables in local variables inside a method if they don't need to be modified
@@ -25,20 +28,32 @@ def _correct_esm_and_lca_efficiency_differences(
     efficiency = self.efficiency
     unit_conversion = self.unit_conversion
     mapping_esm_flows_to_CPC_cat = self.mapping_esm_flows_to_CPC_cat
+    esm_results_db_name = self.esm_results_db_name
+
+    if self.df_flows_set_to_zero is None:
+        self.df_flows_set_to_zero = pd.read_csv(f'{self.results_path_file}removed_flows_list.csv')
+    if self.double_counting_removal_amount is None:
+        self.double_counting_removal_amount = pd.read_csv(f'{self.results_path_file}double_counting_removal.csv')
+
     removed_flows = self.df_flows_set_to_zero
     double_counting_removal_amount = self.double_counting_removal_amount
-    esm_results_db_name = self.esm_results_db_name
+
+    if db_type == 'validation':
+        efficiency = double_counting_removal_amount[['Name', 'Flow']].copy(deep=True)
+        efficiency.drop(efficiency[efficiency['Flow'].isin(['CONSTRUCTION', 'OWN_CONSTRUCTION'])].index, inplace=True)
+        efficiency.Flow = efficiency.Flow.apply(lambda x: f"['{x}']")
 
     try:
         efficiency.Flow = efficiency.Flow.apply(ast.literal_eval)
     except ValueError:
         pass
 
-    if db_type == 'esm':
-        efficiency['ESM efficiency'] = efficiency.apply(
-            self._compute_efficiency_esm,
+    if db_type in ['esm', 'validation']:
+        efficiency['ESM input quantity (ESM unit)'] = efficiency.apply(
+            self._get_esm_input_quantity,
             axis=1,
         )
+        efficiency['ESM efficiency'] = 1 / efficiency['ESM input quantity (ESM unit)']  # inputs are scaled w.r.t. a unit output flow
         efficiency['LCA input unit'] = efficiency.apply(
             self._get_lca_input_flow_unit_or_product,
             axis=1,
@@ -53,12 +68,12 @@ def _correct_esm_and_lca_efficiency_differences(
             removed_flows=removed_flows
         )
         efficiency.drop(efficiency[efficiency['LCA input product'].isnull()].index, inplace=True)
-        efficiency['LCA input quantity'] = efficiency.apply(
+        efficiency['LCA input quantity (LCA unit)'] = efficiency.apply(
             self._get_lca_input_quantity,
             axis=1,
             double_counting_removal_amount=double_counting_removal_amount
         )
-        efficiency.drop(efficiency[efficiency['LCA input quantity'] == 0].index, inplace=True)
+        efficiency.drop(efficiency[efficiency['LCA input quantity (LCA unit)'] == 0].index, inplace=True)
         efficiency = efficiency.merge(
             right=unit_conversion[unit_conversion.Type == 'Operation'][['Name', 'Value', 'LCA', 'ESM']],
             how='left',
@@ -71,14 +86,14 @@ def _correct_esm_and_lca_efficiency_differences(
             right=unit_conversion[
                 (unit_conversion.Type == 'Other')
                 & (unit_conversion.ESM == 'kilowatt hour')
-                ][['Name', 'Value', 'LCA']],
+                ][['Name', 'Value', 'LCA', 'ESM']],
             how='left',
             left_on=['LCA input product', 'LCA input unit'],
             right_on=['Name', 'LCA'],
             suffixes=('', '_to_remove')
         )
         efficiency.drop(columns=['Name_to_remove', 'LCA'], inplace=True)
-        efficiency.rename(columns={'Value': 'Input conversion factor'}, inplace=True)
+        efficiency.rename(columns={'Value': 'Input conversion factor', 'ESM': 'ESM input unit'}, inplace=True)
 
         missing_units = efficiency[efficiency['Input conversion factor'].isna()][
             ['LCA input product', 'LCA input unit']].values.tolist()
@@ -87,8 +102,9 @@ def _correct_esm_and_lca_efficiency_differences(
             raise ValueError(f'No conversion factor found for the following units (product, unit from, unit to): '
                              f'{missing_units}')
 
-        efficiency['LCA efficiency'] = efficiency['Input conversion factor'] / (
-                efficiency['Output conversion factor'] * efficiency['LCA input quantity'])
+        efficiency['LCA input quantity (ESM unit)'] = (
+                (efficiency['Output conversion factor'] * efficiency['LCA input quantity (LCA unit)']) / efficiency['Input conversion factor'])
+        efficiency['LCA efficiency'] = 1 / efficiency['LCA input quantity (ESM unit)']
 
         efficiency['efficiency_ratio'] = efficiency['LCA efficiency'] / efficiency['ESM efficiency']
 
@@ -110,112 +126,120 @@ def _correct_esm_and_lca_efficiency_differences(
             self.efficiency['Flow'] = self.efficiency['Flow'].apply(lambda x: ast.literal_eval(x) if isinstance(x, str) else x)
             efficiency = self.efficiency
 
-    for i in range(len(efficiency)):
+    if db_type != 'validation':
 
-        for year in [self.year] if (not self.operation_metrics_for_all_time_steps or db_type == 'esm') \
-                else [y for y in self.list_of_years if y <= self.year]:
+        for i in range(len(efficiency)):
 
-            act_to_adapt_list = []  # there might be several activities to adapt for one technology in case of market
-            techno_flows_to_correct_dict = {}
-            tech = efficiency['Name'].iloc[i]
-            flows_list = efficiency['Flow'].iloc[i]
+            for year in [self.year] if (not self.operation_metrics_for_all_time_steps or db_type == 'esm') \
+                    else [y for y in self.list_of_years if y <= self.year]:
 
-            CPC_list = []  # list of CPC categories corresponding to the fuel flow(s) of the technology
-            for flow in flows_list:
-                CPC_list += mapping_esm_flows_to_CPC_cat[mapping_esm_flows_to_CPC_cat['Flow'] == flow]['CPC'].values[0]
+                act_to_adapt_list = []  # there might be several activities to adapt for one technology in case of market
+                techno_flows_to_correct_dict = {}
+                tech = efficiency['Name'].iloc[i]
+                flows_list = efficiency['Flow'].iloc[i]
 
-            df_removed_flows = removed_flows[removed_flows.Name == tech]  # flows removed during double counting removal
-            for j in range(len(df_removed_flows)):
-                (main_act_database, main_act_code, removed_act_database, removed_act_code) = df_removed_flows[
-                    ['Database', 'Code', 'Removed flow database', 'Removed flow code']].iloc[j]
-                act_exc = db_dict_code[removed_act_database, removed_act_code]
-                if 'classifications' in act_exc:
-                    if 'CPC' in dict(act_exc['classifications']):
-                        if dict(act_exc['classifications'])['CPC'] in CPC_list:
-                            # if this flow (that was removed during double counting removal) is a fuel flow of the
-                            # technology, the biosphere flows the activity will be adjusted
-                            if db_type == 'esm':
-                                act_to_adapt = db_dict_code[main_act_database, main_act_code]
-                            elif db_type == 'esm results':
-                                act_in_esm_db = db_dict_code[main_act_database, main_act_code]
-                                if act_in_esm_db['name'] == f'{tech}, Operation':
-                                    act_in_esm_db_name = mapping[
-                                        (mapping.Name == tech)
-                                        & (mapping.Type == 'Operation')
-                                    ]['Activity'].iloc[0]
-                                    if self.operation_metrics_for_all_time_steps:
-                                        act_in_esm_db_name += f' ({tech}, {year})'
-                                    else:
-                                        act_in_esm_db_name += f' ({tech})'
-                                    if (
-                                        act_in_esm_db_name,
-                                        act_in_esm_db['reference product'],
-                                        act_in_esm_db['location'],
-                                        esm_results_db_name,
-                                    ) not in db_dict_name.keys():
-                                        # If the technology is not in the ESM results database, it means that its annual
-                                        # production was null. Thus, we do not need to correct its efficiency.
-                                        act_to_adapt = None
-                                    else:
-                                        act_to_adapt = db_dict_name[(
+                CPC_list = []  # list of CPC categories corresponding to the fuel flow(s) of the technology
+                for flow in flows_list:
+                    CPC_list += mapping_esm_flows_to_CPC_cat[mapping_esm_flows_to_CPC_cat['Flow'] == flow]['CPC'].values[0]
+
+                df_removed_flows = removed_flows[removed_flows.Name == tech]  # flows removed during double counting removal
+                for j in range(len(df_removed_flows)):
+                    (main_act_database, main_act_code, removed_act_database, removed_act_code) = df_removed_flows[
+                        ['Database', 'Code', 'Removed flow database', 'Removed flow code']].iloc[j]
+                    act_exc = db_dict_code[removed_act_database, removed_act_code]
+                    if 'classifications' in act_exc:
+                        if 'CPC' in dict(act_exc['classifications']):
+                            if dict(act_exc['classifications'])['CPC'] in CPC_list:
+                                # if this flow (that was removed during double counting removal) is a fuel flow of the
+                                # technology, the biosphere flows the activity will be adjusted
+                                if db_type == 'esm':
+                                    act_to_adapt = db_dict_code[main_act_database, main_act_code]
+                                elif db_type == 'esm results':
+                                    act_in_esm_db = db_dict_code[main_act_database, main_act_code]
+                                    if act_in_esm_db['name'] == f'{tech}, Operation':
+                                        act_in_esm_db_name = mapping[
+                                            (mapping.Name == tech)
+                                            & (mapping.Type == 'Operation')
+                                        ]['Activity'].iloc[0]
+                                        if self.operation_metrics_for_all_time_steps:
+                                            act_in_esm_db_name += f' ({tech}, {year})'
+                                        else:
+                                            act_in_esm_db_name += f' ({tech})'
+                                        if (
                                             act_in_esm_db_name,
                                             act_in_esm_db['reference product'],
                                             act_in_esm_db['location'],
                                             esm_results_db_name,
-                                        )]
-                                else:
-                                    if (
-                                        act_in_esm_db['name'],
-                                        act_in_esm_db['reference product'],
-                                        act_in_esm_db['location'],
-                                        esm_results_db_name,
-                                    ) not in db_dict_name.keys():
-                                        # If the technology is not in the ESM results database, it means that its annual
-                                        # production was null. Thus, we do not need to correct its efficiency.
-                                        act_to_adapt = None
+                                        ) not in db_dict_name.keys():
+                                            # If the technology is not in the ESM results database, it means that
+                                            # its annual production was null. Thus, we do not need to correct its
+                                            # efficiency.
+                                            act_to_adapt = None
+                                        else:
+                                            act_to_adapt = db_dict_name[(
+                                                act_in_esm_db_name,
+                                                act_in_esm_db['reference product'],
+                                                act_in_esm_db['location'],
+                                                esm_results_db_name,
+                                            )]
                                     else:
-                                        act_to_adapt = db_dict_name[(
+                                        if (
                                             act_in_esm_db['name'],
                                             act_in_esm_db['reference product'],
                                             act_in_esm_db['location'],
                                             esm_results_db_name,
-                                        )]
-                            else:
-                                raise ValueError(f'db_type must be either "esm" or "esm results"')
+                                        ) not in db_dict_name.keys():
+                                            # If the technology is not in the ESM results database, it means that
+                                            # its annual production was null. Thus, we do not need to correct its
+                                            # efficiency.
+                                            act_to_adapt = None
+                                        else:
+                                            act_to_adapt = db_dict_name[(
+                                                act_in_esm_db['name'],
+                                                act_in_esm_db['reference product'],
+                                                act_in_esm_db['location'],
+                                                esm_results_db_name,
+                                            )]
+                                else:
+                                    raise ValueError(f'db_type must be either "esm" or "esm results"')
 
-                            if act_to_adapt not in act_to_adapt_list and act_to_adapt is not None:
-                                # in case there are several fuel flows in the same activity
-                                act_to_adapt_list.append(act_to_adapt)
-                                techno_flows_to_correct_dict[
-                                    (act_to_adapt['database'], act_to_adapt['code'])
-                                ] = []
+                                if act_to_adapt not in act_to_adapt_list and act_to_adapt is not None:
+                                    # in case there are several fuel flows in the same activity
+                                    act_to_adapt_list.append(act_to_adapt)
+                                    techno_flows_to_correct_dict[
+                                        (act_to_adapt['database'], act_to_adapt['code'])
+                                    ] = []
 
-                            if act_to_adapt is not None:
-                                techno_flows_to_correct_dict[
-                                    (act_to_adapt['database'], act_to_adapt['code'])
-                                ] += [(act_exc['database'], act_exc['code'])]
+                                if act_to_adapt is not None:
+                                    techno_flows_to_correct_dict[
+                                        (act_to_adapt['database'], act_to_adapt['code'])
+                                    ] += [(act_exc['database'], act_exc['code'])]
 
-            if len(act_to_adapt_list) == 0:
-                if db_type == 'esm':
-                    self.logger.warning(
-                        f'No flow of type(s) {flows_list} found for {tech}. The efficiency of this technology cannot be '
-                        f'adjusted.'
-                    )
-            for act in act_to_adapt_list:
-                if self.operation_metrics_for_all_time_steps and db_type == 'esm results':
-                    efficiency_ratio = efficiency[f'efficiency_ratio ({year})'].iloc[i]
-                else:
-                    efficiency_ratio = efficiency['efficiency_ratio'].iloc[i]
-                techno_flows_to_correct = techno_flows_to_correct_dict[(act['database'], act['code'])]
-                act = self._adapt_flows_to_efficiency_difference(act, efficiency_ratio, techno_flows_to_correct)
+                if len(act_to_adapt_list) == 0:
+                    if db_type == 'esm':
+                        self.logger.warning(
+                            f'No flow of type(s) {flows_list} found for {tech}. The efficiency of this technology '
+                            f'cannot be adjusted.'
+                        )
+                for act in act_to_adapt_list:
+                    if self.operation_metrics_for_all_time_steps and db_type == 'esm results':
+                        efficiency_ratio = efficiency[f'efficiency_ratio ({year})'].iloc[i]
+                    else:
+                        efficiency_ratio = efficiency['efficiency_ratio'].iloc[i]
+                    techno_flows_to_correct = techno_flows_to_correct_dict[(act['database'], act['code'])]
+                    act = self._adapt_flows_to_efficiency_difference(act, efficiency_ratio, techno_flows_to_correct)
 
     if write_efficiency_report:
         # saving the efficiency differences in a csv file
         Path(self.results_path_file).mkdir(parents=True, exist_ok=True)  # Create the folder if it does not exist
         efficiency.to_csv(f'{self.results_path_file}efficiency_differences.csv', index=False)
 
+    if return_efficiency_report:
+        # returning the efficiency differences pandas DataFrame
+        return efficiency
 
-def _compute_efficiency_esm(
+
+def _get_esm_input_quantity(
         self,
         row: pd.Series,
 ) -> float:
@@ -237,13 +261,13 @@ def _compute_efficiency_esm(
             input_amount += model[(model.Name == row.Name) & (model.Flow == flow)].Amount.values[0]
         except IndexError:
             # This allows the user to put a fuel that is not an input in the ESM but in the LCI dataset in the
-            # efficiency file. This is useful in case of mismatch (different fuel consumed between ESM nd LCI dataset).
+            # efficiency file. This is useful in case of mismatch (different fuel consumed between ESM and LCI dataset).
             # However, direct emissions must then be adjusted (tech_specifics file).
             self.logger.warning(f'Flow of type {flow} found for {row.Name} in efficiency file, but not in model file.')
             input_amount += 0
     if input_amount == 0:
         raise ValueError(f'No flow of type(s) {flows_list} found for {row.Name} in the model file')
-    return -1.0 / input_amount  # had negative sign as it is an input
+    return -1.0 * input_amount  # has negative sign as it is an input
 
 
 def _get_lca_input_flow_unit_or_product(
