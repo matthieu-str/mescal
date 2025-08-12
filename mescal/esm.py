@@ -117,7 +117,6 @@ class ESM:
         # Initialize attributes used within mescal
         self.df_flows_set_to_zero = None
         self.double_counting_removal_amount = None
-        self.double_counting_removal_count = None
         self.df_activities_subject_to_double_counting = None
         self.esm_results_db_name = self.esm_db_name + '_results'
         self.pathway = False
@@ -128,6 +127,7 @@ class ESM:
         self.tech_to_remove_layers = None
         self.efficiency_differences_report = None
         self.products_without_a_cpc_category = set()
+        self.resources_without_unit_conversion_factor = set()
         self.locations_list = list(set([i['location'] for i in self.main_database.db_as_list]))
 
 
@@ -193,9 +193,11 @@ class ESM:
     from .adapt_efficiency import (
         _correct_esm_and_lca_efficiency_differences,
         _get_esm_input_quantity,
+        _get_esm_input_unit,
         _get_lca_input_flow_unit_or_product,
         _adapt_flows_to_efficiency_difference,
         _get_lca_input_quantity,
+        _basic_unit_conversion,
     )
     from .esm_back_to_lca import (
         create_new_database_with_esm_results,
@@ -377,8 +379,8 @@ class ESM:
         """
         Create the ESM database after double counting removal. Three csv files summarizing the double-counting removal
         process are automatically saved in the results folder: double_counting_removal.csv (amount of removed
-        flows), double_counting_removal_count.csv (number of flows set to zero), and removed_flows_list.csv
-        (specific activities in which the flows were removed).
+        flows and number of flows set to zero), and removed_flows_list.csv (specific activities in which the flows were
+        removed).
 
         :param return_database: if True, return the ESM database as a mescal.Database object
         :param write_database: if True, write the ESM database to Brightway
@@ -393,14 +395,14 @@ class ESM:
             pass
 
         if (self.efficiency is not None) & (self.unit_conversion is None):
-            raise ValueError('Unit conversion file is needed for efficiency differences correction. Please provide it.')
+            self.logger.error('Unit conversion file is needed for efficiency differences correction. Please provide it.')
 
         if write_database is False and return_database is False:
-            raise ValueError('Please set either return_database or write_database to True.')
+            self.logger.error('Please set either return_database or write_database to True.')
 
         if write_database is False and len(self.tech_specifics) > 0:
-            raise ValueError('The database must be written to Brightway to apply technologies specifics. '
-                             'Please set write_database to True.')
+            self.logger.warning('Some of the changes from tech_specifics.csv will not be applied as the ESM database '
+                                'will not be written to brightway (write_database is False).')
 
         # Adding current code to the mapping file
         self.mapping['Current_code'] = self.mapping.apply(lambda row: self.main_database.get_code(
@@ -459,32 +461,40 @@ class ESM:
             ei_removal_amount[tech] = {}
             ei_removal_count[tech] = {}
             for res in list(self.mapping_op.iloc[:, N:].columns):
-                ei_removal_amount[tech][res] = ei_removal[tech][res]['amount']
-                ei_removal_count[tech][res] = ei_removal[tech][res]['count']
+                ei_removal_amount[tech][res] = {}
+                ei_removal_count[tech][res] = {}
+                for unit in ei_removal[tech][res]['amount'].keys():
+                    ei_removal_amount[tech][res][unit] = ei_removal[tech][res]['amount'][unit]
+                    ei_removal_count[tech][res][unit] = ei_removal[tech][res]['count'][unit]
 
-        double_counting_removal_amount = pd.DataFrame.from_dict(ei_removal_amount, orient='index')
-        double_counting_removal_count = pd.DataFrame.from_dict(ei_removal_count, orient='index')
+        records_amount = []
+        for tech, v1 in ei_removal_amount.items():
+            for res, v2 in v1.items():
+                for unit, v3 in v2.items():
+                    records_amount.append({
+                        'Name': tech,
+                        'Flow': res,
+                        'Unit': unit,
+                        'Amount': v3,
+                    })
+        double_counting_removal_amount = pd.DataFrame(records_amount)
 
-        double_counting_removal_amount.reset_index(inplace=True)
-        double_counting_removal_amount = double_counting_removal_amount.melt(
-            id_vars=['index'],
-            value_vars=double_counting_removal_amount.columns[1:]
-        )
-        double_counting_removal_amount.rename(columns={'index': 'Name', 'variable': 'Flow', 'value': 'Amount'},
-                                              inplace=True)
-        double_counting_removal_amount.drop(
-            double_counting_removal_amount[double_counting_removal_amount.Amount == 0].index, inplace=True
-        )
+        records_count = []
+        for tech, v1 in ei_removal_count.items():
+            for res, v2 in v1.items():
+                for unit, v3 in v2.items():
+                    records_count.append({
+                        'Name': tech,
+                        'Flow': res,
+                        'Unit': unit,
+                        'Count': v3,
+                    })
+        double_counting_removal_count = pd.DataFrame(records_count)
 
-        double_counting_removal_count.reset_index(inplace=True)
-        double_counting_removal_count = double_counting_removal_count.melt(
-            id_vars=['index'],
-            value_vars=double_counting_removal_count.columns[1:]
-        )
-        double_counting_removal_count.rename(columns={'index': 'Name', 'variable': 'Flow', 'value': 'Amount'},
-                                             inplace=True)
-        double_counting_removal_count.drop(
-            double_counting_removal_count[double_counting_removal_count.Amount == 0].index, inplace=True
+        double_counting_removal_amount = double_counting_removal_amount.merge(
+            double_counting_removal_count,
+            on=['Name', 'Flow', 'Unit'],
+            how='left',
         )
 
         df_activities_subject_to_double_counting = pd.DataFrame(
@@ -492,13 +502,12 @@ class ESM:
             columns=['Name', 'Activity name', 'Activity code', 'Amount']
         )
 
-        self.double_counting_removal_count = double_counting_removal_count
         self.double_counting_removal_amount = double_counting_removal_amount
         self.df_flows_set_to_zero = df_flows_set_to_zero
         self.df_activities_subject_to_double_counting = df_activities_subject_to_double_counting
 
         if self.efficiency is not None:
-            self.logger.info(f"Starting to correct efficiency differences")
+            self.logger.info("Starting to correct efficiency differences")
             t1_eff = time.time()
             if self.efficiency is not None:
                 self._correct_esm_and_lca_efficiency_differences()
@@ -508,13 +517,11 @@ class ESM:
         if write_double_counting_removal_reports:
             Path(self.results_path_file).mkdir(parents=True, exist_ok=True)  # Create the folder if it does not exist
             double_counting_removal_amount.to_csv(f"{self.results_path_file}double_counting_removal.csv", index=False)
-            double_counting_removal_count.to_csv(f"{self.results_path_file}double_counting_removal_count.csv",
-                                                 index=False)
             df_flows_set_to_zero.to_csv(f"{self.results_path_file}removed_flows_list.csv", index=False)
             df_activities_subject_to_double_counting.to_csv(f"{self.results_path_file}activities_subject_to_double_counting.csv", index=False)
 
         if write_database:
-            self.logger.info(f"Starting to write database")
+            self.logger.info("Starting to write database")
             t1_mod_inv = time.time()
 
             self.esm_db = Database(

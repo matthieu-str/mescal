@@ -482,20 +482,24 @@ unit_conversion = [
     ['CAR_BIODIESEL_B20', 'Operation', 0.667, 'kilometer', 'person kilometer'],
     ['petrol', 'Other', 0.0829, 'kilogram', 'kilowatt hour'],
     ['diesel', 'Other', 0.075, 'kilogram', 'kilowatt hour'],
+    ['DIESEL', 'Flow', 0.075, 'kilogram', 'kilowatt hour'],
+    ['GASOLINE', 'Flow', 0.0829, 'kilogram', 'kilowatt hour'],
+    ['BIO_DIESEL', 'Flow', 0.075, 'kilogram', 'kilowatt hour'],
+    ['PROPANE', 'Flow', 0.0821, 'kilogram', 'kilowatt hour'],
 ]
 # CAR_GASOLINE: after unit conversion, the "efficiency" in the LCI db is 1/0.05 * 0.0829/0.667 pkm/kWh for type I
 # and 1/(0.03+0.01) * 0.0829 / 0.667 pkm/kWh for type II
 # CAR_BIODIESEL_B20: after unit conversion, the "efficiency" in the LCI db is 1/0.06 * 0.075/0.667 pkm/kWh
 
 double_counting_removal = [
-    ['CAR_GASOLINE', 'GASOLINE', 0.05 * 0.4 + (0.03 + 0.01) * 0.6],
-    ['CAR_GASOLINE', 'TRANSPORT_FUEL', 0.05 * 0.4 + (0.03 + 0.01) * 0.6],
-    ['CAR_GASOLINE', 'CONSTRUCTION', 5e-6 * 0.4 + 5e-6 * 0.6],
-    ['CAR_PROPANE', 'TRANSPORT_FUEL', 0.05],
-    ['CAR_PROPANE', 'CONSTRUCTION', 5e-6],
-    ['CAR_BIODIESEL_B20', 'DIESEL', 0.06],
-    ['CAR_BIODIESEL_B20', 'TRANSPORT_FUEL', 0.06],
-    ['CAR_BIODIESEL_B20', 'CONSTRUCTION', 5e-6],
+    ['CAR_GASOLINE', 'GASOLINE', 0.05 * 0.4 + (0.03 + 0.01) * 0.6, 'kilogram', 2],
+    ['CAR_GASOLINE', 'TRANSPORT_FUEL', 0.05 * 0.4 + (0.03 + 0.01) * 0.6, 'kilogram', 2],
+    ['CAR_GASOLINE', 'CONSTRUCTION', 5e-6 * 0.4 + 5e-6 * 0.6, 'unit', 2],
+    ['CAR_PROPANE', 'TRANSPORT_FUEL', 0.05, 'kilogram', 1],
+    ['CAR_PROPANE', 'CONSTRUCTION', 5e-6, 'unit', 1],
+    ['CAR_BIODIESEL_B20', 'DIESEL', 0.06, 'kilogram', 1],
+    ['CAR_BIODIESEL_B20', 'TRANSPORT_FUEL', 0.06, 'kilogram', 1],
+    ['CAR_BIODIESEL_B20', 'CONSTRUCTION', 5e-6, 'unit', 1],
 ]
 
 model = pd.DataFrame(model, columns=['Name', 'Flow', 'Amount'])
@@ -508,7 +512,7 @@ removed_flows = pd.DataFrame(removed_flows, columns=[
     'Name', 'Product', 'Activity', 'Location', 'Database', 'Code', 'Amount', 'Unit', 'Removed flow activity',
     'Removed flow product', 'Removed flow location', 'Removed flow database', 'Removed flow code'])
 
-double_counting_removal = pd.DataFrame(double_counting_removal, columns=['Name', 'Flow', 'Amount'])
+double_counting_removal = pd.DataFrame(double_counting_removal, columns=['Name', 'Flow', 'Amount', 'Unit', 'Count'])
 
 unit_conversion = pd.DataFrame(unit_conversion, columns=['Name', 'Type', 'Value', 'LCA', 'ESM'])
 

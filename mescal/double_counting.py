@@ -306,8 +306,8 @@ def _double_counting_removal(
         ei_removal[tech] = {}
         for res in list(df_op.iloc[:, N:].columns):
             ei_removal[tech][res] = {}
-            ei_removal[tech][res]['amount'] = 0
-            ei_removal[tech][res]['count'] = 0
+            ei_removal[tech][res]['amount'] = {}
+            ei_removal[tech][res]['count'] = {}
 
     # readings lists as lists and not strings
     try:
@@ -552,10 +552,14 @@ def _double_counting_removal(
                         # only adds the amount for the relevant category
                         # (e.g., ELECTRICITY_MV among [ELECTRICITY_LV, ELECTRICITY_MV, ELECTRICITY_HV]
                         # which share the same CPCs
-
-                        # old amount (e.g., GWh) multiplied by factor as we went down in the tree
-                        ei_removal[tech][cat]['amount'] += old_amount * new_act_op_d_c_amount
-                        ei_removal[tech][cat]['count'] += 1  # count (i.e., number of flows put to zero)
+                        if flow['unit'] not in ei_removal[tech][cat]['amount'].keys():
+                            # old amount (e.g., GWh) multiplied by factor as we went down in the tree
+                            ei_removal[tech][cat]['amount'][flow['unit']] = old_amount * new_act_op_d_c_amount
+                            ei_removal[tech][cat]['count'][flow['unit']] = 1  # count (i.e., number of flows put to zero)
+                        else:
+                            # old amount (e.g., GWh) multiplied by factor as we went down in the tree
+                            ei_removal[tech][cat]['amount'][flow['unit']] += old_amount * new_act_op_d_c_amount
+                            ei_removal[tech][cat]['count'][flow['unit']] += 1  # count (i.e., number of flows put to zero)
 
                 # Setting the amount to zero
                 flow['amount'] = 0
@@ -570,8 +574,8 @@ def _double_counting_removal(
                         # The two following conditions mean that the background search would stop when some
                         # intermediary flows have already been found for a given esm flow, but some other
                         # similar and relevant flows, further in the process tree, might also be there.
-                        & ((ei_removal[tech][cat]['amount'] == 0) | (not self.stop_background_search_when_first_flow_found))
-                        & ((ei_removal[tech][cat]['count'] == 0) | (not self.stop_background_search_when_first_flow_found))
+                        & ((sum(ei_removal[tech][cat]['amount'].values()) == 0) | (not self.stop_background_search_when_first_flow_found))
+                        & ((sum(ei_removal[tech][cat]['count'].values()) == 0) | (not self.stop_background_search_when_first_flow_found))
                 ):
                     missing_ES_inputs.append(cat)
 
@@ -623,7 +627,7 @@ def validation_double_counting(
     validation_d_c.Flow = validation_d_c.Flow.replace("['", "")
     validation_d_c.Flow = validation_d_c.Flow.replace("']", "")
 
-    validation_d_c['Input difference (ESM unit)'] = validation_d_c['ESM input quantity (ESM unit)'] - validation_d_c['LCA input quantity (ESM unit)']
+    validation_d_c['Input difference (ESM unit)'] = validation_d_c['ESM input quantity (ESM unit)'] - validation_d_c['LCA input quantity (ESM unit) aggregated']
     validation_d_c['Input difference (%)'] = 100 * validation_d_c['Input difference (ESM unit)'] / validation_d_c['ESM input quantity (ESM unit)']
 
     validation_d_c = validation_d_c[[
@@ -632,6 +636,7 @@ def validation_double_counting(
         'LCA input product',
         'ESM input quantity (ESM unit)',
         'LCA input quantity (ESM unit)',
+        'LCA input quantity (ESM unit) aggregated',
         'Input difference (ESM unit)',
         'Input difference (%)',
         'LCA input quantity (LCA unit)',

@@ -39,8 +39,8 @@ def _correct_esm_and_lca_efficiency_differences(
     double_counting_removal_amount = self.double_counting_removal_amount
 
     if db_type == 'validation':
-        efficiency = double_counting_removal_amount[['Name', 'Flow']].copy(deep=True)
-        efficiency.drop(efficiency[efficiency['Flow'].isin(['CONSTRUCTION', 'OWN_CONSTRUCTION'])].index, inplace=True)
+        efficiency = double_counting_removal_amount[['Name', 'Flow', 'Unit', 'Amount']].copy(deep=True)
+        efficiency.drop(efficiency[efficiency['Flow'].isin(['CONSTRUCTION', 'OWN_CONSTRUCTION', 'TRANSPORT_FUEL', 'PROCESS_FUEL'])].index, inplace=True)
         efficiency.Flow = efficiency.Flow.apply(lambda x: f"['{x}']")
 
     try:
@@ -49,18 +49,22 @@ def _correct_esm_and_lca_efficiency_differences(
         pass
 
     if db_type in ['esm', 'validation']:
-        efficiency['ESM input quantity (ESM unit)'] = efficiency.apply(
-            self._get_esm_input_quantity,
-            axis=1,
-        )
-        efficiency['ESM efficiency'] = 1 / efficiency['ESM input quantity (ESM unit)']  # inputs are scaled w.r.t. a unit output flow
-        efficiency['LCA input unit'] = efficiency.apply(
-            self._get_lca_input_flow_unit_or_product,
-            axis=1,
-            output_type='unit',
-            removed_flows=removed_flows
-        )
-        efficiency.drop(efficiency[efficiency['LCA input unit'].isnull()].index, inplace=True)
+
+        if db_type == 'esm':
+            # Get in unit of the input flow in the LCI dataset
+            efficiency['LCA input unit'] = efficiency.apply(
+                self._get_lca_input_flow_unit_or_product,
+                axis=1,
+                output_type='unit',
+                removed_flows=removed_flows
+            )
+            efficiency.drop(efficiency[efficiency['LCA input unit'].isnull()].index, inplace=True)
+            efficiency = efficiency.explode(column=['LCA input unit'], ignore_index=True)
+
+        elif db_type == 'validation':
+            efficiency.rename(columns={'Unit': 'LCA input unit'}, inplace=True)
+
+        # Get the name of the reference product of the input flow in the LCI dataset
         efficiency['LCA input product'] = efficiency.apply(
             self._get_lca_input_flow_unit_or_product,
             axis=1,
@@ -68,43 +72,88 @@ def _correct_esm_and_lca_efficiency_differences(
             removed_flows=removed_flows
         )
         efficiency.drop(efficiency[efficiency['LCA input product'].isnull()].index, inplace=True)
-        efficiency['LCA input quantity (LCA unit)'] = efficiency.apply(
-            self._get_lca_input_quantity,
+
+        if db_type == 'esm':
+            # Get the physical unit of the input flow in the LCI dataset
+            efficiency['LCA input quantity (LCA unit)'] = efficiency.apply(
+                self._get_lca_input_quantity,
+                axis=1,
+                double_counting_removal_amount=double_counting_removal_amount
+            )
+            # efficiency.drop(efficiency[efficiency['LCA input quantity (LCA unit)'] == 0].index, inplace=True)
+
+        elif db_type == 'validation':
+            efficiency.rename(columns={'Amount': 'LCA input quantity (LCA unit)'}, inplace=True)
+
+        # Get the physical unit of the input flow in the ESM
+        efficiency['ESM input quantity (ESM unit)'] = efficiency.apply(
+            self._get_esm_input_quantity,
             axis=1,
-            double_counting_removal_amount=double_counting_removal_amount
         )
-        efficiency.drop(efficiency[efficiency['LCA input quantity (LCA unit)'] == 0].index, inplace=True)
+
+        efficiency['ESM input unit'] = efficiency.apply(
+            self._get_esm_input_unit,
+            axis=1,
+        )
+
+        if len(self.resources_without_unit_conversion_factor) > 0:
+            raise ValueError(
+                f'The following ESM resources/flows do not have a unit conversion factor in the unit conversion file: '
+                f'{self.resources_without_unit_conversion_factor}. Please add them to the unit conversion file.'
+            )
+
+        # Derive the efficiency in the ESM
+        efficiency['ESM efficiency'] = 1 / efficiency['ESM input quantity (ESM unit)']  # inputs are scaled w.r.t. a unit output flow
+
+        # Add output flow units from the ESM and the LCI dataset, and the corresponding conversion factor
         efficiency = efficiency.merge(
             right=unit_conversion[unit_conversion.Type == 'Operation'][['Name', 'Value', 'LCA', 'ESM']],
             how='left',
             on='Name'
         )
+
         efficiency.rename(
             columns={'Value': 'Output conversion factor', 'LCA': 'LCA output unit', 'ESM': 'ESM output unit'},
             inplace=True)
+
+        # Add the input flow units from the ESM and the LCI dataset, and the corresponding conversion factor
         efficiency = efficiency.merge(
             right=unit_conversion[
                 (unit_conversion.Type == 'Other')
-                & (unit_conversion.ESM == 'kilowatt hour')
                 ][['Name', 'Value', 'LCA', 'ESM']],
             how='left',
-            left_on=['LCA input product', 'LCA input unit'],
-            right_on=['Name', 'LCA'],
+            left_on=['LCA input product', 'LCA input unit', 'ESM input unit'],
+            right_on=['Name', 'LCA', 'ESM'],
             suffixes=('', '_to_remove')
         )
+
         efficiency.drop(columns=['Name_to_remove', 'LCA'], inplace=True)
-        efficiency.rename(columns={'Value': 'Input conversion factor', 'ESM': 'ESM input unit'}, inplace=True)
+        efficiency.rename(columns={'Value': 'Input conversion factor'}, inplace=True)
+
+        efficiency['Input conversion factor'] = efficiency.apply(self._basic_unit_conversion, axis=1)
 
         missing_units = efficiency[efficiency['Input conversion factor'].isna()][
-            ['LCA input product', 'LCA input unit']].values.tolist()
-        missing_units = [tuple(x) + ('kilowatt hour',) for x in set(tuple(x) for x in missing_units)]
+            ['LCA input product', 'LCA input unit', 'ESM input unit']].values.tolist()
+        missing_units = [tuple(x) for x in set(tuple(x) for x in missing_units)]
         if len(missing_units) > 0:
             raise ValueError(f'No conversion factor found for the following units (product, unit from, unit to): '
                              f'{missing_units}')
 
         efficiency['LCA input quantity (ESM unit)'] = (
                 (efficiency['Output conversion factor'] * efficiency['LCA input quantity (LCA unit)']) / efficiency['Input conversion factor'])
-        efficiency['LCA efficiency'] = 1 / efficiency['LCA input quantity (ESM unit)']
+
+        # To handle the case where multiple flows, with potentially different units, are within the same ESM flow
+        # category, we aggregate those flows to compute the efficiency
+        efficiency['Flow'] = efficiency['Flow'].apply(lambda x: str(x) if isinstance(x, list) else x)  # Convert to string for merging
+        efficiency = efficiency.merge(
+            efficiency.groupby(['Name', 'Flow'])['LCA input quantity (ESM unit)'].sum().reset_index(),
+            how='left',
+            on=['Name', 'Flow'],
+            suffixes=('', ' aggregated'),
+        )
+        efficiency['Flow'] = efficiency['Flow'].apply(lambda x: ast.literal_eval(x) if isinstance(x, str) else x)
+
+        efficiency['LCA efficiency'] = 1 / efficiency['LCA input quantity (ESM unit) aggregated']
 
         efficiency['efficiency_ratio'] = efficiency['LCA efficiency'] / efficiency['ESM efficiency']
 
@@ -269,13 +318,41 @@ def _get_esm_input_quantity(
         raise ValueError(f'No flow of type(s) {flows_list} found for {row.Name} in the model file')
     return -1.0 * input_amount  # has negative sign as it is an input
 
+def _get_esm_input_unit(
+        self,
+        row: pd.Series,
+) -> str or None:
+
+    unit_conversion = self.unit_conversion
+
+    flows_list = row.Flow
+    unit_list = []
+
+    for flow in flows_list:
+        try:
+            unit_list.append(unit_conversion[
+                (unit_conversion.Name == flow)
+                & (unit_conversion.Type == 'Flow')
+            ].ESM.values[0])
+        except IndexError:
+            self.logger.warning(f'Flow of type {flow} found for {row.Name} in efficiency file, but not in unit conversion file.')
+
+    unit_list = list(set(unit_list))  # remove duplicates
+    if len(unit_list) == 0:
+        for flow in flows_list:
+            self.resources_without_unit_conversion_factor.add(flow)
+    elif len(unit_list) > 1:
+        self.logger.error(f'Several units found in the ESM for inputs of {row.Name} ({flows_list}): {unit_list}. '
+                          f'Please harmonize the units in the unit conversion file.')
+    else:
+        return unit_list[0]
 
 def _get_lca_input_flow_unit_or_product(
         self,
         row: pd.Series,
         output_type: str,
         removed_flows: pd.DataFrame
-) -> str | None:
+) -> list[str] | str | None:
     """
     Retrieve the unit or product of the removed flow (taken from the double counting removal report)
 
@@ -307,6 +384,12 @@ def _get_lca_input_flow_unit_or_product(
         if 'classifications' in act_exc:
             if 'CPC' in dict(act_exc['classifications']):
                 if dict(act_exc['classifications'])['CPC'] in CPC_list:
+                    # if the CPC category matches, we add the unit to the unit list
+                    unit_list.append(act_exc['unit'])
+                    # for the product, if the unit is not the one of the given row, we do not add it
+                    if output_type == 'product':
+                        if act_exc['unit'] != row['LCA input unit']:
+                            continue
                     # in carculator, the 'fuel' product may be diesel, NG or H2
                     if act_exc['reference product'] == 'fuel':
                         if 'cng' in act_exc['name']:
@@ -322,19 +405,16 @@ def _get_lca_input_flow_unit_or_product(
                                              f'{act_exc["name"]}')
                     else:
                         name_list.append(act_exc['reference product'].split(',')[0])
-                    unit_list.append(act_exc['unit'])
 
     if output_type == 'unit':
-        if len(set(unit_list)) > 1:
-            raise ValueError(f'Several units possible for flow {row.Flow} in {row.Name}: {set(unit_list)}')
-        elif len(set(unit_list)) == 0:
+        if len(set(unit_list)) == 0:
             self.logger.warning(
                 f'No flow found for type(s) {row.Flow} in {row.Name}. The efficiency of this technology cannot be '
                 f'adjusted.'
             )
             return None
         else:
-            return list(set(unit_list))[0]
+            return list(set(unit_list))  # list of (potentially several) physical units
 
     elif output_type == 'product':
         if len(set(name_list)) > 1:
@@ -405,10 +485,25 @@ def _get_lca_input_quantity(
     flows_list = row.Flow
     for flow in flows_list:
         try:
-            amount += double_counting_removal_amount[(double_counting_removal_amount.Name == row.Name)
-                                              & (double_counting_removal_amount.Flow == flow)].Amount.values[0]
+            amount += double_counting_removal_amount[
+                (double_counting_removal_amount.Name == row.Name)
+                & (double_counting_removal_amount.Flow == flow)
+                & (double_counting_removal_amount.Unit == row['LCA input unit'])
+            ].Amount.values[0]
         except IndexError:
             self.logger.warning(f'No flow of type {flow} has been removed in {row.Name}.')
             amount += 0
     else:
         return amount
+
+@staticmethod
+def _basic_unit_conversion(row: pd.Series) -> float or None:
+
+    if row['LCA input unit'] == row['ESM input unit']:
+        return 1.0
+    elif row['LCA input unit'] in ['megajoule', 'MJ'] and row['ESM input unit'] in ['kilowatt hour', 'kWh']:
+        return 3.6
+    elif row['LCA input unit'] in ['kilowatt hour', 'kWh'] and row['ESM input unit'] in ['megajoule', 'MJ']:
+        return 1 / 3.6
+    else:
+        return row['Input conversion factor']
