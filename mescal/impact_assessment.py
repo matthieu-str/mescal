@@ -420,6 +420,99 @@ def compute_impact_scores(
     else:
         return R_long, None
 
+def validation_direct_carbon_emissions(
+        self,
+        R_direct: pd.DataFrame,
+        lcia_method_carbon_emissions: str,
+        carbon_flow_in_esm: str or list[str],
+        return_df: bool = False,
+        save_df: bool = True,
+) -> pd.DataFrame or None:
+
+    """
+    Returns a dataframe comparing the direct carbon emissions obtained from the LCIA phase (direct emissions module)
+    and direct carbon emissions from the ESM. Please make sure that carbon emissions are expressed with the same
+    physical unit, e.g., kg CO2-eq., in the ESM and LCIA method (while functional units, e.g., kWh, are automatically
+    converted to ESM units).
+
+    :param R_direct: dataframe containing the direct carbon emissions from the LCIA phase
+    :param lcia_method_carbon_emissions: name of the LCIA method for carbon emissions in brightway
+    :param carbon_flow_in_esm: names(s) of the carbon flow(s) in the ESM
+    :param return_df: if True, the function will return the dataframe
+    :param save_df: if True, the function will save the dataframe to a csv file named direct_carbon_emissions_differences
+    :return: dataframe comparing the direct carbon emissions from the LCIA phase and the ESM if return_df is True
+    """
+
+    model = self.model
+    unit_conversion = self.unit_conversion
+
+    if save_df is False and return_df is False:
+        raise ValueError('You must set at least one of the parameters save_df or return_df to True')
+
+    if isinstance(R_direct.Impact_category.iloc[0], str):
+        R_direct['Impact_category'] = R_direct['Impact_category'].apply(ast.literal_eval)
+
+    if lcia_method_carbon_emissions not in list(R_direct['Impact_category'].unique()):
+        raise ValueError(f'The LCIA method {lcia_method_carbon_emissions} is not in the impact scores dataframe')
+
+    if isinstance(carbon_flow_in_esm, str):
+        carbon_flow_in_esm = [carbon_flow_in_esm]
+
+    R_direct = R_direct[R_direct['Impact_category'] == lcia_method_carbon_emissions]
+    R_direct = R_direct[R_direct['Type'] == 'Operation']
+    R_direct.rename(columns={'Value': 'LCA direct carbon emissions (LCA unit)'}, inplace=True)
+    R_direct.drop(columns=['Impact_category', 'Type'], inplace=True)
+
+    R_direct['ESM direct carbon emissions (ESM unit)'] = R_direct.apply(
+        lambda row: sum(model[(model.Name == row.Name) & (model.Flow.isin(carbon_flow_in_esm))]['Amount']),
+        axis=1
+    )
+
+    # Get the unit conversion factor of the output unit
+    R_direct = R_direct.merge(
+        unit_conversion[unit_conversion.Type == 'Operation'][['Name', 'Value', 'LCA', 'ESM']],
+        how='left',
+        on='Name',
+    )
+
+    R_direct.rename(
+        columns={'Value': 'Output conversion factor', 'LCA': 'LCA output unit', 'ESM': 'ESM output unit'},
+        inplace=True
+    )
+
+    R_direct['LCA direct carbon emissions (ESM unit)'] = (
+            R_direct['LCA direct carbon emissions (LCA unit)'] * R_direct['Output conversion factor'])
+
+    R_direct['Direct carbon emissions difference'] = (
+            R_direct['ESM direct carbon emissions (ESM unit)'] - R_direct['LCA direct carbon emissions (ESM unit)'])
+    R_direct['Direct carbon emissions difference (%)'] = R_direct.apply(
+        lambda row: (row['Direct carbon emissions difference'] / row['ESM direct carbon emissions (ESM unit)']) * 100
+        if row['ESM direct carbon emissions (ESM unit)'] != 0 else None,
+        axis=1
+    )
+
+    df_columns = [
+        'Name',
+        'ESM direct carbon emissions (ESM unit)',
+        'LCA direct carbon emissions (ESM unit)',
+        'Direct carbon emissions difference',
+        'Direct carbon emissions difference (%)',
+        'LCA direct carbon emissions (LCA unit)',
+        'LCA output unit',
+        'ESM output unit',
+        'Output conversion factor',
+    ]
+
+    if 'Year' in R_direct.columns:
+        df_columns.insert(0, 'Year')
+
+    R_direct = R_direct[df_columns]
+
+    if save_df:
+        R_direct.to_csv(f"{self.results_path_file}direct_carbon_emissions_differences.csv", index=False)
+
+    if return_df:
+        return R_direct
 
 @staticmethod
 def _get_impact_categories(methods: list[str]) -> list[str]:
