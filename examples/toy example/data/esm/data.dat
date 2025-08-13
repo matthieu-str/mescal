@@ -3,11 +3,12 @@ set PERIODS := 1 2 3 4 5 6 7 8 9 10 11 12;
 set SECTORS := HOUSEHOLDS INDUSTRY;
 set END_USES_INPUT :=  ELECTRICITY LIGHTING HEAT_LOW_T_SC;
 set END_USES_CATEGORIES :=  ELECTRICITY;
-set RESOURCES :=  COAL NG URANIUM RES_SOLAR RES_WIND_ONSHORE;
+set RESOURCES :=  COAL NG URANIUM RES_SOLAR RES_WIND_ONSHORE CO2;
 set END_USES_TYPES_OF_CATEGORY["ELECTRICITY"] := ELECTRICITY;
 set TECHNOLOGIES_OF_END_USES_TYPE["ELECTRICITY"] :=  PV WIND_ONSHORE CCGT CCGT_CC COAL_IGCC COAL_IGCC_CC NUCLEAR;
 set PV_TECH  := PV;
 set INFRASTRUCTURE := BATTERY GRID;
+set CO2_CATEGORY := CO2;
 
 let end_uses_demand_year['ELECTRICITY','HOUSEHOLDS',2050] := 4e3 * 0.6 ;
 let end_uses_demand_year['HEAT_LOW_T_SC','HOUSEHOLDS',2050] := 4e3 * 0.3 ;
@@ -66,6 +67,7 @@ for {y in YEARS}{
 	let layers_in_out['COAL','COAL',y] := 1 ;
 	let layers_in_out['NG','NG',y] := 1 ;
 	let layers_in_out['URANIUM','URANIUM',y] := 1 ;
+	let layers_in_out['CO2','CO2',y] := 1 ;
 }
 
 
@@ -77,4 +79,5 @@ for {y in YEARS}{
 	let avail['RES_WIND_ONSHORE',y] := 1e6 ; #
 	let avail['COAL',y] := 1e6 ; #
 	let avail['NG',y] := 1e6 ; #
+	let avail['CO2',y] := 0 ; #
 }

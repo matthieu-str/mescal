@@ -10,6 +10,7 @@ set END_USES_TYPES := setof {i in END_USES_CATEGORIES, j in END_USES_TYPES_OF_CA
 set TECHNOLOGIES_OF_END_USES_TYPE {END_USES_TYPES}; # set all energy conversion technologies (excluding storage technologies)
 set INFRASTRUCTURE; # Infrastructure: DHN, grid, and intermediate energy conversion technologies (i.e. not directly supplying end-use demand)
 set PV_TECH;
+set CO2_CATEGORY;
 
 ## SECONDARY SETS: a secondary set is defined by operations on MAIN SETS
 set LAYERS := RESOURCES union END_USES_TYPES; # Layers are used to balance resources/products in the system
@@ -54,7 +55,7 @@ param trl_max default 9;
 
 
 ## VARIABLES [Tables 1.2, 1.3] ###
-var End_Uses {LAYERS, PERIODS, YEARS} >= 0; # total demand for each type of end-uses (monthly power). Defined for all layers (0 if not demand)
+var End_Uses {LAYERS diff CO2_CATEGORY, PERIODS, YEARS} >= 0; # total demand for each type of end-uses (monthly power). Defined for all layers (0 if not demand)
 
 var F_Mult {TECHNOLOGIES, YEARS} >= 0; # F: installed size, multiplication factor with respect to the values in layers_in_out table
 var F_Mult_t {RESOURCES union TECHNOLOGIES, PERIODS, YEARS} >= 0; # F_t: Operation in each period. multiplication factor with respect to the values in layers_in_out table. Takes into account c_p
@@ -73,7 +74,7 @@ var Annual_Res{RESOURCES,YEARS};
 ## End-uses demand calculation constraints 
 
 # From annual energy demand to monthly power demand. End_Uses is non-zero only for demand layers.
-subject to end_uses_t {l in LAYERS, t in PERIODS, y in YEARS}:
+subject to end_uses_t {l in LAYERS diff CO2_CATEGORY, t in PERIODS, y in YEARS}:
 	End_Uses [l,t,y] = (if l == "ELECTRICITY" then
 			(end_uses_input[l,y] / total_time + end_uses_input["LIGHTING",y] * lighting_month [t] / t_op [t] + end_uses_input["HEAT_LOW_T_SC",y] * cooling_month [t] / t_op [t])
 		else 
@@ -84,7 +85,7 @@ subject to end_uses_t {l in LAYERS, t in PERIODS, y in YEARS}:
 
 # Layer balance equation with storage. Layers: input > 0, output < 0. Demand > 0. Storage: in > 0, out > 0;
 # output from technologies/resources/storage - input to technologies/storage = demand. Demand has default value of 0 for layers which are not end_uses
-subject to layer_balance {l in LAYERS, t in PERIODS, y in YEARS}:
+subject to layer_balance {l in LAYERS diff CO2_CATEGORY, t in PERIODS, y in YEARS}:
 	0 = (sum {i in RESOURCES union TECHNOLOGIES} (layers_in_out[i, l, y] * F_Mult_t [i, t, y])
 		- End_Uses [l, t, y]
 		);

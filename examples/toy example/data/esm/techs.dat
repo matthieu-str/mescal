@@ -19,23 +19,27 @@ for {y in YEARS}{
 
 	let layers_in_out['CCGT','ELECTRICITY',y] := 1.0 ;
 	let layers_in_out['CCGT','NG',y] := -1.587 ;
+	# let layers_in_out['CCGT','CO2',y] := 1.587*0.18 ; # 0.18 kg CO2/kWh
 	let c_inv['CCGT',y] := 1838.494 ;
 	let c_maint['CCGT',y] := 56.925 ;
 	let lifetime['CCGT',y] := 25.0 ;
 
 	let layers_in_out['CCGT_CC','ELECTRICITY',y] := 1.0 ;
 	let layers_in_out['CCGT_CC','NG',y] := -1.754 ;
+	let layers_in_out['CCGT_CC','CO2',y] := 1.754*0.18*0.10 ; # 0.18 kg CO2/kWh, CC efficiency of 90%
 	let c_inv['CCGT_CC',y] := 2465.021 ;
 	let c_maint['CCGT_CC',y] := 58.479 ;
 	let lifetime['CCGT_CC',y] := 25.0 ;
 
 	let layers_in_out['COAL_IGCC','COAL',y] := -2.065 ;
+	let layers_in_out['COAL_IGCC','CO2',y] := 2.065*0.37 ; # 0.37 kg CO2/kWh
 	let layers_in_out['COAL_IGCC','ELECTRICITY',y] := 1.0 ;
 	let c_inv['COAL_IGCC',y] := 5002.321 ;
 	let c_maint['COAL_IGCC',y] := 128.542 ;
 	let lifetime['COAL_IGCC',y] := 35.0 ;
 
 	let layers_in_out['COAL_IGCC_CC','COAL',y] := -2.58 ;
+	let layers_in_out['COAL_IGCC_CC','CO2',y] := 2.58*0.37*0.10 ; # 0.37 kg CO2/kWh, CC efficiency of 90%
 	let layers_in_out['COAL_IGCC_CC','ELECTRICITY',y] := 1.0 ;
 	let c_inv['COAL_IGCC_CC',y] := 7704.925 ;
 	let c_maint['COAL_IGCC_CC',y] := 173.274 ;
