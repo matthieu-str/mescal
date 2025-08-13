@@ -628,7 +628,7 @@ def _validation_double_counting(
     validation_d_c.Flow = validation_d_c.Flow.replace("']", "")
 
     validation_d_c['Input difference (ESM unit)'] = validation_d_c['ESM input quantity (ESM unit)'] - validation_d_c['LCA input quantity (ESM unit) aggregated']
-    validation_d_c['Input difference (%)'] = 100 * validation_d_c['Input difference (ESM unit)'] / validation_d_c['ESM input quantity (ESM unit)']
+    validation_d_c['Input difference (%)'] = 100 * validation_d_c['Input difference (ESM unit)'] / validation_d_c['LCA input quantity (ESM unit)']
 
     validation_d_c = validation_d_c[[
         'Name',
