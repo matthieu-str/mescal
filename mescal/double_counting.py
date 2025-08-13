@@ -604,7 +604,7 @@ def _double_counting_removal(
 
     return flows_set_to_zero, ei_removal, activities_subject_to_double_counting
 
-def validation_double_counting(
+def _validation_double_counting(
         self,
         return_validation_report: bool = True,
         save_validation_report: bool = False,

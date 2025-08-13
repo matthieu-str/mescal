@@ -183,7 +183,7 @@ class ESM:
         _change_location_activity,
         change_location_mapping_file
     )
-    from .double_counting import _double_counting_removal, _background_search, validation_double_counting
+    from .double_counting import _double_counting_removal, _background_search, _validation_double_counting
     from .impact_assessment import (
         compute_impact_scores,
         _get_impact_categories,
@@ -519,7 +519,7 @@ class ESM:
             double_counting_removal_amount.to_csv(f"{self.results_path_file}double_counting_removal.csv", index=False)
             df_flows_set_to_zero.to_csv(f"{self.results_path_file}removed_flows_list.csv", index=False)
             df_activities_subject_to_double_counting.to_csv(f"{self.results_path_file}activities_subject_to_double_counting.csv", index=False)
-            self.validation_double_counting(save_validation_report=True, return_validation_report=False)
+            self._validation_double_counting(save_validation_report=True, return_validation_report=False)
 
         if write_database:
             self.logger.info("Starting to write database")
