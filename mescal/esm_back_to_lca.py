@@ -19,6 +19,7 @@ def create_new_database_with_esm_results(
         harmonize_efficiency_with_esm: bool = True,
         harmonize_capacity_factor_with_esm: bool = False,
         esm_results_db_name: str = None,
+        name_capacity_factor_difference_file: str = 'capacity_factor_differences',
 ) -> Database | None:
     """
     Create a new database with the ESM results
@@ -39,6 +40,7 @@ def create_new_database_with_esm_results(
     :param harmonize_capacity_factor_with_esm: if True, apply the capacity factor correction to harmonize the LCI
         datasets with the ESM assumptions. It should be set to False if the background construction flows are removed.
     :param esm_results_db_name: name of the new database with the ESM results
+    :param name_capacity_factor_difference_file: name of the file to save the capacity factor differences
     :return: database of the ESM results if return_database is True, else None
     """
 
@@ -181,7 +183,11 @@ def create_new_database_with_esm_results(
 
     if harmonize_capacity_factor_with_esm:
         self.logger.info("Correcting capacity factor differences between ESM and LCI datasets...")
-        self._correct_esm_and_lca_capacity_factor_differences(esm_results=esm_results, write_cp_report=True)
+        self._correct_esm_and_lca_capacity_factor_differences(
+            esm_results=esm_results,
+            write_cp_report=True,
+            name_capacity_factor_difference_file=name_capacity_factor_difference_file,
+        )
 
     # Injecting local variables into the instance variables
     self.main_database.db_as_list = db_as_list
@@ -729,6 +735,7 @@ def _create_or_modify_activity_from_esm_results(
 def _correct_esm_and_lca_capacity_factor_differences(
         self,
         esm_results: pd.DataFrame,
+        name_capacity_factor_difference_file: str,
         write_cp_report: bool = True,
 ) -> None:
     """
@@ -738,6 +745,7 @@ def _correct_esm_and_lca_capacity_factor_differences(
 
     :param esm_results: results of the ESM in terms of annual production and installed capacity. It should contain the
         columns 'Name', 'Production', and 'Capacity'.
+    :param name_capacity_factor_difference_file: name of the file to save the capacity factor differences
     :param write_cp_report: if True, save a csv file reporting capacity factors differences in the results folder
     :return: None
     """
@@ -947,7 +955,7 @@ def _correct_esm_and_lca_capacity_factor_differences(
         pd.DataFrame(
             data=capacity_factor_report_list,
             columns=['Name', 'Product', 'Activity', 'Location', 'Database', 'Code', 'Amount LCA', 'Amount ESM'],
-        ).to_csv(f"{self.results_path_file}capacity_factor_differences.csv", index=False)
+        ).to_csv(f"{self.results_path_file}{name_capacity_factor_difference_file}.csv", index=False)
 
 @staticmethod
 def _replace_mobility_end_use_type(row: pd.Series, new_end_use_types: pd.DataFrame) -> str:
