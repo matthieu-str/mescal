@@ -448,13 +448,8 @@ def _adapt_flows_to_efficiency_difference(
     :return: the adapted LCI dataset
     """
     for exc in Dataset(act).get_biosphere_flows():
-        if exc['unit'] in ['square meter-year', 'square meter']:
-            # we exclude land occupation, land transformation elementary flows
-            pass
-        else:
-            exc['amount'] *= efficiency_ratio
-            exc['comment'] = (f'EF multiplied by {round(efficiency_ratio, 4)} (efficiency). '
-                              + exc.get('comment', ''))
+        exc['amount'] *= efficiency_ratio
+        exc['comment'] = (f'EF multiplied by {round(efficiency_ratio, 4)} (efficiency).' + exc.get('comment', ''))
 
     for exc in Dataset(act).get_technosphere_flows():
         if (exc['database'], exc['code']) in techno_flows_to_correct:

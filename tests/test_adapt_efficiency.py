@@ -546,7 +546,7 @@ def test_correct_esm_and_lca_efficiency_differences():
         elif bf['name'] == 'Carbon dioxide, fossil':
             assert round(bf['amount'], 6) == round(0.2 * efficiency_ratio, 6)
         elif bf['name'] == 'Occupation, unspecified':
-            assert bf['amount'] == 10
+            assert round(bf['amount'], 6) == round(10 * efficiency_ratio, 6)
 
     act_type_II = updated_db_dict_code['dummy_db', '00006']
     for bf in Dataset(act_type_II).get_biosphere_flows():
@@ -555,7 +555,7 @@ def test_correct_esm_and_lca_efficiency_differences():
         elif bf['name'] == 'Carbon dioxide, fossil':
             assert round(bf['amount'], 6) == round(0.15 * efficiency_ratio, 6)
         elif bf['name'] == 'Occupation, unspecified':
-            assert bf['amount'] == 15
+            assert round(bf['amount'], 6) == round(15 * efficiency_ratio, 6)
 
     act = updated_db_dict_code['dummy_db', '00001A']
     for bf in Dataset(act).get_biosphere_flows():
@@ -574,4 +574,4 @@ def test_correct_esm_and_lca_efficiency_differences():
         elif bf['name'] == 'Carbon dioxide, fossil':
             assert round(bf['amount'], 6) == round(0.2 * efficiency_ratio, 6)
         elif bf['name'] == 'Occupation, unspecified':
-            assert bf['amount'] == 10
+            assert round(bf['amount'], 6) == round(10 * efficiency_ratio, 6)
