@@ -90,7 +90,7 @@ def generate_mod_file_ampl(
                 f.write('# Construction\n'
                         'subject to lcia_constr_calc {id in INDICATORS, i in TECHNOLOGIES, y in YEARS}:\n'
                         '  LCIA_constr[id,i,y] = sum {y_inst in YEARS: y_inst <= y} lcia_constr[id,i,y_inst] '
-                        '* F_Mult[i,y,y_inst] / lifetime[i,y_inst];\n\n')
+                        '* F_Mult[i,y_inst] / lifetime[i,y_inst];\n\n')
 
             # Equation of LCIAs variables (operation scaling to F_Mult_t)
             if self.operation_metrics_for_all_time_steps:
