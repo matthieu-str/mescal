@@ -103,6 +103,7 @@ tech_name_dict = {
     'URANIUM': 'Uranium',
     'BATTERY': 'Battery',
     'GRID': 'Grid',
+    'N/A': 'N/A',
 }
 
 color_dict = {
@@ -216,7 +217,7 @@ def run_esm(
         dat_files.append(path_model_lca + 'techs_lca.dat')
     elif lca_metrics_background == 'esm_not_harmonized':
         run = objective_function.replace("Total", "").replace("LCIA_", "").replace('[2050]', '').lower()
-        dat_files.append(path_model_lca + f'esm_results/techs_lca_{run.replace("[2060]", "")}_wo_harmonization.dat')
+        dat_files.append(path_model_lca + f'esm_results/techs_lca_{run.replace("[2060]", "")}_wo_h.dat')
     elif lca_metrics_background == 'esm_harmonized':
         run = objective_function.replace("Total", "").replace("LCIA_", "").replace('[2050]', '').lower()
         dat_files.append(path_model_lca + f'esm_results/techs_lca_{run.replace("[2060]", "")}.dat')
@@ -645,6 +646,8 @@ def plot_energy_system_configuration(
         legend = 'Annual production [GWh]'
     else:
         raise ValueError("type must be 'capacity' or 'production'")
+
+    df = df[df[y] != 0]  # remove unused technos from legend
 
     fig = px.bar(
         df,
