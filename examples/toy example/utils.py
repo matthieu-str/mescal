@@ -398,6 +398,8 @@ def plot_technologies_contribution(
         tech_to_show_list,
     )
 
+    esm_results_total = esm_results_total[esm_results_total[cat] != 0]
+
     # Pivot for stacking
     data_pivot = esm_results_total.pivot(index='Run', columns='Name', values=cat).fillna(0)
 
@@ -457,7 +459,7 @@ def plot_technologies_contribution(
         legend = ax.legend([hatch_proxy], ['Covered in ESM'], loc='upper right', frameon=True)
         legend.get_frame().set_edgecolor('white')
     elif show_legend:
-        legend = ax.legend()
+        legend = ax.legend(title='Energy technology or resource', loc='upper center', bbox_to_anchor=(0.5, -0.1), ncol=6)
         legend.get_frame().set_edgecolor('white')
 
     ax.set_xticks(x)
@@ -469,8 +471,6 @@ def plot_technologies_contribution(
     ymax = bottom.max() * 1.05
     ax.set_ylim(0, ymax)
 
-    if show_legend:
-        ax.legend()
     plt.tight_layout()
     if save_fig:
         plt.savefig(f'./figures/soo_tech_contrib_{cat.lower().replace(" ", "_").replace(",", "")}.pdf')
@@ -630,6 +630,7 @@ def plot_energy_system_configuration(
         type: str,
         df_res: pd.DataFrame,
         save_fig: bool = False,
+        show_legend: bool = False,
 ) -> pd.DataFrame:
     df = df_res[~df_res['Name'].isin(['GRID', 'BATTERY'])]
     df["Run"] = df["Run"].apply(lambda x: obj_code_dict[x])
@@ -666,7 +667,9 @@ def plot_energy_system_configuration(
     )
 
     fig.update_layout(legend_traceorder='reversed')
-    fig.update_layout(showlegend=False)
+    fig.update_layout(showlegend=show_legend)
+    if show_legend:
+        fig.update_layout(legend=dict(orientation="h", yanchor="bottom", y=-0.2, xanchor="center", x=0.5))
 
     fig.update_layout(
         margin=dict(l=20, r=20, t=20, b=20),  # left, right, top, bottom
