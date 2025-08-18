@@ -834,3 +834,185 @@ def plot_technologies_contribution_second_iteration(
         return df['Harmonization effect']
     else:
         return df_res_sec_iter
+
+def plot_moo_config(
+        results_pareto,
+        normalized_limit_list: list[float],
+        obj1: str,
+        y_axis: str = 'F_Mult',
+        plot_type: str = 'line_plot',
+        save_fig: bool = False
+):
+
+    df_y_pareto = results_pareto.variables[y_axis].reset_index()
+    plt.figure(figsize=(4.5, 3.5))
+
+    if obj1 == 'TotalLCIA_m_CCS':
+        x = [i * 1e3 * max_ccs / N_cap for i in normalized_limit_list]
+        plt.xlabel(f'Upper limit for {obj_name_dict[obj1].lower()} [t CO$_2$-eq/cap]')
+
+    elif obj1 == 'TotalLCIA_TTHH':
+        x = [i * 1e6 * max_tthh / N_cap for i in normalized_limit_list]
+        plt.xlabel(f'Upper limit for {obj_name_dict[obj1].lower()} [DALY/cap]')
+
+    elif obj1 == 'TotalLCIA_TTEQ':
+        x = [i * 1e6 * max_tteq / N_cap for i in normalized_limit_list]
+        plt.xlabel(f'Upper limit for {obj_name_dict[obj1].lower()} [PDF.m$^2$.yr/cap]')
+
+    else:
+        raise ValueError(f"Unknown objective: {obj1}")
+
+    y_1 = list(df_y_pareto[(df_y_pareto['index0'] == 'CCGT') & (df_y_pareto['index1'] == 2050)][y_axis])
+    y_2 = list(df_y_pareto[(df_y_pareto['index0'] == 'CCGT_CC') & (df_y_pareto['index1'] == 2050)][y_axis])
+    y_3 = list(df_y_pareto[(df_y_pareto['index0'] == 'PV') & (df_y_pareto['index1'] == 2050)][y_axis])
+    y_4 = list(df_y_pareto[(df_y_pareto['index0'] == 'WIND_ONSHORE') & (df_y_pareto['index1'] == 2050)][y_axis])
+
+    if y_axis == 'Annual_Prod':
+        # from GWh to MWh / cap
+        y_1 = [i * 1e3 / N_cap for i in y_1]
+        y_2 = [i * 1e3 / N_cap for i in y_2]
+        y_3 = [i * 1e3 / N_cap for i in y_3]
+        y_4 = [i * 1e3 / N_cap for i in y_4]
+
+        plt.ylabel('Annual production [MWh/cap]')
+
+    elif y_axis == 'F_Mult':
+        # from GW to kW / cap
+        y_1 = [i * 1e6 / N_cap for i in y_1]
+        y_2 = [i * 1e6 / N_cap for i in y_2]
+        y_3 = [i * 1e6 / N_cap for i in y_3]
+        y_4 = [i * 1e6 / N_cap for i in y_4]
+
+        plt.ylabel('Installed capacity [kW/cap]')
+
+    if plot_type == 'line_plot':
+
+        plt.plot(x, y_1, label=tech_name_dict['CCGT'], c=color_dict[tech_name_dict['CCGT']])
+        plt.plot(x, y_2, label=tech_name_dict['CCGT_CC'], c=color_dict[tech_name_dict['CCGT']], ls='-.')
+        plt.plot(x, y_3, label=tech_name_dict['PV'], c=color_dict[tech_name_dict['PV']])
+        plt.plot(x, y_4, label=tech_name_dict['WIND_ONSHORE'], c=color_dict[tech_name_dict['WIND_ONSHORE']], ls='--')
+
+    elif plot_type == 'stack_plot':
+
+        plt.stackplot(
+            x,
+            [y_1, y_2, y_3, y_4],
+            labels=[tech_name_dict['CCGT'], tech_name_dict['CCGT_CC'], tech_name_dict['PV'], tech_name_dict['WIND_ONSHORE']],
+            colors=[color_dict[tech_name_dict['CCGT']], color_dict[tech_name_dict['CCGT_CC']], color_dict[tech_name_dict['PV']], color_dict[tech_name_dict['WIND_ONSHORE']]],
+        )
+
+    plt.legend()
+    plt.tight_layout()
+
+    if save_fig:
+        plt.savefig(f'./figures/pareto_front_capacities_{obj1}.pdf')
+
+    plt.show()
+
+def plot_moo_indicators(
+        results_pareto,
+        normalized_limit_list: list[float],
+        obj1: str,
+        save_fig: bool = False
+):
+
+    fig, ax1 = plt.subplots(figsize=(4.5, 4))
+    ax2 = ax1.twinx()
+    ax1.set_zorder(1)
+    ax2.set_zorder(0)
+    ax1.patch.set_visible(False)
+
+    color_cost_axis = 'red'
+
+    ax1.tick_params(axis="y", colors=color_cost_axis)
+    ax1.spines["left"].set_color(color_cost_axis)
+
+    if obj1 == 'TotalLCIA_TTHH':
+        max_x = max_tthh
+        max_y = max_tteq
+        y_metric = 'TTEQ'
+        ax1.set_xlabel('Upper limit for human health damage [DALY/(cap.yr)]')
+        ax2.set_ylabel('Ecosystem quality damage [PDF.m$^2$.yr/(cap.yr)]')
+
+    elif obj1 == 'TotalLCIA_TTEQ':
+        max_x = max_tteq
+        max_y = max_tthh
+        y_metric = 'TTHH'
+        ax1.set_xlabel('Upper limit for ecosystem quality damage [PDF.m$^2$.yr/(cap.yr)]')
+        ax2.set_ylabel('Human health damage [DALY/(cap.yr)]')
+
+    else:
+        raise ValueError(f"Unknown objective: {obj1}")
+
+    ax1.set_ylabel('Total cost [credits/(cap.yr)]', c=color_cost_axis)
+    x = [i * 1e6 * max_x / N_cap for i in normalized_limit_list]
+    y_1 = [i * 1e6 / N_cap for i in list(results_pareto.variables['TotalCost'].loc[2050]['TotalCost'])]
+    ax1.set_ylim(0, 1.05*max(y_1))
+
+    tech_impact = {}
+    for tech in ['CCGT', 'CCGT_CC', 'PV', 'WIND_ONSHORE', 'BATTERY']:
+        tech_impact[tech] = {}
+        tech_impact[tech]['Construction'] = [(1e6 * max_y / N_cap) * i for i in list(results_pareto.variables['LCIA_constr'].loc[y_metric].loc[tech]['LCIA_constr'])]
+        tech_impact[tech]['Operation'] = [(1e6 * max_y / N_cap) * i for i in list(results_pareto.variables['LCIA_op'].loc[y_metric].loc[tech]['LCIA_op'])]
+        tech_impact[tech]['Total'] = [i + j for i, j in zip(tech_impact[tech]['Construction'], tech_impact[tech]['Operation'])]
+
+    for res in ['NG']:
+        tech_impact[res] = {}
+        tech_impact[res]['Total'] = [(1e6 * max_y / N_cap) * i for i in list(results_pareto.variables['LCIA_res'].loc[y_metric].loc[res]['LCIA_res'])]
+
+    ax1.plot(x, y_1, label='Total cost', c='red')
+    ax2.stackplot(
+        x,
+        [tech_impact[tech]['Total'] for tech in ['BATTERY', 'CCGT', 'CCGT_CC', 'NG', 'PV', 'WIND_ONSHORE']],
+        labels=['BATTERY', 'CCGT', 'CCGT_CC', 'NG', 'PV', 'WIND_ONSHORE'],
+        colors=[color_dict[tech_name_dict[tech]] for tech in ['BATTERY', 'CCGT', 'CCGT_CC', 'NG', 'PV', 'WIND_ONSHORE']],
+    )
+
+    plt.tight_layout()
+
+    if save_fig:
+        plt.savefig(f'./figures/pareto_front_indicators_{obj1}.pdf')
+
+    plt.show()
+
+def plot_pareto_front(
+        results_pareto,
+        main_variables_results: pd.DataFrame,
+        normalized_limit_list: list[float],
+        obj1: str,
+        obj2: str,
+        colors_var: str,
+        add_soo_point: bool = False,
+):
+
+    if obj1 == 'TotalLCIA_m_CCS':
+        x = [i * 1e3 * max_ccs / N_cap for i in normalized_limit_list]
+    elif obj1 == 'TotalLCIA_TTHH':
+        x = [i * 1e6 * max_tthh / N_cap for i in normalized_limit_list]
+    elif obj1 == 'TotalLCIA_TTEQ':
+        x = [i * 1e6 * max_tteq / N_cap for i in normalized_limit_list]
+    else:
+        raise ValueError(f"Unknown objective: {obj1}")
+
+    y = list(results_pareto.variables[obj2].loc[2050][obj2])
+    colors = list(results_pareto.variables[colors_var].loc[2050][colors_var])
+
+    # adding data point from colors_var SOO
+    if add_soo_point:
+        x = x + [main_variables_results[main_variables_results['Objective'] == colors_var][obj1].values[0]]
+        y = y + [main_variables_results[main_variables_results['Objective'] == colors_var][obj2].values[0]]
+        colors = colors + [main_variables_results[main_variables_results['Objective'] == colors_var][colors_var].values[0]]
+
+    # Create the scatter plot
+    scatter = plt.scatter(x, y, c=colors, cmap='jet')
+
+    # Add a colorbar
+    cbar = plt.colorbar(scatter)
+    cbar.set_label(colors_var)
+
+    # Add labels and title
+    plt.xlabel(obj1)
+    plt.ylabel(obj2)
+
+    # Show the plot
+    plt.show()
