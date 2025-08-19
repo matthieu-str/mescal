@@ -35,6 +35,13 @@ max_ccs = max_per_cat[max_per_cat['Abbrev'] == 'm_CCS']['max_unit'].values[0]
 max_tthh = max_per_cat[max_per_cat['Abbrev'] == 'TTHH']['max_unit'].values[0]
 max_tteq = max_per_cat[max_per_cat['Abbrev'] == 'TTEQ']['max_unit'].values[0]
 
+# Characterization factors from IMPACT World+ (version 2.1)
+cf_dict = {
+    'Climate change, short term': 1.0,
+    'Total human health': 7.197288788407747e-06,
+    'Total ecosystem quality': 0.7025434445756051,
+}
+
 max_ind_dict = {
     'TotalCost': 1,
     'TotalLCIA_m_CCS': max_ccs,
@@ -379,6 +386,7 @@ def aggregate_phases_results(
 
 
 plt.rcParams['hatch.linewidth'] = 0.5  # Set hatch line width to 0.5
+plt.rcParams['font.family'] = 'arial'
 
 def plot_technologies_contribution(
         cat: str,
@@ -403,11 +411,15 @@ def plot_technologies_contribution(
     # Pivot for stacking
     data_pivot = esm_results_total.pivot(index='Run', columns='Name', values=cat).fillna(0)
 
+    tech_order = ['CCGT', 'CCGT with CCS', 'Natural gas', 'Photovoltaic', 'Onshore wind', 'Battery']
+    data_pivot = data_pivot[tech_order]
+
     if cat != 'Total cost':
         direct_pivot = esm_results_total.pivot(index='Run', columns='Name', values=f'{cat} (direct)').fillna(0)
+        direct_pivot = direct_pivot[tech_order]
 
     # Desired order
-    run_order = ['TC', 'TTEQ', 'TTHH', 'CCST']
+    run_order = ['CCST', 'TTHH', 'TTEQ', 'TC']
 
     # Reorder the index
     data_pivot = data_pivot.reindex(run_order)
@@ -415,9 +427,9 @@ def plot_technologies_contribution(
     if cat != 'Total cost':
         direct_pivot = direct_pivot.reindex(run_order)
 
-    fig, ax = plt.subplots(figsize=(4.5, 4))
-    bottom = np.zeros(len(data_pivot))
-    x = np.arange(len(data_pivot.index))
+    fig, ax = plt.subplots(figsize=(5, 2.5))
+    left = np.zeros(len(data_pivot))
+    y = np.arange(len(data_pivot.index))
 
     for i, tech in enumerate(data_pivot.columns):
         values = data_pivot[tech].values
@@ -425,51 +437,51 @@ def plot_technologies_contribution(
             direct_values = direct_pivot[tech].values
             remainder = values - direct_values
             # Plot direct (hatch)
-            bars_direct = ax.bar(
-                x, direct_values, bottom=bottom,
+            bars_direct = ax.barh(
+                y, direct_values, left=left,
                 color=color_dict.get(tech, '#000000'),
                 label=None,
                 edgecolor='black',
                 linewidth=0.5,
-                hatch='//',
+                hatch='\\\\',
             )
             # Plot remainder (no hatch)
-            bars_remainder = ax.bar(
-                x, remainder, bottom=bottom + direct_values,
+            bars_remainder = ax.barh(
+                y, remainder, left=left + direct_values,
                 color=color_dict.get(tech, '#000000'),
                 label=tech,
                 edgecolor='black',
                 linewidth=0.5,
             )
-            bottom += values
+            left += values
         else:
-            bars = ax.bar(
-                x, values, bottom=bottom,
+            bars = ax.barh(
+                y, values, left=left,
                 color=color_dict.get(tech, '#000000'),
                 label=tech,
                 edgecolor='black',
                 linewidth=0.5,
             )
-            bottom += values
+            left += values
 
     if cat != 'Total cost':
         hatch_proxy = mpatches.Patch(
-            facecolor='white', edgecolor='black', hatch='//', linewidth=0.5, label='Covered in ESM'
+            facecolor='white', edgecolor='black', hatch='\\\\', linewidth=0.5, label='Covered in ESM'
         )
-        legend = ax.legend([hatch_proxy], ['Covered in ESM'], loc='upper right', frameon=True)
+        legend = ax.legend([hatch_proxy], ['Covered in ESM'], loc='center right', frameon=True)
         legend.get_frame().set_edgecolor('white')
     elif show_legend:
         legend = ax.legend(title='Energy technology or resource', loc='upper center', bbox_to_anchor=(0.5, -0.1), ncol=6)
         legend.get_frame().set_edgecolor('white')
 
-    ax.set_xticks(x)
-    ax.set_xticklabels(data_pivot.index)
-    ax.set_xlabel('Objective function')
-    ax.set_ylabel(f"{full_name_ind[cat]} [{unit_ind_mpl_dict[cat]}/(cap.yr)]")
+    ax.set_yticks(y)
+    ax.set_yticklabels(data_pivot.index)
+    ax.set_ylabel('Objective function')
+    ax.set_xlabel(f"{full_name_ind[cat]} [{unit_ind_mpl_dict[cat]}/(cap.yr)]")
 
-    # Increase y-axis range with margin (e.g., 10% above max)
-    ymax = bottom.max() * 1.05
-    ax.set_ylim(0, ymax)
+    # Increase x-axis range with margin (e.g., 5% above max)
+    xmax = left.max() * 1.05
+    ax.set_xlim(0, xmax)
 
     plt.tight_layout()
     if save_fig:
@@ -479,11 +491,11 @@ def plot_technologies_contribution(
     if cat != 'Total cost':
         df = pd.merge(
             data_pivot.sum(axis=1).rename('Life-cycle'),
-            direct_pivot.sum(axis=1).rename('Direct'),
+            direct_pivot.sum(axis=1).rename('Direct CO2'),
             left_index=True,
             right_index=True,
         )
-        df['Covered in ESM'] = df['Direct'] / df['Life-cycle']
+        df['Covered in ESM'] = df['Direct CO2'] / df['Life-cycle']
 
         return df
 
@@ -640,11 +652,13 @@ def plot_energy_system_configuration(
     if type == 'capacity':
         y = 'F_Mult'
         file_name = 'soo_installed_capacities'
-        legend = 'Installed capacity [GW]'
+        legend = 'Installed capacity [kW/(cap.yr)]'
+        df[y] *= 1e6 / N_cap
     elif type == 'production':
         y = 'Annual_Prod'
         file_name = 'soo_annual_production'
-        legend = 'Annual production [GWh]'
+        legend = 'Annual production [MWh/(cap.yr)]'
+        df[y] *= 1e3 / N_cap
     else:
         raise ValueError("type must be 'capacity' or 'production'")
 
@@ -837,27 +851,26 @@ def plot_technologies_contribution_second_iteration(
 
 def plot_moo_config(
         results_pareto,
-        normalized_limit_list: list[float],
         obj1: str,
         y_axis: str = 'F_Mult',
         plot_type: str = 'line_plot',
         save_fig: bool = False
 ):
-
+    normalized_limit_list = list(results_pareto.parameters['limit_lcia'].loc[obj1.replace("TotalLCIA_", "")]['limit_lcia'])
     df_y_pareto = results_pareto.variables[y_axis].reset_index()
     plt.figure(figsize=(4.5, 3.5))
 
     if obj1 == 'TotalLCIA_m_CCS':
         x = [i * 1e3 * max_ccs / N_cap for i in normalized_limit_list]
-        plt.xlabel(f'Upper limit for {obj_name_dict[obj1].lower()} [t CO$_2$-eq/cap]')
+        plt.xlabel(f'Upper limit for {obj_name_dict[obj1].lower()} [t CO$_2$-eq/(cap.yr)]')
 
     elif obj1 == 'TotalLCIA_TTHH':
         x = [i * 1e6 * max_tthh / N_cap for i in normalized_limit_list]
-        plt.xlabel(f'Upper limit for {obj_name_dict[obj1].lower()} [DALY/cap]')
+        plt.xlabel(f'Upper limit for {obj_name_dict[obj1].replace("Total ", "").lower()} damage [DALY/(cap.yr)]')
 
     elif obj1 == 'TotalLCIA_TTEQ':
         x = [i * 1e6 * max_tteq / N_cap for i in normalized_limit_list]
-        plt.xlabel(f'Upper limit for {obj_name_dict[obj1].lower()} [PDF.m$^2$.yr/cap]')
+        plt.xlabel(f'Upper limit for {obj_name_dict[obj1].replace("Total ", "").lower()} damage [PDF.m$^2$.yr/(cap.yr)]')
 
     else:
         raise ValueError(f"Unknown objective: {obj1}")
@@ -874,7 +887,7 @@ def plot_moo_config(
         y_3 = [i * 1e3 / N_cap for i in y_3]
         y_4 = [i * 1e3 / N_cap for i in y_4]
 
-        plt.ylabel('Annual production [MWh/cap]')
+        plt.ylabel('Annual production [MWh/(cap.yr)]')
 
     elif y_axis == 'F_Mult':
         # from GW to kW / cap
@@ -883,7 +896,7 @@ def plot_moo_config(
         y_3 = [i * 1e6 / N_cap for i in y_3]
         y_4 = [i * 1e6 / N_cap for i in y_4]
 
-        plt.ylabel('Installed capacity [kW/cap]')
+        plt.ylabel('Installed capacity [kW/(cap.yr)]')
 
     if plot_type == 'line_plot':
 
@@ -901,22 +914,34 @@ def plot_moo_config(
             colors=[color_dict[tech_name_dict['CCGT']], color_dict[tech_name_dict['CCGT_CC']], color_dict[tech_name_dict['PV']], color_dict[tech_name_dict['WIND_ONSHORE']]],
         )
 
-    plt.legend()
+    if plot_type == 'line_plot':
+        plt.legend()
     plt.tight_layout()
 
     if save_fig:
-        plt.savefig(f'./figures/pareto_front_capacities_{obj1}.pdf')
+        if y_axis == 'F_Mult':
+            plt.savefig(f'./figures/pareto_front_capacities_{obj1.replace("TotalLCIA_", "").lower()}.pdf')
+        elif y_axis == 'Annual_Prod':
+            plt.savefig(f'./figures/pareto_front_production_{obj1.replace("TotalLCIA_", "").lower()}.pdf')
 
     plt.show()
 
 def plot_moo_indicators(
         results_pareto,
-        normalized_limit_list: list[float],
         obj1: str,
+        direct_co2_emissions_dict: dict,
         save_fig: bool = False
 ):
+    normalized_limit_list = list(results_pareto.parameters['limit_lcia'].loc[obj1.replace("TotalLCIA_", "")]['limit_lcia'])
 
-    fig, ax1 = plt.subplots(figsize=(4.5, 4))
+    pareto_direct = results_pareto.variables['Annual_Prod'].reset_index().rename(columns={'index0': 'Name'})
+    pareto_direct['Direct CO2 emissions'] = pareto_direct['Annual_Prod'] * pareto_direct.Name.apply(lambda x: direct_co2_emissions_dict[x])
+
+    for imp_cat in ['TotalLCIA_TTHH', 'TotalLCIA_TTEQ']:
+        # Adding direct CO2 emissions columns to the operation impacts dataframe
+        pareto_direct[f'{imp_cat} (direct)'] = pareto_direct['Direct CO2 emissions'] * cf_dict[obj_name_dict[imp_cat]]
+    
+    fig, ax1 = plt.subplots(figsize=(4.5, 3.5))
     ax2 = ax1.twinx()
     ax1.set_zorder(1)
     ax2.set_zorder(0)
@@ -955,35 +980,85 @@ def plot_moo_indicators(
         tech_impact[tech]['Construction'] = [(1e6 * max_y / N_cap) * i for i in list(results_pareto.variables['LCIA_constr'].loc[y_metric].loc[tech]['LCIA_constr'])]
         tech_impact[tech]['Operation'] = [(1e6 * max_y / N_cap) * i for i in list(results_pareto.variables['LCIA_op'].loc[y_metric].loc[tech]['LCIA_op'])]
         tech_impact[tech]['Total'] = [i + j for i, j in zip(tech_impact[tech]['Construction'], tech_impact[tech]['Operation'])]
+        tech_impact[tech]['Direct CO2'] = [(1e6 / N_cap) * i for i in list(pareto_direct[pareto_direct.Name == tech][f'TotalLCIA_{y_metric} (direct)'])]
 
     for res in ['NG']:
         tech_impact[res] = {}
-        tech_impact[res]['Total'] = [(1e6 * max_y / N_cap) * i for i in list(results_pareto.variables['LCIA_res'].loc[y_metric].loc[res]['LCIA_res'])]
+        tech_impact[res]['Operation'] = [(1e6 * max_y / N_cap) * i for i in list(results_pareto.variables['LCIA_res'].loc[y_metric].loc[res]['LCIA_res'])]
+        tech_impact[res]['Total'] = tech_impact[res]['Operation']
+        tech_impact[res]['Direct CO2'] = [0] * len(tech_impact[res]['Total'])
 
-    ax1.plot(x, y_1, label='Total cost', c='red')
-    ax2.stackplot(
-        x,
-        [tech_impact[tech]['Total'] for tech in ['BATTERY', 'CCGT', 'CCGT_CC', 'NG', 'PV', 'WIND_ONSHORE']],
-        labels=['BATTERY', 'CCGT', 'CCGT_CC', 'NG', 'PV', 'WIND_ONSHORE'],
-        colors=[color_dict[tech_name_dict[tech]] for tech in ['BATTERY', 'CCGT', 'CCGT_CC', 'NG', 'PV', 'WIND_ONSHORE']],
+    ax1.plot(x, y_1, label='Total cost', c=color_cost_axis, linewidth=2)
+
+    techs = ['CCGT', 'CCGT_CC', 'NG', 'PV', 'WIND_ONSHORE', 'BATTERY']
+    colors = [color_dict[tech_name_dict[tech]] for tech in techs]
+
+    cumulated_total = np.zeros(len(x))
+    for i, tech in enumerate(techs):
+        direct = np.array(tech_impact[tech]['Direct CO2'])
+        total = np.array(tech_impact[tech]['Total'])
+
+        # Set linewidth to 0 if direct is all zeros
+        lw = 0 if np.all(direct == 0) else 0.5
+
+        # Plot direct (hatched)
+        ax2.fill_between(
+            x, cumulated_total, cumulated_total + direct,
+            color=colors[i], edgecolor='black', linewidth=0, hatch='\\\\', label=None
+        )
+        # Plot remainder (plain)
+        ax2.fill_between(
+            x, cumulated_total + direct, cumulated_total + total,
+            color=colors[i], edgecolor='black', linewidth=lw, label=tech_name_dict[tech]
+        )
+        cumulated_total += total
+
+    ax2.set_ylim(0, 1.1 * max(cumulated_total))
+
+    # Legend for hatching
+    hatch_proxy = mpatches.Patch(
+        facecolor='white', edgecolor='black', hatch='\\\\', linewidth=0.5, label='Covered in ESM'
     )
-
+    ax2.legend([hatch_proxy], ['Covered in ESM'], loc='upper center').get_frame().set_edgecolor('white')
+    
     plt.tight_layout()
 
     if save_fig:
-        plt.savefig(f'./figures/pareto_front_indicators_{obj1}.pdf')
+        plt.savefig(f"./figures/pareto_front_indicators_{obj1.replace('TotalLCIA_', '').replace(' ', '_').lower()}.pdf")
 
     plt.show()
+
+    records = []
+    for tech, v1 in tech_impact.items():
+        for phase, v2 in v1.items():
+            for id, value in enumerate(v2):
+                records.append({
+                    'Run': id+1,
+                    f'Upper limit on {obj_name_dict[obj1].lower()} [{unit_ind_txt_dict[obj_name_dict[obj1]]}/(cap.yr)]': x[id],
+                    'Technology': tech,
+                    'Phase': phase,
+                    'Impact': value,
+                })
+    df = pd.DataFrame(records)
+    df.Technology = df.Technology.apply(lambda x: tech_name_dict[x] if x in tech_name_dict else x)
+    df = df[df.Impact != 0].sort_values('Run').reset_index(drop=True)
+    df = df.pivot_table('Impact', ['Run', f'Upper limit on {obj_name_dict[obj1].lower()} [{unit_ind_txt_dict[obj_name_dict[obj1]]}/(cap.yr)]', 'Technology'], 'Phase')
+    df.fillna(0, inplace=True)
+    if y_metric == 'TTEQ':
+        df['Unit'] = 'PDF.m2.yr/(cap.yr)'
+    elif y_metric == 'TTHH':
+        df['Unit'] = 'DALY/(cap.yr)'
+    return df.reset_index()
 
 def plot_pareto_front(
         results_pareto,
         main_variables_results: pd.DataFrame,
-        normalized_limit_list: list[float],
         obj1: str,
         obj2: str,
         colors_var: str,
         add_soo_point: bool = False,
 ):
+    normalized_limit_list = list(results_pareto.parameters['limit_lcia'].loc[obj1.replace("TotalLCIA_", "")]['limit_lcia'])
 
     if obj1 == 'TotalLCIA_m_CCS':
         x = [i * 1e3 * max_ccs / N_cap for i in normalized_limit_list]
