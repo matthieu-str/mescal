@@ -9,6 +9,7 @@ import plotly.io as pio
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 import numpy as np
+from matplotlib.lines import Line2D
 
 pio.templates["custom"] = pio.templates["plotly_white"]
 pio.templates["custom"].layout.font.family = "Arial"
@@ -1015,12 +1016,23 @@ def plot_moo_indicators(
 
     ax2.set_ylim(0, 1.1 * max(cumulated_total))
 
-    # Legend for hatching
+    # Adding vertical lines for SOO
+    ax2.axvline(x=x[0], ymin=0, ymax=.95, color='black', linestyle=':', linewidth=1, alpha=0.75)
+    ax2.axvline(x=x[-1], ymin=0, ymax=.95, color='black', linestyle='--', linewidth=1, alpha=0.75)
+
+    line1 = Line2D([0], [0], color='black', linestyle=':', linewidth=1, alpha=0.75, label=f'{obj1.replace("TotalLCIA_", "")} SOO')
+    line2 = Line2D([0], [0], color='black', linestyle='--', linewidth=1, alpha=0.75, label='TC SOO')
+
     hatch_proxy = mpatches.Patch(
         facecolor='white', edgecolor='black', hatch='\\\\', linewidth=0.5, label='Covered in ESM'
     )
-    ax2.legend([hatch_proxy], ['Covered in ESM'], loc='upper center').get_frame().set_edgecolor('white')
-    
+    ax2.legend(
+        [hatch_proxy, line1, line2],
+        ['Covered in ESM', f'{obj1.replace("TotalLCIA_", "")} SOO', 'TC SOO'],
+        loc='upper center',
+        framealpha=0,
+    ).get_frame().set_edgecolor('white')
+
     plt.tight_layout()
 
     if save_fig:
