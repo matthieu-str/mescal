@@ -174,6 +174,10 @@ class ESM:
         return list(self.tech_specifics[self.tech_specifics.Specifics == 'No background search'].Name)
 
     @property
+    def no_double_counting_removal_list(self):
+        return list(self.tech_specifics[self.tech_specifics.Specifics == 'No double-counting removal'].Name)
+
+    @property
     def import_export_list(self):
         return list(self.tech_specifics[self.tech_specifics.Specifics == 'Import/Export'].Name)
 

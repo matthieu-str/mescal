@@ -291,6 +291,7 @@ def _double_counting_removal(
     no_construction_list = self.no_construction_list
     mapping_constr = self.mapping_constr
     no_background_search_list = self.no_background_search_list
+    no_double_counting_removal_list = self.no_double_counting_removal_list
     regionalize_foregrounds = self.regionalize_foregrounds
     background_search_act = self.background_search_act
 
@@ -392,7 +393,9 @@ def _double_counting_removal(
         else:
             new_act_op = act_op
 
-        if tech in no_background_search_list:
+        if tech in no_double_counting_removal_list:
+            perform_d_c = []
+        elif tech in no_background_search_list:
             if db_type != 'esm results wo dcr':
                 new_act_op['comment'] = f"Subject to double-counting removal. " + new_act_op.get('comment', '')
                 perform_d_c = [[new_act_op['name'], new_act_op['code'], 1, 0, ESM_inputs]]
