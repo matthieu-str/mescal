@@ -77,11 +77,10 @@ def compute_impact_scores(
             if contribution_analysis_limit < 0 or isinstance(contribution_analysis_limit, int) is False:
                 raise ValueError('The contribution_analysis_limit must be a positive integer if limit_type is "number"')
 
-    if self.esm_db is not None:
-        esm_db = self.esm_db
-    else:
-        self.esm_db = Database(db_names=self.esm_db_name)
-        esm_db = self.esm_db
+    # The ESM database is reloaded anyway in case some modifications were made via brightway
+    # (e.g., using tech_specifics), thus possibly not accounted in the existing wurst database
+    self.esm_db = Database(db_names=self.esm_db_name)
+    esm_db = self.esm_db
     esm_db_dict_code = esm_db.db_as_dict_code
 
     if 'New_code' not in self.mapping.columns:
