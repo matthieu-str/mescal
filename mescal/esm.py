@@ -35,7 +35,7 @@ class ESM:
             technology_compositions: pd.DataFrame = None,
             results_path_file: str = 'results/',
             tech_specifics: pd.DataFrame = None,
-            regionalize_foregrounds: bool = False,
+            regionalize_foregrounds: str or list[str] = None,
             accepted_locations: list[str] = None,
             esm_location: str = 'GLO',
             locations_ranking: list[str] = None,
@@ -64,7 +64,9 @@ class ESM:
             is an aggregation of the main database and complementary databases
         :param biosphere_db_name: name of the (not spatialized) biosphere database. Default is 'biosphere3'.
         :param results_path_file: path to your result folder
-        :param regionalize_foregrounds: if True, regionalize the ESM database foreground
+        :param regionalize_foregrounds: list of types of LCI datasets that will be subject to the foreground
+            regionalization process. Can be 'Operation', 'Construction', 'Resource', or a list of these. Set to 'all'
+            to regionalize all types of datasets. Default is 'all'.
         :param accepted_locations: list of ecoinvent locations to keep without modification in case of regionalization
         :param esm_location: ecoinvent location corresponding to the geographical scope of the ESM
         :param locations_ranking: ranking of the preferred ecoinvent locations in case of regionalization
@@ -108,7 +110,9 @@ class ESM:
         self.biosphere_db_name = biosphere_db_name if biosphere_db_name is not None else 'biosphere3'
         self.esm_db_name = esm_db_name
         self.results_path_file = results_path_file
-        self.regionalize_foregrounds = regionalize_foregrounds
+        self.regionalize_foregrounds = [] if regionalize_foregrounds is None \
+            else (['Operation', 'Construction', 'Resource'] if regionalize_foregrounds == 'all'
+                  else (regionalize_foregrounds if isinstance(regionalize_foregrounds, list) else [regionalize_foregrounds]))
         self.accepted_locations = accepted_locations if accepted_locations is not None else [esm_location]
         self.esm_location = esm_location
         self.locations_ranking = locations_ranking
@@ -733,7 +737,7 @@ class ESM:
         prod_flow['code'] = new_code
         prod_flow['database'] = self.esm_db_name
 
-        if self.regionalize_foregrounds:
+        if act_type in self.regionalize_foregrounds:
             new_act = self._regionalize_activity_foreground(act=new_act)
 
         return new_act
@@ -910,7 +914,7 @@ class ESM:
         :param esm_db_as_dict_name: dictionary of the ESM database with (name, product, location, database) as key
         :return: code of the activity in the ESM database
         """
-        if self.regionalize_foregrounds:
+        if row['Type'] in self.regionalize_foregrounds:
             try:
                 return esm_db_as_dict_name[(
                     f"{row['Name']}, {row['Type']}",
@@ -942,7 +946,7 @@ class ESM:
         :param esm_db_as_dict_name: dictionary of the ESM database with (name, product, location, database) as key
         :return: code of the activity in the ESM database
         """
-        if self.regionalize_foregrounds:
+        if row['Type'] in self.regionalize_foregrounds:
             try:
                 if row['Year'] == self.year:
                     return esm_db_as_dict_name[(

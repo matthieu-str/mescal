@@ -443,7 +443,7 @@ def _double_counting_removal(
             if new_act_op_d_c is None:
                 raise ValueError(f"Activity not found: {new_act_op_d_c_code}")
 
-            if regionalize_foregrounds:
+            if ds_type in regionalize_foregrounds:
                 db_as_list.remove(new_act_op_d_c)
                 new_act_op_d_c = self._regionalize_activity_foreground(act=new_act_op_d_c)
                 db_as_list.append(new_act_op_d_c)

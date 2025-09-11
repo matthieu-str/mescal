@@ -639,7 +639,7 @@ def _create_or_modify_activity_from_esm_results(
                     prod_flow['code'] = activity_new_code
                     prod_flow['database'] = esm_results_db_name
 
-                    if self.regionalize_foregrounds:
+                    if 'Operation' in self.regionalize_foregrounds:
                         # Regionalize the foreground of the new activity
                         new_act = self._regionalize_activity_foreground(act=new_act)
 
