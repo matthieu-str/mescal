@@ -562,7 +562,7 @@ def _aggregate_direct_emissions_activities(
                     exc['output'] = (esm_direct_emissions_db_name, exc['output'][1])
 
         # In the case of forced background check, we keep only the main activity, and remove the other ones
-        elif tech in self.activities_background_search:
+        elif tech in self.activities_background_search['Operation']:
             for i in range(len(activities)):
                 if activities['Activity code'].iloc[i] == old_act['code'] and activities['Amount'].iloc[i] == 1.0:
                     act = [j for j in direct_emissions_db if j['code'] == activities['Activity code'].iloc[i]][0]

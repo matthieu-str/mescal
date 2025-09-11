@@ -38,6 +38,10 @@ def _correct_esm_and_lca_efficiency_differences(
     removed_flows = self.df_flows_set_to_zero
     double_counting_removal_amount = self.double_counting_removal_amount
 
+    # Keep only the operational flows (others are not relevant for efficiency correction)
+    removed_flows = removed_flows[removed_flows['Type'] == 'Operation']
+    double_counting_removal_amount = double_counting_removal_amount[double_counting_removal_amount['Type'] == 'Operation']
+
     if db_type == 'validation':
         efficiency = double_counting_removal_amount[['Name', 'Flow', 'Unit', 'Amount']].copy(deep=True)
         efficiency.drop(efficiency[efficiency['Flow'].isin(['CONSTRUCTION', 'OWN_CONSTRUCTION', 'TRANSPORT_FUEL', 'PROCESS_FUEL'])].index, inplace=True)

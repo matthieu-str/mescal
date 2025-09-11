@@ -266,18 +266,20 @@ def _background_search(
 
 def _double_counting_removal(
         self,
-        df_op: pd.DataFrame,
+        df: pd.DataFrame,
         N: int,
         ESM_inputs: list[str] or str = 'all',
         db_type: str = 'esm',
+        ds_type: str = 'Operation',
 ) -> tuple[list[list], dict, list[list]]:
     """
     Remove double counting in the ESM database and write it in the Brightway project
 
-    :param df_op: operation mapping file
+    :param df: mapping file with input flows of each technology or resource
     :param N: number of columns of the original mapping file
     :param ESM_inputs: list of the ESM flows to perform double counting removal on
     :param db_type: type of database to use, either 'esm', 'esm results' or 'esm results wo dcr'
+    :param ds_type: type of LCI dataset to consider, can be 'Operation', 'Construction' or 'Resource'
     :return: list of removed flows, dictionary of removed quantities, list of activities subject to double counting
     """
     # Store frequently accessed instance variables in local variables inside a method.
@@ -303,9 +305,9 @@ def _double_counting_removal(
 
     # Initializing the dict of removed quantities
     ei_removal = {}
-    for tech in list(df_op.Name):
+    for tech in list(df.Name):
         ei_removal[tech] = {}
-        for res in list(df_op.iloc[:, N:].columns):
+        for res in list(df.iloc[:, N:].columns):
             ei_removal[tech][res] = {}
             ei_removal[tech][res]['amount'] = {}
             ei_removal[tech][res]['count'] = {}
@@ -334,8 +336,8 @@ def _double_counting_removal(
         for x in v:
             mapping_CPC_to_esm_flows_dict.setdefault(x, []).append(k)
 
-    for i in tqdm(range(len(df_op))):
-        tech = df_op['Name'].iloc[i]  # name of ES technology
+    for i in tqdm(range(len(df))):
+        tech = df['Name'].iloc[i]  # name of ES technology
         # print(tech)
 
         # Initialization of the list of construction activities and corresponding CPC categories
@@ -344,7 +346,7 @@ def _double_counting_removal(
         mapping_esm_flows_to_CPC_dict['OWN_CONSTRUCTION'] = []
 
         # Construction activity
-        if tech in no_construction_list:
+        if tech in no_construction_list or ds_type != 'Operation':
             pass
 
         else:
@@ -368,42 +370,42 @@ def _double_counting_removal(
                 mapping_esm_flows_to_CPC_dict['OWN_CONSTRUCTION'] += [CPC_constr]
                 mapping_CPC_to_esm_flows_dict[CPC_constr] = ['OWN_CONSTRUCTION']
 
-        # Operation activity
-        database_op = df_op['Database'].iloc[i]  # LCA database of the operation technology
-        current_code_op = df_op['Current_code'].iloc[i]  # code in ecoinvent
+        # Main activity
+        database_main = df['Database'].iloc[i]  # LCA database of the technology
+        current_code_main = df['Current_code'].iloc[i]  # code in ecoinvent
 
         # identification of the activity in ecoinvent database
-        act_op = db_dict_code[(database_op, current_code_op)]
+        act = db_dict_code[(database_main, current_code_main)]
 
         if db_type == 'esm':
             # Copy the activity and change the database (no new activity in original ecoinvent database)
-            new_code = df_op['New_code'].iloc[i]  # new code defined previously
-            new_act_op = copy.deepcopy(act_op)
-            new_act_op['code'] = new_code
-            new_act_op['database'] = esm_db_name
-            prod_flow = Dataset(new_act_op).get_production_flow()
+            new_code = df['New_code'].iloc[i]  # new code defined previously
+            new_act = copy.deepcopy(act)
+            new_act['code'] = new_code
+            new_act['database'] = esm_db_name
+            prod_flow = Dataset(new_act).get_production_flow()
             prod_flow['code'] = new_code
             prod_flow['database'] = esm_db_name
-            db_as_list.append(new_act_op)
+            db_as_list.append(new_act)
             db_dict_name[
-                (new_act_op['name'], new_act_op['reference product'],
-                 new_act_op['location'], new_act_op['database'])
-            ] = new_act_op
-            db_dict_code[(new_act_op['database'], new_act_op['code'])] = new_act_op
+                (new_act['name'], new_act['reference product'],
+                 new_act['location'], new_act['database'])
+            ] = new_act
+            db_dict_code[(new_act['database'], new_act['code'])] = new_act
         else:
-            new_act_op = act_op
+            new_act = act
 
-        if tech in no_double_counting_removal_list:
+        if tech in no_double_counting_removal_list[ds_type]:
             perform_d_c = []
-        elif tech in no_background_search_list:
+        elif tech in no_background_search_list[ds_type]:
             if db_type != 'esm results wo dcr':
-                new_act_op['comment'] = f"Subject to double-counting removal. " + new_act_op.get('comment', '')
-                perform_d_c = [[new_act_op['name'], new_act_op['code'], 1, 0, ESM_inputs]]
+                new_act['comment'] = f"Subject to double-counting removal. " + new_act.get('comment', '')
+                perform_d_c = [[new_act['name'], new_act['code'], 1, 0, ESM_inputs]]
             else:
                 perform_d_c = []
         else:
             perform_d_c, db_dict_code, db_dict_name, db_as_list = self._background_search(
-                act=new_act_op,
+                act=new_act,
                 k=0,
                 k_lim=self.max_depth_double_counting_search,
                 amount=1,
@@ -417,9 +419,9 @@ def _double_counting_removal(
             )  # list of activities to perform double counting removal on
 
         if db_type == 'esm':
-            new_act_op['name'] = f'{tech}, Operation'  # saving name after market identification
-            prod_flow = Dataset(new_act_op).get_production_flow()
-            prod_flow['name'] = f'{tech}, Operation'
+            new_act['name'] = f'{tech}, {ds_type}'  # saving name after market identification
+            prod_flow = Dataset(new_act).get_production_flow()
+            prod_flow['name'] = f'{tech}, {ds_type}'
 
         id_d_c = 0
         while id_d_c < len(perform_d_c):
@@ -452,7 +454,7 @@ def _double_counting_removal(
 
             if perform_d_c[id_d_c][4] == 'all':
                 # list of inputs in the ESM (i.e., negative flows in layers_in_out)
-                ES_inputs = list(df_op.iloc[:, N:].iloc[i][df_op.iloc[:, N:].iloc[i] < 0].index)
+                ES_inputs = list(df.iloc[:, N:].iloc[i][df.iloc[:, N:].iloc[i] < 0].index)
             else:
                 ES_inputs = perform_d_c[id_d_c][4]
 
@@ -486,7 +488,7 @@ def _double_counting_removal(
             set_CPC_inputs = set(CPC_inputs)
             id_technosphere_inputs_zero = [i for i, e in enumerate(technosphere_inputs_CPC) if e in set_CPC_inputs]
 
-            if tech in no_construction_list:
+            if tech in no_construction_list or ds_type != 'Operation':
                 pass
             elif perform_d_c[id_d_c][4] != 'all':
                 pass
@@ -526,6 +528,7 @@ def _double_counting_removal(
 
                 flows_set_to_zero.append([
                     tech,
+                    ds_type,
                     new_act_op_d_c['reference product'],  # activity in which the flow is removed
                     new_act_op_d_c['name'],
                     new_act_op_d_c['location'],
@@ -572,7 +575,7 @@ def _double_counting_removal(
             missing_ES_inputs = []
             for cat in ES_inputs:
                 if (
-                        (tech in list(background_search_act.keys()))
+                        (tech in list(background_search_act[ds_type].keys()))
                         & (cat not in ['CONSTRUCTION', 'OWN_CONSTRUCTION', 'DECOMMISSIONING'])
                         # The two following conditions mean that the background search would stop when some
                         # intermediary flows have already been found for a given esm flow, but some other
@@ -583,11 +586,11 @@ def _double_counting_removal(
                     missing_ES_inputs.append(cat)
 
             if len(missing_ES_inputs) > 0:
-                if k_deep <= background_search_act[tech]:
+                if k_deep <= background_search_act[ds_type][tech]:
                     perform_d_c, db_dict_code, db_dict_name, db_as_list = self._background_search(
                         act=new_act_op_d_c,
                         k=k_deep,
-                        k_lim=background_search_act[tech] - 1,
+                        k_lim=background_search_act[ds_type][tech] - 1,
                         amount=new_act_op_d_c_amount,
                         explore_type='background_removal',
                         ESM_inputs=missing_ES_inputs,
@@ -600,7 +603,7 @@ def _double_counting_removal(
 
             id_d_c += 1
 
-        activities_subject_to_double_counting.extend([[tech, i[0], i[1], i[2]] for i in perform_d_c])
+        activities_subject_to_double_counting.extend([[tech, ds_type, i[0], i[1], i[2]] for i in perform_d_c])
 
     # Injecting local variables into the instance variables
     self.main_database.db_as_list = db_as_list

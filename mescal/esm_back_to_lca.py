@@ -149,7 +149,7 @@ def create_new_database_with_esm_results(
         # Double-counting removal of background construction flows
         self.logger.info("Removing double-counted construction flows...")
         flows_set_to_zero, ei_removal, activities_subject_to_double_counting = self._double_counting_removal(
-            df_op=double_counting_act,
+            df=double_counting_act,
             N=N,
             ESM_inputs=['OWN_CONSTRUCTION', 'CONSTRUCTION'],
             db_type='esm results',
@@ -161,7 +161,7 @@ def create_new_database_with_esm_results(
         # background search algorithm of the double-counting removal procedure. However, flows are NOT removed
         # during this process.
         flows_set_to_zero, ei_removal, activities_subject_to_double_counting = self._double_counting_removal(
-            df_op=double_counting_act,
+            df=double_counting_act,
             N=N,
             ESM_inputs=['OWN_CONSTRUCTION', 'CONSTRUCTION'],
             db_type='esm results wo dcr',
@@ -757,6 +757,9 @@ def _correct_esm_and_lca_capacity_factor_differences(
     unit_conversion = self.unit_conversion
     lifetime = self.lifetime
     tech_to_remove_layers = self.tech_to_remove_layers
+
+    # Keep only the operational flows (others are not relevant)
+    df_flows_set_to_zero = df_flows_set_to_zero[df_flows_set_to_zero['Type'] == 'Operation']
 
     # readings lists as lists and not strings
     try:

@@ -449,27 +449,27 @@ mapping_esm_flows_to_CPC = [
 ]
 
 removed_flows = [
-    ['CAR_GASOLINE', 'transport, passenger car', 'market for transport, passenger car, gasoline, type I', 'CH',
+    ['CAR_GASOLINE', 'Operation', 'transport, passenger car', 'market for transport, passenger car, gasoline, type I', 'CH',
      'dummy_db', '00001', 5e-6, 'unit', 'passenger car construction', 'passenger car', 'CH', 'dummy_db', '00002'],
-    ['CAR_GASOLINE', 'transport, passenger car', 'market for transport, passenger car, gasoline, type I', 'CH',
+    ['CAR_GASOLINE', 'Operation', 'transport, passenger car', 'market for transport, passenger car, gasoline, type I', 'CH',
      'dummy_db', '00001', 0.05, 'kilogram', 'market for petrol, low-sulfur', 'petrol, low-sulfur', 'CH', 'dummy_db',
      '00003'],
-    ['CAR_GASOLINE', 'transport, passenger car', 'market for transport, passenger car, gasoline, type II', 'CH',
+    ['CAR_GASOLINE', 'Operation', 'transport, passenger car', 'market for transport, passenger car, gasoline, type II', 'CH',
      'dummy_db', '00006', 5e-6, 'unit', 'passenger car construction', 'passenger car', 'CH', 'dummy_db', '00002'],
-    ['CAR_GASOLINE', 'transport, passenger car', 'market for transport, passenger car, gasoline, type II', 'CH',
+    ['CAR_GASOLINE', 'Operation', 'transport, passenger car', 'market for transport, passenger car, gasoline, type II', 'CH',
      'dummy_db', '00006', 0.03, 'kilogram', 'market for petrol, low-sulfur', 'petrol, low-sulfur', 'CH', 'dummy_db',
      '00003'],
-    ['CAR_GASOLINE', 'transport, passenger car', 'market for transport, passenger car, gasoline, type II', 'CH',
+    ['CAR_GASOLINE', 'Operation', 'transport, passenger car', 'market for transport, passenger car, gasoline, type II', 'CH',
      'dummy_db', '00006', 0.01, 'kilogram', 'market for petrol, low-sulfur', 'petrol, low-sulfur', 'CH', 'dummy_db',
      '00003'],
-    ['CAR_PROPANE', 'transport, passenger car', 'market for transport, passenger car, gasoline, type I', 'CH',
+    ['CAR_PROPANE', 'Operation', 'transport, passenger car', 'market for transport, passenger car, gasoline, type I', 'CH',
      'dummy_db', '00001A', 5e-6, 'unit', 'passenger car construction', 'passenger car', 'CH', 'dummy_db', '00002'],
-    ['CAR_PROPANE', 'transport, passenger car', 'market for transport, passenger car, gasoline, type I', 'CH',
+    ['CAR_PROPANE', 'Operation', 'transport, passenger car', 'market for transport, passenger car, gasoline, type I', 'CH',
      'dummy_db', '00001A', 0.05, 'kilogram', 'market for petrol, low-sulfur', 'petrol, low-sulfur', 'CH', 'dummy_db',
      '00003'],
-    ['CAR_BIODIESEL_B20', 'transport, passenger car', 'market for transport, passenger car, diesel', 'CH', 'dummy_db',
+    ['CAR_BIODIESEL_B20', 'Operation', 'transport, passenger car', 'market for transport, passenger car, diesel', 'CH', 'dummy_db',
      '00001B', 5e-6, 'unit', 'passenger car construction', 'passenger car', 'CH', 'dummy_db', '00002'],
-    ['CAR_BIODIESEL_B20', 'transport, passenger car', 'market for transport, passenger car, diesel', 'CH', 'dummy_db',
+    ['CAR_BIODIESEL_B20', 'Operation', 'transport, passenger car', 'market for transport, passenger car, diesel', 'CH', 'dummy_db',
      '00001B', 0.06, 'kilogram', 'market for diesel', 'diesel', 'CH', 'dummy_db', '00010'],
 ]
 # CAR_GASOLINE: the "efficiency" in the LCI database is 1/0.05 km/kg for type I and 1/(0.03+0.01) km/kg for type II
@@ -492,14 +492,14 @@ unit_conversion = [
 # CAR_BIODIESEL_B20: after unit conversion, the "efficiency" in the LCI db is 1/0.06 * 0.075/0.667 pkm/kWh
 
 double_counting_removal = [
-    ['CAR_GASOLINE', 'GASOLINE', 0.05 * 0.4 + (0.03 + 0.01) * 0.6, 'kilogram', 2],
-    ['CAR_GASOLINE', 'TRANSPORT_FUEL', 0.05 * 0.4 + (0.03 + 0.01) * 0.6, 'kilogram', 2],
-    ['CAR_GASOLINE', 'CONSTRUCTION', 5e-6 * 0.4 + 5e-6 * 0.6, 'unit', 2],
-    ['CAR_PROPANE', 'TRANSPORT_FUEL', 0.05, 'kilogram', 1],
-    ['CAR_PROPANE', 'CONSTRUCTION', 5e-6, 'unit', 1],
-    ['CAR_BIODIESEL_B20', 'DIESEL', 0.06, 'kilogram', 1],
-    ['CAR_BIODIESEL_B20', 'TRANSPORT_FUEL', 0.06, 'kilogram', 1],
-    ['CAR_BIODIESEL_B20', 'CONSTRUCTION', 5e-6, 'unit', 1],
+    ['CAR_GASOLINE', 'Operation', 'GASOLINE', 0.05 * 0.4 + (0.03 + 0.01) * 0.6, 'kilogram', 2],
+    ['CAR_GASOLINE', 'Operation', 'TRANSPORT_FUEL', 0.05 * 0.4 + (0.03 + 0.01) * 0.6, 'kilogram', 2],
+    ['CAR_GASOLINE', 'Operation', 'CONSTRUCTION', 5e-6 * 0.4 + 5e-6 * 0.6, 'unit', 2],
+    ['CAR_PROPANE', 'Operation', 'TRANSPORT_FUEL', 0.05, 'kilogram', 1],
+    ['CAR_PROPANE', 'Operation', 'CONSTRUCTION', 5e-6, 'unit', 1],
+    ['CAR_BIODIESEL_B20', 'Operation', 'DIESEL', 0.06, 'kilogram', 1],
+    ['CAR_BIODIESEL_B20', 'Operation', 'TRANSPORT_FUEL', 0.06, 'kilogram', 1],
+    ['CAR_BIODIESEL_B20', 'Operation', 'CONSTRUCTION', 5e-6, 'unit', 1],
 ]
 
 model = pd.DataFrame(model, columns=['Name', 'Flow', 'Amount'])
@@ -509,10 +509,10 @@ efficiency = pd.DataFrame(efficiency, columns=['Name', 'Flow'])
 mapping_esm_flows_to_CPC = pd.DataFrame(mapping_esm_flows_to_CPC, columns=['Flow', 'CPC'])
 
 removed_flows = pd.DataFrame(removed_flows, columns=[
-    'Name', 'Product', 'Activity', 'Location', 'Database', 'Code', 'Amount', 'Unit', 'Removed flow activity',
+    'Name', 'Type', 'Product', 'Activity', 'Location', 'Database', 'Code', 'Amount', 'Unit', 'Removed flow activity',
     'Removed flow product', 'Removed flow location', 'Removed flow database', 'Removed flow code'])
 
-double_counting_removal = pd.DataFrame(double_counting_removal, columns=['Name', 'Flow', 'Amount', 'Unit', 'Count'])
+double_counting_removal = pd.DataFrame(double_counting_removal, columns=['Name', 'Type', 'Flow', 'Amount', 'Unit', 'Count'])
 
 unit_conversion = pd.DataFrame(unit_conversion, columns=['Name', 'Type', 'Value', 'LCA', 'ESM'])
 

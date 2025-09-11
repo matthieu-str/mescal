@@ -193,8 +193,8 @@ unit_conversion = [
 ]
 
 activities_subject_to_double_counting = [
-    ['CAR', 'transport, passenger car, large size, natural gas, EURO 5', 'f23495ddccfa8259de6b05281820685b', 0.6],
-    ['CAR', 'transport, passenger car, large size, diesel, EURO 5', 'f093a4b83a46eff40c7fe72e1d6a81b7', 0.4],
+    ['CAR', 'Operation', 'transport, passenger car, large size, natural gas, EURO 5', 'f23495ddccfa8259de6b05281820685b', 0.6],
+    ['CAR', 'Operation', 'transport, passenger car, large size, diesel, EURO 5', 'f093a4b83a46eff40c7fe72e1d6a81b7', 0.4],
 ]
 
 lifetime = [
@@ -214,7 +214,7 @@ impact_abbrev = [
 mapping = pd.DataFrame(mapping, columns=['Name', 'Type', 'Product', 'Activity', 'Location', 'Database', 'New_code'])
 technology_compositions = pd.DataFrame(technology_compositions, columns=['Name', 'Components'])
 unit_conversion = pd.DataFrame(unit_conversion, columns=['Name', 'Type', 'Value', 'LCA', 'ESM'])
-activities_subject_to_double_counting = pd.DataFrame(activities_subject_to_double_counting, columns=['Name', 'Activity name', 'Activity code', 'Amount'])
+activities_subject_to_double_counting = pd.DataFrame(activities_subject_to_double_counting, columns=['Name', 'Type', 'Activity name', 'Activity code', 'Amount'])
 lifetime = pd.DataFrame(lifetime, columns=['Name', 'ESM', 'LCA'])
 impact_abbrev = pd.DataFrame(impact_abbrev, columns=['Impact_category', 'Unit', 'Abbrev', 'AoP'])
 

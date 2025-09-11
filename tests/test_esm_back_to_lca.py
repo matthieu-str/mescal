@@ -395,9 +395,9 @@ lifetime = [
 ]
 
 removed_flows_list = [
-    ['HEAT_PUMP', 'heat', 'heat production by heat pump', 'CH', 'esm_db_name', 'xxx', 1e-06, 'unit', 'heat pump',
+    ['HEAT_PUMP', 'Operation', 'heat', 'heat production by heat pump', 'CH', 'esm_db_name', 'xxx', 1e-06, 'unit', 'heat pump',
      'heat pump production', 'CH', 'ecoinvent-3.9.1-cutoff', '00000'],
-    ['HEAT_PUMP_DOUBLE_STAGE', 'heat', 'HEAT_PUMP_DOUBLE_STAGE, Operation', 'CH', 'esm_db_name', 'yyy', 1e-06, 'unit',
+    ['HEAT_PUMP_DOUBLE_STAGE', 'Operation', 'heat', 'HEAT_PUMP_DOUBLE_STAGE, Operation', 'CH', 'esm_db_name', 'yyy', 1e-06, 'unit',
      'double-stage heat pump', 'double-stage heat pump production', 'CH', 'ecoinvent-3.9.1-cutoff', '11000'],
 ]
 
@@ -411,7 +411,7 @@ esm_results = pd.DataFrame(esm_results, columns=['Name', 'Production', 'Capacity
 unit_conversion = pd.DataFrame(unit_conversion, columns=['Name', 'Type', 'Value', 'LCA', 'ESM'])
 lifetime = pd.DataFrame(lifetime, columns=['Name', 'LCA', 'ESM'])
 removed_flows_list = pd.DataFrame(removed_flows_list, columns=[
-    'Name', 'Product', 'Activity', 'Location', 'Database', 'Code', 'Amount', 'Unit', 'Removed flow product',
+    'Name', 'Type', 'Product', 'Activity', 'Location', 'Database', 'Code', 'Amount', 'Unit', 'Removed flow product',
     'Removed flow activity', 'Removed flow location', 'Removed flow database', 'Removed flow code'
 ])
 

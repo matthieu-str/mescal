@@ -44,6 +44,8 @@ class ESM:
             lifetime: pd.DataFrame = None,
             max_depth_double_counting_search: int = 10,
             stop_background_search_when_first_flow_found: bool = False,
+            esm_end_use_demands: list[str] = None,
+            remove_double_counting_to: list[str] = None,
     ):
         """
         Initialize the ESM database creation
@@ -76,6 +78,10 @@ class ESM:
             (only applied to 'Background search' technologies in tech_specifics) stops once a flow of the targeted
             category is found. If False, the background search continues until all flows of the targeted category are
             found within the given number of background layers to explore.
+        :param esm_end_use_demands: list of end-use demand categories for the ESM, needed for double-counting removal
+            on construction and resource datasets
+        :param remove_double_counting_to: list of phases to apply double-counting removal to, can be 'Operation',
+            'Construction', and/or 'Resource'. Default is ['Operation'].
         """
 
         # set up logging tool
@@ -113,6 +119,8 @@ class ESM:
         self.lifetime = lifetime
         self.max_depth_double_counting_search = max_depth_double_counting_search
         self.stop_background_search_when_first_flow_found = stop_background_search_when_first_flow_found
+        self.esm_end_use_demands = esm_end_use_demands
+        self.remove_double_counting_to = remove_double_counting_to if remove_double_counting_to is not None else ['Operation']
 
         # Initialize attributes used within mescal
         self.df_flows_set_to_zero = None
@@ -156,13 +164,19 @@ class ESM:
 
     @property
     def activities_background_search(self):
-        return list(self.tech_specifics[self.tech_specifics.Specifics == 'Background search'].Name)
+        return {
+            'Operation': list(self.tech_specifics[self.tech_specifics.Specifics == 'Background search'].Name),
+            'Construction': list(self.tech_specifics[self.tech_specifics.Specifics == 'Background search (construction)'].Name),
+            'Resource': list(self.tech_specifics[self.tech_specifics.Specifics == 'Background search (resource)'].Name),
+        }
 
     @property
     def background_search_act(self):
         background_search_act = {}
-        for tech in self.activities_background_search:
-            background_search_act[tech] = int(self.tech_specifics[self.tech_specifics.Name == tech].Amount.iloc[0])
+        for phase in ['Operation', 'Construction', 'Resource']:
+            background_search_act[phase] = {}
+            for tech in self.activities_background_search[phase]:
+                background_search_act[phase][tech] = int(self.tech_specifics[self.tech_specifics.Name == tech].Amount.iloc[0])
         return background_search_act
 
     @property
@@ -171,11 +185,19 @@ class ESM:
 
     @property
     def no_background_search_list(self):
-        return list(self.tech_specifics[self.tech_specifics.Specifics == 'No background search'].Name)
+        return {
+            'Operation': list(self.tech_specifics[self.tech_specifics.Specifics == 'No background search'].Name),
+            'Construction': list(self.tech_specifics[self.tech_specifics.Specifics == 'No background search (construction)'].Name),
+            'Resource': list(self.tech_specifics[self.tech_specifics.Specifics == 'No background search (resource)'].Name),
+        }
 
     @property
     def no_double_counting_removal_list(self):
-        return list(self.tech_specifics[self.tech_specifics.Specifics == 'No double-counting removal'].Name)
+        return {
+            'Operation': list(self.tech_specifics[self.tech_specifics.Specifics == 'No double-counting removal'].Name),
+            'Construction': list(self.tech_specifics[self.tech_specifics.Specifics == 'No double-counting removal (construction)'].Name),
+            'Resource': list(self.tech_specifics[self.tech_specifics.Specifics == 'No double-counting removal (resource)'].Name),
+        }
 
     @property
     def import_export_list(self):
@@ -422,22 +444,47 @@ class ESM:
 
         N = self.mapping.shape[1]
 
-        # Add construction and resource activities to the database (which do not need double counting removal)
-        self.logger.info("Starting to add construction and resource activities database")
-        t1_add = time.time()
-        self._add_activities_to_database(act_type='Construction')
-        self._add_activities_to_database(act_type='Resource')
-        t2_add = time.time()
-        self.logger.info(f"Construction and resource activities added to the database in {round(t2_add - t1_add, 1)} "
-                         f"seconds")
-
         self.logger.info("Starting to remove double-counted flows")
         t1_dc = time.time()
+
+        # Construction datasets
+        if 'Construction' not in self.remove_double_counting_to:
+            self._add_activities_to_database(act_type='Construction')
+        else:
+            mapping_constr = self.mapping_constr
+            if self.esm_end_use_demands is None:
+                raise ValueError('Please provide a list of end-use demand categories for the ESM if you want to '
+                                 'perform double-counting removal on construction datasets.')
+            for cat in self.esm_end_use_demands:
+                mapping_constr[cat] = -1
+            (
+                flows_set_to_zero_constr,
+                ei_removal_constr,
+                activities_subject_to_double_counting_constr
+            ) = self._double_counting_removal(df=mapping_constr, N=N, ESM_inputs='all', ds_type='Construction')
+
+        # Resource datasets
+        if 'Resource' not in self.remove_double_counting_to:
+            self._add_activities_to_database(act_type='Resource')
+        else:
+            mapping_res = self.mapping_res
+            if self.esm_end_use_demands is None:
+                raise ValueError('Please provide a list of end-use demand categories for the ESM if you want to '
+                                 'perform double-counting removal on resource datasets.')
+            for cat in self.esm_end_use_demands:
+                mapping_res[cat] = -1
+            (
+                flows_set_to_zero_res,
+                ei_removal_res,
+                activities_subject_to_double_counting_res
+            ) = self._double_counting_removal(df=mapping_res, N=N, ESM_inputs='all', ds_type='Resource')
+
+        # Operation datasets (double-counting always applies)
         (
             flows_set_to_zero,
             ei_removal,
             activities_subject_to_double_counting
-        ) = self._double_counting_removal(df_op=self.mapping_op, N=N, ESM_inputs='all')
+        ) = self._double_counting_removal(df=self.mapping_op, N=N, ESM_inputs='all')
         t2_dc = time.time()
         self.logger.info(f"Double-counting removal done in {round(t2_dc - t1_dc, 1)} seconds")
 
@@ -449,10 +496,18 @@ class ESM:
                 f'{self.products_without_a_cpc_category}'
             )
 
+        if 'Construction' in self.remove_double_counting_to:
+            flows_set_to_zero += flows_set_to_zero_constr
+            activities_subject_to_double_counting += activities_subject_to_double_counting_constr
+
+        if 'Resource' in self.remove_double_counting_to:
+            flows_set_to_zero += flows_set_to_zero_res
+            activities_subject_to_double_counting += activities_subject_to_double_counting_res
+
         df_flows_set_to_zero = pd.DataFrame(
             data=flows_set_to_zero,
             columns=[
-                'Name', 'Product', 'Activity', 'Location', 'Database', 'Code',
+                'Name', 'Type', 'Product', 'Activity', 'Location', 'Database', 'Code',
                 'Amount',
                 'Unit', 'Removed flow product', 'Removed flow activity',
                 'Removed flow location', 'Removed flow database',
@@ -465,46 +520,80 @@ class ESM:
         for tech in list(self.mapping_op.Name):
             ei_removal_amount[tech] = {}
             ei_removal_count[tech] = {}
+            ei_removal_amount[tech]['Operation'] = {}
+            ei_removal_count[tech]['Operation'] = {}
             for res in list(self.mapping_op.iloc[:, N:].columns):
-                ei_removal_amount[tech][res] = {}
-                ei_removal_count[tech][res] = {}
+                ei_removal_amount[tech]['Operation'][res] = {}
+                ei_removal_count[tech]['Operation'][res] = {}
                 for unit in ei_removal[tech][res]['amount'].keys():
-                    ei_removal_amount[tech][res][unit] = ei_removal[tech][res]['amount'][unit]
-                    ei_removal_count[tech][res][unit] = ei_removal[tech][res]['count'][unit]
+                    ei_removal_amount[tech]['Operation'][res][unit] = ei_removal[tech][res]['amount'][unit]
+                    ei_removal_count[tech]['Operation'][res][unit] = ei_removal[tech][res]['count'][unit]
+
+        if 'Construction' in self.remove_double_counting_to:
+            for tech in list(mapping_constr.Name):
+                if tech not in ei_removal_amount.keys():
+                    ei_removal_amount[tech] = {}
+                    ei_removal_count[tech] = {}
+                ei_removal_amount[tech]['Construction'] = {}
+                ei_removal_count[tech]['Construction'] = {}
+                for res in list(mapping_constr.iloc[:, N:].columns):
+                    ei_removal_amount[tech]['Construction'][res] = {}
+                    ei_removal_count[tech]['Construction'][res] = {}
+                    for unit in ei_removal_constr[tech][res]['amount'].keys():
+                        ei_removal_amount[tech]['Construction'][res][unit] = ei_removal_constr[tech][res]['amount'][unit]
+                        ei_removal_count[tech]['Construction'][res][unit] = ei_removal_constr[tech][res]['count'][unit]
+
+        if 'Resource' in self.remove_double_counting_to:
+            for tech in list(mapping_res.Name):
+                if tech not in ei_removal_amount.keys():
+                    ei_removal_amount[tech] = {}
+                    ei_removal_count[tech] = {}
+                ei_removal_amount[tech]['Resource'] = {}
+                ei_removal_count[tech]['Resource'] = {}
+                for res in list(mapping_res.iloc[:, N:].columns):
+                    ei_removal_amount[tech]['Resource'][res] = {}
+                    ei_removal_count[tech]['Resource'][res] = {}
+                    for unit in ei_removal_res[tech][res]['amount'].keys():
+                        ei_removal_amount[tech]['Resource'][res][unit] = ei_removal_res[tech][res]['amount'][unit]
+                        ei_removal_count[tech]['Resource'][res][unit] = ei_removal_res[tech][res]['count'][unit]
 
         records_amount = []
         for tech, v1 in ei_removal_amount.items():
-            for res, v2 in v1.items():
-                for unit, v3 in v2.items():
-                    records_amount.append({
-                        'Name': tech,
-                        'Flow': res,
-                        'Unit': unit,
-                        'Amount': v3,
-                    })
-        double_counting_removal_amount = pd.DataFrame(records_amount)
+            for phase, v2 in v1.items():
+                for res, v3 in v2.items():
+                    for unit, v4 in v3.items():
+                        records_amount.append({
+                            'Name': tech,
+                            'Type': phase,
+                            'Flow': res,
+                            'Unit': unit,
+                            'Amount': v4,
+                        })
+            double_counting_removal_amount = pd.DataFrame(records_amount)
 
         records_count = []
         for tech, v1 in ei_removal_count.items():
-            for res, v2 in v1.items():
-                for unit, v3 in v2.items():
-                    records_count.append({
-                        'Name': tech,
-                        'Flow': res,
-                        'Unit': unit,
-                        'Count': v3,
-                    })
-        double_counting_removal_count = pd.DataFrame(records_count)
+            for phase, v2 in v1.items():
+                for res, v3 in v2.items():
+                    for unit, v4 in v3.items():
+                        records_count.append({
+                            'Name': tech,
+                            'Type': phase,
+                            'Flow': res,
+                            'Unit': unit,
+                            'Count': v4,
+                        })
+            double_counting_removal_count = pd.DataFrame(records_count)
 
         double_counting_removal_amount = double_counting_removal_amount.merge(
             double_counting_removal_count,
-            on=['Name', 'Flow', 'Unit'],
+            on=['Name', 'Type', 'Flow', 'Unit'],
             how='left',
         )
 
         df_activities_subject_to_double_counting = pd.DataFrame(
             data=activities_subject_to_double_counting,
-            columns=['Name', 'Activity name', 'Activity code', 'Amount']
+            columns=['Name', 'Type', 'Activity name', 'Activity code', 'Amount']
         )
 
         self.double_counting_removal_amount = double_counting_removal_amount
