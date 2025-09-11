@@ -418,6 +418,13 @@ def _double_counting_removal(
                 db_type=db_type,
             )  # list of activities to perform double counting removal on
 
+            if len(perform_d_c) == 0:
+                # if the datasets has been identified as a market (one of the conditions was true), but none of the
+                # technosphere flows correspond to the same CPC category, we consider the activity itself for
+                # double-counting removal
+                new_act['comment'] = f"Subject to double-counting removal. " + new_act.get('comment', '')
+                perform_d_c = [[new_act['name'], new_act['code'], 1, 0, ESM_inputs]]
+
         if db_type == 'esm':
             new_act['name'] = f'{tech}, {ds_type}'  # saving name after market identification
             prod_flow = Dataset(new_act).get_production_flow()
