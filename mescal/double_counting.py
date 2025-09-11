@@ -112,7 +112,7 @@ def _background_search(
                         j['classifications'] = [('CPC', CPC_cat)]
 
     if not condition:
-        if 'market for' in act['name']:
+        if 'market for' in act['name'] or 'market group for' in act['name']:
             condition = True
 
     if not condition:
@@ -187,7 +187,7 @@ def _background_search(
                                 else:
                                     # if the limit is reached, we consider the last activity for double counting removal
                                     if db_type != 'esm results wo dcr':
-                                        new_act['comment'] = (f"Subject to double-counting removal ({explore_type}). "
+                                        new_act['comment'] = (f"Subject to double-counting removal. "
                                                               + new_act.get('comment', ''))
                                         perform_d_c.append(
                                             [new_act['name'], new_act['code'], amount * flow['amount'], k + 1, ESM_inputs]
@@ -245,7 +245,7 @@ def _background_search(
                                 else:
                                     # if the limit is reached, we consider the last activity for double counting removal
                                     if db_type != 'esm results wo dcr':
-                                        new_act['comment'] = (f"Subject to double-counting removal ({explore_type}). "
+                                        new_act['comment'] = (f"Subject to double-counting removal. "
                                                               + new_act.get('comment', ''))
                                         perform_d_c.append([new_act['name'], new_act['code'],
                                                             amount * flow['amount'], k + 1, ESM_inputs])
@@ -259,7 +259,7 @@ def _background_search(
 
     else:  # the activity is not a market, thus it is added to the list for double-counting removal
         if db_type != 'esm results wo dcr':
-            act['comment'] = f"Subject to double-counting removal ({explore_type}). " + act.get('comment', '')
+            act['comment'] = f"Subject to double-counting removal. " + act.get('comment', '')
             perform_d_c.append([act['name'], act['code'], amount, k, ESM_inputs])
         return perform_d_c, db_dict_code, db_dict_name, db_as_list
 

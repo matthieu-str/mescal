@@ -504,6 +504,7 @@ def test_correct_esm_and_lca_capacity_factor_differences():
     )
 
     esm.df_flows_set_to_zero = removed_flows_list
+    esm.double_counting_removal_amount = pd.DataFrame()  # not needed for this test
 
     esm_with_res_db = esm.create_new_database_with_esm_results(
         esm_results=esm_results,
