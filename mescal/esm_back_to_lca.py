@@ -924,19 +924,29 @@ def _correct_esm_and_lca_capacity_factor_differences(
             for act in act_to_adapt_list:
 
                 for exc in Dataset(act).get_technosphere_flows():
-                    i = 0
                     if (exc['database'], exc['code']) in techno_flows_to_correct_dict[(act['database'], act['code'])]:
+                        if len(set([product for product in list(mapping[(mapping.Type == 'Construction')
+                                                                    & (mapping.Name == sub_comp)].Product.iloc[0]
+                                     for sub_comp in technology_compositions_dict[tech])])) < len(technology_compositions_dict[tech]):
+                            # If several subcomponents have the same product name, we have to match flows based on the
+                            # activity name as well
+                            match_flows_based_on_activity_name = True
+                        else:
+                            match_flows_based_on_activity_name = False
+
                         for sub_comp in technology_compositions_dict[tech]:
-                            if exc['product'] == mapping[(mapping.Name == sub_comp)
-                                                         & (mapping.Type == 'Construction')].Product.iloc[0]:
-                                i+=1
+                            if (
+                                    (exc['product'] == mapping[(mapping.Name == sub_comp) & (mapping.Type == 'Construction')].Product.iloc[0])
+                                    & ((exc['name'] == mapping[(mapping.Name == sub_comp) & (mapping.Type == 'Construction')].Activity.iloc[0])
+                                       | (not match_flows_based_on_activity_name))
+                            ):
                                 amount_constr_esm = amount_constr_per_subcomp[sub_comp]
                                 amount_constr_lca = exc['amount']  # original infrastructure amount in the operation LCI dataset
                                 exc['amount'] = amount_constr_esm  # we replace the latter by the one derived from ESM results
                                 exc['comment'] = (f'TF multiplied by {round(amount_constr_esm / amount_constr_lca, 4)} (capacity '
                                                   f'factor). ' + exc.get('comment', ''))
-                                if amount_constr_lca == 0:
-                                    print(act['name'], exc['name'])
+                                # if amount_constr_lca == 0:
+                                #     print(act['name'], exc['name'])
 
                                 capacity_factor_report_list.append([
                                     tech,
@@ -948,9 +958,6 @@ def _correct_esm_and_lca_capacity_factor_differences(
                                     amount_constr_lca,
                                     amount_constr_esm,
                                 ])  # reporting capacity factors differences
-                    if i > 1:
-                        self.logger.warning(f"Exchange {exc['name']} in activity {act['name']} has matched with several "
-                                         f"sub-components of technology {tech}.")
                 act['comment'] = (f'Infrastructure flows have been harmonized with the ESM to account for capacity factor '
                                   f'differences. ') + act.get('comment', '')
 
