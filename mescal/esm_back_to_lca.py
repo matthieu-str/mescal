@@ -942,6 +942,8 @@ def _correct_esm_and_lca_capacity_factor_differences(
                             ):
                                 amount_constr_esm = amount_constr_per_subcomp[sub_comp]
                                 amount_constr_lca = exc['amount']  # original infrastructure amount in the operation LCI dataset
+                                if amount_constr_lca < 0 < amount_constr_esm:
+                                    amount_constr_esm *= -1  # waste flows must remain negative
                                 exc['amount'] = amount_constr_esm  # we replace the latter by the one derived from ESM results
                                 exc['comment'] = (f'TF multiplied by {round(amount_constr_esm / amount_constr_lca, 4)} (capacity '
                                                   f'factor). ' + exc.get('comment', ''))
