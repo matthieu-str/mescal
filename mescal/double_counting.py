@@ -418,7 +418,7 @@ def _double_counting_removal(
                 db_type=db_type,
             )  # list of activities to perform double counting removal on
 
-            if len(perform_d_c) == 0:
+            if len(perform_d_c) == 0 and db_type != 'esm results wo dcr':
                 # if the datasets has been identified as a market (one of the conditions was true), but none of the
                 # technosphere flows correspond to the same CPC category, we consider the activity itself for
                 # double-counting removal
