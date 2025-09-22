@@ -213,7 +213,12 @@ class ESM:
         _change_location_activity,
         change_location_mapping_file
     )
-    from .double_counting import _double_counting_removal, _background_search, _validation_double_counting
+    from .double_counting import (
+        _double_counting_removal,
+        _background_search,
+        _validation_double_counting,
+        background_double_counting_removal,
+    )
     from .impact_assessment import (
         compute_impact_scores,
         _get_impact_categories,

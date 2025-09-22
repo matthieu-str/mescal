@@ -4,6 +4,7 @@ from .database import Dataset
 from .utils import random_code
 import pandas as pd
 from tqdm import tqdm
+import wurst
 
 
 def _background_search(
@@ -616,6 +617,97 @@ def _double_counting_removal(
     self.main_database.db_as_list = db_as_list
 
     return flows_set_to_zero, ei_removal, activities_subject_to_double_counting
+
+def background_double_counting_removal(
+        self,
+        new_db_name: str = None,
+        write_database: bool = True,
+) -> None:
+    """
+    Performs double-counting removal in the background inventory. Concretely, flows included in the ESM end-use demands
+    (e.g., energy flows in the ESM geographical scope) are removed from the technosphere matrix. This step is needed if
+    the ESM end-use demands include the production and operation of new infrastructures.
+
+    :param new_db_name: name of the new database to write, if None, a default name is used
+        (<original_db_name>_adjusted_for_double_counting)
+    :param write_database: if True, writes the new database in Brightway
+    :return: None
+    """
+
+    if new_db_name is None:
+        new_db_name = f'{self.esm_db_name}_adjusted_for_double_counting'
+
+    db_as_list = self.main_database.db_as_list
+    db_as_dict_code = self.main_database.db_as_dict_code
+    mapping_esm_flows_to_CPC_cat = self.mapping_esm_flows_to_CPC_cat
+
+    double_counting_report = []
+
+    activities_of_esm_region = [
+        a for a in wurst.get_many(
+            db_as_list,
+            wurst.equals('location', self.esm_location)
+        )
+    ]
+
+    cpc_list = [ast.literal_eval(i) for i in list(mapping_esm_flows_to_CPC_cat[mapping_esm_flows_to_CPC_cat.Flow.isin(self.esm_end_use_demands)].CPC)]
+    cpc_list = list(set([item for sublist in cpc_list for item in sublist]))  # flatten the list of lists
+
+    for act in tqdm(activities_of_esm_region):
+        technosphere_flows = Dataset(act).get_technosphere_flows()
+        for flow in technosphere_flows:
+            database = flow['database']
+            code = flow['code']
+            act_flow = db_as_dict_code[(database, code)]
+            if 'classifications' in list(act_flow.keys()):
+                if 'CPC' in dict(act_flow['classifications']).keys():
+                    cpc_flow = dict(act_flow['classifications'])['CPC']
+                    if cpc_flow in cpc_list:
+                        # Keep track of the amount in the original activity as a comment
+                        old_amount = flow['amount']
+                        flow['comment'] = f'Original amount: {old_amount}. ' + flow.get('comment', '')
+                        flow['amount'] = 0  # Setting the amount to zero
+                        double_counting_report.append([
+                            act['name'],
+                            act['reference product'],
+                            act['location'],
+                            act['database'],
+                            act['code'],
+                            old_amount,
+                            flow['unit'],
+                            act_flow['name'],
+                            act_flow['reference product'],
+                            act_flow['location'],
+                            act_flow['database'],
+                            act_flow['code'],
+                        ])
+                else:
+                    pass
+            else:
+                pass
+
+    double_counting_report = pd.DataFrame(double_counting_report, columns=[
+        'Activity name',
+        'Activity reference product',
+        'Activity location',
+        'Activity database',
+        'Activity code',
+        'Removed amount',
+        'Unit',
+        'Removed flow name',
+        'Removed flow reference product',
+        'Removed flow location',
+        'Removed flow database',
+        'Removed flow code',
+    ])
+
+    # Injecting local variables into the instance variables
+    self.main_database.db_as_list = db_as_list
+
+    double_counting_report.to_csv(f'{self.results_path_file}background_double_counting_report.csv', index=False)
+
+    if write_database:
+        self.main_database.write_to_brightway(new_db_name)
 
 def _validation_double_counting(
         self,
