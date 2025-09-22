@@ -1316,10 +1316,11 @@ class PathwayESM(ESM):
             self,
             esm_db_name: str = None,
             *args, **kwargs
-    ) -> tuple[pd.DataFrame, pd.DataFrame | None]:
+    ) -> tuple[pd.DataFrame, pd.DataFrame | None, pd.DataFrame | None]:
 
         list_impact_scores_time_steps = []
         list_contrib_analysis_time_steps = []
+        list_req_technosphere_time_steps = []
 
         # Store the original ESM variable values
         original_esm_db_name = self.esm_db_name
@@ -1361,7 +1362,7 @@ class PathwayESM(ESM):
                 self.mapping = mapping_all_time_steps[mapping_all_time_steps['Year'] == self.year].copy()
 
             # Compute impact scores for the current time step
-            impact_scores, contrib_analysis = super().compute_impact_scores(*args, **kwargs)
+            impact_scores, contrib_analysis, df_req_technosphere = super().compute_impact_scores(*args, **kwargs)
             impact_scores['Year'] = self.year
 
             if self.operation_metrics_for_all_time_steps:
@@ -1387,6 +1388,10 @@ class PathwayESM(ESM):
 
                 list_contrib_analysis_time_steps.append(contrib_analysis)
 
+            if df_req_technosphere is not None:
+                df_req_technosphere['Year'] = self.year
+                list_req_technosphere_time_steps.append(df_req_technosphere)
+
         impact_scores = pd.concat(list_impact_scores_time_steps, ignore_index=True)
 
         if len(list_contrib_analysis_time_steps) > 0:
@@ -1394,12 +1399,17 @@ class PathwayESM(ESM):
         else:
             contrib_analysis = None
 
+        if len(list_req_technosphere_time_steps) > 0:
+            df_req_technosphere = pd.concat(list_req_technosphere_time_steps, ignore_index=True)
+        else:
+            df_req_technosphere = None
+
         # Restore the original ESM variable values
         self.mapping = mapping_all_time_steps
         self.esm_db_name = original_esm_db_name
         self.results_path_file = original_results_path_file
 
-        return impact_scores, contrib_analysis
+        return impact_scores, contrib_analysis, df_req_technosphere
 
     def create_new_database_with_esm_results(
             self,

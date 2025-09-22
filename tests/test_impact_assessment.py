@@ -259,11 +259,12 @@ def test_compute_impact_score():
     )
 
     # Life-cycle emissions
-    R, df_contrib_results = esm.compute_impact_scores(
+    R, df_contrib_results, df_req_technosphere = esm.compute_impact_scores(
         methods=methods,
         impact_abbrev=impact_abbrev,
         specific_lcia_abbrev=['CC'],
         contribution_analysis="emissions",
+        req_technosphere=True,
     )
 
     df_contrib_results[['ef_name', 'ef_categories']] = pd.DataFrame(
@@ -315,15 +316,33 @@ def test_compute_impact_score():
     assert max_contrib_batt.ef_categories.iloc[0] == ('air', 'non-urban air or from high stacks')
     assert 98.78 <= max_contrib_batt.score.iloc[0] <= 98.79
 
+    req_technosphere_batt = df_req_technosphere[
+        (df_req_technosphere.Name == 'BATTERY')
+        & (df_req_technosphere.Type == 'Construction')
+        & (df_req_technosphere['Technosphere flow database'] == 'ecoinvent-3.9.1-cutoff')
+        & (df_req_technosphere['Technosphere flow code'] == '4aa647728332f25a2a4613bc060c7d90')  # market for high voltage electricity in France
+    ].Amount.iloc[0]
+
+    req_technosphere_train = df_req_technosphere[
+        (df_req_technosphere.Name == 'TRAIN_FREIGHT_DIESEL')
+        & (df_req_technosphere.Type == 'Construction')
+        & (df_req_technosphere['Technosphere flow database'] == 'ecoinvent-3.9.1-cutoff')
+        & (df_req_technosphere['Technosphere flow code'] == '4aa647728332f25a2a4613bc060c7d90')
+    ].Amount.iloc[0]
+
+    assert 2.321 <= req_technosphere_batt <= 2.322
+    assert 2.057 <= req_technosphere_train <= 2.058
+
     # Direct emissions module
     esm.df_activities_subject_to_double_counting = activities_subject_to_double_counting
 
-    R_direct, direct_df_contrib_results = esm.compute_impact_scores(
+    R_direct, direct_df_contrib_results, _ = esm.compute_impact_scores(
         assessment_type="direct emissions",
         methods=methods,
         impact_abbrev=impact_abbrev,
         specific_lcia_abbrev=['CC'],
         contribution_analysis=None,
+        req_technosphere=False,
     )
 
     direct_gwp_car = R_direct[

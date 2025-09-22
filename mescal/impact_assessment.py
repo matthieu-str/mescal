@@ -27,7 +27,8 @@ def compute_impact_scores(
         contribution_analysis: str = None,
         contribution_analysis_limit_type: str = 'number',
         contribution_analysis_limit: float or int = 5,
-) -> tuple[pd.DataFrame, pd.DataFrame | None]:
+        req_technosphere: bool = False,
+) -> tuple[pd.DataFrame, pd.DataFrame | None, pd.DataFrame | None]:
     """
     Compute the impact scores of the technologies and resources
 
@@ -47,8 +48,10 @@ def compute_impact_scores(
         Default is 'percent'.
     :param contribution_analysis_limit: number of values to return (if limit_type is 'number'), or percentage cutoff
         (if limit_type is 'percent'). Default is 0.01.
-    :return: impact scores dataframe of the technologies and resources for all selected impact categories, and
-        contribution analysis dataframe (would be None if contribution_analysis is None).
+    :param req_technosphere: if True, the function will compute the requirements for technosphere flows.
+    :return: impact scores dataframe of the technologies and resources for all selected impact categories,
+        contribution analysis dataframe (None if contribution_analysis is None), and technosphere flows requirements
+        dataframe (None if req_technosphere is False).
     """
 
     if assessment_type == 'direct emissions' and self.df_activities_subject_to_double_counting is None:
@@ -164,7 +167,8 @@ def compute_impact_scores(
         cs_name=calculation_setup_name,
         contribution_analysis=contribution_analysis,
         limit=contribution_analysis_limit,
-        limit_type=contribution_analysis_limit_type
+        limit_type=contribution_analysis_limit_type,
+        req_technosphere=req_technosphere,
     )
 
     R = pd.DataFrame(
@@ -219,6 +223,13 @@ def compute_impact_scores(
     else:
         df_contrib_analysis_results = None
 
+    if req_technosphere:
+        df_req_technosphere = multilca.df_req_technosphere
+        # multiply each column by its unit conversion factor
+        df_req_technosphere = df_req_technosphere * unit_conversion_code[df_req_technosphere.columns]
+    else:
+        df_req_technosphere = None
+
     if assessment_type == 'direct emissions':
         R_long = R.melt(ignore_index=False, var_name='New_code').reset_index()
         R_long.rename(columns={'index': 'Impact_category', 'value': 'Value'}, inplace=True)
@@ -228,10 +239,7 @@ def compute_impact_scores(
             how='left'
         )
 
-        if contribution_analysis is not None:
-            return R_long, df_contrib_analysis_results
-        else:
-            return R_long, None
+        return R_long, df_contrib_analysis_results, None
 
     R_tech_op = R[list(mapping[mapping.Type == 'Operation'].New_code)]
     R_tech_constr = R[list(mapping[mapping.Type == 'Construction'].New_code)]
@@ -248,6 +256,15 @@ def compute_impact_scores(
         df_contrib_analysis_results_op = None
         df_contrib_analysis_results_constr = None
         df_contrib_analysis_results_res = None
+
+    if req_technosphere:
+        df_req_technosphere_op = df_req_technosphere[list(mapping[mapping.Type == 'Operation'].New_code)]
+        df_req_technosphere_constr = df_req_technosphere[list(mapping[mapping.Type == 'Construction'].New_code)]
+        df_req_technosphere_res = df_req_technosphere[list(mapping[mapping.Type == 'Resource'].New_code)]
+    else:
+        df_req_technosphere_op = None
+        df_req_technosphere_constr = None
+        df_req_technosphere_res = None
 
     if lifetime is None:
         pass
@@ -278,6 +295,9 @@ def compute_impact_scores(
             df_contrib_analysis_results_constr['amount'] = (df_contrib_analysis_results_constr['amount'] /
                                                             df_contrib_analysis_results_constr['LCA'])
             df_contrib_analysis_results_constr.drop(columns=['Name', 'LCA'], inplace=True)
+
+        if req_technosphere:
+            df_req_technosphere_constr = df_req_technosphere_constr / lifetime_lca_code[df_req_technosphere_constr.columns]
 
     # Reading the list of subcomponents as a list (and not as a string)
     try:
@@ -351,6 +371,23 @@ def compute_impact_scores(
                 df_subcomp.index, inplace=True
             )
 
+        if req_technosphere:
+            df_req_technosphere_constr[new_code_composition] = len(df_req_technosphere_constr) * [0]  # initialize the new column
+
+            for j in range(1, len(subcomp_list) + 1):
+                df_req_technosphere_constr[new_code_composition] += df_req_technosphere_constr[
+                    technology_compositions.iloc[i][f'New_code_component_{j}']
+                ]  # sum up the requirements of the subcomponents
+
+            df_req_technosphere_constr[new_code_composition] *= float(
+                unit_conversion[
+                    (unit_conversion.Name == tech_name)
+                    & (unit_conversion.Type == 'Construction')].Value.iloc[0]
+            )  # multiply the composition column with its unit conversion factor
+
+            df_req_technosphere_constr.drop(columns=[technology_compositions.iloc[i][f'New_code_component_{j}']
+                                        for j in range(1, len(subcomp_list) + 1)], inplace=True)
+
     if contribution_analysis is not None:
         df_comp_all = pd.concat(df_comp_list)  # concatenate composition results in a single dataframe
 
@@ -401,6 +438,9 @@ def compute_impact_scores(
 
             df_contrib_analysis_results_constr.drop(columns=['Name', 'ESM'], inplace=True)
 
+        if req_technosphere:
+            df_req_technosphere_constr = df_req_technosphere_constr * lifetime_esm_code[df_req_technosphere_constr.columns]
+
     name_to_new_code = pd.concat([mapping[['Name', 'Type', 'New_code']],
                                   technology_compositions[['Name', 'Type', 'New_code']]])
 
@@ -408,16 +448,28 @@ def compute_impact_scores(
     R_long = R_long.reset_index().merge(right=name_to_new_code, on='New_code')
     R_long.rename(columns={'index': 'Impact_category', 'value': 'Value'}, inplace=True)
 
+    if req_technosphere:
+        df_req_technosphere = pd.concat([
+            df_req_technosphere_constr,
+            df_req_technosphere_op,
+            df_req_technosphere_res,
+        ], axis=1).melt(ignore_index=False, var_name='New_code')
+        df_req_technosphere.drop(index=df_req_technosphere.index[df_req_technosphere['value'] == 0], inplace=True)
+        df_req_technosphere = df_req_technosphere.reset_index().merge(right=name_to_new_code, on='New_code')
+        df_req_technosphere.rename(columns={
+            'level_0': 'Technosphere flow database',
+            'level_1': 'Technosphere flow code',
+            'value': 'Amount'
+        }, inplace=True)
+        df_req_technosphere.drop(columns=['New_code'], inplace=True)
+
     if contribution_analysis is not None:
         df_contrib_analysis_results = pd.concat(
             [df_contrib_analysis_results_constr, df_contrib_analysis_results_op, df_contrib_analysis_results_res],
             ignore_index=True,
         )
 
-        return R_long, df_contrib_analysis_results
-
-    else:
-        return R_long, None
+    return R_long, df_contrib_analysis_results, df_req_technosphere
 
 def validation_direct_carbon_emissions(
         self,
@@ -713,7 +765,15 @@ class MultiLCA(object):
         columns of LCIA methods. Ordering is the same as in the `calculation_setup`.
     """
 
-    def __init__(self, cs_name, contribution_analysis, limit, limit_type, log_config=None):
+    def __init__(
+            self,
+            cs_name: str,
+            contribution_analysis: bool,
+            limit: int or float,
+            limit_type: str,
+            req_technosphere: bool,
+            log_config=None,
+    ):
         """
         Initialize the MultiLCA_with_contribution_analysis class.
 
@@ -722,6 +782,7 @@ class MultiLCA(object):
         :param limit: number of values to return (if limit_type is 'number'), or percentage cutoff (if limit_type is
             'percent')
         :param limit_type: contribution analysis limit type, can be 'percent' or 'number'
+        :param req_technosphere: if True, the function will compute the requirements for technosphere flows
         :param log_config: log configuration for the LCA calculation
         """
 
@@ -739,6 +800,7 @@ class MultiLCA(object):
         self.limit = limit
         self.limit_type = limit_type
         df_res_list = []
+        req_tech_list = []
 
         self.func_units = cs['inv']
         self.methods = cs['ia']
@@ -755,6 +817,10 @@ class MultiLCA(object):
 
         for row, func_unit in tqdm(enumerate(self.func_units)):
             self.lca.redo_lci(func_unit)
+            if req_technosphere:
+                req_tech = pd.Series(np.multiply(self.lca.supply_array, self.lca.technosphere_matrix.diagonal()), self.lca.product_dict)
+                req_tech.name = list(func_unit.keys())[0][1]  # use the activity code as the column name (ESM database always)
+                req_tech_list.append(req_tech)
             for col, cf_matrix in enumerate(self.method_matrices):
                 self.lca.characterization_matrix = cf_matrix
                 self.lca.lcia_calculation()
@@ -810,6 +876,9 @@ class MultiLCA(object):
 
         if contribution_analysis is not None:
             self.df_res_concat = pd.concat(df_res_list, ignore_index=True)
+
+        if req_technosphere:
+            self.df_req_technosphere = pd.concat(req_tech_list, axis=1).fillna(0)
 
     @property
     def all(self):
