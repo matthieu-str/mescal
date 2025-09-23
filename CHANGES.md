@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.1] - 2025-09-23
+
+### Added
+- The `background_double_counting_removal` method (in `double_counting.py`) that creates a new version of the technosphere matrix where flows included in the ESM end-use demands are set to zero, thus preventing double-counting. This step is needed if the ESM end-use demands include the production and operation of new infrastructures. 
+- The `req_technosphere` argument to the `compute_impact_scores` method (in `impact_assessment.py`). If True, the method returns the technosphere flows requirements (life-cycle inventory) of the ESM technologies and resources. 
+- The `esm_end_use_demands` and `remove_double_counting_to` arguments to the `ESM` class in order to apply the double-counting removal process to infrastructure and resource datasets (in addition to operation datasets).
+- The `stop_background_search_when_first_flow_found` argument in the `ESM` class to stop or continue the background search for double-counting removal when the first flow of the targeted category is found (in `esm.py`).
+- The `_validation_double_counting` method (in `double_counting.py`, included in the `create_esm_database` method) to compare the flows removed during the double-counting removal process and the flows in the ESM.
+- The `validation_direct_carbon_emissions` method (in `impact_assessment.py`) comparing direct carbon emissions in the ESM and from the impact assessment phase (direct emissions module).
+
+### Changed
+- The type of the `regionalize_foregrounds` argument in the `ESM` class is now a string or list of string (instead of a boolean) in order to apply the foreground regionalization process only to certain types of LCI datasets (instead of all or none of them). 
+- The `harmonize_with_esm` argument of the `create_new_database_with_esm_results` method has been replaced by the two arguments `harmonize_efficiency_with_esm` and `harmonize_capacity_factor_with_esm` to be able to harmonize the efficiency and capacity factor separately (in `esm_back_to_lca.py`).
+
 ## [1.2.0] - 2025-07-08
 
 ### Added
