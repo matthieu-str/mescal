@@ -513,6 +513,7 @@ def test_correct_esm_and_lca_capacity_factor_differences():
         harmonize_efficiency_with_esm=False,
         harmonize_capacity_factor_with_esm=True,
         remove_background_construction_flows=False,
+        write_cp_report=False,
     )
 
     full_db = esm_with_res_db + esm.main_database

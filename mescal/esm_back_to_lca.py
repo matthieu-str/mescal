@@ -20,6 +20,7 @@ def create_new_database_with_esm_results(
         harmonize_capacity_factor_with_esm: bool = False,
         esm_results_db_name: str = None,
         name_capacity_factor_difference_file: str = 'capacity_factor_differences',
+        write_cp_report: bool = True,
 ) -> Database | None:
     """
     Create a new database with the ESM results
@@ -41,6 +42,7 @@ def create_new_database_with_esm_results(
         datasets with the ESM assumptions. It should be set to False if the background construction flows are removed.
     :param esm_results_db_name: name of the new database with the ESM results
     :param name_capacity_factor_difference_file: name of the file to save the capacity factor differences
+    :param write_cp_report: if True, save a csv file reporting capacity factors differences in the results folder
     :return: database of the ESM results if return_database is True, else None
     """
 
@@ -185,7 +187,7 @@ def create_new_database_with_esm_results(
         self.logger.info("Correcting capacity factor differences between ESM and LCI datasets...")
         self._correct_esm_and_lca_capacity_factor_differences(
             esm_results=esm_results,
-            write_cp_report=True,
+            write_cp_report=write_cp_report,
             name_capacity_factor_difference_file=name_capacity_factor_difference_file,
         )
 
