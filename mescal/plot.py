@@ -50,7 +50,7 @@ class Plot:
             saving_path: str = None,
             show_plot: bool = True,
             contributions_total_score: bool = False,
-    ):
+    ) -> None:
         """
         Plot operation and infrastructure LCA indicators for a set of technologies for a given impact category.
 
@@ -58,7 +58,7 @@ class Plot:
             to have a meaningful comparison
         :param impact_category: impact category to plot (brightway format)
         :param metadata: dictionary with metadata to include in the plot. It can include 'technologies_type',
-            'operation_unit', 'construction_unit'.
+            'operation_unit', 'construction_unit', 'impact_category_unit'.
         :param filename: name of the file to save the plot. If None, the plot is not saved.
         :param saving_format: format to save the plot, can be 'png', 'jpeg', 'pdf', 'html', etc. Default is 'png'.
         :param saving_path: path to save the plot under the form 'path/to/folder/'. If None, the plot is saved in the
@@ -79,7 +79,17 @@ class Plot:
             if tech not in R['Name'].unique():
                 raise ValueError(f'Technology {tech} not found in the LCA indicators dataframe')
 
-        unit = bd.Method(impact_category).metadata['unit']
+        try:
+            unit = bd.Method(impact_category).metadata['unit']
+        except:
+            if 'impact_category_unit' in metadata:
+                unit = metadata['impact_category_unit']
+            else:
+                unit = 'impact unit'
+                print('Please set the current brightway project to one where the impact category is present or provide '
+                      'a physical unit to the impact category in the metadata dictionary by filling the '
+                      '"impact_category_unit" key.')
+
         impact_category_name = impact_category[-1]
 
         if 'technologies_type' in metadata:
@@ -135,7 +145,7 @@ class Plot:
                     marker=dict(color=color_scale[i % len(color_scale)]),
                     hovertemplate=
                     '<br><b>Technology</b>: %{x}</br>' +
-                    '<b>Value</b>: %{y:.2e}' + f' {unit}</br>',
+                    '<b>Value</b>: %{y:.2e}' + f' {operation_unit}</br>',
                 ))
 
                 data_constr.append(go.Bar(
@@ -145,7 +155,7 @@ class Plot:
                     marker=dict(color=color_scale[i % len(color_scale)]),
                     hovertemplate=
                     '<br><b>Technology</b>: %{x}</br>' +
-                    '<b>Value</b>: %{y:.2e}' + f' {unit}</br>',
+                    '<b>Value</b>: %{y:.2e}' + f' {construction_unit}</br>',
                 ))
 
             # Add bar chart for operation
@@ -168,7 +178,7 @@ class Plot:
                     name='Operation',
                     hovertemplate=
                     '<br><b>Technology</b>: %{x}</br>' +
-                    '<b>Value</b>: %{y:.2e}' + f' {unit}</br>',
+                    '<b>Value</b>: %{y:.2e}' + f' {operation_unit}</br>',
                 ),
                 row=1, col=1
             )
@@ -181,7 +191,7 @@ class Plot:
                     name='Construction',
                     hovertemplate=
                     '<br><b>Technology</b>: %{x}</br>' +
-                    '<b>Value</b>: %{y:.2e}' + f' {unit}</br>',
+                    '<b>Value</b>: %{y:.2e}' + f' {construction_unit}</br>',
                 ),
                 row=1, col=2
             )
@@ -221,14 +231,15 @@ class Plot:
             saving_path: str = None,
             show_plot: bool = True,
             contributions_total_score: bool = False,
-    ):
+    ) -> None:
         """
         Plot operation LCA indicators for a set of resources for a given impact category.
 
         :param resources_list: list of technologies to plot. They should have the same operation/infrastructure units
             to have a meaningful comparison
         :param impact_category: impact category to plot (brightway format)
-        :param metadata: dictionary with metadata to include in the plot. It can include 'resources_type', 'unit'.
+        :param metadata: dictionary with metadata to include in the plot. It can include 'resources_type', 'unit',
+            'impact_category_unit'.
         :param filename: name of the file to save the plot. If None, the plot is not saved.
         :param saving_format: format to save the plot, can be 'png', 'jpeg', 'pdf', 'html', etc. Default is 'png'.
         :param saving_path: path to save the plot under the form 'path/to/folder/'. If None, the plot is saved in the
@@ -249,7 +260,17 @@ class Plot:
             if res not in R['Name'].unique():
                 raise ValueError(f'Resource {res} not found in the LCA indicators dataframe')
 
-        unit = bd.Method(impact_category).metadata['unit']
+        try:
+            unit = bd.Method(impact_category).metadata['unit']
+        except:
+            if 'impact_category_unit' in metadata:
+                unit = metadata['impact_category_unit']
+            else:
+                unit = 'impact unit'
+                print('Please set the current brightway project to one where the impact category is present or provide '
+                      'a physical unit to the impact category in the metadata dictionary by filling the '
+                      '"impact_category_unit" key.')
+
         impact_category_name = impact_category[-1]
 
         if 'resources_type' in metadata:
@@ -330,18 +351,22 @@ class Plot:
     def plot_indicators_of_technologies_for_several_impact_categories(
             self,
             technologies_list: list[str],
-            impact_categories_list: list[tuple],
+            impact_categories_list: list[tuple] = None,
+            impact_categories_units: dict[tuple] = None,
             filename: str = None,
             saving_format: str = 'png',
             saving_path: str = None,
             show_plot: bool = True,
-    ):
+    ) -> None:
         """
         Plot operation and infrastructure LCA indicators for a set of technologies for a set of impact categories.
 
         :param technologies_list: list of technologies to plot. They should have the same operation/infrastructure units
             to have a meaningful comparison
-        :param impact_categories_list: list of impact category to plot (brightway format)
+        :param impact_categories_list: list of impact category to plot (brightway format). Not needed if
+            impact_categories_units is provided.
+        :param impact_categories_units: dictionary with physical units for each impact category. Not needed if the
+            impact categories are available in the current brightway project.
         :param filename: name of the file to save the plot. If None, the plot is not saved.
         :param saving_format: format to save the plot, can be 'png', 'jpeg', 'pdf', 'html', etc. Default is 'png'.
         :param saving_path: path to save the plot under the form 'path/to/folder/'. If None, the plot is saved in the
@@ -359,6 +384,16 @@ class Plot:
             if tech not in R['Name'].unique():
                 raise ValueError(f'Technology {tech} not found in the LCA indicators dataframe')
 
+        if impact_categories_list is None and impact_categories_units is None:
+            raise ValueError('Please provide either a list of impact categories or a dictionary with impact categories '
+                             'and their physical units')
+
+        if impact_categories_list is None and impact_categories_units is not None:
+            impact_categories_list = list(impact_categories_units.keys())
+
+        if impact_categories_units is None:
+            impact_categories_units = {}
+
         for impact_category in impact_categories_list:
             if str(impact_category) not in R['Impact_category'].unique():
                 raise ValueError(f'Impact category {impact_category} not found in the LCA indicators dataframe')
@@ -370,7 +405,16 @@ class Plot:
 
         for i, impact_category in enumerate(impact_categories_list):
 
-            unit = bd.Method(impact_category).metadata['unit']
+            try:
+                unit = bd.Method(impact_category).metadata['unit']
+            except:
+                if impact_category in impact_categories_units:
+                    unit = impact_categories_units[impact_category]
+                else:
+                    unit = 'impact unit'
+                    if i == 0:
+                        print('Please set the current brightway project to one where the impact categories are present'
+                              ' or provide physical units in the impact_categories_units dictionary.')
 
             df_op = R[
                 (R['Name'].isin(technologies_list))
@@ -452,18 +496,22 @@ class Plot:
     def plot_indicators_of_resources_for_several_impact_categories(
             self,
             resources_list: list[str],
-            impact_categories_list: list[tuple],
+            impact_categories_list: list[tuple] = None,
+            impact_categories_units: dict[tuple] = None,
             filename: str = None,
             saving_format: str = 'png',
             saving_path: str = None,
             show_plot: bool = True,
-    ):
+    ) -> None:
         """
         Plot LCA indicators for a set of resources for a set of impact categories.
 
         :param resources_list: list of technologies to plot. They should have the same operation/infrastructure units
             to have a meaningful comparison
-        :param impact_categories_list: list of impact category to plot (brightway format)
+        :param impact_categories_list: list of impact category to plot (brightway format). Not needed if
+            impact_categories_units is provided.
+        :param impact_categories_units: dictionary with physical units for each impact category. Not needed if the
+            impact categories are available in the current brightway project.
         :param filename: name of the file to save the plot. If None, the plot is not saved.
         :param saving_format: format to save the plot, can be 'png', 'jpeg', 'pdf', 'html', etc. Default is 'png'.
         :param saving_path: path to save the plot under the form 'path/to/folder/'. If None, the plot is saved in the
@@ -481,6 +529,16 @@ class Plot:
             if res not in R['Name'].unique():
                 raise ValueError(f'Resource {res} not found in the LCA indicators dataframe')
 
+        if impact_categories_list is None and impact_categories_units is None:
+            raise ValueError('Please provide either a list of impact categories or a dictionary with impact categories '
+                             'and their physical units')
+
+        if impact_categories_list is None and impact_categories_units is not None:
+            impact_categories_list = list(impact_categories_units.keys())
+
+        if impact_categories_units is None:
+            impact_categories_units = {}
+
         for impact_category in impact_categories_list:
             if str(impact_category) not in R['Impact_category'].unique():
                 raise ValueError(f'Impact category {impact_category} not found in the LCA indicators dataframe')
@@ -489,7 +547,17 @@ class Plot:
 
         for impact_category in impact_categories_list:
 
-            unit = bd.Method(impact_category).metadata['unit']
+            try:
+                unit = bd.Method(impact_category).metadata['unit']
+            except:
+                if impact_category in impact_categories_units:
+                    unit = impact_categories_units[impact_category]
+                else:
+                    unit = 'impact unit'
+                    if impact_category == impact_categories_list[0]:
+                        print('Please set the current brightway project to one where the impact categories are present '
+                              'or provide physical units in the impact_categories_units dictionary.')
+
             df = R[(R['Name'].isin(resources_list)) & (R['Impact_category'] == str(impact_category))]
 
             data.append(go.Bar(
@@ -531,7 +599,8 @@ class Plot:
 
     def plot_results(
             self,
-            impact_categories_list: list[tuple],
+            impact_categories_list: list[tuple] = None,
+            impact_categories_units: dict[tuple] = None,
             split_by: str = 'Type',
             N_highest_contributors: int = 0,
             normalized: bool = False,
@@ -540,11 +609,14 @@ class Plot:
             saving_format: str = 'png',
             saving_path: str = None,
             show_plot: bool = True,
-    ):
+    ) -> None:
         """
         Plot the environmental impact results
 
-        :param impact_categories_list: list of impact categories to plot (brightway format)
+        :param impact_categories_list: list of impact categories to plot (brightway format). Not needed if
+            impact_categories_units is provided.
+        :param impact_categories_units: dictionary with physical units for each impact category. Not needed if
+            the impact categories are available in the current brightway project.
         :param split_by: can be 'Type' (for life-cycle phases) or 'Name' (for technologies and resources)
         :param N_highest_contributors: if split_by is 'Name', the number of highest contributors to show
         :param normalized: if True, the impacts are normalized by the total impact of the category
@@ -575,6 +647,16 @@ class Plot:
         if split_by == 'Type' and N_highest_contributors > 0:
             raise ValueError('Cannot split by Type and show the N highest contributors at the same time')
 
+        if impact_categories_list is None and impact_categories_units is None:
+            raise ValueError('Please provide either a list of impact categories or a dictionary with impact categories '
+                             'and their physical units')
+
+        if impact_categories_list is None and impact_categories_units is not None:
+            impact_categories_list = list(impact_categories_units.keys())
+
+        if impact_categories_units is None:
+            impact_categories_units = {}
+
         impact_categories_names = {}
         for cat in impact_categories_list:
             impact_categories_names[str(cat)] = {}
@@ -582,7 +664,17 @@ class Plot:
             if normalized:
                 impact_categories_names[str(cat)]['unit'] = '%'
             else:
-                impact_categories_names[str(cat)]['unit'] = bd.Method(cat).metadata['unit']
+                try:
+                    impact_categories_names[str(cat)]['unit'] = bd.Method(cat).metadata['unit']
+                except:
+                    if cat in impact_categories_units:
+                        impact_categories_names[str(cat)]['unit'] = impact_categories_units[cat]
+                    else:
+                        impact_categories_names[str(cat)]['unit'] = 'impact unit'
+                        if cat == impact_categories_list[0]:
+                            print('Please set the current brightway project to one where impact categories are present '
+                                  'or provide physical units to the impact category in the impact_categories_units '
+                                  'dictionary.')
 
         R = R[R['Impact_category'].isin([str(cat) for cat in impact_categories_list])]
 
@@ -652,6 +744,8 @@ class Plot:
             lambda category: impact_categories_names[category]["name"]
         )
 
+        df_all['custom_hover'] = df_all[x].map(lambda v: f'{v:{number_writing}}') + ' ' + df_all['Impact_category_unit']
+
         fig = px.bar(
             data_frame=df_all,
             x=x,
@@ -662,6 +756,7 @@ class Plot:
             labels={'Impact_category': 'Impact categories'},
             template='plotly_white',
             text_auto=".2s",
+            custom_data=['custom_hover'],
         )
 
         # Update layout
@@ -669,8 +764,7 @@ class Plot:
             insidetextanchor='middle',
             hovertemplate=
             '<br><b>Impact category</b>: %{y}</br>' +
-            f'<b>{x}</b>: %{{x:{number_writing}}} %{{text}}</br>',
-            text=df_all['Impact_category_unit'],
+            f'<b>{x}</b>: %{{customdata}}</br>',
         )
 
         # Show plot
