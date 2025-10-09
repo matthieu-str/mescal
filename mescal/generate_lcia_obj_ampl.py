@@ -75,7 +75,7 @@ def generate_mod_file_ampl(
                         'var LCIA_constr {INDICATORS,TECHNOLOGIES,YEARS};\n'
                         'var LCIA_op {INDICATORS,TECHNOLOGIES,YEARS};\n'
                         'var LCIA_res {INDICATORS,RESOURCES,YEARS};\n'
-                        'var TotalLCIA {INDICATORS,YEARS} >= 0;\n\n')
+                        'var TotalLCIA {INDICATORS,YEARS};\n\n')
             elif assessment_type == 'direct emissions':
                 if self.operation_metrics_for_all_time_steps:
                     f.write('param direct_op {INDICATORS,TECHNOLOGIES,YEARS,YEARS} default 0;\n')
@@ -83,7 +83,7 @@ def generate_mod_file_ampl(
                     f.write('param direct_op {INDICATORS,TECHNOLOGIES,YEARS} default 0;\n')
                 f.write('param limit_direct {INDICATORS,YEARS} default 1e10;\n'
                         'var DIRECT_op {INDICATORS,TECHNOLOGIES,YEARS};\n'
-                        'var TotalDIRECT {INDICATORS,YEARS} >= 0;\n\n')
+                        'var TotalDIRECT {INDICATORS,YEARS};\n\n')
 
             if assessment_type == 'esm':
                 # Equation of LCIAs variables (construction scaling to F_Mult)
@@ -137,12 +137,12 @@ def generate_mod_file_ampl(
                         'var LCIA_constr {INDICATORS,TECHNOLOGIES};\n'
                         'var LCIA_op {INDICATORS,TECHNOLOGIES};\n'
                         'var LCIA_res {INDICATORS,RESOURCES};\n'
-                        'var TotalLCIA {INDICATORS} >= 0;\n\n')
+                        'var TotalLCIA {INDICATORS};\n\n')
             elif assessment_type == 'direct emissions':
                 f.write('param direct_op {INDICATORS,TECHNOLOGIES} default 0;\n'
                         'param limit_direct {INDICATORS} default 1e10;\n'
                         'var DIRECT_op {INDICATORS,TECHNOLOGIES};\n'
-                        'var TotalDIRECT {INDICATORS} >= 0;\n\n')
+                        'var TotalDIRECT {INDICATORS};\n\n')
 
             if assessment_type == 'esm':
                 # Equation of LCIAs variables (construction scaling to F_Mult)
