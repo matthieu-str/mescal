@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.2] - 2025-10-13
+
+### Changed
+- The `Plot` class works without setting a brightway project (in `plot.py`), in preparation for [EnergyScope Symposium 2025](https://forum.energyscope.net/t/energyscope-symposium-2025-save-the-date/19).
+- The optimization variables modeling the environmental impacts can be negative, thus allowing for net-negative configurations (in `generate_lcia_obj_ampl.py`).
+
 ## [1.2.1] - 2025-09-23
 
 ### Added
