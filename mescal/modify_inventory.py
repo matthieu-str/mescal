@@ -256,6 +256,7 @@ def add_carbon_dioxide_flow(
         activity_name: str = None,
         activity_code: str = None,
         biosphere_db_name: str = None,
+        co2_flow_type: str = 'fossil',
 ) -> None:
     """
     Add a carbon dioxide flow to an activity
@@ -266,6 +267,8 @@ def add_carbon_dioxide_flow(
     :param activity_code: code of the activity to be changed
     :param amount: amount of the carbon dioxide flow
     :param biosphere_db_name: name of the biosphere database. Default is 'biosphere3'.
+    :param co2_flow_type: type of carbon dioxide flow to add. Can be 'fossil', 'non-fossil', 'from soil or
+        biomass stock', 'in air', or 'non-fossil, resource correction'. Default is 'fossil'.
     :return: None (changes are saved in the database)
     """
     if biosphere_db_name is None:
@@ -280,9 +283,14 @@ def add_carbon_dioxide_flow(
     else:
         raise ValueError("Either 'activity_name' or 'activity_code' should be provided")
 
-    co2_flow = [bio_act for bio_act in bd.Database(biosphere_db_name).search('Carbon dioxide, fossil', limit=1000) if (
-        (bio_act['name'] == 'Carbon dioxide, fossil')
-        & (bio_act['categories'] == ('air',))
+    if co2_flow_type in ['fossil', 'non-fossil', 'from soil or biomass stock']:
+        category = ('air',)  # emission
+    else:
+        category = ('natural resource', 'in air')  # resource
+
+    co2_flow = [bio_act for bio_act in bd.Database(biosphere_db_name).search(f'Carbon dioxide, {co2_flow_type}', limit=1000) if (
+        (bio_act['name'] == f'Carbon dioxide, {co2_flow_type}')
+        & (bio_act['categories'] == category)
     )][0]
 
     new_co2_flow = act.new_exchange(

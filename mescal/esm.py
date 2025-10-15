@@ -7,6 +7,7 @@ from pathlib import Path
 from .modify_inventory import *
 from .database import Database, Dataset
 from .utils import random_code
+import re
 
 
 class ESM:
@@ -832,6 +833,30 @@ class ESM:
                         factor=float(factor),
                     )
 
+        # Add a CO2 flow to an activity
+        add_fossil_carbon_flows_tech = self.tech_specifics[self.tech_specifics.Specifics.str.startswith('Add CO2')][
+            ['Specifics', 'Name', 'Amount']].values.tolist()
+        for spec, tech, amount in add_fossil_carbon_flows_tech:
+            co2_flow_type = re.search(r'\((.*?)\)', spec).group(1)
+            activity_name_or_code = self._get_activity_name_or_code(tech=tech, return_type=return_type, phase='Resource')
+            if activity_name_or_code in [act[return_type] for act in db.db_as_list]:
+                if return_type == 'name':
+                    add_carbon_dioxide_flow(
+                        db_name=db_name,
+                        activity_name=activity_name_or_code,
+                        amount=float(amount),
+                        biosphere_db_name=biosphere_db_name,
+                        co2_flow_type=co2_flow_type,
+                    )
+                elif return_type == 'code':
+                    add_carbon_dioxide_flow(
+                        db_name=db_name,
+                        activity_code=activity_name_or_code,
+                        amount=float(amount),
+                        biosphere_db_name=biosphere_db_name,
+                        co2_flow_type=co2_flow_type,
+                    )
+
         # Add carbon capture to plant
         add_carbon_capture_tech = self.tech_specifics[self.tech_specifics.Specifics == 'Add CC'][
             ['Name', 'Amount']].values.tolist()
@@ -868,7 +893,7 @@ class ESM:
 
         :param tech: name of the ESM technology
         :param return_type: type of return, can be 'name' or 'code'
-        :param phase: phase of the technology, can be 'Operation' or 'Construction'
+        :param phase: phase of the technology, can be 'Operation', 'Construction' or 'Resource'
         :return: name or code
         """
         if return_type == 'name':
