@@ -46,6 +46,7 @@ self
 content/usage
 content/methods
 content/glossary
+content/user_inputs
 content/api/index
 content/codeofconduct
 content/contributing

@@ -50,6 +50,7 @@ intersphinx_mapping = {
 html_theme = "sphinx_rtd_theme"
 html_title = "mescal"
 html_show_sphinx = False
+html_static_path = ['_static']
 
 html_theme_options = {
     'logo_only': False,
@@ -82,6 +83,7 @@ myst_enable_extensions = [
     "deflist",
     "dollarmath",
     "html_image",
+    "html_admonition",
 ]
 
 ## autoapi configuration ################################################
