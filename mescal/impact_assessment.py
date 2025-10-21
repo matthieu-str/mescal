@@ -762,13 +762,13 @@ class MultiLCA(object):
     Needs to be passed a ``calculation_setup`` name.
     This class does not subclass the `LCA` class, and performs all calculations upon instantiation.
     Initialization creates `self.results`, which is a NumPy array of LCA scores, with rows of functional units and
-        columns of LCIA methods. Ordering is the same as in the `calculation_setup`.
+    columns of LCIA methods. Ordering is the same as in the `calculation_setup`.
     """
 
     def __init__(
             self,
             cs_name: str,
-            contribution_analysis: bool,
+            contribution_analysis: str,
             limit: int or float,
             limit_type: str,
             req_technosphere: bool,
@@ -778,7 +778,9 @@ class MultiLCA(object):
         Initialize the MultiLCA_with_contribution_analysis class.
 
         :param cs_name: name of the calculation setup to use
-        :param contribution_analysis: if True, the function will perform contribution analysis
+        :param contribution_analysis: if 'emissions', the function will return the contribution analysis of top
+            elementary flows. If 'processes', the function will return the contribution analysis of top processes.
+            If 'both', it will return both.
         :param limit: number of values to return (if limit_type is 'number'), or percentage cutoff (if limit_type is
             'percent')
         :param limit_type: contribution analysis limit type, can be 'percent' or 'number'
