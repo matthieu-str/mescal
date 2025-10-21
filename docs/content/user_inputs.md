@@ -30,7 +30,7 @@ The table below has the following columns:
 
 <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 <script>
-const csvPath = '/_static/mapping_generic.csv';
+const csvPath = '../_static/mapping_generic.csv';
 const formLink = 'https://forms.gle/3Yu1qjrpMp7gMfgH8';
 
 fetch(csvPath)
