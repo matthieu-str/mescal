@@ -25,6 +25,7 @@ extensions = [
     # theme
     'sphinx_rtd_theme',
     # Markdown support
+    "nbsphinx",
     'myst_parser',
     # API documentation support
     'autoapi',
@@ -34,7 +35,7 @@ extensions = [
     "sphinx_copybutton",
 ]
 
-exclude_patterns = ['_build']
+exclude_patterns = ['_build', '**.ipynb_checkpoints']
 
 # The master toctree document.
 master_doc = 'index'
@@ -85,6 +86,8 @@ myst_enable_extensions = [
     "html_image",
     "html_admonition",
 ]
+
+nbsphinx_execute = 'never'
 
 ## autoapi configuration ################################################
 ## https://sphinx-autoapi.readthedocs.io/en/latest/reference/config.html#customisation-options

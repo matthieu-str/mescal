@@ -43,7 +43,7 @@ hidden:
 maxdepth: 1
 ---
 self
-content/usage
+examples/tutorial.ipynb
 content/methods
 content/glossary
 content/user_inputs
