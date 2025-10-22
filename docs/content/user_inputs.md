@@ -22,7 +22,6 @@ The table below has the following columns:
 <button id="download-btn">⬇️ Download CSV</button>
 <button id="form-btn">📝 Suggest an edit</button>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
 
@@ -53,6 +52,7 @@ fetch(csvPath)
     document.getElementById('form-btn').onclick = () => window.open(formLink, '_blank');
   });
 </script>
+<script>document.addEventListener('DOMContentLoaded', ()=>{});</script>
 
 ## Unit conversion factors
 
@@ -69,10 +69,9 @@ The table below has the following columns:
 
 <div id="conv-table-container"></div>
 
-<button id="conv-download-btn">⬇️ Download CSV</button>
+<button id="conv-download-btn">⬇️ Download Excel</button>
 <button id="conv-form-btn">📝 Suggest an edit</button>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
 
@@ -103,6 +102,7 @@ fetch(csvPathConv)
     document.getElementById('conv-form-btn').onclick = () => window.open(formLinkConv, '_blank');
   });
 </script>
+<script>document.addEventListener('DOMContentLoaded', ()=>{});</script>
 
 ## Mapping between ESM vectors and CPC categories
 
@@ -118,7 +118,6 @@ The table below has the following columns:
 <button id="cpc-download-btn">⬇️ Download CSV</button>
 <button id="cpc-form-btn">📝 Suggest an edit</button>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
 
@@ -149,6 +148,7 @@ fetch(csvPathCPC)
     document.getElementById('cpc-form-btn').onclick = () => window.open(formLinkCPC, '_blank');
   });
 </script>
+<script>document.addEventListener('DOMContentLoaded', ()=>{});</script>
 
 ## References
 
