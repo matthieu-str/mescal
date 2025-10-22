@@ -88,6 +88,7 @@ myst_enable_extensions = [
 ]
 
 nbsphinx_execute = 'never'
+nbsphinx_allow_scripts = True
 
 ## autoapi configuration ################################################
 ## https://sphinx-autoapi.readthedocs.io/en/latest/reference/config.html#customisation-options

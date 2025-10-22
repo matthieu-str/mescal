@@ -18,41 +18,47 @@ The table below has the following columns:
 - **Activity**: Name of the corresponding LCI dataset activity.
 
 <div id="table-container"></div>
-
 <button id="download-btn">⬇️ Download CSV</button>
 <button id="form-btn">📝 Suggest an edit</button>
 
-<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-
-<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 <script>
-const csvPath = '../_static/mapping_generic.csv';
-const formLink = 'https://forms.gle/dkqB3qa92oETEow97';
+  // Disable AMD temporarily
+  var define_backup = window.define;
+  window.define = undefined;
+</script>
 
-fetch(csvPath)
-  .then(response => response.text())
-  .then(data => {
-    const parsed = Papa.parse(data.trim(), { skipEmptyLines: true });
-    const rows = parsed.data;
-    const headers = rows[0];
-    const body = rows.slice(1).filter(r => r.length === headers.length);
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 
-    let html = '<table id="data-table" class="display"><thead><tr>';
-    headers.forEach(h => html += `<th>${h}</th>`);
-    html += '</tr></thead><tbody>';
-    body.forEach(r => {
-      html += '<tr>' + r.map(c => `<td>${c}</td>`).join('') + '</tr>';
-    });
-    html += '</tbody></table>';
-    document.getElementById('table-container').innerHTML = html;
+<script>
+  window.define = define_backup;
 
-    $('#data-table').DataTable();
-    document.getElementById('download-btn').onclick = () => window.open(csvPath);
-    document.getElementById('form-btn').onclick = () => window.open(formLink, '_blank');
+  document.addEventListener('DOMContentLoaded', function() {
+    const csvPath = '../_static/mapping_generic.csv';
+    const formLink = 'https://forms.gle/dkqB3qa92oETEow97';
+    
+    fetch(csvPath)
+      .then(response => response.text())
+      .then(data => {
+        const parsed = Papa.parse(data.trim(), { skipEmptyLines: true });
+        const rows = parsed.data;
+        const headers = rows[0];
+        const body = rows.slice(1).filter(r => r.length === headers.length);
+
+        let html = '<table id="data-table-1" class="display"><thead><tr>';
+        headers.forEach(h => html += `<th>${h}</th>`);
+        html += '</tr></thead><tbody>';
+        body.forEach(r => html += '<tr>' + r.map(c => `<td>${c}</td>`).join('') + '</tr>');
+        html += '</tbody></table>';
+
+        document.getElementById('table-container').innerHTML = html;
+        $('#data-table-1').DataTable();
+        document.getElementById('download-btn').onclick = () => window.open(csvPath);
+        document.getElementById('form-btn').onclick = () => window.open(formLink, '_blank');
+      });
   });
 </script>
-<script>document.addEventListener('DOMContentLoaded', ()=>{});</script>
 
 ## Unit conversion factors
 
@@ -68,41 +74,35 @@ The table below has the following columns:
 - **Assumptions & Sources**: Any assumptions made or sources used to determine the conversion factor.
 
 <div id="conv-table-container"></div>
-
 <button id="conv-download-btn">⬇️ Download Excel</button>
 <button id="conv-form-btn">📝 Suggest an edit</button>
 
-<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-
-<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 <script>
-const csvPathConv = '../_static/unit_conversion_generic.csv';
-const formLinkConv = 'https://forms.gle/G6Uo2YJVZiRrnK4f9';
+document.addEventListener('DOMContentLoaded', function() {
+  const csvPathConv = '../_static/unit_conversion_generic.csv';
+  const formLinkConv = 'https://forms.gle/G6Uo2YJVZiRrnK4f9';
 
-fetch(csvPathConv)
-  .then(response => response.text())
-  .then(data => {
-    const parsed = Papa.parse(data.trim(), { skipEmptyLines: true });
-    const rows = parsed.data;
-    const headers = rows[0];
-    const body = rows.slice(1).filter(r => r.length === headers.length);
+  fetch(csvPathConv)
+    .then(response => response.text())
+    .then(data => {
+      const parsed = Papa.parse(data.trim(), { skipEmptyLines: true });
+      const rows = parsed.data;
+      const headers = rows[0];
+      const body = rows.slice(1).filter(r => r.length === headers.length);
 
-    let html = '<table id="data-table" class="display"><thead><tr>';
-    headers.forEach(h => html += `<th>${h}</th>`);
-    html += '</tr></thead><tbody>';
-    body.forEach(r => {
-      html += '<tr>' + r.map(c => `<td>${c}</td>`).join('') + '</tr>';
+      let html = '<table id="data-table-2" class="display"><thead><tr>';
+      headers.forEach(h => html += `<th>${h}</th>`);
+      html += '</tr></thead><tbody>';
+      body.forEach(r => html += '<tr>' + r.map(c => `<td>${c}</td>`).join('') + '</tr>');
+      html += '</tbody></table>';
+
+      document.getElementById('conv-table-container').innerHTML = html;
+      $('#data-table-2').DataTable();
+      document.getElementById('conv-download-btn').onclick = () => window.open(csvPathConv);
+      document.getElementById('conv-form-btn').onclick = () => window.open(formLinkConv, '_blank');
     });
-    html += '</tbody></table>';
-    document.getElementById('conv-table-container').innerHTML = html;
-
-    $('#data-table').DataTable();
-    document.getElementById('conv-download-btn').onclick = () => window.open(csvPathConv);
-    document.getElementById('conv-form-btn').onclick = () => window.open(formLinkConv, '_blank');
-  });
+});
 </script>
-<script>document.addEventListener('DOMContentLoaded', ()=>{});</script>
 
 ## Mapping between ESM vectors and CPC categories
 
@@ -114,41 +114,35 @@ The table below has the following columns:
 - **CPC**: List of corresponding CPC categories.
 
 <div id="cpc-table-container"></div>
-
 <button id="cpc-download-btn">⬇️ Download CSV</button>
 <button id="cpc-form-btn">📝 Suggest an edit</button>
 
-<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-
-<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 <script>
-const csvPathCPC = '../_static/mapping_vectors_to_cpc.csv';
-const formLinkCPC = 'https://forms.gle/JoStgTnf41VUccTr8';
+document.addEventListener('DOMContentLoaded', function() {
+  const csvPathCPC = '../_static/mapping_vectors_to_cpc.csv';
+  const formLinkCPC = 'https://forms.gle/JoStgTnf41VUccTr8';
 
-fetch(csvPathCPC)
-  .then(response => response.text())
-  .then(data => {
-    const parsed = Papa.parse(data.trim(), { skipEmptyLines: true });
-    const rows = parsed.data;
-    const headers = rows[0];
-    const body = rows.slice(1).filter(r => r.length === headers.length);
+  fetch(csvPathCPC)
+    .then(response => response.text())
+    .then(data => {
+      const parsed = Papa.parse(data.trim(), { skipEmptyLines: true });
+      const rows = parsed.data;
+      const headers = rows[0];
+      const body = rows.slice(1).filter(r => r.length === headers.length);
 
-    let html = '<table id="data-table" class="display"><thead><tr>';
-    headers.forEach(h => html += `<th>${h}</th>`);
-    html += '</tr></thead><tbody>';
-    body.forEach(r => {
-      html += '<tr>' + r.map(c => `<td>${c}</td>`).join('') + '</tr>';
+      let html = '<table id="data-table-3" class="display"><thead><tr>';
+      headers.forEach(h => html += `<th>${h}</th>`);
+      html += '</tr></thead><tbody>';
+      body.forEach(r => html += '<tr>' + r.map(c => `<td>${c}</td>`).join('') + '</tr>');
+      html += '</tbody></table>';
+
+      document.getElementById('cpc-table-container').innerHTML = html;
+      $('#data-table-3').DataTable();
+      document.getElementById('cpc-download-btn').onclick = () => window.open(csvPathCPC);
+      document.getElementById('cpc-form-btn').onclick = () => window.open(formLinkCPC, '_blank');
     });
-    html += '</tbody></table>';
-    document.getElementById('cpc-table-container').innerHTML = html;
-
-    $('#data-table').DataTable();
-    document.getElementById('cpc-download-btn').onclick = () => window.open(csvPathCPC);
-    document.getElementById('cpc-form-btn').onclick = () => window.open(formLinkCPC, '_blank');
-  });
+});
 </script>
-<script>document.addEventListener('DOMContentLoaded', ()=>{});</script>
 
 ## References
 
