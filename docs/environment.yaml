@@ -21,5 +21,7 @@ dependencies:
   - sphinx-autoapi # to build docs from source code instead of package import # https://anaconda.org/conda-forge/sphinx-autoapi/files
   - sphinx-notfound-page # custom 404 page # https://anaconda.org/conda-forge/sphinx-notfound-page/files
   - sphinx-copybutton # for copy button in code blocks # https://anaconda.org/conda-forge/sphinx-copybutton/files
+  - nbsphinx # Jupyter Notebook support # https://anaconda.org/conda-forge/nbsphinx/files
+  - nbconvert # Jupyter Notebook conversion # https://anaconda.org/conda-forge/nbconvert/files
   # build process
   - sphinx-autobuild # live-html support # https://anaconda.org/conda-forge/sphinx-autobuild/files
