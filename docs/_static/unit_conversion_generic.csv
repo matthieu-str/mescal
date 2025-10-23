@@ -258,7 +258,7 @@ Diesel to Storage,Construction,=1 / (16000*846*11.83),unit,kilowatt hour,"LHV di
 Direct Usage of stored CO2 ,Operation,1,kilogram,kilogram,None
 Deep Oil Reservoir Gas Recovery,Operation,1,kilogram,kilogram,None
 Electric Grid at Extra High Voltage,Construction,=(11.5/0.5) * (1700/500) / 1000000,kilometer,kilowatt,"mean extreme high pressure electricity grid power ($P_{EHP} $ = 1700 MW), typical power size connected to the high-voltage electricity grid ($P_{HV}$ = 500 MW), mean high-voltage electricity grid transportation length ($l_{HV}$ = 11.5 km): (Schnidrig, 2023)"
-Electricity (high voltage),Resource,=1,kilowatt hour,kilowatt hour,None
+Electricity import,Resource,=1,kilowatt hour,kilowatt hour,None
 Electricity exports,Resource,=-1,kilowatt hour,kilowatt hour,Impacts of exports are counted negatively
 Electricity Storage,Construction,=1 / 0.114,kilogram,kilowatt hour,"Li-ion battery energy density (0.114 kWh/kg): (Notter, 2010)"
 Enhanced Oil Recovery,Operation,1,kilogram,kilogram,None
@@ -304,7 +304,7 @@ Hydrogen Compression from Low Pressure to Medium Pressure,Construction,=1/27.7 /
 Hydrogen Compression from Low Pressure to Medium Pressure,Operation,=1 / 33.3,kilogram,kilowatt hour,"H2 LHV (33.3 kWh/kg): (Engineering ToolBox, 2003)"
 Hydrogen Compression from Medium Pressure to High Pressure,Construction,=1/27.7 / 1000,unit,kilowatt,Capacity (27.7 MW)
 Hydrogen Compression from Medium Pressure to High Pressure,Operation,=1 / 33.3,kilogram,kilowatt hour,"H2 LHV (33.3 kWh/kg): (Engineering ToolBox, 2003)"
-Hydrogen (extreme high pressure),Resource,=1 / 33.3,kilogram,kilowatt hour,"H2 LHV (33.3 kWh/kg): (Engineering ToolBox, 2003)"
+Hydrogen,Resource,=1 / 33.3,kilogram,kilowatt hour,"H2 LHV (33.3 kWh/kg): (Engineering ToolBox, 2003)"
 Hydrogen Expansion from Extra High Pressure to High Pressure,Operation,=1 / 33.3,kilogram,kilowatt hour,"H2 LHV (33.3 kWh/kg): (Engineering ToolBox, 2003)"
 Hydrogen Expansion from Extra High Pressure to High Pressure (co-generation unit),Construction,=1 / 160,unit,kilowatt,Cogeneration unit capacity (160 kW)
 Hydrogen Expansion from Extra High Pressure to High Pressure (co-generation unit),Operation,=1 / 33.3,kilogram,kilowatt hour,"H2 LHV (33.3 kWh/kg): (Engineering ToolBox, 2003)"
@@ -314,9 +314,6 @@ Hydrogen Expansion from High Pressure to Medium Pressure (co-generation unit),Op
 Hydrogen Expansion from Medium Pressure to Low Pressure,Operation,=1 / 33.3,kilogram,kilowatt hour,"H2 LHV (33.3 kWh/kg): (Engineering ToolBox, 2003)"
 Hydrogen Expansion from Medium Pressure to Low Pressure (co-generation unit),Construction,=1 / 160,unit,kilowatt,Cogeneration unit capacity (160 kW)
 Hydrogen Expansion from Medium Pressure to Low Pressure (co-generation unit),Operation,=1 / 33.3,kilogram,kilowatt hour,"H2 LHV (33.3 kWh/kg): (Engineering ToolBox, 2003)"
-Hydrogen (high pressure),Resource,=1 / 33.3,kilogram,kilowatt hour,"H2 LHV (33.3 kWh/kg): (Engineering ToolBox, 2003)"
-Hydrogen (low pressure),Resource,=1 / 33.3,kilogram,kilowatt hour,"H2 LHV (33.3 kWh/kg): (Engineering ToolBox, 2003)"
-Hydrogen (medium pressure),Resource,=1 / 33.3,kilogram,kilowatt hour,"H2 LHV (33.3 kWh/kg): (Engineering ToolBox, 2003)"
 Combined Cycle Gas Turbine Hydrogen and Natural Gas Mix,Construction,=1000/400000000,unit,kilowatt,Capacity (400 MW_el)
 Combined Cycle Gas Turbine Hydrogen and Natural Gas Mix,Operation,=1,kilowatt hour,kilowatt hour,None
 Combined Cycle Gas Turbine Hydrogen and Natural Gas Mix with Carbon Capture,Construction,=1000/400000000,unit,kilowatt,Capacity (400 MW_el)
@@ -370,7 +367,7 @@ Industrial Direct Electricity Usage,Construction,=1 / 5,unit,kilowatt,Capacity (
 Industrial Direct Electricity Usage,Operation,1,kilowatt hour,kilowatt hour,None
 Industrial Heat Pump Electricity Usage,Construction,=1 / 10,unit,kilowatt,Heat pump capacity (10 kWth)
 Industrial Heat Pump Electricity Usage,Operation,=1 * 3.6,megajoule,kilowatt hour,None
-Jet fuel,Resource,=1 * 3.6 / 43,kilogram,kilowatt hour,"jet fuels LHV (43 MJ/kg): (Boehm, 2022)"
+Jetfuel,Resource,=1 * 3.6 / 43,kilogram,kilowatt hour,"jet fuels LHV (43 MJ/kg): (Boehm, 2022)"
 100% BioDiesel-Powered Light Commercial Vehicle,Construction,=1 * 8760 * 0.093 / (0.75 * 22660),unit,ton kilometer per hour,"payload (750 kg), yearly distance (22660 km): (Sacchi, 2021), capacity factor (0.093): (Limpens, 2021)"
 100% BioDiesel-Powered Light Commercial Vehicle,Operation,=1/0.75,kilometer,ton kilometer,"payload (750 kg): (Sacchi, 2021)"
 20% BioDiesel-Powered Light Commercial Vehicle,Construction,=1 * 8760 * 0.093 / (0.75 * 22660),unit,ton kilometer per hour,"payload (750 kg), yearly distance (22660 km): (Sacchi, 2021), capacity factor (0.093): (Limpens, 2021)"
@@ -419,7 +416,7 @@ Natural Gas Compression from Low Pressure to Medium Pressure,Construction,=1 / 4
 Natural Gas Compression from Low Pressure to Medium Pressure,Operation,=1 * 3.6 / 39,cubic meter,kilowatt hour,"natural gas LHV (39 MJ/m3): (Wernet, 2016)"
 Natural Gas Compression from Medium Pressure to High Pressure,Construction,=1 / 300,unit,kilowatt,Capacity (300 kW)
 Natural Gas Compression from Medium Pressure to High Pressure,Operation,=1 * 3.6 / 46.5,cubic meter,kilowatt hour,"natural gas LHV (46.5 MJ/kg): (Wernet, 2016)"
-Natural gas (extreme high pressure),Resource,=1 * 3.6 / 39,cubic meter,kilowatt hour,"natural gas LHV (39 MJ/m3): (Wernet, 2016)"
+Natural gas,Resource,=1 * 3.6 / 39,cubic meter,kilowatt hour,"natural gas LHV (39 MJ/m3): (Wernet, 2016)"
 Natural Gas Expansion from Extra High Pressure to High Pressure,Operation,=1 * 3.6 / 39,cubic meter,kilowatt hour,"natural gas LHV (39 MJ/m3): (Wernet, 2016)"
 Natural Gas Expansion from Extra High Pressure to High Pressure (co-generation unit),Construction,=1 / 160,unit,kilowatt,Capacity (160 kW)
 Natural Gas Expansion from Extra High Pressure to High Pressure (co-generation unit),Operation,=1 * 3.6 / 39,cubic meter,kilowatt hour,"natural gas LHV (39 MJ/m3): (Wernet, 2016)"
@@ -429,9 +426,6 @@ Natural Gas Expansion from High Pressure to Medium Pressure (co-generation unit)
 Natural Gas Expansion from Medium Pressure to Low Pressure,Operation,=1 * 3.6 / 46.5,kilogram,kilowatt hour,"natural gas LHV (46.5 MJ/kg): (Wernet, 2016)"
 Natural Gas Expansion from Medium Pressure to Low Pressure (co-generation unit),Construction,=1 / 160,unit,kilowatt,Capacity (160 kW)
 Natural Gas Expansion from Medium Pressure to Low Pressure (co-generation unit),Operation,=1 * 3.6 / 46.5,cubic meter,kilowatt hour,"natural gas LHV (46.5 MJ/kg): (Wernet, 2016)"
-Natural gas (high pressure),Resource,=1 / (0.777 * 13.1),cubic meter,kilowatt hour,"natural gas LHV (39 MJ/m3): (Wernet, 2016)"
-Natural gas (low pressure),Resource,=1 / (0.777 * 13.1),cubic meter,kilowatt hour,"natural gas LHV (39 MJ/m3): (Wernet, 2016)"
-Natural gas (medium pressure),Resource,=1 * 3.6 / 46.5,kilogram,kilowatt hour,"natural gas LHV (46.5 MJ/kg): (Wernet, 2016)"
 Plasma Natural Gas Pyrolysis,Construction,=1000/4000,unit,kilowatt,Capacity (4 kW)
 Plasma Natural Gas Pyrolysis,Operation,=1/33.3,kilogram,kilowatt hour,"H2 LHV (33.3 kWh/kg): (Engineering ToolBox, 2003)"
 Thermal Natural Gas Pyrolysis,Construction,=1000/4000,unit,kilowatt,Capacity (4 kW)
@@ -681,7 +675,7 @@ New Wind Energy Onshore,Construction,=1000/2000000,unit,kilowatt,Capacity (2 MW)
 New Wind Energy Onshore,Operation,=1,kilowatt hour,kilowatt hour,None
 New Wind Energy Onshore (connection),Construction,1,unit,unit,None
 New Wind Energy Onshore (co-generation unit),Construction,1,unit,unit,None
-Woody biomass,Resource,=1 * 3.6 / 15.4,kilogram,kilowatt hour,"LHV wood (15.4 MJ/kg): (Engineering ToolBox, 2003)"
+Wood,Resource,=1 * 3.6 / 15.4,kilogram,kilowatt hour,"LHV wood (15.4 MJ/kg): (Engineering ToolBox, 2003)"
 Conversion of Wood to Methanol,Construction,=(24*0.86)/2.7 / 1000000,unit,kilowatt,"Daily production (2700 t/day): (Wernet, 2016), LHV methanol (5.54 kWh/kg): (Engineering ToolBox, 2003), capacity factor (0.86): (Moret, 2017)"
 Conversion of Wood to Methanol,Operation,=1 / 5.54,kilogram,kilowatt hour,"LHV methanol (5.54 kWh/kg): (Engineering ToolBox, 2003)"
 Xylene,Resource,=1 * 3.6 / 40.961,kilogram,kilowatt hour,"Xylene LHV (40.961 MJ/kg): (Wikipedia, 2023)"
@@ -836,3 +830,47 @@ Hydrogen Grid at Low Pressure,Construction,=0.11/0.2 / 1000,kilometer,kilowatt,"
 Natural Gas Grid at Low Pressure,Construction,=0.11/0.425 / 1000,kilometer,kilowatt,"typical power size connected to the low-pressure NG grid ($P_{LP}$ = 0.425 MW), mean low-pressure NG grid transportation length ($l_{LP}$ = 0.11 km): (Schnidrig, 2023)"
 Hydrogen Grid at Medium Pressure,Construction,=(0.11/0.2) * (7.5/0.0625) / 1000,kilometer,kilowatt,"mean medium-pressure H2 grid pressure ($p_{MP}$ = 7.5 barg), mean low-pressure H2 grid pressure ($p_{LP}$ = 0.0625 barg), typical power size connected to the low-pressure H2 grid ($P_{LP}$ = 0.2 MW), mean low-pressure H2 grid transportation length ($l_{LP}$ = 0.11 km): (Schnidrig, 2023)"
 Natural Gas Grid at Medium Pressure,Construction,=(0.11/0.425) * (7.5/0.0625) / 1000,kilometer,kilowatt,"mean medium-pressure NG grid pressure ($p_{MP}$ = 7.5 barg), mean low-pressure NG grid pressure ($p_{LP}$ = 0.0625 barg), typical power size connected to the low-pressure NG grid ($P_{LP}$ = 0.425 MW), mean low-pressure NG grid transportation length ($l_{LP}$ = 0.11 km): (Schnidrig, 2023)"
+Acetic acid,Flow,=1 * 3.6 / 14.55,kilogram,kilowatt hour,"acetic acid heat of combustion (14.55 MJ/kg): (Engineering ToolBox, 2017)"
+Acetone,Flow,=1 / 8.22,kilogram,kilowatt hour,"Acetone LHV (8.22 kWh/kg): (Engineering ToolBox, 2003)"
+Benzene,Flow,=1 * 3.6 / 42.5,kilogram,kilowatt hour,"Benzene heat of combustion (42.5 MJ/kg): (Wernet, 2016)"
+Bio-diesel,Flow,=1 / 10.5,kilogram,kilowatt hour,"Biodiesel LHV (10.50 kWh/kg): (Engineering ToolBox, 2003)
+"
+Coal,Flow,=1 * 3.6 / 27.91,kilogram,kilowatt hour,"Bituminous coal LHV (27.91 MJ/kg): (Wernet, 2016)"
+Diesel,Flow,=1 / 11.83,kilogram,kilowatt hour,"Diesel LHV (11.83 kWh/kg): (Engineering ToolBox, 2003)"
+Electricity import,Flow,=1,kilowatt hour,kilowatt hour,None
+Electricity (high voltage),Flow,=1,kilowatt hour,kilowatt hour,None
+Electricity (medium voltage),Flow,=1,kilowatt hour,kilowatt hour,None
+Electricity (low voltage),Flow,=1,kilowatt hour,kilowatt hour,None
+Ethane,Flow,=1 / 13.28,kilogram,kilowatt hour,"Ethane LHV (13.28 kWh/kg): (Engineering ToolBox, 2003)"
+Ethanol,Flow,=1 * 3.6 / 31.58,kilogram,kilowatt hour,"Ethanol LHV (31.58 MJ/kg): (Wernet, 2016)"
+Ethylbenzene,Flow,=1 * 3.6 / 40.938,kilogram,kilowatt hour,"Ethylbenzene LHV (40.938 MJ/kg): (Wikipedia, 2023)"
+Ethylene,Flow,=1 * 3.6 / 50.285,kilogram,kilowatt hour,"Ethylene heat of combustion (50.285 MJ/kg): (Engineering ToolBox, 2017)"
+Gasoline,Flow,=1 * 3.6 / 42.5,kilogram,kilowatt hour,"LHV gasoline (42.5 MJ/kg): (Wernet, 2016)"
+Hydrogen,Flow,=1 / 33.3,kilogram,kilowatt hour,"hydrogen LHV (33.3 kWh/kg): (Engineering ToolBox, 2003)"
+Jetfuel,Flow,=1 * 3.6 / 43,kilogram,kilowatt hour,"jet fuels LHV (43 MJ/kg): (Boehm, 2022)"
+Light fuel oil,Flow,=1 * 3.6 / 42.6,kilogram,kilowatt hour,"Light fuel oil LHV (42.6 MJ/kg): (Engineering ToolBox, 2003)"
+Liquified natural gas,Flow,=1 * 3.6 / 39,cubic meter,kilowatt hour,"liquified natural gas LHV (39 MJ/m3): (Wernet, 2016)"
+Methanol,Flow,=1 / 5.54,kilogram,kilowatt hour,"LHV methanol (5.54 kWh/kg): (Engineering ToolBox, 2003)"
+Natural gas,Flow,=1 * 3.6 / 39,cubic meter,kilowatt hour,"natural gas LHV (39 MJ/m3): (Wernet, 2016)"
+Polyethylene,Flow,=1,kilogram,kilogram,None
+Polyethylene terephthalate,Flow,=1,kilogram,kilogram,None
+Phenol,Flow,=1 * 3.6 / 32.45,kilogram,kilowatt hour,"phenol heat of combustion (32.45 MJ/kg): (Engineering ToolBox, 2017)"
+Polypropylene,Flow,=1,kilogram,kilogram,None
+Propane,Flow,=1 * 3.6 / 46.4,kilogram,kilowatt hour,"Propane LHV (46.4 MJ/kg): (Engineering ToolBox, 2003)"
+Propylene,Flow,=1 * 3.6 / 45.799,kilogram,kilowatt hour,"Propylene LHV (45.799 MJ/kg): (Wikipedia, 2023)"
+Polystyrene,Flow,=1,kilogram,kilogram,None
+Polyvinyl chloride,Flow,=1,kilogram,kilogram,None
+Synthetic natural gas,Flow,=1 / (0.777 * 13.1),cubic meter,kilowatt hour,"natural gas LHV (13.1 kWh/kg), natural gas density (0.777 kg/m3): (Engineering ToolBox, 2003)"
+Styrene,Flow,=1,kilogram,kilogram,None
+Toluene,Flow,=1 * 3.6 / 42.43,kilogram,kilowatt hour,"Toluene heat of combustion (42.43 MJ/kg): (Engineering ToolBox, 2017)"
+Uranium,Flow,=1 * 3.6 / (3900*1000),kilogram,kilowatt hour,"Nuclear fuel heat value (3900 GJ/kg) (World Nuclear Association, n.d.)"
+Waste,Flow,=-1 * 3.6 / 12.35,kilogram,kilowatt hour,"Municipal solid waste LHV (12.35 MJ/kg): (Moret, 2017)"
+Biogenic waste,Flow,=-1 * 3.6 / (6.087*0.95),kilogram,kilowatt hour,"Biowaste HHV (6.087 MJ/kg): (Wernet, 2016), HHV to LHV ratio (0.95): (Engineering ToolBox, 2003)"
+Fossil waste,Flow,=-1 * 3.6 / 2.453,kilogram,kilowatt hour,"Refinery sludge LHV (2.453 MJ/kg): (Wernet, 2016)"
+Wet biomass,Flow,=1 * 3.6 / (0.95*15),kilogram,kilowatt hour,"HHV manure (15 MJ/kg): (Marin-Batista, 2020), LHV-to-HHV ratio (0.95)"
+Wood,Flow,=1 * 3.6 / 15.4,kilogram,kilowatt hour,"LHV wood (15.4 MJ/kg): (Engineering ToolBox, 2003)"
+Xylene,Flow,=1 * 3.6 / 40.961,kilogram,kilowatt hour,"Xylene LHV (40.961 MJ/kg): (Wikipedia, 2023)"
+Bio-ethanol,Flow,=1 * 3.6 / 31.58,kilogram,kilowatt hour,"Ethanol LHV (31.58 MJ/kg): (Wernet, 2016)"
+Synthetic natural gas,Flow,=1 * 3.6 / 39,cubic meter,kilowatt hour,"natural gas LHV (39 MJ/m3): (Wernet, 2016)"
+Heat (high temperature),Flow,=1 * 3.6,megajoule,kilowatt hour,None
+Carbon dioxide,Flow,1,kilogram,kilogram,None

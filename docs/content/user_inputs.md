@@ -13,7 +13,7 @@ complemented with additional datasets from [premise](https://github.com/polca/pr
 
 The table below has the following columns:
 - **Name**: Name of the ESM technology, resource or vector.
-- **Type**: Type of the ESM item (technology, resource or vector).
+- **Type**: Type of the LCI dataset (operation, construction, resource or flow).
 - **Product**: Name of the corresponding LCI dataset product.
 - **Activity**: Name of the corresponding LCI dataset activity.
 
@@ -67,7 +67,7 @@ physical units to LCI dataset units.
 
 The table below has the following columns:
 - **Name**: Name of the ESM technology, resource or vector.
-- **Type**: Type of the ESM item (technology, resource or vector).
+- **Type**: Type of the LCI dataset (operation, construction, resource or flow).
 - **Value**: Conversion factor value.
 - **LCA unit**: Unit used in LCI datasets.
 - **ESM unit**: Unit used in ESM.

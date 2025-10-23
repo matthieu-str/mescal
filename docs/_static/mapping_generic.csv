@@ -596,24 +596,18 @@ Benzene,Resource,benzene,market for benzene
 Coal,Resource,hard coal,market for hard coal
 Diesel,Resource,"diesel, low-sulfur","market for diesel, low-sulfur"
 Electricity exports,Resource,"electricity, high voltage","market for electricity, high voltage"
-Electricity (high voltage),Resource,"electricity, high voltage","electricity production, hydro, reservoir, non-alpine region"
+Electricity import,Resource,"electricity, high voltage","market for electricity, high voltage"
 Ethane,Resource,ethane,market for ethane
 Ethanol,Resource,"ethanol, without water, in 99.7% solution state, from fermentation","market for ethanol, without water, in 99.7% solution state, from fermentation"
 Ethylbenzene,Resource,ethyl benzene,market for ethyl benzene
 Ethylene,Resource,ethylene,market for ethylene
 Gasoline,Resource,"petrol, low-sulfur","petrol production, low-sulfur"
-Hydrogen (extreme high pressure),Resource,"hydrogen, gaseous, low pressure","market for hydrogen, gaseous, low pressure"
-Hydrogen (high pressure),Resource,"hydrogen, gaseous, low pressure","market for hydrogen, gaseous, low pressure"
-Hydrogen (low pressure),Resource,"hydrogen, gaseous, low pressure","market for hydrogen, gaseous, low pressure"
-Hydrogen (medium pressure),Resource,"hydrogen, gaseous, low pressure","market for hydrogen, gaseous, low pressure"
-Jet fuel,Resource,kerosene,market for kerosene
+Hydrogen,Resource,"hydrogen, gaseous, low pressure","market for hydrogen, gaseous, low pressure"
+Jetfuel,Resource,kerosene,market for kerosene
 Light fuel oil,Resource,light fuel oil,market for light fuel oil
 Liquified natural gas,Resource,"natural gas, liquefied","market for natural gas, liquefied"
 Methanol,Resource,methanol,market for methanol
-Natural gas (extreme high pressure),Resource,"natural gas, high pressure","market for natural gas, high pressure"
-Natural gas (high pressure),Resource,"natural gas, high pressure","market for natural gas, high pressure"
-Natural gas (low pressure),Resource,"natural gas, low pressure","market for natural gas, low pressure"
-Natural gas (medium pressure),Resource,"natural gas, medium pressure, vehicle grade","natural gas production, medium pressure, vehicle grade"
+Natural gas,Resource,"natural gas, high pressure","market for natural gas, high pressure"
 Polyethylene,Resource,"polyethylene, high density, granulate","market for polyethylene, high density, granulate"
 Polyethylene terephthalate,Resource,"polyethylene terephthalate, granulate, amorphous","market for polyethylene terephthalate, granulate, amorphous"
 Phenol,Resource,phenol,market for phenol
@@ -627,6 +621,54 @@ Styrene,Resource,styrene,market for styrene
 Toluene,Resource,"toluene, liquid","market for toluene, liquid"
 Uranium,Resource,"nuclear fuel element, for pressure water reactor, UO2 4.2% & MOX","market for nuclear fuel element, for pressure water reactor, UO2 4.2% & MOX"
 Xylene,Resource,"xylene, mixed","market for xylene, mixed"
+Acetic acid,Flow,"acetic acid, without water, in 98% solution state","market for acetic acid, without water, in 98% solution state"
+Acetone,Flow,"acetone, liquid","market for acetone, liquid"
+Aluminium,Flow,"aluminium, primary, ingot","market for aluminium, primary, ingot"
+Benzene,Flow,benzene,market for benzene
+Bio-diesel,Flow,"biodiesel, vehicle grade","biodiesel, from used cooking oil, at fuelling station"
+Cement,Flow,"cement, unspecified","market for cement, unspecified"
+Carbon dioxide,Flow,"carbon dioxide, liquid","market for carbon dioxide, liquid"
+Coal,Flow,hard coal,market for hard coal
+Diesel,Flow,"diesel, low-sulfur","market for diesel, low-sulfur"
+Electricity import,Flow,"electricity, high voltage","market for electricity, high voltage"
+Electricity (high voltage),Flow,"electricity, high voltage","market for electricity, high voltage"
+Electricity (low voltage),Flow,"electricity, low voltage","market for electricity, low voltage"
+Electricity (medium voltage),Flow,"electricity, medium voltage","market for electricity, medium voltage"
+Ethane,Flow,ethane,market for ethane
+Ethanol,Flow,"ethanol, without water, in 99.7% solution state, from fermentation","market for ethanol, without water, in 99.7% solution state, from fermentation"
+Ethylbenzene,Flow,ethyl benzene,market for ethyl benzene
+Ethylene,Flow,ethylene,market for ethylene
+Gasoline,Flow,"petrol, low-sulfur","market for petrol, low-sulfur"
+Hydrogen,Flow,"hydrogen, gaseous, low pressure","market for hydrogen, gaseous, low pressure"
+Heat (high temperature),Flow,"heat, district or industrial, other than natural gas","market for heat, district or industrial, other than natural gas"
+Heat (low temperature),Flow,"heat, central or small-scale, other than natural gas","market for heat, central or small-scale, other than natural gas"
+Jetfuel,Flow,kerosene,market for kerosene
+Light fuel oil,Flow,light fuel oil,market for light fuel oil
+Liquified natural gas,Flow,"natural gas, liquefied","market for natural gas, liquefied"
+Methanol,Flow,methanol,market for methanol
+Freight mobility (light commercial vehicles),Flow,"transport, freight, light commercial vehicle","market for transport, freight, light commercial vehicle"
+Freight mobility (semi),Flow,"transport, freight, lorry, unspecified","market for transport, freight, lorry, unspecified"
+Freight mobility (trucks),Flow,"transport, freight, lorry, unspecified","market for transport, freight, lorry, unspecified"
+Freight mobility (trains),Flow,"transport, freight train","market for transport, freight train"
+Private mobility (cars),Flow,"transport, passenger car","market for transport, passenger car"
+Private mobility (SUVs),Flow,"transport, passenger car","market for transport, passenger car"
+Public mobility (buses),Flow,"transport, regular bus","market for transport, regular bus"
+Public mobility (coaches),Flow,"transport, passenger coach","market for transport, passenger coach"
+Public mobility (trains),Flow,"transport, passenger train","market for transport, passenger train"
+Natural gas,Flow,"natural gas, high pressure","market for natural gas, high pressure"
+Paper,Flow,"paper, newsprint","paper production, newsprint, recycled"
+Polyethylene,Flow,"polyethylene, high density, granulate","market for polyethylene, high density, granulate"
+Polyethylene terephthalate,Flow,"polyethylene terephthalate, granulate, amorphous","market for polyethylene terephthalate, granulate, amorphous"
+Phenol,Flow,phenol,market for phenol
+Polypropylene,Flow,"polypropylene, granulate","market for polypropylene, granulate"
+Propylene,Flow,propylene,market for propylene
+Polystyrene,Flow,"polystyrene, general purpose","market for polystyrene, general purpose"
+Polyvinyl chloride,Flow,"polyvinylchloride, bulk polymerised","market for polyvinylchloride, bulk polymerised"
+Steel,Flow,"steel, chromium steel 18/8","market for steel, chromium steel 18/8"
+Styrene,Flow,styrene,market for styrene
+Toluene,Flow,"toluene, liquid","market for toluene, liquid"
+Uranium,Flow,"nuclear fuel element, for pressure water reactor, UO2 4.2% & MOX","market for nuclear fuel element, for pressure water reactor, UO2 4.2% & MOX"
+Xylene,Flow,"xylene, mixed","market for xylene, mixed"
 Compressed Synthetic Natural Gas-Powered Bus,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, compressed gas, 13m double deck urban bus, EURO-VI"
 Compressed Synthetic Natural Gas-Powered Bus,Construction,"Passenger bus, EURO-VI","Passenger bus, compressed gas, 13m double deck urban bus, EURO-VI"
 Compressed Synthetic Natural Gas-Powered School Bus,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, compressed gas, 13m single deck urban bus, EURO-VI"
