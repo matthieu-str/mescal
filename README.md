@@ -34,7 +34,7 @@ and [`wurst`](https://github.com/polca/wurst) Python packages.
 without necessarily being LCA experts. On the other hand, `mescal` is also designed for LCA experts who want to
 integrate projections from ESM into their LCA studies.
 
-![workflow of the mescal methodology](docs/pics/workflow_v2.png "workflow")
+![workflow of the mescal methodology](docs/pics/workflow.png "workflow")
 
 Life-Cycle Inventory (LCI) datasets are taken from ecoinvent and possibly other sources if some of the ESM technologies 
 are not covered in the ecoinvent database, e.g., [`premise`](https://linkinghub.elsevier.com/retrieve/pii/S136403212200226X) additional inventories. These LCI datasets are mapped 
