@@ -16,7 +16,7 @@
 
 ## Workflow
 
-![workflow of the mescal methodology](pics/workflow_v2.png "workflow")
+![workflow of the mescal methodology](pics/workflow.png "workflow")
 
 LCI datasets are taken from ecoinvent and possibly other sources if some of the ESM technologies are not covered in the ecoinvent database, e.g., [`premise`](https://linkinghub.elsevier.com/retrieve/pii/S136403212200226X) additional inventories. These LCI datasets are mapped to the ESM technologies and resources. This is followed by operations of regionalization, databases harmonization, double-counting removal, and life-cycle impact assessment. LCA indicators are then ready to be integrated to the ESM. 
 
