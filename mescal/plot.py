@@ -28,7 +28,7 @@ class Plot:
             (iteration number), 'Name' (technology name), 'Capacity' (installed capacity of the technology),
             'Production' (annual production of the technology).
         :param esm_results_res: dataframe of ESM results for resources. It should have the following columns: 'Run'
-        (iteration number), 'Name' (resource name), 'Import' (annual import of the resource).
+            (iteration number), 'Name' (resource name), 'Import' (annual import of the resource).
         :param lifetime: dataframe of lifetime of technologies.
         """
         self.df_impact_scores = df_impact_scores
