@@ -13,6 +13,8 @@ def _tech_type(tech: str) -> str:
     """
     if tech == 'Construction':
         return 'constr'
+    elif tech == 'Decommission':
+        return 'decom'
     elif tech == 'Operation':
         return 'op'
     elif tech == 'Resource':

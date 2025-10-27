@@ -166,6 +166,66 @@ dummy_esm_db = [
                 "code": '00003',
             }
         ]
+    },
+    {
+        "name": "TRAIN_FREIGHT_DIESEL_WAG, Decommission",
+        "reference product": "used train, passenger, regional",
+        "location": "CH",
+        "database": "dummy_esm_db",
+        "unit": "unit",
+        "code": "00022",
+        "exchanges": [
+            {
+                "name": "TRAIN_FREIGHT_DIESEL_WAG, Decommission",
+                "product": "used train, passenger, regional",
+                "location": "CH",
+                "database": "dummy_esm_db",
+                "type": "production",
+                "amount": 1,
+                "unit": "unit",
+                "code": "00022"
+            },
+            {
+                "name": "treatment of used train, passenger, regional",
+                "product": "treatment of used train, passenger, regional",
+                "location": "CH",
+                "database": "ecoinvent-3.9.1-cutoff",
+                "type": "technosphere",
+                "amount": 1,
+                "unit": "unit",
+                "code": '7bf8f3d3ee1e72620c10ceb8b990d915',
+            }
+        ],
+    },
+    {
+        "name": "TRAIN_FREIGHT_DIESEL_LOC, Decommission",
+        "reference product": "used locomotive",
+        "location": "RER",
+        "database": "dummy_esm_db",
+        "unit": "unit",
+        "code": "00011",
+        "exchanges": [
+            {
+                "name": "TRAIN_FREIGHT_DIESEL_LOC, Decommission",
+                "product": "used locomotive",
+                "location": "RER",
+                "database": "dummy_esm_db",
+                "type": "production",
+                "amount": 1,
+                "unit": "unit",
+                "code": "00011"
+            },
+            {
+                "name": "treatment of used locomotive",
+                "product": "treatment of used locomotive",
+                "location": "RER",
+                "database": "ecoinvent-3.9.1-cutoff",
+                "type": "technosphere",
+                "amount": 1,
+                "unit": "unit",
+                "code": '1ad8be810258f37b7e3acd534b0d7583',
+            }
+        ],
     }
 ]
 
@@ -176,12 +236,17 @@ mapping = [
      'ecoinvent-3.9.1-cutoff', '00001'],
     ['TRAIN_FREIGHT_DIESEL_WAG', 'Construction', 'goods wagon', 'goods wagon production', 'RER',
      'ecoinvent-3.9.1-cutoff', '00002'],
-    ['CAR', 'Operation', 'transport, passenger car', 'market for transport, passenger car', 'RER', 'dummy_esm_db',
+    ['TRAIN_FREIGHT_DIESEL_LOC', 'Decommission', 'used locomotive', 'treatment of used locomotive', 'RER',
+     'ecoinvent-3.9.1-cutoff', '00011'],
+    ['TRAIN_FREIGHT_DIESEL_WAG', 'Decommission', 'used train, passenger, regional',
+     'treatment of used train, passenger, regional', 'CH', 'ecoinvent-3.9.1-cutoff', '00022'],
+    ['CAR', 'Operation', 'transport, passenger car', 'market for transport, passenger car', 'RER', 'ecoinvent-3.9.1-cutoff',
      '00004'],
 ]
 
 technology_compositions = [
-    ['TRAIN_FREIGHT_DIESEL', ['TRAIN_FREIGHT_DIESEL_LOC', 'TRAIN_FREIGHT_DIESEL_WAG']],
+    ['TRAIN_FREIGHT_DIESEL', 'Construction', ['TRAIN_FREIGHT_DIESEL_LOC', 'TRAIN_FREIGHT_DIESEL_WAG']],
+    ['TRAIN_FREIGHT_DIESEL', 'Decommission', ['TRAIN_FREIGHT_DIESEL_LOC', 'TRAIN_FREIGHT_DIESEL_WAG']],
 ]
 
 unit_conversion = [
@@ -189,6 +254,9 @@ unit_conversion = [
     ['TRAIN_FREIGHT_DIESEL_LOC', 'Construction', 2, 'unit', 'unit'],
     ['TRAIN_FREIGHT_DIESEL_WAG', 'Construction', 20, 'unit', 'unit'],
     ['TRAIN_FREIGHT_DIESEL', 'Construction', 2.5e-5, 'unit', 'ton kilometer per hour'],
+    ['TRAIN_FREIGHT_DIESEL_LOC', 'Decommission', -1.5, 'unit', 'unit'],
+    ['TRAIN_FREIGHT_DIESEL_WAG', 'Decommission', -1, 'unit', 'unit'],
+    ['TRAIN_FREIGHT_DIESEL', 'Decommission', 3.5e-5, 'unit', 'ton kilometer per hour'],
     ['CAR', 'Operation', 0.67, 'kilometer', 'person kilometer'],
 ]
 
@@ -212,7 +280,7 @@ impact_abbrev = [
 ]
 
 mapping = pd.DataFrame(mapping, columns=['Name', 'Type', 'Product', 'Activity', 'Location', 'Database', 'New_code'])
-technology_compositions = pd.DataFrame(technology_compositions, columns=['Name', 'Components'])
+technology_compositions = pd.DataFrame(technology_compositions, columns=['Name', 'Type', 'Components'])
 unit_conversion = pd.DataFrame(unit_conversion, columns=['Name', 'Type', 'Value', 'LCA', 'ESM'])
 activities_subject_to_double_counting = pd.DataFrame(activities_subject_to_double_counting, columns=['Name', 'Type', 'Activity name', 'Activity code', 'Amount'])
 lifetime = pd.DataFrame(lifetime, columns=['Name', 'ESM', 'LCA'])
@@ -279,6 +347,14 @@ def test_compute_impact_score():
         ].Value.iloc[0]
 
     assert 44.40 <= lcia_value_train <= 44.41
+
+    lcia_value_train_decom = R[
+        (R.Impact_category == ('IPCC 2021', 'climate change', 'global warming potential (GWP100)'))
+        & (R.Name == 'TRAIN_FREIGHT_DIESEL')
+        & (R.Type == 'Decommission')
+        ].Value.iloc[0]
+
+    assert 1.62 <= lcia_value_train_decom <= 1.63
 
     contrib_train = df_contrib_results[
         (df_contrib_results.impact_category == ('IPCC 2021', 'climate change', 'global warming potential (GWP100)'))

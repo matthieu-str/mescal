@@ -91,6 +91,8 @@ def compute_impact_scores(
 
     # Store frequently accessed instance variables in local variables inside a method
     mapping = self.mapping
+    mapping_infra = self.mapping_infra
+    mapping_res = self.mapping_res
     esm_db_name = self.esm_db_name
     unit_conversion = self.unit_conversion
     lifetime = self.lifetime
@@ -177,12 +179,13 @@ def compute_impact_scores(
         columns=[i for i in impact_categories]
     ).T  # save the LCA scores in a dataframe
 
-    unit_conversion_code = pd.merge(
-        left=mapping[['Name', 'Type', 'New_code']],
-        right=unit_conversion,
+    unit_conversion = unit_conversion.merge(
+        mapping[['Name', 'Type', 'New_code']],
         on=['Name', 'Type'],
         how='left',
     )
+
+    unit_conversion_code = unit_conversion.dropna(subset=['New_code'])
     unit_conversion_code = pd.Series(
         data=unit_conversion_code['Value'].values,
         index=unit_conversion_code['New_code'],
@@ -242,14 +245,16 @@ def compute_impact_scores(
         return R_long, df_contrib_analysis_results, None
 
     R_tech_op = R[list(mapping[mapping.Type == 'Operation'].New_code)]
-    R_tech_constr = R[list(mapping[mapping.Type == 'Construction'].New_code)]
-    R_res = R[list(mapping[mapping.Type == 'Resource'].New_code)]
+    R_tech_constr = R[list(mapping_infra.New_code)]
+    R_res = R[list(mapping_res.New_code)]
 
     if contribution_analysis is not None:
         df_contrib_analysis_results_op = df_contrib_analysis_results[
             df_contrib_analysis_results['act_type'] == 'Operation']
         df_contrib_analysis_results_constr = df_contrib_analysis_results[
-            df_contrib_analysis_results['act_type'] == 'Construction']
+            (df_contrib_analysis_results['act_type'] == 'Construction')
+            | (df_contrib_analysis_results['act_type'] == 'Decommission')
+        ]
         df_contrib_analysis_results_res = df_contrib_analysis_results[
             df_contrib_analysis_results['act_type'] == 'Resource']
     else:
@@ -259,8 +264,8 @@ def compute_impact_scores(
 
     if req_technosphere:
         df_req_technosphere_op = df_req_technosphere[list(mapping[mapping.Type == 'Operation'].New_code)]
-        df_req_technosphere_constr = df_req_technosphere[list(mapping[mapping.Type == 'Construction'].New_code)]
-        df_req_technosphere_res = df_req_technosphere[list(mapping[mapping.Type == 'Resource'].New_code)]
+        df_req_technosphere_constr = df_req_technosphere[list(mapping_infra.New_code)]
+        df_req_technosphere_res = df_req_technosphere[list(mapping_res.New_code)]
     else:
         df_req_technosphere_op = None
         df_req_technosphere_constr = None
@@ -271,7 +276,7 @@ def compute_impact_scores(
     else:
         lifetime['LCA'] = lifetime.apply(lambda row: self._is_empty(row), axis=1)
         lifetime_lca_code = pd.merge(
-            left=mapping[mapping.Type == 'Construction'][['Name', 'New_code']],
+            left=mapping_infra[['Name', 'New_code']],
             right=lifetime,
             on='Name'
         )
@@ -308,7 +313,8 @@ def compute_impact_scores(
     # Maximum length of list of subcomponents
     N_subcomp_max = max(len(i) for i in technology_compositions.Components)
 
-    technology_compositions['Type'] = len(technology_compositions) * ['Construction']
+    if 'Type' not in technology_compositions.columns:  # assume all compositions are of type Construction if not specified
+        technology_compositions['Type'] = len(technology_compositions) * ['Construction']
     # Associate new code to composition of technologies (this code does not correspond to any activity in the database,
     # it is only used as an identifier for the user)
     technology_compositions['New_code'] = technology_compositions.apply(lambda row: random_code(), axis=1)
@@ -321,9 +327,9 @@ def compute_impact_scores(
     for i in range(1, N_subcomp_max + 1):
         technology_compositions = pd.merge(
             left=technology_compositions,
-            right=mapping[mapping.Type == 'Construction'][['Name', 'New_code']],
-            left_on=f'Component_{i}',
-            right_on='Name',
+            right=mapping_infra[['Name', 'Type', 'New_code']],
+            left_on=[f'Component_{i}', 'Type'],
+            right_on=['Name', 'Type'],
             suffixes=('', f'_component_{i}'),
             how='left'
         ).drop(columns=f'Name_component_{i}')
@@ -331,6 +337,7 @@ def compute_impact_scores(
     df_comp_list = []  # list to store the contribution analysis results for each technology composition
     for i in range(len(technology_compositions)):
         tech_name = technology_compositions.iloc[i].Name
+        tech_type = technology_compositions.iloc[i].Type
         subcomp_list = technology_compositions.iloc[i].Components
         new_code_composition = technology_compositions.iloc[i].New_code
         R_tech_constr[new_code_composition] = len(impact_categories) * [0]  # initialize the new column
@@ -343,7 +350,7 @@ def compute_impact_scores(
         R_tech_constr[new_code_composition] *= float(
             unit_conversion[
                 (unit_conversion.Name == tech_name)
-                & (unit_conversion.Type == 'Construction')].Value.iloc[0]
+                & (unit_conversion.Type == tech_type)].Value.iloc[0]
         )  # multiply the composition column with its unit conversion factor
 
         R_tech_constr.drop(columns=[technology_compositions.iloc[i][f'New_code_component_{j}']
@@ -382,7 +389,7 @@ def compute_impact_scores(
             df_req_technosphere_constr[new_code_composition] *= float(
                 unit_conversion[
                     (unit_conversion.Name == tech_name)
-                    & (unit_conversion.Type == 'Construction')].Value.iloc[0]
+                    & (unit_conversion.Type == tech_type)].Value.iloc[0]
             )  # multiply the composition column with its unit conversion factor
 
             df_req_technosphere_constr.drop(columns=[technology_compositions.iloc[i][f'New_code_component_{j}']
@@ -414,7 +421,7 @@ def compute_impact_scores(
         pass
     else:
         lifetime_esm_code = pd.merge(pd.concat([
-            mapping[mapping.Type == 'Construction'][['Name', 'New_code']],
+            mapping_infra[['Name', 'New_code']],
             technology_compositions[['Name', 'New_code']]]), lifetime,
             on='Name'
         )

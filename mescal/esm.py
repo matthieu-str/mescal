@@ -66,7 +66,7 @@ class ESM:
         :param biosphere_db_name: name of the (not spatialized) biosphere database. Default is 'biosphere3'.
         :param results_path_file: path to your result folder
         :param regionalize_foregrounds: list of types of LCI datasets that will be subject to the foreground
-            regionalization process. Can be 'Operation', 'Construction', 'Resource', or a list of these. Set to 'all'
+            regionalization process. Can be 'Operation', 'Construction', 'Decommission', 'Resource', or a list of these. Set to 'all'
             to regionalize all types of datasets. Default is 'all'.
         :param accepted_locations: list of ecoinvent locations to keep without modification in case of regionalization
         :param esm_location: ecoinvent location corresponding to the geographical scope of the ESM
@@ -84,7 +84,7 @@ class ESM:
         :param esm_end_use_demands: list of end-use demand categories for the ESM, needed for double-counting removal
             on construction and resource datasets
         :param remove_double_counting_to: list of phases to apply double-counting removal to, can be 'Operation',
-            'Construction', and/or 'Resource'. Default is ['Operation'].
+            'Construction', 'Decommission', and/or 'Resource'. Default is ['Operation'].
         """
 
         # set up logging tool
@@ -112,7 +112,7 @@ class ESM:
         self.esm_db_name = esm_db_name
         self.results_path_file = results_path_file
         self.regionalize_foregrounds = [] if regionalize_foregrounds is None \
-            else (['Operation', 'Construction', 'Resource'] if regionalize_foregrounds == 'all'
+            else (['Operation', 'Construction', 'Decommission', 'Resource'] if regionalize_foregrounds == 'all'
                   else (regionalize_foregrounds if isinstance(regionalize_foregrounds, list) else [regionalize_foregrounds]))
         self.accepted_locations = accepted_locations if accepted_locations is not None else [esm_location]
         self.esm_location = esm_location
@@ -145,9 +145,10 @@ class ESM:
 
 
     def __repr__(self):
-        n_tech = self.mapping[(self.mapping['Type'] == 'Construction') | (self.mapping['Type'] == 'Operation')].shape[0]
+        n_tech = self.mapping[(self.mapping['Type'] == 'Construction') | (self.mapping['Type'] == 'Decommission')
+                              | (self.mapping['Type'] == 'Operation')].shape[0]
         n_res = self.mapping[self.mapping['Type'] == 'Resource'].shape[0]
-        return f"ESM Database with {n_tech} technologies and {n_res} resources"
+        return f"ESM Database with {n_tech} LCI datasets for technologies and {n_res} LCI datasets for resources"
 
     @property
     def mapping_op(self):
@@ -164,6 +165,14 @@ class ESM:
         return self.mapping[self.mapping['Type'] == 'Construction']
 
     @property
+    def mapping_decom(self):
+        return self.mapping[self.mapping['Type'] == 'Decommission']
+
+    @property
+    def mapping_infra(self):
+        return self.mapping[(self.mapping['Type'] == 'Construction') | (self.mapping['Type'] == 'Decommission')]
+
+    @property
     def mapping_res(self):
         return self.mapping[self.mapping['Type'] == 'Resource']
 
@@ -172,13 +181,14 @@ class ESM:
         return {
             'Operation': list(self.tech_specifics[self.tech_specifics.Specifics == 'Background search'].Name),
             'Construction': list(self.tech_specifics[self.tech_specifics.Specifics == 'Background search (construction)'].Name),
+            'Decommission': list(self.tech_specifics[self.tech_specifics.Specifics == 'Background search (decommission)'].Name),
             'Resource': list(self.tech_specifics[self.tech_specifics.Specifics == 'Background search (resource)'].Name),
         }
 
     @property
     def background_search_act(self):
         background_search_act = {}
-        for phase in ['Operation', 'Construction', 'Resource']:
+        for phase in ['Operation', 'Construction', 'Decommission', 'Resource']:
             background_search_act[phase] = {}
             for tech in self.activities_background_search[phase]:
                 background_search_act[phase][tech] = int(self.tech_specifics[self.tech_specifics.Name == tech].Amount.iloc[0])
@@ -193,6 +203,7 @@ class ESM:
         return {
             'Operation': list(self.tech_specifics[self.tech_specifics.Specifics == 'No background search'].Name),
             'Construction': list(self.tech_specifics[self.tech_specifics.Specifics == 'No background search (construction)'].Name),
+            'Decommission': list(self.tech_specifics[self.tech_specifics.Specifics == 'No background search (decommission)'].Name),
             'Resource': list(self.tech_specifics[self.tech_specifics.Specifics == 'No background search (resource)'].Name),
         }
 
@@ -201,6 +212,7 @@ class ESM:
         return {
             'Operation': list(self.tech_specifics[self.tech_specifics.Specifics == 'No double-counting removal'].Name),
             'Construction': list(self.tech_specifics[self.tech_specifics.Specifics == 'No double-counting removal (construction)'].Name),
+            'Decommission': list(self.tech_specifics[self.tech_specifics.Specifics == 'No double-counting removal (decommission)'].Name),
             'Resource': list(self.tech_specifics[self.tech_specifics.Specifics == 'No double-counting removal (resource)'].Name),
         }
 
@@ -340,7 +352,7 @@ class ESM:
         # Check if the technologies and resources in the model file are in the mapping file
         set_in_model_and_not_in_mapping = set()
         for tech_or_res in list(model.Name.unique()):
-            if tech_or_res not in list(mapping[mapping.Type.isin(['Operation', 'Construction', 'Resource'])].Name):
+            if tech_or_res not in list(mapping[mapping.Type.isin(['Operation', 'Construction', 'Decommission', 'Resource'])].Name):
                 set_in_model_and_not_in_mapping.add(tech_or_res)
         if len(set_in_model_and_not_in_mapping) > 0:
             no_warning = False
@@ -352,7 +364,7 @@ class ESM:
         # Check if the technologies and resources in the mapping file are in the model file
         set_in_mapping_and_not_in_model = set()
         list_subcomponents = [x for xs in list(techno_compositions.Components) for x in xs]
-        for tech_or_res in list(mapping[mapping.Type.isin(['Operation', 'Construction', 'Resource'])].Name):
+        for tech_or_res in list(mapping[mapping.Type.isin(['Operation', 'Construction', 'Decommission', 'Resource'])].Name):
             if tech_or_res not in list(model.Name.unique()):
                 if tech_or_res in list_subcomponents:
                     pass
@@ -367,8 +379,8 @@ class ESM:
 
         # Check if the technologies and resources in the mapping file are in the unit conversion file
         set_in_mapping_and_not_in_unit_conversion = set()
-        for tech_or_res in list(mapping[mapping.Type.isin(['Operation', 'Construction', 'Resource'])].Name):
-            if tech_or_res not in list(unit_conversion.Name):
+        for tech_or_res in list(mapping[mapping.Type.isin(['Operation', 'Construction', 'Decommission', 'Resource'])].Name):
+            if tech_or_res not in list(unit_conversion[unit_conversion.Type.isin(['Operation', 'Construction', 'Decommission', 'Resource'])].Name):
                 set_in_mapping_and_not_in_unit_conversion.add(tech_or_res)
         if len(set_in_mapping_and_not_in_unit_conversion) > 0:
             self.logger.warning(
@@ -406,7 +418,7 @@ class ESM:
         if lifetime is not None:
             # Check if the technologies in the mapping file are in the lifetime file
             set_in_mapping_and_not_in_lifetime = set()
-            for tech in list(mapping[mapping.Type == 'Construction'].Name):
+            for tech in list(mapping[mapping.Type.isin(['Construction', 'Decommission'])].Name):
                 if tech not in list(lifetime.Name):
                     set_in_mapping_and_not_in_lifetime.add(tech)
             if len(set_in_mapping_and_not_in_lifetime) > 0:
@@ -457,7 +469,7 @@ class ESM:
         # Check that sub-technologies in the technology_compositions file are in the mapping file
         set_sub_techs_not_in_mapping = [
             sub_tech for sub_tech_list in self.technology_compositions.Components for sub_tech in sub_tech_list
-            if sub_tech not in list(mapping[mapping.Type == 'Construction'].Name.unique())
+            if sub_tech not in list(mapping[mapping.Type.isin(['Construction', 'Decommission'])].Name.unique())
         ]
         if len(set_sub_techs_not_in_mapping) > 0:
             set_sub_techs_not_in_mapping = set(set_sub_techs_not_in_mapping)
@@ -536,6 +548,22 @@ class ESM:
                 activities_subject_to_double_counting_constr
             ) = self._double_counting_removal(df=mapping_constr, N=N, ESM_inputs='all', ds_type='Construction')
 
+        # Decommission datasets
+        if 'Decommission' not in self.remove_double_counting_to:
+            self._add_activities_to_database(act_type='Decommission')
+        else:
+            mapping_decom = self.mapping_decom
+            if self.esm_end_use_demands is None:
+                raise ValueError('Please provide a list of end-use demand categories for the ESM if you want to '
+                                 'perform double-counting removal on decommission datasets.')
+            for cat in self.esm_end_use_demands:
+                mapping_decom[cat] = -1
+            (
+                flows_set_to_zero_decom,
+                ei_removal_decom,
+                activities_subject_to_double_counting_decom
+            ) = self._double_counting_removal(df=mapping_decom, N=N, ESM_inputs='all', ds_type='Decommission')
+
         # Resource datasets
         if 'Resource' not in self.remove_double_counting_to:
             self._add_activities_to_database(act_type='Resource')
@@ -572,6 +600,10 @@ class ESM:
         if 'Construction' in self.remove_double_counting_to:
             flows_set_to_zero += flows_set_to_zero_constr
             activities_subject_to_double_counting += activities_subject_to_double_counting_constr
+
+        if 'Decommission' in self.remove_double_counting_to:
+            flows_set_to_zero += flows_set_to_zero_decom
+            activities_subject_to_double_counting += activities_subject_to_double_counting_decom
 
         if 'Resource' in self.remove_double_counting_to:
             flows_set_to_zero += flows_set_to_zero_res
@@ -615,6 +647,20 @@ class ESM:
                     for unit in ei_removal_constr[tech][res]['amount'].keys():
                         ei_removal_amount[tech]['Construction'][res][unit] = ei_removal_constr[tech][res]['amount'][unit]
                         ei_removal_count[tech]['Construction'][res][unit] = ei_removal_constr[tech][res]['count'][unit]
+
+        if 'Decommission' in self.remove_double_counting_to:
+            for tech in list(mapping_decom.Name):
+                if tech not in ei_removal_amount.keys():
+                    ei_removal_amount[tech] = {}
+                    ei_removal_count[tech] = {}
+                ei_removal_amount[tech]['Decommission'] = {}
+                ei_removal_count[tech]['Decommission'] = {}
+                for res in list(mapping_decom.iloc[:, N:].columns):
+                    ei_removal_amount[tech]['Decommission'][res] = {}
+                    ei_removal_count[tech]['Decommission'][res] = {}
+                    for unit in ei_removal_decom[tech][res]['amount'].keys():
+                        ei_removal_amount[tech]['Decommission'][res][unit] = ei_removal_decom[tech][res]['amount'][unit]
+                        ei_removal_count[tech]['Decommission'][res][unit] = ei_removal_decom[tech][res]['count'][unit]
 
         if 'Resource' in self.remove_double_counting_to:
             for tech in list(mapping_res.Name):
@@ -754,7 +800,7 @@ class ESM:
         """
         Add new activities to the main database
 
-        :param act_type: the type of activity, it can be 'Construction', 'Operation', or 'Resource'
+        :param act_type: the type of activity, it can be 'Construction', 'Decommission', 'Operation', or 'Resource'
         :return: None
         """
 
@@ -787,7 +833,7 @@ class ESM:
         Create a new LCI dataset for the ESM technology or resource
 
         :param name: name of the technology or resource in the ESM
-        :param act_type: the type of activity, it can be 'Construction', 'Operation', or 'Resource'
+        :param act_type: the type of activity, it can be 'Construction', 'Decommission', 'Operation', or 'Resource'
         :param current_code: code of the activity in the original LCI database
         :param new_code: code of the new activity in the new LCI database
         :param database_name: name of the original LCI database
@@ -956,7 +1002,7 @@ class ESM:
 
         :param tech: name of the ESM technology
         :param return_type: type of return, can be 'name' or 'code'
-        :param phase: phase of the technology, can be 'Operation', 'Construction' or 'Resource'
+        :param phase: phase of the technology, can be 'Operation', 'Construction', 'Decommission' or 'Resource'
         :return: name or code
         """
         if return_type == 'name':
@@ -993,11 +1039,11 @@ class ESM:
         if self.operation_metrics_for_all_time_steps:
             self.mapping['New_code'] = self.mapping.apply(
                 lambda x: self._get_new_code_previous_years(x, esm_db_as_dict_name)
-                if x['Type'] in ['Construction', 'Operation', 'Resource'] else None, axis=1)
+                if x['Type'] in ['Construction', 'Decommission', 'Operation', 'Resource'] else None, axis=1)
         else:
             self.mapping['New_code'] = self.mapping.apply(
                 lambda x: self._get_new_code_iteration(x, esm_db_as_dict_name)
-                if x['Type'] in ['Construction', 'Operation', 'Resource'] else None, axis=1)
+                if x['Type'] in ['Construction', 'Decommission', 'Operation', 'Resource'] else None, axis=1)
 
     def _get_new_code_iteration(self, row: pd.Series, esm_db_as_dict_name: dict) -> str:
         """
@@ -1359,6 +1405,7 @@ class PathwayESM(ESM):
                 i for i in copy.deepcopy(all_esm_databases.db_as_list) if
                 (i['database'] == self.esm_db_name)
                 & (', Construction' not in i['name'])  # Exclude construction activities
+                & (', Decommission' not in i['name'])  # Exclude decommission activities
                 & (', Resource' not in i['name'])  # Exclude resource activities
             ])
 

@@ -280,7 +280,7 @@ def _double_counting_removal(
     :param N: number of columns of the original mapping file
     :param ESM_inputs: list of the ESM flows to perform double counting removal on
     :param db_type: type of database to use, either 'esm', 'esm results' or 'esm results wo dcr'
-    :param ds_type: type of LCI dataset to consider, can be 'Operation', 'Construction' or 'Resource'
+    :param ds_type: type of LCI dataset to consider, can be 'Operation', 'Construction', 'Decommission' or 'Resource'
     :return: list of removed flows, dictionary of removed quantities, list of activities subject to double counting
     """
     # Store frequently accessed instance variables in local variables inside a method.
@@ -292,7 +292,8 @@ def _double_counting_removal(
     # Store frequently accessed instance variables in local variables inside a method if they don't need to be modified
     esm_db_name = self.esm_db_name
     no_construction_list = self.no_construction_list
-    mapping_constr = self.mapping_constr
+    mapping_infra = self.mapping_infra
+    mapping_decom = self.mapping_decom
     no_background_search_list = self.no_background_search_list
     no_double_counting_removal_list = self.no_double_counting_removal_list
     regionalize_foregrounds = self.regionalize_foregrounds
@@ -324,9 +325,14 @@ def _double_counting_removal(
     except ValueError:
         pass
 
-    technology_compositions_dict = {key: value for key, value in dict(zip(
-            self.technology_compositions.Name, self.technology_compositions.Components
-        )).items()}
+    technology_compositions_dict = {}
+    for key, value in dict(zip(
+        self.technology_compositions.Name, self.technology_compositions.Components
+    )).items():
+        if key in technology_compositions_dict:
+            technology_compositions_dict[key] += value
+        else:
+            technology_compositions_dict[key] = value
 
     # inverse mapping dictionary (i.e., from CPC categories to the ESM flows)
     mapping_esm_flows_to_CPC_dict = {key: value for key, value in dict(zip(
@@ -346,6 +352,11 @@ def _double_counting_removal(
         CPC_constr_list = []
         mapping_esm_flows_to_CPC_dict['OWN_CONSTRUCTION'] = []
 
+        # If decommission datasets are separated from the construction datasets, decommission impacts should be removed
+        # from construction datasets
+        if ds_type == 'Construction' and len(mapping_decom[mapping_decom.Name == tech]) > 0:
+            ESM_inputs += ['DECOMMISSIONING']
+
         # Construction activity
         if tech in no_construction_list or ds_type != 'Operation':
             pass
@@ -356,8 +367,9 @@ def _double_counting_removal(
                 technology_compositions_dict[tech] = [tech]
 
             for sub_comp in technology_compositions_dict[tech]:  # looping over the subcomponents of the composition
-                database_constr = mapping_constr[mapping_constr.Name == sub_comp]['Database'].iloc[0]
-                current_code_constr = mapping_constr[mapping_constr.Name == sub_comp]['Current_code'].iloc[0]
+                # TODO: likely an issue when sub_comp have the same name for constr and decom
+                database_constr = mapping_infra[mapping_infra.Name == sub_comp]['Database'].iloc[0]
+                current_code_constr = mapping_infra[mapping_infra.Name == sub_comp]['Current_code'].iloc[0]
 
                 act_constr = db_dict_code[(database_constr, current_code_constr)]
                 act_constr_list.append(act_constr)
@@ -368,6 +380,7 @@ def _double_counting_removal(
                     self.logger.warning(f'Product {act_constr["reference product"]} has no CPC category.')
                     CPC_constr = 'None'
                 CPC_constr_list.append(CPC_constr)
+                # TODO adapt to DECOMMISSIONING
                 mapping_esm_flows_to_CPC_dict['OWN_CONSTRUCTION'] += [CPC_constr]
                 mapping_CPC_to_esm_flows_dict[CPC_constr] = ['OWN_CONSTRUCTION']
 
@@ -556,9 +569,9 @@ def _double_counting_removal(
                         # (for validation purposes)
                         for idx, sub_comp in enumerate(technology_compositions_dict[tech]):
                             if code == act_constr_list[idx]['code']:
-                                new_code_constr = mapping_constr[mapping_constr.Name == sub_comp].New_code.iloc[0]
-                                flow['database'], flow['code'] = esm_db_name, new_code_constr
-                                flow['name'] = f'{sub_comp}, Construction'
+                                new_code_infra, type_infra = mapping_infra[mapping_infra.Name == sub_comp][['New_code', 'Type']].iloc[0]
+                                flow['database'], flow['code'] = esm_db_name, new_code_infra
+                                flow['name'] = f'{sub_comp}, {type_infra}'
 
                 # add the removed amount in the ei_removal dict for post-analysis
                 for cat in res_categories:
@@ -568,11 +581,11 @@ def _double_counting_removal(
                         # which share the same CPCs
                         if flow['unit'] not in ei_removal[tech][cat]['amount'].keys():
                             # old amount (e.g., GWh) multiplied by factor as we went down in the tree
-                            ei_removal[tech][cat]['amount'][flow['unit']] = old_amount * new_act_op_d_c_amount
+                            ei_removal[tech][cat]['amount'][flow['unit']] = abs(old_amount * new_act_op_d_c_amount)
                             ei_removal[tech][cat]['count'][flow['unit']] = 1  # count (i.e., number of flows put to zero)
                         else:
                             # old amount (e.g., GWh) multiplied by factor as we went down in the tree
-                            ei_removal[tech][cat]['amount'][flow['unit']] += old_amount * new_act_op_d_c_amount
+                            ei_removal[tech][cat]['amount'][flow['unit']] += abs(old_amount * new_act_op_d_c_amount)
                             ei_removal[tech][cat]['count'][flow['unit']] += 1  # count (i.e., number of flows put to zero)
 
                 # Setting the amount to zero
