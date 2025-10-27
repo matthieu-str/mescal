@@ -296,10 +296,14 @@ class ESM:
         techno_compositions = self.technology_compositions
         tech_specifics = self.tech_specifics
 
+        no_warning = True
+
         if main_database_name not in list(bd.databases):
+            no_warning = False
             self.logger.error(f"Main database {main_database_name} not found in your brightway project")
 
         if biosphere_db_name not in list(bd.databases):
+            no_warning = False
             self.logger.error(f"Biosphere database {biosphere_db_name} not found in your brightway project")
 
         dict_df_names = {
@@ -320,13 +324,17 @@ class ESM:
 
         # Check for duplicates in all dataframes
         for df_name, df in dict_df_names.items():
+            if df is None or len(df) == 0:
+                continue
             if df_name == 'technology_compositions':
                 df['Components_tuple_temp'] = df.Components.apply(tuple)
                 if df.duplicated(subset=['Name', 'Components_tuple_temp']).any():
+                    no_warning = False
                     self.logger.warning(f"There are duplicates in the {df_name} dataframe. Please check your inputs.")
                 df.drop(columns=['Components_tuple_temp'], inplace=True)
             else:
                 if df.duplicated().any():
+                    no_warning = False
                     self.logger.warning(f"There are duplicates in the {df_name} dataframe. Please check your inputs.")
 
         # Check if the technologies and resources in the model file are in the mapping file
@@ -335,6 +343,7 @@ class ESM:
             if tech_or_res not in list(mapping[mapping.Type.isin(['Operation', 'Construction', 'Resource'])].Name):
                 set_in_model_and_not_in_mapping.add(tech_or_res)
         if len(set_in_model_and_not_in_mapping) > 0:
+            no_warning = False
             self.logger.warning(
                 f"List of technologies or resources that are in the model file but not in the mapping file. "
                 f"Their impact scores will be set to the default value: {sorted(set_in_model_and_not_in_mapping)}"
@@ -350,6 +359,7 @@ class ESM:
                 else:
                     set_in_mapping_and_not_in_model.add(tech_or_res)
         if len(set_in_mapping_and_not_in_model) > 0:
+            no_warning = False
             self.logger.warning(
                 f"List of technologies or resources that are in the mapping file but not in the model file "
                 f"(this will not be a problem in the workflow): {sorted(set_in_mapping_and_not_in_model)}"
@@ -367,6 +377,18 @@ class ESM:
                 f"{sorted(set_in_mapping_and_not_in_unit_conversion)}"
             )
 
+        # Check if the flows in the mapping file are in the unit conversion file
+        set_flows_in_mapping_and_not_in_unit_conversion = set()
+        for flow in list(mapping[mapping.Type == 'Flow'].Name):
+            if flow not in list(unit_conversion[unit_conversion.Type == 'Flow'].Name):
+                set_flows_in_mapping_and_not_in_unit_conversion.add(flow)
+        if len(set_flows_in_mapping_and_not_in_unit_conversion) > 0:
+            self.logger.warning(
+                f"List of flows that are in the mapping file but not in the unit conversion file. "
+                f"It might be an issue if unit conversions are required during the efficiency correction step: "
+                f"{sorted(set_flows_in_mapping_and_not_in_unit_conversion)}"
+            )
+
         # Check if the flows in the model file are in the ESM flows - CPC mapping file
         set_flows_not_in_mapping_esm_flows_to_CPC_cat = set()
         for flow in list(model.Flow.unique()):
@@ -374,6 +396,7 @@ class ESM:
                     & (len(model[(model.Flow == flow) & (model.Amount < 0)]) > 0)):  # Flow used as an input
                 set_flows_not_in_mapping_esm_flows_to_CPC_cat.add(flow)
         if len(set_flows_not_in_mapping_esm_flows_to_CPC_cat) > 0:
+            no_warning = False
             self.logger.warning(
                 f"List of flows that are in the model file but not in the ESM flows to CPC mapping file. "
                 f"It might be an issue for double counting if these flows are inputs of some ESM technologies: "
@@ -387,6 +410,7 @@ class ESM:
                 if tech not in list(lifetime.Name):
                     set_in_mapping_and_not_in_lifetime.add(tech)
             if len(set_in_mapping_and_not_in_lifetime) > 0:
+                no_warning = False
                 self.logger.warning(
                     f"List of technologies that are in the mapping file but not in the lifetime file. "
                     f"Please add the missing technologies or remove the lifetime file: "
@@ -400,6 +424,7 @@ class ESM:
                 if tech not in list(mapping[mapping.Type == 'Operation'].Name):
                     set_in_efficiency_and_not_in_mapping.add(tech)
             if len(set_in_efficiency_and_not_in_mapping) > 0:
+                no_warning = False
                 self.logger.warning(
                     f"List of technologies that are in the efficiency file but not in the mapping file "
                     f"(this will not be a problem in the workflow): {sorted(set_in_efficiency_and_not_in_mapping)}"
@@ -410,6 +435,7 @@ class ESM:
                 if tech not in list(model.Name):
                     set_in_efficiency_and_not_in_model.add(tech)
             if len(set_in_efficiency_and_not_in_model) > 0:
+                no_warning = False
                 self.logger.warning(
                     f"List of technologies that are in the efficiency file but not in the model file. You should "
                     f"remove these technologies from the efficiency file, as the efficiency in the model cannot be "
@@ -422,6 +448,7 @@ class ESM:
             if tech not in list(mapping.Name):
                 set_in_tech_specifics_and_not_in_mapping.add(tech)
         if len(set_in_tech_specifics_and_not_in_mapping) > 0:
+            no_warning = False
             self.logger.warning(
                 f"List of technologies that are in the tech_specifics file but not in the mapping file "
                 f"(this will not be a problem in the workflow): {sorted(set_in_tech_specifics_and_not_in_mapping)}"
@@ -434,10 +461,14 @@ class ESM:
         ]
         if len(set_sub_techs_not_in_mapping) > 0:
             set_sub_techs_not_in_mapping = set(set_sub_techs_not_in_mapping)
+            no_warning = False
             self.logger.warning(
                 f"List of sub-technologies that are in the technology_compositions file but not in the mapping file "
                 f"(this will not be a problem in the workflow): {sorted(set_sub_techs_not_in_mapping)}"
             )
+
+        if no_warning:
+            self.logger.info("All input checks passed successfully.")
 
     def create_esm_database(
             self,
