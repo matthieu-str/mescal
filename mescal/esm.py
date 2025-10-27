@@ -246,6 +246,38 @@ class ESM:
     from .normalization import normalize_lca_metrics, _tech_type
     from .generate_lcia_obj_ampl import generate_mod_file_ampl
 
+    def clean_inputs(self) -> None:
+        """
+        Based on the content of the mapping and model files, other input dataframes are cleaned to keep only the
+        relevant rows.
+
+        :return: None
+        """
+        mapping_names = list(self.mapping.Name.unique())
+        flow_names = list(self.model.Flow.unique())
+
+        self.unit_conversion = self.unit_conversion[
+            ((self.unit_conversion.Type.isin(['Operation', 'Construction', 'Decommission', 'Resource'])
+             & self.unit_conversion.Name.isin(mapping_names)))
+            | ((self.unit_conversion.Type == 'Flow') & self.unit_conversion.Name.isin(flow_names))
+            | (self.unit_conversion.Type == 'Other')
+        ].reset_index(drop=True)
+
+        if self.efficiency is not None:
+            self.efficiency = self.efficiency[self.efficiency.Name.isin(mapping_names)].reset_index(drop=True)
+        if len(self.efficiency) == 0:
+            self.efficiency = None
+
+        if self.lifetime is not None:
+            self.lifetime = self.lifetime[self.lifetime.Name.isin(mapping_names)].reset_index(drop=True)
+        if len(self.lifetime) == 0:
+            self.lifetime = None
+
+        if self.technology_compositions is not None:
+            self.technology_compositions = self.technology_compositions[
+                self.technology_compositions.Name.isin(mapping_names)
+            ].reset_index(drop=True)
+
     def check_inputs(self) -> None:
         """
         Check if the inputs are consistent and send feedback to the user
