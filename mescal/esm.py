@@ -581,11 +581,12 @@ class ESM:
             ) = self._double_counting_removal(df=mapping_res, N=N, ESM_inputs='all', ds_type='Resource')
 
         # Operation datasets (double-counting always applies)
+        mapping_op = self.mapping_op
         (
             flows_set_to_zero,
             ei_removal,
             activities_subject_to_double_counting
-        ) = self._double_counting_removal(df=self.mapping_op, N=N, ESM_inputs='all')
+        ) = self._double_counting_removal(df=mapping_op, N=N, ESM_inputs='all')
         t2_dc = time.time()
         self.logger.info(f"Double-counting removal done in {round(t2_dc - t1_dc, 1)} seconds")
 
@@ -622,12 +623,12 @@ class ESM:
 
         ei_removal_amount = {}
         ei_removal_count = {}
-        for tech in list(self.mapping_op.Name):
+        for tech in list(mapping_op.Name):
             ei_removal_amount[tech] = {}
             ei_removal_count[tech] = {}
             ei_removal_amount[tech]['Operation'] = {}
             ei_removal_count[tech]['Operation'] = {}
-            for res in list(self.mapping_op.iloc[:, N:].columns):
+            for res in list(mapping_op.iloc[:, N:].columns):
                 ei_removal_amount[tech]['Operation'][res] = {}
                 ei_removal_count[tech]['Operation'][res] = {}
                 for unit in ei_removal[tech][res]['amount'].keys():
