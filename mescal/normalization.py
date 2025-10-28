@@ -161,14 +161,13 @@ def normalize_lca_metrics(
         norm_unit = 'normalized'
         if assessment_type == 'esm':
             refactor = {}
-            R_scaled = R[R['Type'] != 'Construction']
+            R_scaled = R[R['Type'].isin(['Operation', 'Resource'])]
             for unit in R['Unit'].unique():
                 # Scale the construction metrics to be at the same order of magnitude as the operation and resource metrics
-                lcia_op_max = R[((R['Type'] == 'Operation') |
-                                 (R['Type'] == 'Resource')) & (R['Unit'] == unit)]['Value'].max()
-                lcia_constr_max = R[(R['Type'] == 'Construction') & (R['Unit'] == unit)]['Value'].max()
+                lcia_op_max = R[(R['Type'].isin(['Operation', 'Resource'])) & (R['Unit'] == unit)]['Value'].max()
+                lcia_constr_max = R[(R['Type'].isin(['Construction', 'Decommission'])) & (R['Unit'] == unit)]['Value'].max()
                 refactor[unit] = lcia_op_max / lcia_constr_max
-                R_constr_imp = R[(R['Type'] == 'Construction') & (R['Unit'] == unit)]
+                R_constr_imp = R[(R['Type'].isin(['Construction', 'Decommission'])) & (R['Unit'] == unit)]
                 R_constr_imp['Value'] *= refactor[unit]
                 R_scaled = pd.concat([R_scaled, R_constr_imp])  # R matrix but with refactor applied to construction metrics
                 R_scaled['max_unit'] = R_scaled.groupby('Unit')['Value'].transform('max')
@@ -183,8 +182,8 @@ def normalize_lca_metrics(
 
         R_scaled['Value_norm'] = R_scaled['Value'] / R_scaled['max_unit']
         if assessment_type == 'esm':
-            R_scaled_constr = R_scaled[R_scaled['Type'] == 'Construction']
-            R_scaled_op = R_scaled[R_scaled['Type'] != 'Construction']
+            R_scaled_constr = R_scaled[R_scaled['Type'].isin(['Construction', 'Decommission'])]
+            R_scaled_op = R_scaled[R_scaled['Type'].isin(['Operation', 'Resource'])]
             R_scaled_op['Value_norm'] = R_scaled_op['Value_norm'].apply(lambda x: 0 if abs(x) < mip_gap else x)
             R_scaled_constr['Value_norm'] = R_scaled_constr.apply(lambda x: 0 if abs(x['Value_norm']) < mip_gap else x['Value_norm'] / refactor[x['Unit']], axis=1)
             R_scaled = pd.concat([R_scaled_op, R_scaled_constr])

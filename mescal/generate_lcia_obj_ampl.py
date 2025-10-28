@@ -70,9 +70,11 @@ def generate_mod_file_ampl(
                 else:
                     f.write('param lcia_op {INDICATORS,TECHNOLOGIES,YEARS} default 0;\n')
                 f.write('param lcia_constr {INDICATORS,TECHNOLOGIES,YEARS} default 0;\n'
+                        'param lcia_decom {INDICATORS,TECHNOLOGIES,YEARS} default 0;\n'
                         'param lcia_res {INDICATORS,RESOURCES,YEARS} default 0;\n'
                         'param limit_lcia {INDICATORS,YEARS} default 1e10;\n'
                         'var LCIA_constr {INDICATORS,TECHNOLOGIES,YEARS};\n'
+                        'var LCIA_decom {INDICATORS,TECHNOLOGIES,YEARS};\n'
                         'var LCIA_op {INDICATORS,TECHNOLOGIES,YEARS};\n'
                         'var LCIA_res {INDICATORS,RESOURCES,YEARS};\n'
                         'var TotalLCIA {INDICATORS,YEARS};\n\n')
@@ -90,6 +92,11 @@ def generate_mod_file_ampl(
                 f.write('# Construction\n'
                         'subject to lcia_constr_calc {id in INDICATORS, i in TECHNOLOGIES, y in YEARS}:\n'
                         '  LCIA_constr[id,i,y] = sum {y_inst in YEARS: y_inst <= y} lcia_constr[id,i,y_inst] '
+                        '* F_Mult[i,y_inst] / lifetime[i,y_inst];\n\n')
+
+                f.write('# Decommission\n'
+                        'subject to lcia_decom_calc {id in INDICATORS, i in TECHNOLOGIES, y in YEARS}:\n'
+                        '  LCIA_decom[id,i,y] = sum {y_inst in YEARS: y_inst <= y} lcia_decom[id,i,y_inst] '
                         '* F_Mult[i,y_inst] / lifetime[i,y_inst];\n\n')
 
             # Equation of LCIAs variables (operation scaling to F_Mult_t)
@@ -112,7 +119,7 @@ def generate_mod_file_ampl(
             # Equation defining the total LCIA impact (sum over all technologies and resources)
             if assessment_type == 'esm':
                 f.write('subject to totalLCIA_calc_r {id in INDICATORS, y in YEARS}:\n'
-                        '  TotalLCIA[id,y] = sum {i in TECHNOLOGIES} (LCIA_constr[id,i,y] '
+                        '  TotalLCIA[id,y] = sum {i in TECHNOLOGIES} (LCIA_constr[id,i,y] + LCIA_decom[id,i,y] '
                         '+ LCIA_op[id,i,y]) + sum{r in RESOURCES} (LCIA_res[id,r,y]);\n\n')
             elif assessment_type == 'direct emissions':
                 f.write('subject to totalDIRECT_calc_r {id in INDICATORS, y in YEARS}:\n'
@@ -131,10 +138,12 @@ def generate_mod_file_ampl(
             # Declaring the LCIA parameters and variables
             if assessment_type == 'esm':
                 f.write('param lcia_constr {INDICATORS,TECHNOLOGIES} default 0;\n'
+                        'param lcia_decom {INDICATORS,TECHNOLOGIES} default 0;\n'
                         'param lcia_op {INDICATORS,TECHNOLOGIES} default 0;\n'
                         'param lcia_res {INDICATORS,RESOURCES} default 0;\n'
                         'param limit_lcia {INDICATORS} default 1e10;\n'
                         'var LCIA_constr {INDICATORS,TECHNOLOGIES};\n'
+                        'var LCIA_decom {INDICATORS,TECHNOLOGIES};\n'
                         'var LCIA_op {INDICATORS,TECHNOLOGIES};\n'
                         'var LCIA_res {INDICATORS,RESOURCES};\n'
                         'var TotalLCIA {INDICATORS};\n\n')
@@ -150,6 +159,11 @@ def generate_mod_file_ampl(
                         'subject to lcia_constr_calc {id in INDICATORS, i in TECHNOLOGIES}:\n'
                         f'  LCIA_constr[id,i] = lcia_constr[id,i] * F_Mult[i] / lifetime[i];\n\n')
 
+                # Equation of LCIAs variables (decommission scaling to F_Mult)
+                f.write('# Decommission\n'
+                        'subject to lcia_decom_calc {id in INDICATORS, i in TECHNOLOGIES}:\n'
+                        f'  LCIA_decom[id,i] = lcia_decom[id,i] * F_Mult[i] / lifetime[i];\n\n')
+
             # Equation of LCIAs variables (operation scaling to F_Mult_t)
             f.write('# Operation\n'
                     f'subject to {metric_type.lower()}_op_calc {{id in INDICATORS, i in TECHNOLOGIES}}:\n'
@@ -164,7 +178,7 @@ def generate_mod_file_ampl(
             # Equation defining the total LCIA impact (sum over all technologies and resources)
             if assessment_type == 'esm':
                 f.write('subject to totalLCIA_calc_r {id in INDICATORS}:\n'
-                        '  TotalLCIA[id] = sum {i in TECHNOLOGIES} (LCIA_constr[id,i] '
+                        '  TotalLCIA[id] = sum {i in TECHNOLOGIES} (LCIA_constr[id,i] + LCIA_decom[id,i] '
                         '+ LCIA_op[id,i]) + sum{r in RESOURCES} (LCIA_res[id,r]);\n\n')
             elif assessment_type == 'direct emissions':
                 f.write('subject to totalDIRECT_calc_r {id in INDICATORS}:\n'
