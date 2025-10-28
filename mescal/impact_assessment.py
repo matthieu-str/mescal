@@ -331,8 +331,6 @@ def compute_impact_scores(
     # Maximum length of list of subcomponents
     N_subcomp_max = max(len(i) for i in technology_compositions.Components)
 
-    if 'Type' not in technology_compositions.columns:  # assume all compositions are of type Construction if not specified
-        technology_compositions['Type'] = len(technology_compositions) * ['Construction']
     # Associate new code to composition of technologies (this code does not correspond to any activity in the database,
     # it is only used as an identifier for the user)
     technology_compositions['New_code'] = technology_compositions.apply(lambda row: random_code(), axis=1)

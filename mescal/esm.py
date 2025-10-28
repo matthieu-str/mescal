@@ -103,7 +103,9 @@ class ESM:
         self.tech_specifics = tech_specifics if tech_specifics is not None \
             else pd.DataFrame(columns=['Name', 'Specifics', 'Amount'])
         self.technology_compositions = technology_compositions if technology_compositions is not None \
-            else pd.DataFrame(columns=['Name', 'Components'])
+            else pd.DataFrame(columns=['Name', 'Components', 'Type'])
+        if 'Type' not in self.technology_compositions.columns:  # assume all compositions are of type Construction if not specified
+            self.technology_compositions['Type'] = len(self.technology_compositions) * ['Construction']
         self.mapping_esm_flows_to_CPC_cat = mapping_esm_flows_to_CPC_cat
         self.main_database = main_database
         self.main_database_name = main_database_name if main_database_name is not None else \
@@ -340,7 +342,7 @@ class ESM:
                 continue
             if df_name == 'technology_compositions':
                 df['Components_tuple_temp'] = df.Components.apply(tuple)
-                if df.duplicated(subset=['Name', 'Components_tuple_temp']).any():
+                if df.duplicated(subset=['Name', 'Components_tuple_temp', 'Type']).any():
                     no_warning = False
                     self.logger.warning(f"There are duplicates in the {df_name} dataframe. Please check your inputs.")
                 df.drop(columns=['Components_tuple_temp'], inplace=True)
