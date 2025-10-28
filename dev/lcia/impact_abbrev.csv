@@ -240,3 +240,8 @@ Impact_category,Unit,Abbrev,AoP
 "('IMPACT World+ Midpoint 2.1 for ecoinvent v3.10', 'Midpoint', 'Photochemical ozone formation')",kg NMVOC eq,m_PCOX,m_PCOX
 "('IMPACT World+ Midpoint 2.1 for ecoinvent v3.10', 'Midpoint', 'Terrestrial acidification')",kg SO2 eq,m_TRA,m_TRA
 "('IMPACT World+ Midpoint 2.1 for ecoinvent v3.10', 'Midpoint', 'Water scarcity')",m3 world-eq,m_WAS,m_WAS
+"('IMPACT World+ Footprint 2.1 for ecoinvent v3.9', 'Carbon footprint')",kg CO2 eq (short),CF,CF
+"('IMPACT World+ Footprint 2.1 for ecoinvent v3.9', 'Energetic resource depletion')",MJ deprived,FNEU,FNEU
+"('IMPACT World+ Footprint 2.1 for ecoinvent v3.9', 'Ecosystem quality (residual)')",PDF.m2.yr,REQD,REQD
+"('IMPACT World+ Footprint 2.1 for ecoinvent v3.9', 'Human health (residual)')",DALY,RHHD,RHHD
+"('IMPACT World+ Footprint 2.1 for ecoinvent v3.9', 'Water footprint - Scarcity')",m3 world-eq,WSF,WSF
