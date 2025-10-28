@@ -44,7 +44,11 @@ def _correct_esm_and_lca_efficiency_differences(
 
     if db_type == 'validation':
         efficiency = double_counting_removal_amount[['Name', 'Flow', 'Unit', 'Amount']].copy(deep=True)
-        efficiency.drop(efficiency[efficiency['Flow'].isin(['CONSTRUCTION', 'OWN_CONSTRUCTION', 'TRANSPORT_FUEL', 'PROCESS_FUEL'])].index, inplace=True)
+        efficiency.drop(efficiency[efficiency['Flow'].isin([
+            'CONSTRUCTION', 'OWN_CONSTRUCTION',
+            'DECOMMISSION', 'OWN_DECOMMISSION',
+            'TRANSPORT_FUEL', 'PROCESS_FUEL',
+        ])].index, inplace=True)
         efficiency.Flow = efficiency.Flow.apply(lambda x: f"['{x}']")
 
     try:

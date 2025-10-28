@@ -292,7 +292,9 @@ def _double_counting_removal(
     # Store frequently accessed instance variables in local variables inside a method if they don't need to be modified
     esm_db_name = self.esm_db_name
     no_construction_list = self.no_construction_list
+    no_decommission_list = self.no_decommission_list
     mapping_infra = self.mapping_infra
+    mapping_constr = self.mapping_constr
     mapping_decom = self.mapping_decom
     no_background_search_list = self.no_background_search_list
     no_double_counting_removal_list = self.no_double_counting_removal_list
@@ -325,14 +327,10 @@ def _double_counting_removal(
     except ValueError:
         pass
 
-    technology_compositions_dict = {}
-    for key, value in dict(zip(
-        self.technology_compositions.Name, self.technology_compositions.Components
-    )).items():
-        if key in technology_compositions_dict:
-            technology_compositions_dict[key] += value
-        else:
-            technology_compositions_dict[key] = value
+    technology_compositions_dict = dict(zip(
+        zip(self.technology_compositions['Name'], self.technology_compositions['Type']),
+        self.technology_compositions['Components']
+    ))
 
     # inverse mapping dictionary (i.e., from CPC categories to the ESM flows)
     mapping_esm_flows_to_CPC_dict = {key: value for key, value in dict(zip(
@@ -344,32 +342,43 @@ def _double_counting_removal(
             mapping_CPC_to_esm_flows_dict.setdefault(x, []).append(k)
 
     for i in tqdm(range(len(df))):
-        tech = df['Name'].iloc[i]  # name of ES technology
+        tech = df['Name'].iloc[i]  # name of ESM technology
         # print(tech)
 
-        # Initialization of the list of construction activities and corresponding CPC categories
+        # Initialization of the list of construction/decommission activities and corresponding CPC categories
         act_constr_list = []
         CPC_constr_list = []
         mapping_esm_flows_to_CPC_dict['OWN_CONSTRUCTION'] = []
 
+        act_decom_list = []
+        CPC_decom_list = []
+        mapping_esm_flows_to_CPC_dict['OWN_DECOMMISSION'] = []
+
+        for key in mapping_CPC_to_esm_flows_dict.keys():  # removing previous OWN_CONSTRUCTION/DECOMMISSION entries
+            if 'OWN_CONSTRUCTION' in mapping_CPC_to_esm_flows_dict[key]:
+                mapping_CPC_to_esm_flows_dict[key].remove('OWN_CONSTRUCTION')
+            if 'OWN_DECOMMISSION' in mapping_CPC_to_esm_flows_dict[key]:
+                mapping_CPC_to_esm_flows_dict[key].remove('OWN_DECOMMISSION')
+
         # If decommission datasets are separated from the construction datasets, decommission impacts should be removed
         # from construction datasets
         if ds_type == 'Construction' and len(mapping_decom[mapping_decom.Name == tech]) > 0:
-            ESM_inputs += ['DECOMMISSIONING']
+            ESM_inputs += ['DECOMMISSION']
 
         # Construction activity
         if tech in no_construction_list or ds_type != 'Operation':
             pass
 
         else:
-            if tech not in technology_compositions_dict.keys():  # if the technology is not a composition
+            if (tech, 'Construction') not in technology_compositions_dict.keys():  # if the technology is not a composition
                 # simple technologies are seen as compositions of one technology
-                technology_compositions_dict[tech] = [tech]
+                technology_compositions_dict[(tech, 'Construction')] = [tech]
 
-            for sub_comp in technology_compositions_dict[tech]:  # looping over the subcomponents of the composition
-                # TODO: likely an issue when sub_comp have the same name for constr and decom
-                database_constr = mapping_infra[mapping_infra.Name == sub_comp]['Database'].iloc[0]
-                current_code_constr = mapping_infra[mapping_infra.Name == sub_comp]['Current_code'].iloc[0]
+            for sub_comp in technology_compositions_dict[(tech, 'Construction')]:  # looping over the subcomponents of the composition
+                database_constr, current_code_constr = mapping_infra[
+                    (mapping_infra.Name == sub_comp)
+                    & (mapping_infra.Type == 'Construction')
+                ][['Database', 'Current_code']].iloc[0]
 
                 act_constr = db_dict_code[(database_constr, current_code_constr)]
                 act_constr_list.append(act_constr)
@@ -380,9 +389,39 @@ def _double_counting_removal(
                     self.logger.warning(f'Product {act_constr["reference product"]} has no CPC category.')
                     CPC_constr = 'None'
                 CPC_constr_list.append(CPC_constr)
-                # TODO adapt to DECOMMISSIONING
                 mapping_esm_flows_to_CPC_dict['OWN_CONSTRUCTION'] += [CPC_constr]
                 mapping_CPC_to_esm_flows_dict[CPC_constr] = ['OWN_CONSTRUCTION']
+
+        # Decommission activity
+        if tech in no_decommission_list or ds_type != 'Operation':
+            pass
+
+        else:
+            if (tech, 'Decommission') not in technology_compositions_dict.keys():  # if the technology is not a composition
+                # simple technologies are seen as compositions of one technology
+                technology_compositions_dict[(tech, 'Decommission')] = [tech]
+
+            for sub_comp in technology_compositions_dict[(tech, 'Decommission')]:  # looping over the subcomponents of the composition
+                database_decom, current_code_decom = mapping_infra[
+                    (mapping_infra.Name == sub_comp)
+                    & (mapping_infra.Type == 'Decommission')
+                ][['Database', 'Current_code']].iloc[0]
+
+                act_decom = db_dict_code[(database_decom, current_code_decom)]
+                act_decom_list.append(act_decom)
+                try:
+                    CPC_decom = dict(act_decom['classifications'])['CPC']
+                except KeyError:
+                    self.products_without_a_cpc_category.add(act_decom["reference product"])
+                    self.logger.warning(f'Product {act_decom["reference product"]} has no CPC category.')
+                    CPC_decom = 'None'
+                CPC_decom_list.append(CPC_decom)
+                mapping_esm_flows_to_CPC_dict['OWN_DECOMMISSION'] += [CPC_decom]
+                if CPC_decom in mapping_CPC_to_esm_flows_dict:
+                    if 'OWN_DECOMMISSION' not in mapping_CPC_to_esm_flows_dict[CPC_decom]:  # avoid duplicates
+                        mapping_CPC_to_esm_flows_dict[CPC_decom] += ['OWN_DECOMMISSION']
+                else:
+                    mapping_CPC_to_esm_flows_dict[CPC_decom] = ['OWN_DECOMMISSION']
 
         # Main activity
         database_main = df['Database'].iloc[i]  # LCA database of the technology
@@ -530,6 +569,27 @@ def _double_counting_removal(
                     id_technosphere_inputs_zero = [i for i, e in enumerate(technosphere_inputs_CPC)
                                                    if e in set_CPC_inputs]
 
+            if tech in no_decommission_list or ds_type != 'Operation':
+                pass
+            elif perform_d_c[id_d_c][4] != 'all':
+                pass
+            else:
+                comp_condition = True
+                for n in range(len(CPC_decom_list)):
+                    comp_condition &= (
+                            CPC_decom_list[n] in [technosphere_inputs_CPC[i] for i in id_technosphere_inputs_zero])
+
+                if comp_condition:
+                    pass
+                else:
+                    # if the decommission phase was not detected via OWN_DECOMMISSION,
+                    # then we need the generic DECOMMISSION CPC categories
+                    CPC_inputs.extend(mapping_esm_flows_to_CPC_dict['DECOMMISSION'])
+                    ES_inputs.append('DECOMMISSION')
+                    set_CPC_inputs = set(CPC_inputs)
+                    id_technosphere_inputs_zero = [i for i, e in enumerate(technosphere_inputs_CPC)
+                                                   if e in set_CPC_inputs]
+
             for n in id_technosphere_inputs_zero:
 
                 flow = technosphere_inputs[n]
@@ -567,11 +627,20 @@ def _double_counting_removal(
                     if 'OWN_CONSTRUCTION' in res_categories:
                         # replace construction flow input by the one added before in the ESM database
                         # (for validation purposes)
-                        for idx, sub_comp in enumerate(technology_compositions_dict[tech]):
+                        for idx, sub_comp in enumerate(technology_compositions_dict[(tech, 'Construction')]):
                             if code == act_constr_list[idx]['code']:
-                                new_code_infra, type_infra = mapping_infra[mapping_infra.Name == sub_comp][['New_code', 'Type']].iloc[0]
-                                flow['database'], flow['code'] = esm_db_name, new_code_infra
-                                flow['name'] = f'{sub_comp}, {type_infra}'
+                                new_code_constr = mapping_constr[mapping_constr.Name == sub_comp]['New_code'].iloc[0]
+                                flow['database'], flow['code'] = esm_db_name, new_code_constr
+                                flow['name'] = f'{sub_comp}, Construction'
+
+                    if 'OWN_DECOMMISSION' in res_categories:
+                        # replace decommission flow input by the one added before in the ESM database
+                        # (for validation purposes)
+                        for idx, sub_comp in enumerate(technology_compositions_dict[(tech, 'Decommission')]):
+                            if code == act_decom_list[idx]['code']:
+                                new_code_decom = mapping_decom[mapping_decom.Name == sub_comp]['New_code'].iloc[0]
+                                flow['database'], flow['code'] = esm_db_name, new_code_decom
+                                flow['name'] = f'{sub_comp}, Decommission'
 
                 # add the removed amount in the ei_removal dict for post-analysis
                 for cat in res_categories:
@@ -597,7 +666,7 @@ def _double_counting_removal(
             for cat in ES_inputs:
                 if (
                         (tech in list(background_search_act[ds_type].keys()))
-                        & (cat not in ['CONSTRUCTION', 'OWN_CONSTRUCTION', 'DECOMMISSIONING'])
+                        & (cat not in ['CONSTRUCTION', 'OWN_CONSTRUCTION', 'DECOMMISSION', 'OWN_DECOMMISSION'])
                         # The two following conditions mean that the background search would stop when some
                         # intermediary flows have already been found for a given esm flow, but some other
                         # similar and relevant flows, further in the process tree, might also be there.

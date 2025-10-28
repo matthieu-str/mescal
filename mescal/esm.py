@@ -172,7 +172,11 @@ class ESM:
 
     @property
     def mapping_infra(self):
-        return self.mapping[(self.mapping['Type'] == 'Construction') | (self.mapping['Type'] == 'Decommission')]
+        return self.mapping[self.mapping['Type'].isin(['Construction', 'Decommission'])]
+
+    @property
+    def mapping_tech(self):
+        return self.mapping[self.mapping['Type'].isin(['Operation', 'Construction', 'Decommission'])]
 
     @property
     def mapping_res(self):
@@ -198,7 +202,17 @@ class ESM:
 
     @property
     def no_construction_list(self):
-        return list(self.tech_specifics[self.tech_specifics.Specifics == 'No construction'].Name)
+        return [tech for tech in self.mapping_tech.Name.unique() if
+                (tech not in self.mapping_constr.Name.unique())
+                & (tech not in self.technology_compositions[self.technology_compositions.Type == 'Construction'].Name.unique())
+                ]
+
+    @property
+    def no_decommission_list(self):
+        return [tech for tech in self.mapping_tech.Name.unique() if
+                (tech not in self.mapping_decom.Name.unique())
+                & (tech not in self.technology_compositions[self.technology_compositions.Type == 'Decommission'].Name.unique())
+                ]
 
     @property
     def no_background_search_list(self):
@@ -778,13 +792,10 @@ class ESM:
         df_tech_specifics = self.tech_specifics
 
         # Add a construction input to technologies that have a construction phase
-        no_construction_list = list(df_tech_specifics[df_tech_specifics.Specifics == 'No construction'].Name)
-        mapping_op['OWN_CONSTRUCTION'] = mapping_op.apply(lambda row: has_construction(row, no_construction_list),
-                                                          axis=1)
+        mapping_op['OWN_CONSTRUCTION'] = mapping_op.apply(lambda row: has_construction(row, self.no_construction_list), axis=1)
 
-        # Add a decommissioning input to technologies that have a decommissioning phase outside their construction phase
-        decom_list = list(df_tech_specifics[df_tech_specifics.Specifics == 'Decommissioning'].Name)
-        mapping_op['DECOMMISSIONING'] = mapping_op.apply(lambda row: has_decommissioning(row, decom_list), axis=1)
+        # Add a decommission input to technologies that have a decommissioning phase outside their construction phase
+        mapping_op['OWN_DECOMMISSION'] = mapping_op.apply(lambda row: has_decommission(row, self.no_decommission_list), axis=1)
 
         # Add a fuel input to mobility technologies (due to possible mismatch)
         mobility_list = list(df_tech_specifics[df_tech_specifics.Specifics == 'Mobility'].Name)
@@ -1155,18 +1166,18 @@ def has_construction(row: pd.Series, no_construction_list: list[str]) -> int:
         return -1
 
 
-def has_decommissioning(row: pd.Series, decom_list: list[str]) -> int:
+def has_decommission(row: pd.Series, no_decommission_list: list[str]) -> int:
     """
     Add a decommissioning input to technologies that have a decommissioning phase outside their construction phase
 
     :param row: row of the model file
-    :param decom_list: list of technologies for which the decommissioning phase is considered
+    :param no_decommission_list: list of technologies for which the decommissioning phase is not considered
     :return: -1 if decommissioning phase, 0 otherwise
     """
-    if row.Name in decom_list:
-        return -1
-    else:
+    if row.Name in no_decommission_list:
         return 0
+    else:
+        return -1
 
 
 def is_transport(row: pd.Series, mobility_list: list[str]) -> int:
