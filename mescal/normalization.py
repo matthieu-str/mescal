@@ -24,35 +24,6 @@ def _tech_type(tech: str) -> str:
         raise ValueError(f"Unknown technology type: {tech}")
 
 
-def lcia_methods_short_names(lcia_method: str) -> str:
-    """
-    Returns the short name of the LCIA method
-
-    :param lcia_method: name of the LCIA method
-    :return: short name for the LCIA method
-    """
-    if lcia_method == 'IMPACT World+ Damage 2.0.1':
-        return 'endpoint'
-    elif lcia_method == 'IMPACT World+ Damage 2.0.1 - Total only':
-        return 'endpoint_tot'
-    elif lcia_method == 'IMPACT World+ Midpoint 2.0.1':
-        return 'midpoint'
-    elif lcia_method == 'IMPACT World+ Footprint 2.0.1':
-        return 'footprint'
-    if lcia_method == 'IMPACT World+ Damage 2.0.1_regionalized':
-        return 'endpoint_reg'
-    elif lcia_method == 'IMPACT World+ Damage 2.0.1_regionalized - Total only':
-        return 'endpoint_tot_reg'
-    elif lcia_method == 'IMPACT World+ Midpoint 2.0.1_regionalized':
-        return 'midpoint_reg'
-    elif lcia_method == 'IMPACT World+ Footprint 2.0.1_regionalized':
-        return 'footprint_reg'
-    elif lcia_method == 'PB LCIA':
-        return 'pb_lcia'
-    else:
-        raise ValueError(f"Unknown LCIA method: {lcia_method}")
-
-
 def from_str_to_tuple(df: pd.DataFrame, col: str) -> pd.DataFrame:
     """
     Convert a column of strings to tuples
