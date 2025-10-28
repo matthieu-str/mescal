@@ -465,7 +465,7 @@ class Database:
             write: bool = False,
     ) -> None:
         """
-        Relink a database based on activity codes and write it
+        Relink a database based on activity codes or activity names and write it to your brightway project
 
         :param name_database_unlink: name of the database to unlink
         :param name_database_relink: name of the database to relink
