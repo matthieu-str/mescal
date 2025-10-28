@@ -19,6 +19,7 @@ __all__ = (
     "random_code",
     "ecoinvent_unit_convention",
     "change_mapping_year",
+    "expand_impact_category_levels",
 
     # change_ecoinvent.py
     "change_ecoinvent_version_mapping",

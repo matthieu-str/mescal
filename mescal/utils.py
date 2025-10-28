@@ -117,3 +117,31 @@ def random_code() -> str:
     length = 32
     code_rand = ''.join(random.choices(string.ascii_lowercase + string.digits, k=length))
     return code_rand
+
+
+def expand_impact_category_levels(
+        df: pd.DataFrame,
+        impact_category_col: str = 'Impact_category',
+) -> pd.DataFrame:
+    """
+    Expand the impact category levels into separate columns
+
+    :param df: dataframe with impact category column
+    :param impact_category_col: name of the impact category column
+    :return: the dataframe with expanded impact category levels
+    """
+
+    max_len = df[impact_category_col].dropna().apply(
+        lambda x: len(x) if isinstance(x, (tuple, list)) else 0
+    ).max()
+
+    expanded = pd.DataFrame(
+        df[impact_category_col].apply(
+            lambda x: list(x) + [None] * (max_len - len(x)) if isinstance(x, (tuple, list)) else [None] * max_len
+        ).tolist(),
+        index=df.index
+    )
+
+    expanded.columns = [f'{impact_category_col} (level {i})' for i in range(max_len)]
+
+    return pd.concat([df, expanded], axis=1)

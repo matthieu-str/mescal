@@ -5,7 +5,7 @@ import pandas as pd
 import ast
 import numpy as np
 from tqdm import tqdm
-from .utils import random_code
+from .utils import random_code, expand_impact_category_levels
 from .database import Database
 
 pd.options.mode.chained_assignment = None  # default='warn'
@@ -241,6 +241,24 @@ def compute_impact_scores(
             on='New_code',
             how='left'
         )
+        R_long = expand_impact_category_levels(R_long)
+        R_long['Impact_category_unit'] = R_long['Impact_category'].apply(lambda row: bd.Method(row).metadata['unit'])
+        R_long = R_long.merge(
+            unit_conversion[['Name', 'Type', 'ESM']],
+            on=['Name', 'Type'],
+            how='left',
+        ).rename(columns={'ESM': 'Functional unit'})
+
+        if contribution_analysis is not None:
+            df_contrib_analysis_results = expand_impact_category_levels(df_contrib_analysis_results, 'impact_category')
+            df_contrib_analysis_results['Impact_category_unit'] = df_contrib_analysis_results['Impact_category'].apply(
+                lambda row: bd.Method(row).metadata['unit'])
+            df_contrib_analysis_results = df_contrib_analysis_results.merge(
+                unit_conversion[['Name', 'Type', 'ESM']],
+                left_on=['act_name', 'act_type'],
+                right_on=['Name', 'Type'],
+                how='left',
+            ).rename(columns={'ESM': 'act_func_unit'})
 
         return R_long, df_contrib_analysis_results, None
 
@@ -454,6 +472,13 @@ def compute_impact_scores(
     R_long = pd.concat([R_tech_constr, R_tech_op, R_res], axis=1).melt(ignore_index=False, var_name='New_code')
     R_long = R_long.reset_index().merge(right=name_to_new_code, on='New_code')
     R_long.rename(columns={'index': 'Impact_category', 'value': 'Value'}, inplace=True)
+    R_long = expand_impact_category_levels(R_long)
+    R_long['Impact_category_unit'] = R_long['Impact_category'].apply(lambda row: bd.Method(row).metadata['unit'])
+    R_long = R_long.merge(
+        unit_conversion[['Name', 'Type', 'ESM']],
+        on=['Name', 'Type'],
+        how='left',
+    ).rename(columns={'ESM': 'Functional unit'})
 
     if req_technosphere:
         df_req_technosphere = pd.concat([
@@ -475,6 +500,15 @@ def compute_impact_scores(
             [df_contrib_analysis_results_constr, df_contrib_analysis_results_op, df_contrib_analysis_results_res],
             ignore_index=True,
         )
+        df_contrib_analysis_results = expand_impact_category_levels(df_contrib_analysis_results, 'impact_category')
+        df_contrib_analysis_results['impact_category_unit'] = df_contrib_analysis_results['impact_category'].apply(
+            lambda row: bd.Method(row).metadata['unit'])
+        df_contrib_analysis_results = df_contrib_analysis_results.merge(
+            unit_conversion[['Name', 'Type', 'ESM']],
+            left_on=['act_name', 'act_type'],
+            right_on=['Name', 'Type'],
+            how='left',
+        ).rename(columns={'ESM': 'act_func_unit'})
 
     return R_long, df_contrib_analysis_results, df_req_technosphere
 
