@@ -1,6 +1,7 @@
 import pandas as pd
 import ast
 from pathlib import Path
+import bw2data as bd
 
 
 @staticmethod
@@ -161,6 +162,22 @@ def normalize_lca_metrics(
         specific_lcia_categories=specific_lcia_categories,
         specific_lcia_abbrev=specific_lcia_abbrev,
     )
+
+    if 'Unit' not in impact_abbrev.columns:
+        impact_abbrev['Impact_category_unit'] = impact_abbrev['Impact_category'].apply(lambda row: bd.Method(row).metadata['unit'])
+
+    if specific_lcia_categories is not None:
+        if len(specific_lcia_categories) > len(impact_abbrev):
+            missing_lcia_categories = [cat for cat in specific_lcia_categories if cat not in impact_abbrev['Impact_category'].tolist()]
+            raise ValueError(f"The following specified LCIA categories were not found in the impact_abbrev dataframe: {missing_lcia_categories}")
+
+    if specific_lcia_abbrev is not None:
+        if len(specific_lcia_abbrev) > len(impact_abbrev):
+            missing_lcia_abbrev = [abbrev for abbrev in specific_lcia_abbrev if abbrev not in impact_abbrev['Abbrev'].tolist()]
+            raise ValueError(f"The following specified LCIA abbreviations were not found in the impact_abbrev dataframe: {missing_lcia_abbrev}")
+
+    if len(impact_abbrev) == 0:
+        raise ValueError("The demanded LCIA categories were not found in the impact_abbrev dataframe.")
 
     R = pd.merge(R, impact_abbrev, on='Impact_category')
 
