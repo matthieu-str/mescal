@@ -2,11 +2,12 @@ Name,Type,Value,LCA,ESM
 ACETIC_ACID,Resource,0.2474226804,kilogram,kilowatt hour
 ACETONE,Resource,0.1216545012,kilogram,kilowatt hour
 ALKALINE_ELECTROLYSIS,Construction,0.001555555556,unit,kilowatt
+ALKALINE_ELECTROLYSIS,Decommission,0.001555555556,unit,kilowatt
 ALKALINE_ELECTROLYSIS,Operation,0.03003003003,kilogram,kilowatt hour
 ALKALINE_ELECTROLYSIS_PLANT,Construction,1.0,unit,unit
-ALKALINE_ELECTROLYSIS_PLANT_DECOM,Construction,-1.0,unit,unit
+ALKALINE_ELECTROLYSIS_PLANT,Decommission,-1.0,unit,unit
 ALKALINE_ELECTROLYSIS_STACK,Construction,1.0,unit,unit
-ALKALINE_ELECTROLYSIS_STACK_DECOM,Construction,-1.0,unit,unit
+ALKALINE_ELECTROLYSIS_STACK,Decommission,-1.0,unit,unit
 AL_MAKING,Construction,5.727692308e-05,unit,kilogram per hour
 AL_MAKING,Operation,1.0,kilogram,kilogram
 AL_MAKING_HR,Construction,5.727692308e-05,unit,kilogram per hour
@@ -130,13 +131,11 @@ CROPS_TO_JETFUELS,Operation,0.08372093023,kilogram,kilowatt hour
 CUMENE_PROCESS,Construction,1.316008443e-05,unit,kilowatt
 CUMENE_PROCESS,Operation,0.08734260135,kilogram,kilowatt hour
 DAC_HT,Construction,7.445999999999999e-05,unit,kilogram per hour
+DAC_HT,Decommission,-7.445999999999999e-05,unit,kilogram per hour
 DAC_HT,Operation,1.0,kilogram,kilogram
-DAC_HT_PLANT,Construction,1.0,unit,unit
-DAC_HT_PLANT_DECOM,Construction,-1.0,unit,unit
 DAC_LT,Construction,7.445999999999999e-06,unit,kilogram per hour
+DAC_LT,Decommission,-7.445999999999999e-06,unit,kilogram per hour
 DAC_LT,Operation,1.0,kilogram,kilogram
-DAC_LT_PLANT,Construction,1.0,unit,unit
-DAC_LT_PLANT_DECOM,Construction,-1.0,unit,unit
 DEC_ADVCOGEN_H2,Construction,0.5,unit,kilowatt
 DEC_ADVCOGEN_H2,Operation,1.0,kilowatt hour,kilowatt hour
 DEC_BOILER_GAS,Construction,0.1,unit,kilowatt
@@ -373,11 +372,12 @@ PAPER_MAKING_HR,Construction,2.023369565e-05,unit,kilogram per hour
 PAPER_MAKING_HR,Operation,1.0,kilogram,kilogram
 PE,Resource,1.0,kilogram,kilogram
 PEM_ELECTROLYSIS,Construction,0.0016216216219999,unit,kilowatt
+PEM_ELECTROLYSIS,Decommission,0.0016216216219999,unit,kilowatt
 PEM_ELECTROLYSIS,Operation,0.03003003003,kilogram,kilowatt hour
 PEM_ELECTROLYSIS_PLANT,Construction,1.0,unit,unit
-PEM_ELECTROLYSIS_PLANT_DECOM,Construction,-1.0,unit,unit
+PEM_ELECTROLYSIS_PLANT,Decommission,-1.0,unit,unit
 PEM_ELECTROLYSIS_STACK,Construction,1.0,unit,unit
-PEM_ELECTROLYSIS_STACK_DECOM,Construction,-1.0,unit,unit
+PEM_ELECTROLYSIS_STACK,Decommission,-1.0,unit,unit
 PET,Resource,1.0,kilogram,kilogram
 PET_FORMATION,Construction,0.000150672,unit,kilogram per hour
 PET_FORMATION,Operation,1.0,kilogram,kilogram
@@ -407,11 +407,12 @@ SMART_PROCESS,Operation,1.0,kilogram,kilogram
 SNG,Resource,0.09824437305,cubic meter,kilowatt hour
 SNG_NG,Operation,0.09824437305,cubic meter,kilowatt hour
 SOEC_ELECTROLYSIS,Construction,0.00127027027,unit,kilowatt
+SOEC_ELECTROLYSIS,Decommission,0.00127027027,unit,kilowatt
 SOEC_ELECTROLYSIS,Operation,0.03003003003,kilogram,kilowatt hour
 SOEC_ELECTROLYSIS_PLANT,Construction,1.0,unit,unit
-SOEC_ELECTROLYSIS_PLANT_DECOM,Construction,-1.0,unit,unit
+SOEC_ELECTROLYSIS_PLANT,Decommission,-1.0,unit,unit
 SOEC_ELECTROLYSIS_STACK,Construction,1.0,unit,unit
-SOEC_ELECTROLYSIS_STACK_DECOM,Construction,-1.0,unit,unit
+SOEC_ELECTROLYSIS_STACK,Decommission,-1.0,unit,unit
 STEEL_MAKING,Construction,5.727692308e-05,unit,kilogram per hour
 STEEL_MAKING,Operation,1.0,kilogram,kilogram
 STEEL_MAKING_HP,Construction,5.727692308e-05,unit,kilogram per hour

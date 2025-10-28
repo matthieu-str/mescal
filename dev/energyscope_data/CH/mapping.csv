@@ -1,9 +1,9 @@
 Name,Type,Product,Activity,Location,Database
 ALKALINE_ELECTROLYSIS,Operation,"hydrogen, gaseous, 20 bar","hydrogen production, gaseous, 20 bar, from AEC electrolysis, from grid electricity",CH,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2050+truck_carculator
 ALKALINE_ELECTROLYSIS_PLANT,Construction,"electrolyzer, 1MWe, AEC, Balance of Plant","electrolyzer production, 1MWe, AEC, Balance of Plant",RER,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2050+truck_carculator
-ALKALINE_ELECTROLYSIS_PLANT_DECOM,Construction,"used fuel cell balance of plant, 1MWe, AEC","treatment of fuel cell balance of plant, 1MWe, AEC",RER,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2050+truck_carculator
+ALKALINE_ELECTROLYSIS_PLANT,Decommission,"used fuel cell balance of plant, 1MWe, AEC","treatment of fuel cell balance of plant, 1MWe, AEC",RER,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2050+truck_carculator
 ALKALINE_ELECTROLYSIS_STACK,Construction,"electrolyzer, 1MWe, AEC, Stack","electrolyzer production, 1MWe, AEC, Stack",RER,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2050+truck_carculator
-ALKALINE_ELECTROLYSIS_STACK_DECOM,Construction,"used fuel cell stack, 1MWe, AEC","treatment of fuel cell stack, 1MWe, AEC",RER,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2050+truck_carculator
+ALKALINE_ELECTROLYSIS_STACK,Decommission,"used fuel cell stack, 1MWe, AEC","treatment of fuel cell stack, 1MWe, AEC",RER,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2050+truck_carculator
 AL_MAKING,Construction,aluminium casting facility,aluminium casting facility construction,RER,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2050+truck_carculator
 AL_MAKING,Operation,"aluminium, primary, ingot","aluminium production, primary, ingot","IAI Area, EU27 & EFTA",ecoinvent_cutoff_3.9.1_image_SSP2-Base_2050+truck_carculator
 AL_MAKING_HR,Operation,"aluminium, primary, ingot","aluminium production, primary, ingot","IAI Area, EU27 & EFTA",ecoinvent_cutoff_3.9.1_image_SSP2-Base_2050+truck_carculator
@@ -120,11 +120,11 @@ CROPS_TO_JETFUELS,Operation,"kerosene, synthetic","kerosene production, syntheti
 CUMENE_PROCESS,Construction,"chemical factory, organics","chemical factory construction, organics",RER,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2050+truck_carculator
 CUMENE_PROCESS,Operation,cumene,cumene production,RER,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2050+truck_carculator
 DAC_HT,Operation,"carbon dioxide, captured from atmosphere","carbon dioxide, captured from atmosphere, with a sorbent-based direct air capture system, 100ktCO2",RER,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2050+truck_carculator
-DAC_HT_PLANT,Construction,direct air capture system,"direct air capture system, sorbent-based, 100ktCO2",RER,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2050+truck_carculator
-DAC_HT_PLANT_DECOM,Construction,direct air capture system,"treatment of direct air capture system, sorbent-based, 100ktCO2",RER,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2050+truck_carculator
+DAC_HT,Construction,direct air capture system,"direct air capture system, sorbent-based, 100ktCO2",RER,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2050+truck_carculator
+DAC_HT,Decommission,direct air capture system,"treatment of direct air capture system, sorbent-based, 100ktCO2",RER,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2050+truck_carculator
 DAC_LT,Operation,"carbon dioxide, captured from atmosphere","carbon dioxide, captured from atmosphere, with a solvent-based direct air capture system, 1MtCO2",RER,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2050+truck_carculator
-DAC_LT_PLANT,Construction,direct air capture system,"direct air capture system, solvent-based, 1MtCO2",RER,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2050+truck_carculator
-DAC_LT_PLANT_DECOM,Construction,direct air capture system,"treatment of direct air capture system, solvent-based, 1MtCO2",RER,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2050+truck_carculator
+DAC_LT,Construction,direct air capture system,"direct air capture system, solvent-based, 1MtCO2",RER,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2050+truck_carculator
+DAC_LT,Decommission,direct air capture system,"treatment of direct air capture system, solvent-based, 1MtCO2",RER,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2050+truck_carculator
 DEC_ADVCOGEN_H2,Construction,"fuel cell, polymer electrolyte membrane, 2kW electrical, future","fuel cell production, polymer electrolyte membrane, 2kW electrical, future",CH,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2050+truck_carculator
 DEC_ADVCOGEN_H2,Operation,"electricity, from residential heating system","electricity, residential, by conversion of hydrogen using fuel cell, PEM, allocated by exergy, distributed by pipeline, produced by Electrolysis, PEM using electricity from grid",CH,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2050+truck_carculator
 DEC_BOILER_GAS,Operation,"heat, central or small-scale, natural gas","heat production, natural gas, at boiler modulating <100kW",WEU,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2050+truck_carculator
@@ -323,9 +323,9 @@ PAPER_MAKING_HR,Operation,"paper, newsprint","paper production, newsprint, recyc
 PAPER_MAKING_HR,Construction,"paper mill, integrated","paper mill construction, integrated",RER,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2050+truck_carculator
 PEM_ELECTROLYSIS,Operation,"hydrogen, gaseous, 30 bar","hydrogen production, gaseous, 30 bar, from PEM electrolysis, from grid electricity",WEU,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2050+truck_carculator
 PEM_ELECTROLYSIS_PLANT,Construction,"electrolyzer, 1MWe, PEM, Balance of Plant","electrolyzer production, 1MWe, PEM, Balance of Plant",RER,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2050+truck_carculator
-PEM_ELECTROLYSIS_PLANT_DECOM,Construction,"used fuel cell balance of plant, 1MWe, PEM","treatment of fuel cell balance of plant, 1MWe, PEM",RER,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2050+truck_carculator
+PEM_ELECTROLYSIS_PLANT,Decommission,"used fuel cell balance of plant, 1MWe, PEM","treatment of fuel cell balance of plant, 1MWe, PEM",RER,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2050+truck_carculator
 PEM_ELECTROLYSIS_STACK,Construction,"electrolyzer, 1MWe, PEM, Stack","electrolyzer production, 1MWe, PEM, Stack",RER,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2050+truck_carculator
-PEM_ELECTROLYSIS_STACK_DECOM,Construction,"used fuel cell stack, 1MWe, PEM","treatment of fuel cell stack, 1MWe, PEM",RER,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2050+truck_carculator
+PEM_ELECTROLYSIS_STACK,Decommission,"used fuel cell stack, 1MWe, PEM","treatment of fuel cell stack, 1MWe, PEM",RER,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2050+truck_carculator
 PET_FORMATION,Operation,"polyethylene terephthalate, granulate, amorphous","polyethylene terephthalate production, granulate, amorphous",RER,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2050+truck_carculator
 PET_FORMATION,Construction,"chemical factory, organics","chemical factory construction, organics",RER,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2050+truck_carculator
 POLYPROPYLENE_PP,Operation,"polypropylene, granulate","polypropylene production, granulate",RER,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2050+truck_carculator
@@ -349,9 +349,9 @@ SMART_PROCESS,Construction,"chemical factory, organics","chemical factory constr
 SNG_NG,Operation,biogas,market for biogas,CH,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2050+truck_carculator
 SOEC_ELECTROLYSIS,Operation,"hydrogen, gaseous, 1 bar","hydrogen production, gaseous, 1 bar, from SOEC electrolysis, from grid electricity",CH,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2050+truck_carculator
 SOEC_ELECTROLYSIS_PLANT,Construction,"electrolyzer, 1MWe, SOEC, Balance of Plant","electrolyzer production, 1MWe, SOEC, Balance of Plant",RER,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2050+truck_carculator
-SOEC_ELECTROLYSIS_PLANT_DECOM,Construction,"used fuel cell balance of plant, 1MWe, SOEC","treatment of fuel cell balance of plant, 1MWe, SOEC",RER,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2050+truck_carculator
+SOEC_ELECTROLYSIS_PLANT,Decommission,"used fuel cell balance of plant, 1MWe, SOEC","treatment of fuel cell balance of plant, 1MWe, SOEC",RER,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2050+truck_carculator
 SOEC_ELECTROLYSIS_STACK,Construction,"electrolyzer, 1MWe, SOEC, Stack","electrolyzer production, 1MWe, SOEC, Stack",RER,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2050+truck_carculator
-SOEC_ELECTROLYSIS_STACK_DECOM,Construction,"used fuel cell stack, 1MWe, SOEC","treatment of fuel cell stack, 1MWe, SOEC",RER,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2050+truck_carculator
+SOEC_ELECTROLYSIS_STACK,Decommission,"used fuel cell stack, 1MWe, SOEC","treatment of fuel cell stack, 1MWe, SOEC",RER,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2050+truck_carculator
 STEEL_MAKING,Operation,"steel, chromium steel 18/8","market for steel, chromium steel 18/8",WEU,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2050+truck_carculator
 STEEL_MAKING,Construction,aluminium casting facility,aluminium casting facility construction,RER,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2050+truck_carculator
 STEEL_MAKING_HP,Operation,"steel, chromium steel 18/8","market for steel, chromium steel 18/8",WEU,ecoinvent_cutoff_3.9.1_image_SSP2-Base_2050+truck_carculator
