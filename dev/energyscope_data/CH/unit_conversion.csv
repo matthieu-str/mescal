@@ -503,61 +503,53 @@ syngas,Other,2.13,cubic meter,kilogram
 waste wood,Other,0.234,kilogram,kilowatt hour
 wood ash mixture,Other,0.234,kilogram,kilowatt hour
 wood chips,Other,0.234,kilogram,kilowatt hour
-ACETIC_ACID,Flow,0.24742268,kilogram,kilowatt hour
-ACETONE,Flow,0.121654501,kilogram,kilowatt hour
-BENZENE,Flow,0.084705882,kilogram,kilowatt hour
-BIO_DIESEL,Flow,0.095238095,kilogram,kilowatt hour
-COAL,Flow,0.128986027,kilogram,kilowatt hour
-DIESEL,Flow,0.084530854,kilogram,kilowatt hour
-ELECTRICITY_EHV,Flow,1,kilowatt hour,kilowatt hour
-ELECTRICITY_HV,Flow,1,kilowatt hour,kilowatt hour
-ELECTRICITY_MV,Flow,1,kilowatt hour,kilowatt hour
-ELECTRICITY_LV,Flow,1,kilowatt hour,kilowatt hour
-ETHANE,Flow,0.075301205,kilogram,kilowatt hour
-ETHANOL,Flow,0.1139962,kilogram,kilowatt hour
-ETHYLBENZENE,Flow,0.087937857,kilogram,kilowatt hour
-ETHYLENE,Flow,0.071591926,kilogram,kilowatt hour
-GASOLINE,Flow,0.084705882,kilogram,kilowatt hour
-H2_EHP,Flow,0.03003003,kilogram,kilowatt hour
-H2_HP,Flow,0.03003003,kilogram,kilowatt hour
-H2_LP,Flow,0.03003003,kilogram,kilowatt hour
-H2_MP,Flow,0.03003003,kilogram,kilowatt hour
-JETFUEL,Flow,0.08372093,kilogram,kilowatt hour
-LFO,Flow,0.084507042,kilogram,kilowatt hour
-LNG,Flow,0.092307692,cubic meter,kilowatt hour
-METHANOL,Flow,0.180505415,kilogram,kilowatt hour
-NG_EHP,Flow,0.092307692,cubic meter,kilowatt hour
-NG_HP,Flow,0.098244373,cubic meter,kilowatt hour
-NG_LP,Flow,0.098244373,cubic meter,kilowatt hour
-NG_MP,Flow,0.098244373,cubic meter,kilowatt hour
-PE,Flow,1,kilogram,kilogram
-PET,Flow,1,kilogram,kilogram
-PHENOL,Flow,0.110939908,kilogram,kilowatt hour
-PP,Flow,1,kilogram,kilogram
-PROPANE,Flow,0.077586207,kilogram,kilowatt hour
-PROPYLENE,Flow,0.078604336,kilogram,kilowatt hour
-PS,Flow,1,kilogram,kilogram
-PVC,Flow,1,kilogram,kilogram
-SNG_EHP,Flow,0.098244373,cubic meter,kilowatt hour
-STYRENE,Flow,1,kilogram,kilogram
-TOLUENE,Flow,0.084845628,kilogram,kilowatt hour
-URANIUM,Flow,9.23077E-07,kilogram,kilowatt hour
-WASTE,Flow,-0.291497976,kilogram,kilowatt hour
-WASTE_BIO,Flow,-0.622551944,kilogram,kilowatt hour
-WASTE_FOS,Flow,-1.467590705,kilogram,kilowatt hour
-WET_BIOMASS,Flow,0.252631579,kilogram,kilowatt hour
-WOOD,Flow,0.233766234,kilogram,kilowatt hour
-XYLENE,Flow,0.087888479,kilogram,kilowatt hour
-BIO_ETHANOL,Flow,0.1139962,kilogram,kilowatt hour
-BIO_JETFUEL,Flow,0.08372093,kilogram,kilowatt hour
-BIO_LFO,Flow,0.084507042,kilogram,kilowatt hour
-BIO_METHANOL,Flow,0.180505415,kilogram,kilowatt hour
-SNG,Flow,0.092307692,cubic meter,kilowatt hour
-HEAT_HIGH_T,Flow,3.6,megajoule,kilowatt hour
-CO2_E,Flow,1,kilogram,kilogram
-CO2_C,Flow,1,kilogram,kilogram
-propylene,Other,0.078604336,kilogram,kilowatt hour
-biogas,Other,0.076335878,cubic meter,kilowatt hour
+biogas,Other,0.098244373,cubic meter,kilowatt hour
 benzene,Other,0.084705882,kilogram,kilowatt hour
 ethylene,Other,0.071591926,kilogram,kilowatt hour
 methanol,Other,0.180505415,kilogram,kilowatt hour
+propylene,Other,0.078604336,kilogram,kilowatt hour
+ACETIC_ACID,Flow,0.2474226804,kilogram,kilowatt hour
+ACETONE,Flow,0.1216545012,kilogram,kilowatt hour
+BENZENE,Flow,0.08470588235,kilogram,kilowatt hour
+COAL,Flow,0.1289860265,kilogram,kilowatt hour
+DIESEL,Flow,0.08453085376,kilogram,kilowatt hour
+ELECTRICITY_EHV,Flow,1.0,kilowatt hour,kilowatt hour
+ELECTRICITY_HV,Flow,1.0,kilowatt hour,kilowatt hour
+ELECTRICITY_MV,Flow,1.0,kilowatt hour,kilowatt hour
+ELECTRICITY_LV,Flow,1.0,kilowatt hour,kilowatt hour
+ETHANE,Flow,0.07530120482,kilogram,kilowatt hour
+ETHANOL,Flow,0.1139962001,kilogram,kilowatt hour
+ETHYLBENZENE,Flow,0.08793785725,kilogram,kilowatt hour
+ETHYLENE,Flow,0.07159192602,kilogram,kilowatt hour
+GASOLINE,Flow,0.08470588235,kilogram,kilowatt hour
+H2_EHP,Flow,0.03003003003,kilogram,kilowatt hour
+H2_HP,Flow,0.03003003003,kilogram,kilowatt hour
+H2_LP,Flow,0.03003003003,kilogram,kilowatt hour
+H2_MP,Flow,0.03003003003,kilogram,kilowatt hour
+JETFUEL,Flow,0.08372093023,kilogram,kilowatt hour
+LFO,Flow,0.08450704225,kilogram,kilowatt hour
+LNG,Flow,0.09230769231,cubic meter,kilowatt hour
+METHANOL,Flow,0.1805054152,kilogram,kilowatt hour
+NG_EHP,Flow,0.09230769231,cubic meter,kilowatt hour
+NG_HP,Flow,0.09824437305,cubic meter,kilowatt hour
+NG_LP,Flow,0.09824437305,cubic meter,kilowatt hour
+NG_MP,Flow,0.07741935484,kilogram,kilowatt hour
+PE,Flow,1.0,kilogram,kilogram
+PET,Flow,1.0,kilogram,kilogram
+PHENOL,Flow,0.1109399076,kilogram,kilowatt hour
+PP,Flow,1.0,kilogram,kilogram
+PROPYLENE,Flow,0.07860433634,kilogram,kilowatt hour
+PS,Flow,1.0,kilogram,kilogram
+PVC,Flow,1.0,kilogram,kilogram
+SNG,Flow,0.09824437305,cubic meter,kilowatt hour
+STYRENE,Flow,1.0,kilogram,kilogram
+TOLUENE,Flow,0.08484562809,kilogram,kilowatt hour
+URANIUM,Flow,9.230769231e-07,kilogram,kilowatt hour
+WASTE,Flow,-0.2914979757,kilogram,kilowatt hour
+WASTE_BIO,Flow,-0.6225519442,kilogram,kilowatt hour
+WASTE_FOS,Flow,-1.467590705,kilogram,kilowatt hour
+WET_BIOMASS,Flow,0.25263158,kilogram,kilowatt hour
+WOOD,Flow,0.2337662338,kilogram,kilowatt hour
+HEAT_HIGH_T,Flow,3.6,megajoule,kilowatt hour
+CO2_E,Flow,1.0,kilogram,kilogram
+CO2_C,Flow,1.0,kilogram,kilogram
