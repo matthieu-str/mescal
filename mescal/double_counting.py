@@ -360,11 +360,6 @@ def _double_counting_removal(
             if 'OWN_DECOMMISSION' in mapping_CPC_to_esm_flows_dict[key]:
                 mapping_CPC_to_esm_flows_dict[key].remove('OWN_DECOMMISSION')
 
-        # If decommission datasets are separated from the construction datasets, decommission impacts should be removed
-        # from construction datasets
-        if ds_type == 'Construction' and len(mapping_decom[mapping_decom.Name == tech]) > 0:
-            ESM_inputs += ['DECOMMISSION']
-
         # Construction activity
         if tech in no_construction_list or ds_type != 'Operation':
             pass
@@ -594,18 +589,21 @@ def _double_counting_removal(
 
                 flow = technosphere_inputs[n]
 
-                if flow['amount'] < 0 and flow['unit'] != 'unit':
+                if ds_type != 'Construction' and flow['amount'] < 0 and flow['unit'] != 'unit':
                     # we keep waste flows (but not infrastructure decommissioning flows, which should be contained
                     # in the infrastructure LCI dataset)
                     continue
 
                 # Keep track of the amount in the original activity as a comment
                 old_amount = flow['amount']
-                flow['comment'] = f'Original amount: {old_amount}. ' + flow.get('comment', '')
                 database = flow['database']
                 code = flow['code']
                 act_flow = db_dict_code[(database, code)]
                 res_categories = mapping_CPC_to_esm_flows_dict.get(dict(act_flow['classifications']).get('CPC', ''), '')
+
+                if ds_type == 'Construction' and flow['amount'] > 0 and 'DECOMMISSION' in res_categories:
+                    # Positive flow identified as a waste flow, this is probably a mismatch
+                    continue
 
                 flows_set_to_zero.append([
                     tech,
@@ -658,10 +656,11 @@ def _double_counting_removal(
                             ei_removal[tech][cat]['count'][flow['unit']] += 1  # count (i.e., number of flows put to zero)
 
                 # Setting the amount to zero
+                flow['comment'] = f'Original amount: {old_amount}. ' + flow.get('comment', '')
                 flow['amount'] = 0
 
             # Go deeper in the process tree if some flows were not found.
-            # This is not applied to construction datasets, which should be found the foreground inventory.
+            # This is not applied to construction and decommission datasets, which should be found the foreground inventory.
             missing_ES_inputs = []
             for cat in ES_inputs:
                 if (

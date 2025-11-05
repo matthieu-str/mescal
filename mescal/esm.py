@@ -47,6 +47,7 @@ class ESM:
             stop_background_search_when_first_flow_found: bool = False,
             esm_end_use_demands: list[str] = None,
             remove_double_counting_to: list[str] = None,
+            extract_eol_from_construction: bool = False,
     ):
         """
         Initialize the ESM database creation
@@ -85,6 +86,8 @@ class ESM:
             on construction and resource datasets
         :param remove_double_counting_to: list of phases to apply double-counting removal to, can be 'Operation',
             'Construction', 'Decommission', and/or 'Resource'. Default is ['Operation'].
+        :param extract_eol_from_construction: if True, the end-of-life flows are set to zero in the construction
+            dataset, and they are used to build the decommission dataset of the technology.
         """
 
         # set up logging tool
@@ -126,8 +129,9 @@ class ESM:
         self.lifetime = lifetime
         self.max_depth_double_counting_search = max_depth_double_counting_search
         self.stop_background_search_when_first_flow_found = stop_background_search_when_first_flow_found
-        self.esm_end_use_demands = esm_end_use_demands
+        self.esm_end_use_demands = esm_end_use_demands if esm_end_use_demands is not None else []
         self.remove_double_counting_to = remove_double_counting_to if remove_double_counting_to is not None else ['Operation']
+        self.extract_eol_from_construction = extract_eol_from_construction
 
         # Initialize attributes used within mescal
         self.df_flows_set_to_zero = None
@@ -273,6 +277,7 @@ class ESM:
     )
     from .normalization import normalize_lca_metrics, _tech_type
     from .generate_lcia_obj_ampl import generate_mod_file_ampl
+    from .decommission import _add_decommission_datasets
 
     def clean_inputs(self) -> None:
         """
@@ -553,11 +558,13 @@ class ESM:
             self._add_activities_to_database(act_type='Construction')
         else:
             mapping_constr = self.mapping_constr
-            if self.esm_end_use_demands is None:
+            if self.esm_end_use_demands is None and self.extract_eol_from_construction is False:
                 raise ValueError('Please provide a list of end-use demand categories for the ESM if you want to '
                                  'perform double-counting removal on construction datasets.')
             for cat in self.esm_end_use_demands:
                 mapping_constr[cat] = -1
+            if self.extract_eol_from_construction:
+                mapping_constr['DECOMMISSION'] = -1
             (
                 flows_set_to_zero_constr,
                 ei_removal_constr,
@@ -735,6 +742,9 @@ class ESM:
         self.double_counting_removal_amount = double_counting_removal_amount
         self.df_flows_set_to_zero = df_flows_set_to_zero
         self.df_activities_subject_to_double_counting = df_activities_subject_to_double_counting
+
+        if self.extract_eol_from_construction:
+            self._add_decommission_datasets()
 
         if self.efficiency is not None:
             self.logger.info("Starting to correct efficiency differences")
