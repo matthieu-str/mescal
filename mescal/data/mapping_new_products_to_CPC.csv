@@ -24,7 +24,8 @@ diesel,33370: Fuel oils n.e.c.,equals,Product
 "diesel, low-sulfur",33370: Fuel oils n.e.c.,equals,Product
 "diesel, synthetic",33370: Fuel oils n.e.c.,equals,Product
 "diesel, synthetic, vehicle grade",33370: Fuel oils n.e.c.,equals,Product
-direct air capture system,43230: Air or vacuum pumps; air or other gas compressors,equals,Product
+"direct air capture system, solvent-based, 1MtCO2",43230: Air or vacuum pumps; air or other gas compressors,equals,Activity
+"direct air capture system, sorbent-based, 100ktCO2",43230: Air or vacuum pumps; air or other gas compressors,equals,Activity
 distribution pipeline,53251: Local pipelines,contains,Activity
 electricity production,17100: Electrical energy,contains,Product
 "electricity, from residential heating system",17100: Electrical energy,equals,Product
@@ -94,15 +95,17 @@ transmission pipeline,53251: Local pipelines,contains,Activity
 "transport, passenger car","64119: Other land transportation services of passengers, n.e.c.",contains,Product
 "transport, truck",6511: Road transport services of freight,equals,Product
 "transport, truck, Euro-6",6511: Road transport services of freight,equals,Product
+"treatment of direct air capture system, solvent-based, 1MtCO2",39990: Other wastes n.e.c.,equals,Activity
+"treatment of direct air capture system, sorbent-based, 100ktCO2",39990: Other wastes n.e.c.,equals,Activity
 truck,49114: Motor vehicles n.e.c. for the transport of goods,equals,Product
 "truck, Euro-6",49114: Motor vehicles n.e.c. for the transport of goods,equals,Product
 unit construction,53269: Other constructions for manufacturing,contains,Activity
-"used fuel cell balance of plant, 1MWe, AEC",46410: Primary cells and primary batteries,equals,Product
-"used fuel cell balance of plant, 1MWe, PEM",46410: Primary cells and primary batteries,equals,Product
-"used fuel cell balance of plant, 1MWe, SOEC",46410: Primary cells and primary batteries,equals,Product
-"used fuel cell stack, 1MWe, AEC",46410: Primary cells and primary batteries,equals,Product
-"used fuel cell stack, 1MWe, PEM",46410: Primary cells and primary batteries,equals,Product
-"used fuel cell stack, 1MWe, SOEC",46410: Primary cells and primary batteries,equals,Product
+"used fuel cell balance of plant, 1MWe, AEC",39990: Other wastes n.e.c.,equals,Product
+"used fuel cell balance of plant, 1MWe, PEM",39990: Other wastes n.e.c.,equals,Product
+"used fuel cell balance of plant, 1MWe, SOEC",39990: Other wastes n.e.c.,equals,Product
+"used fuel cell stack, 1MWe, AEC",39990: Other wastes n.e.c.,equals,Product
+"used fuel cell stack, 1MWe, PEM",39990: Other wastes n.e.c.,equals,Product
+"used fuel cell stack, 1MWe, SOEC",39990: Other wastes n.e.c.,equals,Product
 wave energy converter platform,53262: Power plants,equals,Product
 "wood chips and particles, willow",31230: Wood in chips or particles,equals,Product
 "wood chips, dry, measured as dry mass",31230: Wood in chips or particles,equals,Product
