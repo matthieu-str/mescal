@@ -32,7 +32,7 @@ class ESM:
 
             # Optional inputs
             main_database_name: str = None,
-            biosphere_db_name: str = None,
+            biosphere_db_name: str = 'biosphere3',
             technology_compositions: pd.DataFrame = None,
             results_path_file: str = 'results/',
             tech_specifics: pd.DataFrame = None,
@@ -113,7 +113,7 @@ class ESM:
         self.main_database = main_database
         self.main_database_name = main_database_name if main_database_name is not None else \
             (main_database.db_names if type(main_database.db_names) is str else main_database.db_names[0])
-        self.biosphere_db_name = biosphere_db_name if biosphere_db_name is not None else 'biosphere3'
+        self.biosphere_db_name = biosphere_db_name
         self.esm_db_name = esm_db_name
         self.results_path_file = results_path_file
         self.regionalize_foregrounds = [] if regionalize_foregrounds is None \
