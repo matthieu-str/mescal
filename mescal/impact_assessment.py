@@ -515,9 +515,10 @@ def validation_direct_carbon_emissions(
         R_direct: pd.DataFrame,
         lcia_method_carbon_emissions: str,
         carbon_flow_in_esm: str or list[str],
+        esm_results: pd.DataFrame = None,
         return_df: bool = False,
         save_df: bool = True,
-) -> pd.DataFrame or None:
+) -> tuple[pd.DataFrame, pd.DataFrame | None] or None:
 
     """
     Returns a dataframe comparing the direct carbon emissions obtained from the LCIA phase (direct emissions module)
@@ -528,8 +529,12 @@ def validation_direct_carbon_emissions(
     :param R_direct: dataframe containing the direct carbon emissions from the LCIA phase
     :param lcia_method_carbon_emissions: name of the LCIA method for carbon emissions in brightway
     :param carbon_flow_in_esm: names(s) of the carbon flow(s) in the ESM
+    :param esm_results: dataframe containing the annual production of each technology in the ESM. It must contain the
+        columns 'Name' and 'Production', and it can possibly contain the 'Run' and 'Year' columns too. If provided, the
+        system's direct emissions will be compared.
     :param return_df: if True, the function will return the dataframe
     :param save_df: if True, the function will save the dataframe to a csv file named direct_carbon_emissions_differences
+         and a file named direct_carbon_emissions_differences_system (if esm_results is provided) in self.results_path_file
     :return: dataframe comparing the direct carbon emissions from the LCIA phase and the ESM if return_df is True
     """
 
@@ -597,12 +602,47 @@ def validation_direct_carbon_emissions(
         df_columns.insert(0, 'Year')
 
     R_direct = R_direct[df_columns]
+    
+    if esm_results is not None:
+
+        id_columns = ['Name']
+        group_by_columns = ['Run']
+
+        if 'Year' in R_direct.columns and 'Year' in esm_results.columns:
+            id_columns.append('Year')
+            group_by_columns.append('Year')
+
+        if 'Run' not in esm_results.columns:
+            esm_results['Run'] = 'Total'
+
+        R_direct_tot = R_direct.merge(esm_results, on=id_columns)
+        R_direct_tot['ESM direct carbon emissions (ESM unit)'] *= R_direct_tot['Production']
+        R_direct_tot['LCA direct carbon emissions (ESM unit)'] *= R_direct_tot['Production']
+        R_direct_tot_grouped = R_direct_tot.groupby(group_by_columns).sum().reset_index()
+        R_direct_tot_grouped['Name'] = 'Total'
+
+        R_direct_tot = pd.concat([R_direct_tot, R_direct_tot_grouped])[
+            group_by_columns + ['Name', 'Production', 'ESM direct carbon emissions (ESM unit)', 'LCA direct carbon emissions (ESM unit)']
+        ]
+        R_direct_tot['Direct carbon emissions difference'] = (
+                R_direct_tot['ESM direct carbon emissions (ESM unit)'] - R_direct_tot['LCA direct carbon emissions (ESM unit)'])
+        R_direct_tot['Direct carbon emissions difference (%)'] = R_direct_tot.apply(
+            lambda row: (row['Direct carbon emissions difference'] / row['LCA direct carbon emissions (ESM unit)']) * 100
+            if row['ESM direct carbon emissions (ESM unit)'] != 0 else None,
+            axis=1
+        )
+
+        if save_df:
+            R_direct_tot.to_csv(f"{self.results_path_file}direct_carbon_emissions_differences_system.csv", index=False)
 
     if save_df:
         R_direct.to_csv(f"{self.results_path_file}direct_carbon_emissions_differences.csv", index=False)
 
     if return_df:
-        return R_direct
+        if esm_results is not None:
+            return R_direct, R_direct_tot
+        else:
+            return R_direct, None
 
 @staticmethod
 def _get_impact_categories(methods: list[str]) -> list[str]:
