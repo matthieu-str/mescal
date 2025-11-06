@@ -27,6 +27,7 @@ diesel,33370: Fuel oils n.e.c.,equals,Product
 "direct air capture system, solvent-based, 1MtCO2",43230: Air or vacuum pumps; air or other gas compressors,equals,Activity
 "direct air capture system, sorbent-based, 100ktCO2",43230: Air or vacuum pumps; air or other gas compressors,equals,Activity
 distribution pipeline,53251: Local pipelines,contains,Activity
+electric installation,5461: Electrical installation services,contains,Product
 electricity production,17100: Electrical energy,contains,Product
 "electricity, from residential heating system",17100: Electrical energy,equals,Product
 "electricity, high voltage",17100: Electrical energy,equals,Product
@@ -52,10 +53,12 @@ fuel supply for hydrogen vehicles,"34210: Hydrogen, nitrogen, oxygen, carbon dio
 geothermal heat plant,"43913: Refrigerating and freezing equipment and heat pumps, except household type equipment",equals,Product
 hard coal IGCC power plant 450MW,53262: Power plants,equals,Product
 "heat, deep geothermal",17300: Steam and hot water,equals,Product
+high pressure hydrogen storage tank,"42210: Reservoirs, tanks, vats and similar containers (other than for compressed or liquefied gas), of iron, steel or[…]",equals,Product
 hydrogen storage,67220: Bulk liquid or gas storage services,equals,Product
 "hydrogen, 700 bar","34210: Hydrogen, nitrogen, oxygen, carbon dioxide and rare gases; inorganic oxygen compounds of non-metals n.e.c.",equals,Product
 "hydrogen, gaseous","34210: Hydrogen, nitrogen, oxygen, carbon dioxide and rare gases; inorganic oxygen compounds of non-metals n.e.c.",contains,Product
 "hydrogen, liquid","34210: Hydrogen, nitrogen, oxygen, carbon dioxide and rare gases; inorganic oxygen compounds of non-metals n.e.c.",equals,Product
+inverter,46220: Parts of electricity distribution or control apparatus,contains,Product
 "kerosene, synthetic",3334: Kerosenes,equals,Product
 light duty truck,49114: Motor vehicles n.e.c. for the transport of goods,contains,Product
 Light duty truck,49114: Motor vehicles n.e.c. for the transport of goods,contains,Product
@@ -69,6 +72,7 @@ methanol,"34139: Other alcohols, phenols, phenol-alcohols, and their halogenated
 "NGCC power plant, 400MWe",53262: Power plants,equals,Product
 "naphtha, synthetic",33330: Naphtha,equals,Product
 nickel-based catalyst for methanation,"415: Semi-finished products of copper, nickel, aluminium, lead, zinc and tin or their alloys",equals,Product
+open ground construction,87360: Installation services of electrical machinery and apparatus n.e.c.,contains,Product
 passenger bus,49112: Public-transport type passenger motor vehicles,equals,Product
 "Passenger bus, EURO-VI",49112: Public-transport type passenger motor vehicles,equals,Product
 passenger car,49113: Motor cars and other motor vehicles principally designed for the transport of persons (except public-transport[…],contains,Product
@@ -77,6 +81,8 @@ petroleum refinery,53290: Other civil engineering works,equals,Product
 photovoltaic open ground installation,87360: Installation services of electrical machinery and apparatus n.e.c.,contains,Product
 photovoltaic flat-roof installation,87360: Installation services of electrical machinery and apparatus n.e.c.,contains,Product
 photovoltaic slanted-roof installation,87360: Installation services of electrical machinery and apparatus n.e.c.,contains,Product
+photovoltaic panel,87360: Installation services of electrical machinery and apparatus n.e.c.,contains,Product
+photovoltaic laminate,87360: Installation services of electrical machinery and apparatus n.e.c.,contains,Product
 "pipeline, for hydrogen distribution",53251: Local pipelines,equals,Product
 "pipeline, for hydrogen transmission",53251: Local pipelines,equals,Product
 plant construction,53269: Other constructions for manufacturing,contains,Activity
@@ -97,6 +103,7 @@ transmission pipeline,53251: Local pipelines,contains,Activity
 "transport, truck, Euro-6",6511: Road transport services of freight,equals,Product
 "treatment of direct air capture system, solvent-based, 1MtCO2",39990: Other wastes n.e.c.,equals,Activity
 "treatment of direct air capture system, sorbent-based, 100ktCO2",39990: Other wastes n.e.c.,equals,Activity
+"treatment, c-Si PV module",87360: Installation services of electrical machinery and apparatus n.e.c.,equals,Product
 truck,49114: Motor vehicles n.e.c. for the transport of goods,equals,Product
 "truck, Euro-6",49114: Motor vehicles n.e.c. for the transport of goods,equals,Product
 unit construction,53269: Other constructions for manufacturing,contains,Activity
