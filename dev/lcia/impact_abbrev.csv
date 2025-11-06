@@ -245,3 +245,53 @@ Impact_category,Unit,Abbrev,AoP
 "('IMPACT World+ Footprint 2.1 for ecoinvent v3.9', 'Ecosystem quality (residual)')",PDF.m2.yr,REQD,REQD
 "('IMPACT World+ Footprint 2.1 for ecoinvent v3.9', 'Human health (residual)')",DALY,RHHD,RHHD
 "('IMPACT World+ Footprint 2.1 for ecoinvent v3.9', 'Water footprint - Scarcity')",m3 world-eq,WSF,WSF
+"('EF v3.1', 'acidification', 'accumulated exceedance (AE)')",mol H+-Eq,Aci,Aci
+"('EF v3.1', 'climate change', 'global warming potential (GWP100)')",kg CO2-Eq,CC,CC
+"('EF v3.1', 'climate change: biogenic', 'global warming potential (GWP100)')",kg CO2-Eq,CCb,CCb
+"('EF v3.1', 'climate change: fossil', 'global warming potential (GWP100)')",kg CO2-Eq,CCf,CCf
+"('EF v3.1', 'climate change: land use and land use change', 'global warming potential (GWP100)')",kg CO2-Eq,CCluluc,CCluluc
+"('EF v3.1', 'ecotoxicity: freshwater', 'comparative toxic unit for ecosystems (CTUe)')",CTUe,ETF,ETF
+"('EF v3.1', 'ecotoxicity: freshwater, inorganics', 'comparative toxic unit for ecosystems (CTUe)')",CTUe,ETFi,ETFi
+"('EF v3.1', 'ecotoxicity: freshwater, organics', 'comparative toxic unit for ecosystems (CTUe)')",CTUe,ETFo,ETFo
+"('EF v3.1', 'energy resources: non-renewable', 'abiotic depletion potential (ADP): fossil fuels')","MJ, net calorific value",ERNR,ERNR
+"('EF v3.1', 'eutrophication: freshwater', 'fraction of nutrients reaching freshwater end compartment (P)')",kg P-Eq,EUTf,EUTf
+"('EF v3.1', 'eutrophication: marine', 'fraction of nutrients reaching marine end compartment (N)')",kg N-Eq,EUTm,EUTm
+"('EF v3.1', 'eutrophication: terrestrial', 'accumulated exceedance (AE)')",mol N-Eq,EUTt,EUTt
+"('EF v3.1', 'human toxicity: carcinogenic', 'comparative toxic unit for human (CTUh)')",CTUh_c,HTC,HTC
+"('EF v3.1', 'human toxicity: carcinogenic, inorganics', 'comparative toxic unit for human (CTUh)')",CTUh_c,HTCi,HTCi
+"('EF v3.1', 'human toxicity: carcinogenic, organics', 'comparative toxic unit for human (CTUh)')",CTUh_c,HTCo,HTCo
+"('EF v3.1', 'human toxicity: non-carcinogenic', 'comparative toxic unit for human (CTUh)')",CTUh_nc,HTNC,HTNC
+"('EF v3.1', 'human toxicity: non-carcinogenic, inorganics', 'comparative toxic unit for human (CTUh)')",CTUh_nc,HTNCi,HTNCi
+"('EF v3.1', 'human toxicity: non-carcinogenic, organics', 'comparative toxic unit for human (CTUh)')",CTUh_nc,HTNCo,HTNCo
+"('EF v3.1', 'ionising radiation: human health', 'human exposure efficiency relative to u235')",kBq U235-Eq,IR,IR
+"('EF v3.1', 'land use', 'soil quality index')",dimensionless,LU,LU
+"('EF v3.1', 'material resources: metals/minerals', 'abiotic depletion potential (ADP): elements (ultimate reserves)')",kg Sb-Eq,MR,MR
+"('EF v3.1', 'ozone depletion', 'ozone depletion potential (ODP)')",kg CFC-11-Eq,OD,OD
+"('EF v3.1', 'particulate matter formation', 'impact on human health')",disease incidence,PMF,PMF
+"('EF v3.1', 'photochemical oxidant formation: human health', 'tropospheric ozone concentration increase')",kg NMVOC-Eq,POF,POF
+"('EF v3.1', 'water use', 'user deprivation potential (deprivation-weighted water consumption)')",m3 world eq. deprived,WU,WU
+"('EF v3.1 regionalized', 'acidification', 'accumulated exceedance (AE)')",mol H+-Eq,Aci,Aci
+"('EF v3.1 regionalized', 'climate change', 'global warming potential (GWP100)')",kg CO2-Eq,CC,CC
+"('EF v3.1 regionalized', 'climate change: biogenic', 'global warming potential (GWP100)')",kg CO2-Eq,CCb,CCb
+"('EF v3.1 regionalized', 'climate change: fossil', 'global warming potential (GWP100)')",kg CO2-Eq,CCf,CCf
+"('EF v3.1 regionalized', 'climate change: land use and land use change', 'global warming potential (GWP100)')",kg CO2-Eq,CCluluc,CCluluc
+"('EF v3.1 regionalized', 'ecotoxicity: freshwater', 'comparative toxic unit for ecosystems (CTUe)')",CTUe,ETF,ETF
+"('EF v3.1 regionalized', 'ecotoxicity: freshwater, inorganics', 'comparative toxic unit for ecosystems (CTUe)')",CTUe,ETFi,ETFi
+"('EF v3.1 regionalized', 'ecotoxicity: freshwater, organics', 'comparative toxic unit for ecosystems (CTUe)')",CTUe,ETFo,ETFo
+"('EF v3.1 regionalized', 'energy resources: non-renewable', 'abiotic depletion potential (ADP): fossil fuels')","MJ, net calorific value",ERNR,ERNR
+"('EF v3.1 regionalized', 'eutrophication: freshwater', 'fraction of nutrients reaching freshwater end compartment (P)')",kg P-Eq,EUTf,EUTf
+"('EF v3.1 regionalized', 'eutrophication: marine', 'fraction of nutrients reaching marine end compartment (N)')",kg N-Eq,EUTm,EUTm
+"('EF v3.1 regionalized', 'eutrophication: terrestrial', 'accumulated exceedance (AE)')",mol N-Eq,EUTt,EUTt
+"('EF v3.1 regionalized', 'human toxicity: carcinogenic', 'comparative toxic unit for human (CTUh)')",CTUh_c,HTC,HTC
+"('EF v3.1 regionalized', 'human toxicity: carcinogenic, inorganics', 'comparative toxic unit for human (CTUh)')",CTUh_c,HTCi,HTCi
+"('EF v3.1 regionalized', 'human toxicity: carcinogenic, organics', 'comparative toxic unit for human (CTUh)')",CTUh_c,HTCo,HTCo
+"('EF v3.1 regionalized', 'human toxicity: non-carcinogenic', 'comparative toxic unit for human (CTUh)')",CTUh_nc,HTNC,HTNC
+"('EF v3.1 regionalized', 'human toxicity: non-carcinogenic, inorganics', 'comparative toxic unit for human (CTUh)')",CTUh_nc,HTNCi,HTNCi
+"('EF v3.1 regionalized', 'human toxicity: non-carcinogenic, organics', 'comparative toxic unit for human (CTUh)')",CTUh_nc,HTNCo,HTNCo
+"('EF v3.1 regionalized', 'ionising radiation: human health', 'human exposure efficiency relative to u235')",kBq U235-Eq,IR,IR
+"('EF v3.1 regionalized', 'land use', 'soil quality index')",dimensionless,LU,LU
+"('EF v3.1 regionalized', 'material resources: metals/minerals', 'abiotic depletion potential (ADP): elements (ultimate reserves)')",kg Sb-Eq,MR,MR
+"('EF v3.1 regionalized', 'ozone depletion', 'ozone depletion potential (ODP)')",kg CFC-11-Eq,OD,OD
+"('EF v3.1 regionalized', 'particulate matter formation', 'impact on human health')",disease incidence,PMF,PMF
+"('EF v3.1 regionalized', 'photochemical oxidant formation: human health', 'tropospheric ozone concentration increase')",kg NMVOC-Eq,POF,POF
+"('EF v3.1 regionalized', 'water use', 'user deprivation potential (deprivation-weighted water consumption)')",m3 world eq. deprived,WU,WU
