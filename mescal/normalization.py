@@ -2,26 +2,7 @@ import pandas as pd
 import ast
 from pathlib import Path
 import bw2data as bd
-
-
-@staticmethod
-def _tech_type(tech: str) -> str:
-    """
-    Returns the short name of the technology type
-
-    :param tech: type of technology
-    :return: short name of the technology type
-    """
-    if tech == 'Construction':
-        return 'constr'
-    elif tech == 'Decommission':
-        return 'decom'
-    elif tech == 'Operation':
-        return 'op'
-    elif tech == 'Resource':
-        return 'res'
-    else:
-        raise ValueError(f"Unknown technology type: {tech}")
+from .utils import _short_name_ds_type
 
 
 def from_str_to_tuple(df: pd.DataFrame, col: str) -> pd.DataFrame:
@@ -224,16 +205,16 @@ def normalize_lca_metrics(
                 if self.pathway:
                     if self.operation_metrics_for_all_time_steps:
                         f.write(
-                            f"let {metric_type}_{self._tech_type(R_scaled.Type.iloc[i])}['{R_scaled.Abbrev.iloc[i]}',"
+                            f"let {metric_type}_{_short_name_ds_type(R_scaled.Type.iloc[i])}['{R_scaled.Abbrev.iloc[i]}',"
                             f"'{R_scaled.Name.iloc[i]}',{R_scaled.Year.iloc[i]},{R_scaled.Year_inst.iloc[i]}] "
                             f":= {R_scaled.Value_norm.iloc[i]}; #{norm_unit} {R_scaled.Unit.iloc[i]}\n")
                     else:
                         f.write(
-                            f"let {metric_type}_{self._tech_type(R_scaled.Type.iloc[i])}['{R_scaled.Abbrev.iloc[i]}',"
+                            f"let {metric_type}_{_short_name_ds_type(R_scaled.Type.iloc[i])}['{R_scaled.Abbrev.iloc[i]}',"
                             f"'{R_scaled.Name.iloc[i]}',{R_scaled.Year.iloc[i]}] := {R_scaled.Value_norm.iloc[i]}; "
                             f"#{norm_unit} {R_scaled.Unit.iloc[i]}\n")
                 else:
-                    f.write(f"let {metric_type}_{self._tech_type(R_scaled.Type.iloc[i])}['{R_scaled.Abbrev.iloc[i]}','{R_scaled.Name.iloc[i]}'] "
+                    f.write(f"let {metric_type}_{_short_name_ds_type(R_scaled.Type.iloc[i])}['{R_scaled.Abbrev.iloc[i]}','{R_scaled.Name.iloc[i]}'] "
                             f":= {R_scaled.Value_norm.iloc[i]}; #{norm_unit} {R_scaled.Unit.iloc[i]}\n")
 
         if not skip_normalization:

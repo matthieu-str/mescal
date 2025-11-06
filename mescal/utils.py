@@ -145,3 +145,22 @@ def expand_impact_category_levels(
     expanded.columns = [f'{impact_category_col} (level {i})' for i in range(max_len)]
 
     return pd.concat([df, expanded], axis=1)
+
+
+def _short_name_ds_type(ds_type: str) -> str:
+    """
+    Returns the short name of the LCI dataset type
+
+    :param ds_type: type of LCI dataset
+    :return: short name of the LCI dataset type
+    """
+    if ds_type == 'Construction':
+        return 'constr'
+    elif ds_type == 'Decommission':
+        return 'decom'
+    elif ds_type == 'Operation':
+        return 'op'
+    elif ds_type == 'Resource':
+        return 'res'
+    else:
+        raise ValueError(f"Unknown technology type: {ds_type}")

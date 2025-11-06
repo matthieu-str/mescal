@@ -275,7 +275,7 @@ class ESM:
         connect_esm_results_to_database,
         _correct_esm_and_lca_capacity_factor_differences,
     )
-    from .normalization import normalize_lca_metrics, _tech_type
+    from .normalization import normalize_lca_metrics
     from .generate_lcia_obj_ampl import generate_mod_file_ampl
     from .decommission import _add_decommission_datasets
 
