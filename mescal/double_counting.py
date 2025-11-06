@@ -1,7 +1,7 @@
 import copy
 import ast
 from .database import Dataset
-from .utils import random_code
+from .utils import random_code, _short_name_ds_type
 import pandas as pd
 from tqdm import tqdm
 import wurst
@@ -29,7 +29,8 @@ def _background_search(
     :param k: tree depth of act with respect to starting activity
     :param k_lim: maximum allowed tree depth (i.e., maximum recursion depth)
     :param amount: product of amounts when going down in the tree
-    :param explore_type: can be 'market' or 'background_removal'
+    :param explore_type: can be 'market' or 'background_removal_' + ds_type (where ds_type can be 'op', 'constr',
+        'decom' or 'res')
     :param ESM_inputs: list of the ESM flows to perform double counting removal on
     :param perform_d_c: list of activities to check for double counting
     :param db_dict_code: LCI database as dictionary of activities with (database, code) as key
@@ -54,11 +55,12 @@ def _background_search(
         # we want to test whether the activity is a market (if yes, we explore the background),
         # thus the condition is False a priori
         condition = False
-    elif explore_type == 'background_removal':
+    elif explore_type.startswith('background_removal'):
         # we know that we want to explore the background, thus we directly set the condition as true
         condition = True
     else:
-        raise ValueError('Type should be either "market" or "background_removal"')
+        raise ValueError('Type should be either "market" or "background_removal_" + ds_type (where ds_type can be '
+                         '"op", "constr", "decom" or "res")')
 
     if 'CPC' in dict(act['classifications']).keys():  # we have a CPC category
         CPC_cat = dict(act['classifications'])['CPC']
@@ -195,14 +197,13 @@ def _background_search(
                                         )
                     else:
                         pass
-                elif explore_type == 'background_removal':
+                elif explore_type.startswith('background_removal'):
                     if (
-                            (flow['amount'] > 0)
-                            & (flow['unit'] not in ['unit', 'megajoule', 'kilowatt hour', 'ton kilometer'])
-                            & (flow['product'] not in ['tap water', 'water, deionised'])
+                            (flow['amount'] > 0)  # do not explore waste flows
+                            & ((flow['unit'] not in ['unit', 'megajoule', 'kilowatt hour', 'ton kilometer']) | (explore_type != 'background_removal_op'))  # in operation datasets search is NOT allowed for energy and transport flows
+                            & ((flow['unit'] in ['unit', 'kilogram', 'square meter']) | (explore_type != 'background_removal_constr'))  # in construction datasets search is ONLY allowed for flows in unit, kg, or m2
+                            & (flow['product'] not in ['tap water', 'water, deionised'])  # do not explore water flows
                     ):
-                        # we do not consider construction, transport, water and energy flows (we typically target fuel
-                        # flows in kg or m3) as well as negative flows
                         techno_act = db_dict_code[(flow['database'], flow['code'])]
                         if 'classifications' in techno_act.keys():
                             if 'CPC' in dict(techno_act['classifications']):
@@ -665,7 +666,7 @@ def _double_counting_removal(
             for cat in ES_inputs:
                 if (
                         (tech in list(background_search_act[ds_type].keys()))
-                        & (cat not in ['CONSTRUCTION', 'OWN_CONSTRUCTION', 'DECOMMISSION', 'OWN_DECOMMISSION'])
+                        & (cat not in ['CONSTRUCTION', 'OWN_CONSTRUCTION', 'OWN_DECOMMISSION'])
                         # The two following conditions mean that the background search would stop when some
                         # intermediary flows have already been found for a given esm flow, but some other
                         # similar and relevant flows, further in the process tree, might also be there.
@@ -681,7 +682,7 @@ def _double_counting_removal(
                         k=k_deep,
                         k_lim=background_search_act[ds_type][tech] - 1,
                         amount=new_act_op_d_c_amount,
-                        explore_type='background_removal',
+                        explore_type='background_removal_'+_short_name_ds_type(ds_type),
                         ESM_inputs=missing_ES_inputs,
                         perform_d_c=perform_d_c,
                         db_dict_code=db_dict_code,
