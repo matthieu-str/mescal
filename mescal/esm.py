@@ -249,7 +249,7 @@ class ESM:
     from .double_counting import (
         _double_counting_removal,
         _background_search,
-        _validation_double_counting,
+        validation_double_counting,
         background_double_counting_removal,
     )
     from .impact_assessment import (
@@ -512,8 +512,9 @@ class ESM:
         """
         Create the ESM database after double counting removal. Three csv files summarizing the double-counting removal
         process are automatically saved in the results folder: double_counting_removal.csv (amount of removed
-        flows and number of flows set to zero), and removed_flows_list.csv (specific activities in which the flows were
-        removed).
+        flows and number of flows set to zero), removed_flows_list.csv (specific activities in which the flows were
+        removed), and validation_double_counting.csv (comparing amounts of removed flows in LCI datasets with amounts
+        present in the ESM).
 
         :param return_database: if True, return the ESM database as a mescal.Database object
         :param write_database: if True, write the ESM database to Brightway
@@ -759,7 +760,7 @@ class ESM:
             double_counting_removal_amount.to_csv(f"{self.results_path_file}double_counting_removal.csv", index=False)
             df_flows_set_to_zero.to_csv(f"{self.results_path_file}removed_flows_list.csv", index=False)
             df_activities_subject_to_double_counting.to_csv(f"{self.results_path_file}activities_subject_to_double_counting.csv", index=False)
-            self._validation_double_counting(save_validation_report=True, return_validation_report=False)
+            self.validation_double_counting(save_validation_report=True, return_validation_report=False)
 
         if write_database:
             self.logger.info("Starting to write database")

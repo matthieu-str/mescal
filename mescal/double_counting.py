@@ -200,8 +200,10 @@ def _background_search(
                 elif explore_type.startswith('background_removal'):
                     if (
                             (flow['amount'] > 0)  # do not explore waste flows
-                            & ((flow['unit'] not in ['unit', 'megajoule', 'kilowatt hour', 'ton kilometer']) | (explore_type != 'background_removal_op'))  # in operation datasets search is NOT allowed for energy and transport flows
-                            & ((flow['unit'] in ['unit', 'kilogram', 'square meter']) | (explore_type != 'background_removal_constr'))  # in construction datasets search is ONLY allowed for flows in unit, kg, or m2
+                            & ((flow['unit'] not in ['unit', 'megajoule', 'kilowatt hour', 'ton kilometer']) | (explore_type != 'background_removal_op'))
+                            # in operation datasets search is NOT allowed for energy and transport flows
+                            & ((flow['unit'] in ['unit', 'kilogram', 'square meter']) | (explore_type != 'background_removal_constr'))
+                            # in construction datasets search is ONLY allowed for flows in unit, kg, or m2
                             & (flow['product'] not in ['tap water', 'water, deionised'])  # do not explore water flows
                     ):
                         techno_act = db_dict_code[(flow['database'], flow['code'])]
@@ -791,52 +793,100 @@ def background_double_counting_removal(
     if write_database:
         self.main_database.write_to_brightway(new_db_name)
 
-def _validation_double_counting(
+def validation_double_counting(
         self,
+        esm_results: pd.DataFrame = None,
         return_validation_report: bool = True,
         save_validation_report: bool = False,
 ) -> None or pd.DataFrame:
     """
     Generate a validation report for the double-counting removal process: comparison of quantities removed in LCI
     datasets vs quantities in ESM flows. LCI datasets quantities are converted in ESM units (both in terms of inputs
-    and outputs, i.e., quantities of input fuels per functional unit).
+    and outputs, i.e., quantities of input fuels per functional unit). If an ESM results dataframe is provided, the
+    input flows are aggregated to compare the system's primary energy use.
 
-    :param return_validation_report: if True, returns a DataFrame with the validation report
-    :param save_validation_report: if True, saves the validation report as a CSV file
+    :param return_validation_report: if True, returns a DataFrame with the validation report (double-counting removal
+        or primary energy use, depending on whether esm_results is provided).
+    :param esm_results: dataframe containing the annual production of each technology in the ESM. It must contain the
+        columns 'Name' and 'Production', and it can possibly contain the 'Run' and 'Year' columns too. If provided, the
+        system's primary energy use will be compared.
+    :param save_validation_report: if True, saves the validation report as a CSV file in self.results_path_file.
     :return: None or DataFrame with the validation report if return_validation_report is True
     """
-    validation_d_c = self._correct_esm_and_lca_efficiency_differences(
-        write_efficiency_report=False,
-        return_efficiency_report=True,
-        db_type='validation',
-    )
 
-    validation_d_c.Flow = validation_d_c.Flow.replace("['", "")
-    validation_d_c.Flow = validation_d_c.Flow.replace("']", "")
+    if esm_results is None:
+        df = self._correct_esm_and_lca_efficiency_differences(
+            write_efficiency_report=False,
+            return_efficiency_report=True,
+            db_type='validation',
+        )
 
-    validation_d_c['Input difference (ESM unit)'] = validation_d_c['ESM input quantity (ESM unit)'] - validation_d_c['LCA input quantity (ESM unit) aggregated']
-    validation_d_c['Input difference (%)'] = 100 * validation_d_c['Input difference (ESM unit)'] / validation_d_c['LCA input quantity (ESM unit)']
+        df.Flow = df.Flow.astype('string').str.replace("['", "")
+        df.Flow = df.Flow.astype('string').str.replace("']", "")
 
-    validation_d_c = validation_d_c[[
-        'Name',
-        'Flow',
-        'LCA input product',
-        'ESM input quantity (ESM unit)',
-        'LCA input quantity (ESM unit)',
-        'LCA input quantity (ESM unit) aggregated',
-        'Input difference (ESM unit)',
-        'Input difference (%)',
-        'LCA input quantity (LCA unit)',
-        'ESM input unit',
-        'LCA input unit',
-        'Input conversion factor',
-        'ESM output unit',
-        'LCA output unit',
-        'Output conversion factor',
-    ]]
+        df['Input difference (ESM unit)'] = df['ESM input quantity (ESM unit)'] - df['LCA input quantity (ESM unit) aggregated']
+        df['Input difference (%)'] = df.apply(
+            lambda row: 100 * row['Input difference (ESM unit)'] / row['LCA input quantity (ESM unit)']
+            if row['ESM input quantity (ESM unit)'] != 0 else None,
+            axis=1
+        )
 
-    if save_validation_report:
-        validation_d_c.to_csv(f'{self.results_path_file}validation_double_counting.csv', index=False)
+        df = df[[
+            'Name',
+            'Flow',
+            'LCA input product',
+            'ESM input quantity (ESM unit)',
+            'LCA input quantity (ESM unit)',
+            'LCA input quantity (ESM unit) aggregated',
+            'Input difference (ESM unit)',
+            'Input difference (%)',
+            'LCA input quantity (LCA unit)',
+            'ESM input unit',
+            'LCA input unit',
+            'Input conversion factor',
+            'ESM output unit',
+            'LCA output unit',
+            'Output conversion factor',
+        ]]
 
-    if return_validation_report:
-        return validation_d_c
+        if save_validation_report:
+            df.to_csv(f'{self.results_path_file}validation_double_counting.csv', index=False)
+
+        if return_validation_report:
+            return df
+
+    else:
+
+        df = pd.read_csv(f'{self.results_path_file}validation_double_counting.csv')
+
+        id_columns = ['Name']
+        group_by_columns = ['Flow']
+
+        if 'Year' in df.columns and 'Year' in esm_results.columns:
+            id_columns.append('Year')
+            group_by_columns.append('Year')
+
+        if 'Run' in esm_results.columns:
+            group_by_columns.append('Run')
+
+        df_tot = df.merge(esm_results, on=id_columns)
+        df_tot['ESM input quantity (ESM unit)'] *= df_tot['Production']
+        df_tot['LCA input quantity (ESM unit) aggregated'] *= df_tot['Production']
+        df_tot = df_tot[
+            group_by_columns + ['Name', 'ESM input quantity (ESM unit)', 'LCA input quantity (ESM unit) aggregated']
+        ].drop_duplicates()  # avoid double-counting aggregated flows
+        df_tot = df_tot.groupby(group_by_columns).sum()[
+            ['ESM input quantity (ESM unit)', 'LCA input quantity (ESM unit) aggregated']
+        ].reset_index()
+        df_tot['Input difference'] = df_tot['ESM input quantity (ESM unit)'] - df_tot['LCA input quantity (ESM unit) aggregated']
+        df_tot['Input difference (%)'] = df_tot.apply(
+            lambda row: (row['Input difference'] / row['LCA input quantity (ESM unit) aggregated']) * 100
+            if row['ESM input quantity (ESM unit)'] != 0 else None,
+            axis=1
+        )
+
+        if save_validation_report:
+            df_tot.to_csv(f'{self.results_path_file}validation_double_counting_system.csv', index=False)
+
+        if return_validation_report:
+            return df_tot
