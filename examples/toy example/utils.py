@@ -959,6 +959,8 @@ def plot_moo_indicators(
         y_metric = 'TTEQ'
         ax1.set_xlabel('Upper limit for human health damage [DALY/(cap.yr)]')
         ax2.set_ylabel('Ecosystem quality damage [PDF.m$^2$.yr/(cap.yr)]')
+        bbox_to_anchor = (0.05, 1)
+        loc = 'upper left'
 
     elif obj1 == 'TotalLCIA_TTEQ':
         max_x = max_tteq
@@ -966,6 +968,8 @@ def plot_moo_indicators(
         y_metric = 'TTHH'
         ax1.set_xlabel('Upper limit for ecosystem quality damage [PDF.m$^2$.yr/(cap.yr)]')
         ax2.set_ylabel('Human health damage [DALY/(cap.yr)]')
+        bbox_to_anchor = (0, 0, 1, 1)
+        loc = 'upper center'
 
     else:
         raise ValueError(f"Unknown objective: {obj1}")
@@ -1022,14 +1026,16 @@ def plot_moo_indicators(
 
     line1 = Line2D([0], [0], color='black', linestyle=':', linewidth=1, alpha=0.75, label=f'{obj1.replace("TotalLCIA_", "")} SOO')
     line2 = Line2D([0], [0], color='black', linestyle='--', linewidth=1, alpha=0.75, label='TC SOO')
+    line3 = Line2D([0], [0], color=color_cost_axis, linewidth=2, label='Pareto front')
 
     hatch_proxy = mpatches.Patch(
         facecolor='white', edgecolor='black', hatch='\\\\', linewidth=0.5, label='Covered in ESM'
     )
     ax2.legend(
-        [hatch_proxy, line1, line2],
-        ['Covered in ESM', f'{obj1.replace("TotalLCIA_", "")} SOO', 'TC SOO'],
-        loc='upper center',
+        [hatch_proxy, line1, line2, line3],
+        ['Covered in ESM', f'{obj1.replace("TotalLCIA_", "")} SOO', 'TC SOO', 'Pareto front'],
+        loc=loc,
+        bbox_to_anchor=bbox_to_anchor,
         framealpha=0,
     ).get_frame().set_edgecolor('white')
 
