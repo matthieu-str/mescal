@@ -36,6 +36,7 @@ The table below has the following columns:
 
   document.addEventListener('DOMContentLoaded', function() {
     const csvPath = '../_static/mapping_generic.csv';
+    const csvPathES = '../_static/mapping_energyscope.csv';
     const formLink = 'https://forms.gle/dkqB3qa92oETEow97';
     
     fetch(csvPath)
@@ -54,7 +55,7 @@ The table below has the following columns:
 
         document.getElementById('table-container').innerHTML = html;
         $('#data-table-1').DataTable();
-        document.getElementById('download-btn').onclick = () => window.open(csvPath);
+        document.getElementById('download-btn').onclick = () => window.open(csvPathES);
         document.getElementById('form-btn').onclick = () => window.open(formLink, '_blank');
       });
   });
@@ -80,6 +81,7 @@ The table below has the following columns:
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   const csvPathConv = '../_static/unit_conversion_generic.csv';
+  const excelPathConv = '../_static/unit_conversion_energyscope.xlsx';
   const formLinkConv = 'https://forms.gle/G6Uo2YJVZiRrnK4f9';
 
   fetch(csvPathConv)
@@ -98,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
       document.getElementById('conv-table-container').innerHTML = html;
       $('#data-table-2').DataTable();
-      document.getElementById('conv-download-btn').onclick = () => window.open(csvPathConv);
+      document.getElementById('conv-download-btn').onclick = () => window.open(excelPathConv);
       document.getElementById('conv-form-btn').onclick = () => window.open(formLinkConv, '_blank');
     });
 });
