@@ -204,9 +204,9 @@ DIESEL,Resource,0.08453085376,kilogram,kilowatt hour
 DIE_STO,Construction,6.244891679e-09,unit,kilowatt hour
 DIRECT_USAGE,Operation,1.0,kilogram,kilogram
 DOGR,Operation,1.0,kilogram,kilogram
-EHP_H2_GRID,Construction,1.387283237e-05,kilometer,kilowatt
-EHP_NG_GRID,Construction,3.517915309e-06,kilometer,kilowatt
-EHV_GRID,Construction,7.82e-05,kilometer,kilowatt
+EHP_H2_GRID,Construction,8.24198466990851E-8,kilometer,kilowatt kilometer
+EHP_NG_GRID,Construction,1.94174757281553E-8,kilometer,kilowatt kilometer
+EHV_GRID,Construction,5.88235294117647E-7,kilometer,kilowatt kilometer
 ELECTRICITY_EHV,Resource,1.0,kilowatt hour,kilowatt hour
 ELEC_EXPORT,Resource,-1.0,kilowatt hour,kilowatt hour
 ELEC_STO,Construction,8.771929824999999,kilogram,kilowatt hour
@@ -245,30 +245,30 @@ GASOLINE,Resource,0.08470588235,kilogram,kilowatt hour
 GASO_STO,Construction,7.031779141e-09,unit,kilowatt hour
 GEOTHERMAL,Construction,0.0001818181817999,unit,kilowatt
 GEOTHERMAL,Operation,1.0,kilowatt hour,kilowatt hour
-H2_COMP_HE,Construction,3.610108303e-05,unit,kilowatt
+H2_COMP_HE,Construction,2.60061371841155E-7,unit,kilowatt
 H2_COMP_HE,Operation,0.03003003003,kilogram,kilowatt hour
-H2_COMP_LM,Construction,3.610108303e-05,unit,kilowatt
+H2_COMP_LM,Construction,7.27415162454874E-7,unit,kilowatt
 H2_COMP_LM,Operation,0.03003003003,kilogram,kilowatt hour
-H2_COMP_MH,Construction,3.610108303e-05,unit,kilowatt
+H2_COMP_MH,Construction,3.67949458483754E-7,unit,kilowatt
 H2_COMP_MH,Operation,0.03003003003,kilogram,kilowatt hour
 H2_EHP,Resource,0.03003003003,kilogram,kilowatt hour
 H2_EXP_EH,Operation,0.03003003003,kilogram,kilowatt hour
-H2_EXP_EH_COGEN,Construction,0.00625,unit,kilowatt
+H2_EXP_EH_COGEN,Construction,4.5023125E-5,unit,kilowatt
 H2_EXP_EH_COGEN,Operation,0.03003003003,kilogram,kilowatt hour
 H2_EXP_HM,Operation,0.03003003003,kilogram,kilowatt hour
-H2_EXP_HM_COGEN,Construction,0.00625,unit,kilowatt
+H2_EXP_HM_COGEN,Construction,6.370125E-5,unit,kilowatt
 H2_EXP_HM_COGEN,Operation,0.03003003003,kilogram,kilowatt hour
 H2_EXP_ML,Operation,0.03003003003,kilogram,kilowatt hour
-H2_EXP_ML_COGEN,Construction,0.00625,unit,kilowatt
+H2_EXP_ML_COGEN,Construction,1.2593375E-4,unit,kilowatt
 H2_EXP_ML_COGEN,Operation,0.03003003003,kilogram,kilowatt hour
 H2_HP,Resource,0.03003003003,kilogram,kilowatt hour
 H2_LP,Resource,0.03003003003,kilogram,kilowatt hour
 H2_MP,Resource,0.03003003003,kilogram,kilowatt hour
 H2_STO,Construction,0.03003003003,kilogram,kilowatt hour
-HP_H2_GRID,Construction,5.202312139e-06,kilometer,kilowatt
-HP_NG_GRID,Construction,1.319218241e-06,kilometer,kilowatt
+HP_H2_GRID,Construction,6.42260757867694E-7,kilometer,kilowatt kilometer
+HP_NG_GRID,Construction,1.62866449511401E-7,kilometer,kilowatt kilometer
 HT_LT_DEC,Operation,3.6,megajoule,kilowatt hour
-HV_GRID,Construction,2.3e-05,kilometer,kilowatt
+HV_GRID,Construction,2.0E-6,kilometer,kilowatt kilometer
 HYDRO_DAM,Construction,1.095290252e-07,unit,kilowatt
 HYDRO_DAM,Operation,1.0,kilowatt hour,kilowatt hour
 HYDRO_GAS,Construction,0.0002,unit,kilowatt
@@ -312,9 +312,9 @@ IND_HP_ELEC,Operation,3.6,megajoule,kilowatt hour
 JETFUEL,Resource,0.08372093023,kilogram,kilowatt hour
 LFO,Resource,0.08450704225,kilogram,kilowatt hour
 LNG,Resource,0.09230769231,cubic meter,kilowatt hour
-LP_H2_GRID,Construction,0.00055,kilometer,kilowatt
-LP_NG_GRID,Construction,0.0002588235294,kilometer,kilowatt
-LV_GRID,Construction,0.0002,kilometer,kilowatt
+LP_H2_GRID,Construction,0.005,kilometer,kilowatt kilometer
+LP_NG_GRID,Construction,0.00235294117647059,kilometer,kilowatt kilometer
+LV_GRID,Construction,0.00333333333333333,kilometer,kilowatt kilometer
 METATHESIS_PROPYLENE,Construction,1.078689868e-05,unit,kilowatt
 METATHESIS_PROPYLENE,Operation,0.07159192602,kilogram,kilowatt hour
 METHANATION,Construction,0.0002,unit,kilowatt
@@ -331,28 +331,28 @@ METHANOL_TO_AROMATICS,Operation,0.0860564626,kilogram,kilowatt hour
 METHANOL_TO_OLEFINS,Construction,1.078689868e-05,unit,kilowatt
 METHANOL_TO_OLEFINS,Operation,0.07159192602,kilogram,kilowatt hour
 MINES_STORAGE,Operation,1.0,kilogram,kilogram
-MP_H2_GRID,Construction,0.066,kilometer,kilowatt
-MP_NG_GRID,Construction,0.03105882353,kilometer,kilowatt
-MV_GRID,Construction,0.02,kilometer,kilowatt
+MP_H2_GRID,Construction,8.13008130081301E-6,kilometer,kilowatt kilometer
+MP_NG_GRID,Construction,2.35294117647059E-6,kilometer,kilowatt kilometer
+MV_GRID,Construction,3.33333333333333E-5,kilometer,kilowatt kilometer
 NEW_HYDRO_DAM,Construction,1.095290252e-07,unit,kilowatt
 NEW_HYDRO_DAM,Operation,1.0,kilowatt hour,kilowatt hour
 NEW_HYDRO_RIVER,Construction,2.738207182e-07,unit,kilowatt
 NEW_HYDRO_RIVER,Operation,1.0,kilowatt hour,kilowatt hour
-NG_COMP_HE,Construction,0.003333333333,unit,kilowatt
+NG_COMP_HE,Construction,1.61933333333333E-5,unit,kilowatt
 NG_COMP_HE,Operation,0.09230769231,cubic meter,kilowatt hour
-NG_COMP_LM,Construction,0.25,unit,kilowatt
+NG_COMP_LM,Construction,0.005072025,unit,kilowatt
 NG_COMP_LM,Operation,0.09230769231,cubic meter,kilowatt hour
-NG_COMP_MH,Construction,0.003333333333,unit,kilowatt
+NG_COMP_MH,Construction,1.48573333333333E-5,unit,kilowatt
 NG_COMP_MH,Operation,0.07741935484,cubic meter,kilowatt hour
 NG_EHP,Resource,0.09230769231,cubic meter,kilowatt hour
 NG_EXP_EH,Operation,0.09230769231,cubic meter,kilowatt hour
-NG_EXP_EH_COGEN,Construction,0.00625,unit,kilowatt
+NG_EXP_EH_COGEN,Construction,3.03625E-5,unit,kilowatt
 NG_EXP_EH_COGEN,Operation,0.09230769231,cubic meter,kilowatt hour
 NG_EXP_HM,Operation,0.09230769231,cubic meter,kilowatt hour
-NG_EXP_HM_COGEN,Construction,0.00625,unit,kilowatt
+NG_EXP_HM_COGEN,Construction,2.78575E-5,unit,kilowatt
 NG_EXP_HM_COGEN,Operation,0.09230769231,cubic meter,kilowatt hour
 NG_EXP_ML,Operation,0.07741935484,kilogram,kilowatt hour
-NG_EXP_ML_COGEN,Construction,0.00625,unit,kilowatt
+NG_EXP_ML_COGEN,Construction,1.26800625E-4,unit,kilowatt
 NG_EXP_ML_COGEN,Operation,0.07741935484,cubic meter,kilowatt hour
 NG_HP,Resource,0.09824437305,cubic meter,kilowatt hour
 NG_LP,Resource,0.09824437305,cubic meter,kilowatt hour

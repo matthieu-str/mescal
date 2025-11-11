@@ -257,7 +257,7 @@ Diesel,Resource,=1 / 11.83,kilogram,kilowatt hour,"Diesel LHV (11.83 kWh/kg): (E
 Diesel to Storage,Construction,=1 / (16000*846*11.83),unit,kilowatt hour,"LHV diesel (11.83 kWh/kg), diesel density (0.846 kg/L): (Engineering ToolBox, 2003), capacity (16000 m3)"
 Direct Usage of stored CO2 ,Operation,1,kilogram,kilogram,None
 Deep Oil Reservoir Gas Recovery,Operation,1,kilogram,kilogram,None
-Electric Grid at Extra High Voltage,Construction,=(11.5/0.5) * (1700/500) / 1000000,kilometer,kilowatt,"mean extreme high pressure electricity grid power ($P_{EHP} $ = 1700 MW), typical power size connected to the high-voltage electricity grid ($P_{HV}$ = 500 MW), mean high-voltage electricity grid transportation length ($l_{HV}$ = 11.5 km): (Schnidrig, 2023)"
+Electric Grid at Extra High Voltage,Construction,=1 / (2 * 1000000),kilometer,kilowatt kilometer,mean extreme high voltage electricity grid power ($P_{EHV} $ = 2 GW)
 Electricity import,Resource,=1,kilowatt hour,kilowatt hour,None
 Electricity exports,Resource,=-1,kilowatt hour,kilowatt hour,Impacts of exports are counted negatively
 Electricity Storage,Construction,=1 / 0.114,kilogram,kilowatt hour,"Li-ion battery energy density (0.114 kWh/kg): (Notter, 2010)"
@@ -298,21 +298,21 @@ Geothermal Energy Utilization,Construction,=1/5.5 / 1000,unit,kilowatt,"Geotherm
 Geothermal Energy Utilization,Operation,1,kilowatt hour,kilowatt hour,None
 Combine Cycle Gas Turbine Hydrogen,Construction,=1000/400000000,unit,kilowatt,Capacity (400 MW_el)
 Combine Cycle Gas Turbine Hydrogen,Operation,=1,kilowatt hour,kilowatt hour,None
-Hydrogen Compression from High Pressure to Extra High Pressure,Construction,=1/27.7 / 1000,unit,kilowatt,Capacity (27.7 MW)
+Hydrogen Compression from High Pressure to Extra High Pressure,Construction,=1*0.0072037 / (27.7 * 1000),unit,kilowatt,"Capacity (27.7 MW): (Wernet, 2016), power consumption (0.0072037 kW_el / kW_H2): (Schnidrig, 2023)"
 Hydrogen Compression from High Pressure to Extra High Pressure,Operation,=1 / 33.3,kilogram,kilowatt hour,"H2 LHV (33.3 kWh/kg): (Engineering ToolBox, 2003)"
-Hydrogen Compression from Low Pressure to Medium Pressure,Construction,=1/27.7 / 1000,unit,kilowatt,Capacity (27.7 MW)
+Hydrogen Compression from Low Pressure to Medium Pressure,Construction,=1*0.0201494 / (27.7 * 1000),unit,kilowatt,"Capacity (27.7 MW): (Wernet, 2016), power consumption (0.0201494 kW_el / kW_H2): (Schnidrig, 2023)"
 Hydrogen Compression from Low Pressure to Medium Pressure,Operation,=1 / 33.3,kilogram,kilowatt hour,"H2 LHV (33.3 kWh/kg): (Engineering ToolBox, 2003)"
-Hydrogen Compression from Medium Pressure to High Pressure,Construction,=1/27.7 / 1000,unit,kilowatt,Capacity (27.7 MW)
+Hydrogen Compression from Medium Pressure to High Pressure,Construction,=1*0.0101922 / (27.7 * 1000),unit,kilowatt,"Capacity (27.7 MW): (Wernet, 2016), power consumption (0.0101922 kW_el / kW_H2): (Schnidrig, 2023)"
 Hydrogen Compression from Medium Pressure to High Pressure,Operation,=1 / 33.3,kilogram,kilowatt hour,"H2 LHV (33.3 kWh/kg): (Engineering ToolBox, 2003)"
 Hydrogen,Resource,=1 / 33.3,kilogram,kilowatt hour,"H2 LHV (33.3 kWh/kg): (Engineering ToolBox, 2003)"
 Hydrogen Expansion from Extra High Pressure to High Pressure,Operation,=1 / 33.3,kilogram,kilowatt hour,"H2 LHV (33.3 kWh/kg): (Engineering ToolBox, 2003)"
-Hydrogen Expansion from Extra High Pressure to High Pressure (co-generation unit),Construction,=1 / 160,unit,kilowatt,Cogeneration unit capacity (160 kW)
+Hydrogen Expansion from Extra High Pressure to High Pressure (co-generation unit),Construction,=1*0.0072037 / 160,unit,kilowatt,"Cogeneration unit capacity (160 kW_el): (Wernet, 2016), power consumption (0.0072037 kW_el / kW_H2): (Schnidrig, 2023)"
 Hydrogen Expansion from Extra High Pressure to High Pressure (co-generation unit),Operation,=1 / 33.3,kilogram,kilowatt hour,"H2 LHV (33.3 kWh/kg): (Engineering ToolBox, 2003)"
 Hydrogen Expansion from High Pressure to Medium Pressure,Operation,=1 / 33.3,kilogram,kilowatt hour,"H2 LHV (33.3 kWh/kg): (Engineering ToolBox, 2003)"
-Hydrogen Expansion from High Pressure to Medium Pressure (co-generation unit),Construction,=1 / 160,unit,kilowatt,Cogeneration unit capacity (160 kW)
+Hydrogen Expansion from High Pressure to Medium Pressure (co-generation unit),Construction,=1*0.0101922 / 160,unit,kilowatt,"Cogeneration unit capacity (160 kW_el): (Wernet, 2016), power consumption (0.0101922 kW_el / kW_H2): (Schnidrig, 2023)"
 Hydrogen Expansion from High Pressure to Medium Pressure (co-generation unit),Operation,=1 / 33.3,kilogram,kilowatt hour,"H2 LHV (33.3 kWh/kg): (Engineering ToolBox, 2003)"
 Hydrogen Expansion from Medium Pressure to Low Pressure,Operation,=1 / 33.3,kilogram,kilowatt hour,"H2 LHV (33.3 kWh/kg): (Engineering ToolBox, 2003)"
-Hydrogen Expansion from Medium Pressure to Low Pressure (co-generation unit),Construction,=1 / 160,unit,kilowatt,Cogeneration unit capacity (160 kW)
+Hydrogen Expansion from Medium Pressure to Low Pressure (co-generation unit),Construction,=1*0.0201494 / 160,unit,kilowatt,"Cogeneration unit capacity (160 kW_el): (Wernet, 2016), power consumption (0.0201494 kW_el / kW_H2): (Schnidrig, 2023)"
 Hydrogen Expansion from Medium Pressure to Low Pressure (co-generation unit),Operation,=1 / 33.3,kilogram,kilowatt hour,"H2 LHV (33.3 kWh/kg): (Engineering ToolBox, 2003)"
 Combined Cycle Gas Turbine Hydrogen and Natural Gas Mix,Construction,=1000/400000000,unit,kilowatt,Capacity (400 MW_el)
 Combined Cycle Gas Turbine Hydrogen and Natural Gas Mix,Operation,=1,kilowatt hour,kilowatt hour,None
@@ -320,7 +320,7 @@ Combined Cycle Gas Turbine Hydrogen and Natural Gas Mix with Carbon Capture,Cons
 Combined Cycle Gas Turbine Hydrogen and Natural Gas Mix with Carbon Capture,Operation,=1,kilowatt hour,kilowatt hour,None
 Hydrogen to Storage,Construction,=1 / 33.3,kilogram,kilowatt hour,"LHV (33.3 kWh/kg): (Engineering ToolBox, 2003)"
 High Temperature to Low Temperature Conversion in Decentralized Systems,Operation,=1 * 3.6,megajoule,kilowatt hour,None
-Electric Grid at High Voltage,Construction,=11.5/0.5 / 1000000,kilometer,kilowatt,"typical power size connected to the high-voltage electricity grid ($P_{HV}$ = 500 MW), mean high-voltage electricity grid transportation length ($l_{HV}$ = 11.5 km): (Schnidrig, 2023)"
+Electric Grid at High Voltage,Construction,=1 / (500 * 1000),kilometer,kilowatt kilometer,mean high voltage electricity grid power ($P_{HV} $ = 500 MW)
 Hydroelectric Dam,Construction,=1 / 22583 / 1000,unit,kilowatt,"Capacity (22583 MWe): (Wernet, 2016)"
 Hydroelectric Dam,Operation,=1,kilowatt hour,kilowatt hour,None
 Hydrothermal Gasification,Construction,=1/5 / 1000,unit,kilowatt,Capacity (5 MW_th)
@@ -388,7 +388,7 @@ Propane-Powered Light Commercial Vehicle,Construction,=1 * 8760 * 0.093 / (0.75 
 Propane-Powered Light Commercial Vehicle,Operation,=1/0.75,kilometer,ton kilometer,"payload (750 kg): (Sacchi, 2021)"
 Light fuel oil,Resource,=1 * 3.6 / 42.6,kilogram,kilowatt hour,"Light fuel oil LHV (42.6 MJ/kg): (Engineering ToolBox, 2003)"
 Liquified natural gas,Resource,=1 * 3.6 / 39,cubic meter,kilowatt hour,"liquified natural gas LHV (39 MJ/m3): (Wernet, 2016)"
-Electric Grid at Low Voltage,Construction,=0.06/0.0003 / 1000000,kilometer,kilowatt,"typical power size connected to the low-voltage electricity grid ($P_{LV}$ = 0.3 MW), mean low-voltage electricity grid transportation length ($l_{LV}$ = 0.06 km): (Schnidrig, 2023)"
+Electric Grid at Low Voltage,Construction,=1 / 50,kilometer,kilowatt kilometer,mean low voltage electricity grid power ($P_{LV} $ = 50 kW)
 Propylene Production via Metathesis,Construction,=3.6 * 8760 * 0.86 / (0.05 * 1000 * 50.285) / 1000000,unit,kilowatt,"ethylene heat of combustion (50.285 MJ/kg): (Engineering ToolBox, 2017), yearly production (0.05 Mt/yr): (Althaus, 2007), capacity factor (0.86): (Moret, 2017)"
 Propylene Production via Metathesis,Operation,=3.6 / 50.285,kilogram,kilowatt hour,"ethylene heat of combustion (50.285 MJ/kg): (Engineering ToolBox, 2017)"
 Methanation Process,Construction,=1/5 / 1000,unit,kilowatt,Capacity (5 MWth)
@@ -405,26 +405,26 @@ Conversion of Methanol to Aromatic Compounds,Operation,=3.6 / 41.833,kilogram,ki
 Conversion of Methanol to Olefinic Compounds,Construction,=3.6 * 8760 * 0.86 / (0.05 * 1000 * 50.285) / 1000000,unit,kilowatt,"ethylene heat of combustion (50.285 MJ/kg): (Engineering ToolBox, 2017), yearly production (0.05 Mt/yr): (Althaus, 2007), capacity factor (0.86): (Moret, 2017)"
 Conversion of Methanol to Olefinic Compounds,Operation,=3.6 / 50.285,kilogram,kilowatt hour,"ethylene heat of combustion (50.285 MJ/kg): (Engineering ToolBox, 2017)"
 Sequestration of CO2 in Mines,Operation,=1,kilogram,kilogram,None
-Electric Grid at Medium Voltage,Construction,=(0.06/0.0003) * (30/0.3) / 1000000,kilometer,kilowatt,"mean medium-voltage electricity grid power ($P_{MV}$ = 30 MW), typical power size connected to the low-voltage electricity grid ($P_{LV}$ = 0.3 MW), mean low-voltage electricity grid transportation length ($l_{LV}$ = 0.06 km): (Schnidrig, 2023)"
+Electric Grid at Medium Voltage,Construction,=1 / (50 * 1000),kilometer,kilowatt kilometer,mean medium voltage electricity grid power ($P_{MV} $ = 50 MW)
 New Hydroelectric Dam,Construction,=1 / 22583 / 1000,unit,kilowatt,"Capacity (22583 MWe): (Wernet, 2016)"
 New Hydroelectric Dam,Operation,=1,kilowatt hour,kilowatt hour,None
 New Hydroelectric Power from River Flow,Construction,=1/13787 / 1000,unit,kilowatt,"Capacity (13787 MWe): (Wernet, 2016)"
 New Hydroelectric Power from River Flow,Operation,=1,kilowatt hour,kilowatt hour,None
-Natural Gas Compression from High Pressure to Extra High Pressure,Construction,=1 / 300,unit,kilowatt,Capacity (300 kW)
+Natural Gas Compression from High Pressure to Extra High Pressure,Construction,=1*0.004858 / 300,unit,kilowatt,"Capacity (300 kW): (Wernet, 2016), power consumption (0.004858 kW_el / kW_NG): (Schnidrig, 2023)"
 Natural Gas Compression from High Pressure to Extra High Pressure,Operation,=1 * 3.6 / 39,cubic meter,kilowatt hour,"natural gas LHV (39 MJ/m3): (Wernet, 2016)"
-Natural Gas Compression from Low Pressure to Medium Pressure,Construction,=1 / 4,unit,kilowatt,Capacity (4 kW)
+Natural Gas Compression from Low Pressure to Medium Pressure,Construction,=1*0.0202881 / 4,unit,kilowatt,"Capacity (4 kW): (Wernet, 2016), power consumption (0.0202881 kW_el / kW_NG): (Schnidrig, 2023)"
 Natural Gas Compression from Low Pressure to Medium Pressure,Operation,=1 * 3.6 / 39,cubic meter,kilowatt hour,"natural gas LHV (39 MJ/m3): (Wernet, 2016)"
-Natural Gas Compression from Medium Pressure to High Pressure,Construction,=1 / 300,unit,kilowatt,Capacity (300 kW)
+Natural Gas Compression from Medium Pressure to High Pressure,Construction,=1*0.0044572 / 300,unit,kilowatt,"Capacity (300 kW): (Wernet, 2016), power consumption (0.0044572 kW_el / kW_NG): (Schnidrig, 2023)"
 Natural Gas Compression from Medium Pressure to High Pressure,Operation,=1 * 3.6 / 46.5,cubic meter,kilowatt hour,"natural gas LHV (46.5 MJ/kg): (Wernet, 2016)"
 Natural gas,Resource,=1 * 3.6 / 39,cubic meter,kilowatt hour,"natural gas LHV (39 MJ/m3): (Wernet, 2016)"
 Natural Gas Expansion from Extra High Pressure to High Pressure,Operation,=1 * 3.6 / 39,cubic meter,kilowatt hour,"natural gas LHV (39 MJ/m3): (Wernet, 2016)"
-Natural Gas Expansion from Extra High Pressure to High Pressure (co-generation unit),Construction,=1 / 160,unit,kilowatt,Capacity (160 kW)
+Natural Gas Expansion from Extra High Pressure to High Pressure (co-generation unit),Construction,=1*0.004858 / 160,unit,kilowatt,"Cogeneration unit capacity (160 kW_el): (Wernet, 2016), power consumption (0.004858 kW_el / kW_NG): (Schnidrig, 2023)"
 Natural Gas Expansion from Extra High Pressure to High Pressure (co-generation unit),Operation,=1 * 3.6 / 39,cubic meter,kilowatt hour,"natural gas LHV (39 MJ/m3): (Wernet, 2016)"
 Natural Gas Expansion from High Pressure to Medium Pressure,Operation,=1 * 3.6 / 39,cubic meter,kilowatt hour,"natural gas LHV (39 MJ/m3): (Wernet, 2016)"
-Natural Gas Expansion from High Pressure to Medium Pressure (co-generation unit),Construction,=1 / 160,unit,kilowatt,Capacity (160 kW)
+Natural Gas Expansion from High Pressure to Medium Pressure (co-generation unit),Construction,=1*0.0044572 / 160,unit,kilowatt,"Cogeneration unit capacity (160 kW_el): (Wernet, 2016), power consumption (0.0044572 kW_el / kW_NG): (Schnidrig, 2023)"
 Natural Gas Expansion from High Pressure to Medium Pressure (co-generation unit),Operation,=1 * 3.6 / 39,cubic meter,kilowatt hour,"natural gas LHV (39 MJ/m3): (Wernet, 2016)"
 Natural Gas Expansion from Medium Pressure to Low Pressure,Operation,=1 * 3.6 / 46.5,kilogram,kilowatt hour,"natural gas LHV (46.5 MJ/kg): (Wernet, 2016)"
-Natural Gas Expansion from Medium Pressure to Low Pressure (co-generation unit),Construction,=1 / 160,unit,kilowatt,Capacity (160 kW)
+Natural Gas Expansion from Medium Pressure to Low Pressure (co-generation unit),Construction,=1*0.0202881 / 160,unit,kilowatt,"Cogeneration unit capacity (160 kW_el): (Wernet, 2016), power consumption (0.0202881 kW_el / kW_NG): (Schnidrig, 2023)"
 Natural Gas Expansion from Medium Pressure to Low Pressure (co-generation unit),Operation,=1 * 3.6 / 46.5,cubic meter,kilowatt hour,"natural gas LHV (46.5 MJ/kg): (Wernet, 2016)"
 Plasma Natural Gas Pyrolysis,Construction,=1000/4000,unit,kilowatt,Capacity (4 kW)
 Plasma Natural Gas Pyrolysis,Operation,=1/33.3,kilogram,kilowatt hour,"H2 LHV (33.3 kWh/kg): (Engineering ToolBox, 2003)"
@@ -759,20 +759,20 @@ Conversion of BioMethanol to Aromatic Compounds,Construction,=3.6 * 8760 * 0.86 
 Conversion of BioMethanol to Aromatic Compounds,Operation,=3.6 / 41.833,kilogram,kilowatt hour,"benzene heat of combustion (41.833 MJ/kg): (Engineering ToolBox, 2017)"
 Conversion of BioMethanol to Olefinic Compounds,Construction,=3.6 * 8760 * 0.86 / (0.05 * 1000 * 50.285) / 1000000,unit,kilowatt,"ethylene heat of combustion (50.285 MJ/kg): (Engineering ToolBox, 2017), yearly production (0.05 Mt/yr): (Althaus, 2007), capacity factor (0.86): (Moret, 2017)"
 Conversion of BioMethanol to Olefinic Compounds,Operation,=3.6 / 50.285,kilogram,kilowatt hour,"ethylene heat of combustion (50.285 MJ/kg): (Engineering ToolBox, 2017)"
-Synthetic Natural Gas Compression from High Pressure to Extra High Pressure,Construction,=1 / 300,unit,kilowatt,Capacity (300 kW)
+Synthetic Natural Gas Compression from High Pressure to Extra High Pressure,Construction,=1*0.004858 / 300,unit,kilowatt,"Capacity (300 kW): (Wernet, 2016), power consumption (0.004858 kW_el / kW_SNG): (Schnidrig, 2023)"
 Synthetic Natural Gas Compression from High Pressure to Extra High Pressure,Operation,=1 * 3.6 / 39,cubic meter,kilowatt hour,"natural gas LHV (39 MJ/m3): (Wernet, 2016)"
-Synthetic Natural Gas Compression from Low Pressure to Medium Pressure,Construction,=1 / 4,unit,kilowatt,Capacity (4 kW)
+Synthetic Natural Gas Compression from Low Pressure to Medium Pressure,Construction,=1*0.0202881 / 4,unit,kilowatt,"Capacity (4 kW): (Wernet, 2016), power consumption (0.0202881 kW_el / kW_SNG): (Schnidrig, 2023)"
 Synthetic Natural Gas Compression from Low Pressure to Medium Pressure,Operation,=1 * 3.6 / 39,cubic meter,kilowatt hour,"natural gas LHV (39 MJ/m3): (Wernet, 2016)"
-Synthetic Natural Gas Compression from Medium Pressure to High Pressure,Construction,=1 / 300,unit,kilowatt,Capacity (300 kW)
+Synthetic Natural Gas Compression from Medium Pressure to High Pressure,Construction,=1*0.0044572 / 300,unit,kilowatt,"Capacity (300 kW): (Wernet, 2016), power consumption (0.0044572 kW_el / kW_SNG): (Schnidrig, 2023)"
 Synthetic Natural Gas Compression from Medium Pressure to High Pressure,Operation,=1 * 3.6 / 46.5,cubic meter,kilowatt hour,"natural gas LHV (46.5 MJ/kg): (Wernet, 2016)"
 Synthetic Natural Gas Expansion from Extra High Pressure to High Pressure,Operation,=1 * 3.6 / 39,cubic meter,kilowatt hour,"natural gas LHV (39 MJ/m3): (Wernet, 2016)"
-Synthetic Natural Gas Expansion from Extra High Pressure to High Pressure (co-generation unit),Construction,=1 / 160,unit,kilowatt,Capacity (160 kW)
+Synthetic Natural Gas Expansion from Extra High Pressure to High Pressure (co-generation unit),Construction,=1*0.004858 / 160,unit,kilowatt,"Cogeneration unit capacity (160 kW_el): (Wernet, 2016), power consumption (0.004858 kW_el / kW_SNG): (Schnidrig, 2023)"
 Synthetic Natural Gas Expansion from Extra High Pressure to High Pressure (co-generation unit),Operation,=1 * 3.6 / 39,cubic meter,kilowatt hour,"natural gas LHV (39 MJ/m3): (Wernet, 2016)"
 Synthetic Natural Gas Expansion from High Pressure to Medium Pressure,Operation,=1 * 3.6 / 39,cubic meter,kilowatt hour,"natural gas LHV (39 MJ/m3): (Wernet, 2016)"
-Synthetic Natural Gas Expansion from High Pressure to Medium Pressure (co-generation unit),Construction,=1 / 160,unit,kilowatt,Capacity (160 kW)
+Synthetic Natural Gas Expansion from High Pressure to Medium Pressure (co-generation unit),Construction,=1*0.0044572 / 160,unit,kilowatt,"Cogeneration unit capacity (160 kW_el): (Wernet, 2016), power consumption (0.0044572 kW_el / kW_SNG): (Schnidrig, 2023)"
 Synthetic Natural Gas Expansion from High Pressure to Medium Pressure (co-generation unit),Operation,=1 * 3.6 / 39,cubic meter,kilowatt hour,"natural gas LHV (39 MJ/m3): (Wernet, 2016)"
 Synthetic Natural Gas Expansion from Medium Pressure to Low Pressure,Operation,=1 * 3.6 / 46.5,kilogram,kilowatt hour,"natural gas LHV (46.5 MJ/kg): (Wernet, 2016)"
-Synthetic Natural Gas Expansion from Medium Pressure to Low Pressure (co-generation unit),Construction,=1 / 160,unit,kilowatt,Capacity (160 kW)
+Synthetic Natural Gas Expansion from Medium Pressure to Low Pressure (co-generation unit),Construction,=1*0.0202881 / 160,unit,kilowatt,"Cogeneration unit capacity (160 kW_el): (Wernet, 2016), power consumption (0.0202881 kW_el / kW_SNG): (Schnidrig, 2023)"
 Synthetic Natural Gas Expansion from Medium Pressure to Low Pressure (co-generation unit),Operation,=1 * 3.6 / 46.5,cubic meter,kilowatt hour,"natural gas LHV (46.5 MJ/kg): (Wernet, 2016)"
 Plasma Synthetic Natural Gas Pyrolysis,Construction,=1000/4000,unit,kilowatt,Capacity (4 kW)
 Plasma Synthetic Natural Gas Pyrolysis,Operation,=1/33.3,kilogram,kilowatt hour,"H2 LHV (33.3 kWh/kg): (Engineering ToolBox, 2003)"
@@ -822,14 +822,14 @@ Compressed Synthetic Natural Gas-Powered Long Distance Truck,Operation,=1,ton ki
 Compressed Synthetic Natural Gas-Powered Short Distance Truck,Construction,=1 * 8760 * 0.093 / (3.2 * 78000),unit,ton kilometer per hour,"payload (3.2 t), yearly distance (78000 km): (Sacchi, 2021), capacity factor (0.093): (Limpens, 2021)"
 Compressed Synthetic Natural Gas-Powered Short Distance Truck,Operation,=1/3.2,kilometer,ton kilometer,"payload (3.2 t): (Sacchi, 2021)"
 Bio-ethanol,Resource,=1 * 3.6 / 31.58,kilogram,kilowatt hour,"Ethanol LHV (31.58 MJ/kg): (Wernet, 2016)"
-Hydrogen Grid at Extra High Pressure,Construction,=(8.1/1.557) * (80/30) / 1000000,kilometer,kilowatt,"mean extreme high pressure H2 grid pressure ($p_{EHP} $ = 80 barg), mean high pressure H2 grid pressure ($p_{HP} $ = 30 barg), typical power size connected to the high-pressure H2 grid ($P_{HP}$ = 1557 MW), mean high-pressure H2 grid transportation length ($l_{HP}$ = 8.10 km): (Schnidrig, 2023)"
-Natural Gas Grid at Extra High Pressure,Construction,=(8.1/6.14) * (80/30) / 1000000,kilometer,kilowatt,"mean extreme high pressure NG grid pressure ($p_{EHP} $ = 80 barg), mean high pressure NG grid pressure ($p_{HP} $ = 30 barg), typical power size connected to the high-pressure NG grid ($P_{HP}$ = 6140MW), mean high-pressure NG grid transportation length ($l_{HP}$ = 8.10 km): (Schnidrig, 2023)"
-Hydrogen Grid at High Pressure,Construction,=8.1/1.557 / 1000000,kilometer,kilowatt,"typical power size connected to the high-pressure H2 grid ($P_{HP}$ = 1557 MW), mean high-pressure H2 grid transportation length ($l_{HP}$ = 8.10 km): (Schnidrig, 2023)"
-Natural Gas Grid at High Pressure,Construction,=8.1/6.14 / 1000000,kilometer,kilowatt,"typical power size connected to the high-pressure NG grid ($P_{HP}$ = 6140MW), mean high-pressure NG grid transportation length ($l_{HP}$ = 8.10 km): (Schnidrig, 2023)"
-Hydrogen Grid at Low Pressure,Construction,=0.11/0.2 / 1000,kilometer,kilowatt,"typical power size connected to the low-pressure H2 grid ($P_{LP}$ = 0.2 MW), mean low-pressure H2 grid transportation length ($l_{LP}$ = 0.11 km): (Schnidrig, 2023)"
-Natural Gas Grid at Low Pressure,Construction,=0.11/0.425 / 1000,kilometer,kilowatt,"typical power size connected to the low-pressure NG grid ($P_{LP}$ = 0.425 MW), mean low-pressure NG grid transportation length ($l_{LP}$ = 0.11 km): (Schnidrig, 2023)"
-Hydrogen Grid at Medium Pressure,Construction,=(0.11/0.2) * (7.5/0.0625) / 1000,kilometer,kilowatt,"mean medium-pressure H2 grid pressure ($p_{MP}$ = 7.5 barg), mean low-pressure H2 grid pressure ($p_{LP}$ = 0.0625 barg), typical power size connected to the low-pressure H2 grid ($P_{LP}$ = 0.2 MW), mean low-pressure H2 grid transportation length ($l_{LP}$ = 0.11 km): (Schnidrig, 2023)"
-Natural Gas Grid at Medium Pressure,Construction,=(0.11/0.425) * (7.5/0.0625) / 1000,kilometer,kilowatt,"mean medium-pressure NG grid pressure ($p_{MP}$ = 7.5 barg), mean low-pressure NG grid pressure ($p_{LP}$ = 0.0625 barg), typical power size connected to the low-pressure NG grid ($P_{LP}$ = 0.425 MW), mean low-pressure NG grid transportation length ($l_{LP}$ = 0.11 km): (Schnidrig, 2023)"
+Hydrogen Grid at Extra High Pressure,Construction,=1 / (12133 * 1000),kilometer,kilowatt kilometer,"Power size connected to the extreme high-pressure H2 grid ($P_{EHP}$ = 12133 MW): (Schnidrig, 2023)"
+Natural Gas Grid at Extra High Pressure,Construction,=1 / (51500 * 1000),kilometer,kilowatt kilometer,"Power size connected to the extreme high-pressure NG grid ($P_{EHP}$ = 51500 MW): (Schnidrig, 2023)"
+Hydrogen Grid at High Pressure,Construction,=1 / (1557 * 1000),kilometer,kilowatt kilometer,"Power size connected to the high-pressure H2 grid ($P_{HP}$ = 1557 MW): (Schnidrig, 2023)"
+Natural Gas Grid at High Pressure,Construction,=1 / (6140 * 1000),kilometer,kilowatt kilometer,"Power size connected to the high-pressure NG grid ($P_{HP}$ = 6140 MW): (Schnidrig, 2023)"
+Hydrogen Grid at Low Pressure,Construction,=1 / (0.2 * 1000),kilometer,kilowatt kilometer,"Power size connected to the medium-pressure H2 grid ($P_{LP}$ = 0.2 MW): (Schnidrig, 2023)"
+Natural Gas Grid at Low Pressure,Construction,=1 / (0.425 * 1000),kilometer,kilowatt kilometer,"Power size connected to the low-pressure NG grid ($P_{LP}$ = 0.425 MW): (Schnidrig, 2023)"
+Hydrogen Grid at Medium Pressure,Construction,=1 / (132 * 1000),kilometer,kilowatt kilometer,"Power size connected to the medium-pressure H2 grid ($P_{MP}$ = 132 MW): (Schnidrig, 2023)"
+Natural Gas Grid at Medium Pressure,Construction,=1 / (425 * 1000),kilometer,kilowatt kilometer,"Power size connected to the medium-pressure NG grid ($P_{MP}$ = 425 MW): (Schnidrig, 2023)"
 Acetic acid,Flow,=1 * 3.6 / 14.55,kilogram,kilowatt hour,"acetic acid heat of combustion (14.55 MJ/kg): (Engineering ToolBox, 2017)"
 Acetone,Flow,=1 / 8.22,kilogram,kilowatt hour,"Acetone LHV (8.22 kWh/kg): (Engineering ToolBox, 2003)"
 Benzene,Flow,=1 * 3.6 / 42.5,kilogram,kilowatt hour,"Benzene heat of combustion (42.5 MJ/kg): (Wernet, 2016)"
