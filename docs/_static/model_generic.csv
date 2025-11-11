@@ -48,18 +48,6 @@ Biogas Steam Methane Reforming with Carbon Capture,Captured CO2,0.443
 Biogas Steam Methane Reforming with Carbon Capture,CO2 emission (from nonconcentrated spot sources),-0.049
 Biogas Steam Methane Reforming with Carbon Capture,Hydrogen (high pressure),1.0
 Biogas Steam Methane Reforming with Carbon Capture,Woody biomass,-1.967
-,CO2 emission (from nonconcentrated spot sources),-0.388235
-,Wet biomass,1.0
-,CO2 emission (from nonconcentrated spot sources),-0.388235
-,Woody biomass,1.0
-,CO2 emission (from nonconcentrated spot sources),-0.388235
-,Woody biomass,1.0
-,CO2 emission (from nonconcentrated spot sources),-0.388235
-,Woody biomass,1.0
-,CO2 emission (from nonconcentrated spot sources),-0.388235
-,Woody biomass,1.0
-,CO2 emission (from nonconcentrated spot sources),-0.388235
-,Woody biomass,1.0
 Hydrogen from Biomass Gasification Entrained Flow ,CO2 emission (from nonconcentrated spot sources),0.589
 Hydrogen from Biomass Gasification Entrained Flow ,Electricity (low voltage),0.034
 Hydrogen from Biomass Gasification Entrained Flow ,Hydrogen (medium pressure),1.0
@@ -78,16 +66,6 @@ Hydrogen from Biomass Gasification Fuidized Bed with Carbon Capture,CO2 emission
 Hydrogen from Biomass Gasification Fuidized Bed with Carbon Capture,Electricity (low voltage),0.064
 Hydrogen from Biomass Gasification Fuidized Bed with Carbon Capture,Hydrogen (medium pressure),1.0
 Hydrogen from Biomass Gasification Fuidized Bed with Carbon Capture,Woody biomass,-3.06
-,CO2 emission (from nonconcentrated spot sources),-0.388235
-,Woody biomass,1.0
-,CO2 emission (from nonconcentrated spot sources),-0.388235
-,Wet biomass,1.0
-,CO2 emission (from nonconcentrated spot sources),-0.388235
-,Waste,1.0
-,CO2 emission (from nonconcentrated spot sources),-0.388235
-,Waste,1.0
-,CO2 emission (from nonconcentrated spot sources),-0.388235
-,Wet biomass,1.0
 Conversion of BioMethane to Methanol,Bio-methanol,1.0
 Conversion of BioMethane to Methanol,CO2 emission (from carbon-intensive fields),-0.25
 Conversion of BioMethane to Methanol,Synthetic natural gas (medium pressure),-1.4
@@ -271,7 +249,6 @@ Cement Production (heat pump),Cement,1.0
 Cement Production (heat pump),CO2 emission (from carbon-intensive fields),0.185
 Cement Production (heat pump),Electricity (medium voltage),-0.058
 Cement Production (heat pump),Heat (high temperature),-0.862
-,CO2 emission (from nonconcentrated spot sources),1.0
 Conversion of CO2 to Methanol,Captured CO2,-0.25
 Conversion of CO2 to Methanol,Hydrogen (medium pressure),-1.5
 Conversion of CO2 to Methanol,Methanol,1.0
@@ -498,7 +475,6 @@ District Heating Network with Heat Pump Electricity,Electricity (medium voltage)
 District Heating Network with Heat Pump Electricity,"Heat (low temperature, district heating network)",1.0
 District Heating Network Renovation,"Heat (low temperature, district heating network)",1.0
 Diesel,Diesel,1.0
-,Stored diesel,1.0
 Diesel to Storage,Diesel,-1.0
 Diesel to Storage,Stored diesel,1.0
 Direct Usage of stored CO2 ,Captured CO2,-1.0
@@ -510,7 +486,6 @@ Deep Oil Reservoir Gas Recovery,Electricity (medium voltage),-0.0001
 Electricity import,CO2 emission (from nonconcentrated spot sources),0.4818
 Electricity import,Electricity (extra high voltage),1.0
 Electricity exports,Electricity (extra high voltage),-1.0
-,Stored electricity,1.0
 Electricity Storage,Electricity (low voltage),-1.0
 Electricity Storage,Stored electricity,1.0
 Enhanced Oil Recovery,Captured CO2,-1.0
@@ -561,7 +536,6 @@ Synthetic Natural Gas Production via Gasification,Heat (high temperature),0.324
 Synthetic Natural Gas Production via Gasification,Synthetic natural gas (medium pressure),1.0
 Synthetic Natural Gas Production via Gasification,Woody biomass,-1.351
 Gasoline,Gasoline,1.0
-,Stored gasoline,1.0
 Gasoline to Storage,Gasoline,-1.0
 Gasoline to Storage,Stored gasoline,1.0
 Geothermal Energy Utilization,Electricity (medium voltage),1.0
@@ -596,9 +570,6 @@ Hydrogen Expansion from Medium Pressure to Low Pressure (co-generation unit),Ele
 Hydrogen Expansion from Medium Pressure to Low Pressure (co-generation unit),Hydrogen (low pressure),1.0
 Hydrogen Expansion from Medium Pressure to Low Pressure (co-generation unit),Hydrogen (medium pressure),-1.0
 Hydrogen Expansion from Medium Pressure to Low Pressure (co-generation unit),"Heat (low temperature, decentralized)",-0.201
-,Hydrogen (high pressure),1.0
-,Hydrogen (low pressure),1.0
-,Hydrogen (medium pressure),1.0
 Combined Cycle Gas Turbine Hydrogen and Natural Gas Mix,CO2 emission (from carbon-intensive fields),0.32
 Combined Cycle Gas Turbine Hydrogen and Natural Gas Mix,Electricity (high voltage),1.0
 Combined Cycle Gas Turbine Hydrogen and Natural Gas Mix,Hydrogen (medium pressure),-0.362
@@ -796,9 +767,6 @@ Natural Gas Expansion from Medium Pressure to Low Pressure (co-generation unit),
 Natural Gas Expansion from Medium Pressure to Low Pressure (co-generation unit),"Heat (low temperature, decentralized)",-0.02
 Natural Gas Expansion from Medium Pressure to Low Pressure (co-generation unit),Natural gas (low pressure),1.0
 Natural Gas Expansion from Medium Pressure to Low Pressure (co-generation unit),Natural gas (medium pressure),-1.0
-,Natural gas (high pressure),1.0
-,Natural gas (low pressure),1.0
-,Natural gas (medium pressure),1.0
 Plasma Natural Gas Pyrolysis,Hydrogen (medium pressure),1.0
 Plasma Natural Gas Pyrolysis,Heat (high temperature),-0.356
 Plasma Natural Gas Pyrolysis,"Heat (low temperature, district heating network)",0.244
@@ -810,7 +778,6 @@ Thermal Natural Gas Pyrolysis,Natural gas (medium pressure),-1.902
 Natural Gas Reforming,CO2 emission (from carbon-intensive fields),0.27
 Natural Gas Reforming,Hydrogen (medium pressure),1.0
 Natural Gas Reforming,Natural gas (medium pressure),-1.365
-,Stored natural gas,1.0
 Natural Gas to Storage,Natural gas (extra high pressure),-1.0
 Natural Gas to Storage,Stored natural gas,1.0
 Nuclear Power Generation,CO2 emission (from carbon-intensive fields),0.011
@@ -887,12 +854,6 @@ Pyrolysis Process,Bio-light fuel oil,1.0
 Pyrolysis Process,CO2 emission (from carbon-intensive fields),0.322
 Pyrolysis Process,Electricity (medium voltage),0.024
 Pyrolysis Process,Woody biomass,-1.502
-,Geothermal resource,1.0
-,Hydro resource,1.0
-,Solar resource,1.0
-,Tidal resource,1.0
-,Wind resource,1.0
-,Wind resource,1.0
 100% BioDiesel-Powered School Bus,Bio-diesel,-0.062
 100% BioDiesel-Powered School Bus,CO2 emission (from nonconcentrated spot sources),0.018
 100% BioDiesel-Powered School Bus,Public mobility,1.0
@@ -1041,7 +1002,6 @@ Thermal Synthetic Natural Gas Pyrolysis,Synthetic natural gas (medium pressure),
 Synthetic Natural Gas Reforming,CO2 emission (from carbon-intensive fields),0.27
 Synthetic Natural Gas Reforming,Hydrogen (medium pressure),1.0
 Synthetic Natural Gas Reforming,Synthetic natural gas (medium pressure),-1.365
-,Stored synthetic natural gas,1.0
 Synthetic Natural Gas to Storage,Synthetic natural gas (extra high pressure),-1.0
 Synthetic Natural Gas to Storage,Stored synthetic natural gas,1.0
 Solid Oxide Electrolysis Cell Electrolysis,Electricity (high voltage),-1.25
@@ -1070,8 +1030,6 @@ Storage to Hydrogen,Hydrogen (extra high pressure),1.0
 Storage to Hydrogen,Stored hydrogen,-1.0
 Storage to Natural Gas,Natural gas (extra high pressure),1.0
 Storage to Natural Gas,Stored natural gas,-1.0
-,Synthetic natural gas (extra high pressure),1.0
-,Stored synthetic natural gas,-1.0
 Styrene,Styrene,1.0
 Styrene Polymerization Process,CO2 emission (from carbon-intensive fields),0.003
 Styrene Polymerization Process,Polystyrene,1.0

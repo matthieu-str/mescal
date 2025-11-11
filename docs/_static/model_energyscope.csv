@@ -48,18 +48,6 @@ BIOGAS_SMR_CCS,CO2_C,0.443,Biogas Steam Methane Reforming with Carbon Capture,Ca
 BIOGAS_SMR_CCS,CO2_E,-0.049,Biogas Steam Methane Reforming with Carbon Capture,CO2 emission (from nonconcentrated spot sources)
 BIOGAS_SMR_CCS,H2_HP,1.0,Biogas Steam Methane Reforming with Carbon Capture,Hydrogen (high pressure)
 BIOGAS_SMR_CCS,WOOD,-1.967,Biogas Steam Methane Reforming with Carbon Capture,Woody biomass
-BIOMASS_AGRICULTURE_DEJECTION,CO2_E,-0.388235,,CO2 emission (from nonconcentrated spot sources)
-BIOMASS_AGRICULTURE_DEJECTION,WET_BIOMASS,1.0,,Wet biomass
-BIOMASS_AGRICULTURE_RESIDUAL,CO2_E,-0.388235,,CO2 emission (from nonconcentrated spot sources)
-BIOMASS_AGRICULTURE_RESIDUAL,WOOD,1.0,,Woody biomass
-BIOMASS_FORESTRY_LEFTOVER1,CO2_E,-0.388235,,CO2 emission (from nonconcentrated spot sources)
-BIOMASS_FORESTRY_LEFTOVER1,WOOD,1.0,,Woody biomass
-BIOMASS_FORESTRY_LEFTOVER2,CO2_E,-0.388235,,CO2 emission (from nonconcentrated spot sources)
-BIOMASS_FORESTRY_LEFTOVER2,WOOD,1.0,,Woody biomass
-BIOMASS_FORESTRY_RESIDUAL,CO2_E,-0.388235,,CO2 emission (from nonconcentrated spot sources)
-BIOMASS_FORESTRY_RESIDUAL,WOOD,1.0,,Woody biomass
-BIOMASS_FORESTRY_UNEXPLOITED,CO2_E,-0.388235,,CO2 emission (from nonconcentrated spot sources)
-BIOMASS_FORESTRY_UNEXPLOITED,WOOD,1.0,,Woody biomass
 BIOMASS_GAS_EF_H2,CO2_E,0.589,Hydrogen from Biomass Gasification Entrained Flow ,CO2 emission (from nonconcentrated spot sources)
 BIOMASS_GAS_EF_H2,ELECTRICITY_LV,0.034,Hydrogen from Biomass Gasification Entrained Flow ,Electricity (low voltage)
 BIOMASS_GAS_EF_H2,H2_MP,1.0,Hydrogen from Biomass Gasification Entrained Flow ,Hydrogen (medium pressure)
@@ -78,16 +66,6 @@ BIOMASS_GAS_FB_H2_CCS,CO2_E,-0.107,Hydrogen from Biomass Gasification Fuidized B
 BIOMASS_GAS_FB_H2_CCS,ELECTRICITY_LV,0.064,Hydrogen from Biomass Gasification Fuidized Bed with Carbon Capture,Electricity (low voltage)
 BIOMASS_GAS_FB_H2_CCS,H2_MP,1.0,Hydrogen from Biomass Gasification Fuidized Bed with Carbon Capture,Hydrogen (medium pressure)
 BIOMASS_GAS_FB_H2_CCS,WOOD,-3.06,Hydrogen from Biomass Gasification Fuidized Bed with Carbon Capture,Woody biomass
-BIOMASS_WASTE_BUILDING,CO2_E,-0.388235,,CO2 emission (from nonconcentrated spot sources)
-BIOMASS_WASTE_BUILDING,WOOD,1.0,,Woody biomass
-BIOMASS_WASTE_MUNICIPAL,CO2_E,-0.388235,,CO2 emission (from nonconcentrated spot sources)
-BIOMASS_WASTE_MUNICIPAL,WET_BIOMASS,1.0,,Wet biomass
-BIOMASS_WASTE_ORGANIC,CO2_E,-0.388235,,CO2 emission (from nonconcentrated spot sources)
-BIOMASS_WASTE_ORGANIC,WASTE,1.0,,Waste
-BIOMASS_WASTE_PAPER,CO2_E,-0.388235,,CO2 emission (from nonconcentrated spot sources)
-BIOMASS_WASTE_PAPER,WASTE,1.0,,Waste
-BIOMASS_WASTE_PAPER_FABRIC,CO2_E,-0.388235,,CO2 emission (from nonconcentrated spot sources)
-BIOMASS_WASTE_PAPER_FABRIC,WET_BIOMASS,1.0,,Wet biomass
 BIOMETHANE_TO_BIOMETHANOL,BIO_METHANOL,1.0,Conversion of BioMethane to Methanol,Bio-methanol
 BIOMETHANE_TO_BIOMETHANOL,CO2_A,-0.25,Conversion of BioMethane to Methanol,CO2 emission (from carbon-intensive fields)
 BIOMETHANE_TO_BIOMETHANOL,SNG_MP,-1.4,Conversion of BioMethane to Methanol,Synthetic natural gas (medium pressure)
@@ -271,7 +249,6 @@ CEMENT_PROD_HP,CEMENT,1.0,Cement Production (heat pump),Cement
 CEMENT_PROD_HP,CO2_A,0.185,Cement Production (heat pump),CO2 emission (from carbon-intensive fields)
 CEMENT_PROD_HP,ELECTRICITY_MV,-0.058,Cement Production (heat pump),Electricity (medium voltage)
 CEMENT_PROD_HP,HEAT_HIGH_T,-0.862,Cement Production (heat pump),Heat (high temperature)
-CO2_E,CO2_E,1.0,,CO2 emission (from nonconcentrated spot sources)
 CO2_METHANOL,CO2_C,-0.25,Conversion of CO2 to Methanol,Captured CO2
 CO2_METHANOL,H2_MP,-1.5,Conversion of CO2 to Methanol,Hydrogen (medium pressure)
 CO2_METHANOL,METHANOL,1.0,Conversion of CO2 to Methanol,Methanol
@@ -498,7 +475,6 @@ DHN_HP_ELEC,ELECTRICITY_MV,-0.25,District Heating Network with Heat Pump Electri
 DHN_HP_ELEC,HEAT_LOW_T_DHN,1.0,District Heating Network with Heat Pump Electricity,"Heat (low temperature, district heating network)"
 DHN_RENOVATION,HEAT_LOW_T_DHN,1.0,District Heating Network Renovation,"Heat (low temperature, district heating network)"
 DIESEL,DIESEL,1.0,Diesel,Diesel
-DIESEL_S,DIESEL_S,1.0,,Stored diesel
 DIE_STO,DIESEL,-1.0,Diesel to Storage,Diesel
 DIE_STO,DIESEL_S,1.0,Diesel to Storage,Stored diesel
 DIRECT_USAGE,CO2_C,-1.0,Direct Usage of stored CO2 ,Captured CO2
@@ -510,7 +486,6 @@ DOGR,ELECTRICITY_MV,-0.0001,Deep Oil Reservoir Gas Recovery,Electricity (medium 
 ELECTRICITY_EHV,CO2_E,0.4818,Electricity import,CO2 emission (from nonconcentrated spot sources)
 ELECTRICITY_EHV,ELECTRICITY_EHV,1.0,Electricity import,Electricity (extra high voltage)
 ELEC_EXPORT,ELECTRICITY_EHV,-1.0,Electricity exports,Electricity (extra high voltage)
-ELEC_S,ELEC_S,1.0,,Stored electricity
 ELEC_STO,ELECTRICITY_LV,-1.0,Electricity Storage,Electricity (low voltage)
 ELEC_STO,ELEC_S,1.0,Electricity Storage,Stored electricity
 EOR,CO2_C,-1.0,Enhanced Oil Recovery,Captured CO2
@@ -561,7 +536,6 @@ GASIFICATION_SNG,HEAT_HIGH_T,0.324,Synthetic Natural Gas Production via Gasifica
 GASIFICATION_SNG,SNG_MP,1.0,Synthetic Natural Gas Production via Gasification,Synthetic natural gas (medium pressure)
 GASIFICATION_SNG,WOOD,-1.351,Synthetic Natural Gas Production via Gasification,Woody biomass
 GASOLINE,GASOLINE,1.0,Gasoline,Gasoline
-GASOLINE_S,GASOLINE_S,1.0,,Stored gasoline
 GASO_STO,GASOLINE,-1.0,Gasoline to Storage,Gasoline
 GASO_STO,GASOLINE_S,1.0,Gasoline to Storage,Stored gasoline
 GEOTHERMAL,ELECTRICITY_MV,1.0,Geothermal Energy Utilization,Electricity (medium voltage)
@@ -596,9 +570,6 @@ H2_EXP_ML_COGEN,ELECTRICITY_MV,0.02,Hydrogen Expansion from Medium Pressure to L
 H2_EXP_ML_COGEN,H2_LP,1.0,Hydrogen Expansion from Medium Pressure to Low Pressure (co-generation unit),Hydrogen (low pressure)
 H2_EXP_ML_COGEN,H2_MP,-1.0,Hydrogen Expansion from Medium Pressure to Low Pressure (co-generation unit),Hydrogen (medium pressure)
 H2_EXP_ML_COGEN,HEAT_LOW_T_DECEN,-0.201,Hydrogen Expansion from Medium Pressure to Low Pressure (co-generation unit),"Heat (low temperature, decentralized)"
-H2_HP,H2_HP,1.0,,Hydrogen (high pressure)
-H2_LP,H2_LP,1.0,,Hydrogen (low pressure)
-H2_MP,H2_MP,1.0,,Hydrogen (medium pressure)
 H2_NG_CCGT,CO2_A,0.32,Combined Cycle Gas Turbine Hydrogen and Natural Gas Mix,CO2 emission (from carbon-intensive fields)
 H2_NG_CCGT,ELECTRICITY_HV,1.0,Combined Cycle Gas Turbine Hydrogen and Natural Gas Mix,Electricity (high voltage)
 H2_NG_CCGT,H2_MP,-0.362,Combined Cycle Gas Turbine Hydrogen and Natural Gas Mix,Hydrogen (medium pressure)
@@ -796,9 +767,6 @@ NG_EXP_ML_COGEN,ELECTRICITY_MV,0.02,Natural Gas Expansion from Medium Pressure t
 NG_EXP_ML_COGEN,HEAT_LOW_T_DECEN,-0.02,Natural Gas Expansion from Medium Pressure to Low Pressure (co-generation unit),"Heat (low temperature, decentralized)"
 NG_EXP_ML_COGEN,NG_LP,1.0,Natural Gas Expansion from Medium Pressure to Low Pressure (co-generation unit),Natural gas (low pressure)
 NG_EXP_ML_COGEN,NG_MP,-1.0,Natural Gas Expansion from Medium Pressure to Low Pressure (co-generation unit),Natural gas (medium pressure)
-NG_HP,NG_HP,1.0,,Natural gas (high pressure)
-NG_LP,NG_LP,1.0,,Natural gas (low pressure)
-NG_MP,NG_MP,1.0,,Natural gas (medium pressure)
 NG_PYROLYSIS_PLASMA,H2_MP,1.0,Plasma Natural Gas Pyrolysis,Hydrogen (medium pressure)
 NG_PYROLYSIS_PLASMA,HEAT_HIGH_T,-0.356,Plasma Natural Gas Pyrolysis,Heat (high temperature)
 NG_PYROLYSIS_PLASMA,HEAT_LOW_T_DHN,0.244,Plasma Natural Gas Pyrolysis,"Heat (low temperature, district heating network)"
@@ -810,7 +778,6 @@ NG_PYROLYSIS_THERMAL,NG_MP,-1.902,Thermal Natural Gas Pyrolysis,Natural gas (med
 NG_REFORMING,CO2_A,0.27,Natural Gas Reforming,CO2 emission (from carbon-intensive fields)
 NG_REFORMING,H2_MP,1.0,Natural Gas Reforming,Hydrogen (medium pressure)
 NG_REFORMING,NG_MP,-1.365,Natural Gas Reforming,Natural gas (medium pressure)
-NG_S,NG_S,1.0,,Stored natural gas
 NG_STO,NG_EHP,-1.0,Natural Gas to Storage,Natural gas (extra high pressure)
 NG_STO,NG_S,1.0,Natural Gas to Storage,Stored natural gas
 NUCLEAR,CO2_A,0.011,Nuclear Power Generation,CO2 emission (from carbon-intensive fields)
@@ -887,12 +854,6 @@ PYROLYSIS,BIO_LFO,1.0,Pyrolysis Process,Bio-light fuel oil
 PYROLYSIS,CO2_A,0.322,Pyrolysis Process,CO2 emission (from carbon-intensive fields)
 PYROLYSIS,ELECTRICITY_MV,0.024,Pyrolysis Process,Electricity (medium voltage)
 PYROLYSIS,WOOD,-1.502,Pyrolysis Process,Woody biomass
-RES_GEO,RES_GEO,1.0,,Geothermal resource
-RES_HYDRO,RES_HYDRO,1.0,,Hydro resource
-RES_SOLAR,RES_SOLAR,1.0,,Solar resource
-RES_TIDAL,RES_TIDAL,1.0,,Tidal resource
-RES_WIND_OFFSHORE,RES_WIND_OFFSHORE,1.0,,Wind resource
-RES_WIND_ONSHORE,RES_WIND_ONSHORE,1.0,,Wind resource
 SCHOOLBUS_BIODIESEL_B100,BIO_DIESEL,-0.062,100% BioDiesel-Powered School Bus,Bio-diesel
 SCHOOLBUS_BIODIESEL_B100,CO2_E,0.018,100% BioDiesel-Powered School Bus,CO2 emission (from nonconcentrated spot sources)
 SCHOOLBUS_BIODIESEL_B100,MOB_PUBLIC_SD,1.0,100% BioDiesel-Powered School Bus,Public mobility
@@ -1041,7 +1002,6 @@ SNG_PYROLYSIS_THERMAL,SNG_MP,-1.902,Thermal Synthetic Natural Gas Pyrolysis,Synt
 SNG_REFORMING,CO2_A,0.27,Synthetic Natural Gas Reforming,CO2 emission (from carbon-intensive fields)
 SNG_REFORMING,H2_MP,1.0,Synthetic Natural Gas Reforming,Hydrogen (medium pressure)
 SNG_REFORMING,SNG_MP,-1.365,Synthetic Natural Gas Reforming,Synthetic natural gas (medium pressure)
-SNG_S,SNG_S,1.0,,Stored synthetic natural gas
 SNG_STO,SNG_EHP,-1.0,Synthetic Natural Gas to Storage,Synthetic natural gas (extra high pressure)
 SNG_STO,SNG_S,1.0,Synthetic Natural Gas to Storage,Stored synthetic natural gas
 SOEC_ELECTROLYSIS,ELECTRICITY_HV,-1.25,Solid Oxide Electrolysis Cell Electrolysis,Electricity (high voltage)
@@ -1070,8 +1030,6 @@ STO_H2,H2_EHP,1.0,Storage to Hydrogen,Hydrogen (extra high pressure)
 STO_H2,H2_S,-1.0,Storage to Hydrogen,Stored hydrogen
 STO_NG,NG_EHP,1.0,Storage to Natural Gas,Natural gas (extra high pressure)
 STO_NG,NG_S,-1.0,Storage to Natural Gas,Stored natural gas
-STO_SNG,SNG_EHP,1.0,,Synthetic natural gas (extra high pressure)
-STO_SNG,SNG_S,-1.0,,Stored synthetic natural gas
 STYRENE,STYRENE,1.0,Styrene,Styrene
 STYRENE_POLYMERIZATION,CO2_A,0.003,Styrene Polymerization Process,CO2 emission (from carbon-intensive fields)
 STYRENE_POLYMERIZATION,PS,1.0,Styrene Polymerization Process,Polystyrene
