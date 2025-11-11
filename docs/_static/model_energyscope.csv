@@ -91,142 +91,91 @@ BIO_ETHANOL,BIO_ETHANOL,1.0,Bio-ethanol,Bio-ethanol
 BIO_ETHANOL,CO2_E,-0.2579384463,Bio-ethanol,CO2 emission (from nonconcentrated spot sources)
 BUS_BIODIESEL_B100,BIO_DIESEL,-0.391,100% BioDiesel-Powered Bus,Bio-diesel
 BUS_BIODIESEL_B100,CO2_E,0.112,100% BioDiesel-Powered Bus,CO2 emission (from nonconcentrated spot sources)
-BUS_BIODIESEL_B100,MOB_PUBLIC_SD,1.0,100% BioDiesel-Powered Bus,Public mobility
+BUS_BIODIESEL_B100,MOB_PUBLIC,1.0,100% BioDiesel-Powered Bus,Public mobility
 BUS_BIODIESEL_B20,BIO_DIESEL,-0.078,20% BioDiesel-Powered Bus,Bio-diesel
 BUS_BIODIESEL_B20,CO2_E,0.111,20% BioDiesel-Powered Bus,CO2 emission (from nonconcentrated spot sources)
 BUS_BIODIESEL_B20,DIESEL,-0.313,20% BioDiesel-Powered Bus,Diesel
-BUS_BIODIESEL_B20,MOB_PUBLIC_SD,1.0,20% BioDiesel-Powered Bus,Public mobility
+BUS_BIODIESEL_B20,MOB_PUBLIC,1.0,20% BioDiesel-Powered Bus,Public mobility
 BUS_CNG,CO2_E,0.095,Compressed Natural Gas-Powered Bus,CO2 emission (from nonconcentrated spot sources)
-BUS_CNG,MOB_PUBLIC_SD,1.0,Compressed Natural Gas-Powered Bus,Public mobility
+BUS_CNG,MOB_PUBLIC,1.0,Compressed Natural Gas-Powered Bus,Public mobility
 BUS_CNG,NG_HP,-0.458,Compressed Natural Gas-Powered Bus,Natural gas (high pressure)
 BUS_CSNG,CO2_E,0.095,Compressed Synthetic Natural Gas-Powered Bus,CO2 emission (from nonconcentrated spot sources)
-BUS_CSNG,MOB_PUBLIC_SD,1.0,Compressed Synthetic Natural Gas-Powered Bus,Public mobility
+BUS_CSNG,MOB_PUBLIC,1.0,Compressed Synthetic Natural Gas-Powered Bus,Public mobility
 BUS_CSNG,SNG_HP,-0.458,Compressed Synthetic Natural Gas-Powered Bus,Synthetic natural gas (high pressure)
 BUS_DIESEL,CO2_E,0.111,Diesel-Powered Bus,CO2 emission (from nonconcentrated spot sources)
 BUS_DIESEL,DIESEL,-0.391,Diesel-Powered Bus,Diesel
-BUS_DIESEL,MOB_PUBLIC_SD,1.0,Diesel-Powered Bus,Public mobility
+BUS_DIESEL,MOB_PUBLIC,1.0,Diesel-Powered Bus,Public mobility
 BUS_EV,ELECTRICITY_MV,-0.153,Electric-Powered Bus,Electricity (medium voltage)
-BUS_EV,MOB_PUBLIC_SD,1.0,Electric-Powered Bus,Public mobility
+BUS_EV,MOB_PUBLIC,1.0,Electric-Powered Bus,Public mobility
 BUS_FC_H2,H2_HP,-0.229,Hydrogen Fuel Cell-Powered Bus,Hydrogen (high pressure)
-BUS_FC_H2,MOB_PUBLIC_SD,1.0,Hydrogen Fuel Cell-Powered Bus,Public mobility
+BUS_FC_H2,MOB_PUBLIC,1.0,Hydrogen Fuel Cell-Powered Bus,Public mobility
 BUS_GASOLINE,CO2_E,0.111,Gasoline-Powered Bus,CO2 emission (from nonconcentrated spot sources)
 BUS_GASOLINE,GASOLINE,-0.472,Gasoline-Powered Bus,Gasoline
-BUS_GASOLINE,MOB_PUBLIC_SD,1.0,Gasoline-Powered Bus,Public mobility
+BUS_GASOLINE,MOB_PUBLIC,1.0,Gasoline-Powered Bus,Public mobility
 BUS_HY_DIESEL,CO2_E,0.08,Diesel Hybrid Bus,CO2 emission (from nonconcentrated spot sources)
 BUS_HY_DIESEL,DIESEL,-0.281,Diesel Hybrid Bus,Diesel
-BUS_HY_DIESEL,MOB_PUBLIC_SD,1.0,Diesel Hybrid Bus,Public mobility
+BUS_HY_DIESEL,MOB_PUBLIC,1.0,Diesel Hybrid Bus,Public mobility
 BUS_PROPANE,CO2_E,0.111,Propane-Powered Bus,CO2 emission (from nonconcentrated spot sources)
-BUS_PROPANE,MOB_PUBLIC_SD,1.0,Propane-Powered Bus,Public mobility
+BUS_PROPANE,MOB_PUBLIC,1.0,Propane-Powered Bus,Public mobility
 BUS_PROPANE,PROPANE,-0.472,Propane-Powered Bus,Propane
 CAR_BIODIESEL_B100,BIO_DIESEL,-0.441,100% BioDiesel-Powered Car,Bio-diesel
 CAR_BIODIESEL_B100,CO2_E,0.108,100% BioDiesel-Powered Car,CO2 emission (from nonconcentrated spot sources)
-CAR_BIODIESEL_B100,MOB_PRIVATE_ELD,1.0,100% BioDiesel-Powered Car,Private mobility
-CAR_BIODIESEL_B100,MOB_PRIVATE_LD,1.0,100% BioDiesel-Powered Car,Private mobility
-CAR_BIODIESEL_B100,MOB_PRIVATE_MD,1.0,100% BioDiesel-Powered Car,Private mobility
-CAR_BIODIESEL_B100,MOB_PRIVATE_SD,1.0,100% BioDiesel-Powered Car,Private mobility
+CAR_BIODIESEL_B100,MOB_PRIVATE,1.0,100% BioDiesel-Powered Car,Private mobility
 CAR_BIODIESEL_B20,BIO_DIESEL,-0.088,20% BioDiesel-Powered Car,Bio-diesel
 CAR_BIODIESEL_B20,CO2_E,0.107,20% BioDiesel-Powered Car,CO2 emission (from nonconcentrated spot sources)
 CAR_BIODIESEL_B20,DIESEL,-0.353,20% BioDiesel-Powered Car,Diesel
-CAR_BIODIESEL_B20,MOB_PRIVATE_ELD,1.0,20% BioDiesel-Powered Car,Private mobility
-CAR_BIODIESEL_B20,MOB_PRIVATE_LD,1.0,20% BioDiesel-Powered Car,Private mobility
-CAR_BIODIESEL_B20,MOB_PRIVATE_MD,1.0,20% BioDiesel-Powered Car,Private mobility
-CAR_BIODIESEL_B20,MOB_PRIVATE_SD,1.0,20% BioDiesel-Powered Car,Private mobility
+CAR_BIODIESEL_B20,MOB_PRIVATE,1.0,20% BioDiesel-Powered Car,Private mobility
 CAR_BIOETOH_E10,BIO_ETHANOL,-0.053,BioEthanol-Powered Car (E10 Blend),Bio-ethanol
 CAR_BIOETOH_E10,CO2_E,0.124,BioEthanol-Powered Car (E10 Blend),CO2 emission (from nonconcentrated spot sources)
 CAR_BIOETOH_E10,GASOLINE,-0.476,BioEthanol-Powered Car (E10 Blend),Gasoline
-CAR_BIOETOH_E10,MOB_PRIVATE_ELD,1.0,BioEthanol-Powered Car (E10 Blend),Private mobility
-CAR_BIOETOH_E10,MOB_PRIVATE_LD,1.0,BioEthanol-Powered Car (E10 Blend),Private mobility
-CAR_BIOETOH_E10,MOB_PRIVATE_MD,1.0,BioEthanol-Powered Car (E10 Blend),Private mobility
-CAR_BIOETOH_E10,MOB_PRIVATE_SD,1.0,BioEthanol-Powered Car (E10 Blend),Private mobility
+CAR_BIOETOH_E10,MOB_PRIVATE,1.0,BioEthanol-Powered Car (E10 Blend),Private mobility
 CAR_BIOETOH_E85,BIO_ETHANOL,-0.45,BioEthanol-Powered Car with E85 Blend,Bio-ethanol
 CAR_BIOETOH_E85,CO2_E,0.114,BioEthanol-Powered Car with E85 Blend,CO2 emission (from nonconcentrated spot sources)
 CAR_BIOETOH_E85,GASOLINE,-0.079,BioEthanol-Powered Car with E85 Blend,Gasoline
-CAR_BIOETOH_E85,MOB_PRIVATE_ELD,1.0,BioEthanol-Powered Car with E85 Blend,Private mobility
-CAR_BIOETOH_E85,MOB_PRIVATE_LD,1.0,BioEthanol-Powered Car with E85 Blend,Private mobility
-CAR_BIOETOH_E85,MOB_PRIVATE_MD,1.0,BioEthanol-Powered Car with E85 Blend,Private mobility
-CAR_BIOETOH_E85,MOB_PRIVATE_SD,1.0,BioEthanol-Powered Car with E85 Blend,Private mobility
+CAR_BIOETOH_E85,MOB_PRIVATE,1.0,BioEthanol-Powered Car with E85 Blend,Private mobility
 CAR_BIOMEOH,BIO_METHANOL,-0.05,Biomethanol-Powered Car ,Bio-methanol
 CAR_BIOMEOH,CO2_E,0.111,Biomethanol-Powered Car ,CO2 emission (from nonconcentrated spot sources)
 CAR_BIOMEOH,GASOLINE,-0.39,Biomethanol-Powered Car ,Gasoline
-CAR_BIOMEOH,MOB_PRIVATE_ELD,1.0,Biomethanol-Powered Car ,Private mobility
-CAR_BIOMEOH,MOB_PRIVATE_LD,1.0,Biomethanol-Powered Car ,Private mobility
-CAR_BIOMEOH,MOB_PRIVATE_MD,1.0,Biomethanol-Powered Car ,Private mobility
-CAR_BIOMEOH,MOB_PRIVATE_SD,1.0,Biomethanol-Powered Car ,Private mobility
+CAR_BIOMEOH,MOB_PRIVATE,1.0,Biomethanol-Powered Car ,Private mobility
 CAR_CNG,CO2_E,0.101,Compressed Natural Gas-Powered Car,CO2 emission (from nonconcentrated spot sources)
-CAR_CNG,MOB_PRIVATE_ELD,1.0,Compressed Natural Gas-Powered Car,Private mobility
+CAR_CNG,MOB_PRIVATE,1.0,Compressed Natural Gas-Powered Car,Private mobility
 CAR_CNG,NG_HP,-0.599,Compressed Natural Gas-Powered Car,Natural gas (high pressure)
-CAR_CNG,MOB_PRIVATE_LD,1.0,Compressed Natural Gas-Powered Car,Private mobility
-CAR_CNG,MOB_PRIVATE_MD,1.0,Compressed Natural Gas-Powered Car,Private mobility
-CAR_CNG,MOB_PRIVATE_SD,1.0,Compressed Natural Gas-Powered Car,Private mobility
 CAR_CSNG,CO2_E,0.101,Compressed Synthetic Natural Gas-Powered Car,CO2 emission (from nonconcentrated spot sources)
-CAR_CSNG,MOB_PRIVATE_ELD,1.0,Compressed Synthetic Natural Gas-Powered Car,Private mobility
+CAR_CSNG,MOB_PRIVATE,1.0,Compressed Synthetic Natural Gas-Powered Car,Private mobility
 CAR_CSNG,SNG_HP,-0.599,Compressed Synthetic Natural Gas-Powered Car,Synthetic natural gas (high pressure)
-CAR_CSNG,MOB_PRIVATE_LD,1.0,Compressed Synthetic Natural Gas-Powered Car,Private mobility
-CAR_CSNG,MOB_PRIVATE_MD,1.0,Compressed Synthetic Natural Gas-Powered Car,Private mobility
-CAR_CSNG,MOB_PRIVATE_SD,1.0,Compressed Synthetic Natural Gas-Powered Car,Private mobility
 CAR_DIESEL,CO2_E,0.112,Diesel-Powered Car,CO2 emission (from nonconcentrated spot sources)
 CAR_DIESEL,DIESEL,-0.423,Diesel-Powered Car,Diesel
-CAR_DIESEL,MOB_PRIVATE_ELD,1.0,Diesel-Powered Car,Private mobility
-CAR_DIESEL,MOB_PRIVATE_LD,1.0,Diesel-Powered Car,Private mobility
-CAR_DIESEL,MOB_PRIVATE_MD,1.0,Diesel-Powered Car,Private mobility
-CAR_DIESEL,MOB_PRIVATE_SD,1.0,Diesel-Powered Car,Private mobility
+CAR_DIESEL,MOB_PRIVATE,1.0,Diesel-Powered Car,Private mobility
 CAR_ETOH_E10,CO2_E,0.124,Ethanol-Powered Car (E10 Blend),CO2 emission (from nonconcentrated spot sources)
 CAR_ETOH_E10,ETHANOL,-0.053,Ethanol-Powered Car (E10 Blend),Ethanol
 CAR_ETOH_E10,GASOLINE,-0.476,Ethanol-Powered Car (E10 Blend),Gasoline
-CAR_ETOH_E10,MOB_PRIVATE_ELD,1.0,Ethanol-Powered Car (E10 Blend),Private mobility
-CAR_ETOH_E10,MOB_PRIVATE_LD,1.0,Ethanol-Powered Car (E10 Blend),Private mobility
-CAR_ETOH_E10,MOB_PRIVATE_MD,1.0,Ethanol-Powered Car (E10 Blend),Private mobility
-CAR_ETOH_E10,MOB_PRIVATE_SD,1.0,Ethanol-Powered Car (E10 Blend),Private mobility
+CAR_ETOH_E10,MOB_PRIVATE,1.0,Ethanol-Powered Car (E10 Blend),Private mobility
 CAR_ETOH_E85,CO2_E,0.114,Ethanol-Powered Car with E85 Blend,CO2 emission (from nonconcentrated spot sources)
 CAR_ETOH_E85,ETHANOL,-0.45,Ethanol-Powered Car with E85 Blend,Ethanol
 CAR_ETOH_E85,GASOLINE,-0.079,Ethanol-Powered Car with E85 Blend,Gasoline
-CAR_ETOH_E85,MOB_PRIVATE_ELD,1.0,Ethanol-Powered Car with E85 Blend,Private mobility
-CAR_ETOH_E85,MOB_PRIVATE_LD,1.0,Ethanol-Powered Car with E85 Blend,Private mobility
-CAR_ETOH_E85,MOB_PRIVATE_MD,1.0,Ethanol-Powered Car with E85 Blend,Private mobility
-CAR_ETOH_E85,MOB_PRIVATE_SD,1.0,Ethanol-Powered Car with E85 Blend,Private mobility
+CAR_ETOH_E85,MOB_PRIVATE,1.0,Ethanol-Powered Car with E85 Blend,Private mobility
 CAR_EV,ELECTRICITY_MV,-0.192,Electric-Powered Car,Electricity (medium voltage)
-CAR_EV,MOB_PRIVATE_ELD,1.0,Electric-Powered Car,Private mobility
-CAR_EV,MOB_PRIVATE_LD,1.0,Electric-Powered Car,Private mobility
-CAR_EV,MOB_PRIVATE_MD,1.0,Electric-Powered Car,Private mobility
-CAR_EV,MOB_PRIVATE_SD,1.0,Electric-Powered Car,Private mobility
+CAR_EV,MOB_PRIVATE,1.0,Electric-Powered Car,Private mobility
 CAR_FC_H2,CO2_E,0.022,Fuel Cell-Powered Car with Hydrogen,CO2 emission (from nonconcentrated spot sources)
 CAR_FC_H2,H2_HP,-0.256,Fuel Cell-Powered Car with Hydrogen,Hydrogen (high pressure)
-CAR_FC_H2,MOB_PRIVATE_ELD,1.0,Fuel Cell-Powered Car with Hydrogen,Private mobility
-CAR_FC_H2,MOB_PRIVATE_LD,1.0,Fuel Cell-Powered Car with Hydrogen,Private mobility
-CAR_FC_H2,MOB_PRIVATE_MD,1.0,Fuel Cell-Powered Car with Hydrogen,Private mobility
-CAR_FC_H2,MOB_PRIVATE_SD,1.0,Fuel Cell-Powered Car with Hydrogen,Private mobility
+CAR_FC_H2,MOB_PRIVATE,1.0,Fuel Cell-Powered Car with Hydrogen,Private mobility
 CAR_GASOLINE,CO2_E,0.116,Gasoline-Powered Car,CO2 emission (from nonconcentrated spot sources)
 CAR_GASOLINE,GASOLINE,-0.426,Gasoline-Powered Car,Gasoline
-CAR_GASOLINE,MOB_PRIVATE_ELD,1.0,Gasoline-Powered Car,Private mobility
-CAR_GASOLINE,MOB_PRIVATE_LD,1.0,Gasoline-Powered Car,Private mobility
-CAR_GASOLINE,MOB_PRIVATE_MD,1.0,Gasoline-Powered Car,Private mobility
-CAR_GASOLINE,MOB_PRIVATE_SD,1.0,Gasoline-Powered Car,Private mobility
+CAR_GASOLINE,MOB_PRIVATE,1.0,Gasoline-Powered Car,Private mobility
 CAR_HEV,CO2_E,0.09,Hybrid Electric Car,CO2 emission (from nonconcentrated spot sources)
 CAR_HEV,GASOLINE,-0.381,Hybrid Electric Car,Gasoline
-CAR_HEV,MOB_PRIVATE_ELD,1.0,Hybrid Electric Car,Private mobility
-CAR_HEV,MOB_PRIVATE_LD,1.0,Hybrid Electric Car,Private mobility
-CAR_HEV,MOB_PRIVATE_MD,1.0,Hybrid Electric Car,Private mobility
-CAR_HEV,MOB_PRIVATE_SD,1.0,Hybrid Electric Car,Private mobility
+CAR_HEV,MOB_PRIVATE,1.0,Hybrid Electric Car,Private mobility
 CAR_MEOH,CO2_E,0.111,Methanol-Powered Car ,CO2 emission (from nonconcentrated spot sources)
 CAR_MEOH,GASOLINE,-0.39,Methanol-Powered Car ,Gasoline
 CAR_MEOH,METHANOL,-0.05,Methanol-Powered Car ,Methanol
-CAR_MEOH,MOB_PRIVATE_ELD,1.0,Methanol-Powered Car ,Private mobility
-CAR_MEOH,MOB_PRIVATE_LD,1.0,Methanol-Powered Car ,Private mobility
-CAR_MEOH,MOB_PRIVATE_MD,1.0,Methanol-Powered Car ,Private mobility
-CAR_MEOH,MOB_PRIVATE_SD,1.0,Methanol-Powered Car ,Private mobility
+CAR_MEOH,MOB_PRIVATE,1.0,Methanol-Powered Car ,Private mobility
 CAR_PHEV,CO2_E,0.052,Plug-in Hybrid Electric Car,CO2 emission (from nonconcentrated spot sources)
 CAR_PHEV,ELECTRICITY_MV,-0.112,Plug-in Hybrid Electric Car,Electricity (medium voltage)
 CAR_PHEV,GASOLINE,-0.222,Plug-in Hybrid Electric Car,Gasoline
-CAR_PHEV,MOB_PRIVATE_ELD,1.0,Plug-in Hybrid Electric Car,Private mobility
-CAR_PHEV,MOB_PRIVATE_LD,1.0,Plug-in Hybrid Electric Car,Private mobility
-CAR_PHEV,MOB_PRIVATE_MD,1.0,Plug-in Hybrid Electric Car,Private mobility
-CAR_PHEV,MOB_PRIVATE_SD,1.0,Plug-in Hybrid Electric Car,Private mobility
+CAR_PHEV,MOB_PRIVATE,1.0,Plug-in Hybrid Electric Car,Private mobility
 CAR_PROPANE,CO2_E,0.11,Propane-Powered Car,CO2 emission (from nonconcentrated spot sources)
-CAR_PROPANE,MOB_PRIVATE_ELD,1.0,Propane-Powered Car,Private mobility
+CAR_PROPANE,MOB_PRIVATE,1.0,Propane-Powered Car,Private mobility
 CAR_PROPANE,PROPANE,-0.529,Propane-Powered Car,Propane
-CAR_PROPANE,MOB_PRIVATE_LD,1.0,Propane-Powered Car,Private mobility
-CAR_PROPANE,MOB_PRIVATE_MD,1.0,Propane-Powered Car,Private mobility
-CAR_PROPANE,MOB_PRIVATE_SD,1.0,Propane-Powered Car,Private mobility
 CCGT,CO2_A,0.314,Combined Cycle Gas Turbine,CO2 emission (from carbon-intensive fields)
 CCGT,ELECTRICITY_HV,1.0,Combined Cycle Gas Turbine,Electricity (high voltage)
 CCGT,NG_HP,-1.587,Combined Cycle Gas Turbine,Natural gas (high pressure)
@@ -266,61 +215,39 @@ CO2_TO_JETFUELS,H2_MP,-1.19,Conversion of CO2 to Jet Fuels,Hydrogen (medium pres
 CO2_TO_JETFUELS,WET_BIOMASS,-3.413,Conversion of CO2 to Jet Fuels,Wet biomass
 COACH_BIODIESEL_B100,BIO_DIESEL,-0.122,100% BioDiesel-Powered Coach,Bio-diesel
 COACH_BIODIESEL_B100,CO2_E,0.024,100% BioDiesel-Powered Coach,CO2 emission (from nonconcentrated spot sources)
-COACH_BIODIESEL_B100,MOB_PUBLIC_ELD,1.0,100% BioDiesel-Powered Coach,Public mobility
-COACH_BIODIESEL_B100,MOB_PUBLIC_LD,1.0,100% BioDiesel-Powered Coach,Public mobility
-COACH_BIODIESEL_B100,MOB_PUBLIC_MD,1.0,100% BioDiesel-Powered Coach,Public mobility
+COACH_BIODIESEL_B100,MOB_PUBLIC,1.0,100% BioDiesel-Powered Coach,Public mobility
 COACH_BIODIESEL_B20,BIO_DIESEL,-0.024,20% BioDiesel-Powered Coach,Bio-diesel
 COACH_BIODIESEL_B20,CO2_E,0.024,20% BioDiesel-Powered Coach,CO2 emission (from nonconcentrated spot sources)
 COACH_BIODIESEL_B20,DIESEL,-0.097,20% BioDiesel-Powered Coach,Diesel
-COACH_BIODIESEL_B20,MOB_PUBLIC_ELD,1.0,20% BioDiesel-Powered Coach,Public mobility
-COACH_BIODIESEL_B20,MOB_PUBLIC_LD,1.0,20% BioDiesel-Powered Coach,Public mobility
-COACH_BIODIESEL_B20,MOB_PUBLIC_MD,1.0,20% BioDiesel-Powered Coach,Public mobility
+COACH_BIODIESEL_B20,MOB_PUBLIC,1.0,20% BioDiesel-Powered Coach,Public mobility
 COACH_BIOETOH_E10,BIO_ETHANOL,-0.016,10% BioEthanol-Powered Coach,Bio-ethanol
 COACH_BIOETOH_E10,CO2_E,0.039,10% BioEthanol-Powered Coach,CO2 emission (from nonconcentrated spot sources)
 COACH_BIOETOH_E10,GASOLINE,-0.148,10% BioEthanol-Powered Coach,Gasoline
-COACH_BIOETOH_E10,MOB_PUBLIC_ELD,1.0,10% BioEthanol-Powered Coach,Public mobility
-COACH_BIOETOH_E10,MOB_PUBLIC_LD,1.0,10% BioEthanol-Powered Coach,Public mobility
-COACH_BIOETOH_E10,MOB_PUBLIC_MD,1.0,10% BioEthanol-Powered Coach,Public mobility
+COACH_BIOETOH_E10,MOB_PUBLIC,1.0,10% BioEthanol-Powered Coach,Public mobility
 COACH_CNG,CO2_E,0.019,Compressed Natural Gas-Powered Coach,CO2 emission (from nonconcentrated spot sources)
-COACH_CNG,MOB_PUBLIC_ELD,1.0,Compressed Natural Gas-Powered Coach,Public mobility
+COACH_CNG,MOB_PUBLIC,1.0,Compressed Natural Gas-Powered Coach,Public mobility
 COACH_CNG,NG_HP,-0.11,Compressed Natural Gas-Powered Coach,Natural gas (high pressure)
-COACH_CNG,MOB_PUBLIC_LD,1.0,Compressed Natural Gas-Powered Coach,Public mobility
-COACH_CNG,MOB_PUBLIC_MD,1.0,Compressed Natural Gas-Powered Coach,Public mobility
 COACH_CSNG,CO2_E,0.019,Compressed Synthetic Natural Gas-Powered Coach,CO2 emission (from nonconcentrated spot sources)
-COACH_CSNG,MOB_PUBLIC_ELD,1.0,Compressed Synthetic Natural Gas-Powered Coach,Public mobility
+COACH_CSNG,MOB_PUBLIC,1.0,Compressed Synthetic Natural Gas-Powered Coach,Public mobility
 COACH_CSNG,SNG_HP,-0.11,Compressed Synthetic Natural Gas-Powered Coach,Synthetic natural gas (high pressure)
-COACH_CSNG,MOB_PUBLIC_LD,1.0,Compressed Synthetic Natural Gas-Powered Coach,Public mobility
-COACH_CSNG,MOB_PUBLIC_MD,1.0,Compressed Synthetic Natural Gas-Powered Coach,Public mobility
 COACH_DIESEL,CO2_E,0.024,Diesel-Powered Coach,CO2 emission (from nonconcentrated spot sources)
 COACH_DIESEL,DIESEL,-0.122,Diesel-Powered Coach,Diesel
-COACH_DIESEL,MOB_PUBLIC_ELD,1.0,Diesel-Powered Coach,Public mobility
-COACH_DIESEL,MOB_PUBLIC_LD,1.0,Diesel-Powered Coach,Public mobility
-COACH_DIESEL,MOB_PUBLIC_MD,1.0,Diesel-Powered Coach,Public mobility
+COACH_DIESEL,MOB_PUBLIC,1.0,Diesel-Powered Coach,Public mobility
 COACH_ETOH_E10,CO2_E,0.039,10% Ethanol-Powered Coach,CO2 emission (from nonconcentrated spot sources)
 COACH_ETOH_E10,ETHANOL,-0.016,10% Ethanol-Powered Coach,Ethanol
 COACH_ETOH_E10,GASOLINE,-0.148,10% Ethanol-Powered Coach,Gasoline
-COACH_ETOH_E10,MOB_PUBLIC_ELD,1.0,10% Ethanol-Powered Coach,Public mobility
-COACH_ETOH_E10,MOB_PUBLIC_LD,1.0,10% Ethanol-Powered Coach,Public mobility
-COACH_ETOH_E10,MOB_PUBLIC_MD,1.0,10% Ethanol-Powered Coach,Public mobility
+COACH_ETOH_E10,MOB_PUBLIC,1.0,10% Ethanol-Powered Coach,Public mobility
 COACH_EV,ELECTRICITY_MV,-0.036,Electric-Powered Coach,Electricity (medium voltage)
-COACH_EV,MOB_PUBLIC_ELD,1.0,Electric-Powered Coach,Public mobility
-COACH_EV,MOB_PUBLIC_LD,1.0,Electric-Powered Coach,Public mobility
-COACH_EV,MOB_PUBLIC_MD,1.0,Electric-Powered Coach,Public mobility
+COACH_EV,MOB_PUBLIC,1.0,Electric-Powered Coach,Public mobility
 COACH_GASOLINE,CO2_E,0.039,Gasoline-Powered Coach,CO2 emission (from nonconcentrated spot sources)
 COACH_GASOLINE,GASOLINE,-0.165,Gasoline-Powered Coach,Gasoline
-COACH_GASOLINE,MOB_PUBLIC_ELD,1.0,Gasoline-Powered Coach,Public mobility
-COACH_GASOLINE,MOB_PUBLIC_LD,1.0,Gasoline-Powered Coach,Public mobility
-COACH_GASOLINE,MOB_PUBLIC_MD,1.0,Gasoline-Powered Coach,Public mobility
+COACH_GASOLINE,MOB_PUBLIC,1.0,Gasoline-Powered Coach,Public mobility
 COACH_HY_DIESEL,CO2_E,0.048,Diesel Hybrid Coach,CO2 emission (from nonconcentrated spot sources)
 COACH_HY_DIESEL,DIESEL,-0.183,Diesel Hybrid Coach,Diesel
-COACH_HY_DIESEL,MOB_PUBLIC_ELD,1.0,Diesel Hybrid Coach,Public mobility
-COACH_HY_DIESEL,MOB_PUBLIC_LD,1.0,Diesel Hybrid Coach,Public mobility
-COACH_HY_DIESEL,MOB_PUBLIC_MD,1.0,Diesel Hybrid Coach,Public mobility
+COACH_HY_DIESEL,MOB_PUBLIC,1.0,Diesel Hybrid Coach,Public mobility
 COACH_PROPANE,CO2_E,0.039,Propane-Powered Coach,CO2 emission (from nonconcentrated spot sources)
-COACH_PROPANE,MOB_PUBLIC_ELD,1.0,Propane-Powered Coach,Public mobility
+COACH_PROPANE,MOB_PUBLIC,1.0,Propane-Powered Coach,Public mobility
 COACH_PROPANE,PROPANE,-0.165,Propane-Powered Coach,Propane
-COACH_PROPANE,MOB_PUBLIC_LD,1.0,Propane-Powered Coach,Public mobility
-COACH_PROPANE,MOB_PUBLIC_MD,1.0,Propane-Powered Coach,Public mobility
 COAL,COAL,1.0,Coal,Coal
 COAL_GAS_H2,CO2_A,0.656,Hydrogen from Coal Gasification,CO2 emission (from carbon-intensive fields)
 COAL_GAS_H2,COAL,-1.635,Hydrogen from Coal Gasification,Coal
@@ -356,9 +283,9 @@ COAL_US_CC,COAL,-1.985,Coal Ultra-Supercritical with Carbon Capture,Coal
 COAL_US_CC,ELECTRICITY_HV,1.0,Coal Ultra-Supercritical with Carbon Capture,Electricity (high voltage)
 COMMUTER_RAIL_DIESEL,CO2_E,0.102,Diesel-Powered Commuter Train,CO2 emission (from nonconcentrated spot sources)
 COMMUTER_RAIL_DIESEL,DIESEL,-0.27,Diesel-Powered Commuter Train,Diesel
-COMMUTER_RAIL_DIESEL,MOB_PUBLIC_MD,1.0,Diesel-Powered Commuter Train,Public mobility
+COMMUTER_RAIL_DIESEL,MOB_PUBLIC,1.0,Diesel-Powered Commuter Train,Public mobility
 COMMUTER_RAIL_ELEC,ELECTRICITY_HV,-0.092,Electric-Powered Commuter Train,Electricity (high voltage)
-COMMUTER_RAIL_ELEC,MOB_PUBLIC_MD,1.0,Electric-Powered Commuter Train,Public mobility
+COMMUTER_RAIL_ELEC,MOB_PUBLIC,1.0,Electric-Powered Commuter Train,Public mobility
 CROPS_TO_ETHANOL,BIO_ETHANOL,1.0,Conversion of Crops to Ethanol,Bio-ethanol
 CROPS_TO_ETHANOL,CO2_A,0.154,Conversion of Crops to Ethanol,CO2 emission (from carbon-intensive fields)
 CROPS_TO_ETHANOL,WET_BIOMASS,-1.786,Conversion of Crops to Ethanol,Wet biomass
@@ -659,44 +586,34 @@ IND_HP_ELEC,HEAT_HIGH_T,1.0,Industrial Heat Pump Electricity Usage,Heat (high te
 JETFUEL,JETFUEL,1.0,Jetfuel,Jet fuel
 LCV_BIODIESEL_B100,BIO_DIESEL,-1.256,100% BioDiesel-Powered Light Commercial Vehicle,Bio-diesel
 LCV_BIODIESEL_B100,CO2_E,0.332,100% BioDiesel-Powered Light Commercial Vehicle,CO2 emission (from nonconcentrated spot sources)
-LCV_BIODIESEL_B100,MOB_FREIGHT_MD,1.0,100% BioDiesel-Powered Light Commercial Vehicle,Freight mobility
-LCV_BIODIESEL_B100,MOB_FREIGHT_SD,1.0,100% BioDiesel-Powered Light Commercial Vehicle,Freight mobility
+LCV_BIODIESEL_B100,MOB_FREIGHT,1.0,100% BioDiesel-Powered Light Commercial Vehicle,Freight mobility
 LCV_BIODIESEL_B20,BIO_DIESEL,-0.251,20% BioDiesel-Powered Light Commercial Vehicle,Bio-diesel
 LCV_BIODIESEL_B20,CO2_E,0.332,20% BioDiesel-Powered Light Commercial Vehicle,CO2 emission (from nonconcentrated spot sources)
 LCV_BIODIESEL_B20,DIESEL,-1.005,20% BioDiesel-Powered Light Commercial Vehicle,Diesel
-LCV_BIODIESEL_B20,MOB_FREIGHT_MD,1.0,20% BioDiesel-Powered Light Commercial Vehicle,Freight mobility
-LCV_BIODIESEL_B20,MOB_FREIGHT_SD,1.0,20% BioDiesel-Powered Light Commercial Vehicle,Freight mobility
+LCV_BIODIESEL_B20,MOB_FREIGHT,1.0,20% BioDiesel-Powered Light Commercial Vehicle,Freight mobility
 LCV_CNG,CO2_E,0.33,Compressed Natural Gas-Powered Light Commercial Vehicle,CO2 emission (from nonconcentrated spot sources)
-LCV_CNG,MOB_FREIGHT_MD,1.0,Compressed Natural Gas-Powered Light Commercial Vehicle,Freight mobility
+LCV_CNG,MOB_FREIGHT,1.0,Compressed Natural Gas-Powered Light Commercial Vehicle,Freight mobility
 LCV_CNG,NG_HP,-1.918,Compressed Natural Gas-Powered Light Commercial Vehicle,Natural gas (high pressure)
-LCV_CNG,MOB_FREIGHT_SD,1.0,Compressed Natural Gas-Powered Light Commercial Vehicle,Freight mobility
 LCV_CSNG,CO2_E,0.33,Compressed Synthetic Natural Gas-Powered Light Commercial Vehicle,CO2 emission (from nonconcentrated spot sources)
-LCV_CSNG,MOB_FREIGHT_MD,1.0,Compressed Synthetic Natural Gas-Powered Light Commercial Vehicle,Freight mobility
+LCV_CSNG,MOB_FREIGHT,1.0,Compressed Synthetic Natural Gas-Powered Light Commercial Vehicle,Freight mobility
 LCV_CSNG,SNG_HP,-1.918,Compressed Synthetic Natural Gas-Powered Light Commercial Vehicle,Synthetic natural gas (high pressure)
-LCV_CSNG,MOB_FREIGHT_SD,1.0,Compressed Synthetic Natural Gas-Powered Light Commercial Vehicle,Freight mobility
 LCV_DIESEL,CO2_E,0.332,Diesel-Powered Light Commercial Vehicle,CO2 emission (from nonconcentrated spot sources)
 LCV_DIESEL,DIESEL,-1.256,Diesel-Powered Light Commercial Vehicle,Diesel
-LCV_DIESEL,MOB_FREIGHT_MD,1.0,Diesel-Powered Light Commercial Vehicle,Freight mobility
-LCV_DIESEL,MOB_FREIGHT_SD,1.0,Diesel-Powered Light Commercial Vehicle,Freight mobility
+LCV_DIESEL,MOB_FREIGHT,1.0,Diesel-Powered Light Commercial Vehicle,Freight mobility
 LCV_EV,ELECTRICITY_MV,-0.575,Electric-Powered Light Commercial Vehicle,Electricity (medium voltage)
-LCV_EV,MOB_FREIGHT_MD,1.0,Electric-Powered Light Commercial Vehicle,Freight mobility
-LCV_EV,MOB_FREIGHT_SD,1.0,Electric-Powered Light Commercial Vehicle,Freight mobility
+LCV_EV,MOB_FREIGHT,1.0,Electric-Powered Light Commercial Vehicle,Freight mobility
 LCV_FC_H2,H2_HP,-0.655,Hydrogen Fuel Cell-Powered Light Commercial Vehicle,Hydrogen (high pressure)
-LCV_FC_H2,MOB_FREIGHT_MD,1.0,Hydrogen Fuel Cell-Powered Light Commercial Vehicle,Freight mobility
-LCV_FC_H2,MOB_FREIGHT_SD,1.0,Hydrogen Fuel Cell-Powered Light Commercial Vehicle,Freight mobility
+LCV_FC_H2,MOB_FREIGHT,1.0,Hydrogen Fuel Cell-Powered Light Commercial Vehicle,Freight mobility
 LCV_GASOLINE,CO2_E,0.414,Gasoline-Powered Light Commercial Vehicle,CO2 emission (from nonconcentrated spot sources)
 LCV_GASOLINE,GASOLINE,-1.529,Gasoline-Powered Light Commercial Vehicle,Gasoline
-LCV_GASOLINE,MOB_FREIGHT_MD,1.0,Gasoline-Powered Light Commercial Vehicle,Freight mobility
-LCV_GASOLINE,MOB_FREIGHT_SD,1.0,Gasoline-Powered Light Commercial Vehicle,Freight mobility
+LCV_GASOLINE,MOB_FREIGHT,1.0,Gasoline-Powered Light Commercial Vehicle,Freight mobility
 LCV_PHEV_DIESEL,CO2_E,0.075,Diesel-Powered Light Commercial Vehicle,CO2 emission (from nonconcentrated spot sources)
 LCV_PHEV_DIESEL,DIESEL,-0.284,Diesel-Powered Light Commercial Vehicle,Diesel
 LCV_PHEV_DIESEL,ELECTRICITY_MV,-0.449,Diesel-Powered Light Commercial Vehicle,Electricity (medium voltage)
-LCV_PHEV_DIESEL,MOB_FREIGHT_MD,1.0,Diesel-Powered Light Commercial Vehicle,Freight mobility
-LCV_PHEV_DIESEL,MOB_FREIGHT_SD,1.0,Diesel-Powered Light Commercial Vehicle,Freight mobility
+LCV_PHEV_DIESEL,MOB_FREIGHT,1.0,Diesel-Powered Light Commercial Vehicle,Freight mobility
 LCV_PROPANE,CO2_E,0.366,Propane-Powered Light Commercial Vehicle,CO2 emission (from nonconcentrated spot sources)
-LCV_PROPANE,MOB_FREIGHT_MD,1.0,Propane-Powered Light Commercial Vehicle,Freight mobility
+LCV_PROPANE,MOB_FREIGHT,1.0,Propane-Powered Light Commercial Vehicle,Freight mobility
 LCV_PROPANE,PROPANE,-1.634,Propane-Powered Light Commercial Vehicle,Propane
-LCV_PROPANE,MOB_FREIGHT_SD,1.0,Propane-Powered Light Commercial Vehicle,Freight mobility
 LFO,LFO,1.0,Light fuel oil,Light fuel oil
 LNG,LNG,1.0,Liquified natural gas,Liquified natural gas
 LT_DEC_WH,HEAT_LOW_T_DECEN,-1.0,Low Temperature Decentralized Waste Heat,"Heat (low temperature, decentralized)"
@@ -821,22 +738,22 @@ PET_FORMATION,PET,1.0,Polyethylene Terephthalate Formation,Polyethylene terephth
 PHENOL,PHENOL,1.0,Phenol,Phenol
 PLANE_FREIGHT_BIO,BIO_JETFUEL,-1.294,Bio-Jet Fuel-Powered Freight Plane,Bio-jetfuel
 PLANE_FREIGHT_BIO,CO2_E,0.324,Bio-Jet Fuel-Powered Freight Plane,CO2 emission (from nonconcentrated spot sources)
-PLANE_FREIGHT_BIO,MOB_FREIGHT_ELD,1.0,Bio-Jet Fuel-Powered Freight Plane,Freight mobility
+PLANE_FREIGHT_BIO,MOB_FREIGHT,1.0,Bio-Jet Fuel-Powered Freight Plane,Freight mobility
 PLANE_FREIGHT,CO2_E,0.324,Plane Freight,CO2 emission (from nonconcentrated spot sources)
 PLANE_FREIGHT,JETFUEL,-1.294,Plane Freight,Jet fuel
-PLANE_FREIGHT,MOB_FREIGHT_ELD,1.0,Plane Freight,Freight mobility
+PLANE_FREIGHT,MOB_FREIGHT,1.0,Plane Freight,Freight mobility
 PLANE_LH_BIO,BIO_JETFUEL,-0.734,Bio-Jet Fuel-Powered Long Haul Passenger Plane,Bio-jetfuel
 PLANE_LH_BIO,CO2_E,0.183,Bio-Jet Fuel-Powered Long Haul Passenger Plane,CO2 emission (from nonconcentrated spot sources)
-PLANE_LH_BIO,MOB_PUBLIC_ELD,1.0,Bio-Jet Fuel-Powered Long Haul Passenger Plane,Public mobility
+PLANE_LH_BIO,MOB_PUBLIC,1.0,Bio-Jet Fuel-Powered Long Haul Passenger Plane,Public mobility
 PLANE_LH,CO2_E,0.183,Passenger Plane long haul,CO2 emission (from nonconcentrated spot sources)
 PLANE_LH,JETFUEL,-0.734,Passenger Plane long haul,Jet fuel
-PLANE_LH,MOB_PUBLIC_ELD,1.0,Passenger Plane long haul,Public mobility
+PLANE_LH,MOB_PUBLIC,1.0,Passenger Plane long haul,Public mobility
 PLANE_SH_BIO,BIO_JETFUEL,-0.734,Bio-Jet Fuel-Powered Short Haul Passenger Plane,Bio-jetfuel
 PLANE_SH_BIO,CO2_E,0.183,Bio-Jet Fuel-Powered Short Haul Passenger Plane,CO2 emission (from nonconcentrated spot sources)
-PLANE_SH_BIO,MOB_PUBLIC_LD,1.0,Bio-Jet Fuel-Powered Short Haul Passenger Plane,Public mobility
+PLANE_SH_BIO,MOB_PUBLIC,1.0,Bio-Jet Fuel-Powered Short Haul Passenger Plane,Public mobility
 PLANE_SH,CO2_E,0.183,Passenger Plane short haul,CO2 emission (from nonconcentrated spot sources)
 PLANE_SH,JETFUEL,-0.734,Passenger Plane short haul,Jet fuel
-PLANE_SH,MOB_PUBLIC_LD,1.0,Passenger Plane short haul,Public mobility
+PLANE_SH,MOB_PUBLIC,1.0,Passenger Plane short haul,Public mobility
 POLYPROPYLENE_PP,PP,1.0,Polypropylene Production,Polypropylene
 POLYPROPYLENE_PP,PROPYLENE,-1.191,Polypropylene Production,Propylene
 PP,PP,1.0,Polypropylene,Polypropylene
@@ -856,99 +773,90 @@ PYROLYSIS,ELECTRICITY_MV,0.024,Pyrolysis Process,Electricity (medium voltage)
 PYROLYSIS,WOOD,-1.502,Pyrolysis Process,Woody biomass
 SCHOOLBUS_BIODIESEL_B100,BIO_DIESEL,-0.062,100% BioDiesel-Powered School Bus,Bio-diesel
 SCHOOLBUS_BIODIESEL_B100,CO2_E,0.018,100% BioDiesel-Powered School Bus,CO2 emission (from nonconcentrated spot sources)
-SCHOOLBUS_BIODIESEL_B100,MOB_PUBLIC_SD,1.0,100% BioDiesel-Powered School Bus,Public mobility
+SCHOOLBUS_BIODIESEL_B100,MOB_PUBLIC,1.0,100% BioDiesel-Powered School Bus,Public mobility
 SCHOOLBUS_BIODIESEL_B20,BIO_DIESEL,-0.012,20% BioDiesel-Powered School Bus,Bio-diesel
 SCHOOLBUS_BIODIESEL_B20,CO2_E,0.018,20% BioDiesel-Powered School Bus,CO2 emission (from nonconcentrated spot sources)
 SCHOOLBUS_BIODIESEL_B20,DIESEL,-0.05,20% BioDiesel-Powered School Bus,Diesel
-SCHOOLBUS_BIODIESEL_B20,MOB_PUBLIC_SD,1.0,20% BioDiesel-Powered School Bus,Public mobility
+SCHOOLBUS_BIODIESEL_B20,MOB_PUBLIC,1.0,20% BioDiesel-Powered School Bus,Public mobility
 SCHOOLBUS_BIOETOH_E10,BIO_ETHANOL,-0.008,10% BioEthanol-Powered School Bus,Bio-ethanol
 SCHOOLBUS_BIOETOH_E10,CO2_E,0.017,10% BioEthanol-Powered School Bus,CO2 emission (from nonconcentrated spot sources)
 SCHOOLBUS_BIOETOH_E10,GASOLINE,-0.067,10% BioEthanol-Powered School Bus,Gasoline
-SCHOOLBUS_BIOETOH_E10,MOB_PUBLIC_SD,1.0,10% BioEthanol-Powered School Bus,Public mobility
+SCHOOLBUS_BIOETOH_E10,MOB_PUBLIC,1.0,10% BioEthanol-Powered School Bus,Public mobility
 SCHOOLBUS_CNG,CO2_E,0.015,Compressed Natural Gas-Powered School Bus,CO2 emission (from nonconcentrated spot sources)
-SCHOOLBUS_CNG,MOB_PUBLIC_SD,1.0,Compressed Natural Gas-Powered School Bus,Public mobility
+SCHOOLBUS_CNG,MOB_PUBLIC,1.0,Compressed Natural Gas-Powered School Bus,Public mobility
 SCHOOLBUS_CNG,NG_HP,-0.074,Compressed Natural Gas-Powered School Bus,Natural gas (high pressure)
 SCHOOLBUS_CSNG,CO2_E,0.015,Compressed Synthetic Natural Gas-Powered School Bus,CO2 emission (from nonconcentrated spot sources)
-SCHOOLBUS_CSNG,MOB_PUBLIC_SD,1.0,Compressed Synthetic Natural Gas-Powered School Bus,Public mobility
+SCHOOLBUS_CSNG,MOB_PUBLIC,1.0,Compressed Synthetic Natural Gas-Powered School Bus,Public mobility
 SCHOOLBUS_CSNG,SNG_HP,-0.074,Compressed Synthetic Natural Gas-Powered School Bus,Synthetic natural gas (high pressure)
 SCHOOLBUS_DIESEL,CO2_E,0.018,Diesel-Powered School Bus,CO2 emission (from nonconcentrated spot sources)
 SCHOOLBUS_DIESEL,DIESEL,-0.062,Diesel-Powered School Bus,Diesel
-SCHOOLBUS_DIESEL,MOB_PUBLIC_SD,1.0,Diesel-Powered School Bus,Public mobility
+SCHOOLBUS_DIESEL,MOB_PUBLIC,1.0,Diesel-Powered School Bus,Public mobility
 SCHOOLBUS_ETOH_E10,CO2_E,0.017,10% Ethanol-Powered School Bus,CO2 emission (from nonconcentrated spot sources)
 SCHOOLBUS_ETOH_E10,ETHANOL,-0.008,10% Ethanol-Powered School Bus,Ethanol
 SCHOOLBUS_ETOH_E10,GASOLINE,-0.067,10% Ethanol-Powered School Bus,Gasoline
-SCHOOLBUS_ETOH_E10,MOB_PUBLIC_SD,1.0,10% Ethanol-Powered School Bus,Public mobility
+SCHOOLBUS_ETOH_E10,MOB_PUBLIC,1.0,10% Ethanol-Powered School Bus,Public mobility
 SCHOOLBUS_EV,ELECTRICITY_MV,-0.024,Electric-Powered School Bus,Electricity (medium voltage)
-SCHOOLBUS_EV,MOB_PUBLIC_SD,1.0,Electric-Powered School Bus,Public mobility
+SCHOOLBUS_EV,MOB_PUBLIC,1.0,Electric-Powered School Bus,Public mobility
 SCHOOLBUS_GASOLINE,CO2_E,0.018,Gasoline-Powered School Bus,CO2 emission (from nonconcentrated spot sources)
 SCHOOLBUS_GASOLINE,GASOLINE,-0.075,Gasoline-Powered School Bus,Gasoline
-SCHOOLBUS_GASOLINE,MOB_PUBLIC_SD,1.0,Gasoline-Powered School Bus,Public mobility
+SCHOOLBUS_GASOLINE,MOB_PUBLIC,1.0,Gasoline-Powered School Bus,Public mobility
 SCHOOLBUS_HY_DIESEL,CO2_E,0.013,Diesel Hybrid School Bus,CO2 emission (from nonconcentrated spot sources)
 SCHOOLBUS_HY_DIESEL,DIESEL,-0.046,Diesel Hybrid School Bus,Diesel
-SCHOOLBUS_HY_DIESEL,MOB_PUBLIC_SD,1.0,Diesel Hybrid School Bus,Public mobility
+SCHOOLBUS_HY_DIESEL,MOB_PUBLIC,1.0,Diesel Hybrid School Bus,Public mobility
 SCHOOLBUS_PROPANE,CO2_E,0.018,Propane-Powered School Bus,CO2 emission (from nonconcentrated spot sources)
-SCHOOLBUS_PROPANE,MOB_PUBLIC_SD,1.0,Propane-Powered School Bus,Public mobility
+SCHOOLBUS_PROPANE,MOB_PUBLIC,1.0,Propane-Powered School Bus,Public mobility
 SCHOOLBUS_PROPANE,PROPANE,-0.075,Propane-Powered School Bus,Propane
 SEMI_LH_BIODIESEL_B100,BIO_DIESEL,-0.327,100% BioDiesel-Powered Long Distance Semi-trailer truck,Bio-diesel
 SEMI_LH_BIODIESEL_B100,CO2_E,0.086,100% BioDiesel-Powered Long Distance Semi-trailer truck,CO2 emission (from nonconcentrated spot sources)
-SEMI_LH_BIODIESEL_B100,MOB_FREIGHT_ELD,1.0,100% BioDiesel-Powered Long Distance Semi-trailer truck,Freight mobility
-SEMI_LH_BIODIESEL_B100,MOB_FREIGHT_LD,1.0,100% BioDiesel-Powered Long Distance Semi-trailer truck,Freight mobility
+SEMI_LH_BIODIESEL_B100,MOB_FREIGHT,1.0,100% BioDiesel-Powered Long Distance Semi-trailer truck,Freight mobility
 SEMI_LH_BIODIESEL_B20,BIO_DIESEL,-0.065,20% BioDiesel-Powered Long Distance Semi-trailer truck,Bio-diesel
 SEMI_LH_BIODIESEL_B20,CO2_E,0.086,20% BioDiesel-Powered Long Distance Semi-trailer truck,CO2 emission (from nonconcentrated spot sources)
 SEMI_LH_BIODIESEL_B20,DIESEL,-0.261,20% BioDiesel-Powered Long Distance Semi-trailer truck,Diesel
-SEMI_LH_BIODIESEL_B20,MOB_FREIGHT_ELD,1.0,20% BioDiesel-Powered Long Distance Semi-trailer truck,Freight mobility
-SEMI_LH_BIODIESEL_B20,MOB_FREIGHT_LD,1.0,20% BioDiesel-Powered Long Distance Semi-trailer truck,Freight mobility
+SEMI_LH_BIODIESEL_B20,MOB_FREIGHT,1.0,20% BioDiesel-Powered Long Distance Semi-trailer truck,Freight mobility
 SEMI_LH_CNG,CO2_E,0.072,Compressed Natural Gas-Powered Long Distance Semi-trailer truck,CO2 emission (from nonconcentrated spot sources)
-SEMI_LH_CNG,MOB_FREIGHT_ELD,1.0,Compressed Natural Gas-Powered Long Distance Semi-trailer truck,Freight mobility
+SEMI_LH_CNG,MOB_FREIGHT,1.0,Compressed Natural Gas-Powered Long Distance Semi-trailer truck,Freight mobility
 SEMI_LH_CNG,NG_HP,-0.422,Compressed Natural Gas-Powered Long Distance Semi-trailer truck,Natural gas (high pressure)
-SEMI_LH_CNG,MOB_FREIGHT_LD,1.0,Compressed Natural Gas-Powered Long Distance Semi-trailer truck,Freight mobility
 SEMI_LH_CSNG,CO2_E,0.072,Compressed Synthetic Natural Gas-Powered Long Distance Semi-trailer truck,CO2 emission (from nonconcentrated spot sources)
-SEMI_LH_CSNG,MOB_FREIGHT_ELD,1.0,Compressed Synthetic Natural Gas-Powered Long Distance Semi-trailer truck,Freight mobility
+SEMI_LH_CSNG,MOB_FREIGHT,1.0,Compressed Synthetic Natural Gas-Powered Long Distance Semi-trailer truck,Freight mobility
 SEMI_LH_CSNG,SNG_HP,-0.422,Compressed Synthetic Natural Gas-Powered Long Distance Semi-trailer truck,Synthetic natural gas (high pressure)
-SEMI_LH_CSNG,MOB_FREIGHT_LD,1.0,Compressed Synthetic Natural Gas-Powered Long Distance Semi-trailer truck,Freight mobility
 SEMI_LH_DIESEL,CO2_E,0.115,Diesel-Powered Long Distance Semi-trailer truck,CO2 emission (from nonconcentrated spot sources)
 SEMI_LH_DIESEL,DIESEL,-0.434,Diesel-Powered Long Distance Semi-trailer truck,Diesel
-SEMI_LH_DIESEL,MOB_FREIGHT_ELD,1.0,Diesel-Powered Long Distance Semi-trailer truck,Freight mobility
-SEMI_LH_DIESEL,MOB_FREIGHT_LD,1.0,Diesel-Powered Long Distance Semi-trailer truck,Freight mobility
+SEMI_LH_DIESEL,MOB_FREIGHT,1.0,Diesel-Powered Long Distance Semi-trailer truck,Freight mobility
 SEMI_LH_EV,ELECTRICITY_MV,-0.473,Electric-Powered Long Distance Semi-trailer truck,Electricity (medium voltage)
-SEMI_LH_EV,MOB_FREIGHT_ELD,1.0,Electric-Powered Long Distance Semi-trailer truck,Freight mobility
-SEMI_LH_EV,MOB_FREIGHT_LD,1.0,Electric-Powered Long Distance Semi-trailer truck,Freight mobility
+SEMI_LH_EV,MOB_FREIGHT,1.0,Electric-Powered Long Distance Semi-trailer truck,Freight mobility
 SEMI_LH_FC_H2,H2_HP,-0.306,Hydrogen Fuel Cell-Powered Long Distance Semi-trailer truck,Hydrogen (high pressure)
-SEMI_LH_FC_H2,MOB_FREIGHT_ELD,1.0,Hydrogen Fuel Cell-Powered Long Distance Semi-trailer truck,Freight mobility
-SEMI_LH_FC_H2,MOB_FREIGHT_LD,1.0,Hydrogen Fuel Cell-Powered Long Distance Semi-trailer truck,Freight mobility
+SEMI_LH_FC_H2,MOB_FREIGHT,1.0,Hydrogen Fuel Cell-Powered Long Distance Semi-trailer truck,Freight mobility
 SEMI_LH_HY_DIESEL,CO2_E,0.081,Diesel Hybrid Long Distance Semi-trailer truck,CO2 emission (from nonconcentrated spot sources)
 SEMI_LH_HY_DIESEL,DIESEL,-0.308,Diesel Hybrid Long Distance Semi-trailer truck,Diesel
-SEMI_LH_HY_DIESEL,MOB_FREIGHT_ELD,1.0,Diesel Hybrid Long Distance Semi-trailer truck,Freight mobility
-SEMI_LH_HY_DIESEL,MOB_FREIGHT_LD,1.0,Diesel Hybrid Long Distance Semi-trailer truck,Freight mobility
+SEMI_LH_HY_DIESEL,MOB_FREIGHT,1.0,Diesel Hybrid Long Distance Semi-trailer truck,Freight mobility
 SEMI_LH_PROPANE,CO2_E,0.095,Propane-Powered Long Distance Semi-trailer truck,CO2 emission (from nonconcentrated spot sources)
-SEMI_LH_PROPANE,MOB_FREIGHT_ELD,1.0,Propane-Powered Long Distance Semi-trailer truck,Freight mobility
+SEMI_LH_PROPANE,MOB_FREIGHT,1.0,Propane-Powered Long Distance Semi-trailer truck,Freight mobility
 SEMI_LH_PROPANE,PROPANE,-0.425,Propane-Powered Long Distance Semi-trailer truck,Propane
-SEMI_LH_PROPANE,MOB_FREIGHT_LD,1.0,Propane-Powered Long Distance Semi-trailer truck,Freight mobility
 SEMI_SH_BIODIESEL_B100,BIO_DIESEL,-0.342,100% BioDiesel-Powered Short Distance Semi-trailer truck,Bio-diesel
 SEMI_SH_BIODIESEL_B100,CO2_E,0.09,100% BioDiesel-Powered Short Distance Semi-trailer truck,CO2 emission (from nonconcentrated spot sources)
-SEMI_SH_BIODIESEL_B100,MOB_FREIGHT_MD,1.0,100% BioDiesel-Powered Short Distance Semi-trailer truck,Freight mobility
+SEMI_SH_BIODIESEL_B100,MOB_FREIGHT,1.0,100% BioDiesel-Powered Short Distance Semi-trailer truck,Freight mobility
 SEMI_SH_BIODIESEL_B20,BIO_DIESEL,-0.068,20% BioDiesel-Powered Short Distance Semi-trailer truck,Bio-diesel
 SEMI_SH_BIODIESEL_B20,CO2_E,0.09,20% BioDiesel-Powered Short Distance Semi-trailer truck,CO2 emission (from nonconcentrated spot sources)
 SEMI_SH_BIODIESEL_B20,DIESEL,-0.273,20% BioDiesel-Powered Short Distance Semi-trailer truck,Diesel
-SEMI_SH_BIODIESEL_B20,MOB_FREIGHT_MD,1.0,20% BioDiesel-Powered Short Distance Semi-trailer truck,Freight mobility
+SEMI_SH_BIODIESEL_B20,MOB_FREIGHT,1.0,20% BioDiesel-Powered Short Distance Semi-trailer truck,Freight mobility
 SEMI_SH_CNG,CO2_E,0.074,Compressed Natural Gas-Powered Short Distance Semi-trailer truck,CO2 emission (from nonconcentrated spot sources)
-SEMI_SH_CNG,MOB_FREIGHT_MD,1.0,Compressed Natural Gas-Powered Short Distance Semi-trailer truck,Freight mobility
+SEMI_SH_CNG,MOB_FREIGHT,1.0,Compressed Natural Gas-Powered Short Distance Semi-trailer truck,Freight mobility
 SEMI_SH_CNG,NG_HP,-0.429,Compressed Natural Gas-Powered Short Distance Semi-trailer truck,Natural gas (high pressure)
 SEMI_SH_CSNG,CO2_E,0.074,Compressed Synthetic Natural Gas-Powered Short Distance Semi-trailer truck,CO2 emission (from nonconcentrated spot sources)
-SEMI_SH_CSNG,MOB_FREIGHT_MD,1.0,Compressed Synthetic Natural Gas-Powered Short Distance Semi-trailer truck,Freight mobility
+SEMI_SH_CSNG,MOB_FREIGHT,1.0,Compressed Synthetic Natural Gas-Powered Short Distance Semi-trailer truck,Freight mobility
 SEMI_SH_CSNG,SNG_HP,-0.429,Compressed Synthetic Natural Gas-Powered Short Distance Semi-trailer truck,Synthetic natural gas (high pressure)
 SEMI_SH_DIESEL,CO2_E,0.12,Diesel-Powered Short Distance Semi-trailer truck,CO2 emission (from nonconcentrated spot sources)
 SEMI_SH_DIESEL,DIESEL,-0.453,Diesel-Powered Short Distance Semi-trailer truck,Diesel
-SEMI_SH_DIESEL,MOB_FREIGHT_MD,1.0,Diesel-Powered Short Distance Semi-trailer truck,Freight mobility
+SEMI_SH_DIESEL,MOB_FREIGHT,1.0,Diesel-Powered Short Distance Semi-trailer truck,Freight mobility
 SEMI_SH_EV,ELECTRICITY_MV,-0.232,Electric-Powered Short Distance Semi-trailer truck,Electricity (medium voltage)
-SEMI_SH_EV,MOB_FREIGHT_MD,1.0,Electric-Powered Short Distance Semi-trailer truck,Freight mobility
+SEMI_SH_EV,MOB_FREIGHT,1.0,Electric-Powered Short Distance Semi-trailer truck,Freight mobility
 SEMI_SH_FC_H2,H2_HP,-0.305,Hydrogen Fuel Cell-Powered Short Distance Semi-trailer truck,Hydrogen (high pressure)
-SEMI_SH_FC_H2,MOB_FREIGHT_MD,1.0,Hydrogen Fuel Cell-Powered Short Distance Semi-trailer truck,Freight mobility
+SEMI_SH_FC_H2,MOB_FREIGHT,1.0,Hydrogen Fuel Cell-Powered Short Distance Semi-trailer truck,Freight mobility
 SEMI_SH_HY_DIESEL,CO2_E,0.083,Diesel Hybrid Short Distance Semi-trailer truck,CO2 emission (from nonconcentrated spot sources)
 SEMI_SH_HY_DIESEL,DIESEL,-0.314,Diesel Hybrid Short Distance Semi-trailer truck,Diesel
-SEMI_SH_HY_DIESEL,MOB_FREIGHT_MD,1.0,Diesel Hybrid Short Distance Semi-trailer truck,Freight mobility
+SEMI_SH_HY_DIESEL,MOB_FREIGHT,1.0,Diesel Hybrid Short Distance Semi-trailer truck,Freight mobility
 SEMI_SH_PROPANE,CO2_E,0.095,Propane-Powered Short Distance Semi-trailer truck,CO2 emission (from nonconcentrated spot sources)
-SEMI_SH_PROPANE,MOB_FREIGHT_MD,1.0,Propane-Powered Short Distance Semi-trailer truck,Freight mobility
+SEMI_SH_PROPANE,MOB_FREIGHT,1.0,Propane-Powered Short Distance Semi-trailer truck,Freight mobility
 SEMI_SH_PROPANE,PROPANE,-0.423,Propane-Powered Short Distance Semi-trailer truck,Propane
 SMART_PROCESS,CO2_A,0.296,Implementation of SMART Process from ethylbenzene to styrene,CO2 emission (from carbon-intensive fields)
 SMART_PROCESS,ETHYLBENZENE,-2.0,Implementation of SMART Process from ethylbenzene to styrene,Ethylbenzene
@@ -1036,98 +944,53 @@ STYRENE_POLYMERIZATION,PS,1.0,Styrene Polymerization Process,Polystyrene
 STYRENE_POLYMERIZATION,STYRENE,-1.05,Styrene Polymerization Process,Styrene
 SUV_BIODIESEL_B100,BIO_DIESEL,-0.703,100% BioDiesel-Powered Sport Utility Vehicle,Bio-diesel
 SUV_BIODIESEL_B100,CO2_E,0.172,100% BioDiesel-Powered Sport Utility Vehicle,CO2 emission (from nonconcentrated spot sources)
-SUV_BIODIESEL_B100,MOB_PRIVATE_ELD,1.0,100% BioDiesel-Powered Sport Utility Vehicle,Private mobility
-SUV_BIODIESEL_B100,MOB_PRIVATE_LD,1.0,100% BioDiesel-Powered Sport Utility Vehicle,Private mobility
-SUV_BIODIESEL_B100,MOB_PRIVATE_MD,1.0,100% BioDiesel-Powered Sport Utility Vehicle,Private mobility
-SUV_BIODIESEL_B100,MOB_PRIVATE_SD,1.0,100% BioDiesel-Powered Sport Utility Vehicle,Private mobility
+SUV_BIODIESEL_B100,MOB_PRIVATE,1.0,100% BioDiesel-Powered Sport Utility Vehicle,Private mobility
 SUV_BIODIESEL_B20,BIO_DIESEL,-0.141,20% BioDiesel-Powered Sport Utility Vehicle,Bio-diesel
 SUV_BIODIESEL_B20,CO2_E,0.171,20% BioDiesel-Powered Sport Utility Vehicle,CO2 emission (from nonconcentrated spot sources)
 SUV_BIODIESEL_B20,DIESEL,-0.563,20% BioDiesel-Powered Sport Utility Vehicle,Diesel
-SUV_BIODIESEL_B20,MOB_PRIVATE_ELD,1.0,20% BioDiesel-Powered Sport Utility Vehicle,Private mobility
-SUV_BIODIESEL_B20,MOB_PRIVATE_LD,1.0,20% BioDiesel-Powered Sport Utility Vehicle,Private mobility
-SUV_BIODIESEL_B20,MOB_PRIVATE_MD,1.0,20% BioDiesel-Powered Sport Utility Vehicle,Private mobility
-SUV_BIODIESEL_B20,MOB_PRIVATE_SD,1.0,20% BioDiesel-Powered Sport Utility Vehicle,Private mobility
+SUV_BIODIESEL_B20,MOB_PRIVATE,1.0,20% BioDiesel-Powered Sport Utility Vehicle,Private mobility
 SUV_BIOETOH_E10,BIO_ETHANOL,-0.084,10% BioEthanol-Powered Sport Utility Vehicle,Bio-ethanol
 SUV_BIOETOH_E10,CO2_E,0.197,10% BioEthanol-Powered Sport Utility Vehicle,CO2 emission (from nonconcentrated spot sources)
 SUV_BIOETOH_E10,GASOLINE,-0.76,10% BioEthanol-Powered Sport Utility Vehicle,Gasoline
-SUV_BIOETOH_E10,MOB_PRIVATE_ELD,1.0,10% BioEthanol-Powered Sport Utility Vehicle,Private mobility
-SUV_BIOETOH_E10,MOB_PRIVATE_LD,1.0,10% BioEthanol-Powered Sport Utility Vehicle,Private mobility
-SUV_BIOETOH_E10,MOB_PRIVATE_MD,1.0,10% BioEthanol-Powered Sport Utility Vehicle,Private mobility
-SUV_BIOETOH_E10,MOB_PRIVATE_SD,1.0,10% BioEthanol-Powered Sport Utility Vehicle,Private mobility
+SUV_BIOETOH_E10,MOB_PRIVATE,1.0,10% BioEthanol-Powered Sport Utility Vehicle,Private mobility
 SUV_BIOETOH_E85,BIO_ETHANOL,-0.718,85% BioEthanol-Powered Sport Utility Vehicle,Bio-ethanol
 SUV_BIOETOH_E85,CO2_E,0.183,85% BioEthanol-Powered Sport Utility Vehicle,CO2 emission (from nonconcentrated spot sources)
 SUV_BIOETOH_E85,GASOLINE,-0.127,85% BioEthanol-Powered Sport Utility Vehicle,Gasoline
-SUV_BIOETOH_E85,MOB_PRIVATE_ELD,1.0,85% BioEthanol-Powered Sport Utility Vehicle,Private mobility
-SUV_BIOETOH_E85,MOB_PRIVATE_LD,1.0,85% BioEthanol-Powered Sport Utility Vehicle,Private mobility
-SUV_BIOETOH_E85,MOB_PRIVATE_MD,1.0,85% BioEthanol-Powered Sport Utility Vehicle,Private mobility
-SUV_BIOETOH_E85,MOB_PRIVATE_SD,1.0,85% BioEthanol-Powered Sport Utility Vehicle,Private mobility
+SUV_BIOETOH_E85,MOB_PRIVATE,1.0,85% BioEthanol-Powered Sport Utility Vehicle,Private mobility
 SUV_CNG,CO2_E,0.15,Compressed Natural Gas-Powered Sport Utility Vehicle,CO2 emission (from nonconcentrated spot sources)
-SUV_CNG,MOB_PRIVATE_ELD,1.0,Compressed Natural Gas-Powered Sport Utility Vehicle,Private mobility
+SUV_CNG,MOB_PRIVATE,1.0,Compressed Natural Gas-Powered Sport Utility Vehicle,Private mobility
 SUV_CNG,NG_HP,-0.888,Compressed Natural Gas-Powered Sport Utility Vehicle,Natural gas (high pressure)
-SUV_CNG,MOB_PRIVATE_LD,1.0,Compressed Natural Gas-Powered Sport Utility Vehicle,Private mobility
-SUV_CNG,MOB_PRIVATE_MD,1.0,Compressed Natural Gas-Powered Sport Utility Vehicle,Private mobility
-SUV_CNG,MOB_PRIVATE_SD,1.0,Compressed Natural Gas-Powered Sport Utility Vehicle,Private mobility
 SUV_CSNG,CO2_E,0.15,Compressed Synthetic Natural Gas-Powered Sport Utility Vehicle,CO2 emission (from nonconcentrated spot sources)
-SUV_CSNG,MOB_PRIVATE_ELD,1.0,Compressed Synthetic Natural Gas-Powered Sport Utility Vehicle,Private mobility
+SUV_CSNG,MOB_PRIVATE,1.0,Compressed Synthetic Natural Gas-Powered Sport Utility Vehicle,Private mobility
 SUV_CSNG,SNG_HP,-0.888,Compressed Synthetic Natural Gas-Powered Sport Utility Vehicle,Synthetic natural gas (high pressure)
-SUV_CSNG,MOB_PRIVATE_LD,1.0,Compressed Synthetic Natural Gas-Powered Sport Utility Vehicle,Private mobility
-SUV_CSNG,MOB_PRIVATE_MD,1.0,Compressed Synthetic Natural Gas-Powered Sport Utility Vehicle,Private mobility
-SUV_CSNG,MOB_PRIVATE_SD,1.0,Compressed Synthetic Natural Gas-Powered Sport Utility Vehicle,Private mobility
 SUV_DIESEL,CO2_E,0.143,Diesel-Powered Sport Utility Vehicle,CO2 emission (from nonconcentrated spot sources)
 SUV_DIESEL,DIESEL,-0.537,Diesel-Powered Sport Utility Vehicle,Diesel
-SUV_DIESEL,MOB_PRIVATE_ELD,1.0,Diesel-Powered Sport Utility Vehicle,Private mobility
-SUV_DIESEL,MOB_PRIVATE_LD,1.0,Diesel-Powered Sport Utility Vehicle,Private mobility
-SUV_DIESEL,MOB_PRIVATE_MD,1.0,Diesel-Powered Sport Utility Vehicle,Private mobility
-SUV_DIESEL,MOB_PRIVATE_SD,1.0,Diesel-Powered Sport Utility Vehicle,Private mobility
+SUV_DIESEL,MOB_PRIVATE,1.0,Diesel-Powered Sport Utility Vehicle,Private mobility
 SUV_ETOH_E10,CO2_E,0.197,10% Ethanol-Powered Sport Utility Vehicle,CO2 emission (from nonconcentrated spot sources)
 SUV_ETOH_E10,ETHANOL,-0.084,10% Ethanol-Powered Sport Utility Vehicle,Ethanol
 SUV_ETOH_E10,GASOLINE,-0.76,10% Ethanol-Powered Sport Utility Vehicle,Gasoline
-SUV_ETOH_E10,MOB_PRIVATE_ELD,1.0,10% Ethanol-Powered Sport Utility Vehicle,Private mobility
-SUV_ETOH_E10,MOB_PRIVATE_LD,1.0,10% Ethanol-Powered Sport Utility Vehicle,Private mobility
-SUV_ETOH_E10,MOB_PRIVATE_MD,1.0,10% Ethanol-Powered Sport Utility Vehicle,Private mobility
-SUV_ETOH_E10,MOB_PRIVATE_SD,1.0,10% Ethanol-Powered Sport Utility Vehicle,Private mobility
+SUV_ETOH_E10,MOB_PRIVATE,1.0,10% Ethanol-Powered Sport Utility Vehicle,Private mobility
 SUV_ETOH_E85,CO2_E,0.183,85% Ethanol-Powered Sport Utility Vehicle,CO2 emission (from nonconcentrated spot sources)
 SUV_ETOH_E85,ETHANOL,-0.718,85% Ethanol-Powered Sport Utility Vehicle,Ethanol
 SUV_ETOH_E85,GASOLINE,-0.127,85% Ethanol-Powered Sport Utility Vehicle,Gasoline
-SUV_ETOH_E85,MOB_PRIVATE_ELD,1.0,85% Ethanol-Powered Sport Utility Vehicle,Private mobility
-SUV_ETOH_E85,MOB_PRIVATE_LD,1.0,85% Ethanol-Powered Sport Utility Vehicle,Private mobility
-SUV_ETOH_E85,MOB_PRIVATE_MD,1.0,85% Ethanol-Powered Sport Utility Vehicle,Private mobility
-SUV_ETOH_E85,MOB_PRIVATE_SD,1.0,85% Ethanol-Powered Sport Utility Vehicle,Private mobility
+SUV_ETOH_E85,MOB_PRIVATE,1.0,85% Ethanol-Powered Sport Utility Vehicle,Private mobility
 SUV_EV,ELECTRICITY_MV,-0.313,Electric-Powered Sport Utility Vehicle,Electricity (medium voltage)
-SUV_EV,MOB_PRIVATE_ELD,1.0,Electric-Powered Sport Utility Vehicle,Private mobility
-SUV_EV,MOB_PRIVATE_LD,1.0,Electric-Powered Sport Utility Vehicle,Private mobility
-SUV_EV,MOB_PRIVATE_MD,1.0,Electric-Powered Sport Utility Vehicle,Private mobility
-SUV_EV,MOB_PRIVATE_SD,1.0,Electric-Powered Sport Utility Vehicle,Private mobility
+SUV_EV,MOB_PRIVATE,1.0,Electric-Powered Sport Utility Vehicle,Private mobility
 SUV_FC_H2,H2_HP,-0.41,Hydrogen Fuel Cell-Powered Sport Utility Vehicle,Hydrogen (high pressure)
-SUV_FC_H2,MOB_PRIVATE_ELD,1.0,Hydrogen Fuel Cell-Powered Sport Utility Vehicle,Private mobility
-SUV_FC_H2,MOB_PRIVATE_LD,1.0,Hydrogen Fuel Cell-Powered Sport Utility Vehicle,Private mobility
-SUV_FC_H2,MOB_PRIVATE_MD,1.0,Hydrogen Fuel Cell-Powered Sport Utility Vehicle,Private mobility
-SUV_FC_H2,MOB_PRIVATE_SD,1.0,Hydrogen Fuel Cell-Powered Sport Utility Vehicle,Private mobility
+SUV_FC_H2,MOB_PRIVATE,1.0,Hydrogen Fuel Cell-Powered Sport Utility Vehicle,Private mobility
 SUV_GASOLINE,CO2_E,0.153,Gasoline-Powered Sport Utility Vehicle,CO2 emission (from nonconcentrated spot sources)
 SUV_GASOLINE,GASOLINE,-0.565,Gasoline-Powered Sport Utility Vehicle,Gasoline
-SUV_GASOLINE,MOB_PRIVATE_ELD,1.0,Gasoline-Powered Sport Utility Vehicle,Private mobility
-SUV_GASOLINE,MOB_PRIVATE_LD,1.0,Gasoline-Powered Sport Utility Vehicle,Private mobility
-SUV_GASOLINE,MOB_PRIVATE_MD,1.0,Gasoline-Powered Sport Utility Vehicle,Private mobility
-SUV_GASOLINE,MOB_PRIVATE_SD,1.0,Gasoline-Powered Sport Utility Vehicle,Private mobility
+SUV_GASOLINE,MOB_PRIVATE,1.0,Gasoline-Powered Sport Utility Vehicle,Private mobility
 SUV_HY_GASOLINE,CO2_E,0.135,Gasoline Hybrid Sport Utility Vehicle,CO2 emission (from nonconcentrated spot sources)
 SUV_HY_GASOLINE,GASOLINE,-0.57,Gasoline Hybrid Sport Utility Vehicle,Gasoline
-SUV_HY_GASOLINE,MOB_PRIVATE_ELD,1.0,Gasoline Hybrid Sport Utility Vehicle,Private mobility
-SUV_HY_GASOLINE,MOB_PRIVATE_LD,1.0,Gasoline Hybrid Sport Utility Vehicle,Private mobility
-SUV_HY_GASOLINE,MOB_PRIVATE_MD,1.0,Gasoline Hybrid Sport Utility Vehicle,Private mobility
-SUV_HY_GASOLINE,MOB_PRIVATE_SD,1.0,Gasoline Hybrid Sport Utility Vehicle,Private mobility
+SUV_HY_GASOLINE,MOB_PRIVATE,1.0,Gasoline Hybrid Sport Utility Vehicle,Private mobility
 SUV_PHEV_GASOLINE,CO2_E,0.084,Plug-in Hybrid Gasoline-Powered Sport Utility Vehicle,CO2 emission (from nonconcentrated spot sources)
 SUV_PHEV_GASOLINE,ELECTRICITY_MV,-0.181,Plug-in Hybrid Gasoline-Powered Sport Utility Vehicle,Electricity (medium voltage)
 SUV_PHEV_GASOLINE,GASOLINE,-0.355,Plug-in Hybrid Gasoline-Powered Sport Utility Vehicle,Gasoline
-SUV_PHEV_GASOLINE,MOB_PRIVATE_ELD,1.0,Plug-in Hybrid Gasoline-Powered Sport Utility Vehicle,Private mobility
-SUV_PHEV_GASOLINE,MOB_PRIVATE_LD,1.0,Plug-in Hybrid Gasoline-Powered Sport Utility Vehicle,Private mobility
-SUV_PHEV_GASOLINE,MOB_PRIVATE_MD,1.0,Plug-in Hybrid Gasoline-Powered Sport Utility Vehicle,Private mobility
-SUV_PHEV_GASOLINE,MOB_PRIVATE_SD,1.0,Plug-in Hybrid Gasoline-Powered Sport Utility Vehicle,Private mobility
+SUV_PHEV_GASOLINE,MOB_PRIVATE,1.0,Plug-in Hybrid Gasoline-Powered Sport Utility Vehicle,Private mobility
 SUV_PROPANE,CO2_E,0.177,Propane-Powered Sport Utility Vehicle,CO2 emission (from nonconcentrated spot sources)
-SUV_PROPANE,MOB_PRIVATE_ELD,1.0,Propane-Powered Sport Utility Vehicle,Private mobility
+SUV_PROPANE,MOB_PRIVATE,1.0,Propane-Powered Sport Utility Vehicle,Private mobility
 SUV_PROPANE,PROPANE,-0.845,Propane-Powered Sport Utility Vehicle,Propane
-SUV_PROPANE,MOB_PRIVATE_LD,1.0,Propane-Powered Sport Utility Vehicle,Private mobility
-SUV_PROPANE,MOB_PRIVATE_MD,1.0,Propane-Powered Sport Utility Vehicle,Private mobility
-SUV_PROPANE,MOB_PRIVATE_SD,1.0,Propane-Powered Sport Utility Vehicle,Private mobility
 TIDAL,ELECTRICITY_MV,1.0,Tidal power,Electricity (medium voltage)
 TIDAL,RES_TIDAL,-1.0,Tidal power,Tidal resource
 TOLUENE,TOLUENE,1.0,Toluene,Toluene
@@ -1145,118 +1008,96 @@ TRAFO_ML,ELECTRICITY_LV,1.0,Medium to Low Voltage Transformer,Electricity (low v
 TRAFO_ML,ELECTRICITY_MV,-1.045,Medium to Low Voltage Transformer,Electricity (medium voltage)
 TRAIN_BIODIESEL,BIO_DIESEL,-1.025,BioDiesel-Powered Train,Bio-diesel
 TRAIN_BIODIESEL,CO2_E,0.102,BioDiesel-Powered Train,CO2 emission (from nonconcentrated spot sources)
-TRAIN_BIODIESEL,MOB_PUBLIC_ELD,1.0,BioDiesel-Powered Train,Public mobility
-TRAIN_BIODIESEL,MOB_PUBLIC_LD,1.0,BioDiesel-Powered Train,Public mobility
+TRAIN_BIODIESEL,MOB_PUBLIC,1.0,BioDiesel-Powered Train,Public mobility
 TRAIN_DIESEL,CO2_E,0.102,Diesel-Powered Train,CO2 emission (from nonconcentrated spot sources)
 TRAIN_DIESEL,DIESEL,-1.025,Diesel-Powered Train,Diesel
-TRAIN_DIESEL,MOB_PUBLIC_ELD,1.0,Diesel-Powered Train,Public mobility
-TRAIN_DIESEL,MOB_PUBLIC_LD,1.0,Diesel-Powered Train,Public mobility
+TRAIN_DIESEL,MOB_PUBLIC,1.0,Diesel-Powered Train,Public mobility
 TRAIN_ELEC,ELECTRICITY_EHV,-0.092,Electric-Powered Train,Electricity (extra high voltage)
-TRAIN_ELEC,MOB_PUBLIC_ELD,1.0,Electric-Powered Train,Public mobility
-TRAIN_ELEC,MOB_PUBLIC_LD,1.0,Electric-Powered Train,Public mobility
+TRAIN_ELEC,MOB_PUBLIC,1.0,Electric-Powered Train,Public mobility
 TRAIN_FREIGHT_BIODIESEL,BIO_DIESEL,-0.051,Biodiesel-Powered Freight Train,Bio-diesel
 TRAIN_FREIGHT_BIODIESEL,CO2_E,0.001,Biodiesel-Powered Freight Train,CO2 emission (from nonconcentrated spot sources)
-TRAIN_FREIGHT_BIODIESEL,MOB_FREIGHT_ELD,1.0,Biodiesel-Powered Freight Train,Freight mobility
-TRAIN_FREIGHT_BIODIESEL,MOB_FREIGHT_LD,1.0,Biodiesel-Powered Freight Train,Freight mobility
+TRAIN_FREIGHT_BIODIESEL,MOB_FREIGHT,1.0,Biodiesel-Powered Freight Train,Freight mobility
 TRAIN_FREIGHT_DIESEL,CO2_E,0.001,Diesel-Powered Freight Train,CO2 emission (from nonconcentrated spot sources)
 TRAIN_FREIGHT_DIESEL,DIESEL,-0.051,Diesel-Powered Freight Train,Diesel
-TRAIN_FREIGHT_DIESEL,MOB_FREIGHT_ELD,1.0,Diesel-Powered Freight Train,Freight mobility
-TRAIN_FREIGHT_DIESEL,MOB_FREIGHT_LD,1.0,Diesel-Powered Freight Train,Freight mobility
+TRAIN_FREIGHT_DIESEL,MOB_FREIGHT,1.0,Diesel-Powered Freight Train,Freight mobility
 TRAIN_FREIGHT_ELEC,ELECTRICITY_EHV,-0.068,"Electric-Powered Freight Train (co-generation unit, components for electricity)",Electricity (extra high voltage)
-TRAIN_FREIGHT_ELEC,MOB_FREIGHT_ELD,1.0,"Electric-Powered Freight Train (co-generation unit, components for electricity)",Freight mobility
-TRAIN_FREIGHT_ELEC,MOB_FREIGHT_LD,1.0,"Electric-Powered Freight Train (co-generation unit, components for electricity)",Freight mobility
+TRAIN_FREIGHT_ELEC,MOB_FREIGHT,1.0,"Electric-Powered Freight Train (co-generation unit, components for electricity)",Freight mobility
 TRAIN_FREIGHT_H2,H2_EHP,-0.022,Hydrogen-Powered Freight Train,Hydrogen (extra high pressure)
 TRAIN_FREIGHT_H2,H2_HP,-0.333,Hydrogen-Powered Freight Train,Hydrogen (high pressure)
-TRAIN_FREIGHT_H2,MOB_FREIGHT_ELD,1.0,Hydrogen-Powered Freight Train,Freight mobility
+TRAIN_FREIGHT_H2,MOB_FREIGHT,1.0,Hydrogen-Powered Freight Train,Freight mobility
 TRAIN_FREIGHT_H2_HYBRID,H2_EHP,-0.02,Hybrid Battery-Fuel Cell-Powered Freight Train,Hydrogen (extra high pressure)
-TRAIN_FREIGHT_H2_HYBRID,MOB_FREIGHT_ELD,1.0,Hybrid Battery-Fuel Cell-Powered Freight Train,Freight mobility
-TRAIN_FREIGHT_H2_HYBRID,MOB_FREIGHT_LD,1.0,Hybrid Battery-Fuel Cell-Powered Freight Train,Freight mobility
-TRAIN_FREIGHT_H2,MOB_FREIGHT_LD,1.0,Hydrogen-Powered Freight Train,Freight mobility
+TRAIN_FREIGHT_H2_HYBRID,MOB_FREIGHT,1.0,Hybrid Battery-Fuel Cell-Powered Freight Train,Freight mobility
 TRAIN_FREIGHT_NG,CO2_E,0.057,Natural Gas-Powered Freight Train,CO2 emission (from nonconcentrated spot sources)
-TRAIN_FREIGHT_NG,MOB_FREIGHT_ELD,1.0,Natural Gas-Powered Freight Train,Freight mobility
+TRAIN_FREIGHT_NG,MOB_FREIGHT,1.0,Natural Gas-Powered Freight Train,Freight mobility
 TRAIN_FREIGHT_NG,NG_HP,-0.251,Natural Gas-Powered Freight Train,Natural gas (high pressure)
-TRAIN_FREIGHT_NG,MOB_FREIGHT_LD,1.0,Natural Gas-Powered Freight Train,Freight mobility
 TRAIN_FREIGHT_SNG,CO2_E,0.057,Natural Synthetic Gas-Powered Freight Train,CO2 emission (from nonconcentrated spot sources)
-TRAIN_FREIGHT_SNG,MOB_FREIGHT_ELD,1.0,Natural Synthetic Gas-Powered Freight Train,Freight mobility
+TRAIN_FREIGHT_SNG,MOB_FREIGHT,1.0,Natural Synthetic Gas-Powered Freight Train,Freight mobility
 TRAIN_FREIGHT_SNG,SNG_HP,-0.251,Natural Synthetic Gas-Powered Freight Train,Synthetic natural gas (high pressure)
-TRAIN_FREIGHT_SNG,MOB_FREIGHT_LD,1.0,Natural Synthetic Gas-Powered Freight Train,Freight mobility
 TRAIN_H2,H2_EHP,-0.294,Hydrogen-Powered Train,Hydrogen (extra high pressure)
 TRAIN_H2,H2_HP,-0.312,Hydrogen-Powered Train,Hydrogen (high pressure)
-TRAIN_H2,MOB_PUBLIC_ELD,1.0,Hydrogen-Powered Train,Public mobility
-TRAIN_H2,MOB_PUBLIC_LD,1.0,Hydrogen-Powered Train,Public mobility
+TRAIN_H2,MOB_PUBLIC,1.0,Hydrogen-Powered Train,Public mobility
 TRAIN_NG,CO2_E,0.076,Natural Gas-Powered Train,CO2 emission (from nonconcentrated spot sources)
-TRAIN_NG,MOB_PUBLIC_ELD,1.0,Natural Gas-Powered Train,Public mobility
+TRAIN_NG,MOB_PUBLIC,1.0,Natural Gas-Powered Train,Public mobility
 TRAIN_NG,NG_HP,-0.238,Natural Gas-Powered Train,Natural gas (high pressure)
-TRAIN_NG,MOB_PUBLIC_LD,1.0,Natural Gas-Powered Train,Public mobility
 TRAIN_SNG,CO2_E,0.076,Synthetic Natural Gas-Powered Train,CO2 emission (from nonconcentrated spot sources)
-TRAIN_SNG,MOB_PUBLIC_ELD,1.0,Synthetic Natural Gas-Powered Train,Public mobility
+TRAIN_SNG,MOB_PUBLIC,1.0,Synthetic Natural Gas-Powered Train,Public mobility
 TRAIN_SNG,SNG_HP,-0.238,Synthetic Natural Gas-Powered Train,Synthetic natural gas (high pressure)
-TRAIN_SNG,MOB_PUBLIC_LD,1.0,Synthetic Natural Gas-Powered Train,Public mobility
 TRAMWAY,ELECTRICITY_HV,-0.168,Tramway,Electricity (high voltage)
-TRAMWAY,MOB_PUBLIC_SD,1.0,Tramway,Public mobility
+TRAMWAY,MOB_PUBLIC,1.0,Tramway,Public mobility
 TRUCK_LH_BIODIESEL_B100,BIO_DIESEL,-0.466,100% BioDiesel-Powered Long Distance Truck,Bio-diesel
 TRUCK_LH_BIODIESEL_B100,CO2_E,0.123,100% BioDiesel-Powered Long Distance Truck,CO2 emission (from nonconcentrated spot sources)
-TRUCK_LH_BIODIESEL_B100,MOB_FREIGHT_LD,1.0,100% BioDiesel-Powered Long Distance Truck,Freight mobility
+TRUCK_LH_BIODIESEL_B100,MOB_FREIGHT,1.0,100% BioDiesel-Powered Long Distance Truck,Freight mobility
 TRUCK_LH_BIODIESEL_B20,BIO_DIESEL,-0.093,20% BioDiesel-Powered Long Distance Truck,Bio-diesel
 TRUCK_LH_BIODIESEL_B20,CO2_E,0.123,20% BioDiesel-Powered Long Distance Truck,CO2 emission (from nonconcentrated spot sources)
 TRUCK_LH_BIODIESEL_B20,DIESEL,-0.372,20% BioDiesel-Powered Long Distance Truck,Diesel
-TRUCK_LH_BIODIESEL_B20,MOB_FREIGHT_LD,1.0,20% BioDiesel-Powered Long Distance Truck,Freight mobility
+TRUCK_LH_BIODIESEL_B20,MOB_FREIGHT,1.0,20% BioDiesel-Powered Long Distance Truck,Freight mobility
 TRUCK_LH_CNG,CO2_E,0.11,Compressed Natural Gas-Powered Long Distance Truck,CO2 emission (from nonconcentrated spot sources)
-TRUCK_LH_CNG,MOB_FREIGHT_LD,1.0,Compressed Natural Gas-Powered Long Distance Truck,Freight mobility
+TRUCK_LH_CNG,MOB_FREIGHT,1.0,Compressed Natural Gas-Powered Long Distance Truck,Freight mobility
 TRUCK_LH_CNG,NG_HP,-0.588,Compressed Natural Gas-Powered Long Distance Truck,Natural gas (high pressure)
 TRUCK_LH_CSNG,CO2_E,0.11,Compressed Synthetic Natural Gas-Powered Long Distance Truck,CO2 emission (from nonconcentrated spot sources)
-TRUCK_LH_CSNG,MOB_FREIGHT_LD,1.0,Compressed Synthetic Natural Gas-Powered Long Distance Truck,Freight mobility
+TRUCK_LH_CSNG,MOB_FREIGHT,1.0,Compressed Synthetic Natural Gas-Powered Long Distance Truck,Freight mobility
 TRUCK_LH_CSNG,SNG_HP,-0.588,Compressed Synthetic Natural Gas-Powered Long Distance Truck,Synthetic natural gas (high pressure)
 TRUCK_LH_DIESEL,CO2_E,0.13,Diesel-Powered Long Distance Truck,CO2 emission (from nonconcentrated spot sources)
 TRUCK_LH_DIESEL,DIESEL,-0.496,Diesel-Powered Long Distance Truck,Diesel
-TRUCK_LH_DIESEL,MOB_FREIGHT_LD,1.0,Diesel-Powered Long Distance Truck,Freight mobility
+TRUCK_LH_DIESEL,MOB_FREIGHT,1.0,Diesel-Powered Long Distance Truck,Freight mobility
 TRUCK_LH_EV,ELECTRICITY_MV,-1.08,Electric-Powered Long Distance Truck,Electricity (medium voltage)
-TRUCK_LH_EV,MOB_FREIGHT_LD,1.0,Electric-Powered Long Distance Truck,Freight mobility
+TRUCK_LH_EV,MOB_FREIGHT,1.0,Electric-Powered Long Distance Truck,Freight mobility
 TRUCK_LH_GASOLINE,CO2_E,0.153,Gasoline-Powered Long Distance Truck,CO2 emission (from nonconcentrated spot sources)
 TRUCK_LH_GASOLINE,GASOLINE,-0.566,Gasoline-Powered Long Distance Truck,Gasoline
-TRUCK_LH_GASOLINE,MOB_FREIGHT_LD,1.0,Gasoline-Powered Long Distance Truck,Freight mobility
+TRUCK_LH_GASOLINE,MOB_FREIGHT,1.0,Gasoline-Powered Long Distance Truck,Freight mobility
 TRUCK_LH_HY_DIESEL,CO2_E,0.108,Diesel Hybrid Long Distance Truck,CO2 emission (from nonconcentrated spot sources)
 TRUCK_LH_HY_DIESEL,DIESEL,-0.41,Diesel Hybrid Long Distance Truck,Diesel
-TRUCK_LH_HY_DIESEL,MOB_FREIGHT_LD,1.0,Diesel Hybrid Long Distance Truck,Freight mobility
+TRUCK_LH_HY_DIESEL,MOB_FREIGHT,1.0,Diesel Hybrid Long Distance Truck,Freight mobility
 TRUCK_LH_PROPANE,CO2_E,0.136,Propane-Powered Long Distance Truck,CO2 emission (from nonconcentrated spot sources)
-TRUCK_LH_PROPANE,MOB_FREIGHT_LD,1.0,Propane-Powered Long Distance Truck,Freight mobility
+TRUCK_LH_PROPANE,MOB_FREIGHT,1.0,Propane-Powered Long Distance Truck,Freight mobility
 TRUCK_LH_PROPANE,PROPANE,-0.606,Propane-Powered Long Distance Truck,Propane
 TRUCK_SH_BIODIESEL_B100,BIO_DIESEL,-0.478,100% BioDiesel-Powered Short Distance Truck,Bio-diesel
 TRUCK_SH_BIODIESEL_B100,CO2_E,0.126,100% BioDiesel-Powered Short Distance Truck,CO2 emission (from nonconcentrated spot sources)
-TRUCK_SH_BIODIESEL_B100,MOB_FREIGHT_MD,1.0,100% BioDiesel-Powered Short Distance Truck,Freight mobility
-TRUCK_SH_BIODIESEL_B100,MOB_FREIGHT_SD,1.0,100% BioDiesel-Powered Short Distance Truck,Freight mobility
+TRUCK_SH_BIODIESEL_B100,MOB_FREIGHT,1.0,100% BioDiesel-Powered Short Distance Truck,Freight mobility
 TRUCK_SH_BIODIESEL_B20,BIO_DIESEL,-0.096,20% BioDiesel-Powered Short Distance Truck,Bio-diesel
 TRUCK_SH_BIODIESEL_B20,CO2_E,0.126,20% BioDiesel-Powered Short Distance Truck,CO2 emission (from nonconcentrated spot sources)
 TRUCK_SH_BIODIESEL_B20,DIESEL,-0.383,20% BioDiesel-Powered Short Distance Truck,Diesel
-TRUCK_SH_BIODIESEL_B20,MOB_FREIGHT_MD,1.0,20% BioDiesel-Powered Short Distance Truck,Freight mobility
-TRUCK_SH_BIODIESEL_B20,MOB_FREIGHT_SD,1.0,20% BioDiesel-Powered Short Distance Truck,Freight mobility
+TRUCK_SH_BIODIESEL_B20,MOB_FREIGHT,1.0,20% BioDiesel-Powered Short Distance Truck,Freight mobility
 TRUCK_SH_CNG,CO2_E,0.105,Compressed Natural Gas-Powered Short Distance Truck,CO2 emission (from nonconcentrated spot sources)
-TRUCK_SH_CNG,MOB_FREIGHT_MD,1.0,Compressed Natural Gas-Powered Short Distance Truck,Freight mobility
+TRUCK_SH_CNG,MOB_FREIGHT,1.0,Compressed Natural Gas-Powered Short Distance Truck,Freight mobility
 TRUCK_SH_CNG,NG_HP,-0.608,Compressed Natural Gas-Powered Short Distance Truck,Natural gas (high pressure)
-TRUCK_SH_CNG,MOB_FREIGHT_SD,1.0,Compressed Natural Gas-Powered Short Distance Truck,Freight mobility
 TRUCK_SH_CSNG,CO2_E,0.105,Compressed Synthetic Natural Gas-Powered Short Distance Truck,CO2 emission (from nonconcentrated spot sources)
-TRUCK_SH_CSNG,MOB_FREIGHT_MD,1.0,Compressed Synthetic Natural Gas-Powered Short Distance Truck,Freight mobility
+TRUCK_SH_CSNG,MOB_FREIGHT,1.0,Compressed Synthetic Natural Gas-Powered Short Distance Truck,Freight mobility
 TRUCK_SH_CSNG,SNG_HP,-0.608,Compressed Synthetic Natural Gas-Powered Short Distance Truck,Synthetic natural gas (high pressure)
-TRUCK_SH_CSNG,MOB_FREIGHT_SD,1.0,Compressed Synthetic Natural Gas-Powered Short Distance Truck,Freight mobility
 TRUCK_SH_DIESEL,CO2_E,0.126,Diesel-Powered Short Distance Truck,CO2 emission (from nonconcentrated spot sources)
 TRUCK_SH_DIESEL,DIESEL,-0.478,Diesel-Powered Short Distance Truck,Diesel
-TRUCK_SH_DIESEL,MOB_FREIGHT_MD,1.0,Diesel-Powered Short Distance Truck,Freight mobility
-TRUCK_SH_DIESEL,MOB_FREIGHT_SD,1.0,Diesel-Powered Short Distance Truck,Freight mobility
+TRUCK_SH_DIESEL,MOB_FREIGHT,1.0,Diesel-Powered Short Distance Truck,Freight mobility
 TRUCK_SH_EV,ELECTRICITY_MV,-0.382,Electric-Powered Short Distance Truck,Electricity (medium voltage)
-TRUCK_SH_EV,MOB_FREIGHT_MD,1.0,Electric-Powered Short Distance Truck,Freight mobility
-TRUCK_SH_EV,MOB_FREIGHT_SD,1.0,Electric-Powered Short Distance Truck,Freight mobility
+TRUCK_SH_EV,MOB_FREIGHT,1.0,Electric-Powered Short Distance Truck,Freight mobility
 TRUCK_SH_GASOLINE,CO2_E,0.158,Gasoline-Powered Short Distance Truck,CO2 emission (from nonconcentrated spot sources)
 TRUCK_SH_GASOLINE,GASOLINE,-0.582,Gasoline-Powered Short Distance Truck,Gasoline
-TRUCK_SH_GASOLINE,MOB_FREIGHT_MD,1.0,Gasoline-Powered Short Distance Truck,Freight mobility
-TRUCK_SH_GASOLINE,MOB_FREIGHT_SD,1.0,Gasoline-Powered Short Distance Truck,Freight mobility
+TRUCK_SH_GASOLINE,MOB_FREIGHT,1.0,Gasoline-Powered Short Distance Truck,Freight mobility
 TRUCK_SH_HY_DIESEL,CO2_E,0.112,Diesel Hybrid Short Distance Truck,CO2 emission (from nonconcentrated spot sources)
 TRUCK_SH_HY_DIESEL,DIESEL,-0.424,Diesel Hybrid Short Distance Truck,Diesel
-TRUCK_SH_HY_DIESEL,MOB_FREIGHT_MD,1.0,Diesel Hybrid Short Distance Truck,Freight mobility
-TRUCK_SH_HY_DIESEL,MOB_FREIGHT_SD,1.0,Diesel Hybrid Short Distance Truck,Freight mobility
+TRUCK_SH_HY_DIESEL,MOB_FREIGHT,1.0,Diesel Hybrid Short Distance Truck,Freight mobility
 TRUCK_SH_PROPANE,CO2_E,0.139,Propane-Powered Short Distance Truck,CO2 emission (from nonconcentrated spot sources)
-TRUCK_SH_PROPANE,MOB_FREIGHT_MD,1.0,Propane-Powered Short Distance Truck,Freight mobility
+TRUCK_SH_PROPANE,MOB_FREIGHT,1.0,Propane-Powered Short Distance Truck,Freight mobility
 TRUCK_SH_PROPANE,PROPANE,-0.622,Propane-Powered Short Distance Truck,Propane
-TRUCK_SH_PROPANE,MOB_FREIGHT_SD,1.0,Propane-Powered Short Distance Truck,Freight mobility
 UNMINEABLE_COAL_SEAM,CO2_C,-1.0,Sequestration of CO2 in Unmineable Coal Seams,Captured CO2
 UNMINEABLE_COAL_SEAM,CO2_E,0.05,Sequestration of CO2 in Unmineable Coal Seams,CO2 emission (from nonconcentrated spot sources)
 UNMINEABLE_COAL_SEAM,CO2_S,0.95,Sequestration of CO2 in Unmineable Coal Seams,Sequestrated CO2
