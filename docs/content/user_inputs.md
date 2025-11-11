@@ -139,7 +139,7 @@ document.addEventListener('DOMContentLoaded', function() {
       html += '</tbody></table>';
 
       document.getElementById('model-table-container').innerHTML = html;
-      $('#data-table-3').DataTable();
+      $('#data-table-4').DataTable();
       document.getElementById('model-download-btn').onclick = () => window.open(csvPathModelES);
     });
 });
