@@ -1,0 +1,1317 @@
+Name,Flow,Amount,Description (name),Description (flow)
+ACETIC_ACID,ACETIC_ACID,1.0,Acetic acid,Acetic acid
+ACETONE,ACETONE,1.0,Acetone,Acetone
+AFC,ELECTRICITY_LV,2.915,Alkaline Fuel Cell,Electricity (low voltage)
+AFC,H2_HP,-4.255,Alkaline Fuel Cell,Hydrogen (high pressure)
+AFC,HEAT_LOW_T_DECEN,1.0,Alkaline Fuel Cell,"Heat (low temperature, decentralized)"
+ALKALINE_ELECTROLYSIS,ELECTRICITY_HV,-1.72,Alkaline Electrolysis,Electricity (high voltage)
+ALKALINE_ELECTROLYSIS,H2_MP,1.0,Alkaline Electrolysis,Hydrogen (medium pressure)
+ALKALINE_ELECTROLYSIS,HEAT_LOW_T_DECEN,0.26,Alkaline Electrolysis,"Heat (low temperature, decentralized)"
+AL_MAKING,ALUMINUM,1.0,Aluminum Making,Aluminium
+AL_MAKING,ELECTRICITY_HV,-0.125,Aluminum Making,Electricity (high voltage)
+AL_MAKING,HEAT_HIGH_T,-1.056,Aluminum Making,Heat (high temperature)
+AL_MAKING_HR,ALUMINUM,1.0,Aluminum Making Heat Recovery,Aluminium
+AL_MAKING_HR,ELECTRICITY_HV,-0.125,Aluminum Making Heat Recovery,Electricity (high voltage)
+AL_MAKING_HR,HEAT_HIGH_T,-1.003,Aluminum Making Heat Recovery,Heat (high temperature)
+AN_DIG,CO2_A,1.06,Anaerobic Digestion of Sewage Sludge,CO2 emission (from carbon-intensive fields)
+AN_DIG,SNG_MP,1.0,Anaerobic Digestion of Sewage Sludge,Synthetic natural gas (medium pressure)
+AN_DIG,WET_BIOMASS,-3.346,Anaerobic Digestion of Sewage Sludge,Wet biomass
+AN_DIG_SI,CO2_A,2.903,Anaerobic Digestion of Sewage Sludge Cogeneration,CO2 emission (from carbon-intensive fields)
+AN_DIG_SI,ELECTRICITY_MV,1.0,Anaerobic Digestion of Sewage Sludge Cogeneration,Electricity (medium voltage)
+AN_DIG_SI,HEAT_LOW_T_DHN,1.12,Anaerobic Digestion of Sewage Sludge Cogeneration,"Heat (low temperature, district heating network)"
+AN_DIG_SI,WET_BIOMASS,-7.722,Anaerobic Digestion of Sewage Sludge Cogeneration,Wet biomass
+ATR,CO2_A,0.411,Auto-Thermal Reforming,CO2 emission (from carbon-intensive fields)
+ATR,H2_HP,1.0,Auto-Thermal Reforming,Hydrogen (high pressure)
+ATR,NG_HP,-1.542,Auto-Thermal Reforming,Natural gas (high pressure)
+ATR_CCS,CO2_C,0.38,Auto-Thermal Reforming with Carbon Capture,Captured CO2
+ATR_CCS,CO2_E,0.042,Auto-Thermal Reforming with Carbon Capture,CO2 emission (from nonconcentrated spot sources)
+ATR_CCS,H2_HP,1.0,Auto-Thermal Reforming with Carbon Capture,Hydrogen (high pressure)
+ATR_CCS,NG_HP,-1.583,Auto-Thermal Reforming with Carbon Capture,Natural gas (high pressure)
+BENZENE,BENZENE,1.0,Benzene,Benzene
+BIOETHANOL_TO_BIOJETFUELS,BIO_ETHANOL,-1.754,Conversion of BioEthanol to Jet Fuels,Bio-ethanol
+BIOETHANOL_TO_BIOJETFUELS,BIO_JETFUEL,1.0,Conversion of BioEthanol to Jet Fuels,Bio-jetfuel
+BIOETHANOL_TO_BIOJETFUELS,CO2_A,0.192,Conversion of BioEthanol to Jet Fuels,CO2 emission (from carbon-intensive fields)
+BIOGAS_ATR,H2_HP,1.0,Biogas Auto-Thermal Reforming,Hydrogen (high pressure)
+BIOGAS_ATR,WOOD,-2.783,Biogas Auto-Thermal Reforming,Woody biomass
+BIOGAS_ATR_CCS,CO2_C,0.72,Biogas Auto-Thermal Reforming with Carbon Capture,Captured CO2
+BIOGAS_ATR_CCS,CO2_E,-0.08,Biogas Auto-Thermal Reforming with Carbon Capture,CO2 emission (from nonconcentrated spot sources)
+BIOGAS_ATR_CCS,H2_HP,1.0,Biogas Auto-Thermal Reforming with Carbon Capture,Hydrogen (high pressure)
+BIOGAS_ATR_CCS,WOOD,-3.199,Biogas Auto-Thermal Reforming with Carbon Capture,Woody biomass
+BIOGAS_BIOMETHANE,CO2_C,-0.198,Biomass to Biomethane,Captured CO2
+BIOGAS_BIOMETHANE,ELECTRICITY_MV,-0.024,Biomass to Biomethane,Electricity (medium voltage)
+BIOGAS_BIOMETHANE,H2_MP,-1.191,Biomass to Biomethane,Hydrogen (medium pressure)
+BIOGAS_BIOMETHANE,HEAT_HIGH_T,0.189,Biomass to Biomethane,Heat (high temperature)
+BIOGAS_BIOMETHANE,SNG_MP,1.0,Biomass to Biomethane,Synthetic natural gas (medium pressure)
+BIOGAS_SMR,H2_HP,1.0,Biogas Steam Methane Reforming,Hydrogen (high pressure)
+BIOGAS_SMR,WOOD,-1.711,Biogas Steam Methane Reforming,Woody biomass
+BIOGAS_SMR_CCS,CO2_C,0.443,Biogas Steam Methane Reforming with Carbon Capture,Captured CO2
+BIOGAS_SMR_CCS,CO2_E,-0.049,Biogas Steam Methane Reforming with Carbon Capture,CO2 emission (from nonconcentrated spot sources)
+BIOGAS_SMR_CCS,H2_HP,1.0,Biogas Steam Methane Reforming with Carbon Capture,Hydrogen (high pressure)
+BIOGAS_SMR_CCS,WOOD,-1.967,Biogas Steam Methane Reforming with Carbon Capture,Woody biomass
+BIOMASS_AGRICULTURE_DEJECTION,CO2_E,-0.388235,,CO2 emission (from nonconcentrated spot sources)
+BIOMASS_AGRICULTURE_DEJECTION,WET_BIOMASS,1.0,,Wet biomass
+BIOMASS_AGRICULTURE_RESIDUAL,CO2_E,-0.388235,,CO2 emission (from nonconcentrated spot sources)
+BIOMASS_AGRICULTURE_RESIDUAL,WOOD,1.0,,Woody biomass
+BIOMASS_FORESTRY_LEFTOVER1,CO2_E,-0.388235,,CO2 emission (from nonconcentrated spot sources)
+BIOMASS_FORESTRY_LEFTOVER1,WOOD,1.0,,Woody biomass
+BIOMASS_FORESTRY_LEFTOVER2,CO2_E,-0.388235,,CO2 emission (from nonconcentrated spot sources)
+BIOMASS_FORESTRY_LEFTOVER2,WOOD,1.0,,Woody biomass
+BIOMASS_FORESTRY_RESIDUAL,CO2_E,-0.388235,,CO2 emission (from nonconcentrated spot sources)
+BIOMASS_FORESTRY_RESIDUAL,WOOD,1.0,,Woody biomass
+BIOMASS_FORESTRY_UNEXPLOITED,CO2_E,-0.388235,,CO2 emission (from nonconcentrated spot sources)
+BIOMASS_FORESTRY_UNEXPLOITED,WOOD,1.0,,Woody biomass
+BIOMASS_GAS_EF_H2,CO2_E,0.589,Hydrogen from Biomass Gasification Entrained Flow ,CO2 emission (from nonconcentrated spot sources)
+BIOMASS_GAS_EF_H2,ELECTRICITY_LV,0.034,Hydrogen from Biomass Gasification Entrained Flow ,Electricity (low voltage)
+BIOMASS_GAS_EF_H2,H2_MP,1.0,Hydrogen from Biomass Gasification Entrained Flow ,Hydrogen (medium pressure)
+BIOMASS_GAS_EF_H2,WOOD,-2.107,Hydrogen from Biomass Gasification Entrained Flow ,Woody biomass
+BIOMASS_GAS_EF_H2_CCS,CO2_C,0.763,Hydrogen from Biomass Gasification Entrained Flow with Carbon Capture,Captured CO2
+BIOMASS_GAS_EF_H2_CCS,CO2_E,-0.085,Hydrogen from Biomass Gasification Entrained Flow with Carbon Capture,CO2 emission (from nonconcentrated spot sources)
+BIOMASS_GAS_EF_H2_CCS,ELECTRICITY_LV,0.034,Hydrogen from Biomass Gasification Entrained Flow with Carbon Capture,Electricity (low voltage)
+BIOMASS_GAS_EF_H2_CCS,H2_MP,1.0,Hydrogen from Biomass Gasification Entrained Flow with Carbon Capture,Hydrogen (medium pressure)
+BIOMASS_GAS_EF_H2_CCS,WOOD,-2.422,Hydrogen from Biomass Gasification Entrained Flow with Carbon Capture,Woody biomass
+BIOMASS_GAS_FB_H2,CO2_E,0.745,Hydrogen from Biomass Gasification Fuidized Bed ,CO2 emission (from nonconcentrated spot sources)
+BIOMASS_GAS_FB_H2,ELECTRICITY_LV,0.064,Hydrogen from Biomass Gasification Fuidized Bed ,Electricity (low voltage)
+BIOMASS_GAS_FB_H2,H2_MP,1.0,Hydrogen from Biomass Gasification Fuidized Bed ,Hydrogen (medium pressure)
+BIOMASS_GAS_FB_H2,WOOD,-2.662,Hydrogen from Biomass Gasification Fuidized Bed ,Woody biomass
+BIOMASS_GAS_FB_H2_CCS,CO2_C,0.964,Hydrogen from Biomass Gasification Fuidized Bed with Carbon Capture,Captured CO2
+BIOMASS_GAS_FB_H2_CCS,CO2_E,-0.107,Hydrogen from Biomass Gasification Fuidized Bed with Carbon Capture,CO2 emission (from nonconcentrated spot sources)
+BIOMASS_GAS_FB_H2_CCS,ELECTRICITY_LV,0.064,Hydrogen from Biomass Gasification Fuidized Bed with Carbon Capture,Electricity (low voltage)
+BIOMASS_GAS_FB_H2_CCS,H2_MP,1.0,Hydrogen from Biomass Gasification Fuidized Bed with Carbon Capture,Hydrogen (medium pressure)
+BIOMASS_GAS_FB_H2_CCS,WOOD,-3.06,Hydrogen from Biomass Gasification Fuidized Bed with Carbon Capture,Woody biomass
+BIOMASS_WASTE_BUILDING,CO2_E,-0.388235,,CO2 emission (from nonconcentrated spot sources)
+BIOMASS_WASTE_BUILDING,WOOD,1.0,,Woody biomass
+BIOMASS_WASTE_MUNICIPAL,CO2_E,-0.388235,,CO2 emission (from nonconcentrated spot sources)
+BIOMASS_WASTE_MUNICIPAL,WET_BIOMASS,1.0,,Wet biomass
+BIOMASS_WASTE_ORGANIC,CO2_E,-0.388235,,CO2 emission (from nonconcentrated spot sources)
+BIOMASS_WASTE_ORGANIC,WASTE,1.0,,Waste
+BIOMASS_WASTE_PAPER,CO2_E,-0.388235,,CO2 emission (from nonconcentrated spot sources)
+BIOMASS_WASTE_PAPER,WASTE,1.0,,Waste
+BIOMASS_WASTE_PAPER_FABRIC,CO2_E,-0.388235,,CO2 emission (from nonconcentrated spot sources)
+BIOMASS_WASTE_PAPER_FABRIC,WET_BIOMASS,1.0,,Wet biomass
+BIOMETHANE_TO_BIOMETHANOL,BIO_METHANOL,1.0,Conversion of BioMethane to Methanol,Bio-methanol
+BIOMETHANE_TO_BIOMETHANOL,CO2_A,-0.25,Conversion of BioMethane to Methanol,CO2 emission (from carbon-intensive fields)
+BIOMETHANE_TO_BIOMETHANOL,SNG_MP,-1.4,Conversion of BioMethane to Methanol,Synthetic natural gas (medium pressure)
+BIOMETHANOL_CARBONYLATION,ACETIC_ACID,1.0,BioMethanol Cabonylation Process,Acetic acid
+BIOMETHANOL_CARBONYLATION,BIO_METHANOL,-2.066,BioMethanol Cabonylation Process,Bio-methanol
+BIOMETHANOL_CARBONYLATION,CO2_A,0.15,BioMethanol Cabonylation Process,CO2 emission (from carbon-intensive fields)
+BIOMETHANOL_FT,BIO_METHANOL,1.0,BioMethanol Synthesis via Fischer-Tropsch Process,Bio-methanol
+BIOMETHANOL_FT,CO2_C,-0.25,BioMethanol Synthesis via Fischer-Tropsch Process,Captured CO2
+BIOMETHANOL_FT,ELECTRICITY_MV,-0.03,BioMethanol Synthesis via Fischer-Tropsch Process,Electricity (medium voltage)
+BIOMETHANOL_FT,SNG_MP,-1.08,BioMethanol Synthesis via Fischer-Tropsch Process,Synthetic natural gas (medium pressure)
+BIOMETHANOL_TO_AROMATICS,BENZENE,1.0,Conversion of BioMethanol to Aromatic Compounds,Benzene
+BIOMETHANOL_TO_AROMATICS,BIO_METHANOL,-74.074,Conversion of BioMethanol to Aromatic Compounds,Bio-methanol
+BIOMETHANOL_TO_AROMATICS,CO2_A,13.186,Conversion of BioMethanol to Aromatic Compounds,CO2 emission (from carbon-intensive fields)
+BIOMETHANOL_TO_AROMATICS,ETHYLENE,5.33,Conversion of BioMethanol to Aromatic Compounds,Ethylene
+BIOMETHANOL_TO_AROMATICS,TOLUENE,6.296,Conversion of BioMethanol to Aromatic Compounds,Toluene
+BIOMETHANOL_TO_AROMATICS,XYLENE,10.37,Conversion of BioMethanol to Aromatic Compounds,Xylene
+BIOMETHANOL_TO_OLEFINS,BIO_METHANOL,-2.891,Conversion of BioMethanol to Olefinic Compounds,Bio-methanol
+BIOMETHANOL_TO_OLEFINS,CO2_A,25843.33,Conversion of BioMethanol to Olefinic Compounds,CO2 emission (from carbon-intensive fields)
+BIOMETHANOL_TO_OLEFINS,ETHYLENE,1.0,Conversion of BioMethanol to Olefinic Compounds,Ethylene
+BIOMETHANOL_TO_OLEFINS,PROPYLENE,1.643,Conversion of BioMethanol to Olefinic Compounds,Propylene
+BIO_DIESEL,BIO_DIESEL,1.0,Bio-diesel,Bio-diesel
+BIO_ETHANOL,BIO_ETHANOL,1.0,Bio-ethanol,Bio-ethanol
+BIO_ETHANOL,CO2_E,-0.2579384463,Bio-ethanol,CO2 emission (from nonconcentrated spot sources)
+BUS_BIODIESEL_B100,BIO_DIESEL,-0.391,100% BioDiesel-Powered Bus,Bio-diesel
+BUS_BIODIESEL_B100,CO2_E,0.112,100% BioDiesel-Powered Bus,CO2 emission (from nonconcentrated spot sources)
+BUS_BIODIESEL_B100,MOB_PUBLIC_SD,1.0,100% BioDiesel-Powered Bus,Public mobility
+BUS_BIODIESEL_B20,BIO_DIESEL,-0.078,20% BioDiesel-Powered Bus,Bio-diesel
+BUS_BIODIESEL_B20,CO2_E,0.111,20% BioDiesel-Powered Bus,CO2 emission (from nonconcentrated spot sources)
+BUS_BIODIESEL_B20,DIESEL,-0.313,20% BioDiesel-Powered Bus,Diesel
+BUS_BIODIESEL_B20,MOB_PUBLIC_SD,1.0,20% BioDiesel-Powered Bus,Public mobility
+BUS_CNG,CO2_E,0.095,Compressed Natural Gas-Powered Bus,CO2 emission (from nonconcentrated spot sources)
+BUS_CNG,MOB_PUBLIC_SD,1.0,Compressed Natural Gas-Powered Bus,Public mobility
+BUS_CNG,NG_HP,-0.458,Compressed Natural Gas-Powered Bus,Natural gas (high pressure)
+BUS_CSNG,CO2_E,0.095,Compressed Synthetic Natural Gas-Powered Bus,CO2 emission (from nonconcentrated spot sources)
+BUS_CSNG,MOB_PUBLIC_SD,1.0,Compressed Synthetic Natural Gas-Powered Bus,Public mobility
+BUS_CSNG,SNG_HP,-0.458,Compressed Synthetic Natural Gas-Powered Bus,Synthetic natural gas (high pressure)
+BUS_DIESEL,CO2_E,0.111,Diesel-Powered Bus,CO2 emission (from nonconcentrated spot sources)
+BUS_DIESEL,DIESEL,-0.391,Diesel-Powered Bus,Diesel
+BUS_DIESEL,MOB_PUBLIC_SD,1.0,Diesel-Powered Bus,Public mobility
+BUS_EV,ELECTRICITY_MV,-0.153,Electric-Powered Bus,Electricity (medium voltage)
+BUS_EV,MOB_PUBLIC_SD,1.0,Electric-Powered Bus,Public mobility
+BUS_FC_H2,H2_HP,-0.229,Hydrogen Fuel Cell-Powered Bus,Hydrogen (high pressure)
+BUS_FC_H2,MOB_PUBLIC_SD,1.0,Hydrogen Fuel Cell-Powered Bus,Public mobility
+BUS_GASOLINE,CO2_E,0.111,Gasoline-Powered Bus,CO2 emission (from nonconcentrated spot sources)
+BUS_GASOLINE,GASOLINE,-0.472,Gasoline-Powered Bus,Gasoline
+BUS_GASOLINE,MOB_PUBLIC_SD,1.0,Gasoline-Powered Bus,Public mobility
+BUS_HY_DIESEL,CO2_E,0.08,Diesel Hybrid Bus,CO2 emission (from nonconcentrated spot sources)
+BUS_HY_DIESEL,DIESEL,-0.281,Diesel Hybrid Bus,Diesel
+BUS_HY_DIESEL,MOB_PUBLIC_SD,1.0,Diesel Hybrid Bus,Public mobility
+BUS_PROPANE,CO2_E,0.111,Propane-Powered Bus,CO2 emission (from nonconcentrated spot sources)
+BUS_PROPANE,MOB_PUBLIC_SD,1.0,Propane-Powered Bus,Public mobility
+BUS_PROPANE,PROPANE,-0.472,Propane-Powered Bus,Propane
+CAR_BIODIESEL_B100,BIO_DIESEL,-0.441,100% BioDiesel-Powered Car,Bio-diesel
+CAR_BIODIESEL_B100,CO2_E,0.108,100% BioDiesel-Powered Car,CO2 emission (from nonconcentrated spot sources)
+CAR_BIODIESEL_B100,MOB_PRIVATE_ELD,1.0,100% BioDiesel-Powered Car,Private mobility
+CAR_BIODIESEL_B100,MOB_PRIVATE_LD,1.0,100% BioDiesel-Powered Car,Private mobility
+CAR_BIODIESEL_B100,MOB_PRIVATE_MD,1.0,100% BioDiesel-Powered Car,Private mobility
+CAR_BIODIESEL_B100,MOB_PRIVATE_SD,1.0,100% BioDiesel-Powered Car,Private mobility
+CAR_BIODIESEL_B20,BIO_DIESEL,-0.088,20% BioDiesel-Powered Car,Bio-diesel
+CAR_BIODIESEL_B20,CO2_E,0.107,20% BioDiesel-Powered Car,CO2 emission (from nonconcentrated spot sources)
+CAR_BIODIESEL_B20,DIESEL,-0.353,20% BioDiesel-Powered Car,Diesel
+CAR_BIODIESEL_B20,MOB_PRIVATE_ELD,1.0,20% BioDiesel-Powered Car,Private mobility
+CAR_BIODIESEL_B20,MOB_PRIVATE_LD,1.0,20% BioDiesel-Powered Car,Private mobility
+CAR_BIODIESEL_B20,MOB_PRIVATE_MD,1.0,20% BioDiesel-Powered Car,Private mobility
+CAR_BIODIESEL_B20,MOB_PRIVATE_SD,1.0,20% BioDiesel-Powered Car,Private mobility
+CAR_BIOETOH_E10,BIO_ETHANOL,-0.053,BioEthanol-Powered Car (E10 Blend),Bio-ethanol
+CAR_BIOETOH_E10,CO2_E,0.124,BioEthanol-Powered Car (E10 Blend),CO2 emission (from nonconcentrated spot sources)
+CAR_BIOETOH_E10,GASOLINE,-0.476,BioEthanol-Powered Car (E10 Blend),Gasoline
+CAR_BIOETOH_E10,MOB_PRIVATE_ELD,1.0,BioEthanol-Powered Car (E10 Blend),Private mobility
+CAR_BIOETOH_E10,MOB_PRIVATE_LD,1.0,BioEthanol-Powered Car (E10 Blend),Private mobility
+CAR_BIOETOH_E10,MOB_PRIVATE_MD,1.0,BioEthanol-Powered Car (E10 Blend),Private mobility
+CAR_BIOETOH_E10,MOB_PRIVATE_SD,1.0,BioEthanol-Powered Car (E10 Blend),Private mobility
+CAR_BIOETOH_E85,BIO_ETHANOL,-0.45,BioEthanol-Powered Car with E85 Blend,Bio-ethanol
+CAR_BIOETOH_E85,CO2_E,0.114,BioEthanol-Powered Car with E85 Blend,CO2 emission (from nonconcentrated spot sources)
+CAR_BIOETOH_E85,GASOLINE,-0.079,BioEthanol-Powered Car with E85 Blend,Gasoline
+CAR_BIOETOH_E85,MOB_PRIVATE_ELD,1.0,BioEthanol-Powered Car with E85 Blend,Private mobility
+CAR_BIOETOH_E85,MOB_PRIVATE_LD,1.0,BioEthanol-Powered Car with E85 Blend,Private mobility
+CAR_BIOETOH_E85,MOB_PRIVATE_MD,1.0,BioEthanol-Powered Car with E85 Blend,Private mobility
+CAR_BIOETOH_E85,MOB_PRIVATE_SD,1.0,BioEthanol-Powered Car with E85 Blend,Private mobility
+CAR_BIOMEOH,BIO_METHANOL,-0.05,Biomethanol-Powered Car ,Bio-methanol
+CAR_BIOMEOH,CO2_E,0.111,Biomethanol-Powered Car ,CO2 emission (from nonconcentrated spot sources)
+CAR_BIOMEOH,GASOLINE,-0.39,Biomethanol-Powered Car ,Gasoline
+CAR_BIOMEOH,MOB_PRIVATE_ELD,1.0,Biomethanol-Powered Car ,Private mobility
+CAR_BIOMEOH,MOB_PRIVATE_LD,1.0,Biomethanol-Powered Car ,Private mobility
+CAR_BIOMEOH,MOB_PRIVATE_MD,1.0,Biomethanol-Powered Car ,Private mobility
+CAR_BIOMEOH,MOB_PRIVATE_SD,1.0,Biomethanol-Powered Car ,Private mobility
+CAR_CNG,CO2_E,0.101,Compressed Natural Gas-Powered Car,CO2 emission (from nonconcentrated spot sources)
+CAR_CNG,MOB_PRIVATE_ELD,1.0,Compressed Natural Gas-Powered Car,Private mobility
+CAR_CNG,NG_HP,-0.599,Compressed Natural Gas-Powered Car,Natural gas (high pressure)
+CAR_CNG,MOB_PRIVATE_LD,1.0,Compressed Natural Gas-Powered Car,Private mobility
+CAR_CNG,MOB_PRIVATE_MD,1.0,Compressed Natural Gas-Powered Car,Private mobility
+CAR_CNG,MOB_PRIVATE_SD,1.0,Compressed Natural Gas-Powered Car,Private mobility
+CAR_CSNG,CO2_E,0.101,Compressed Synthetic Natural Gas-Powered Car,CO2 emission (from nonconcentrated spot sources)
+CAR_CSNG,MOB_PRIVATE_ELD,1.0,Compressed Synthetic Natural Gas-Powered Car,Private mobility
+CAR_CSNG,SNG_HP,-0.599,Compressed Synthetic Natural Gas-Powered Car,Synthetic natural gas (high pressure)
+CAR_CSNG,MOB_PRIVATE_LD,1.0,Compressed Synthetic Natural Gas-Powered Car,Private mobility
+CAR_CSNG,MOB_PRIVATE_MD,1.0,Compressed Synthetic Natural Gas-Powered Car,Private mobility
+CAR_CSNG,MOB_PRIVATE_SD,1.0,Compressed Synthetic Natural Gas-Powered Car,Private mobility
+CAR_DIESEL,CO2_E,0.112,Diesel-Powered Car,CO2 emission (from nonconcentrated spot sources)
+CAR_DIESEL,DIESEL,-0.423,Diesel-Powered Car,Diesel
+CAR_DIESEL,MOB_PRIVATE_ELD,1.0,Diesel-Powered Car,Private mobility
+CAR_DIESEL,MOB_PRIVATE_LD,1.0,Diesel-Powered Car,Private mobility
+CAR_DIESEL,MOB_PRIVATE_MD,1.0,Diesel-Powered Car,Private mobility
+CAR_DIESEL,MOB_PRIVATE_SD,1.0,Diesel-Powered Car,Private mobility
+CAR_ETOH_E10,CO2_E,0.124,Ethanol-Powered Car (E10 Blend),CO2 emission (from nonconcentrated spot sources)
+CAR_ETOH_E10,ETHANOL,-0.053,Ethanol-Powered Car (E10 Blend),Ethanol
+CAR_ETOH_E10,GASOLINE,-0.476,Ethanol-Powered Car (E10 Blend),Gasoline
+CAR_ETOH_E10,MOB_PRIVATE_ELD,1.0,Ethanol-Powered Car (E10 Blend),Private mobility
+CAR_ETOH_E10,MOB_PRIVATE_LD,1.0,Ethanol-Powered Car (E10 Blend),Private mobility
+CAR_ETOH_E10,MOB_PRIVATE_MD,1.0,Ethanol-Powered Car (E10 Blend),Private mobility
+CAR_ETOH_E10,MOB_PRIVATE_SD,1.0,Ethanol-Powered Car (E10 Blend),Private mobility
+CAR_ETOH_E85,CO2_E,0.114,Ethanol-Powered Car with E85 Blend,CO2 emission (from nonconcentrated spot sources)
+CAR_ETOH_E85,ETHANOL,-0.45,Ethanol-Powered Car with E85 Blend,Ethanol
+CAR_ETOH_E85,GASOLINE,-0.079,Ethanol-Powered Car with E85 Blend,Gasoline
+CAR_ETOH_E85,MOB_PRIVATE_ELD,1.0,Ethanol-Powered Car with E85 Blend,Private mobility
+CAR_ETOH_E85,MOB_PRIVATE_LD,1.0,Ethanol-Powered Car with E85 Blend,Private mobility
+CAR_ETOH_E85,MOB_PRIVATE_MD,1.0,Ethanol-Powered Car with E85 Blend,Private mobility
+CAR_ETOH_E85,MOB_PRIVATE_SD,1.0,Ethanol-Powered Car with E85 Blend,Private mobility
+CAR_EV,ELECTRICITY_MV,-0.192,Electric-Powered Car,Electricity (medium voltage)
+CAR_EV,MOB_PRIVATE_ELD,1.0,Electric-Powered Car,Private mobility
+CAR_EV,MOB_PRIVATE_LD,1.0,Electric-Powered Car,Private mobility
+CAR_EV,MOB_PRIVATE_MD,1.0,Electric-Powered Car,Private mobility
+CAR_EV,MOB_PRIVATE_SD,1.0,Electric-Powered Car,Private mobility
+CAR_FC_H2,CO2_E,0.022,Fuel Cell-Powered Car with Hydrogen,CO2 emission (from nonconcentrated spot sources)
+CAR_FC_H2,H2_HP,-0.256,Fuel Cell-Powered Car with Hydrogen,Hydrogen (high pressure)
+CAR_FC_H2,MOB_PRIVATE_ELD,1.0,Fuel Cell-Powered Car with Hydrogen,Private mobility
+CAR_FC_H2,MOB_PRIVATE_LD,1.0,Fuel Cell-Powered Car with Hydrogen,Private mobility
+CAR_FC_H2,MOB_PRIVATE_MD,1.0,Fuel Cell-Powered Car with Hydrogen,Private mobility
+CAR_FC_H2,MOB_PRIVATE_SD,1.0,Fuel Cell-Powered Car with Hydrogen,Private mobility
+CAR_GASOLINE,CO2_E,0.116,Gasoline-Powered Car,CO2 emission (from nonconcentrated spot sources)
+CAR_GASOLINE,GASOLINE,-0.426,Gasoline-Powered Car,Gasoline
+CAR_GASOLINE,MOB_PRIVATE_ELD,1.0,Gasoline-Powered Car,Private mobility
+CAR_GASOLINE,MOB_PRIVATE_LD,1.0,Gasoline-Powered Car,Private mobility
+CAR_GASOLINE,MOB_PRIVATE_MD,1.0,Gasoline-Powered Car,Private mobility
+CAR_GASOLINE,MOB_PRIVATE_SD,1.0,Gasoline-Powered Car,Private mobility
+CAR_HEV,CO2_E,0.09,Hybrid Electric Car,CO2 emission (from nonconcentrated spot sources)
+CAR_HEV,GASOLINE,-0.381,Hybrid Electric Car,Gasoline
+CAR_HEV,MOB_PRIVATE_ELD,1.0,Hybrid Electric Car,Private mobility
+CAR_HEV,MOB_PRIVATE_LD,1.0,Hybrid Electric Car,Private mobility
+CAR_HEV,MOB_PRIVATE_MD,1.0,Hybrid Electric Car,Private mobility
+CAR_HEV,MOB_PRIVATE_SD,1.0,Hybrid Electric Car,Private mobility
+CAR_MEOH,CO2_E,0.111,Methanol-Powered Car ,CO2 emission (from nonconcentrated spot sources)
+CAR_MEOH,GASOLINE,-0.39,Methanol-Powered Car ,Gasoline
+CAR_MEOH,METHANOL,-0.05,Methanol-Powered Car ,Methanol
+CAR_MEOH,MOB_PRIVATE_ELD,1.0,Methanol-Powered Car ,Private mobility
+CAR_MEOH,MOB_PRIVATE_LD,1.0,Methanol-Powered Car ,Private mobility
+CAR_MEOH,MOB_PRIVATE_MD,1.0,Methanol-Powered Car ,Private mobility
+CAR_MEOH,MOB_PRIVATE_SD,1.0,Methanol-Powered Car ,Private mobility
+CAR_PHEV,CO2_E,0.052,Plug-in Hybrid Electric Car,CO2 emission (from nonconcentrated spot sources)
+CAR_PHEV,ELECTRICITY_MV,-0.112,Plug-in Hybrid Electric Car,Electricity (medium voltage)
+CAR_PHEV,GASOLINE,-0.222,Plug-in Hybrid Electric Car,Gasoline
+CAR_PHEV,MOB_PRIVATE_ELD,1.0,Plug-in Hybrid Electric Car,Private mobility
+CAR_PHEV,MOB_PRIVATE_LD,1.0,Plug-in Hybrid Electric Car,Private mobility
+CAR_PHEV,MOB_PRIVATE_MD,1.0,Plug-in Hybrid Electric Car,Private mobility
+CAR_PHEV,MOB_PRIVATE_SD,1.0,Plug-in Hybrid Electric Car,Private mobility
+CAR_PROPANE,CO2_E,0.11,Propane-Powered Car,CO2 emission (from nonconcentrated spot sources)
+CAR_PROPANE,MOB_PRIVATE_ELD,1.0,Propane-Powered Car,Private mobility
+CAR_PROPANE,PROPANE,-0.529,Propane-Powered Car,Propane
+CAR_PROPANE,MOB_PRIVATE_LD,1.0,Propane-Powered Car,Private mobility
+CAR_PROPANE,MOB_PRIVATE_MD,1.0,Propane-Powered Car,Private mobility
+CAR_PROPANE,MOB_PRIVATE_SD,1.0,Propane-Powered Car,Private mobility
+CCGT,CO2_A,0.314,Combined Cycle Gas Turbine,CO2 emission (from carbon-intensive fields)
+CCGT,ELECTRICITY_HV,1.0,Combined Cycle Gas Turbine,Electricity (high voltage)
+CCGT,NG_HP,-1.587,Combined Cycle Gas Turbine,Natural gas (high pressure)
+CCGT_BIOGAS,CO2_A,0.314,Combined Cycle BioGas Turbine,CO2 emission (from carbon-intensive fields)
+CCGT_BIOGAS,ELECTRICITY_HV,1.0,Combined Cycle BioGas Turbine,Electricity (high voltage)
+CCGT_BIOGAS,SNG_HP,-1.587,Combined Cycle BioGas Turbine,Synthetic natural gas (high pressure)
+CCGT_BIOGAS_CC,CO2_C,0.314,Combined Cycle BioGas Turbine with Carbon Capture,Captured CO2
+CCGT_BIOGAS_CC,CO2_E,0.09,Combined Cycle BioGas Turbine with Carbon Capture,CO2 emission (from nonconcentrated spot sources)
+CCGT_BIOGAS_CC,ELECTRICITY_HV,1.0,Combined Cycle BioGas Turbine with Carbon Capture,Electricity (high voltage)
+CCGT_BIOGAS_CC,SNG_HP,-1.754,Combined Cycle BioGas Turbine with Carbon Capture,Synthetic natural gas (high pressure)
+CCGT_CC,CO2_C,0.314,Combined Cycle Gas Turbine with Carbon Capture,Captured CO2
+CCGT_CC,CO2_E,0.09,Combined Cycle Gas Turbine with Carbon Capture,CO2 emission (from nonconcentrated spot sources)
+CCGT_CC,ELECTRICITY_HV,1.0,Combined Cycle Gas Turbine with Carbon Capture,Electricity (high voltage)
+CCGT_CC,NG_HP,-1.754,Combined Cycle Gas Turbine with Carbon Capture,Natural gas (high pressure)
+CEMENT_PROD,CEMENT,1.0,Cement Production,Cement
+CEMENT_PROD,CO2_A,0.185,Cement Production,CO2 emission (from carbon-intensive fields)
+CEMENT_PROD,ELECTRICITY_MV,-0.108,Cement Production,Electricity (medium voltage)
+CEMENT_PROD,HEAT_HIGH_T,-0.862,Cement Production,Heat (high temperature)
+CEMENT_PROD_HP,CEMENT,1.0,Cement Production (heat pump),Cement
+CEMENT_PROD_HP,CO2_A,0.185,Cement Production (heat pump),CO2 emission (from carbon-intensive fields)
+CEMENT_PROD_HP,ELECTRICITY_MV,-0.058,Cement Production (heat pump),Electricity (medium voltage)
+CEMENT_PROD_HP,HEAT_HIGH_T,-0.862,Cement Production (heat pump),Heat (high temperature)
+CO2_E,CO2_E,1.0,,CO2 emission (from nonconcentrated spot sources)
+CO2_METHANOL,CO2_C,-0.25,Conversion of CO2 to Methanol,Captured CO2
+CO2_METHANOL,H2_MP,-1.5,Conversion of CO2 to Methanol,Hydrogen (medium pressure)
+CO2_METHANOL,METHANOL,1.0,Conversion of CO2 to Methanol,Methanol
+CO2_STO,CO2_C,-1.0,CO2 Storage (input),Captured CO2
+CO2_STO,CO2_CS,1.0,CO2 Storage (input),Captured & stored CO2
+CO2_STO,ELECTRICITY_MV,-0.007,CO2 Storage (input),Electricity (medium voltage)
+CO2_TO_DIESEL,CO2_C,-0.361,Conversion of CO2 to Diesel,Captured CO2
+CO2_TO_DIESEL,DIESEL,1.0,Conversion of CO2 to Diesel,Diesel
+CO2_TO_DIESEL,GASOLINE,0.388,Conversion of CO2 to Diesel,Gasoline
+CO2_TO_DIESEL,H2_MP,-1.538,Conversion of CO2 to Diesel,Hydrogen (medium pressure)
+CO2_TO_JETFUELS,BIO_JETFUEL,1.0,Conversion of CO2 to Jet Fuels,Bio-jetfuel
+CO2_TO_JETFUELS,CO2_A,1.023,Conversion of CO2 to Jet Fuels,CO2 emission (from carbon-intensive fields)
+CO2_TO_JETFUELS,CO2_C,-0.26,Conversion of CO2 to Jet Fuels,Captured CO2
+CO2_TO_JETFUELS,H2_MP,-1.19,Conversion of CO2 to Jet Fuels,Hydrogen (medium pressure)
+CO2_TO_JETFUELS,WET_BIOMASS,-3.413,Conversion of CO2 to Jet Fuels,Wet biomass
+COACH_BIODIESEL_B100,BIO_DIESEL,-0.122,100% BioDiesel-Powered Coach,Bio-diesel
+COACH_BIODIESEL_B100,CO2_E,0.024,100% BioDiesel-Powered Coach,CO2 emission (from nonconcentrated spot sources)
+COACH_BIODIESEL_B100,MOB_PUBLIC_ELD,1.0,100% BioDiesel-Powered Coach,Public mobility
+COACH_BIODIESEL_B100,MOB_PUBLIC_LD,1.0,100% BioDiesel-Powered Coach,Public mobility
+COACH_BIODIESEL_B100,MOB_PUBLIC_MD,1.0,100% BioDiesel-Powered Coach,Public mobility
+COACH_BIODIESEL_B20,BIO_DIESEL,-0.024,20% BioDiesel-Powered Coach,Bio-diesel
+COACH_BIODIESEL_B20,CO2_E,0.024,20% BioDiesel-Powered Coach,CO2 emission (from nonconcentrated spot sources)
+COACH_BIODIESEL_B20,DIESEL,-0.097,20% BioDiesel-Powered Coach,Diesel
+COACH_BIODIESEL_B20,MOB_PUBLIC_ELD,1.0,20% BioDiesel-Powered Coach,Public mobility
+COACH_BIODIESEL_B20,MOB_PUBLIC_LD,1.0,20% BioDiesel-Powered Coach,Public mobility
+COACH_BIODIESEL_B20,MOB_PUBLIC_MD,1.0,20% BioDiesel-Powered Coach,Public mobility
+COACH_BIOETOH_E10,BIO_ETHANOL,-0.016,10% BioEthanol-Powered Coach,Bio-ethanol
+COACH_BIOETOH_E10,CO2_E,0.039,10% BioEthanol-Powered Coach,CO2 emission (from nonconcentrated spot sources)
+COACH_BIOETOH_E10,GASOLINE,-0.148,10% BioEthanol-Powered Coach,Gasoline
+COACH_BIOETOH_E10,MOB_PUBLIC_ELD,1.0,10% BioEthanol-Powered Coach,Public mobility
+COACH_BIOETOH_E10,MOB_PUBLIC_LD,1.0,10% BioEthanol-Powered Coach,Public mobility
+COACH_BIOETOH_E10,MOB_PUBLIC_MD,1.0,10% BioEthanol-Powered Coach,Public mobility
+COACH_CNG,CO2_E,0.019,Compressed Natural Gas-Powered Coach,CO2 emission (from nonconcentrated spot sources)
+COACH_CNG,MOB_PUBLIC_ELD,1.0,Compressed Natural Gas-Powered Coach,Public mobility
+COACH_CNG,NG_HP,-0.11,Compressed Natural Gas-Powered Coach,Natural gas (high pressure)
+COACH_CNG,MOB_PUBLIC_LD,1.0,Compressed Natural Gas-Powered Coach,Public mobility
+COACH_CNG,MOB_PUBLIC_MD,1.0,Compressed Natural Gas-Powered Coach,Public mobility
+COACH_CSNG,CO2_E,0.019,Compressed Synthetic Natural Gas-Powered Coach,CO2 emission (from nonconcentrated spot sources)
+COACH_CSNG,MOB_PUBLIC_ELD,1.0,Compressed Synthetic Natural Gas-Powered Coach,Public mobility
+COACH_CSNG,SNG_HP,-0.11,Compressed Synthetic Natural Gas-Powered Coach,Synthetic natural gas (high pressure)
+COACH_CSNG,MOB_PUBLIC_LD,1.0,Compressed Synthetic Natural Gas-Powered Coach,Public mobility
+COACH_CSNG,MOB_PUBLIC_MD,1.0,Compressed Synthetic Natural Gas-Powered Coach,Public mobility
+COACH_DIESEL,CO2_E,0.024,Diesel-Powered Coach,CO2 emission (from nonconcentrated spot sources)
+COACH_DIESEL,DIESEL,-0.122,Diesel-Powered Coach,Diesel
+COACH_DIESEL,MOB_PUBLIC_ELD,1.0,Diesel-Powered Coach,Public mobility
+COACH_DIESEL,MOB_PUBLIC_LD,1.0,Diesel-Powered Coach,Public mobility
+COACH_DIESEL,MOB_PUBLIC_MD,1.0,Diesel-Powered Coach,Public mobility
+COACH_ETOH_E10,CO2_E,0.039,10% Ethanol-Powered Coach,CO2 emission (from nonconcentrated spot sources)
+COACH_ETOH_E10,ETHANOL,-0.016,10% Ethanol-Powered Coach,Ethanol
+COACH_ETOH_E10,GASOLINE,-0.148,10% Ethanol-Powered Coach,Gasoline
+COACH_ETOH_E10,MOB_PUBLIC_ELD,1.0,10% Ethanol-Powered Coach,Public mobility
+COACH_ETOH_E10,MOB_PUBLIC_LD,1.0,10% Ethanol-Powered Coach,Public mobility
+COACH_ETOH_E10,MOB_PUBLIC_MD,1.0,10% Ethanol-Powered Coach,Public mobility
+COACH_EV,ELECTRICITY_MV,-0.036,Electric-Powered Coach,Electricity (medium voltage)
+COACH_EV,MOB_PUBLIC_ELD,1.0,Electric-Powered Coach,Public mobility
+COACH_EV,MOB_PUBLIC_LD,1.0,Electric-Powered Coach,Public mobility
+COACH_EV,MOB_PUBLIC_MD,1.0,Electric-Powered Coach,Public mobility
+COACH_GASOLINE,CO2_E,0.039,Gasoline-Powered Coach,CO2 emission (from nonconcentrated spot sources)
+COACH_GASOLINE,GASOLINE,-0.165,Gasoline-Powered Coach,Gasoline
+COACH_GASOLINE,MOB_PUBLIC_ELD,1.0,Gasoline-Powered Coach,Public mobility
+COACH_GASOLINE,MOB_PUBLIC_LD,1.0,Gasoline-Powered Coach,Public mobility
+COACH_GASOLINE,MOB_PUBLIC_MD,1.0,Gasoline-Powered Coach,Public mobility
+COACH_HY_DIESEL,CO2_E,0.048,Diesel Hybrid Coach,CO2 emission (from nonconcentrated spot sources)
+COACH_HY_DIESEL,DIESEL,-0.183,Diesel Hybrid Coach,Diesel
+COACH_HY_DIESEL,MOB_PUBLIC_ELD,1.0,Diesel Hybrid Coach,Public mobility
+COACH_HY_DIESEL,MOB_PUBLIC_LD,1.0,Diesel Hybrid Coach,Public mobility
+COACH_HY_DIESEL,MOB_PUBLIC_MD,1.0,Diesel Hybrid Coach,Public mobility
+COACH_PROPANE,CO2_E,0.039,Propane-Powered Coach,CO2 emission (from nonconcentrated spot sources)
+COACH_PROPANE,MOB_PUBLIC_ELD,1.0,Propane-Powered Coach,Public mobility
+COACH_PROPANE,PROPANE,-0.165,Propane-Powered Coach,Propane
+COACH_PROPANE,MOB_PUBLIC_LD,1.0,Propane-Powered Coach,Public mobility
+COACH_PROPANE,MOB_PUBLIC_MD,1.0,Propane-Powered Coach,Public mobility
+COAL,COAL,1.0,Coal,Coal
+COAL_GAS_H2,CO2_A,0.656,Hydrogen from Coal Gasification,CO2 emission (from carbon-intensive fields)
+COAL_GAS_H2,COAL,-1.635,Hydrogen from Coal Gasification,Coal
+COAL_GAS_H2,ELECTRICITY_LV,0.043,Hydrogen from Coal Gasification,Electricity (low voltage)
+COAL_GAS_H2,H2_MP,1.0,Hydrogen from Coal Gasification,Hydrogen (medium pressure)
+COAL_GAS_H2_ADV,CO2_A,1.221,Hydrogen from Advanced Coal Gasification,CO2 emission (from carbon-intensive fields)
+COAL_GAS_H2_ADV,COAL,-3.042,Hydrogen from Advanced Coal Gasification,Coal
+COAL_GAS_H2_ADV,ELECTRICITY_LV,0.898,Hydrogen from Advanced Coal Gasification,Electricity (low voltage)
+COAL_GAS_H2_ADV,H2_MP,1.0,Hydrogen from Advanced Coal Gasification,Hydrogen (medium pressure)
+COAL_GAS_H2_ADV_CCS,CO2_C,1.062,Hydrogen from Advanced Coal Gasification with Carbon Capture,Captured CO2
+COAL_GAS_H2_ADV_CCS,CO2_E,0.118,Hydrogen from Advanced Coal Gasification with Carbon Capture,CO2 emission (from nonconcentrated spot sources)
+COAL_GAS_H2_ADV_CCS,COAL,-2.939,Hydrogen from Advanced Coal Gasification with Carbon Capture,Coal
+COAL_GAS_H2_ADV_CCS,ELECTRICITY_LV,0.661,Hydrogen from Advanced Coal Gasification with Carbon Capture,Electricity (low voltage)
+COAL_GAS_H2_ADV_CCS,H2_MP,1.0,Hydrogen from Advanced Coal Gasification with Carbon Capture,Hydrogen (medium pressure)
+COAL_GAS_H2_CCS,CO2_C,0.652,Hydrogen from Coal Gasification with Carbon Capture,Captured CO2
+COAL_GAS_H2_CCS,CO2_E,0.072,Hydrogen from Coal Gasification with Carbon Capture,CO2 emission (from nonconcentrated spot sources)
+COAL_GAS_H2_CCS,COAL,-1.804,Hydrogen from Coal Gasification with Carbon Capture,Coal
+COAL_GAS_H2_CCS,ELECTRICITY_LV,0.064,Hydrogen from Coal Gasification with Carbon Capture,Electricity (low voltage)
+COAL_GAS_H2_CCS,H2_MP,1.0,Hydrogen from Coal Gasification with Carbon Capture,Hydrogen (medium pressure)
+COAL_IGCC,CO2_A,0.442,Integrated Gasification Combined Cycle,CO2 emission (from carbon-intensive fields)
+COAL_IGCC,COAL,-2.065,Integrated Gasification Combined Cycle,Coal
+COAL_IGCC,ELECTRICITY_HV,1.0,Integrated Gasification Combined Cycle,Electricity (high voltage)
+COAL_IGCC_CC,CO2_C,0.754,Integrated Gasification Combined Cycle with Carbon Capture,Captured CO2
+COAL_IGCC_CC,CO2_E,0.086,Integrated Gasification Combined Cycle with Carbon Capture,CO2 emission (from nonconcentrated spot sources)
+COAL_IGCC_CC,COAL,-2.58,Integrated Gasification Combined Cycle with Carbon Capture,Coal
+COAL_IGCC_CC,ELECTRICITY_HV,1.0,Integrated Gasification Combined Cycle with Carbon Capture,Electricity (high voltage)
+COAL_US,CO2_A,0.434,Coal Ultra-Supercritical,CO2 emission (from carbon-intensive fields)
+COAL_US,COAL,-1.94,Coal Ultra-Supercritical,Coal
+COAL_US,ELECTRICITY_HV,1.0,Coal Ultra-Supercritical,Electricity (high voltage)
+COAL_US_CC,CO2_C,0.784,Coal Ultra-Supercritical with Carbon Capture,Captured CO2
+COAL_US_CC,CO2_E,0.161,Coal Ultra-Supercritical with Carbon Capture,CO2 emission (from nonconcentrated spot sources)
+COAL_US_CC,COAL,-1.985,Coal Ultra-Supercritical with Carbon Capture,Coal
+COAL_US_CC,ELECTRICITY_HV,1.0,Coal Ultra-Supercritical with Carbon Capture,Electricity (high voltage)
+COMMUTER_RAIL_DIESEL,CO2_E,0.102,Diesel-Powered Commuter Train,CO2 emission (from nonconcentrated spot sources)
+COMMUTER_RAIL_DIESEL,DIESEL,-0.27,Diesel-Powered Commuter Train,Diesel
+COMMUTER_RAIL_DIESEL,MOB_PUBLIC_MD,1.0,Diesel-Powered Commuter Train,Public mobility
+COMMUTER_RAIL_ELEC,ELECTRICITY_HV,-0.092,Electric-Powered Commuter Train,Electricity (high voltage)
+COMMUTER_RAIL_ELEC,MOB_PUBLIC_MD,1.0,Electric-Powered Commuter Train,Public mobility
+CROPS_TO_ETHANOL,BIO_ETHANOL,1.0,Conversion of Crops to Ethanol,Bio-ethanol
+CROPS_TO_ETHANOL,CO2_A,0.154,Conversion of Crops to Ethanol,CO2 emission (from carbon-intensive fields)
+CROPS_TO_ETHANOL,WET_BIOMASS,-1.786,Conversion of Crops to Ethanol,Wet biomass
+CROPS_TO_JETFUELS,BIO_JETFUEL,1.0,Conversion of Crops to Jet Fuels,Bio-jetfuel
+CROPS_TO_JETFUELS,CO2_A,1.023,Conversion of Crops to Jet Fuels,CO2 emission (from carbon-intensive fields)
+CROPS_TO_JETFUELS,WET_BIOMASS,-3.413,Conversion of Crops to Jet Fuels,Wet biomass
+CUMENE_PROCESS,ACETIC_ACID,0.01,Cumene Production Process,Acetic acid
+CUMENE_PROCESS,ACETONE,1.0,Cumene Production Process,Acetone
+CUMENE_PROCESS,BENZENE,-3.0,Cumene Production Process,Benzene
+CUMENE_PROCESS,CO2_A,0.853,Cumene Production Process,CO2 emission (from carbon-intensive fields)
+CUMENE_PROCESS,PHENOL,0.92,Cumene Production Process,Phenol
+CUMENE_PROCESS,PROPYLENE,-0.95,Cumene Production Process,Propylene
+DAC_HT,CO2_C,1.0,Direct Air Capture at High Temperature,Captured CO2
+DAC_HT,CO2_E,-1.0,Direct Air Capture at High Temperature,CO2 emission (from nonconcentrated spot sources)
+DAC_HT,ELECTRICITY_MV,-1.535,Direct Air Capture at High Temperature,Electricity (medium voltage)
+DAC_LT,CO2_C,1.0,Direct Air Capture at Low Temperature,Captured CO2
+DAC_LT,CO2_E,-1.0,Direct Air Capture at Low Temperature,CO2 emission (from nonconcentrated spot sources)
+DAC_LT,ELECTRICITY_MV,-0.25,Direct Air Capture at Low Temperature,Electricity (medium voltage)
+DAC_LT,HEAT_HIGH_T,-1.75,Direct Air Capture at Low Temperature,Heat (high temperature)
+DEC_ADVCOGEN_H2,ELECTRICITY_MV,2.64,Decentralized Cogeneration with Hydrogen,Electricity (medium voltage)
+DEC_ADVCOGEN_H2,H2_MP,-4.55,Decentralized Cogeneration with Hydrogen,Hydrogen (medium pressure)
+DEC_ADVCOGEN_H2,HEAT_LOW_T_DECEN,1.0,Decentralized Cogeneration with Hydrogen,"Heat (low temperature, decentralized)"
+DEC_BOILER_BIOGAS,CO2_E,0.202,Decentralized Boiler with BioGas Combustion,CO2 emission (from nonconcentrated spot sources)
+DEC_BOILER_BIOGAS,HEAT_LOW_T_DECEN,1.0,Decentralized Boiler with BioGas Combustion,"Heat (low temperature, decentralized)"
+DEC_BOILER_BIOGAS,SNG_LP,-1.11,Decentralized Boiler with BioGas Combustion,Synthetic natural gas (low pressure)
+DEC_BOILER_BIOOIL,BIO_LFO,-1.18,Decentralized Boiler with BioOil Combustion,Bio-light fuel oil
+DEC_BOILER_BIOOIL,CO2_E,0.274,Decentralized Boiler with BioOil Combustion,CO2 emission (from nonconcentrated spot sources)
+DEC_BOILER_BIOOIL,HEAT_LOW_T_DECEN,1.0,Decentralized Boiler with BioOil Combustion,"Heat (low temperature, decentralized)"
+DEC_BOILER_GAS,CO2_E,0.202,Decentralized Boiler with Gas Combustion,CO2 emission (from nonconcentrated spot sources)
+DEC_BOILER_GAS,HEAT_LOW_T_DECEN,1.0,Decentralized Boiler with Gas Combustion,"Heat (low temperature, decentralized)"
+DEC_BOILER_GAS,NG_LP,-1.11,Decentralized Boiler with Gas Combustion,Natural gas (low pressure)
+DEC_BOILER_OIL,CO2_E,0.274,Decentralized Boiler with Oil Combustion,CO2 emission (from nonconcentrated spot sources)
+DEC_BOILER_OIL,HEAT_LOW_T_DECEN,1.0,Decentralized Boiler with Oil Combustion,"Heat (low temperature, decentralized)"
+DEC_BOILER_OIL,LFO,-1.18,Decentralized Boiler with Oil Combustion,Light fuel oil
+DEC_BOILER_WOOD,CO2_E,0.457,Decentralized Boiler with Wood Combustion,CO2 emission (from nonconcentrated spot sources)
+DEC_BOILER_WOOD,HEAT_LOW_T_DECEN,1.0,Decentralized Boiler with Wood Combustion,"Heat (low temperature, decentralized)"
+DEC_BOILER_WOOD,WOOD,-1.18,Decentralized Boiler with Wood Combustion,Woody biomass
+DEC_COGEN_BIOGAS,CO2_E,0.43,Decentralized Cogeneration with BioGas Combustion,CO2 emission (from nonconcentrated spot sources)
+DEC_COGEN_BIOGAS,ELECTRICITY_LV,0.96,Decentralized Cogeneration with BioGas Combustion,Electricity (low voltage)
+DEC_COGEN_BIOGAS,HEAT_LOW_T_DECEN,1.0,Decentralized Cogeneration with BioGas Combustion,"Heat (low temperature, decentralized)"
+DEC_COGEN_BIOGAS,SNG_LP,-2.17,Decentralized Cogeneration with BioGas Combustion,Synthetic natural gas (low pressure)
+DEC_COGEN_BIOOIL,BIO_LFO,-2.33,Decentralized Cogeneration with BioOil Combustion,Bio-light fuel oil
+DEC_COGEN_BIOOIL,CO2_E,0.625,Decentralized Cogeneration with BioOil Combustion,CO2 emission (from nonconcentrated spot sources)
+DEC_COGEN_BIOOIL,ELECTRICITY_LV,0.91,Decentralized Cogeneration with BioOil Combustion,Electricity (low voltage)
+DEC_COGEN_BIOOIL,HEAT_LOW_T_DECEN,1.0,Decentralized Cogeneration with BioOil Combustion,"Heat (low temperature, decentralized)"
+DEC_COGEN_GAS,CO2_E,0.43,Decentralized Cogeneration with Gas Combustion,CO2 emission (from nonconcentrated spot sources)
+DEC_COGEN_GAS,ELECTRICITY_LV,0.96,Decentralized Cogeneration with Gas Combustion,Electricity (low voltage)
+DEC_COGEN_GAS,HEAT_LOW_T_DECEN,1.0,Decentralized Cogeneration with Gas Combustion,"Heat (low temperature, decentralized)"
+DEC_COGEN_GAS,NG_LP,-2.17,Decentralized Cogeneration with Gas Combustion,Natural gas (low pressure)
+DEC_COGEN_OIL,CO2_E,0.625,Decentralized Cogeneration with Oil Combustion,CO2 emission (from nonconcentrated spot sources)
+DEC_COGEN_OIL,ELECTRICITY_LV,0.91,Decentralized Cogeneration with Oil Combustion,Electricity (low voltage)
+DEC_COGEN_OIL,HEAT_LOW_T_DECEN,1.0,Decentralized Cogeneration with Oil Combustion,"Heat (low temperature, decentralized)"
+DEC_COGEN_OIL,LFO,-2.33,Decentralized Cogeneration with Oil Combustion,Light fuel oil
+DEC_COGEN_WOOD,CO2_A,0.733,Decentralized Cogeneration with Wood Combustion,CO2 emission (from carbon-intensive fields)
+DEC_COGEN_WOOD,ELECTRICITY_MV,0.34,Decentralized Cogeneration with Wood Combustion,Electricity (medium voltage)
+DEC_COGEN_WOOD,HEAT_LOW_T_DECEN,1.0,Decentralized Cogeneration with Wood Combustion,"Heat (low temperature, decentralized)"
+DEC_COGEN_WOOD,WOOD,-1.887,Decentralized Cogeneration with Wood Combustion,Woody biomass
+DEC_DIRECT_ELEC,ELECTRICITY_LV,-1.0,Decentralized Direct Electricity,Electricity (low voltage)
+DEC_DIRECT_ELEC,HEAT_LOW_T_DECEN,1.0,Decentralized Direct Electricity,"Heat (low temperature, decentralized)"
+DEC_HP_ELEC,ELECTRICITY_LV,-0.33,Decentralized Heat Pump Electricity ,Electricity (low voltage)
+DEC_HP_ELEC,HEAT_LOW_T_DECEN,1.0,Decentralized Heat Pump Electricity ,"Heat (low temperature, decentralized)"
+DEC_RENOVATION,HEAT_LOW_T_DECEN,1.0,Decentralized Energy System Renovation,"Heat (low temperature, decentralized)"
+DEC_SOLAR,HEAT_LOW_T_DECEN,1.0,Decentralized Solar Thermal ,"Heat (low temperature, decentralized)"
+DEC_SOLAR,RES_SOLAR,-1.0,Decentralized Solar Thermal ,Solar resource
+DEC_THHP_BIOGAS,CO2_E,0.132,Decentralized Thermal BioGas Heat Pump,CO2 emission (from nonconcentrated spot sources)
+DEC_THHP_BIOGAS,HEAT_LOW_T_DECEN,1.0,Decentralized Thermal BioGas Heat Pump,"Heat (low temperature, decentralized)"
+DEC_THHP_BIOGAS,SNG_LP,-0.67,Decentralized Thermal BioGas Heat Pump,Synthetic natural gas (low pressure)
+DEC_THHP_GAS,CO2_E,0.132,Decentralized Thermal Gas Heat Pump,CO2 emission (from nonconcentrated spot sources)
+DEC_THHP_GAS,HEAT_LOW_T_DECEN,1.0,Decentralized Thermal Gas Heat Pump,"Heat (low temperature, decentralized)"
+DEC_THHP_GAS,NG_LP,-0.67,Decentralized Thermal Gas Heat Pump,Natural gas (low pressure)
+DEEP_SALINE,CO2_C,-1.0,Deep Saline Carbon Sequestration,Captured CO2
+DEEP_SALINE,CO2_E,0.05,Deep Saline Carbon Sequestration,CO2 emission (from nonconcentrated spot sources)
+DEEP_SALINE,CO2_S,0.95,Deep Saline Carbon Sequestration,Sequestrated CO2
+DEEP_SALINE,ELECTRICITY_MV,-0.0001,Deep Saline Carbon Sequestration,Electricity (medium voltage)
+DHN_BOILER_BIOGAS,CO2_A,0.202,District Heating Network Boiler with BioGas Combustion,CO2 emission (from carbon-intensive fields)
+DHN_BOILER_BIOGAS,HEAT_LOW_T_DHN,1.0,District Heating Network Boiler with BioGas Combustion,"Heat (low temperature, district heating network)"
+DHN_BOILER_BIOGAS,SNG_MP,-1.08,District Heating Network Boiler with BioGas Combustion,Synthetic natural gas (medium pressure)
+DHN_BOILER_BIOOIL,BIO_LFO,-1.15,District Heating Network Boiler with BioOil Combustion,Bio-light fuel oil
+DHN_BOILER_BIOOIL,CO2_A,0.308,District Heating Network Boiler with BioOil Combustion,CO2 emission (from carbon-intensive fields)
+DHN_BOILER_BIOOIL,HEAT_LOW_T_DHN,1.0,District Heating Network Boiler with BioOil Combustion,"Heat (low temperature, district heating network)"
+DHN_BOILER_GAS,CO2_A,0.202,District Heating Network Boiler with Gas Combustion,CO2 emission (from carbon-intensive fields)
+DHN_BOILER_GAS,HEAT_LOW_T_DHN,1.0,District Heating Network Boiler with Gas Combustion,"Heat (low temperature, district heating network)"
+DHN_BOILER_GAS,NG_MP,-1.08,District Heating Network Boiler with Gas Combustion,Natural gas (medium pressure)
+DHN_BOILER_OIL,CO2_A,0.308,District Heating Network Boiler with Oil Combustion,CO2 emission (from carbon-intensive fields)
+DHN_BOILER_OIL,HEAT_LOW_T_DHN,1.0,District Heating Network Boiler with Oil Combustion,"Heat (low temperature, district heating network)"
+DHN_BOILER_OIL,LFO,-1.15,District Heating Network Boiler with Oil Combustion,Light fuel oil
+DHN_BOILER_WOOD,CO2_A,0.449,District Heating Network Boiler with Wood Combustion,CO2 emission (from carbon-intensive fields)
+DHN_BOILER_WOOD,HEAT_LOW_T_DHN,1.0,District Heating Network Boiler with Wood Combustion,"Heat (low temperature, district heating network)"
+DHN_BOILER_WOOD,WOOD,-1.16,District Heating Network Boiler with Wood Combustion,Woody biomass
+DHN_COGEN_BIOGAS,CO2_A,0.396,District Heating Network Cogeneration with BioGas Combustion,CO2 emission (from carbon-intensive fields)
+DHN_COGEN_BIOGAS,ELECTRICITY_MV,1.25,District Heating Network Cogeneration with BioGas Combustion,Electricity (medium voltage)
+DHN_COGEN_BIOGAS,HEAT_LOW_T_DHN,1.0,District Heating Network Cogeneration with BioGas Combustion,"Heat (low temperature, district heating network)"
+DHN_COGEN_BIOGAS,SNG_MP,-2.5,District Heating Network Cogeneration with BioGas Combustion,Synthetic natural gas (medium pressure)
+DHN_COGEN_GAS,CO2_A,0.396,District Heating Network Cogeneration with Gas Combustion,CO2 emission (from carbon-intensive fields)
+DHN_COGEN_GAS,ELECTRICITY_MV,1.25,District Heating Network Cogeneration with Gas Combustion,Electricity (medium voltage)
+DHN_COGEN_GAS,HEAT_LOW_T_DHN,1.0,District Heating Network Cogeneration with Gas Combustion,"Heat (low temperature, district heating network)"
+DHN_COGEN_GAS,NG_MP,-2.5,District Heating Network Cogeneration with Gas Combustion,Natural gas (medium pressure)
+DHN_COGEN_WASTE,CO2_A,1.203,District Heating Network Cogeneration with Waste Combustion,CO2 emission (from carbon-intensive fields)
+DHN_COGEN_WASTE,ELECTRICITY_MV,0.44,District Heating Network Cogeneration with Waste Combustion,Electricity (medium voltage)
+DHN_COGEN_WASTE,HEAT_LOW_T_DHN,1.0,District Heating Network Cogeneration with Waste Combustion,"Heat (low temperature, district heating network)"
+DHN_COGEN_WASTE,WASTE,-2.22,District Heating Network Cogeneration with Waste Combustion,Waste
+DHN_COGEN_WASTE_CC,CO2_C,0.68,District Heating Network Cogeneration with Waste Combustion with Carbon Capture,Captured CO2
+DHN_COGEN_WASTE_CC,CO2_E,0.68,District Heating Network Cogeneration with Waste Combustion with Carbon Capture,CO2 emission (from nonconcentrated spot sources)
+DHN_COGEN_WASTE_CC,ELECTRICITY_MV,0.444,District Heating Network Cogeneration with Waste Combustion with Carbon Capture,Electricity (medium voltage)
+DHN_COGEN_WASTE_CC,HEAT_LOW_T_DHN,1.0,District Heating Network Cogeneration with Waste Combustion with Carbon Capture,"Heat (low temperature, district heating network)"
+DHN_COGEN_WASTE_CC,WASTE,-2.4,District Heating Network Cogeneration with Waste Combustion with Carbon Capture,Waste
+DHN_COGEN_WOOD,CO2_A,0.733,District Heating Network Cogeneration with Wood Combustion,CO2 emission (from carbon-intensive fields)
+DHN_COGEN_WOOD,ELECTRICITY_MV,0.34,District Heating Network Cogeneration with Wood Combustion,Electricity (medium voltage)
+DHN_COGEN_WOOD,HEAT_LOW_T_DHN,1.0,District Heating Network Cogeneration with Wood Combustion,"Heat (low temperature, district heating network)"
+DHN_COGEN_WOOD,WOOD,-1.89,District Heating Network Cogeneration with Wood Combustion,Woody biomass
+DHN_DEEP_GEO,HEAT_LOW_T_DHN,1.0,District Heating Network with Deep Geothermal Heat,"Heat (low temperature, district heating network)"
+DHN_DEEP_GEO,RES_GEO,-1.0,District Heating Network with Deep Geothermal Heat,Geothermal resource
+DHN_HP_ELEC,ELECTRICITY_MV,-0.25,District Heating Network with Heat Pump Electricity,Electricity (medium voltage)
+DHN_HP_ELEC,HEAT_LOW_T_DHN,1.0,District Heating Network with Heat Pump Electricity,"Heat (low temperature, district heating network)"
+DHN_RENOVATION,HEAT_LOW_T_DHN,1.0,District Heating Network Renovation,"Heat (low temperature, district heating network)"
+DIESEL,DIESEL,1.0,Diesel,Diesel
+DIESEL_S,DIESEL_S,1.0,,Stored diesel
+DIE_STO,DIESEL,-1.0,Diesel to Storage,Diesel
+DIE_STO,DIESEL_S,1.0,Diesel to Storage,Stored diesel
+DIRECT_USAGE,CO2_C,-1.0,Direct Usage of stored CO2 ,Captured CO2
+DIRECT_USAGE,ELECTRICITY_EHV,-0.119,Direct Usage of stored CO2 ,Electricity (extra high voltage)
+DOGR,CO2_C,-1.0,Deep Oil Reservoir Gas Recovery,Captured CO2
+DOGR,CO2_E,0.05,Deep Oil Reservoir Gas Recovery,CO2 emission (from nonconcentrated spot sources)
+DOGR,CO2_S,0.95,Deep Oil Reservoir Gas Recovery,Sequestrated CO2
+DOGR,ELECTRICITY_MV,-0.0001,Deep Oil Reservoir Gas Recovery,Electricity (medium voltage)
+ELECTRICITY_EHV,CO2_E,0.4818,Electricity import,CO2 emission (from nonconcentrated spot sources)
+ELECTRICITY_EHV,ELECTRICITY_EHV,1.0,Electricity import,Electricity (extra high voltage)
+ELEC_EXPORT,ELECTRICITY_EHV,-1.0,Electricity exports,Electricity (extra high voltage)
+ELEC_S,ELEC_S,1.0,,Stored electricity
+ELEC_STO,ELECTRICITY_LV,-1.0,Electricity Storage,Electricity (low voltage)
+ELEC_STO,ELEC_S,1.0,Electricity Storage,Stored electricity
+EOR,CO2_C,-1.0,Enhanced Oil Recovery,Captured CO2
+EOR,CO2_E,0.05,Enhanced Oil Recovery,CO2 emission (from nonconcentrated spot sources)
+EOR,CO2_S,0.95,Enhanced Oil Recovery,Sequestrated CO2
+EOR,ELECTRICITY_MV,-0.0001,Enhanced Oil Recovery,Electricity (medium voltage)
+ETHANE,ETHANE,1.0,Ethane,Ethane
+ETHANE_CRACKING,CO2_A,0.053,Ethane Cracking Process,CO2 emission (from carbon-intensive fields)
+ETHANE_CRACKING,ETHANE,-1.577,Ethane Cracking Process,Ethane
+ETHANE_CRACKING,ETHYLENE,1.0,Ethane Cracking Process,Ethylene
+ETHANE_CRACKING,PROPYLENE,0.224,Ethane Cracking Process,Propylene
+ETHANE_OXIDATION,ACETIC_ACID,1.0,Ethane Oxidation Process,Acetic acid
+ETHANE_OXIDATION,CO2_A,0.152,Ethane Oxidation Process,CO2 emission (from carbon-intensive fields)
+ETHANE_OXIDATION,ETHYLENE,-2.146,Ethane Oxidation Process,Ethylene
+ETHANE_TO_ETHYLENE,CO2_A,0.09,Conversion of Ethane to Ethylene,CO2 emission (from carbon-intensive fields)
+ETHANE_TO_ETHYLENE,ETHANE,-1.493,Conversion of Ethane to Ethylene,Ethane
+ETHANE_TO_ETHYLENE,ETHYLENE,1.0,Conversion of Ethane to Ethylene,Ethylene
+ETHANOL,ETHANOL,1.0,Ethanol,Ethanol
+ETHANOL_TO_JETFUELS,CO2_A,0.192,Conversion of Ethanol to Jet Fuels,CO2 emission (from carbon-intensive fields)
+ETHANOL_TO_JETFUELS,ETHANOL,-1.754,Conversion of Ethanol to Jet Fuels,Ethanol
+ETHANOL_TO_JETFUELS,JETFUEL,1.0,Conversion of Ethanol to Jet Fuels,Jet fuel
+ETHYLBENZENE,ETHYLBENZENE,1.0,Ethylbenzene,Ethylbenzene
+ETHYLENE,ETHYLENE,1.0,Ethylene,Ethylene
+ETHYLENE_POLYMERIZATION,CO2_C,-0.011,Ethylene Polymerization,Captured CO2
+ETHYLENE_POLYMERIZATION,ETHYLENE,-1.031,Ethylene Polymerization,Ethylene
+ETHYLENE_POLYMERIZATION,PE,1.0,Ethylene Polymerization,Polyethylene
+FOOD_PROD,ELECTRICITY_MV,-0.61,Food Production,Electricity (medium voltage)
+FOOD_PROD,FOOD,1.0,Food Production,Food
+FOOD_PROD,HEAT_HIGH_T,-1.6,Food Production,Heat (high temperature)
+FOOD_PROD_HP,ELECTRICITY_MV,-0.788,Food Production (heat pump),Electricity (medium voltage)
+FOOD_PROD_HP,FOOD,1.0,Food Production (heat pump),Food
+FOOD_PROD_HP,HEAT_HIGH_T,-0.009,Food Production (heat pump),Heat (high temperature)
+FOOD_PROD_HR,ELECTRICITY_MV,-0.61,Food Production with Heat Recovery,Electricity (medium voltage)
+FOOD_PROD_HR,FOOD,1.0,Food Production with Heat Recovery,Food
+FOOD_PROD_HR,HEAT_HIGH_T,-1.285,Food Production with Heat Recovery,Heat (high temperature)
+FT,BIO_DIESEL,1.0,Fischer-Tropsch Synthesis,Bio-diesel
+FT,CO2_A,0.464,Fischer-Tropsch Synthesis,CO2 emission (from carbon-intensive fields)
+FT,ELECTRICITY_MV,-0.004,Fischer-Tropsch Synthesis,Electricity (medium voltage)
+FT,HEAT_LOW_T_DHN,0.395,Fischer-Tropsch Synthesis,"Heat (low temperature, district heating network)"
+FT,WOOD,-1.879,Fischer-Tropsch Synthesis,Woody biomass
+GASIFICATION_H2,CO2_A,0.635,Hydrogen Production via Gasification,CO2 emission (from carbon-intensive fields)
+GASIFICATION_H2,ELECTRICITY_MV,-0.093,Hydrogen Production via Gasification,Electricity (medium voltage)
+GASIFICATION_H2,H2_MP,1.0,Hydrogen Production via Gasification,Hydrogen (medium pressure)
+GASIFICATION_H2,HEAT_HIGH_T,0.288,Hydrogen Production via Gasification,Heat (high temperature)
+GASIFICATION_H2,WOOD,-1.63,Hydrogen Production via Gasification,Woody biomass
+GASIFICATION_SNG,CO2_A,0.327,Synthetic Natural Gas Production via Gasification,CO2 emission (from carbon-intensive fields)
+GASIFICATION_SNG,HEAT_HIGH_T,0.324,Synthetic Natural Gas Production via Gasification,Heat (high temperature)
+GASIFICATION_SNG,SNG_MP,1.0,Synthetic Natural Gas Production via Gasification,Synthetic natural gas (medium pressure)
+GASIFICATION_SNG,WOOD,-1.351,Synthetic Natural Gas Production via Gasification,Woody biomass
+GASOLINE,GASOLINE,1.0,Gasoline,Gasoline
+GASOLINE_S,GASOLINE_S,1.0,,Stored gasoline
+GASO_STO,GASOLINE,-1.0,Gasoline to Storage,Gasoline
+GASO_STO,GASOLINE_S,1.0,Gasoline to Storage,Stored gasoline
+GEOTHERMAL,ELECTRICITY_MV,1.0,Geothermal Energy Utilization,Electricity (medium voltage)
+GEOTHERMAL,RES_GEO,-1.0,Geothermal Energy Utilization,Geothermal resource
+H2_CCGT,ELECTRICITY_HV,1.0,Combine Cycle Gas Turbine Hydrogen,Electricity (high voltage)
+H2_CCGT,H2_MP,-1.429,Combine Cycle Gas Turbine Hydrogen,Hydrogen (medium pressure)
+H2_COMP_HE,ELECTRICITY_MV,-0.007,Hydrogen Compression from High Pressure to Extra High Pressure,Electricity (medium voltage)
+H2_COMP_HE,H2_EHP,1.0,Hydrogen Compression from High Pressure to Extra High Pressure,Hydrogen (extra high pressure)
+H2_COMP_HE,H2_HP,-1.0,Hydrogen Compression from High Pressure to Extra High Pressure,Hydrogen (high pressure)
+H2_COMP_LM,ELECTRICITY_MV,-0.02,Hydrogen Compression from Low Pressure to Medium Pressure,Electricity (medium voltage)
+H2_COMP_LM,H2_LP,-1.0,Hydrogen Compression from Low Pressure to Medium Pressure,Hydrogen (low pressure)
+H2_COMP_LM,H2_MP,1.0,Hydrogen Compression from Low Pressure to Medium Pressure,Hydrogen (medium pressure)
+H2_COMP_MH,ELECTRICITY_MV,-0.01,Hydrogen Compression from Medium Pressure to High Pressure,Electricity (medium voltage)
+H2_COMP_MH,H2_HP,1.0,Hydrogen Compression from Medium Pressure to High Pressure,Hydrogen (high pressure)
+H2_COMP_MH,H2_MP,-1.0,Hydrogen Compression from Medium Pressure to High Pressure,Hydrogen (medium pressure)
+H2_EHP,H2_EHP,1.0,Hydrogen,Hydrogen (extra high pressure)
+H2_EXP_EH,H2_EHP,-1.0,Hydrogen Expansion from Extra High Pressure to High Pressure,Hydrogen (extra high pressure)
+H2_EXP_EH,H2_HP,1.0,Hydrogen Expansion from Extra High Pressure to High Pressure,Hydrogen (high pressure)
+H2_EXP_EH_COGEN,ELECTRICITY_MV,0.007,Hydrogen Expansion from Extra High Pressure to High Pressure (co-generation unit),Electricity (medium voltage)
+H2_EXP_EH_COGEN,H2_EHP,-1.0,Hydrogen Expansion from Extra High Pressure to High Pressure (co-generation unit),Hydrogen (extra high pressure)
+H2_EXP_EH_COGEN,H2_HP,1.0,Hydrogen Expansion from Extra High Pressure to High Pressure (co-generation unit),Hydrogen (high pressure)
+H2_EXP_EH_COGEN,HEAT_LOW_T_DECEN,-0.007,Hydrogen Expansion from Extra High Pressure to High Pressure (co-generation unit),"Heat (low temperature, decentralized)"
+H2_EXP_HM,H2_HP,-1.0,Hydrogen Expansion from High Pressure to Medium Pressure,Hydrogen (high pressure)
+H2_EXP_HM,H2_MP,1.0,Hydrogen Expansion from High Pressure to Medium Pressure,Hydrogen (medium pressure)
+H2_EXP_HM_COGEN,ELECTRICITY_MV,0.01,Hydrogen Expansion from High Pressure to Medium Pressure (co-generation unit),Electricity (medium voltage)
+H2_EXP_HM_COGEN,H2_HP,-1.0,Hydrogen Expansion from High Pressure to Medium Pressure (co-generation unit),Hydrogen (high pressure)
+H2_EXP_HM_COGEN,H2_MP,1.0,Hydrogen Expansion from High Pressure to Medium Pressure (co-generation unit),Hydrogen (medium pressure)
+H2_EXP_HM_COGEN,HEAT_LOW_T_DECEN,-0.01,Hydrogen Expansion from High Pressure to Medium Pressure (co-generation unit),"Heat (low temperature, decentralized)"
+H2_EXP_ML,H2_LP,1.0,Hydrogen Expansion from Medium Pressure to Low Pressure,Hydrogen (low pressure)
+H2_EXP_ML,H2_MP,-1.0,Hydrogen Expansion from Medium Pressure to Low Pressure,Hydrogen (medium pressure)
+H2_EXP_ML_COGEN,ELECTRICITY_MV,0.02,Hydrogen Expansion from Medium Pressure to Low Pressure (co-generation unit),Electricity (medium voltage)
+H2_EXP_ML_COGEN,H2_LP,1.0,Hydrogen Expansion from Medium Pressure to Low Pressure (co-generation unit),Hydrogen (low pressure)
+H2_EXP_ML_COGEN,H2_MP,-1.0,Hydrogen Expansion from Medium Pressure to Low Pressure (co-generation unit),Hydrogen (medium pressure)
+H2_EXP_ML_COGEN,HEAT_LOW_T_DECEN,-0.201,Hydrogen Expansion from Medium Pressure to Low Pressure (co-generation unit),"Heat (low temperature, decentralized)"
+H2_HP,H2_HP,1.0,,Hydrogen (high pressure)
+H2_LP,H2_LP,1.0,,Hydrogen (low pressure)
+H2_MP,H2_MP,1.0,,Hydrogen (medium pressure)
+H2_NG_CCGT,CO2_A,0.32,Combined Cycle Gas Turbine Hydrogen and Natural Gas Mix,CO2 emission (from carbon-intensive fields)
+H2_NG_CCGT,ELECTRICITY_HV,1.0,Combined Cycle Gas Turbine Hydrogen and Natural Gas Mix,Electricity (high voltage)
+H2_NG_CCGT,H2_MP,-0.362,Combined Cycle Gas Turbine Hydrogen and Natural Gas Mix,Hydrogen (medium pressure)
+H2_NG_CCGT,NG_MP,-1.2,Combined Cycle Gas Turbine Hydrogen and Natural Gas Mix,Natural gas (medium pressure)
+H2_NG_CCGT_CCS,CO2_C,0.318,Combined Cycle Gas Turbine Hydrogen and Natural Gas Mix with Carbon Capture,Captured CO2
+H2_NG_CCGT_CCS,CO2_E,0.035,Combined Cycle Gas Turbine Hydrogen and Natural Gas Mix with Carbon Capture,CO2 emission (from nonconcentrated spot sources)
+H2_NG_CCGT_CCS,ELECTRICITY_HV,1.0,Combined Cycle Gas Turbine Hydrogen and Natural Gas Mix with Carbon Capture,Electricity (high voltage)
+H2_NG_CCGT_CCS,H2_MP,-0.4,Combined Cycle Gas Turbine Hydrogen and Natural Gas Mix with Carbon Capture,Hydrogen (medium pressure)
+H2_NG_CCGT_CCS,NG_MP,-1.325,Combined Cycle Gas Turbine Hydrogen and Natural Gas Mix with Carbon Capture,Natural gas (medium pressure)
+H2_SNG_CCGT,CO2_A,0.32,Combined Cycle Gas Turbine Hydrogen and Synthetic Natural Gas Mix,CO2 emission (from carbon-intensive fields)
+H2_SNG_CCGT,ELECTRICITY_HV,1.0,Combined Cycle Gas Turbine Hydrogen and Synthetic Natural Gas Mix,Electricity (high voltage)
+H2_SNG_CCGT,H2_MP,-0.362,Combined Cycle Gas Turbine Hydrogen and Synthetic Natural Gas Mix,Hydrogen (medium pressure)
+H2_SNG_CCGT,SNG_MP,-1.2,Combined Cycle Gas Turbine Hydrogen and Synthetic Natural Gas Mix,Synthetic natural gas (medium pressure)
+H2_SNG_CCGT_CCS,CO2_C,0.318,Combined Cycle Gas Turbine Hydrogen and Synthetic Natural Gas Mix with Carbon Capture,Captured CO2
+H2_SNG_CCGT_CCS,CO2_E,0.035,Combined Cycle Gas Turbine Hydrogen and Synthetic Natural Gas Mix with Carbon Capture,CO2 emission (from nonconcentrated spot sources)
+H2_SNG_CCGT_CCS,ELECTRICITY_HV,1.0,Combined Cycle Gas Turbine Hydrogen and Synthetic Natural Gas Mix with Carbon Capture,Electricity (high voltage)
+H2_SNG_CCGT_CCS,H2_MP,-0.4,Combined Cycle Gas Turbine Hydrogen and Synthetic Natural Gas Mix with Carbon Capture,Hydrogen (medium pressure)
+H2_SNG_CCGT_CCS,SNG_MP,-1.325,Combined Cycle Gas Turbine Hydrogen and Synthetic Natural Gas Mix with Carbon Capture,Synthetic natural gas (medium pressure)
+H2_STO,H2_EHP,-1.0,Hydrogen to Storage,Hydrogen (extra high pressure)
+H2_STO,H2_S,1.0,Hydrogen to Storage,Stored hydrogen
+HT_LT,HEAT_HIGH_T,-1.0,High Temperature to Low Temperature Conversion,Heat (high temperature)
+HT_LT,HEAT_LOW_T_DHN,1.0,High Temperature to Low Temperature Conversion,"Heat (low temperature, district heating network)"
+HT_LT_DEC,HEAT_HIGH_T,-1.0,High Temperature to Low Temperature Conversion in Decentralized Systems,Heat (high temperature)
+HT_LT_DEC,HEAT_LOW_T_DECEN,1.0,High Temperature to Low Temperature Conversion in Decentralized Systems,"Heat (low temperature, decentralized)"
+HYDRO_DAM,ELECTRICITY_EHV,1.0,Hydroelectric Dam,Electricity (extra high voltage)
+HYDRO_DAM,RES_HYDRO,-1.0,Hydroelectric Dam,Hydro resource
+HYDRO_GAS,CO2_A,0.689,Hydrothermal Gasification,CO2 emission (from carbon-intensive fields)
+HYDRO_GAS,ELECTRICITY_MV,0.094,Hydrothermal Gasification,Electricity (medium voltage)
+HYDRO_GAS,SNG_MP,1.0,Hydrothermal Gasification,Synthetic natural gas (medium pressure)
+HYDRO_GAS,WET_BIOMASS,-2.36,Hydrothermal Gasification,Wet biomass
+HYDRO_GAS_CHP,CO2_A,1.481,"Hydrothermal Gasification (co-generation unit, components for heat and electricity)",CO2 emission (from carbon-intensive fields)
+HYDRO_GAS_CHP,ELECTRICITY_MV,1.0,"Hydrothermal Gasification (co-generation unit, components for heat and electricity)",Electricity (medium voltage)
+HYDRO_GAS_CHP,HEAT_HIGH_T,1.319,"Hydrothermal Gasification (co-generation unit, components for heat and electricity)",Heat (high temperature)
+HYDRO_GAS_CHP,WET_BIOMASS,-3.937,"Hydrothermal Gasification (co-generation unit, components for heat and electricity)",Wet biomass
+HYDRO_RIVER,ELECTRICITY_EHV,1.0,Hydroelectric Power from River Flow,Electricity (extra high voltage)
+HYDRO_RIVER,RES_HYDRO,-1.0,Hydroelectric Power from River Flow,Hydro resource
+IND_BOILER_BIOGAS,CO2_A,0.202,Industrial Boiler with BioGas Combustion,CO2 emission (from carbon-intensive fields)
+IND_BOILER_BIOGAS,HEAT_HIGH_T,1.0,Industrial Boiler with BioGas Combustion,Heat (high temperature)
+IND_BOILER_BIOGAS,SNG_MP,-1.02,Industrial Boiler with BioGas Combustion,Synthetic natural gas (medium pressure)
+IND_BOILER_BIOOIL,BIO_LFO,-1.146,Industrial Boiler with BioOil Combustion,Bio-light fuel oil
+IND_BOILER_BIOOIL,CO2_A,0.308,Industrial Boiler with BioOil Combustion,CO2 emission (from carbon-intensive fields)
+IND_BOILER_BIOOIL,HEAT_HIGH_T,1.0,Industrial Boiler with BioOil Combustion,Heat (high temperature)
+IND_BOILER_COAL,CO2_A,0.389,Industrial Boiler with Coal Combustion,CO2 emission (from carbon-intensive fields)
+IND_BOILER_COAL,COAL,-1.22,Industrial Boiler with Coal Combustion,Coal
+IND_BOILER_COAL,HEAT_HIGH_T,1.0,Industrial Boiler with Coal Combustion,Heat (high temperature)
+IND_BOILER_GAS,CO2_A,0.202,Industrial Boiler with Gas Combustion,CO2 emission (from carbon-intensive fields)
+IND_BOILER_GAS,HEAT_HIGH_T,1.0,Industrial Boiler with Gas Combustion,Heat (high temperature)
+IND_BOILER_GAS,NG_MP,-1.02,Industrial Boiler with Gas Combustion,Natural gas (medium pressure)
+IND_BOILER_OIL,CO2_A,0.308,Industrial Boiler with Oil Combustion,CO2 emission (from carbon-intensive fields)
+IND_BOILER_OIL,HEAT_HIGH_T,1.0,Industrial Boiler with Oil Combustion,Heat (high temperature)
+IND_BOILER_OIL,LFO,-1.146,Industrial Boiler with Oil Combustion,Light fuel oil
+IND_BOILER_WASTE,CO2_A,0.379,Industrial Boiler with Waste Combustion,CO2 emission (from carbon-intensive fields)
+IND_BOILER_WASTE,HEAT_HIGH_T,1.0,Industrial Boiler with Waste Combustion,Heat (high temperature)
+IND_BOILER_WASTE,WASTE,-1.22,Industrial Boiler with Waste Combustion,Waste
+IND_BOILER_WASTE_CC,CO2_C,0.369,Industrial Boiler with Carbon Capture using Waste Combustion,Captured CO2
+IND_BOILER_WASTE_CC,CO2_E,0.369,Industrial Boiler with Carbon Capture using Waste Combustion,CO2 emission (from nonconcentrated spot sources)
+IND_BOILER_WASTE_CC,HEAT_HIGH_T,1.0,Industrial Boiler with Carbon Capture using Waste Combustion,Heat (high temperature)
+IND_BOILER_WASTE_CC,WASTE,-1.317,Industrial Boiler with Carbon Capture using Waste Combustion,Waste
+IND_BOILER_WOOD,CO2_A,0.449,Industrial Boiler with Wood Combustion,CO2 emission (from carbon-intensive fields)
+IND_BOILER_WOOD,HEAT_HIGH_T,1.0,Industrial Boiler with Wood Combustion,Heat (high temperature)
+IND_BOILER_WOOD,WOOD,-1.157,Industrial Boiler with Wood Combustion,Woody biomass
+IND_COGEN_BIOGAS,CO2_A,0.43,Industrial Cogeneration with BioGas Combustion,CO2 emission (from carbon-intensive fields)
+IND_COGEN_BIOGAS,ELECTRICITY_HV,0.956,Industrial Cogeneration with BioGas Combustion,Electricity (high voltage)
+IND_COGEN_BIOGAS,HEAT_HIGH_T,1.0,Industrial Cogeneration with BioGas Combustion,Heat (high temperature)
+IND_COGEN_BIOGAS,SNG_MP,-2.174,Industrial Cogeneration with BioGas Combustion,Synthetic natural gas (medium pressure)
+IND_COGEN_GAS,CO2_A,0.43,Industrial Cogeneration with Gas Combustion,CO2 emission (from carbon-intensive fields)
+IND_COGEN_GAS,ELECTRICITY_HV,0.956,Industrial Cogeneration with Gas Combustion,Electricity (high voltage)
+IND_COGEN_GAS,HEAT_HIGH_T,1.0,Industrial Cogeneration with Gas Combustion,Heat (high temperature)
+IND_COGEN_GAS,NG_MP,-2.174,Industrial Cogeneration with Gas Combustion,Natural gas (medium pressure)
+IND_COGEN_WASTE,CO2_A,0.691,Industrial Cogeneration using Waste Combustion,CO2 emission (from carbon-intensive fields)
+IND_COGEN_WASTE,ELECTRICITY_HV,0.444,Industrial Cogeneration using Waste Combustion,Electricity (high voltage)
+IND_COGEN_WASTE,HEAT_HIGH_T,1.0,Industrial Cogeneration using Waste Combustion,Heat (high temperature)
+IND_COGEN_WASTE,WASTE,-2.222,Industrial Cogeneration using Waste Combustion,Waste
+IND_COGEN_WASTE_CC,CO2_C,0.672,Industrial Cogeneration with Carbon Capture using Waste Combustion,Captured CO2
+IND_COGEN_WASTE_CC,CO2_E,0.672,Industrial Cogeneration with Carbon Capture using Waste Combustion,CO2 emission (from nonconcentrated spot sources)
+IND_COGEN_WASTE_CC,ELECTRICITY_HV,0.444,Industrial Cogeneration with Carbon Capture using Waste Combustion,Electricity (high voltage)
+IND_COGEN_WASTE_CC,HEAT_HIGH_T,1.0,Industrial Cogeneration with Carbon Capture using Waste Combustion,Heat (high temperature)
+IND_COGEN_WASTE_CC,WASTE,-2.4,Industrial Cogeneration with Carbon Capture using Waste Combustion,Waste
+IND_COGEN_WOOD,CO2_A,0.733,Industrial Cogeneration with Wood Combustion,CO2 emission (from carbon-intensive fields)
+IND_COGEN_WOOD,ELECTRICITY_HV,0.34,Industrial Cogeneration with Wood Combustion,Electricity (high voltage)
+IND_COGEN_WOOD,HEAT_HIGH_T,1.0,Industrial Cogeneration with Wood Combustion,Heat (high temperature)
+IND_COGEN_WOOD,WOOD,-1.887,Industrial Cogeneration with Wood Combustion,Woody biomass
+IND_DIRECT_ELEC,ELECTRICITY_HV,-1.0,Industrial Direct Electricity Usage,Electricity (high voltage)
+IND_DIRECT_ELEC,HEAT_HIGH_T,1.0,Industrial Direct Electricity Usage,Heat (high temperature)
+IND_HP_ELEC,ELECTRICITY_MV,-0.2,Industrial Heat Pump Electricity Usage,Electricity (medium voltage)
+IND_HP_ELEC,HEAT_HIGH_T,1.0,Industrial Heat Pump Electricity Usage,Heat (high temperature)
+JETFUEL,JETFUEL,1.0,Jetfuel,Jet fuel
+LCV_BIODIESEL_B100,BIO_DIESEL,-1.256,100% BioDiesel-Powered Light Commercial Vehicle,Bio-diesel
+LCV_BIODIESEL_B100,CO2_E,0.332,100% BioDiesel-Powered Light Commercial Vehicle,CO2 emission (from nonconcentrated spot sources)
+LCV_BIODIESEL_B100,MOB_FREIGHT_MD,1.0,100% BioDiesel-Powered Light Commercial Vehicle,Freight mobility
+LCV_BIODIESEL_B100,MOB_FREIGHT_SD,1.0,100% BioDiesel-Powered Light Commercial Vehicle,Freight mobility
+LCV_BIODIESEL_B20,BIO_DIESEL,-0.251,20% BioDiesel-Powered Light Commercial Vehicle,Bio-diesel
+LCV_BIODIESEL_B20,CO2_E,0.332,20% BioDiesel-Powered Light Commercial Vehicle,CO2 emission (from nonconcentrated spot sources)
+LCV_BIODIESEL_B20,DIESEL,-1.005,20% BioDiesel-Powered Light Commercial Vehicle,Diesel
+LCV_BIODIESEL_B20,MOB_FREIGHT_MD,1.0,20% BioDiesel-Powered Light Commercial Vehicle,Freight mobility
+LCV_BIODIESEL_B20,MOB_FREIGHT_SD,1.0,20% BioDiesel-Powered Light Commercial Vehicle,Freight mobility
+LCV_CNG,CO2_E,0.33,Compressed Natural Gas-Powered Light Commercial Vehicle,CO2 emission (from nonconcentrated spot sources)
+LCV_CNG,MOB_FREIGHT_MD,1.0,Compressed Natural Gas-Powered Light Commercial Vehicle,Freight mobility
+LCV_CNG,NG_HP,-1.918,Compressed Natural Gas-Powered Light Commercial Vehicle,Natural gas (high pressure)
+LCV_CNG,MOB_FREIGHT_SD,1.0,Compressed Natural Gas-Powered Light Commercial Vehicle,Freight mobility
+LCV_CSNG,CO2_E,0.33,Compressed Synthetic Natural Gas-Powered Light Commercial Vehicle,CO2 emission (from nonconcentrated spot sources)
+LCV_CSNG,MOB_FREIGHT_MD,1.0,Compressed Synthetic Natural Gas-Powered Light Commercial Vehicle,Freight mobility
+LCV_CSNG,SNG_HP,-1.918,Compressed Synthetic Natural Gas-Powered Light Commercial Vehicle,Synthetic natural gas (high pressure)
+LCV_CSNG,MOB_FREIGHT_SD,1.0,Compressed Synthetic Natural Gas-Powered Light Commercial Vehicle,Freight mobility
+LCV_DIESEL,CO2_E,0.332,Diesel-Powered Light Commercial Vehicle,CO2 emission (from nonconcentrated spot sources)
+LCV_DIESEL,DIESEL,-1.256,Diesel-Powered Light Commercial Vehicle,Diesel
+LCV_DIESEL,MOB_FREIGHT_MD,1.0,Diesel-Powered Light Commercial Vehicle,Freight mobility
+LCV_DIESEL,MOB_FREIGHT_SD,1.0,Diesel-Powered Light Commercial Vehicle,Freight mobility
+LCV_EV,ELECTRICITY_MV,-0.575,Electric-Powered Light Commercial Vehicle,Electricity (medium voltage)
+LCV_EV,MOB_FREIGHT_MD,1.0,Electric-Powered Light Commercial Vehicle,Freight mobility
+LCV_EV,MOB_FREIGHT_SD,1.0,Electric-Powered Light Commercial Vehicle,Freight mobility
+LCV_FC_H2,H2_HP,-0.655,Hydrogen Fuel Cell-Powered Light Commercial Vehicle,Hydrogen (high pressure)
+LCV_FC_H2,MOB_FREIGHT_MD,1.0,Hydrogen Fuel Cell-Powered Light Commercial Vehicle,Freight mobility
+LCV_FC_H2,MOB_FREIGHT_SD,1.0,Hydrogen Fuel Cell-Powered Light Commercial Vehicle,Freight mobility
+LCV_GASOLINE,CO2_E,0.414,Gasoline-Powered Light Commercial Vehicle,CO2 emission (from nonconcentrated spot sources)
+LCV_GASOLINE,GASOLINE,-1.529,Gasoline-Powered Light Commercial Vehicle,Gasoline
+LCV_GASOLINE,MOB_FREIGHT_MD,1.0,Gasoline-Powered Light Commercial Vehicle,Freight mobility
+LCV_GASOLINE,MOB_FREIGHT_SD,1.0,Gasoline-Powered Light Commercial Vehicle,Freight mobility
+LCV_PHEV_DIESEL,CO2_E,0.075,Diesel-Powered Light Commercial Vehicle,CO2 emission (from nonconcentrated spot sources)
+LCV_PHEV_DIESEL,DIESEL,-0.284,Diesel-Powered Light Commercial Vehicle,Diesel
+LCV_PHEV_DIESEL,ELECTRICITY_MV,-0.449,Diesel-Powered Light Commercial Vehicle,Electricity (medium voltage)
+LCV_PHEV_DIESEL,MOB_FREIGHT_MD,1.0,Diesel-Powered Light Commercial Vehicle,Freight mobility
+LCV_PHEV_DIESEL,MOB_FREIGHT_SD,1.0,Diesel-Powered Light Commercial Vehicle,Freight mobility
+LCV_PROPANE,CO2_E,0.366,Propane-Powered Light Commercial Vehicle,CO2 emission (from nonconcentrated spot sources)
+LCV_PROPANE,MOB_FREIGHT_MD,1.0,Propane-Powered Light Commercial Vehicle,Freight mobility
+LCV_PROPANE,PROPANE,-1.634,Propane-Powered Light Commercial Vehicle,Propane
+LCV_PROPANE,MOB_FREIGHT_SD,1.0,Propane-Powered Light Commercial Vehicle,Freight mobility
+LFO,LFO,1.0,Light fuel oil,Light fuel oil
+LNG,LNG,1.0,Liquified natural gas,Liquified natural gas
+LT_DEC_WH,HEAT_LOW_T_DECEN,-1.0,Low Temperature Decentralized Waste Heat,"Heat (low temperature, decentralized)"
+LT_DEC_WH,HEAT_WASTE,1.0,Low Temperature Decentralized Waste Heat,Heat waste
+LT_DHN_WH,HEAT_LOW_T_DHN,-1.0,Low Temperature District Heating Network Waste Heat,"Heat (low temperature, district heating network)"
+LT_DHN_WH,HEAT_WASTE,1.0,Low Temperature District Heating Network Waste Heat,Heat waste
+METATHESIS_PROPYLENE,CO2_A,0.557,Propylene Production via Metathesis,CO2 emission (from carbon-intensive fields)
+METATHESIS_PROPYLENE,ETHYLENE,1.0,Propylene Production via Metathesis,Ethylene
+METATHESIS_PROPYLENE,PROPYLENE,-3.226,Propylene Production via Metathesis,Propylene
+METHANATION,CO2_C,-0.198,Methanation Process,Captured CO2
+METHANATION,H2_MP,-1.282,Methanation Process,Hydrogen (medium pressure)
+METHANATION,SNG_MP,1.0,Methanation Process,Synthetic natural gas (medium pressure)
+METHANE_TO_METHANOL,CO2_A,-0.25,Conversion of Methane to Methanol,CO2 emission (from carbon-intensive fields)
+METHANE_TO_METHANOL,METHANOL,1.0,Conversion of Methane to Methanol,Methanol
+METHANE_TO_METHANOL,NG_MP,-1.4,Conversion of Methane to Methanol,Natural gas (medium pressure)
+METHANOL,METHANOL,1.0,Methanol,Methanol
+METHANOL_CARBONYLATION,ACETIC_ACID,1.0,Methanol Cabonylation Process,Acetic acid
+METHANOL_CARBONYLATION,CO2_A,0.15,Methanol Cabonylation Process,CO2 emission (from carbon-intensive fields)
+METHANOL_CARBONYLATION,METHANOL,-2.066,Methanol Cabonylation Process,Methanol
+METHANOL_FT,CO2_C,-0.25,Methanol Synthesis via Fischer-Tropsch Process,Captured CO2
+METHANOL_FT,ELECTRICITY_MV,-0.03,Methanol Synthesis via Fischer-Tropsch Process,Electricity (medium voltage)
+METHANOL_FT,METHANOL,1.0,Methanol Synthesis via Fischer-Tropsch Process,Methanol
+METHANOL_FT,NG_MP,-1.08,Methanol Synthesis via Fischer-Tropsch Process,Natural gas (medium pressure)
+METHANOL_TO_AROMATICS,BENZENE,1.0,Conversion of Methanol to Aromatic Compounds,Benzene
+METHANOL_TO_AROMATICS,CO2_A,13.186,Conversion of Methanol to Aromatic Compounds,CO2 emission (from carbon-intensive fields)
+METHANOL_TO_AROMATICS,ETHYLENE,5.33,Conversion of Methanol to Aromatic Compounds,Ethylene
+METHANOL_TO_AROMATICS,METHANOL,-74.074,Conversion of Methanol to Aromatic Compounds,Methanol
+METHANOL_TO_AROMATICS,TOLUENE,6.296,Conversion of Methanol to Aromatic Compounds,Toluene
+METHANOL_TO_AROMATICS,XYLENE,10.37,Conversion of Methanol to Aromatic Compounds,Xylene
+METHANOL_TO_OLEFINS,CO2_A,25843.33,Conversion of Methanol to Olefinic Compounds,CO2 emission (from carbon-intensive fields)
+METHANOL_TO_OLEFINS,ETHYLENE,1.0,Conversion of Methanol to Olefinic Compounds,Ethylene
+METHANOL_TO_OLEFINS,METHANOL,-2.891,Conversion of Methanol to Olefinic Compounds,Methanol
+METHANOL_TO_OLEFINS,PROPYLENE,1.643,Conversion of Methanol to Olefinic Compounds,Propylene
+MINES_STORAGE,CO2_C,-1.0,Sequestration of CO2 in Mines,Captured CO2
+MINES_STORAGE,CO2_E,0.308,Sequestration of CO2 in Mines,CO2 emission (from nonconcentrated spot sources)
+MINES_STORAGE,CO2_S,0.692,Sequestration of CO2 in Mines,Sequestrated CO2
+MINES_STORAGE,ELECTRICITY_MV,-0.0001,Sequestration of CO2 in Mines,Electricity (medium voltage)
+NEW_HYDRO_DAM,ELECTRICITY_EHV,1.0,New Hydroelectric Dam,Electricity (extra high voltage)
+NEW_HYDRO_DAM,RES_HYDRO,-1.0,New Hydroelectric Dam,Hydro resource
+NEW_HYDRO_RIVER,ELECTRICITY_EHV,1.0,New Hydroelectric Power from River Flow,Electricity (extra high voltage)
+NEW_HYDRO_RIVER,RES_HYDRO,-1.0,New Hydroelectric Power from River Flow,Hydro resource
+NG_COMP_HE,ELECTRICITY_MV,-0.005,Natural Gas Compression from High Pressure to Extra High Pressure,Electricity (medium voltage)
+NG_COMP_HE,NG_EHP,1.0,Natural Gas Compression from High Pressure to Extra High Pressure,Natural gas (extra high pressure)
+NG_COMP_HE,NG_HP,-1.0,Natural Gas Compression from High Pressure to Extra High Pressure,Natural gas (high pressure)
+NG_COMP_LM,ELECTRICITY_MV,-0.02,Natural Gas Compression from Low Pressure to Medium Pressure,Electricity (medium voltage)
+NG_COMP_LM,NG_LP,-1.0,Natural Gas Compression from Low Pressure to Medium Pressure,Natural gas (low pressure)
+NG_COMP_LM,NG_MP,1.0,Natural Gas Compression from Low Pressure to Medium Pressure,Natural gas (medium pressure)
+NG_COMP_MH,ELECTRICITY_MV,-0.004,Natural Gas Compression from Medium Pressure to High Pressure,Electricity (medium voltage)
+NG_COMP_MH,NG_HP,1.0,Natural Gas Compression from Medium Pressure to High Pressure,Natural gas (high pressure)
+NG_COMP_MH,NG_MP,-1.0,Natural Gas Compression from Medium Pressure to High Pressure,Natural gas (medium pressure)
+NG_EHP,NG_EHP,1.0,Natural gas,Natural gas (extra high pressure)
+NG_EXP_EH,HEAT_LOW_T_DECEN,-0.001,Natural Gas Expansion from Extra High Pressure to High Pressure,"Heat (low temperature, decentralized)"
+NG_EXP_EH,NG_EHP,-1.0,Natural Gas Expansion from Extra High Pressure to High Pressure,Natural gas (extra high pressure)
+NG_EXP_EH,NG_HP,1.0,Natural Gas Expansion from Extra High Pressure to High Pressure,Natural gas (high pressure)
+NG_EXP_EH_COGEN,ELECTRICITY_MV,0.005,Natural Gas Expansion from Extra High Pressure to High Pressure (co-generation unit),Electricity (medium voltage)
+NG_EXP_EH_COGEN,HEAT_LOW_T_DECEN,-0.005,Natural Gas Expansion from Extra High Pressure to High Pressure (co-generation unit),"Heat (low temperature, decentralized)"
+NG_EXP_EH_COGEN,NG_EHP,-1.0,Natural Gas Expansion from Extra High Pressure to High Pressure (co-generation unit),Natural gas (extra high pressure)
+NG_EXP_EH_COGEN,NG_HP,1.0,Natural Gas Expansion from Extra High Pressure to High Pressure (co-generation unit),Natural gas (high pressure)
+NG_EXP_HM,NG_HP,-1.0,Natural Gas Expansion from High Pressure to Medium Pressure,Natural gas (high pressure)
+NG_EXP_HM,NG_MP,1.0,Natural Gas Expansion from High Pressure to Medium Pressure,Natural gas (medium pressure)
+NG_EXP_HM_COGEN,ELECTRICITY_MV,0.004,Natural Gas Expansion from High Pressure to Medium Pressure (co-generation unit),Electricity (medium voltage)
+NG_EXP_HM_COGEN,HEAT_LOW_T_DECEN,-0.004,Natural Gas Expansion from High Pressure to Medium Pressure (co-generation unit),"Heat (low temperature, decentralized)"
+NG_EXP_HM_COGEN,NG_HP,-1.0,Natural Gas Expansion from High Pressure to Medium Pressure (co-generation unit),Natural gas (high pressure)
+NG_EXP_HM_COGEN,NG_MP,1.0,Natural Gas Expansion from High Pressure to Medium Pressure (co-generation unit),Natural gas (medium pressure)
+NG_EXP_ML,NG_LP,1.0,Natural Gas Expansion from Medium Pressure to Low Pressure,Natural gas (low pressure)
+NG_EXP_ML,NG_MP,-1.0,Natural Gas Expansion from Medium Pressure to Low Pressure,Natural gas (medium pressure)
+NG_EXP_ML_COGEN,ELECTRICITY_MV,0.02,Natural Gas Expansion from Medium Pressure to Low Pressure (co-generation unit),Electricity (medium voltage)
+NG_EXP_ML_COGEN,HEAT_LOW_T_DECEN,-0.02,Natural Gas Expansion from Medium Pressure to Low Pressure (co-generation unit),"Heat (low temperature, decentralized)"
+NG_EXP_ML_COGEN,NG_LP,1.0,Natural Gas Expansion from Medium Pressure to Low Pressure (co-generation unit),Natural gas (low pressure)
+NG_EXP_ML_COGEN,NG_MP,-1.0,Natural Gas Expansion from Medium Pressure to Low Pressure (co-generation unit),Natural gas (medium pressure)
+NG_HP,NG_HP,1.0,,Natural gas (high pressure)
+NG_LP,NG_LP,1.0,,Natural gas (low pressure)
+NG_MP,NG_MP,1.0,,Natural gas (medium pressure)
+NG_PYROLYSIS_PLASMA,H2_MP,1.0,Plasma Natural Gas Pyrolysis,Hydrogen (medium pressure)
+NG_PYROLYSIS_PLASMA,HEAT_HIGH_T,-0.356,Plasma Natural Gas Pyrolysis,Heat (high temperature)
+NG_PYROLYSIS_PLASMA,HEAT_LOW_T_DHN,0.244,Plasma Natural Gas Pyrolysis,"Heat (low temperature, district heating network)"
+NG_PYROLYSIS_PLASMA,NG_MP,-1.867,Plasma Natural Gas Pyrolysis,Natural gas (medium pressure)
+NG_PYROLYSIS_THERMAL,H2_MP,1.0,Thermal Natural Gas Pyrolysis,Hydrogen (medium pressure)
+NG_PYROLYSIS_THERMAL,HEAT_HIGH_T,-0.537,Thermal Natural Gas Pyrolysis,Heat (high temperature)
+NG_PYROLYSIS_THERMAL,HEAT_LOW_T_DHN,0.39,Thermal Natural Gas Pyrolysis,"Heat (low temperature, district heating network)"
+NG_PYROLYSIS_THERMAL,NG_MP,-1.902,Thermal Natural Gas Pyrolysis,Natural gas (medium pressure)
+NG_REFORMING,CO2_A,0.27,Natural Gas Reforming,CO2 emission (from carbon-intensive fields)
+NG_REFORMING,H2_MP,1.0,Natural Gas Reforming,Hydrogen (medium pressure)
+NG_REFORMING,NG_MP,-1.365,Natural Gas Reforming,Natural gas (medium pressure)
+NG_S,NG_S,1.0,,Stored natural gas
+NG_STO,NG_EHP,-1.0,Natural Gas to Storage,Natural gas (extra high pressure)
+NG_STO,NG_S,1.0,Natural Gas to Storage,Stored natural gas
+NUCLEAR,CO2_A,0.011,Nuclear Power Generation,CO2 emission (from carbon-intensive fields)
+NUCLEAR,ELECTRICITY_EHV,1.0,Nuclear Power Generation,Electricity (extra high voltage)
+NUCLEAR,URANIUM,-2.7,Nuclear Power Generation,Uranium
+OCGT_BIOGAS_LARGE,CO2_A,0.524,Open Cycle BioGas Turbine 243 MW,CO2 emission (from carbon-intensive fields)
+OCGT_BIOGAS_LARGE,ELECTRICITY_HV,1.0,Open Cycle BioGas Turbine 243 MW,Electricity (high voltage)
+OCGT_BIOGAS_LARGE,SNG_HP,-2.5,Open Cycle BioGas Turbine 243 MW,Synthetic natural gas (high pressure)
+OCGT_BIOGAS_SMALL,CO2_A,0.524,Open Cycle BioGas Turbine 100 MW,CO2 emission (from carbon-intensive fields)
+OCGT_BIOGAS_SMALL,ELECTRICITY_HV,1.0,Open Cycle BioGas Turbine 100 MW,Electricity (high voltage)
+OCGT_BIOGAS_SMALL,SNG_HP,-2.5,Open Cycle BioGas Turbine 100 MW,Synthetic natural gas (high pressure)
+OCGT_LARGE,CO2_A,0.524,Open Cycle Gas Turbine 243 MW,CO2 emission (from carbon-intensive fields)
+OCGT_LARGE,ELECTRICITY_HV,1.0,Open Cycle Gas Turbine 243 MW,Electricity (high voltage)
+OCGT_LARGE,NG_HP,-2.5,Open Cycle Gas Turbine 243 MW,Natural gas (high pressure)
+OCGT_SMALL,CO2_A,0.524,Open Cycle Gas Turbine 100 MW,CO2 emission (from carbon-intensive fields)
+OCGT_SMALL,ELECTRICITY_HV,1.0,Open Cycle Gas Turbine 100 MW,Electricity (high voltage)
+OCGT_SMALL,NG_HP,-2.5,Open Cycle Gas Turbine 100 MW,Natural gas (high pressure)
+PAFC,ELECTRICITY_LV,1.647,Phosphoric Acid Fuel Cell,Electricity (low voltage)
+PAFC,H2_HP,-2.941,Phosphoric Acid Fuel Cell,Hydrogen (high pressure)
+PAFC,HEAT_LOW_T_DECEN,1.0,Phosphoric Acid Fuel Cell,"Heat (low temperature, decentralized)"
+PAPER_MAKING,ELECTRICITY_EHV,-0.65,Paper Production,Electricity (extra high voltage)
+PAPER_MAKING,HEAT_HIGH_T,-2.22,Paper Production,Heat (high temperature)
+PAPER_MAKING,PAPER,1.0,Paper Production,Paper
+PAPER_MAKING_HP,ELECTRICITY_HV,-0.789,Paper Production (heat pump),Electricity (high voltage)
+PAPER_MAKING_HP,HEAT_HIGH_T,-0.383,Paper Production (heat pump),Heat (high temperature)
+PAPER_MAKING_HP,PAPER,1.0,Paper Production (heat pump),Paper
+PAPER_MAKING_HR,ELECTRICITY_EHV,-1.104,Paper Production with Heat Recovery,Electricity (extra high voltage)
+PAPER_MAKING_HR,HEAT_HIGH_T,-0.383,Paper Production with Heat Recovery,Heat (high temperature)
+PAPER_MAKING_HR,HEAT_WASTE,0.05,Paper Production with Heat Recovery,Heat waste
+PAPER_MAKING_HR,PAPER,1.0,Paper Production with Heat Recovery,Paper
+PE,PE,1.0,Polyethylene,Polyethylene
+PEMFC,ELECTRICITY_LV,2.778,Proton Exchange Membrane Fuel Cell,Electricity (low voltage)
+PEMFC,H2_HP,-4.444,Proton Exchange Membrane Fuel Cell,Hydrogen (high pressure)
+PEMFC,HEAT_LOW_T_DECEN,1.0,Proton Exchange Membrane Fuel Cell,"Heat (low temperature, decentralized)"
+PEM_ELECTROLYSIS,ELECTRICITY_HV,-1.43,Proton Exchange Membrane Electrolysis,Electricity (high voltage)
+PEM_ELECTROLYSIS,H2_MP,1.0,Proton Exchange Membrane Electrolysis,Hydrogen (medium pressure)
+PEM_ELECTROLYSIS,HEAT_LOW_T_DECEN,0.26,Proton Exchange Membrane Electrolysis,"Heat (low temperature, decentralized)"
+PET,PET,1.0,Polyethylene terephthalate,Polyethylene terephthalate
+PET_FORMATION,ETHYLENE,-1.424,Polyethylene Terephthalate Formation,Ethylene
+PET_FORMATION,PET,1.0,Polyethylene Terephthalate Formation,Polyethylene terephthalate
+PHENOL,PHENOL,1.0,Phenol,Phenol
+PLANE_FREIGHT_BIO,BIO_JETFUEL,-1.294,Bio-Jet Fuel-Powered Freight Plane,Bio-jetfuel
+PLANE_FREIGHT_BIO,CO2_E,0.324,Bio-Jet Fuel-Powered Freight Plane,CO2 emission (from nonconcentrated spot sources)
+PLANE_FREIGHT_BIO,MOB_FREIGHT_ELD,1.0,Bio-Jet Fuel-Powered Freight Plane,Freight mobility
+PLANE_FREIGHT,CO2_E,0.324,Plane Freight,CO2 emission (from nonconcentrated spot sources)
+PLANE_FREIGHT,JETFUEL,-1.294,Plane Freight,Jet fuel
+PLANE_FREIGHT,MOB_FREIGHT_ELD,1.0,Plane Freight,Freight mobility
+PLANE_LH_BIO,BIO_JETFUEL,-0.734,Bio-Jet Fuel-Powered Long Haul Passenger Plane,Bio-jetfuel
+PLANE_LH_BIO,CO2_E,0.183,Bio-Jet Fuel-Powered Long Haul Passenger Plane,CO2 emission (from nonconcentrated spot sources)
+PLANE_LH_BIO,MOB_PUBLIC_ELD,1.0,Bio-Jet Fuel-Powered Long Haul Passenger Plane,Public mobility
+PLANE_LH,CO2_E,0.183,Passenger Plane long haul,CO2 emission (from nonconcentrated spot sources)
+PLANE_LH,JETFUEL,-0.734,Passenger Plane long haul,Jet fuel
+PLANE_LH,MOB_PUBLIC_ELD,1.0,Passenger Plane long haul,Public mobility
+PLANE_SH_BIO,BIO_JETFUEL,-0.734,Bio-Jet Fuel-Powered Short Haul Passenger Plane,Bio-jetfuel
+PLANE_SH_BIO,CO2_E,0.183,Bio-Jet Fuel-Powered Short Haul Passenger Plane,CO2 emission (from nonconcentrated spot sources)
+PLANE_SH_BIO,MOB_PUBLIC_LD,1.0,Bio-Jet Fuel-Powered Short Haul Passenger Plane,Public mobility
+PLANE_SH,CO2_E,0.183,Passenger Plane short haul,CO2 emission (from nonconcentrated spot sources)
+PLANE_SH,JETFUEL,-0.734,Passenger Plane short haul,Jet fuel
+PLANE_SH,MOB_PUBLIC_LD,1.0,Passenger Plane short haul,Public mobility
+POLYPROPYLENE_PP,PP,1.0,Polypropylene Production,Polypropylene
+POLYPROPYLENE_PP,PROPYLENE,-1.191,Polypropylene Production,Propylene
+PP,PP,1.0,Polypropylene,Polypropylene
+PROPANE,PROPANE,1.0,Propane,Propane
+PROPYLENE,PROPYLENE,1.0,Propylene,Propylene
+PS,PS,1.0,Polystyrene,Polystyrene
+PV_GROUND,ELECTRICITY_LV,1.0,Open Ground Photovoltaic Solar Energy,Electricity (low voltage)
+PV_GROUND,RES_SOLAR,-1.0,Open Ground Photovoltaic Solar Energy,Solar resource
+PV_ROOF,ELECTRICITY_LV,1.0,Slanted-Roof Photovoltaic Solar Energy,Electricity (low voltage)
+PV_ROOF,RES_SOLAR,-1.0,Slanted-Roof Photovoltaic Solar Energy,Solar resource
+PVC,PVC,1.0,Polyvinyl chloride,Polyvinyl chloride
+PVC_FORMATION,ETHYLENE,-1.511,Polyvinyl Chloride Formation,Ethylene
+PVC_FORMATION,PVC,1.0,Polyvinyl Chloride Formation,Polyvinyl chloride
+PYROLYSIS,BIO_LFO,1.0,Pyrolysis Process,Bio-light fuel oil
+PYROLYSIS,CO2_A,0.322,Pyrolysis Process,CO2 emission (from carbon-intensive fields)
+PYROLYSIS,ELECTRICITY_MV,0.024,Pyrolysis Process,Electricity (medium voltage)
+PYROLYSIS,WOOD,-1.502,Pyrolysis Process,Woody biomass
+RES_GEO,RES_GEO,1.0,,Geothermal resource
+RES_HYDRO,RES_HYDRO,1.0,,Hydro resource
+RES_SOLAR,RES_SOLAR,1.0,,Solar resource
+RES_TIDAL,RES_TIDAL,1.0,,Tidal resource
+RES_WIND_OFFSHORE,RES_WIND_OFFSHORE,1.0,,Wind resource
+RES_WIND_ONSHORE,RES_WIND_ONSHORE,1.0,,Wind resource
+SCHOOLBUS_BIODIESEL_B100,BIO_DIESEL,-0.062,100% BioDiesel-Powered School Bus,Bio-diesel
+SCHOOLBUS_BIODIESEL_B100,CO2_E,0.018,100% BioDiesel-Powered School Bus,CO2 emission (from nonconcentrated spot sources)
+SCHOOLBUS_BIODIESEL_B100,MOB_PUBLIC_SD,1.0,100% BioDiesel-Powered School Bus,Public mobility
+SCHOOLBUS_BIODIESEL_B20,BIO_DIESEL,-0.012,20% BioDiesel-Powered School Bus,Bio-diesel
+SCHOOLBUS_BIODIESEL_B20,CO2_E,0.018,20% BioDiesel-Powered School Bus,CO2 emission (from nonconcentrated spot sources)
+SCHOOLBUS_BIODIESEL_B20,DIESEL,-0.05,20% BioDiesel-Powered School Bus,Diesel
+SCHOOLBUS_BIODIESEL_B20,MOB_PUBLIC_SD,1.0,20% BioDiesel-Powered School Bus,Public mobility
+SCHOOLBUS_BIOETOH_E10,BIO_ETHANOL,-0.008,10% BioEthanol-Powered School Bus,Bio-ethanol
+SCHOOLBUS_BIOETOH_E10,CO2_E,0.017,10% BioEthanol-Powered School Bus,CO2 emission (from nonconcentrated spot sources)
+SCHOOLBUS_BIOETOH_E10,GASOLINE,-0.067,10% BioEthanol-Powered School Bus,Gasoline
+SCHOOLBUS_BIOETOH_E10,MOB_PUBLIC_SD,1.0,10% BioEthanol-Powered School Bus,Public mobility
+SCHOOLBUS_CNG,CO2_E,0.015,Compressed Natural Gas-Powered School Bus,CO2 emission (from nonconcentrated spot sources)
+SCHOOLBUS_CNG,MOB_PUBLIC_SD,1.0,Compressed Natural Gas-Powered School Bus,Public mobility
+SCHOOLBUS_CNG,NG_HP,-0.074,Compressed Natural Gas-Powered School Bus,Natural gas (high pressure)
+SCHOOLBUS_CSNG,CO2_E,0.015,Compressed Synthetic Natural Gas-Powered School Bus,CO2 emission (from nonconcentrated spot sources)
+SCHOOLBUS_CSNG,MOB_PUBLIC_SD,1.0,Compressed Synthetic Natural Gas-Powered School Bus,Public mobility
+SCHOOLBUS_CSNG,SNG_HP,-0.074,Compressed Synthetic Natural Gas-Powered School Bus,Synthetic natural gas (high pressure)
+SCHOOLBUS_DIESEL,CO2_E,0.018,Diesel-Powered School Bus,CO2 emission (from nonconcentrated spot sources)
+SCHOOLBUS_DIESEL,DIESEL,-0.062,Diesel-Powered School Bus,Diesel
+SCHOOLBUS_DIESEL,MOB_PUBLIC_SD,1.0,Diesel-Powered School Bus,Public mobility
+SCHOOLBUS_ETOH_E10,CO2_E,0.017,10% Ethanol-Powered School Bus,CO2 emission (from nonconcentrated spot sources)
+SCHOOLBUS_ETOH_E10,ETHANOL,-0.008,10% Ethanol-Powered School Bus,Ethanol
+SCHOOLBUS_ETOH_E10,GASOLINE,-0.067,10% Ethanol-Powered School Bus,Gasoline
+SCHOOLBUS_ETOH_E10,MOB_PUBLIC_SD,1.0,10% Ethanol-Powered School Bus,Public mobility
+SCHOOLBUS_EV,ELECTRICITY_MV,-0.024,Electric-Powered School Bus,Electricity (medium voltage)
+SCHOOLBUS_EV,MOB_PUBLIC_SD,1.0,Electric-Powered School Bus,Public mobility
+SCHOOLBUS_GASOLINE,CO2_E,0.018,Gasoline-Powered School Bus,CO2 emission (from nonconcentrated spot sources)
+SCHOOLBUS_GASOLINE,GASOLINE,-0.075,Gasoline-Powered School Bus,Gasoline
+SCHOOLBUS_GASOLINE,MOB_PUBLIC_SD,1.0,Gasoline-Powered School Bus,Public mobility
+SCHOOLBUS_HY_DIESEL,CO2_E,0.013,Diesel Hybrid School Bus,CO2 emission (from nonconcentrated spot sources)
+SCHOOLBUS_HY_DIESEL,DIESEL,-0.046,Diesel Hybrid School Bus,Diesel
+SCHOOLBUS_HY_DIESEL,MOB_PUBLIC_SD,1.0,Diesel Hybrid School Bus,Public mobility
+SCHOOLBUS_PROPANE,CO2_E,0.018,Propane-Powered School Bus,CO2 emission (from nonconcentrated spot sources)
+SCHOOLBUS_PROPANE,MOB_PUBLIC_SD,1.0,Propane-Powered School Bus,Public mobility
+SCHOOLBUS_PROPANE,PROPANE,-0.075,Propane-Powered School Bus,Propane
+SEMI_LH_BIODIESEL_B100,BIO_DIESEL,-0.327,100% BioDiesel-Powered Long Distance Semi-trailer truck,Bio-diesel
+SEMI_LH_BIODIESEL_B100,CO2_E,0.086,100% BioDiesel-Powered Long Distance Semi-trailer truck,CO2 emission (from nonconcentrated spot sources)
+SEMI_LH_BIODIESEL_B100,MOB_FREIGHT_ELD,1.0,100% BioDiesel-Powered Long Distance Semi-trailer truck,Freight mobility
+SEMI_LH_BIODIESEL_B100,MOB_FREIGHT_LD,1.0,100% BioDiesel-Powered Long Distance Semi-trailer truck,Freight mobility
+SEMI_LH_BIODIESEL_B20,BIO_DIESEL,-0.065,20% BioDiesel-Powered Long Distance Semi-trailer truck,Bio-diesel
+SEMI_LH_BIODIESEL_B20,CO2_E,0.086,20% BioDiesel-Powered Long Distance Semi-trailer truck,CO2 emission (from nonconcentrated spot sources)
+SEMI_LH_BIODIESEL_B20,DIESEL,-0.261,20% BioDiesel-Powered Long Distance Semi-trailer truck,Diesel
+SEMI_LH_BIODIESEL_B20,MOB_FREIGHT_ELD,1.0,20% BioDiesel-Powered Long Distance Semi-trailer truck,Freight mobility
+SEMI_LH_BIODIESEL_B20,MOB_FREIGHT_LD,1.0,20% BioDiesel-Powered Long Distance Semi-trailer truck,Freight mobility
+SEMI_LH_CNG,CO2_E,0.072,Compressed Natural Gas-Powered Long Distance Semi-trailer truck,CO2 emission (from nonconcentrated spot sources)
+SEMI_LH_CNG,MOB_FREIGHT_ELD,1.0,Compressed Natural Gas-Powered Long Distance Semi-trailer truck,Freight mobility
+SEMI_LH_CNG,NG_HP,-0.422,Compressed Natural Gas-Powered Long Distance Semi-trailer truck,Natural gas (high pressure)
+SEMI_LH_CNG,MOB_FREIGHT_LD,1.0,Compressed Natural Gas-Powered Long Distance Semi-trailer truck,Freight mobility
+SEMI_LH_CSNG,CO2_E,0.072,Compressed Synthetic Natural Gas-Powered Long Distance Semi-trailer truck,CO2 emission (from nonconcentrated spot sources)
+SEMI_LH_CSNG,MOB_FREIGHT_ELD,1.0,Compressed Synthetic Natural Gas-Powered Long Distance Semi-trailer truck,Freight mobility
+SEMI_LH_CSNG,SNG_HP,-0.422,Compressed Synthetic Natural Gas-Powered Long Distance Semi-trailer truck,Synthetic natural gas (high pressure)
+SEMI_LH_CSNG,MOB_FREIGHT_LD,1.0,Compressed Synthetic Natural Gas-Powered Long Distance Semi-trailer truck,Freight mobility
+SEMI_LH_DIESEL,CO2_E,0.115,Diesel-Powered Long Distance Semi-trailer truck,CO2 emission (from nonconcentrated spot sources)
+SEMI_LH_DIESEL,DIESEL,-0.434,Diesel-Powered Long Distance Semi-trailer truck,Diesel
+SEMI_LH_DIESEL,MOB_FREIGHT_ELD,1.0,Diesel-Powered Long Distance Semi-trailer truck,Freight mobility
+SEMI_LH_DIESEL,MOB_FREIGHT_LD,1.0,Diesel-Powered Long Distance Semi-trailer truck,Freight mobility
+SEMI_LH_EV,ELECTRICITY_MV,-0.473,Electric-Powered Long Distance Semi-trailer truck,Electricity (medium voltage)
+SEMI_LH_EV,MOB_FREIGHT_ELD,1.0,Electric-Powered Long Distance Semi-trailer truck,Freight mobility
+SEMI_LH_EV,MOB_FREIGHT_LD,1.0,Electric-Powered Long Distance Semi-trailer truck,Freight mobility
+SEMI_LH_FC_H2,H2_HP,-0.306,Hydrogen Fuel Cell-Powered Long Distance Semi-trailer truck,Hydrogen (high pressure)
+SEMI_LH_FC_H2,MOB_FREIGHT_ELD,1.0,Hydrogen Fuel Cell-Powered Long Distance Semi-trailer truck,Freight mobility
+SEMI_LH_FC_H2,MOB_FREIGHT_LD,1.0,Hydrogen Fuel Cell-Powered Long Distance Semi-trailer truck,Freight mobility
+SEMI_LH_HY_DIESEL,CO2_E,0.081,Diesel Hybrid Long Distance Semi-trailer truck,CO2 emission (from nonconcentrated spot sources)
+SEMI_LH_HY_DIESEL,DIESEL,-0.308,Diesel Hybrid Long Distance Semi-trailer truck,Diesel
+SEMI_LH_HY_DIESEL,MOB_FREIGHT_ELD,1.0,Diesel Hybrid Long Distance Semi-trailer truck,Freight mobility
+SEMI_LH_HY_DIESEL,MOB_FREIGHT_LD,1.0,Diesel Hybrid Long Distance Semi-trailer truck,Freight mobility
+SEMI_LH_PROPANE,CO2_E,0.095,Propane-Powered Long Distance Semi-trailer truck,CO2 emission (from nonconcentrated spot sources)
+SEMI_LH_PROPANE,MOB_FREIGHT_ELD,1.0,Propane-Powered Long Distance Semi-trailer truck,Freight mobility
+SEMI_LH_PROPANE,PROPANE,-0.425,Propane-Powered Long Distance Semi-trailer truck,Propane
+SEMI_LH_PROPANE,MOB_FREIGHT_LD,1.0,Propane-Powered Long Distance Semi-trailer truck,Freight mobility
+SEMI_SH_BIODIESEL_B100,BIO_DIESEL,-0.342,100% BioDiesel-Powered Short Distance Semi-trailer truck,Bio-diesel
+SEMI_SH_BIODIESEL_B100,CO2_E,0.09,100% BioDiesel-Powered Short Distance Semi-trailer truck,CO2 emission (from nonconcentrated spot sources)
+SEMI_SH_BIODIESEL_B100,MOB_FREIGHT_MD,1.0,100% BioDiesel-Powered Short Distance Semi-trailer truck,Freight mobility
+SEMI_SH_BIODIESEL_B20,BIO_DIESEL,-0.068,20% BioDiesel-Powered Short Distance Semi-trailer truck,Bio-diesel
+SEMI_SH_BIODIESEL_B20,CO2_E,0.09,20% BioDiesel-Powered Short Distance Semi-trailer truck,CO2 emission (from nonconcentrated spot sources)
+SEMI_SH_BIODIESEL_B20,DIESEL,-0.273,20% BioDiesel-Powered Short Distance Semi-trailer truck,Diesel
+SEMI_SH_BIODIESEL_B20,MOB_FREIGHT_MD,1.0,20% BioDiesel-Powered Short Distance Semi-trailer truck,Freight mobility
+SEMI_SH_CNG,CO2_E,0.074,Compressed Natural Gas-Powered Short Distance Semi-trailer truck,CO2 emission (from nonconcentrated spot sources)
+SEMI_SH_CNG,MOB_FREIGHT_MD,1.0,Compressed Natural Gas-Powered Short Distance Semi-trailer truck,Freight mobility
+SEMI_SH_CNG,NG_HP,-0.429,Compressed Natural Gas-Powered Short Distance Semi-trailer truck,Natural gas (high pressure)
+SEMI_SH_CSNG,CO2_E,0.074,Compressed Synthetic Natural Gas-Powered Short Distance Semi-trailer truck,CO2 emission (from nonconcentrated spot sources)
+SEMI_SH_CSNG,MOB_FREIGHT_MD,1.0,Compressed Synthetic Natural Gas-Powered Short Distance Semi-trailer truck,Freight mobility
+SEMI_SH_CSNG,SNG_HP,-0.429,Compressed Synthetic Natural Gas-Powered Short Distance Semi-trailer truck,Synthetic natural gas (high pressure)
+SEMI_SH_DIESEL,CO2_E,0.12,Diesel-Powered Short Distance Semi-trailer truck,CO2 emission (from nonconcentrated spot sources)
+SEMI_SH_DIESEL,DIESEL,-0.453,Diesel-Powered Short Distance Semi-trailer truck,Diesel
+SEMI_SH_DIESEL,MOB_FREIGHT_MD,1.0,Diesel-Powered Short Distance Semi-trailer truck,Freight mobility
+SEMI_SH_EV,ELECTRICITY_MV,-0.232,Electric-Powered Short Distance Semi-trailer truck,Electricity (medium voltage)
+SEMI_SH_EV,MOB_FREIGHT_MD,1.0,Electric-Powered Short Distance Semi-trailer truck,Freight mobility
+SEMI_SH_FC_H2,H2_HP,-0.305,Hydrogen Fuel Cell-Powered Short Distance Semi-trailer truck,Hydrogen (high pressure)
+SEMI_SH_FC_H2,MOB_FREIGHT_MD,1.0,Hydrogen Fuel Cell-Powered Short Distance Semi-trailer truck,Freight mobility
+SEMI_SH_HY_DIESEL,CO2_E,0.083,Diesel Hybrid Short Distance Semi-trailer truck,CO2 emission (from nonconcentrated spot sources)
+SEMI_SH_HY_DIESEL,DIESEL,-0.314,Diesel Hybrid Short Distance Semi-trailer truck,Diesel
+SEMI_SH_HY_DIESEL,MOB_FREIGHT_MD,1.0,Diesel Hybrid Short Distance Semi-trailer truck,Freight mobility
+SEMI_SH_PROPANE,CO2_E,0.095,Propane-Powered Short Distance Semi-trailer truck,CO2 emission (from nonconcentrated spot sources)
+SEMI_SH_PROPANE,MOB_FREIGHT_MD,1.0,Propane-Powered Short Distance Semi-trailer truck,Freight mobility
+SEMI_SH_PROPANE,PROPANE,-0.423,Propane-Powered Short Distance Semi-trailer truck,Propane
+SMART_PROCESS,CO2_A,0.296,Implementation of SMART Process from ethylbenzene to styrene,CO2 emission (from carbon-intensive fields)
+SMART_PROCESS,ETHYLBENZENE,-2.0,Implementation of SMART Process from ethylbenzene to styrene,Ethylbenzene
+SMART_PROCESS,STYRENE,1.0,Implementation of SMART Process from ethylbenzene to styrene,Styrene
+SMR,CO2_A,0.262,Steam Methane Reforming,CO2 emission (from carbon-intensive fields)
+SMR,H2_HP,1.0,Steam Methane Reforming,Hydrogen (high pressure)
+SMR,HEAT_HIGH_T,-0.6,Steam Methane Reforming,Heat (high temperature)
+SMR,NG_HP,-0.983,Steam Methane Reforming,Natural gas (high pressure)
+SMR_CCS,CO2_C,0.236,Steam Methane Reforming with Carbon Capture,Captured CO2
+SMR_CCS,CO2_E,0.026,Steam Methane Reforming with Carbon Capture,CO2 emission (from nonconcentrated spot sources)
+SMR_CCS,H2_HP,1.0,Steam Methane Reforming with Carbon Capture,Hydrogen (high pressure)
+SMR_CCS,HEAT_HIGH_T,-1.183,Steam Methane Reforming with Carbon Capture,Heat (high temperature)
+SMR_CCS,NG_HP,-0.983,Steam Methane Reforming with Carbon Capture,Natural gas (high pressure)
+SNG_COMP_HE,ELECTRICITY_MV,-0.005,Synthetic Natural Gas Compression from High Pressure to Extra High Pressure,Electricity (medium voltage)
+SNG_COMP_HE,SNG_EHP,1.0,Synthetic Natural Gas Compression from High Pressure to Extra High Pressure,Synthetic natural gas (extra high pressure)
+SNG_COMP_HE,SNG_HP,-1.0,Synthetic Natural Gas Compression from High Pressure to Extra High Pressure,Synthetic natural gas (high pressure)
+SNG_COMP_LM,ELECTRICITY_MV,-0.02,Synthetic Natural Gas Compression from Low Pressure to Medium Pressure,Electricity (medium voltage)
+SNG_COMP_LM,SNG_LP,-1.0,Synthetic Natural Gas Compression from Low Pressure to Medium Pressure,Synthetic natural gas (low pressure)
+SNG_COMP_LM,SNG_MP,1.0,Synthetic Natural Gas Compression from Low Pressure to Medium Pressure,Synthetic natural gas (medium pressure)
+SNG_COMP_MH,ELECTRICITY_MV,-0.004,Synthetic Natural Gas Compression from Medium Pressure to High Pressure,Electricity (medium voltage)
+SNG_COMP_MH,SNG_HP,1.0,Synthetic Natural Gas Compression from Medium Pressure to High Pressure,Synthetic natural gas (high pressure)
+SNG_COMP_MH,SNG_MP,-1.0,Synthetic Natural Gas Compression from Medium Pressure to High Pressure,Synthetic natural gas (medium pressure)
+SNG_EHP,SNG_EHP,1.0,Synthetic natural gas,Synthetic natural gas (extra high pressure)
+SNG_EXP_EH,HEAT_LOW_T_DECEN,-0.001,Synthetic Natural Gas Expansion from Extra High Pressure to High Pressure,"Heat (low temperature, decentralized)"
+SNG_EXP_EH,SNG_EHP,-1.0,Synthetic Natural Gas Expansion from Extra High Pressure to High Pressure,Synthetic natural gas (extra high pressure)
+SNG_EXP_EH,SNG_HP,1.0,Synthetic Natural Gas Expansion from Extra High Pressure to High Pressure,Synthetic natural gas (high pressure)
+SNG_EXP_EH_COGEN,ELECTRICITY_MV,0.005,Synthetic Natural Gas Expansion from Extra High Pressure to High Pressure (co-generation unit),Electricity (medium voltage)
+SNG_EXP_EH_COGEN,HEAT_LOW_T_DECEN,-0.005,Synthetic Natural Gas Expansion from Extra High Pressure to High Pressure (co-generation unit),"Heat (low temperature, decentralized)"
+SNG_EXP_EH_COGEN,SNG_EHP,-1.0,Synthetic Natural Gas Expansion from Extra High Pressure to High Pressure (co-generation unit),Synthetic natural gas (extra high pressure)
+SNG_EXP_EH_COGEN,SNG_HP,1.0,Synthetic Natural Gas Expansion from Extra High Pressure to High Pressure (co-generation unit),Synthetic natural gas (high pressure)
+SNG_EXP_HM,SNG_HP,-1.0,Synthetic Natural Gas Expansion from High Pressure to Medium Pressure,Synthetic natural gas (high pressure)
+SNG_EXP_HM,SNG_MP,1.0,Synthetic Natural Gas Expansion from High Pressure to Medium Pressure,Synthetic natural gas (medium pressure)
+SNG_EXP_HM_COGEN,ELECTRICITY_MV,0.004,Synthetic Natural Gas Expansion from High Pressure to Medium Pressure (co-generation unit),Electricity (medium voltage)
+SNG_EXP_HM_COGEN,HEAT_LOW_T_DECEN,-0.004,Synthetic Natural Gas Expansion from High Pressure to Medium Pressure (co-generation unit),"Heat (low temperature, decentralized)"
+SNG_EXP_HM_COGEN,SNG_HP,-1.0,Synthetic Natural Gas Expansion from High Pressure to Medium Pressure (co-generation unit),Synthetic natural gas (high pressure)
+SNG_EXP_HM_COGEN,SNG_MP,1.0,Synthetic Natural Gas Expansion from High Pressure to Medium Pressure (co-generation unit),Synthetic natural gas (medium pressure)
+SNG_EXP_ML,SNG_LP,1.0,Synthetic Natural Gas Expansion from Medium Pressure to Low Pressure,Synthetic natural gas (low pressure)
+SNG_EXP_ML,SNG_MP,-1.0,Synthetic Natural Gas Expansion from Medium Pressure to Low Pressure,Synthetic natural gas (medium pressure)
+SNG_EXP_ML_COGEN,ELECTRICITY_MV,0.02,Synthetic Natural Gas Expansion from Medium Pressure to Low Pressure (co-generation unit),Electricity (medium voltage)
+SNG_EXP_ML_COGEN,HEAT_LOW_T_DECEN,-0.02,Synthetic Natural Gas Expansion from Medium Pressure to Low Pressure (co-generation unit),"Heat (low temperature, decentralized)"
+SNG_EXP_ML_COGEN,SNG_LP,1.0,Synthetic Natural Gas Expansion from Medium Pressure to Low Pressure (co-generation unit),Synthetic natural gas (low pressure)
+SNG_EXP_ML_COGEN,SNG_MP,-1.0,Synthetic Natural Gas Expansion from Medium Pressure to Low Pressure (co-generation unit),Synthetic natural gas (medium pressure)
+SNG_PYROLYSIS_PLASMA,H2_MP,1.0,Plasma Synthetic Natural Gas Pyrolysis,Hydrogen (medium pressure)
+SNG_PYROLYSIS_PLASMA,HEAT_HIGH_T,-0.356,Plasma Synthetic Natural Gas Pyrolysis,Heat (high temperature)
+SNG_PYROLYSIS_PLASMA,HEAT_LOW_T_DHN,0.244,Plasma Synthetic Natural Gas Pyrolysis,"Heat (low temperature, district heating network)"
+SNG_PYROLYSIS_PLASMA,SNG_MP,-1.867,Plasma Synthetic Natural Gas Pyrolysis,Synthetic natural gas (medium pressure)
+SNG_PYROLYSIS_THERMAL,H2_MP,1.0,Thermal Synthetic Natural Gas Pyrolysis,Hydrogen (medium pressure)
+SNG_PYROLYSIS_THERMAL,HEAT_HIGH_T,-0.537,Thermal Synthetic Natural Gas Pyrolysis,Heat (high temperature)
+SNG_PYROLYSIS_THERMAL,HEAT_LOW_T_DHN,0.39,Thermal Synthetic Natural Gas Pyrolysis,"Heat (low temperature, district heating network)"
+SNG_PYROLYSIS_THERMAL,SNG_MP,-1.902,Thermal Synthetic Natural Gas Pyrolysis,Synthetic natural gas (medium pressure)
+SNG_REFORMING,CO2_A,0.27,Synthetic Natural Gas Reforming,CO2 emission (from carbon-intensive fields)
+SNG_REFORMING,H2_MP,1.0,Synthetic Natural Gas Reforming,Hydrogen (medium pressure)
+SNG_REFORMING,SNG_MP,-1.365,Synthetic Natural Gas Reforming,Synthetic natural gas (medium pressure)
+SNG_S,SNG_S,1.0,,Stored synthetic natural gas
+SNG_STO,SNG_EHP,-1.0,Synthetic Natural Gas to Storage,Synthetic natural gas (extra high pressure)
+SNG_STO,SNG_S,1.0,Synthetic Natural Gas to Storage,Stored synthetic natural gas
+SOEC_ELECTROLYSIS,ELECTRICITY_HV,-1.25,Solid Oxide Electrolysis Cell Electrolysis,Electricity (high voltage)
+SOEC_ELECTROLYSIS,H2_MP,1.0,Solid Oxide Electrolysis Cell Electrolysis,Hydrogen (medium pressure)
+SOFC,ELECTRICITY_LV,2.491,Solid Oxide Fuel Cell,Electricity (low voltage)
+SOFC,H2_HP,-3.774,Solid Oxide Fuel Cell,Hydrogen (high pressure)
+SOFC,HEAT_LOW_T_DECEN,1.0,Solid Oxide Fuel Cell,"Heat (low temperature, decentralized)"
+STEEL_MAKING,ELECTRICITY_EHV,-0.716,Steel Production,Electricity (extra high voltage)
+STEEL_MAKING,HEAT_HIGH_T,-0.725,Steel Production,Heat (high temperature)
+STEEL_MAKING,STEEL,1.0,Steel Production,Steel
+STEEL_MAKING_HP,ELECTRICITY_MV,-0.609,Steel Production (heat pump),Electricity (medium voltage)
+STEEL_MAKING_HP,HEAT_HIGH_T,-0.66,Steel Production (heat pump),Heat (high temperature)
+STEEL_MAKING_HP,STEEL,1.0,Steel Production (heat pump),Steel
+STEEL_MAKING_HR,ELECTRICITY_HV,-0.716,Steel Production with Heat Recovery,Electricity (high voltage)
+STEEL_MAKING_HR,HEAT_HIGH_T,-0.66,Steel Production with Heat Recovery,Heat (high temperature)
+STEEL_MAKING_HR,STEEL,1.0,Steel Production with Heat Recovery,Steel
+STO_CO2,CO2_C,1.0,CO2 Storage (output),Captured CO2
+STO_CO2,CO2_CS,-1.0,CO2 Storage (output),Captured & stored CO2
+STO_DIE,DIESEL,1.0,Storage to Diesel,Diesel
+STO_DIE,DIESEL_S,-1.0,Storage to Diesel,Stored diesel
+STO_ELEC,ELECTRICITY_LV,1.0,Storage Electricity,Electricity (low voltage)
+STO_ELEC,ELEC_S,-1.0,Storage Electricity,Stored electricity
+STO_GASO,GASOLINE,1.0,Storage to Gasoline,Gasoline
+STO_GASO,GASOLINE_S,-1.0,Storage to Gasoline,Stored gasoline
+STO_H2,H2_EHP,1.0,Storage to Hydrogen,Hydrogen (extra high pressure)
+STO_H2,H2_S,-1.0,Storage to Hydrogen,Stored hydrogen
+STO_NG,NG_EHP,1.0,Storage to Natural Gas,Natural gas (extra high pressure)
+STO_NG,NG_S,-1.0,Storage to Natural Gas,Stored natural gas
+STO_SNG,SNG_EHP,1.0,,Synthetic natural gas (extra high pressure)
+STO_SNG,SNG_S,-1.0,,Stored synthetic natural gas
+STYRENE,STYRENE,1.0,Styrene,Styrene
+STYRENE_POLYMERIZATION,CO2_A,0.003,Styrene Polymerization Process,CO2 emission (from carbon-intensive fields)
+STYRENE_POLYMERIZATION,PS,1.0,Styrene Polymerization Process,Polystyrene
+STYRENE_POLYMERIZATION,STYRENE,-1.05,Styrene Polymerization Process,Styrene
+SUV_BIODIESEL_B100,BIO_DIESEL,-0.703,100% BioDiesel-Powered Sport Utility Vehicle,Bio-diesel
+SUV_BIODIESEL_B100,CO2_E,0.172,100% BioDiesel-Powered Sport Utility Vehicle,CO2 emission (from nonconcentrated spot sources)
+SUV_BIODIESEL_B100,MOB_PRIVATE_ELD,1.0,100% BioDiesel-Powered Sport Utility Vehicle,Private mobility
+SUV_BIODIESEL_B100,MOB_PRIVATE_LD,1.0,100% BioDiesel-Powered Sport Utility Vehicle,Private mobility
+SUV_BIODIESEL_B100,MOB_PRIVATE_MD,1.0,100% BioDiesel-Powered Sport Utility Vehicle,Private mobility
+SUV_BIODIESEL_B100,MOB_PRIVATE_SD,1.0,100% BioDiesel-Powered Sport Utility Vehicle,Private mobility
+SUV_BIODIESEL_B20,BIO_DIESEL,-0.141,20% BioDiesel-Powered Sport Utility Vehicle,Bio-diesel
+SUV_BIODIESEL_B20,CO2_E,0.171,20% BioDiesel-Powered Sport Utility Vehicle,CO2 emission (from nonconcentrated spot sources)
+SUV_BIODIESEL_B20,DIESEL,-0.563,20% BioDiesel-Powered Sport Utility Vehicle,Diesel
+SUV_BIODIESEL_B20,MOB_PRIVATE_ELD,1.0,20% BioDiesel-Powered Sport Utility Vehicle,Private mobility
+SUV_BIODIESEL_B20,MOB_PRIVATE_LD,1.0,20% BioDiesel-Powered Sport Utility Vehicle,Private mobility
+SUV_BIODIESEL_B20,MOB_PRIVATE_MD,1.0,20% BioDiesel-Powered Sport Utility Vehicle,Private mobility
+SUV_BIODIESEL_B20,MOB_PRIVATE_SD,1.0,20% BioDiesel-Powered Sport Utility Vehicle,Private mobility
+SUV_BIOETOH_E10,BIO_ETHANOL,-0.084,10% BioEthanol-Powered Sport Utility Vehicle,Bio-ethanol
+SUV_BIOETOH_E10,CO2_E,0.197,10% BioEthanol-Powered Sport Utility Vehicle,CO2 emission (from nonconcentrated spot sources)
+SUV_BIOETOH_E10,GASOLINE,-0.76,10% BioEthanol-Powered Sport Utility Vehicle,Gasoline
+SUV_BIOETOH_E10,MOB_PRIVATE_ELD,1.0,10% BioEthanol-Powered Sport Utility Vehicle,Private mobility
+SUV_BIOETOH_E10,MOB_PRIVATE_LD,1.0,10% BioEthanol-Powered Sport Utility Vehicle,Private mobility
+SUV_BIOETOH_E10,MOB_PRIVATE_MD,1.0,10% BioEthanol-Powered Sport Utility Vehicle,Private mobility
+SUV_BIOETOH_E10,MOB_PRIVATE_SD,1.0,10% BioEthanol-Powered Sport Utility Vehicle,Private mobility
+SUV_BIOETOH_E85,BIO_ETHANOL,-0.718,85% BioEthanol-Powered Sport Utility Vehicle,Bio-ethanol
+SUV_BIOETOH_E85,CO2_E,0.183,85% BioEthanol-Powered Sport Utility Vehicle,CO2 emission (from nonconcentrated spot sources)
+SUV_BIOETOH_E85,GASOLINE,-0.127,85% BioEthanol-Powered Sport Utility Vehicle,Gasoline
+SUV_BIOETOH_E85,MOB_PRIVATE_ELD,1.0,85% BioEthanol-Powered Sport Utility Vehicle,Private mobility
+SUV_BIOETOH_E85,MOB_PRIVATE_LD,1.0,85% BioEthanol-Powered Sport Utility Vehicle,Private mobility
+SUV_BIOETOH_E85,MOB_PRIVATE_MD,1.0,85% BioEthanol-Powered Sport Utility Vehicle,Private mobility
+SUV_BIOETOH_E85,MOB_PRIVATE_SD,1.0,85% BioEthanol-Powered Sport Utility Vehicle,Private mobility
+SUV_CNG,CO2_E,0.15,Compressed Natural Gas-Powered Sport Utility Vehicle,CO2 emission (from nonconcentrated spot sources)
+SUV_CNG,MOB_PRIVATE_ELD,1.0,Compressed Natural Gas-Powered Sport Utility Vehicle,Private mobility
+SUV_CNG,NG_HP,-0.888,Compressed Natural Gas-Powered Sport Utility Vehicle,Natural gas (high pressure)
+SUV_CNG,MOB_PRIVATE_LD,1.0,Compressed Natural Gas-Powered Sport Utility Vehicle,Private mobility
+SUV_CNG,MOB_PRIVATE_MD,1.0,Compressed Natural Gas-Powered Sport Utility Vehicle,Private mobility
+SUV_CNG,MOB_PRIVATE_SD,1.0,Compressed Natural Gas-Powered Sport Utility Vehicle,Private mobility
+SUV_CSNG,CO2_E,0.15,Compressed Synthetic Natural Gas-Powered Sport Utility Vehicle,CO2 emission (from nonconcentrated spot sources)
+SUV_CSNG,MOB_PRIVATE_ELD,1.0,Compressed Synthetic Natural Gas-Powered Sport Utility Vehicle,Private mobility
+SUV_CSNG,SNG_HP,-0.888,Compressed Synthetic Natural Gas-Powered Sport Utility Vehicle,Synthetic natural gas (high pressure)
+SUV_CSNG,MOB_PRIVATE_LD,1.0,Compressed Synthetic Natural Gas-Powered Sport Utility Vehicle,Private mobility
+SUV_CSNG,MOB_PRIVATE_MD,1.0,Compressed Synthetic Natural Gas-Powered Sport Utility Vehicle,Private mobility
+SUV_CSNG,MOB_PRIVATE_SD,1.0,Compressed Synthetic Natural Gas-Powered Sport Utility Vehicle,Private mobility
+SUV_DIESEL,CO2_E,0.143,Diesel-Powered Sport Utility Vehicle,CO2 emission (from nonconcentrated spot sources)
+SUV_DIESEL,DIESEL,-0.537,Diesel-Powered Sport Utility Vehicle,Diesel
+SUV_DIESEL,MOB_PRIVATE_ELD,1.0,Diesel-Powered Sport Utility Vehicle,Private mobility
+SUV_DIESEL,MOB_PRIVATE_LD,1.0,Diesel-Powered Sport Utility Vehicle,Private mobility
+SUV_DIESEL,MOB_PRIVATE_MD,1.0,Diesel-Powered Sport Utility Vehicle,Private mobility
+SUV_DIESEL,MOB_PRIVATE_SD,1.0,Diesel-Powered Sport Utility Vehicle,Private mobility
+SUV_ETOH_E10,CO2_E,0.197,10% Ethanol-Powered Sport Utility Vehicle,CO2 emission (from nonconcentrated spot sources)
+SUV_ETOH_E10,ETHANOL,-0.084,10% Ethanol-Powered Sport Utility Vehicle,Ethanol
+SUV_ETOH_E10,GASOLINE,-0.76,10% Ethanol-Powered Sport Utility Vehicle,Gasoline
+SUV_ETOH_E10,MOB_PRIVATE_ELD,1.0,10% Ethanol-Powered Sport Utility Vehicle,Private mobility
+SUV_ETOH_E10,MOB_PRIVATE_LD,1.0,10% Ethanol-Powered Sport Utility Vehicle,Private mobility
+SUV_ETOH_E10,MOB_PRIVATE_MD,1.0,10% Ethanol-Powered Sport Utility Vehicle,Private mobility
+SUV_ETOH_E10,MOB_PRIVATE_SD,1.0,10% Ethanol-Powered Sport Utility Vehicle,Private mobility
+SUV_ETOH_E85,CO2_E,0.183,85% Ethanol-Powered Sport Utility Vehicle,CO2 emission (from nonconcentrated spot sources)
+SUV_ETOH_E85,ETHANOL,-0.718,85% Ethanol-Powered Sport Utility Vehicle,Ethanol
+SUV_ETOH_E85,GASOLINE,-0.127,85% Ethanol-Powered Sport Utility Vehicle,Gasoline
+SUV_ETOH_E85,MOB_PRIVATE_ELD,1.0,85% Ethanol-Powered Sport Utility Vehicle,Private mobility
+SUV_ETOH_E85,MOB_PRIVATE_LD,1.0,85% Ethanol-Powered Sport Utility Vehicle,Private mobility
+SUV_ETOH_E85,MOB_PRIVATE_MD,1.0,85% Ethanol-Powered Sport Utility Vehicle,Private mobility
+SUV_ETOH_E85,MOB_PRIVATE_SD,1.0,85% Ethanol-Powered Sport Utility Vehicle,Private mobility
+SUV_EV,ELECTRICITY_MV,-0.313,Electric-Powered Sport Utility Vehicle,Electricity (medium voltage)
+SUV_EV,MOB_PRIVATE_ELD,1.0,Electric-Powered Sport Utility Vehicle,Private mobility
+SUV_EV,MOB_PRIVATE_LD,1.0,Electric-Powered Sport Utility Vehicle,Private mobility
+SUV_EV,MOB_PRIVATE_MD,1.0,Electric-Powered Sport Utility Vehicle,Private mobility
+SUV_EV,MOB_PRIVATE_SD,1.0,Electric-Powered Sport Utility Vehicle,Private mobility
+SUV_FC_H2,H2_HP,-0.41,Hydrogen Fuel Cell-Powered Sport Utility Vehicle,Hydrogen (high pressure)
+SUV_FC_H2,MOB_PRIVATE_ELD,1.0,Hydrogen Fuel Cell-Powered Sport Utility Vehicle,Private mobility
+SUV_FC_H2,MOB_PRIVATE_LD,1.0,Hydrogen Fuel Cell-Powered Sport Utility Vehicle,Private mobility
+SUV_FC_H2,MOB_PRIVATE_MD,1.0,Hydrogen Fuel Cell-Powered Sport Utility Vehicle,Private mobility
+SUV_FC_H2,MOB_PRIVATE_SD,1.0,Hydrogen Fuel Cell-Powered Sport Utility Vehicle,Private mobility
+SUV_GASOLINE,CO2_E,0.153,Gasoline-Powered Sport Utility Vehicle,CO2 emission (from nonconcentrated spot sources)
+SUV_GASOLINE,GASOLINE,-0.565,Gasoline-Powered Sport Utility Vehicle,Gasoline
+SUV_GASOLINE,MOB_PRIVATE_ELD,1.0,Gasoline-Powered Sport Utility Vehicle,Private mobility
+SUV_GASOLINE,MOB_PRIVATE_LD,1.0,Gasoline-Powered Sport Utility Vehicle,Private mobility
+SUV_GASOLINE,MOB_PRIVATE_MD,1.0,Gasoline-Powered Sport Utility Vehicle,Private mobility
+SUV_GASOLINE,MOB_PRIVATE_SD,1.0,Gasoline-Powered Sport Utility Vehicle,Private mobility
+SUV_HY_GASOLINE,CO2_E,0.135,Gasoline Hybrid Sport Utility Vehicle,CO2 emission (from nonconcentrated spot sources)
+SUV_HY_GASOLINE,GASOLINE,-0.57,Gasoline Hybrid Sport Utility Vehicle,Gasoline
+SUV_HY_GASOLINE,MOB_PRIVATE_ELD,1.0,Gasoline Hybrid Sport Utility Vehicle,Private mobility
+SUV_HY_GASOLINE,MOB_PRIVATE_LD,1.0,Gasoline Hybrid Sport Utility Vehicle,Private mobility
+SUV_HY_GASOLINE,MOB_PRIVATE_MD,1.0,Gasoline Hybrid Sport Utility Vehicle,Private mobility
+SUV_HY_GASOLINE,MOB_PRIVATE_SD,1.0,Gasoline Hybrid Sport Utility Vehicle,Private mobility
+SUV_PHEV_GASOLINE,CO2_E,0.084,Plug-in Hybrid Gasoline-Powered Sport Utility Vehicle,CO2 emission (from nonconcentrated spot sources)
+SUV_PHEV_GASOLINE,ELECTRICITY_MV,-0.181,Plug-in Hybrid Gasoline-Powered Sport Utility Vehicle,Electricity (medium voltage)
+SUV_PHEV_GASOLINE,GASOLINE,-0.355,Plug-in Hybrid Gasoline-Powered Sport Utility Vehicle,Gasoline
+SUV_PHEV_GASOLINE,MOB_PRIVATE_ELD,1.0,Plug-in Hybrid Gasoline-Powered Sport Utility Vehicle,Private mobility
+SUV_PHEV_GASOLINE,MOB_PRIVATE_LD,1.0,Plug-in Hybrid Gasoline-Powered Sport Utility Vehicle,Private mobility
+SUV_PHEV_GASOLINE,MOB_PRIVATE_MD,1.0,Plug-in Hybrid Gasoline-Powered Sport Utility Vehicle,Private mobility
+SUV_PHEV_GASOLINE,MOB_PRIVATE_SD,1.0,Plug-in Hybrid Gasoline-Powered Sport Utility Vehicle,Private mobility
+SUV_PROPANE,CO2_E,0.177,Propane-Powered Sport Utility Vehicle,CO2 emission (from nonconcentrated spot sources)
+SUV_PROPANE,MOB_PRIVATE_ELD,1.0,Propane-Powered Sport Utility Vehicle,Private mobility
+SUV_PROPANE,PROPANE,-0.845,Propane-Powered Sport Utility Vehicle,Propane
+SUV_PROPANE,MOB_PRIVATE_LD,1.0,Propane-Powered Sport Utility Vehicle,Private mobility
+SUV_PROPANE,MOB_PRIVATE_MD,1.0,Propane-Powered Sport Utility Vehicle,Private mobility
+SUV_PROPANE,MOB_PRIVATE_SD,1.0,Propane-Powered Sport Utility Vehicle,Private mobility
+TIDAL,ELECTRICITY_MV,1.0,Tidal power,Electricity (medium voltage)
+TIDAL,RES_TIDAL,-1.0,Tidal power,Tidal resource
+TOLUENE,TOLUENE,1.0,Toluene,Toluene
+TRAFO_EH,ELECTRICITY_EHV,-1.018,Extra High to High Voltage Transformer,Electricity (extra high voltage)
+TRAFO_EH,ELECTRICITY_HV,1.0,Extra High to High Voltage Transformer,Electricity (high voltage)
+TRAFO_HE,ELECTRICITY_EHV,1.0,High to Extra High Voltage Transformer,Electricity (extra high voltage)
+TRAFO_HE,ELECTRICITY_HV,-1.018,High to Extra High Voltage Transformer,Electricity (high voltage)
+TRAFO_HM,ELECTRICITY_HV,-1.027,High to Medium Voltage Transformer,Electricity (high voltage)
+TRAFO_HM,ELECTRICITY_MV,1.0,High to Medium Voltage Transformer,Electricity (medium voltage)
+TRAFO_LM,ELECTRICITY_LV,-1.045,Low to Medium Voltage Transformer,Electricity (low voltage)
+TRAFO_LM,ELECTRICITY_MV,1.0,Low to Medium Voltage Transformer,Electricity (medium voltage)
+TRAFO_MH,ELECTRICITY_HV,1.0,Medium to High Voltage Transformer,Electricity (high voltage)
+TRAFO_MH,ELECTRICITY_MV,-1.027,Medium to High Voltage Transformer,Electricity (medium voltage)
+TRAFO_ML,ELECTRICITY_LV,1.0,Medium to Low Voltage Transformer,Electricity (low voltage)
+TRAFO_ML,ELECTRICITY_MV,-1.045,Medium to Low Voltage Transformer,Electricity (medium voltage)
+TRAIN_BIODIESEL,BIO_DIESEL,-1.025,BioDiesel-Powered Train,Bio-diesel
+TRAIN_BIODIESEL,CO2_E,0.102,BioDiesel-Powered Train,CO2 emission (from nonconcentrated spot sources)
+TRAIN_BIODIESEL,MOB_PUBLIC_ELD,1.0,BioDiesel-Powered Train,Public mobility
+TRAIN_BIODIESEL,MOB_PUBLIC_LD,1.0,BioDiesel-Powered Train,Public mobility
+TRAIN_DIESEL,CO2_E,0.102,Diesel-Powered Train,CO2 emission (from nonconcentrated spot sources)
+TRAIN_DIESEL,DIESEL,-1.025,Diesel-Powered Train,Diesel
+TRAIN_DIESEL,MOB_PUBLIC_ELD,1.0,Diesel-Powered Train,Public mobility
+TRAIN_DIESEL,MOB_PUBLIC_LD,1.0,Diesel-Powered Train,Public mobility
+TRAIN_ELEC,ELECTRICITY_EHV,-0.092,Electric-Powered Train,Electricity (extra high voltage)
+TRAIN_ELEC,MOB_PUBLIC_ELD,1.0,Electric-Powered Train,Public mobility
+TRAIN_ELEC,MOB_PUBLIC_LD,1.0,Electric-Powered Train,Public mobility
+TRAIN_FREIGHT_BIODIESEL,BIO_DIESEL,-0.051,Biodiesel-Powered Freight Train,Bio-diesel
+TRAIN_FREIGHT_BIODIESEL,CO2_E,0.001,Biodiesel-Powered Freight Train,CO2 emission (from nonconcentrated spot sources)
+TRAIN_FREIGHT_BIODIESEL,MOB_FREIGHT_ELD,1.0,Biodiesel-Powered Freight Train,Freight mobility
+TRAIN_FREIGHT_BIODIESEL,MOB_FREIGHT_LD,1.0,Biodiesel-Powered Freight Train,Freight mobility
+TRAIN_FREIGHT_DIESEL,CO2_E,0.001,Diesel-Powered Freight Train,CO2 emission (from nonconcentrated spot sources)
+TRAIN_FREIGHT_DIESEL,DIESEL,-0.051,Diesel-Powered Freight Train,Diesel
+TRAIN_FREIGHT_DIESEL,MOB_FREIGHT_ELD,1.0,Diesel-Powered Freight Train,Freight mobility
+TRAIN_FREIGHT_DIESEL,MOB_FREIGHT_LD,1.0,Diesel-Powered Freight Train,Freight mobility
+TRAIN_FREIGHT_ELEC,ELECTRICITY_EHV,-0.068,"Electric-Powered Freight Train (co-generation unit, components for electricity)",Electricity (extra high voltage)
+TRAIN_FREIGHT_ELEC,MOB_FREIGHT_ELD,1.0,"Electric-Powered Freight Train (co-generation unit, components for electricity)",Freight mobility
+TRAIN_FREIGHT_ELEC,MOB_FREIGHT_LD,1.0,"Electric-Powered Freight Train (co-generation unit, components for electricity)",Freight mobility
+TRAIN_FREIGHT_H2,H2_EHP,-0.022,Hydrogen-Powered Freight Train,Hydrogen (extra high pressure)
+TRAIN_FREIGHT_H2,H2_HP,-0.333,Hydrogen-Powered Freight Train,Hydrogen (high pressure)
+TRAIN_FREIGHT_H2,MOB_FREIGHT_ELD,1.0,Hydrogen-Powered Freight Train,Freight mobility
+TRAIN_FREIGHT_H2_HYBRID,H2_EHP,-0.02,Hybrid Battery-Fuel Cell-Powered Freight Train,Hydrogen (extra high pressure)
+TRAIN_FREIGHT_H2_HYBRID,MOB_FREIGHT_ELD,1.0,Hybrid Battery-Fuel Cell-Powered Freight Train,Freight mobility
+TRAIN_FREIGHT_H2_HYBRID,MOB_FREIGHT_LD,1.0,Hybrid Battery-Fuel Cell-Powered Freight Train,Freight mobility
+TRAIN_FREIGHT_H2,MOB_FREIGHT_LD,1.0,Hydrogen-Powered Freight Train,Freight mobility
+TRAIN_FREIGHT_NG,CO2_E,0.057,Natural Gas-Powered Freight Train,CO2 emission (from nonconcentrated spot sources)
+TRAIN_FREIGHT_NG,MOB_FREIGHT_ELD,1.0,Natural Gas-Powered Freight Train,Freight mobility
+TRAIN_FREIGHT_NG,NG_HP,-0.251,Natural Gas-Powered Freight Train,Natural gas (high pressure)
+TRAIN_FREIGHT_NG,MOB_FREIGHT_LD,1.0,Natural Gas-Powered Freight Train,Freight mobility
+TRAIN_FREIGHT_SNG,CO2_E,0.057,Natural Synthetic Gas-Powered Freight Train,CO2 emission (from nonconcentrated spot sources)
+TRAIN_FREIGHT_SNG,MOB_FREIGHT_ELD,1.0,Natural Synthetic Gas-Powered Freight Train,Freight mobility
+TRAIN_FREIGHT_SNG,SNG_HP,-0.251,Natural Synthetic Gas-Powered Freight Train,Synthetic natural gas (high pressure)
+TRAIN_FREIGHT_SNG,MOB_FREIGHT_LD,1.0,Natural Synthetic Gas-Powered Freight Train,Freight mobility
+TRAIN_H2,H2_EHP,-0.294,Hydrogen-Powered Train,Hydrogen (extra high pressure)
+TRAIN_H2,H2_HP,-0.312,Hydrogen-Powered Train,Hydrogen (high pressure)
+TRAIN_H2,MOB_PUBLIC_ELD,1.0,Hydrogen-Powered Train,Public mobility
+TRAIN_H2,MOB_PUBLIC_LD,1.0,Hydrogen-Powered Train,Public mobility
+TRAIN_NG,CO2_E,0.076,Natural Gas-Powered Train,CO2 emission (from nonconcentrated spot sources)
+TRAIN_NG,MOB_PUBLIC_ELD,1.0,Natural Gas-Powered Train,Public mobility
+TRAIN_NG,NG_HP,-0.238,Natural Gas-Powered Train,Natural gas (high pressure)
+TRAIN_NG,MOB_PUBLIC_LD,1.0,Natural Gas-Powered Train,Public mobility
+TRAIN_SNG,CO2_E,0.076,Synthetic Natural Gas-Powered Train,CO2 emission (from nonconcentrated spot sources)
+TRAIN_SNG,MOB_PUBLIC_ELD,1.0,Synthetic Natural Gas-Powered Train,Public mobility
+TRAIN_SNG,SNG_HP,-0.238,Synthetic Natural Gas-Powered Train,Synthetic natural gas (high pressure)
+TRAIN_SNG,MOB_PUBLIC_LD,1.0,Synthetic Natural Gas-Powered Train,Public mobility
+TRAMWAY,ELECTRICITY_HV,-0.168,Tramway,Electricity (high voltage)
+TRAMWAY,MOB_PUBLIC_SD,1.0,Tramway,Public mobility
+TRUCK_LH_BIODIESEL_B100,BIO_DIESEL,-0.466,100% BioDiesel-Powered Long Distance Truck,Bio-diesel
+TRUCK_LH_BIODIESEL_B100,CO2_E,0.123,100% BioDiesel-Powered Long Distance Truck,CO2 emission (from nonconcentrated spot sources)
+TRUCK_LH_BIODIESEL_B100,MOB_FREIGHT_LD,1.0,100% BioDiesel-Powered Long Distance Truck,Freight mobility
+TRUCK_LH_BIODIESEL_B20,BIO_DIESEL,-0.093,20% BioDiesel-Powered Long Distance Truck,Bio-diesel
+TRUCK_LH_BIODIESEL_B20,CO2_E,0.123,20% BioDiesel-Powered Long Distance Truck,CO2 emission (from nonconcentrated spot sources)
+TRUCK_LH_BIODIESEL_B20,DIESEL,-0.372,20% BioDiesel-Powered Long Distance Truck,Diesel
+TRUCK_LH_BIODIESEL_B20,MOB_FREIGHT_LD,1.0,20% BioDiesel-Powered Long Distance Truck,Freight mobility
+TRUCK_LH_CNG,CO2_E,0.11,Compressed Natural Gas-Powered Long Distance Truck,CO2 emission (from nonconcentrated spot sources)
+TRUCK_LH_CNG,MOB_FREIGHT_LD,1.0,Compressed Natural Gas-Powered Long Distance Truck,Freight mobility
+TRUCK_LH_CNG,NG_HP,-0.588,Compressed Natural Gas-Powered Long Distance Truck,Natural gas (high pressure)
+TRUCK_LH_CSNG,CO2_E,0.11,Compressed Synthetic Natural Gas-Powered Long Distance Truck,CO2 emission (from nonconcentrated spot sources)
+TRUCK_LH_CSNG,MOB_FREIGHT_LD,1.0,Compressed Synthetic Natural Gas-Powered Long Distance Truck,Freight mobility
+TRUCK_LH_CSNG,SNG_HP,-0.588,Compressed Synthetic Natural Gas-Powered Long Distance Truck,Synthetic natural gas (high pressure)
+TRUCK_LH_DIESEL,CO2_E,0.13,Diesel-Powered Long Distance Truck,CO2 emission (from nonconcentrated spot sources)
+TRUCK_LH_DIESEL,DIESEL,-0.496,Diesel-Powered Long Distance Truck,Diesel
+TRUCK_LH_DIESEL,MOB_FREIGHT_LD,1.0,Diesel-Powered Long Distance Truck,Freight mobility
+TRUCK_LH_EV,ELECTRICITY_MV,-1.08,Electric-Powered Long Distance Truck,Electricity (medium voltage)
+TRUCK_LH_EV,MOB_FREIGHT_LD,1.0,Electric-Powered Long Distance Truck,Freight mobility
+TRUCK_LH_GASOLINE,CO2_E,0.153,Gasoline-Powered Long Distance Truck,CO2 emission (from nonconcentrated spot sources)
+TRUCK_LH_GASOLINE,GASOLINE,-0.566,Gasoline-Powered Long Distance Truck,Gasoline
+TRUCK_LH_GASOLINE,MOB_FREIGHT_LD,1.0,Gasoline-Powered Long Distance Truck,Freight mobility
+TRUCK_LH_HY_DIESEL,CO2_E,0.108,Diesel Hybrid Long Distance Truck,CO2 emission (from nonconcentrated spot sources)
+TRUCK_LH_HY_DIESEL,DIESEL,-0.41,Diesel Hybrid Long Distance Truck,Diesel
+TRUCK_LH_HY_DIESEL,MOB_FREIGHT_LD,1.0,Diesel Hybrid Long Distance Truck,Freight mobility
+TRUCK_LH_PROPANE,CO2_E,0.136,Propane-Powered Long Distance Truck,CO2 emission (from nonconcentrated spot sources)
+TRUCK_LH_PROPANE,MOB_FREIGHT_LD,1.0,Propane-Powered Long Distance Truck,Freight mobility
+TRUCK_LH_PROPANE,PROPANE,-0.606,Propane-Powered Long Distance Truck,Propane
+TRUCK_SH_BIODIESEL_B100,BIO_DIESEL,-0.478,100% BioDiesel-Powered Short Distance Truck,Bio-diesel
+TRUCK_SH_BIODIESEL_B100,CO2_E,0.126,100% BioDiesel-Powered Short Distance Truck,CO2 emission (from nonconcentrated spot sources)
+TRUCK_SH_BIODIESEL_B100,MOB_FREIGHT_MD,1.0,100% BioDiesel-Powered Short Distance Truck,Freight mobility
+TRUCK_SH_BIODIESEL_B100,MOB_FREIGHT_SD,1.0,100% BioDiesel-Powered Short Distance Truck,Freight mobility
+TRUCK_SH_BIODIESEL_B20,BIO_DIESEL,-0.096,20% BioDiesel-Powered Short Distance Truck,Bio-diesel
+TRUCK_SH_BIODIESEL_B20,CO2_E,0.126,20% BioDiesel-Powered Short Distance Truck,CO2 emission (from nonconcentrated spot sources)
+TRUCK_SH_BIODIESEL_B20,DIESEL,-0.383,20% BioDiesel-Powered Short Distance Truck,Diesel
+TRUCK_SH_BIODIESEL_B20,MOB_FREIGHT_MD,1.0,20% BioDiesel-Powered Short Distance Truck,Freight mobility
+TRUCK_SH_BIODIESEL_B20,MOB_FREIGHT_SD,1.0,20% BioDiesel-Powered Short Distance Truck,Freight mobility
+TRUCK_SH_CNG,CO2_E,0.105,Compressed Natural Gas-Powered Short Distance Truck,CO2 emission (from nonconcentrated spot sources)
+TRUCK_SH_CNG,MOB_FREIGHT_MD,1.0,Compressed Natural Gas-Powered Short Distance Truck,Freight mobility
+TRUCK_SH_CNG,NG_HP,-0.608,Compressed Natural Gas-Powered Short Distance Truck,Natural gas (high pressure)
+TRUCK_SH_CNG,MOB_FREIGHT_SD,1.0,Compressed Natural Gas-Powered Short Distance Truck,Freight mobility
+TRUCK_SH_CSNG,CO2_E,0.105,Compressed Synthetic Natural Gas-Powered Short Distance Truck,CO2 emission (from nonconcentrated spot sources)
+TRUCK_SH_CSNG,MOB_FREIGHT_MD,1.0,Compressed Synthetic Natural Gas-Powered Short Distance Truck,Freight mobility
+TRUCK_SH_CSNG,SNG_HP,-0.608,Compressed Synthetic Natural Gas-Powered Short Distance Truck,Synthetic natural gas (high pressure)
+TRUCK_SH_CSNG,MOB_FREIGHT_SD,1.0,Compressed Synthetic Natural Gas-Powered Short Distance Truck,Freight mobility
+TRUCK_SH_DIESEL,CO2_E,0.126,Diesel-Powered Short Distance Truck,CO2 emission (from nonconcentrated spot sources)
+TRUCK_SH_DIESEL,DIESEL,-0.478,Diesel-Powered Short Distance Truck,Diesel
+TRUCK_SH_DIESEL,MOB_FREIGHT_MD,1.0,Diesel-Powered Short Distance Truck,Freight mobility
+TRUCK_SH_DIESEL,MOB_FREIGHT_SD,1.0,Diesel-Powered Short Distance Truck,Freight mobility
+TRUCK_SH_EV,ELECTRICITY_MV,-0.382,Electric-Powered Short Distance Truck,Electricity (medium voltage)
+TRUCK_SH_EV,MOB_FREIGHT_MD,1.0,Electric-Powered Short Distance Truck,Freight mobility
+TRUCK_SH_EV,MOB_FREIGHT_SD,1.0,Electric-Powered Short Distance Truck,Freight mobility
+TRUCK_SH_GASOLINE,CO2_E,0.158,Gasoline-Powered Short Distance Truck,CO2 emission (from nonconcentrated spot sources)
+TRUCK_SH_GASOLINE,GASOLINE,-0.582,Gasoline-Powered Short Distance Truck,Gasoline
+TRUCK_SH_GASOLINE,MOB_FREIGHT_MD,1.0,Gasoline-Powered Short Distance Truck,Freight mobility
+TRUCK_SH_GASOLINE,MOB_FREIGHT_SD,1.0,Gasoline-Powered Short Distance Truck,Freight mobility
+TRUCK_SH_HY_DIESEL,CO2_E,0.112,Diesel Hybrid Short Distance Truck,CO2 emission (from nonconcentrated spot sources)
+TRUCK_SH_HY_DIESEL,DIESEL,-0.424,Diesel Hybrid Short Distance Truck,Diesel
+TRUCK_SH_HY_DIESEL,MOB_FREIGHT_MD,1.0,Diesel Hybrid Short Distance Truck,Freight mobility
+TRUCK_SH_HY_DIESEL,MOB_FREIGHT_SD,1.0,Diesel Hybrid Short Distance Truck,Freight mobility
+TRUCK_SH_PROPANE,CO2_E,0.139,Propane-Powered Short Distance Truck,CO2 emission (from nonconcentrated spot sources)
+TRUCK_SH_PROPANE,MOB_FREIGHT_MD,1.0,Propane-Powered Short Distance Truck,Freight mobility
+TRUCK_SH_PROPANE,PROPANE,-0.622,Propane-Powered Short Distance Truck,Propane
+TRUCK_SH_PROPANE,MOB_FREIGHT_SD,1.0,Propane-Powered Short Distance Truck,Freight mobility
+UNMINEABLE_COAL_SEAM,CO2_C,-1.0,Sequestration of CO2 in Unmineable Coal Seams,Captured CO2
+UNMINEABLE_COAL_SEAM,CO2_E,0.05,Sequestration of CO2 in Unmineable Coal Seams,CO2 emission (from nonconcentrated spot sources)
+UNMINEABLE_COAL_SEAM,CO2_S,0.95,Sequestration of CO2 in Unmineable Coal Seams,Sequestrated CO2
+UNMINEABLE_COAL_SEAM,ELECTRICITY_MV,-0.0001,Sequestration of CO2 in Unmineable Coal Seams,Electricity (medium voltage)
+URANIUM,URANIUM,1.0,Uranium,Uranium
+WIND_OFFSHORE,ELECTRICITY_MV,1.0,Wind Energy Offshore,Electricity (medium voltage)
+WIND_OFFSHORE,RES_WIND_OFFSHORE,-1.0,Wind Energy Offshore,Wind resource
+WIND_ONSHORE,ELECTRICITY_MV,1.0,Wind Energy Onshore,Electricity (medium voltage)
+WIND_ONSHORE,RES_WIND_ONSHORE,-1.0,Wind Energy Onshore,Wind resource
+WOOD_METHANOL,BIO_METHANOL,1.0,Conversion of Wood to Methanol,Bio-methanol
+WOOD_METHANOL,CO2_A,0.56,Conversion of Wood to Methanol,CO2 emission (from carbon-intensive fields)
+WOOD_METHANOL,ELECTRICITY_MV,2.636,Conversion of Wood to Methanol,Electricity (medium voltage)
+WOOD_METHANOL,H2_MP,-4.546,Conversion of Wood to Methanol,Hydrogen (medium pressure)
+WOOD_METHANOL,HEAT_LOW_T_DECEN,1.0,Conversion of Wood to Methanol,"Heat (low temperature, decentralized)"
+WOOD_METHANOL,WOOD,-2.083,Conversion of Wood to Methanol,Woody biomass
+XYLENE,XYLENE,1.0,Xylene,Xylene

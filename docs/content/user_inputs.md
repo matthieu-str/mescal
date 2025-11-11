@@ -106,6 +106,45 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
+## Energy System Model
+
+The technologies and resources presented in the mapping files above correspond to those used in the Energy System 
+Model (ESM).
+
+The table below has the following columns:
+- **Name**: Name of the ESM technology.
+- **Flow**: Name of the ESM resource or vector.
+- **Amount**: Amount of resource or vector used/produced by the technology (positive for production, negative for consumption).
+
+<div id="model-table-container"></div>
+<button id="model-download-btn">⬇️ Download CSV</button>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const csvPathModel = '../_static/model_generic.csv';
+  const csvPathModelES = '../_static/model_energyscope.csv';
+
+  fetch(csvPathModel)
+    .then(response => response.text())
+    .then(data => {
+      const parsed = Papa.parse(data.trim(), { skipEmptyLines: true });
+      const rows = parsed.data;
+      const headers = rows[0];
+      const body = rows.slice(1).filter(r => r.length === headers.length);
+
+      let html = '<table id="data-table-4" class="display"><thead><tr>';
+      headers.forEach(h => html += `<th>${h}</th>`);
+      html += '</tr></thead><tbody>';
+      body.forEach(r => html += '<tr>' + r.map(c => `<td>${c}</td>`).join('') + '</tr>');
+      html += '</tbody></table>';
+
+      document.getElementById('model-table-container').innerHTML = html;
+      $('#data-table-3').DataTable();
+      document.getElementById('model-download-btn').onclick = () => window.open(csvPathModelES);
+    });
+});
+</script>
+
 ## Mapping between ESM vectors and CPC categories
 
 When removing double-counted flows in LCI datasets, we identify flows based on their correspondence to CPC categories.
