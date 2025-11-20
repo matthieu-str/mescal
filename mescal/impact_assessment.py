@@ -147,6 +147,8 @@ def compute_impact_scores(
     activities_bw = {(i['database'], i['code']): i for i in activities}
 
     impact_categories = self._get_impact_categories(methods)
+    if len(impact_categories) == 0:
+        raise ValueError('The selected impact methods are missing in your brightway project')
 
     # Filtering impact categories if specific_lcia_categories or specific_lcia_abbrev is provided
     if specific_lcia_abbrev is not None:
@@ -652,7 +654,14 @@ def _get_impact_categories(methods: list[str]) -> list[str]:
     :param methods: list of LCIA methods
     :return: list of impact categories in the LCIA methods
     """
-    return [i for i in bd.methods if i[0] in methods]
+    all_cat = []
+    for method in methods:
+        cat = [i for i in bd.methods if i[0] == method]
+        if len(cat) == 0:
+            raise ValueError(f'The LCIA method {method} is not available in your brightway project')
+        all_cat.extend(cat)
+
+    return all_cat
 
 
 def _aggregate_direct_emissions_activities(
