@@ -339,6 +339,11 @@ class ESM:
             no_warning = False
             self.logger.error(f"Biosphere database {biosphere_db_name} not found in your brightway project")
 
+        if self.regionalize_foregrounds != [] and self.locations_ranking is None:
+            no_warning = False
+            self.logger.error("Please provide a locations ranking (locations_ranking) for the foreground "
+                              "regionalization process")
+
         dict_df_names = {
             'model': model,
             'mapping': mapping,
@@ -529,14 +534,18 @@ class ESM:
             pass
 
         if (self.efficiency is not None) & (self.unit_conversion is None):
-            self.logger.error('Unit conversion file is needed for efficiency differences correction. Please provide it.')
+            raise ValueError('Unit conversion file is needed for efficiency differences correction. Please provide it.')
 
         if write_database is False and return_database is False:
-            self.logger.error('Please set either return_database or write_database to True.')
+            raise ValueError('Please set either return_database or write_database to True.')
 
         if write_database is False and len(self.tech_specifics) > 0:
             self.logger.warning('Some of the changes from tech_specifics.csv will not be applied as the ESM database '
                                 'will not be written to brightway (write_database is False).')
+
+        if self.regionalize_foregrounds != [] and self.locations_ranking is None:
+            raise ValueError("Please provide a locations ranking (locations_ranking) for the foreground regionalization "
+                             "process")
 
         # Adding current code to the mapping file
         self.mapping['Current_code'] = self.mapping.apply(lambda row: self.main_database.get_code(
