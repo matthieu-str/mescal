@@ -58,8 +58,10 @@ ecoinvent's [GDPR & EULA](https://ecoinvent.org/gdpr-eula/).
 You can install `mescal` via [pip] from [PyPI]:
 
 ```console
-$ pip install mescal
+$ pip install mescal pypardiso
 ```
+
+We recommend installing the optional package `pypardiso` to speed up matrix calculations.
 
 ## Contributing
 

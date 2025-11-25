@@ -30,8 +30,10 @@ LCI datasets are taken from ecoinvent and possibly other sources if some of the 
 You can install `mescal` via [pip] from [PyPI]:
 
 ```console
-$ pip install mescal
+$ pip install mescal pypardiso
 ```
+
+We recommend installing the optional package `pypardiso` to speed up matrix calculations.
 
 ## Main contributor
 
