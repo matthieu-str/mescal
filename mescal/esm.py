@@ -454,6 +454,25 @@ class ESM:
                     f"Please add the missing technologies or remove the lifetime file: "
                     f"{sorted(set_in_mapping_and_not_in_lifetime)}"
                 )
+            # Check if there is no missing data in the lifetime file
+            components_list = [item for comp in self.technology_compositions.Components for item in comp]
+            main_tech_list = list(self.technology_compositions.Name.unique())
+            tech_with_no_lca_lt = list(lifetime[lifetime.LCA.isnull()].Name)
+            tech_with_no_esm_lt = list(lifetime[lifetime.ESM.isnull()].Name)
+            tech_with_no_lca_lt_warning = [tech for tech in tech_with_no_lca_lt if tech not in main_tech_list]
+            tech_with_no_esm_lt_error = [tech for tech in tech_with_no_esm_lt if tech not in components_list]
+            if len(tech_with_no_lca_lt_warning) > 0:
+                no_warning = False
+                self.logger.warning(
+                    "Some technologies have no lifetime value for LCA in the lifetime file. Therefore, lifetime "
+                    "harmonization with the ESM will not be performed during the LCIA phase and capacity factor "
+                    "harmonization during the feedback of ESM results will not be performed either for those "
+                    f"technologies: {tech_with_no_lca_lt_warning}")
+            if len(tech_with_no_esm_lt_error) > 0:
+                no_warning = False
+                self.logger.error(
+                    "Some technologies have no lifetime value for ESM in the lifetime file. Please add an ESM lifetime "
+                    f"value for the following technologies: {tech_with_no_esm_lt_error}")
 
         if efficiency is not None:
             # Check if the technologies in the efficiency file are in the mapping file and the model file
