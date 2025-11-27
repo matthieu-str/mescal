@@ -7,6 +7,9 @@ import numpy as np
 from tqdm import tqdm
 from .utils import random_code, expand_impact_category_levels
 from .database import Database
+from.contribution_analysis import ABContributionAnalysis
+
+ca = ABContributionAnalysis()
 
 pd.options.mode.chained_assignment = None  # default='warn'
 
@@ -218,10 +221,8 @@ def compute_impact_scores(
         )
 
         # Multiply the score and amount columns by the conversion factor
-        df_contrib_analysis_results['score'] = df_contrib_analysis_results['score'] * df_contrib_analysis_results[
-            'Value']
-        df_contrib_analysis_results['amount'] = df_contrib_analysis_results['amount'] * df_contrib_analysis_results[
-            'Value']
+        df_contrib_analysis_results['score'] = df_contrib_analysis_results['score'] * df_contrib_analysis_results['Value']
+        df_contrib_analysis_results['amount'] = df_contrib_analysis_results['amount'] * df_contrib_analysis_results['Value']
 
         df_contrib_analysis_results.drop(columns=['New_code', 'Value'], inplace=True)
 
@@ -800,48 +801,6 @@ def _add_virtual_technosphere_flow(
     return act
 
 
-def bw2_compat_annotated_top_emissions(lca, names=True, **kwargs):
-    """
-    Get list of most damaging biosphere flows in an LCA, sorted by ``abs(direct impact)``.
-
-    Returns a list of tuples: ``(lca score, inventory amount, activity)``. If ``names`` is False, they return the
-        process key as the last element.
-    """
-    # This is a temporary fix, until https://github.com/brightway-lca/brightway2-analyzer/issues/27
-
-    ra, rp, rb = lca.reverse_dict()
-    results = [
-        (score, lca.inventory[int(index), :].sum(), rb[int(index)])
-        for score, index in ba.ContributionAnalysis().top_emissions(
-            lca.characterized_inventory, **kwargs
-        )
-    ]
-    if names:
-        results = [(x[0], x[1], bd.get_activity(x[2])) for x in results]
-    return results
-
-
-def bw2_compat_annotated_top_processes(lca, names=True, **kwargs):
-    """
-    Get list of most damaging processes in an LCA, sorted by ``abs(direct impact)``.
-
-    Returns a list of tuples: ``(lca score, supply, activity)``. If ``names`` is False, they return the process
-        key as the last element.
-    """
-    # This is a temporary fix, until https://github.com/brightway-lca/brightway2-analyzer/issues/27
-
-    ra, rp, rb = lca.reverse_dict()
-    results = [
-        (score, lca.supply_array[int(index)], ra[int(index)])
-        for score, index in ba.ContributionAnalysis().top_processes(
-            lca.characterized_inventory, **kwargs
-        )
-    ]
-    if names:
-        results = [(x[0], x[1], bd.get_activity(x[2])) for x in results]
-    return results
-
-
 class MultiLCA(object):
     """
     Adaptation of the `MultiLCA` class from the `bw2calc` package in order to perform contribution analysis.
@@ -882,14 +841,12 @@ class MultiLCA(object):
         try:
             cs = calculation_setups[cs_name]
         except KeyError:
-            raise ValueError(
-                "{} is not a known `calculation_setup`.".format(cs_name)
-            )
+            raise ValueError(f"{cs_name} is not a known calculation setup")
 
         self.contribution_analysis = contribution_analysis
         self.limit = limit
         self.limit_type = limit_type
-        df_res_list = []
+        df_res_rows = []
         req_tech_list = []
 
         self.func_units = cs['inv']
@@ -905,67 +862,81 @@ class MultiLCA(object):
             self.lca.switch_method(method)
             self.method_matrices.append(self.lca.characterization_matrix)
 
+        ### LOCAL references for speed inside loop (avoid attribute lookups)
+        lca = self.lca
+        reverse_dict = lca.reverse_dict()
+        ra, rp, rb = reverse_dict
+        methods = self.methods
+        method_matrices = self.method_matrices
+
         for row, func_unit in tqdm(enumerate(self.func_units)):
-            self.lca.redo_lci(func_unit)
+
+            lca.redo_lci(func_unit)
+
             if req_technosphere:
-                req_tech = pd.Series(np.multiply(self.lca.supply_array, self.lca.technosphere_matrix.diagonal()), self.lca.product_dict)
+                req_tech = pd.Series(np.multiply(lca.supply_array, lca.technosphere_matrix.diagonal()), lca.product_dict)
                 req_tech.name = list(func_unit.keys())[0][1]  # use the activity code as the column name (ESM database always)
                 req_tech_list.append(req_tech)
-            for col, cf_matrix in enumerate(self.method_matrices):
-                self.lca.characterization_matrix = cf_matrix
-                self.lca.lcia_calculation()
-                self.results[row, col] = self.lca.score
+
+            for col, cf_matrix in enumerate(method_matrices):
+                lca.characterization_matrix = cf_matrix
+                lca.lcia_calculation()
+                self.results[row, col] = lca.score
 
                 if contribution_analysis in ['emissions', 'both']:
-                    top_contributors = bw2_compat_annotated_top_emissions(
-                        self.lca,
-                        limit=self.limit,
-                        limit_type=self.limit_type
-                    )
+                    flow_scores = np.asarray(lca.characterized_inventory.sum(axis=1)).ravel()
+                    sorted_flows = ca.sort_array(flow_scores, limit=limit, limit_type=limit_type)
 
-                    df_res = pd.DataFrame(
-                        data=[[i[0], i[1], i[2].as_dict()['code'], i[2].as_dict()['database']] for i in top_contributors],
-                        columns=['score', 'amount', 'code', 'database'],
-                    )
-
-                    # Drop rows where the score is zero
-                    df_res.drop(df_res[df_res['score'] == 0].index, inplace=True)
-
-                    if len(df_res) > 0:
-                        df_res['impact_category'] = len(df_res) * [self.methods[col]]
-
-                        act = list(fu_all.keys())[row]
-                        df_res['act_database'] = len(df_res) * [act[0]]
-                        df_res['act_code'] = len(df_res) * [act[1]]
-
-                        df_res_list.append(df_res)
+                    act = list(fu_all.keys())[row]
+                    for value, idx in sorted_flows:
+                        if value == 0:
+                            continue
+                        flow = bd.get_activity(rb[int(idx)])  # biosphere dict
+                        df_res_rows.append([
+                            value,
+                            flow_scores[int(idx)],
+                            flow['code'],
+                            flow['database'],
+                            methods[col],
+                            act[0],  # act_database
+                            act[1],  # act_code
+                            "emissions", # contribution_type
+                        ])
 
                 if contribution_analysis in ['processes', 'both']:
-                    top_contributors = bw2_compat_annotated_top_processes(
-                        self.lca,
-                        limit=self.limit,
-                        limit_type=self.limit_type
-                    )
+                    process_scores = np.asarray(lca.characterized_inventory.sum(axis=0)).ravel()
+                    sorted_processes = ca.sort_array(process_scores, limit=limit, limit_type=limit_type)
 
-                    df_res = pd.DataFrame(
-                        data=[[i[0], i[1], i[2].as_dict()['code'], i[2].as_dict()['database']] for i in top_contributors],
-                        columns=['score', 'amount', 'code', 'database'],
-                    )
-
-                    # Drop rows where the score is zero
-                    df_res.drop(df_res[df_res['score'] == 0].index, inplace=True)
-
-                    if len(df_res) > 0:
-                        df_res['impact_category'] = len(df_res) * [self.methods[col]]
-
-                        act = list(fu_all.keys())[row]
-                        df_res['act_database'] = len(df_res) * [act[0]]
-                        df_res['act_code'] = len(df_res) * [act[1]]
-
-                        df_res_list.append(df_res)
+                    act = list(fu_all.keys())[row]
+                    for value, idx in sorted_processes:
+                        if value == 0:
+                            continue
+                        proc = bd.get_activity(ra[int(idx)])  # activity dict
+                        df_res_rows.append([
+                            value,
+                            process_scores[int(idx)],
+                            proc['code'],
+                            proc['database'],
+                            methods[col],
+                            act[0],  # act_database
+                            act[1],  # act_code
+                            "processes", # contribution_type
+                        ])
 
         if contribution_analysis is not None:
-            self.df_res_concat = pd.concat(df_res_list, ignore_index=True)
+            self.df_res_concat = pd.DataFrame(
+                df_res_rows,
+                columns=[
+                    "score",
+                    "amount",
+                    "code",
+                    "database",
+                    "impact_category",
+                    "act_database",
+                    "act_code",
+                    "contribution_type",
+                ],
+            )
 
         if req_technosphere:
             self.df_req_technosphere = pd.concat(req_tech_list, axis=1).fillna(0)
