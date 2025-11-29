@@ -234,15 +234,24 @@ def change_location_mapping_file(self) -> None:
     main_database = self.main_database
     main_database_as_list = main_database.db_as_list
 
+    missing_datasets = []
+
     if 'Location' not in mapping.columns:
         for i in range(len(mapping)):
             activity_name = mapping.Activity.iloc[i]
             product_name = mapping.Product.iloc[i]
-            location = [a for a in wurst.get_many(main_database_as_list, *[
-                wurst.equals('name', activity_name),
-                wurst.equals('reference product', product_name)
-            ])][0]['location']  # picks one location randomly
+            try:
+                location = [a for a in wurst.get_many(main_database_as_list, *[
+                    wurst.equals('name', activity_name),
+                    wurst.equals('reference product', product_name)
+                ])][0]['location']  # picks one location randomly
+            except IndexError:
+                missing_datasets.append((product_name, activity_name))
+                location = None
             mapping.at[i, 'Location'] = location
+
+    if len(missing_datasets) > 0:
+        raise ValueError(f"The following datasets could not be found in the database: {missing_datasets}")
 
     mapping['Location'] = mapping.apply(lambda row: self._change_location_activity(
         esm_tech_name=row['Name'],
