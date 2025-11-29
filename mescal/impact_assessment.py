@@ -252,17 +252,6 @@ def compute_impact_scores(
             how='left',
         ).rename(columns={'ESM': 'Functional unit'})
 
-        if contribution_analysis is not None:
-            df_contrib_analysis_results = expand_impact_category_levels(df_contrib_analysis_results, 'impact_category')
-            df_contrib_analysis_results['Impact_category_unit'] = df_contrib_analysis_results['Impact_category'].apply(
-                lambda row: bd.Method(row).metadata['unit'])
-            df_contrib_analysis_results = df_contrib_analysis_results.merge(
-                unit_conversion[['Name', 'Type', 'ESM']],
-                left_on=['act_name', 'act_type'],
-                right_on=['Name', 'Type'],
-                how='left',
-            ).rename(columns={'ESM': 'act_func_unit'})
-
         return R_long, df_contrib_analysis_results, None
 
     R_tech_op = R[list(mapping[mapping.Type == 'Operation'].New_code)]
@@ -501,15 +490,6 @@ def compute_impact_scores(
             [df_contrib_analysis_results_constr, df_contrib_analysis_results_op, df_contrib_analysis_results_res],
             ignore_index=True,
         )
-        df_contrib_analysis_results = expand_impact_category_levels(df_contrib_analysis_results, 'impact_category')
-        df_contrib_analysis_results['impact_category_unit'] = df_contrib_analysis_results['impact_category'].apply(
-            lambda row: bd.Method(row).metadata['unit'])
-        df_contrib_analysis_results = df_contrib_analysis_results.merge(
-            unit_conversion[['Name', 'Type', 'ESM']],
-            left_on=['act_name', 'act_type'],
-            right_on=['Name', 'Type'],
-            how='left',
-        ).rename(columns={'ESM': 'act_func_unit'})
 
     return R_long, df_contrib_analysis_results, df_req_technosphere
 
