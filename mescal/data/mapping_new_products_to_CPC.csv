@@ -53,6 +53,7 @@ fuel supply for hydrogen vehicles,"34210: Hydrogen, nitrogen, oxygen, carbon dio
 geothermal heat plant,"43913: Refrigerating and freezing equipment and heat pumps, except household type equipment",equals,Product
 hard coal IGCC power plant 450MW,53262: Power plants,equals,Product
 "heat, deep geothermal",17300: Steam and hot water,equals,Product
+"heat, from residential heating system",17300: Steam and hot water,equals,Product
 high pressure hydrogen storage tank,"42210: Reservoirs, tanks, vats and similar containers (other than for compressed or liquefied gas), of iron, steel or[…]",equals,Product
 hydrogen storage,67220: Bulk liquid or gas storage services,equals,Product
 "hydrogen, 700 bar","34210: Hydrogen, nitrogen, oxygen, carbon dioxide and rare gases; inorganic oxygen compounds of non-metals n.e.c.",equals,Product
