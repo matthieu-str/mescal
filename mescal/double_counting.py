@@ -131,10 +131,16 @@ def _background_search(
                                                    for j in technosphere_flows_act
                                                    for i in range(len(j['classifications']))]):
                 # CPC categories corresponding to technosphere flows:
-                technosphere_flows_CPC = [dict(j['classifications'])['CPC'] for j in technosphere_flows_act]
-                # if there is one CPC category among all technosphere flows and no direct emissions
-                if (len(set(technosphere_flows_CPC)) == 1) & (len(biosphere_flows) == 0):
-                    condition = True
+                try:
+                    technosphere_flows_CPC = [dict(j['classifications'])['CPC'] for j in technosphere_flows_act]
+                    # if there is one CPC category among all technosphere flows and no direct emissions
+                    if (len(set(technosphere_flows_CPC)) == 1) & (len(biosphere_flows) == 0):
+                        condition = True
+                except KeyError:
+                    for j in technosphere_flows_act:
+                        if 'CPC' not in dict(j['classifications']).keys():
+                            self.products_without_a_cpc_category.add(j["reference product"])
+                            self.logger.warning(f'Product {j["reference product"]} has no CPC category.')
 
     # The tests to assess whether the activity background should be explored stops here.
     # If one condition was fulfilled, we continue to explore the tree.
