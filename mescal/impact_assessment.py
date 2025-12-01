@@ -565,7 +565,7 @@ def validation_direct_carbon_emissions(
             R_direct['ESM direct carbon emissions (ESM unit)'] - R_direct['LCA direct carbon emissions (ESM unit)'])
     R_direct['Direct carbon emissions difference (%)'] = R_direct.apply(
         lambda row: (row['Direct carbon emissions difference'] / row['LCA direct carbon emissions (ESM unit)']) * 100
-        if row['ESM direct carbon emissions (ESM unit)'] != 0 else None,
+        if row['LCA direct carbon emissions (ESM unit)'] != 0 else None,
         axis=1
     )
 
@@ -611,7 +611,7 @@ def validation_direct_carbon_emissions(
                 R_direct_tot['ESM direct carbon emissions (ESM unit)'] - R_direct_tot['LCA direct carbon emissions (ESM unit)'])
         R_direct_tot['Direct carbon emissions difference (%)'] = R_direct_tot.apply(
             lambda row: (row['Direct carbon emissions difference'] / row['LCA direct carbon emissions (ESM unit)']) * 100
-            if row['ESM direct carbon emissions (ESM unit)'] != 0 else None,
+            if row['LCA direct carbon emissions (ESM unit)'] != 0 else None,
             axis=1
         )
 

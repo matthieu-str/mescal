@@ -827,7 +827,7 @@ def validation_double_counting(
         df['Input difference (ESM unit)'] = df['ESM input quantity (ESM unit)'] - df['LCA input quantity (ESM unit) aggregated']
         df['Input difference (%)'] = df.apply(
             lambda row: 100 * row['Input difference (ESM unit)'] / row['LCA input quantity (ESM unit)']
-            if row['ESM input quantity (ESM unit)'] != 0 else None,
+            if row['LCA input quantity (ESM unit)'] != 0 else None,
             axis=1
         )
 
@@ -881,7 +881,7 @@ def validation_double_counting(
         df_tot['Input difference'] = df_tot['ESM input quantity (ESM unit)'] - df_tot['LCA input quantity (ESM unit) aggregated']
         df_tot['Input difference (%)'] = df_tot.apply(
             lambda row: (row['Input difference'] / row['LCA input quantity (ESM unit) aggregated']) * 100
-            if row['ESM input quantity (ESM unit)'] != 0 else None,
+            if row['LCA input quantity (ESM unit) aggregated'] != 0 else None,
             axis=1
         )
 
