@@ -1,0 +1,219 @@
+Name,Type,Product,Activity,Database
+AMMONIA,Resource,"ammonia, anhydrous, liquid","market for ammonia, anhydrous, liquid",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+AMMONIA_RE,Resource,"ammonia, anhydrous, liquid","ammonia production, hydrogen from electrolysis",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+AMMONIA_TO_H2,Construction,"chemical factory, organics","market for chemical factory, organics",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+ATM_CCS,Decommission,direct air capture system,"treatment of direct air capture system, solvent-based, 1MtCO2",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+ATM_CCS,Construction,direct air capture system,"direct air capture system, solvent-based, 1MtCO2",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+ATM_CCS,Operation,"carbon dioxide, captured","carbon dioxide, captured, with a solvent-based direct air capture system, 1MtCO2",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+BIODIESEL,Resource,"biodiesel, vehicle grade","biodiesel, from used cooking oil, at fuelling station",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+BIOETHANOL,Resource,"ethanol, from corn","ethanol production, via fermentation, from corn, economic allocation",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+BIOMASS_TO_METHANOL,Operation,"methanol, unpurified","methanol synthesis, from wood, with CCS",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+BIOMASS_TO_METHANOL,Construction,methanol factory,methanol factory construction,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+BIOMETHANATION,Construction,"chemical factory, organics","market for chemical factory, organics",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+BIOMETHANATION,Operation,"methane, from biological methanation","methane, from biological methanation, with carbon from municipal waste incineration plant",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+BIO_HYDROLYSIS,Operation,"biomethane, from biogas upgrading, using amine scrubbing","biomethane production, from biogas upgrading, using amine scrubbing",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+BIO_HYDROLYSIS,Construction,"chemical factory, organics","market for chemical factory, organics",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+BOAT_FREIGHT_DIESEL,Construction,container ship,market for container ship,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+BOAT_FREIGHT_DIESEL,Operation,"transport, freight, sea, container ship","transport, freight, sea, container ship",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+BOAT_FREIGHT_METHANOL,Construction,container ship,market for container ship,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+BOAT_FREIGHT_METHANOL,Operation,"transport, freight, sea, container ship","transport, freight, sea, container ship",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+BOAT_FREIGHT_NG,Construction,container ship,market for container ship,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+BOAT_FREIGHT_NG,Operation,"transport, freight, sea, container ship","transport, freight, sea, container ship",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+BUS_COACH_CNG_STOICH,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, compressed gas, 13m double deck urban bus, EURO-VI",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+BUS_COACH_CNG_STOICH,Construction,"Passenger bus, EURO-VI","Passenger bus, compressed gas, 13m double deck urban bus, EURO-VI",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+BUS_COACH_DIESEL,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m double deck urban bus, EURO-VI",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+BUS_COACH_DIESEL,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m double deck urban bus, EURO-VI",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+BUS_COACH_FC_HYBRIDH2,Operation,"transport, passenger bus","transport, passenger bus, fuel cell electric, 13m double deck urban bus",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+BUS_COACH_FC_HYBRIDH2,Construction,passenger bus,"passenger bus, fuel cell electric, 13m double deck urban bus",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+BUS_COACH_HYDIESEL,Construction,"Passenger bus, EURO-VI","Passenger bus, diesel hybrid, 13m double deck urban bus, EURO-VI",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+BUS_COACH_HYDIESEL,Operation,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel hybrid, 13m double deck urban bus, EURO-VI",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+CAR_BEV,Operation,"transport, passenger car","transport, passenger car, battery electric, Medium",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+CAR_BEV,Construction,passenger car,"passenger car, battery electric, Medium",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+CAR_DIESEL,Construction,"Passenger car, EURO-6ab","Passenger car, diesel, Medium, EURO-6ab",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+CAR_DIESEL,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Medium, EURO-6ab",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+CAR_FUEL_CELL,Operation,"transport, passenger car","transport, passenger car, fuel cell electric, Medium",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+CAR_FUEL_CELL,Construction,passenger car,"passenger car, fuel cell electric, Medium",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+CAR_GASOLINE,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline, Medium, EURO-6ab",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+CAR_GASOLINE,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline, Medium, EURO-6ab",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+CAR_HEV,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline hybrid, Medium, EURO-6ab",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+CAR_HEV,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline hybrid, Medium, EURO-6ab",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+CAR_METHANOL,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline, Medium, EURO-6ab",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+CAR_METHANOL,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline, Medium, EURO-6ab",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+CAR_NG,Construction,"Passenger car, EURO-6ab","Passenger car, compressed gas, Medium, EURO-6ab",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+CAR_NG,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, compressed gas, Medium, EURO-6ab",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+CAR_PHEV,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, plugin gasoline hybrid, Medium, EURO-6ab",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+CAR_PHEV,Construction,"Passenger car, EURO-6ab","Passenger car, plugin gasoline hybrid, Medium, EURO-6ab",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+CCGT,Construction,"NGCC power plant, 400MWe","market for gas power plant, combined cycle, 400MW electrical",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+CCGT,Operation,"electricity, high voltage","electricity production, at natural gas-fired combined cycle power plant",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+CCGT_AMMONIA,Construction,"gas power plant, combined cycle, 400MW electrical","gas power plant construction, combined cycle, 400MW electrical",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+CO2_CAPTURED,Flow,"carbon dioxide, liquid","market for carbon dioxide, liquid",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+COAL,Flow,hard coal,market for hard coal,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+COAL,Resource,hard coal,market for hard coal,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+COAL_IGCC,Construction,hard coal IGCC power plant 450MW,hard coal IGCC power plant 450MW,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+COAL_IGCC,Operation,"electricity, high voltage","electricity production, at hard coal-fired IGCC power plant",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+COAL_US,Construction,lignite power plant,market for lignite power plant,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+COAL_US,Operation,"electricity, high voltage","electricity production, at lignite-fired power plant, pulverised",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+DEC_ADVCOGEN_GAS,Construction,"gas power plant, 100MW electrical","gas power plant construction, 100MW electrical",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+DEC_ADVCOGEN_GAS,Operation,"heat, district or industrial, natural gas","heat and power co-generation, natural gas, conventional power plant, 100MW electrical",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+DEC_ADVCOGEN_H2,Construction,"fuel cell, polymer electrolyte membrane, 2kW electrical, future","fuel cell production, polymer electrolyte membrane, 2kW electrical, future",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+DEC_ADVCOGEN_H2,Operation,"heat, from residential heating system","heat, residential, by conversion of hydrogen using fuel cell, PEM, allocated by exergy, distributed by pipeline, produced by Electrolysis, PEM using electricity from grid",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+DEC_BOILER_GAS,Construction,gas boiler,gas boiler production,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+DEC_BOILER_GAS,Operation,"heat, central or small-scale, natural gas","heat production, natural gas, at boiler modulating <100kW",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+DEC_BOILER_OIL,Operation,"heat, central or small-scale, other than natural gas","heat production, light fuel oil, at boiler 10kW condensing, non-modulating",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+DEC_BOILER_OIL_BOILER,Construction,"oil boiler, 10kW","oil boiler production, 10kW",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+DEC_BOILER_OIL_TANK,Construction,"oil storage, 3000l","market for oil storage, 3000l",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+DEC_BOILER_WOOD,Operation,"heat, central or small-scale, other than natural gas","heat production, wood chips from industry, at furnace 50kW, state-of-the-art 2014",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+DEC_BOILER_WOOD,Construction,"furnace, wood chips, hardwood storage area, 50kW","furnace production, wood chips, hardwood storage area, 50kW",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+DEC_COGEN_GAS,Operation,"heat, central or small-scale, natural gas","heat and power co-generation, natural gas, 50kW electrical, lean burn",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+DEC_COGEN_GAS_CHP,Construction,"heat and power co-generation unit, 50kW electrical, common components for heat+electricity","heat and power co-generation unit construction, 50kW electrical, common components for heat+electricity",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+DEC_COGEN_GAS_ELEC,Construction,"heat and power co-generation unit, 50kW electrical, components for electricity only","heat and power co-generation unit construction, 50kW electrical, components for electricity only",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+DEC_COGEN_GAS_HEAT,Construction,"heat and power co-generation unit, 50kW electrical, components for heat only","heat and power co-generation unit construction, 50kW electrical, components for heat only",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+DEC_COGEN_OIL,Operation,"heat, central or small-scale, other than natural gas","heat production, light fuel oil, at boiler 10kW condensing, non-modulating",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+DEC_COGEN_OIL_BOILER,Construction,"oil boiler, 10kW","oil boiler production, 10kW",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+DEC_COGEN_OIL_TANK,Construction,"oil storage, 3000l","market for oil storage, 3000l",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+DEC_COGEN_OIL_TURBINE,Construction,"heat and power co-generation unit, organic Rankine cycle, 200kW electrical","heat and power co-generation unit construction, organic Rankine cycle, 200kW electrical",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+DEC_DIRECT_ELEC,Operation,"electricity, low voltage","market for electricity, low voltage",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+DEC_DIRECT_ELEC,Construction,"auxiliary heating unit, electric, 5kW","auxiliary heating unit production, electric, 5kW",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+DEC_HP_ELEC,Operation,"heat, air-water heat pump 10kW","heat production, air-water heat pump 10kW",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+DEC_HP_ELEC,Construction,"heat pump, brine-water, 10kW","heat pump production, brine-water, 10kW",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+DEC_SOLAR,Construction,"flat plate solar collector, Cu absorber","flat plate solar collector production, Cu absorber",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+DEC_THHP_GAS,Operation,"heat, future","heat production, natural gas, at diffusion absorption heat pump 4kW, future",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+DEC_THHP_GAS_HEX,Construction,"borehole heat exchanger, 150m","borehole heat exchanger production, 150m",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+DEC_THHP_GAS_HP,Construction,"heat pump, diffusion absorption, 4kW, future","heat pump production, diffusion absorption, 4kW, future",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+DHN_BOILER_GAS,Construction,"industrial furnace, natural gas","market for industrial furnace, natural gas",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+DHN_BOILER_GAS,Operation,"heat, district or industrial, natural gas","heat production, natural gas, at boiler modulating >100kW",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+DHN_BOILER_OIL,Operation,"heat, district or industrial, other than natural gas","heat production, light fuel oil, at industrial furnace 1MW",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+DHN_BOILER_OIL_BOILER,Construction,"industrial furnace, 1MW, oil","industrial furnace production, 1MW, oil",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+DHN_BOILER_OIL_TANK,Construction,"oil storage, 3000l","oil storage production, 3000l",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+DHN_BOILER_WOOD,Operation,"heat, district or industrial, other than natural gas","heat production, wood chips from industry, at furnace 1000kW, state-of-the-art 2014",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+DHN_BOILER_WOOD_BOILER,Construction,"furnace, wood chips, with silo, 1000kW","furnace production, wood chips, with silo, 1000kW",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+DHN_BOILER_WOOD_DUST,Construction,"dust collector, electrostatic precipitator, for industrial use","market for dust collector, electrostatic precipitator, for industrial use",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+DHN_COGEN_BIO_HYDROLYSIS,Operation,"heat, district or industrial, other than natural gas","heat and power co-generation, wood chips, 6667 kW, state-of-the-art 2014",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+DHN_COGEN_BIO_HYDROLYSIS_BOILER,Construction,"furnace, wood chips, with silo, 5000kW","furnace production, wood chips, with silo, 5000kW",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+DHN_COGEN_BIO_HYDROLYSIS_DUST,Construction,"dust collector, electrostatic precipitator, for industrial use","market for dust collector, electrostatic precipitator, for industrial use",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+DHN_COGEN_BIO_HYDROLYSIS_TURBINE,Construction,"heat and power co-generation unit, organic Rankine cycle, 1000kW electrical","market for heat and power co-generation unit, organic Rankine cycle, 1000kW electrical",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+DHN_COGEN_GAS,Operation,"heat, district or industrial, natural gas","heat and power co-generation, natural gas, 1MW electrical, lean burn",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+DHN_COGEN_GAS_CHP,Construction,"heat and power co-generation unit, 1MW electrical, common components for heat+electricity","heat and power co-generation unit construction, 1MW electrical, common components for heat+electricity",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+DHN_COGEN_GAS_ELEC,Construction,"heat and power co-generation unit, 1MW electrical, components for electricity only","heat and power co-generation unit construction, 1MW electrical, components for electricity only",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+DHN_COGEN_GAS_HEAT,Construction,"heat and power co-generation unit, 1MW electrical, components for heat only","heat and power co-generation unit construction, 1MW electrical, components for heat only",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+DHN_COGEN_WASTE,Operation,"heat, district or industrial, other than natural gas","heat, from municipal waste incineration to generic market for heat district or industrial, other than natural gas",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+DHN_COGEN_WASTE_BOILER,Construction,municipal waste incineration facility,municipal waste incineration facility construction,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+DHN_COGEN_WASTE_TURBINE,Construction,"heat and power co-generation unit, organic Rankine cycle, 200kW electrical","heat and power co-generation unit construction, organic Rankine cycle, 200kW electrical",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+DHN_COGEN_WET_BIOMASS,Operation,"heat, district or industrial, other than natural gas","heat and power co-generation, wood chips, 6667 kW, state-of-the-art 2014",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+DHN_COGEN_WET_BIOMASS_BOILER,Construction,"furnace, wood chips, with silo, 5000kW","furnace production, wood chips, with silo, 5000kW",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+DHN_COGEN_WET_BIOMASS_DUST,Construction,"dust collector, electrostatic precipitator, for industrial use","market for dust collector, electrostatic precipitator, for industrial use",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+DHN_COGEN_WET_BIOMASS_TURBINE,Construction,"heat and power co-generation unit, organic Rankine cycle, 1000kW electrical","market for heat and power co-generation unit, organic Rankine cycle, 1000kW electrical",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+DHN_COGEN_WOOD,Operation,"heat, district or industrial, other than natural gas","heat and power co-generation, wood chips, 6667 kW, state-of-the-art 2014",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+DHN_COGEN_WOOD_BOILER,Construction,"furnace, wood chips, with silo, 5000kW","furnace production, wood chips, with silo, 5000kW",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+DHN_COGEN_WOOD_DUST,Construction,"dust collector, electrostatic precipitator, for industrial use","market for dust collector, electrostatic precipitator, for industrial use",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+DHN_COGEN_WOOD_TURBINE,Construction,"heat and power co-generation unit, organic Rankine cycle, 1000kW electrical","market for heat and power co-generation unit, organic Rankine cycle, 1000kW electrical",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+DHN_DEEP_GEO,Operation,"heat, deep geothermal","heat production, deep geothermal",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+DHN_DEEP_GEO,Construction,geothermal heat plant,geothermal heat plant construction,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+DHN_HP_ELEC,Construction,"heat pump, 30kW","heat pump production, 30kW",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+DHN_HP_ELEC,Operation,"heat, central or small-scale, other than natural gas","heat production, at heat pump 30kW, allocation exergy",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+DHN_SOLAR,Construction,"flat plate solar collector, Cu absorber","flat plate solar collector production, Cu absorber",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+DIESEL,Resource,"diesel, low-sulfur","market for diesel, low-sulfur",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+DIESEL,Flow,"diesel, low-sulfur","market for diesel, low-sulfur",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+ELECTRICITY,Flow,"electricity, high voltage","market for electricity, high voltage",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+ELECTRICITY,Resource,"electricity, high voltage","market group for electricity, high voltage",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+ELEC_EXPORT,Resource,"electricity, high voltage","market group for electricity, high voltage",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+GAS,Flow,"natural gas, high pressure","market for natural gas, high pressure",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+GAS,Resource,"natural gas, high pressure","market for natural gas, high pressure",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+GASIFICATION_SNG,Operation,"syngas, RWGS, Production","syngas, RWGS, Production, for Fischer Tropsch process, hydrogen from wood gasification",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+GASIFICATION_SNG_PLANT,Construction,synthetic gas factory,synthetic gas factory construction,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+GASIFICATION_SNG_TANK,Construction,"liquid storage tank, chemicals, organics","market for liquid storage tank, chemicals, organics",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+GASOLINE,Flow,"petrol, low-sulfur","market for petrol, low-sulfur",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+GASOLINE,Resource,"petrol, low-sulfur","market for petrol, low-sulfur",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+GAS_RE,Resource,"syngas, from biomass gasification, pre, pipeline 200km, storage 1000m","syngas, from biomass gasification, pre, pipeline 200km, storage 1000m",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+GEOTHERMAL,Construction,"geothermal power plant, 5.5MWel",geothermal power plant construction,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+GEOTHERMAL,Operation,"electricity, high voltage","electricity production, deep geothermal",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+H2,Flow,"hydrogen, gaseous, low pressure","market for hydrogen, gaseous, low pressure",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+H2,Resource,"hydrogen, gaseous, low pressure","market for hydrogen, gaseous, low pressure",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+H2_BIOMASS,Operation,"hydrogen, gaseous, 25 bar","hydrogen production, gaseous, 25 bar, from gasification of woody biomass in entrained flow gasifier, at gasification plant",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+H2_BIOMASS_PLANT,Construction,synthetic gas factory,synthetic gas factory construction,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+H2_BIOMASS_TANK,Construction,"liquid storage tank, chemicals, organics","market for liquid storage tank, chemicals, organics",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+H2_ELECTROLYSIS,Operation,"hydrogen, gaseous, 20 bar","hydrogen production, gaseous, 20 bar, from AEC electrolysis, from grid electricity",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+H2_ELECTROLYSIS_PLANT,Construction,"electrolyzer, 1MWe, AEC, Balance of Plant","electrolyzer production, 1MWe, AEC, Balance of Plant",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+H2_ELECTROLYSIS_STACK,Construction,"electrolyzer, 1MWe, AEC, Stack","electrolyzer production, 1MWe, AEC, Stack",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+H2_RE,Resource,"hydrogen, gaseous, 25 bar","hydrogen production, gaseous, 25 bar, from gasification of woody biomass in entrained flow gasifier, with CCS, at gasification plant",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+HABER_BOSCH,Operation,"ammonia, anhydrous, liquid","ammonia production, steam reforming, liquid",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+HABER_BOSCH,Construction,"chemical factory, organics","market for chemical factory, organics",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+HYDRO_RIVER,Operation,"electricity, high voltage","electricity production, hydro, run-of-river",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+HYDRO_RIVER,Construction,"hydropower plant, run-of-river","hydropower plant construction, run-of-river",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+INDUSTRY_CCS,Operation,"carbon dioxide, captured and stored",market for carbon dioxide removal,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+IND_BOILER_COAL,Construction,"industrial furnace, coal, 1-10MW","industrial furnace production, coal, 1-10MW",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+IND_BOILER_COAL,Operation,"heat, district or industrial, other than natural gas","heat production, at hard coal industrial furnace 1-10MW",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+IND_BOILER_GAS,Operation,"heat, district or industrial, natural gas","heat production, natural gas, at industrial furnace >100kW",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+IND_BOILER_GAS,Construction,"industrial furnace, natural gas","industrial furnace production, natural gas",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+IND_BOILER_OIL,Operation,"heat, district or industrial, other than natural gas","heat production, heavy fuel oil, at industrial furnace 1MW",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+IND_BOILER_OIL_PLANT,Construction,"industrial furnace, 1MW, oil","industrial furnace production, 1MW, oil",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+IND_BOILER_OIL_TANK,Construction,"oil storage, 3000l","market for oil storage, 3000l",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+IND_BOILER_WASTE,Construction,municipal waste incineration facility,municipal waste incineration facility construction,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+IND_BOILER_WASTE,Operation,"heat, district or industrial, other than natural gas","heat, from municipal waste incineration to generic market for heat district or industrial, other than natural gas",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+IND_BOILER_WOOD,Operation,"heat, district or industrial, other than natural gas","heat production, wood chips from industry, at furnace 1000kW",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+IND_BOILER_WOOD,Construction,"furnace, wood chips, with silo, 1000kW","furnace production, wood chips, with silo, 1000kW",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+IND_COGEN_GAS,Operation,"heat, district or industrial, natural gas","heat and power co-generation, natural gas, 1MW electrical, lean burn",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+IND_COGEN_GAS_CHP,Construction,"heat and power co-generation unit, 1MW electrical, common components for heat+electricity","heat and power co-generation unit construction, 1MW electrical, common components for heat+electricity",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+IND_COGEN_GAS_ELEC,Construction,"heat and power co-generation unit, 1MW electrical, components for electricity only","heat and power co-generation unit construction, 1MW electrical, components for electricity only",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+IND_COGEN_GAS_HEAT,Construction,"heat and power co-generation unit, 1MW electrical, components for heat only","heat and power co-generation unit construction, 1MW electrical, components for heat only",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+IND_COGEN_WASTE,Operation,"heat, district or industrial, other than natural gas","heat, from municipal waste incineration to generic market for heat district or industrial, other than natural gas",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+IND_COGEN_WASTE_PLANT,Construction,municipal waste incineration facility,municipal waste incineration facility construction,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+IND_COGEN_WASTE_TURBINE,Construction,"heat and power co-generation unit, organic Rankine cycle, 200kW electrical","heat and power co-generation unit construction, organic Rankine cycle, 200kW electrical",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+IND_COGEN_WOOD,Operation,"heat, district or industrial, other than natural gas","heat and power co-generation, wood chips, 6667 kW, state-of-the-art 2014",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+IND_COGEN_WOOD_DUST,Construction,"dust collector, electrostatic precipitator, for industrial use","market for dust collector, electrostatic precipitator, for industrial use",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+IND_COGEN_WOOD_PLANT,Construction,"furnace, wood chips, with silo, 5000kW","furnace production, wood chips, with silo, 5000kW",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+IND_COGEN_WOOD_TURBINE,Construction,"heat and power co-generation unit, organic Rankine cycle, 1000kW electrical","market for heat and power co-generation unit, organic Rankine cycle, 1000kW electrical",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+IND_DIRECT_ELEC,Operation,"electricity, high voltage","market for electricity, high voltage",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+IND_DIRECT_ELEC,Construction,"auxiliary heating unit, electric, 5kW","auxiliary heating unit production, electric, 5kW",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+LFO,Flow,light fuel oil,market for light fuel oil,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+LFO,Resource,light fuel oil,market for light fuel oil,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+METHANE_TO_METHANOL,Construction,methanol factory,methanol factory construction,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+METHANE_TO_METHANOL,Operation,methanol,"methanol production, natural gas reforming",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+METHANOL,Resource,methanol,market for methanol,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+METHANOL,Flow,methanol,market for methanol,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+METHANOL_RE,Resource,"methanol, from biomass","methanol production, biomass gasification",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+NUCLEAR,Construction,"nuclear power plant, pressure water reactor, 1000MW","nuclear power plant construction, pressure water reactor, 1000MW",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+NUCLEAR,Operation,"electricity, high voltage","electricity production, nuclear, pressure water reactor",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+PV,Operation,"electricity, low voltage","electricity production, photovoltaic, residential",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+PV,Construction,"photovoltaic flat-roof installation, 3kWp, multi-Si, on roof","photovoltaic flat-roof installation, 3kWp, multi-Si, on roof",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+PYROLYSIS_TO_FUELS,Construction,"chemical factory, organics","market for chemical factory, organics",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+PYROLYSIS_TO_FUELS,Operation,biochar,"biochar, from spruce wood pyrolysis",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+PYROLYSIS_TO_LFO,Operation,light fuel oil,"light fuel oil production, from waste polyethylene",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+PYROLYSIS_TO_LFO,Construction,"chemical factory, organics","chemical factory construction, organics",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+SMR,Operation,"hydrogen, gaseous, low pressure","hydrogen production, steam methane reforming",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+SMR_PLANT,Construction,"chemical factory, organics","chemical factory construction, organics",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+SMR_TANK,Construction,"liquid storage tank, chemicals, organics","market for liquid storage tank, chemicals, organics",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+SYN_METHANATION,Operation,"methane, from electrochemical methanation","methane, from electrochemical methanation, with carbon from municipal waste incineration plant",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+SYN_METHANATION,Construction,"chemical factory, organics","market for chemical factory, organics",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+SYN_METHANOLATION,Construction,"chemical factory, organics","market for chemical factory, organics",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+TRAIN_FREIGHT,Operation,"transport, freight train","transport, freight train, electricity",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+TRAIN_FREIGHT_LOC,Construction,locomotive,locomotive production,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+TRAIN_FREIGHT_WAG,Construction,goods wagon,goods wagon production,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+TRAIN_PUB,Operation,"transport, passenger train","transport, passenger train, high-speed",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+TRAIN_PUB,Construction,"train, passenger, high speed","market for train, passenger, high speed",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+TRAMWAY_TROLLEY,Construction,tram,tram production,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+TRAMWAY_TROLLEY,Operation,"transport, tram","transport, tram",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+TRUCK_DIESEL,Operation,"transport, freight, lorry","transport, freight, lorry, diesel, 26 metric ton",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+TRUCK_DIESEL,Construction,truck,"lorry production, diesel, 26 metric ton",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+TRUCK_ELEC,Construction,truck,"lorry production, battery electric, 26 metric ton",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+TRUCK_ELEC,Operation,"transport, freight, lorry","transport, freight, lorry, battery electric, 26 metric ton",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+TRUCK_FUEL_CELL,Construction,truck,"lorry production, fuel cell electric, 26 metric ton",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+TRUCK_FUEL_CELL,Operation,"transport, freight, lorry","transport, freight, lorry, fuel cell electric, 26 metric ton",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+TRUCK_METHANOL,Operation,"transport, freight, lorry","transport, freight, lorry, gasoline, 18 metric ton",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+TRUCK_METHANOL,Construction,truck,"lorry production, diesel, 18 metric ton",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+TRUCK_NG,Operation,"transport, freight, lorry","transport, freight, lorry, compressed gas, 26 metric ton",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+TRUCK_NG,Construction,truck,"lorry production, compressed gas, 26 metric ton",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+URANIUM,Flow,"nuclear fuel element, for pressure water reactor, UO2 4.2% & MOX","market for nuclear fuel element, for pressure water reactor, UO2 4.2% & MOX",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+URANIUM,Resource,"nuclear fuel element, for pressure water reactor, UO2 4.2% & MOX","market for nuclear fuel element, for pressure water reactor, UO2 4.2% & MOX",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+WASTE,Flow,municipal solid waste,market for municipal solid waste,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+WASTE,Resource,municipal solid waste,market for municipal solid waste,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+WET_BIOMASS,Flow,"manure, solid, cattle","market for manure, solid, cattle",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+WET_BIOMASS,Resource,"manure, solid, cattle","market for manure, solid, cattle",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+WIND_OFFSHORE,Operation,"electricity, high voltage","electricity production, wind, 1-3MW turbine, offshore",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+WIND_OFFSHORE_FIXED,Construction,"wind power plant, 2MW, offshore, fixed parts","market for wind power plant, 2MW, offshore, fixed parts",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+WIND_OFFSHORE_MOVING,Construction,"wind power plant, 2MW, offshore, moving parts","market for wind power plant, 2MW, offshore, moving parts",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+WIND_ONSHORE,Operation,"electricity, high voltage","electricity production, wind, 1-3MW turbine, onshore",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+WIND_ONSHORE_CONNECTION,Construction,"wind turbine network connection, 2MW, onshore","wind turbine network connection construction, 2MW, onshore",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+WIND_ONSHORE_TURBINE,Construction,"wind turbine, 2MW, onshore","wind turbine construction, 2MW, onshore",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+WOOD,Resource,"wood chips, dry, measured as dry mass","market for wood chips, dry, measured as dry mass",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
+WOOD,Flow,"wood chips, dry, measured as dry mass","market for wood chips, dry, measured as dry mass",ecoinvent_cutoff_3.10.1_image_SSP2-L_2050
