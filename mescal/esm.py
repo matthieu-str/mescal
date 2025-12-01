@@ -666,7 +666,7 @@ class ESM:
             data=flows_set_to_zero,
             columns=[
                 'Name', 'Type', 'Product', 'Activity', 'Location', 'Database', 'Code',
-                'Amount',
+                'Amount', 'Amount (scaled to the FU)',
                 'Unit', 'Removed flow product', 'Removed flow activity',
                 'Removed flow location', 'Removed flow database',
                 'Removed flow code'

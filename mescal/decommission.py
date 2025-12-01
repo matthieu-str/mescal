@@ -41,7 +41,7 @@ def _add_decommission_datasets(self) -> None:
     new_technology_compositions_dict = {}
     df_removed_decom = df[
         (df.Type == 'Construction')
-        & (df.Amount < 0)  # waste flows only
+        & (df['Amount (scaled to the FU)'] < 0)  # waste flows only
     ]
 
     for tech in df_removed_decom.Name.unique():  # iterate over construction technologies
@@ -78,7 +78,7 @@ def _add_decommission_datasets(self) -> None:
         for i in range(len(df_removed_decom_tech)):
             exchanges.append(
                 {
-                    'amount': df_removed_decom_tech['Amount'].iloc[i],
+                    'amount': df_removed_decom_tech['Amount (scaled to the FU)'].iloc[i],
                     'code': df_removed_decom_tech['Removed flow code'].iloc[i],
                     'type': 'technosphere',
                     'name': df_removed_decom_tech['Removed flow activity'].iloc[i],

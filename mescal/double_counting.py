@@ -622,7 +622,9 @@ def _double_counting_removal(
                     new_act_op_d_c['location'],
                     new_act_op_d_c['database'],
                     new_act_op_d_c['code'],
-                    old_amount, flow['unit'],  # quantity and unit
+                    old_amount,  # flow quantity
+                    old_amount * new_act_op_d_c_amount,  # flow quantity scaled to the FU
+                    flow['unit'],  # flow unit
                     act_flow['reference product'],  # removed flow
                     act_flow['name'],
                     act_flow['location'],
