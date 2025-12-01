@@ -62,10 +62,10 @@ CAR_GASOLINE_LOCAL,Operation,"transport, passenger car, EURO-6ab","transport, pa
 CAR_GASOLINE_LOCAL,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10.1_image_SSP2-RCP26_2050 regionalized
 CAR_GASOLINE_LONGD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10.1_image_SSP2-RCP26_2050 regionalized
 CAR_GASOLINE_LONGD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10.1_image_SSP2-RCP26_2050 regionalized
-CAR_HEV_LOCAL,Construction,"Passenger car, EURO-6ab","Passenger car, diesel hybrid, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10.1_image_SSP2-RCP26_2050 regionalized
-CAR_HEV_LOCAL,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel hybrid, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10.1_image_SSP2-RCP26_2050 regionalized
-CAR_HEV_LONGD,Construction,"Passenger car, EURO-6ab","Passenger car, diesel hybrid, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10.1_image_SSP2-RCP26_2050 regionalized
-CAR_HEV_LONGD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, diesel hybrid, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10.1_image_SSP2-RCP26_2050 regionalized
+CAR_HEV_LOCAL,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline hybrid, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10.1_image_SSP2-RCP26_2050 regionalized
+CAR_HEV_LOCAL,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline hybrid, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10.1_image_SSP2-RCP26_2050 regionalized
+CAR_HEV_LONGD,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline hybrid, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10.1_image_SSP2-RCP26_2050 regionalized
+CAR_HEV_LONGD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline hybrid, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10.1_image_SSP2-RCP26_2050 regionalized
 CAR_MEOH_LOCAL,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10.1_image_SSP2-RCP26_2050 regionalized
 CAR_MEOH_LOCAL,Construction,"Passenger car, EURO-6ab","Passenger car, gasoline, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10.1_image_SSP2-RCP26_2050 regionalized
 CAR_MEOH_LONGD,Operation,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline, Medium, EURO-6ab",RER,ecoinvent_cutoff_3.10.1_image_SSP2-RCP26_2050 regionalized
