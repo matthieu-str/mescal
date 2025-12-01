@@ -185,8 +185,8 @@ Direct Air Capture at Low Temperature,Construction,=8760*0.85/1000 / 1000000,uni
 Direct Air Capture at Low Temperature,Operation,=1,kilogram,kilogram,None
 Direct Air Capture at Low Temperature (plant),Construction,1,unit,unit,None
 Direct Air Capture at Low Temperature (plant decommissioning),Construction,-1,unit,unit,None
-Decentralized Cogeneration with Hydrogen,Construction,=1 / 2,unit,kilowatt,Capacity (2 kWe PEM)
-Decentralized Cogeneration with Hydrogen,Operation,1,kilowatt hour,kilowatt hour,None
+Decentralized Cogeneration with Hydrogen,Construction,= 2.64 / 2,unit,kilowatt,"Capacity (2 kWe PEM), cogeneration (2.64 kWe/kWth): (Moret, 2017)"
+Decentralized Cogeneration with Hydrogen,Operation,=3.6/0.123336767415877,megajoule,kilowatt hour,"allocation factor (0.123336767415877): (Sacchi, 2022)"
 Decentralized Boiler with Gas Combustion,Construction,=1 / 10,unit,kilowatt,Capacity (10 kW)
 Decentralized Boiler with Gas Combustion,Operation,=1 * 3600 / 1000,megajoule,kilowatt hour,None
 Decentralized Boiler with Oil Combustion,Construction,=1 / 10,unit,kilowatt,Capacity (10 kW)

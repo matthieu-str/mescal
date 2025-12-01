@@ -161,7 +161,7 @@ Direct Air Capture at High Temperature (plant decommissioning),Construction,dire
 Direct Air Capture at Low Temperature,Operation,"carbon dioxide, captured from atmosphere","carbon dioxide, captured from atmosphere, with a solvent-based direct air capture system, 1MtCO2"
 Direct Air Capture at Low Temperature (plant),Construction,direct air capture system,"direct air capture system, solvent-based, 1MtCO2"
 Direct Air Capture at Low Temperature (plant decommissioning),Construction,direct air capture system,"treatment of direct air capture system, solvent-based, 1MtCO2"
-Decentralized Cogeneration with Hydrogen,Operation,"electricity, from residential heating system","electricity, residential, by conversion of hydrogen using fuel cell, PEM, allocated by exergy, distributed by pipeline, produced by Electrolysis, PEM using electricity from grid"
+Decentralized Cogeneration with Hydrogen,Operation,"heat, from residential heating system","heat, residential, by conversion of hydrogen using fuel cell, PEM, allocated by exergy, distributed by pipeline, produced by Electrolysis, PEM using electricity from grid"
 Decentralized Cogeneration with Hydrogen,Construction,"fuel cell, polymer electrolyte membrane, 2kW electrical, future","fuel cell production, polymer electrolyte membrane, 2kW electrical, future"
 Decentralized Boiler with Gas Combustion,Operation,"heat, central or small-scale, natural gas","heat production, natural gas, at boiler modulating <100kW"
 Decentralized Boiler with Gas Combustion,Construction,gas boiler,gas boiler production
@@ -596,7 +596,7 @@ Benzene,Resource,benzene,market for benzene
 Coal,Resource,hard coal,market for hard coal
 Diesel,Resource,"diesel, low-sulfur","market for diesel, low-sulfur"
 Electricity exports,Resource,"electricity, high voltage","market for electricity, high voltage"
-Electricity import,Resource,"electricity, high voltage","market for electricity, high voltage"
+Electricity import,Resource,"electricity, high voltage","electricity production, hydro, reservoir, non-alpine region"
 Ethane,Resource,ethane,market for ethane
 Ethanol,Resource,"ethanol, without water, in 99.7% solution state, from fermentation","market for ethanol, without water, in 99.7% solution state, from fermentation"
 Ethylbenzene,Resource,ethyl benzene,market for ethyl benzene

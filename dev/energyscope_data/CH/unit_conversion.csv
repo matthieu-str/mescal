@@ -136,8 +136,8 @@ DAC_HT,Operation,1.0,kilogram,kilogram
 DAC_LT,Construction,7.445999999999999e-06,unit,kilogram per hour
 DAC_LT,Decommission,-7.445999999999999e-06,unit,kilogram per hour
 DAC_LT,Operation,1.0,kilogram,kilogram
-DEC_ADVCOGEN_H2,Construction,0.5,unit,kilowatt
-DEC_ADVCOGEN_H2,Operation,1.0,kilowatt hour,kilowatt hour
+DEC_ADVCOGEN_H2,Construction,1.32,unit,kilowatt
+DEC_ADVCOGEN_H2,Operation,29.18837647,megajoule,kilowatt hour
 DEC_BOILER_GAS,Construction,0.1,unit,kilowatt
 DEC_BOILER_GAS,Operation,3.6,megajoule,kilowatt hour
 DEC_BOILER_OIL,Construction,0.1,unit,kilowatt
