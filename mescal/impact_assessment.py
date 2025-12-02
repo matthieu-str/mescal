@@ -109,13 +109,13 @@ def compute_impact_scores(
     elif assessment_type == 'direct emissions':
         esm_direct_emissions_db_name = esm_db_name + '_direct_emissions'
         calculation_setup_name = 'direct_emissions'
-        activities_subject_to_double_counting['Type'] = 'Operation'
-        activities_subject_to_double_counting['Database'] = esm_direct_emissions_db_name
 
         # Filtering the database to keep only the activities subject to double counting (i.e., the ones with
         # direct emissions)
-        activities = [i for i in esm_db.db_as_list if
-                      i['code'] in list(activities_subject_to_double_counting['Activity code'].unique())]
+        activities = [
+            i for i in esm_db.db_as_list if
+            i['code'] in list(activities_subject_to_double_counting[activities_subject_to_double_counting.Type == 'Operation']['Activity code'].unique())
+        ]
 
         # Set the amount of all technosphere exchanges to 0 (keeps direct emissions only) and change database name
         for act in activities:
@@ -661,9 +661,13 @@ def _aggregate_direct_emissions_activities(
     """
     esm_db_name = self.esm_db_name
     esm_direct_emissions_db_name = esm_db_name + '_direct_emissions'
+    tech_list = activities_subject_to_double_counting[activities_subject_to_double_counting.Type == 'Operation']['Name'].unique()
 
-    for tech in activities_subject_to_double_counting['Name'].unique():
-        activities = activities_subject_to_double_counting[activities_subject_to_double_counting.Name == tech]
+    for tech in tech_list:
+        activities = activities_subject_to_double_counting[
+            (activities_subject_to_double_counting.Name == tech)
+            & (activities_subject_to_double_counting.Type == 'Operation')
+        ]
         old_act = [i for i in esm_db.db_as_list if i['name'] == f'{tech}, Operation'][0]
 
         if (
