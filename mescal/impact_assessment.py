@@ -7,7 +7,7 @@ import numpy as np
 from tqdm import tqdm
 from .utils import random_code, expand_impact_category_levels
 from .database import Database
-from.contribution_analysis import ABContributionAnalysis
+from .contribution_analysis import ABContributionAnalysis
 
 ca = ABContributionAnalysis()
 
@@ -91,6 +91,12 @@ def compute_impact_scores(
 
     if 'New_code' not in self.mapping.columns:
         self._get_new_code()
+
+    if 'Current_code' not in self.mapping.columns:
+        self._get_original_code()
+
+    if self.extract_eol_from_construction is True and self.added_decom_to_input_data is False:
+        self._add_decommission_datasets(add_decom_ds_to_db=False)
 
     # Store frequently accessed instance variables in local variables inside a method
     mapping = self.mapping

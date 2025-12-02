@@ -3,12 +3,18 @@ import pandas as pd
 import ast
 
 
-def _add_decommission_datasets(self) -> None:
+def _add_decommission_datasets(
+        self,
+        add_decom_ds_to_db: bool = True,
+) -> None:
     """
     This method aggregates the EoL flows that have been identified during the double-counting removal step in a
     decommission dataset. This is applied to every technology that has not already a decommission adataset.
     The mapping, unit conversion, and technology compositions files are updated accordingly.
 
+    :param add_decom_ds_to_db: If True, decommission datasets are added to the main database. This argument is True
+        when decommission datasets are created during the create_esm_database method. This argument is False there is
+        a need to recover decommission datasets codes from the ESM database (outside the create_esm_database method).
     :return: None
     """
 
@@ -59,51 +65,59 @@ def _add_decommission_datasets(self) -> None:
                 else:
                     new_technology_compositions_dict[parent_tech] = [tech]
 
-        df_removed_decom_tech = df_removed_decom[(df_removed_decom.Name == tech)].reset_index(drop=True)
         act_constr_code, act_constr_database = mapping_constr[mapping_constr.Name == tech][['Current_code', 'Database']].iloc[0]
         act_constr = db_dict_code[(act_constr_database, act_constr_code)]
-        new_code = random_code()
 
-        exchanges = [{
-            'amount': -1,
-            'code': new_code,
-            'type': 'production',
-            'name': f'{tech}, Decommission',
-            'product': f'used {act_constr["reference product"]}',
-            'unit': act_constr['unit'],
-            'location': act_constr['location'],
-            'database': esm_db_name,
-        }]
+        if add_decom_ds_to_db:
 
-        for i in range(len(df_removed_decom_tech)):
-            exchanges.append(
-                {
-                    'amount': df_removed_decom_tech['Amount (scaled to the FU)'].iloc[i],
-                    'code': df_removed_decom_tech['Removed flow code'].iloc[i],
-                    'type': 'technosphere',
-                    'name': df_removed_decom_tech['Removed flow activity'].iloc[i],
-                    'product': df_removed_decom_tech['Removed flow product'].iloc[i],
-                    'unit': df_removed_decom_tech['Unit'].iloc[i],
-                    'location': df_removed_decom_tech['Removed flow location'].iloc[i],
-                    'database': df_removed_decom_tech['Removed flow database'].iloc[i],
-                }
-            )
+            df_removed_decom_tech = df_removed_decom[(df_removed_decom.Name == tech)].reset_index(drop=True)
+            new_code = random_code()
 
-        new_activity = {
-            'database': esm_db_name,
-            'name': f'{tech}, Decommission',
-            'location': act_constr['location'],
-            'unit': act_constr['unit'],
-            'reference product': f'used {act_constr["reference product"]}',
-            'code': new_code,
-            'classifications': [('CPC', '39990: Other wastes n.e.c.')],
-            'comment': f'Activity derived from the aggregation of waste flows in ({act_constr["reference product"]} '
-                       f'- {act_constr["name"]} - {act_constr["location"]})',
-            'parameters': {},
-            'exchanges': exchanges,
-        }
-        
-        db_as_list.append(new_activity)
+            exchanges = [{
+                'amount': -1,
+                'code': new_code,
+                'type': 'production',
+                'name': f'{tech}, Decommission',
+                'product': f'used {act_constr["reference product"]}',
+                'unit': act_constr['unit'],
+                'location': act_constr['location'],
+                'database': esm_db_name,
+            }]
+
+            for i in range(len(df_removed_decom_tech)):
+                exchanges.append(
+                    {
+                        'amount': df_removed_decom_tech['Amount (scaled to the FU)'].iloc[i],
+                        'code': df_removed_decom_tech['Removed flow code'].iloc[i],
+                        'type': 'technosphere',
+                        'name': df_removed_decom_tech['Removed flow activity'].iloc[i],
+                        'product': df_removed_decom_tech['Removed flow product'].iloc[i],
+                        'unit': df_removed_decom_tech['Unit'].iloc[i],
+                        'location': df_removed_decom_tech['Removed flow location'].iloc[i],
+                        'database': df_removed_decom_tech['Removed flow database'].iloc[i],
+                    }
+                )
+
+            new_activity = {
+                'database': esm_db_name,
+                'name': f'{tech}, Decommission',
+                'location': act_constr['location'],
+                'unit': act_constr['unit'],
+                'reference product': f'used {act_constr["reference product"]}',
+                'code': new_code,
+                'classifications': [('CPC', '39990: Other wastes n.e.c.')],
+                'comment': f'Activity derived from the aggregation of waste flows in ({act_constr["reference product"]} '
+                           f'- {act_constr["name"]} - {act_constr["location"]})',
+                'parameters': {},
+                'exchanges': exchanges,
+            }
+
+            db_as_list.append(new_activity)
+
+        else:
+            # Recover decommission datasets new codes from ESM database
+            new_code = [i['code'] for i in self.esm_db.db_as_list if i['name'] == f'{tech}, Decommission'][0]
+
         new_mapping_data.append([
             tech,
             'Decommission',
@@ -139,6 +153,8 @@ def _add_decommission_datasets(self) -> None:
         "Components": list(new_technology_compositions_dict.values()),
     })
     new_technology_compositions['Type'] = 'Decommission'
+
+    self.added_decom_to_input_data = True
 
     # Injecting local variables into the instance variables
     self.main_database.db_as_list = db_as_list
