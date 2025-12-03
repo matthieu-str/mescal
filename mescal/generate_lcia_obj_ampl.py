@@ -12,10 +12,12 @@ def generate_mod_file_ampl(
         assessment_type: str = 'esm',
         path: str = 'results/',
         file_name: str = 'objectives',
-        metadata: dict = None
+        metadata: dict = None,
+        energyscope_version: str = 'epfl',
 ) -> None:
     """
-    Create an AMPL mod file containing everything related to LCA
+    Create an AMPL mod file containing the LCIA equations. This method has been specifically designed for the
+    EnergyScope model. Currently, it supports the 'epfl' and 'core' versions of EnergyScope.
 
     :param lcia_methods: LCIA methods to be used
     :param specific_lcia_categories: specific LCIA categories to be used
@@ -26,6 +28,7 @@ def generate_mod_file_ampl(
     :param path: path where the mod file will be saved
     :param file_name: name of the .mod file
     :param metadata: dictionary containing the metadata to be written at the beginning of the file
+    :param energyscope_version: version of EnergyScope model used, can be 'epfl' or 'core'
     :return: None (writes the file)
     """
 
@@ -78,6 +81,7 @@ def generate_mod_file_ampl(
                         'var LCIA_op {INDICATORS,TECHNOLOGIES,YEARS};\n'
                         'var LCIA_res {INDICATORS,RESOURCES,YEARS};\n'
                         'var TotalLCIA {INDICATORS,YEARS};\n\n')
+
             elif assessment_type == 'direct emissions':
                 if self.operation_metrics_for_all_time_steps:
                     f.write('param direct_op {INDICATORS,TECHNOLOGIES,YEARS,YEARS} default 0;\n')
@@ -88,7 +92,7 @@ def generate_mod_file_ampl(
                         'var TotalDIRECT {INDICATORS,YEARS};\n\n')
 
             if assessment_type == 'esm':
-                # Equation of LCIAs variables (construction scaling to F_Mult)
+                # Equation of LCIAs variables (construction and decommission impacts scaled with the installed capacity)
                 f.write('# Construction\n'
                         'subject to lcia_constr_calc {id in INDICATORS, i in TECHNOLOGIES, y in YEARS}:\n'
                         '  LCIA_constr[id,i,y] = sum {y_inst in YEARS: y_inst <= y} lcia_constr[id,i,y_inst] '
@@ -99,7 +103,7 @@ def generate_mod_file_ampl(
                         '  LCIA_decom[id,i,y] = sum {y_inst in YEARS: y_inst <= y} lcia_decom[id,i,y_inst] '
                         '* F_Mult[i,y_inst] / lifetime[i,y_inst];\n\n')
 
-            # Equation of LCIAs variables (operation scaling to F_Mult_t)
+            # Equation of LCIAs variables (operation impacts scaled with the annual production)
             if self.operation_metrics_for_all_time_steps:
                 f.write('# Operation\n'
                         f'subject to {metric_type.lower()}_op_calc {{id in INDICATORS, i in TECHNOLOGIES, y in YEARS}}:\n'
@@ -111,7 +115,7 @@ def generate_mod_file_ampl(
                         f'  {metric_type}_op[id,i,y] = {metric_type.lower()}_op[id,i,y] * sum {{t in PERIODS}} (t_op[t] * F_Mult_t[i,t,y]);\n\n')
 
             if assessment_type == 'esm':
-                # Equation of LCIAs variables (resources scaling to F_Mult_t)
+                # Equation of LCIAs variables (resources impacts scaled with the annual usage)
                 f.write('# Resources\n'
                         'subject to lcia_res_calc {id in INDICATORS, r in RESOURCES, y in YEARS}:\n'
                         '  LCIA_res[id,r,y] = lcia_res[id,r,y] * sum {t in PERIODS} (t_op[t] * F_Mult_t[r,t,y]);\n\n')
@@ -147,6 +151,7 @@ def generate_mod_file_ampl(
                         'var LCIA_op {INDICATORS,TECHNOLOGIES};\n'
                         'var LCIA_res {INDICATORS,RESOURCES};\n'
                         'var TotalLCIA {INDICATORS};\n\n')
+
             elif assessment_type == 'direct emissions':
                 f.write('param direct_op {INDICATORS,TECHNOLOGIES} default 0;\n'
                         'param limit_direct {INDICATORS} default 1e10;\n'
@@ -154,32 +159,68 @@ def generate_mod_file_ampl(
                         'var TotalDIRECT {INDICATORS};\n\n')
 
             if assessment_type == 'esm':
-                # Equation of LCIAs variables (construction scaling to F_Mult)
-                f.write('# Construction\n'
-                        'subject to lcia_constr_calc {id in INDICATORS, i in TECHNOLOGIES}:\n'
-                        f'  LCIA_constr[id,i] = lcia_constr[id,i] * F_Mult[i] / lifetime[i];\n\n')
+                # Equation of LCIAs variables (construction and decommission impacts scaled with the installed capacity)
+                if energyscope_version == 'epfl':
+                    f.write('# Construction\n'
+                            'subject to lcia_constr_calc {id in INDICATORS, i in TECHNOLOGIES}:\n'
+                            f'  LCIA_constr[id,i] = lcia_constr[id,i] * F_Mult[i] / lifetime[i];\n\n')
 
-                # Equation of LCIAs variables (decommission scaling to F_Mult)
-                f.write('# Decommission\n'
-                        'subject to lcia_decom_calc {id in INDICATORS, i in TECHNOLOGIES}:\n'
-                        f'  LCIA_decom[id,i] = lcia_decom[id,i] * F_Mult[i] / lifetime[i];\n\n')
+                    f.write('# Decommission\n'
+                            'subject to lcia_decom_calc {id in INDICATORS, i in TECHNOLOGIES}:\n'
+                            f'  LCIA_decom[id,i] = lcia_decom[id,i] * F_Mult[i] / lifetime[i];\n\n')
 
-            # Equation of LCIAs variables (operation scaling to F_Mult_t)
-            f.write('# Operation\n'
-                    f'subject to {metric_type.lower()}_op_calc {{id in INDICATORS, i in TECHNOLOGIES}}:\n'
-                    f'  {metric_type}_op[id,i] = {metric_type.lower()}_op[id,i] * sum {{t in PERIODS}} (t_op[t] * F_Mult_t[i,t]);\n\n')
+                elif energyscope_version == 'core':
+                    f.write('# Construction\n'
+                            'subject to lcia_constr_calc {id in INDICATORS, i in TECHNOLOGIES}:\n'
+                            f'  LCIA_constr[id,i] = lcia_constr[id,i] * F[i] / lifetime[i];\n\n')
+
+                    f.write('# Decommission\n'
+                            'subject to lcia_decom_calc {id in INDICATORS, i in TECHNOLOGIES}:\n'
+                            f'  LCIA_decom[id,i] = lcia_decom[id,i] * F[i] / lifetime[i];\n\n')
+
+                else:
+                    raise ValueError(f"Unknown energyscope_version: {energyscope_version}. Only 'epfl' and 'core' are "
+                                     f"supported.")
+
+            # Equation of LCIAs variables (operation impacts scaled with the annual production)
+            if energyscope_version == 'epfl':
+                f.write('# Operation\n'
+                        f'subject to {metric_type.lower()}_op_calc {{id in INDICATORS, i in TECHNOLOGIES}}:\n'
+                        f'  {metric_type}_op[id,i] = {metric_type.lower()}_op[id,i] * sum {{t in PERIODS}} (t_op[t] * F_Mult_t[i,t]);\n\n')
+
+            elif energyscope_version == 'core':
+                f.write('# Operation\n'
+                        f'subject to {metric_type.lower()}_op_calc {{id in INDICATORS, i in TECHNOLOGIES}}:\n'
+                        f'  {metric_type}_op[id,i] = {metric_type.lower()}_op[id,i] * sum {{t in PERIODS, h in HOUR_OF_PERIOD [t], '
+                        f'td in TYPICAL_DAY_OF_PERIOD [t]}} (t_op[h,td] * F_t[i,h,td]);\n\n')
+
+            else:
+                raise ValueError(f"Unknown energyscope_version: {energyscope_version}. Only 'epfl' and 'core' are "
+                                 f"supported.")
 
             if assessment_type == 'esm':
-                # Equation of LCIAs variables (resources scaling to F_Mult_t)
-                f.write('# Resources\n'
-                        'subject to lcia_res_calc {id in INDICATORS, r in RESOURCES}:\n'
-                        '  LCIA_res[id,r] = lcia_res[id,r] * sum {t in PERIODS} (t_op[t] * F_Mult_t[r,t]);\n\n')
+                # Equation of LCIAs variables (resources impacts scaled with the annual usage)
+                if energyscope_version == 'epfl':
+                    f.write('# Resources\n'
+                            'subject to lcia_res_calc {id in INDICATORS, r in RESOURCES}:\n'
+                            '  LCIA_res[id,r] = lcia_res[id,r] * sum {t in PERIODS} (t_op[t] * F_Mult_t[r,t]);\n\n')
+
+                elif energyscope_version == 'core':
+                    f.write('# Resources\n'
+                            'subject to lcia_res_calc {id in INDICATORS, r in RESOURCES}:\n'
+                            f'  LCIA_res[id,r] = lcia_res[id,r] * sum {{t in PERIODS, h in HOUR_OF_PERIOD [t], '
+                            f'td in TYPICAL_DAY_OF_PERIOD [t]}} (t_op[h,td] * F_t[r,h,td]);\n\n')
+
+                else:
+                    raise ValueError(f"Unknown energyscope_version: {energyscope_version}. Only 'epfl' and 'core' are "
+                                     f"supported.")
 
             # Equation defining the total LCIA impact (sum over all technologies and resources)
             if assessment_type == 'esm':
                 f.write('subject to totalLCIA_calc_r {id in INDICATORS}:\n'
                         '  TotalLCIA[id] = sum {i in TECHNOLOGIES} (LCIA_constr[id,i] + LCIA_decom[id,i] '
                         '+ LCIA_op[id,i]) + sum{r in RESOURCES} (LCIA_res[id,r]);\n\n')
+
             elif assessment_type == 'direct emissions':
                 f.write('subject to totalDIRECT_calc_r {id in INDICATORS}:\n'
                         '  TotalDIRECT[id] = sum {i in TECHNOLOGIES} DIRECT_op[id,i];\n\n')
