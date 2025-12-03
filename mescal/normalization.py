@@ -60,8 +60,8 @@ def normalize_lca_metrics(
         specific_lcia_abbrev: list[str] = None,
         assessment_type: str = 'esm',
         max_per_cat: pd.DataFrame = None,
-        path: str = 'results/',
-        file_name: str = 'techs_lcia',
+        path: str = None,
+        file_name: str = None,
         metadata: dict = None,
         output: str = 'write',
         skip_normalization: bool = False,
@@ -70,8 +70,9 @@ def normalize_lca_metrics(
     Create a .dat file containing the normalized LCA metrics for AMPL and a csv file containing the normalization
     factors
 
-    :param path: path to results folder
-    :param file_name: name of the .dat file
+    :param path: path to results folder. Default is the results_path_file from the ESM class.
+    :param file_name: name of the .dat file. Default is 'techs_lcia' if assessment_type is 'esm',
+        'techs_direct' if assessment_type is 'direct emissions'.
     :param R: dataframe containing the LCA indicators results
     :param mip_gap: normalized values that are lower than the MIP gap are set to 0 (to improve numerical stability)
     :param lcia_methods: LCIA method to be used
@@ -104,6 +105,15 @@ def normalize_lca_metrics(
 
     if metadata is None:
         metadata = {}
+
+    if file_name is None:
+        if assessment_type == 'esm':
+            file_name = 'techs_lcia'
+        else:
+            file_name = 'techs_direct'
+
+    if path is None:
+        path = self.results_path_file
 
     R = from_str_to_tuple(R, 'Impact_category')
     impact_abbrev = from_str_to_tuple(impact_abbrev, 'Impact_category')

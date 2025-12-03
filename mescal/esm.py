@@ -65,11 +65,12 @@ class ESM:
         :param main_database_name: name of the main database (e.g., 'ecoinvent-3.9.1-cutoff') if main_database
             is an aggregation of the main database and complementary databases
         :param biosphere_db_name: name of the (not spatialized) biosphere database. Default is 'biosphere3'.
-        :param results_path_file: path to your result folder
+        :param results_path_file: path to your result folder. Default is 'results/'.
         :param regionalize_foregrounds: list of types of LCI datasets that will be subject to the foreground
-            regionalization process. Can be 'Operation', 'Construction', 'Decommission', 'Resource', or a list of these. Set to 'all'
-            to regionalize all types of datasets. Default is 'all'.
-        :param accepted_locations: list of ecoinvent locations to keep without modification in case of regionalization
+            regionalization process. Can be 'Operation', 'Construction', 'Decommission', 'Resource', or a list of these.
+            Set to 'all' to regionalize all types of datasets. Default is None (no regionalization).
+        :param accepted_locations: list of ecoinvent locations to keep without modification in case of regionalization.
+            Default is None (only the esm_location is accepted).
         :param esm_location: ecoinvent location corresponding to the geographical scope of the ESM
         :param locations_ranking: ranking of the preferred ecoinvent locations in case of regionalization
         :param spatialized_biosphere_db: spatialized biosphere database
@@ -77,7 +78,7 @@ class ESM:
             between the ESM and LCI database
         :param lifetime: dataframe containing the lifetime of the ESM technologies
         :param max_depth_double_counting_search: maximum recursion depth of the double-counting background search
-            algorithm
+            algorithm. Default is 10.
         :param stop_background_search_when_first_flow_found: if True, the background search for double-counting removal
             (only applied to 'Background search' technologies in tech_specifics) stops once a flow of the targeted
             category is found. If False, the background search continues until all flows of the targeted category are

@@ -10,8 +10,8 @@ def generate_mod_file_ampl(
         specific_lcia_categories: list[str] = None,
         specific_lcia_abbrev: list[str] = None,
         assessment_type: str = 'esm',
-        path: str = 'results/',
-        file_name: str = 'objectives',
+        path: str = None,
+        file_name: str = None,
         metadata: dict = None,
         energyscope_version: str = 'epfl',
 ) -> None:
@@ -23,10 +23,11 @@ def generate_mod_file_ampl(
     :param specific_lcia_categories: specific LCIA categories to be used
     :param specific_lcia_abbrev: specific LCIA abbreviations to be used
     :param assessment_type: type of assessment, can be 'esm' for the full LCA database, or 'direct emissions' for the
-        computation of territorial emissions only
+        computation of direct emissions only
     :param impact_abbrev: dataframe containing the impact abbreviations of the LCIA method
-    :param path: path where the mod file will be saved
-    :param file_name: name of the .mod file
+    :param path: path where the mod file will be saved. Default is results_path_file from the ESM class.
+    :param file_name: name of the .mod file. Default is 'objectives' if assessment_type is 'esm', and
+        'objectives_direct' if assessment_type is 'direct emissions'.
     :param metadata: dictionary containing the metadata to be written at the beginning of the file
     :param energyscope_version: version of EnergyScope model used, can be 'epfl' or 'core'
     :return: None (writes the file)
@@ -41,6 +42,15 @@ def generate_mod_file_ampl(
 
     if metadata is None:
         metadata = {}
+
+    if file_name is None:
+        if assessment_type == 'esm':
+            file_name = 'objectives'
+        else:
+            file_name = 'objectives_direct'
+
+    if path is None:
+        path = self.results_path_file
 
     impact_abbrev = from_str_to_tuple(impact_abbrev, 'Impact_category')
 
