@@ -633,6 +633,42 @@ def validation_direct_carbon_emissions(
         else:
             return R_direct, None
 
+def compute_territorial_impact_scores(
+        self,
+        df_contrib_processes: pd.DataFrame,
+) -> pd.DataFrame:
+    """
+    Compute the territorial and abroad impact scores from the contribution analysis of processes.
+
+    :param df_contrib_processes: dataframe of the contribution analysis of processes
+    :return: territorial and abroad impact scores dataframe
+    """
+    if self.esm_db is None:
+        self.esm_db = Database(db_names=self.esm_db_name)
+    db = self.main_database + self.esm_db
+    db_as_dict_code = db.db_as_dict_code
+
+    df_contrib_processes.drop(columns=['act_database', 'act_code', 'contribution_type'], inplace=True)
+    df_contrib_processes['process_location'] = df_contrib_processes.apply(
+        lambda x: db_as_dict_code[(x['database'], x['code'])]['location'],
+        axis=1,
+    )
+    df_contrib_processes['territorial'] = df_contrib_processes.apply(
+        lambda x: True if (
+                (x['process_location'] == self.esm_location)  # process located in the ESM location
+                | (x['database'] == self.esm_db_name)  # process in the foreground (therefore in the ESM location)
+        ) else False, axis=1)
+
+    group_cols = ['act_name', 'act_type', 'impact_category']
+    df_contrib_processes = df_contrib_processes.groupby(
+        group_cols + ['territorial']
+    ).sum()[['score', 'amount']].reset_index()
+    df_contrib_processes['score_rel'] = df_contrib_processes.groupby(group_cols)['score'].transform(
+        lambda s: (s / s.sum()) if s.sum() != 0 else s * 0  # (non-) territorial score relative to total score
+    )
+
+    return df_contrib_processes
+
 @staticmethod
 def _get_impact_categories(methods: list[str]) -> list[str]:
     """

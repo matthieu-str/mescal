@@ -56,10 +56,10 @@ def normalize_lca_metrics(
         mip_gap: float,
         impact_abbrev: pd.DataFrame,
         lcia_methods: list[str],
+        contrib_processes: pd.DataFrame = None,
         specific_lcia_categories: list[str] = None,
         specific_lcia_abbrev: list[str] = None,
         assessment_type: str = 'esm',
-        max_per_cat: pd.DataFrame = None,
         path: str = None,
         file_name: str = None,
         metadata: dict = None,
@@ -70,19 +70,22 @@ def normalize_lca_metrics(
     Create a .dat file containing the normalized LCA metrics for AMPL and a csv file containing the normalization
     factors
 
-    :param path: path to results folder. Default is the results_path_file from the ESM class.
-    :param file_name: name of the .dat file. Default is 'techs_lcia' if assessment_type is 'esm',
-        'techs_direct' if assessment_type is 'direct emissions'.
     :param R: dataframe containing the LCA indicators results
     :param mip_gap: normalized values that are lower than the MIP gap are set to 0 (to improve numerical stability)
-    :param lcia_methods: LCIA method to be used
+    :param impact_abbrev: dataframe containing the impact categories abbreviations
+    :param lcia_methods: list of LCIA methods to be used
+    :param contrib_processes: dataframe containing the contribution of processes for each technology/resource and
+        impact category. This dataframe must only be provided if assessment_type is 'territorial emissions'. It will
+        be used to compute the amount of territorial/abroad impact for each impact category.
     :param specific_lcia_categories: specific LCIA categories to be used
     :param specific_lcia_abbrev: specific LCIA abbreviations to be used
-    :param assessment_type: type of assessment, can be 'esm' for the full LCA database, or 'direct emissions' for the
-        computation of territorial emissions only
-    :param max_per_cat: dataframe containing the maximum value of each impact unit, needed if assessment_type is 'direct
-        emissions'
-    :param impact_abbrev: dataframe containing the impact categories abbreviations
+    :param assessment_type: type of assessment, can be 'esm' for the full LCA database, 'direct emissions' for the
+        computation of direct emissions only, or 'territorial emissions' for the computation of territorial and abroad
+        emissions.
+    :param path: path to results folder. Default is the results_path_file from the ESM class.
+    :param file_name: name of the .dat file. Default is 'techs_lcia' if assessment_type is 'esm',
+        'techs_direct' if assessment_type is 'direct emissions', and 'techs_territorial' if assessment_type is
+        'territorial emissions'.
     :param metadata: dictionary containing the metadata. Can contain keys 'ecoinvent_version, 'year', 'spatialized',
         'regionalized', 'iam', 'ssp_rcp', 'lcia_method'.
     :param output: if 'write', writes the .dat file in 'path', if 'return', normalizes pandas dataframe, if 'both' does
@@ -92,16 +95,32 @@ def normalize_lca_metrics(
     :return: None or the normalized pandas dataframe (depending on the value of 'output')
     """
 
-    if assessment_type == 'direct emissions' and max_per_cat is None:
-        raise ValueError("If assessment_type is 'direct emissions', max_per_cat must be provided. Run this method with "
-                         "assessment_type='esm' first to get the max_per_cat dataframe.")
+    if assessment_type == 'territorial emissions' and contrib_processes is None:
+        raise ValueError("If assessment_type is 'territorial emissions', contrib_processes must be provided.")
+
+    if assessment_type == 'territorial emissions':
+        if 'territorial' not in contrib_processes.columns:
+            contrib_processes = self.compute_territorial_impact_scores(contrib_processes)
+        contrib_processes = contrib_processes[contrib_processes['territorial'] == True]
+
+        if 'score' in contrib_processes.columns:
+            contrib_processes = contrib_processes.rename(columns={'score': 'Value'})
+        if 'act_type' in contrib_processes.columns:
+            contrib_processes = contrib_processes.rename(columns={'act_type': 'Type'})
+        if 'act_name' in contrib_processes.columns:
+            contrib_processes = contrib_processes.rename(columns={'act_name': 'Name'})
+        if 'impact_category' in contrib_processes.columns:
+            contrib_processes = contrib_processes.rename(columns={'impact_category': 'Impact_category'})
 
     if assessment_type == 'esm':
         metric_type = 'lcia'
     elif assessment_type == 'direct emissions':
         metric_type = 'direct'
+    elif assessment_type == 'territorial emissions':
+        metric_type = 'territorial'
     else:
-        raise ValueError(f"Unknown assessment type: {assessment_type}. Must be 'esm' or 'direct emissions'.")
+        raise ValueError(f"Unknown assessment type: {assessment_type}. Must be 'esm', 'direct emissions' or "
+                         f"'territorial emissions'.")
 
     if metadata is None:
         metadata = {}
@@ -109,14 +128,19 @@ def normalize_lca_metrics(
     if file_name is None:
         if assessment_type == 'esm':
             file_name = 'techs_lcia'
-        else:
+        elif assessment_type == 'direct emissions':
             file_name = 'techs_direct'
+        else:
+            file_name = 'techs_territorial'
 
     if path is None:
         path = self.results_path_file
 
     R = from_str_to_tuple(R, 'Impact_category')
+    impact_abbrev.drop_duplicates(inplace=True)
     impact_abbrev = from_str_to_tuple(impact_abbrev, 'Impact_category')
+    if assessment_type == 'territorial emissions':
+        contrib_processes = from_str_to_tuple(contrib_processes, 'Impact_category')
 
     impact_abbrev = restrict_lcia_metrics(
         df=impact_abbrev,
@@ -142,37 +166,55 @@ def normalize_lca_metrics(
         raise ValueError("The demanded LCIA categories were not found in the impact_abbrev dataframe.")
 
     R = pd.merge(R, impact_abbrev, on='Impact_category')
+    if assessment_type == 'territorial emissions':
+        contrib_processes = pd.merge(contrib_processes, impact_abbrev, on='Impact_category')
 
     if skip_normalization:
-        R_scaled = R.copy()
+        if assessment_type in ['esm', 'direct emissions']:
+            R_scaled = R.copy()
+        else:  # assessment_type == 'territorial emissions'
+            R_scaled = contrib_processes.copy()
         R_scaled['Value_norm'] = R_scaled['Value']
         norm_unit = ''
 
     else:
         norm_unit = 'normalized'
-        if assessment_type == 'esm':
-            refactor = {}
-            R_scaled = R[R['Type'].isin(['Operation', 'Resource'])]
-            for unit in R['Unit'].unique():
-                # Scale the construction metrics to be at the same order of magnitude as the operation and resource metrics
-                lcia_op_max = R[(R['Type'].isin(['Operation', 'Resource'])) & (R['Unit'] == unit)]['Value'].max()
-                lcia_constr_max = R[(R['Type'].isin(['Construction', 'Decommission'])) & (R['Unit'] == unit)]['Value'].max()
-                refactor[unit] = lcia_op_max / lcia_constr_max
-                R_constr_imp = R[(R['Type'].isin(['Construction', 'Decommission'])) & (R['Unit'] == unit)]
-                R_constr_imp['Value'] *= refactor[unit]
-                R_scaled = pd.concat([R_scaled, R_constr_imp])  # R matrix but with refactor applied to construction metrics
-                R_scaled['max_unit'] = R_scaled.groupby('Unit')['Value'].transform('max')
+        refactor = {}
+        R_scaled = R[R['Type'].isin(['Operation', 'Resource'])]
+        for unit in R['Unit'].unique():
+            # Scale the construction metrics to be at the same order of magnitude as the operation and resource metrics
+            lcia_op_max = R[(R['Type'].isin(['Operation', 'Resource'])) & (R['Unit'] == unit)]['Value'].max()
+            lcia_constr_max = R[(R['Type'].isin(['Construction', 'Decommission'])) & (R['Unit'] == unit)]['Value'].max()
+            refactor[unit] = lcia_op_max / lcia_constr_max
+            R_constr_imp = R[(R['Type'].isin(['Construction', 'Decommission'])) & (R['Unit'] == unit)]
+            R_constr_imp['Value'] *= refactor[unit]
+            R_scaled = pd.concat([R_scaled, R_constr_imp])  # R matrix but with refactor applied to construction metrics
+        R_scaled['max_unit'] = R_scaled.groupby('Unit')['Value'].transform('max')
 
-        else:  # assessment_type == 'direct emissions'
-            refactor = None  # not needed for direct emissions as they are for operation datasets only
+        if assessment_type == 'direct emissions':
             max_per_cat_dict = {}
+            max_per_cat = R_scaled[['Abbrev', 'Unit', 'max_unit']].drop_duplicates().reset_index()
             for i in range(len(max_per_cat)):
                 max_per_cat_dict[max_per_cat['Unit'][i]] = max_per_cat['max_unit'][i]
             R_scaled = R.copy()
             R_scaled['max_unit'] = R_scaled.apply(lambda x: max_per_cat_dict[x['Unit']], axis=1)
 
+        elif assessment_type == 'territorial emissions':
+            max_per_cat_dict = {}
+            max_per_cat = R_scaled[['Abbrev', 'Unit', 'max_unit']].drop_duplicates().reset_index()
+            R_scaled = contrib_processes[contrib_processes['Type'].isin(['Operation', 'Resource'])]
+            for unit in contrib_processes['Unit'].unique():
+                # Scale the construction metrics to be at the same order of magnitude as the operation and resource metrics
+                R_constr_imp = contrib_processes[(contrib_processes['Type'].isin(['Construction', 'Decommission'])) & (contrib_processes['Unit'] == unit)]
+                R_constr_imp['Value'] *= refactor[unit]
+                R_scaled = pd.concat([R_scaled, R_constr_imp])  # R matrix but with refactor applied to construction metrics
+            for i in range(len(max_per_cat)):
+                max_per_cat_dict[max_per_cat['Unit'][i]] = max_per_cat['max_unit'][i]
+            R_scaled['max_unit'] = R_scaled.apply(lambda x: max_per_cat_dict[x['Unit']], axis=1)
+
         R_scaled['Value_norm'] = R_scaled['Value'] / R_scaled['max_unit']
-        if assessment_type == 'esm':
+
+        if assessment_type in ['esm', 'territorial emissions']:
             R_scaled_constr = R_scaled[R_scaled['Type'].isin(['Construction', 'Decommission'])]
             R_scaled_op = R_scaled[R_scaled['Type'].isin(['Operation', 'Resource'])]
             R_scaled_op['Value_norm'] = R_scaled_op['Value_norm'].apply(lambda x: 0 if abs(x) < mip_gap else x)
@@ -205,7 +247,6 @@ def normalize_lca_metrics(
             f.write("\n")
 
             if assessment_type == 'esm':
-
                 # Set of LCA indicators and units
                 f.write(f"set INDICATORS := {' '.join(R_scaled['Abbrev'].unique())};\n\n")
 

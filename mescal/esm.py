@@ -260,6 +260,7 @@ class ESM:
         _is_empty,
         _aggregate_direct_emissions_activities,
         validation_direct_carbon_emissions,
+        compute_territorial_impact_scores,
     )
     from .adapt_efficiency import (
         _correct_esm_and_lca_efficiency_differences,
