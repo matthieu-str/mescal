@@ -56,6 +56,7 @@ def normalize_lca_metrics(
         mip_gap: float,
         impact_abbrev: pd.DataFrame,
         lcia_methods: list[str],
+        R_direct: pd.DataFrame = None,
         contrib_processes: pd.DataFrame = None,
         specific_lcia_categories: list[str] = None,
         specific_lcia_abbrev: list[str] = None,
@@ -74,6 +75,8 @@ def normalize_lca_metrics(
     :param mip_gap: normalized values that are lower than the MIP gap are set to 0 (to improve numerical stability)
     :param impact_abbrev: dataframe containing the impact categories abbreviations
     :param lcia_methods: list of LCIA methods to be used
+    :param R_direct: dataframe containing the direct emissions indicators results. This dataframe must only be provided
+        if assessment_type is 'direct emissions'.
     :param contrib_processes: dataframe containing the contribution of processes for each technology/resource and
         impact category. This dataframe must only be provided if assessment_type is 'territorial emissions'. It will
         be used to compute the amount of territorial/abroad impact for each impact category.
@@ -141,6 +144,8 @@ def normalize_lca_metrics(
     impact_abbrev = from_str_to_tuple(impact_abbrev, 'Impact_category')
     if assessment_type == 'territorial emissions':
         contrib_processes = from_str_to_tuple(contrib_processes, 'Impact_category')
+    elif assessment_type == 'direct emissions':
+        R_direct = from_str_to_tuple(R_direct, 'Impact_category')
 
     impact_abbrev = restrict_lcia_metrics(
         df=impact_abbrev,
@@ -168,10 +173,14 @@ def normalize_lca_metrics(
     R = pd.merge(R, impact_abbrev, on='Impact_category')
     if assessment_type == 'territorial emissions':
         contrib_processes = pd.merge(contrib_processes, impact_abbrev, on='Impact_category')
+    elif assessment_type == 'direct emissions':
+        R_direct = pd.merge(R_direct, impact_abbrev, on='Impact_category')
 
     if skip_normalization:
-        if assessment_type in ['esm', 'direct emissions']:
+        if assessment_type == 'esm':
             R_scaled = R.copy()
+        elif assessment_type == 'direct emissions':
+            R_scaled = R_direct.copy()
         else:  # assessment_type == 'territorial emissions'
             R_scaled = contrib_processes.copy()
         R_scaled['Value_norm'] = R_scaled['Value']
@@ -196,7 +205,7 @@ def normalize_lca_metrics(
             max_per_cat = R_scaled[['Abbrev', 'Unit', 'max_unit']].drop_duplicates().reset_index()
             for i in range(len(max_per_cat)):
                 max_per_cat_dict[max_per_cat['Unit'][i]] = max_per_cat['max_unit'][i]
-            R_scaled = R.copy()
+            R_scaled = R_direct.copy()
             R_scaled['max_unit'] = R_scaled.apply(lambda x: max_per_cat_dict[x['Unit']], axis=1)
 
         elif assessment_type == 'territorial emissions':
