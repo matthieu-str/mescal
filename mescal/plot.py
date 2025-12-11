@@ -53,6 +53,7 @@ class Plot:
     ) -> None:
         """
         Plot operation and infrastructure LCA indicators for a set of technologies for a given impact category.
+        If decommission scores are provided, they wil be accounted in the infrastructure scores.
 
         :param technologies_list: list of technologies to plot. They should have the same operation/infrastructure units
             to have a meaningful comparison
@@ -114,7 +115,7 @@ class Plot:
         else:
             df = R[(R['Name'].isin(technologies_list)) & (R['Impact_category'] == str(impact_category))]
         df_op = df[df['Type'] == 'Operation']
-        df_constr = df[df['Type'] == 'Construction']
+        df_constr = df[df['Type'].isin(['Construction', 'Decommission'])]
 
         if self.lifetime is not None:
             df_constr = df_constr.merge(self.lifetime, on='Name')
@@ -125,7 +126,7 @@ class Plot:
         fig = make_subplots(
             rows=1,
             cols=2,
-            subplot_titles=("Operation", "Construction"),
+            subplot_titles=("Operation", "Infrastructure"),
             )
 
         if contributions_total_score:
@@ -183,12 +184,12 @@ class Plot:
                 row=1, col=1
             )
 
-            # Add bar chart for construction
+            # Add bar chart for infrastructure
             fig.add_trace(
                 go.Bar(
                     x=df_constr['Name'],
                     y=df_constr['Value'],
-                    name='Construction',
+                    name='Infrastructure',
                     hovertemplate=
                     '<br><b>Technology</b>: %{x}</br>' +
                     '<b>Value</b>: %{y:.2e}' + f' {construction_unit}</br>',
@@ -360,6 +361,7 @@ class Plot:
     ) -> None:
         """
         Plot operation and infrastructure LCA indicators for a set of technologies for a set of impact categories.
+        If decommission scores are provided, they wil be accounted in the infrastructure scores.
 
         :param technologies_list: list of technologies to plot. They should have the same operation/infrastructure units
             to have a meaningful comparison
@@ -437,7 +439,7 @@ class Plot:
             df_constr = R[
                 (R['Name'].isin(technologies_list))
                 & (R['Impact_category'] == str(impact_category))
-                & (R['Type'] == 'Construction')
+                & (R['Type'].isin(['Construction', 'Decommission']))
                 ]
 
             data_constr.append(go.Bar(
@@ -456,7 +458,7 @@ class Plot:
         fig = make_subplots(
             rows=1,
             cols=2,
-            subplot_titles=("Operation", "Construction"),
+            subplot_titles=("Operation", "Infrastructure"),
             )
 
         # Add bar chart for operation
@@ -686,13 +688,18 @@ class Plot:
                                                       on=['Name'], how='left')
         df_op = R[R.Type == 'Operation'].merge(esm_results_tech[['Name', 'Production']], on=['Name'], how='left')
         df_res = R[R.Type == 'Resource'].merge(esm_results_res[['Name', 'Import']], on=['Name'], how='left')
+        df_decom = R[R.Type == 'Decommission'].merge(esm_results_tech[['Name', 'Capacity']],
+                                                     on=['Name'], how='left').fillna(0)
 
         if self.lifetime is not None:
             # The construction impacts are divided by the lifetime to get the annual impact
             df_constr = df_constr.merge(self.lifetime, on='Name', how='left')
             df_constr['Impact'] = df_constr['Value'] * df_constr['Capacity'] / df_constr['ESM']
+            df_decom = df_decom.merge(self.lifetime, on='Name', how='left')
+            df_decom['Impact'] = df_decom['Value'] * df_decom['Capacity'] / df_decom['ESM']
         else:
             df_constr['Impact'] = df_constr['Value'] * df_constr['Capacity']
+            df_decom['Impact'] = df_decom['Value'] * df_decom['Capacity']
 
         df_op['Impact'] = df_op['Value'] * df_op['Production']
         df_res['Impact'] = df_res['Value'] * df_res['Import']
@@ -701,6 +708,7 @@ class Plot:
             df_constr[['Name', 'Type', 'Impact_category', 'Impact']],
             df_op[['Name', 'Type', 'Impact_category', 'Impact']],
             df_res[['Name', 'Type', 'Impact_category', 'Impact']],
+            df_decom[['Name', 'Type', 'Impact_category', 'Impact']],
         ])
 
         if normalized:
