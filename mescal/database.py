@@ -146,7 +146,8 @@ class Database:
             self,
             db_names: str | list[str] = None,
             db_as_list: list[dict] = None,
-            create_pickle: bool = False
+            create_pickle: bool = False,
+            load_dependencies: bool = False,
     ):
         """
         Initialize the database
@@ -155,6 +156,7 @@ class Database:
             several databases.
         :param db_as_list: List of dictionaries of the LCI database.
         :param create_pickle: if True, create a pickle file to store the database. Only used if db_names is provided.
+        :param load_dependencies: if True, load the dependencies of the database(s). Only used if db_names is provided.
         """
         # set up logging tool
         self.logger = logging.getLogger('Database')
@@ -166,13 +168,19 @@ class Database:
         ch.setFormatter(formatter)
         self.logger.addHandler(ch)
         self.logger.propagate = False
+        self.create_pickle = create_pickle
+
+        if db_as_list is not None and db_names is not None:
+            raise ValueError('Only one of db_names or db_as_list should be provided.')
 
         if db_as_list is not None:
+            self.load_dependencies = False
             self.db_as_list = db_as_list
             self.db_names = list(set([i['database'] for i in db_as_list]))
         elif db_names is not None:
+            self.load_dependencies = load_dependencies
             self.db_names = db_names
-            self.db_as_list = self.load(create_pickle)
+            self.db_as_list = self.load()
         else:
             raise ValueError('Database name or list of dictionaries must be provided')
 
@@ -213,16 +221,18 @@ class Database:
         _save_mapping_between_products_and_CPC_categories,
     )
 
-    def load(self, create_pickle: bool = False) -> list[dict]:
+    def load(self) -> list[dict]:
         """
         Load or extract a single database
 
-        :param create_pickle: if True, create a pickle file to store the database
         :return: list of dictionaries of the LCI database
         """
         if isinstance(self.db_names, list):
-            db = self.load_multiple(create_pickle)
-        elif isinstance(self.db_names, str):
+            db = self.load_multiple()
+        elif isinstance(self.db_names, str) and self.load_dependencies:
+            self.db_names = [self.db_names]
+            db = self.load_multiple()
+        elif isinstance(self.db_names, str) and not self.load_dependencies:
             if self.db_names not in bd.databases:
                 raise ValueError(f"{self.db_names} is not a registered database")
             elif os.path.isfile(DIR_DATABASE_CACHE / f'{self.db_names}.pickle'):
@@ -231,17 +241,16 @@ class Database:
             else:
                 db = wurst.extract_brightway2_databases(self.db_names, add_identifiers=True)
                 self.logger.info(f"Loaded {self.db_names} from brightway!")
-                if create_pickle:
+                if self.create_pickle:
                     cache_database(db, self.db_names)
         else:
             raise ValueError('Database name must be a string or a list of strings')
         return db
 
-    def load_multiple(self, create_pickle: bool = False) -> list[dict]:
+    def load_multiple(self) -> list[dict]:
         """
-        Concatenates databases in a list of dictionaries (including dependencies)
+        Concatenates databases in a list of dictionaries
 
-        :param create_pickle: if True, create a pickle file to store the database
         :return: list of dictionaries of the concatenated databases
         """
         db = Database(db_as_list=[])
@@ -249,17 +258,26 @@ class Database:
         db_names_copy = copy.deepcopy(self.db_names)
         for name in db_names_copy:
             if name not in loaded_databases:
-                db += Database(db_names=name, create_pickle=create_pickle)
+                db += Database(
+                    db_names=name,
+                    create_pickle=self.create_pickle,
+                    load_dependencies=False,  # only load dependencies of the first level
+                )
                 loaded_databases.add(name)
-                dependencies = list(set([a['exchanges'][i]['database']
-                                         for a in db.db_as_list
-                                         for i in range(len(a['exchanges']))]))
-                for dep_db_name in dependencies:
-                    if (dep_db_name not in self.db_names) & ('biosphere' not in dep_db_name):
-                        if dep_db_name not in loaded_databases:
-                            db += Database(db_names=dep_db_name, create_pickle=create_pickle)
-                            loaded_databases.add(dep_db_name)
-                        self.db_names.append(dep_db_name)
+                if self.load_dependencies:
+                    dependencies = list(set([a['exchanges'][i]['database']
+                                             for a in db.db_as_list
+                                             for i in range(len(a['exchanges']))]))
+                    for dep_db_name in dependencies:
+                        if (dep_db_name not in self.db_names) & ('biosphere' not in dep_db_name):
+                            if dep_db_name not in loaded_databases:
+                                db += Database(
+                                    db_names=dep_db_name,
+                                    create_pickle=self.create_pickle,
+                                    load_dependencies=False,  # only load dependencies of the first level
+                                )
+                                loaded_databases.add(dep_db_name)
+                            self.db_names.append(dep_db_name)
         return db.db_as_list
 
     def merge(
