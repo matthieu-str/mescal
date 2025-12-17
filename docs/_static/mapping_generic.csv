@@ -635,7 +635,7 @@ Electricity (high voltage),Flow,"electricity, high voltage","market for electric
 Electricity (low voltage),Flow,"electricity, low voltage","market for electricity, low voltage"
 Electricity (medium voltage),Flow,"electricity, medium voltage","market for electricity, medium voltage"
 Ethane,Flow,ethane,market for ethane
-Ethanol,Flow,"ethanol, without water, in 99.7% solution state, from fermentation","market for ethanol, without water, in 99.7% solution state, from fermentation"
+Ethanol,Flow,"ethanol, without water, in 99.7% solution state, from ethylene","market for ethanol, without water, in 99.7% solution state, from ethylene"
 Ethylbenzene,Flow,ethyl benzene,market for ethyl benzene
 Ethylene,Flow,ethylene,market for ethylene
 Gasoline,Flow,"petrol, low-sulfur","market for petrol, low-sulfur"

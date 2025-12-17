@@ -900,7 +900,7 @@ ELECTRICITY_HV,Flow,"electricity, high voltage","market for electricity, high vo
 ELECTRICITY_LV,Flow,"electricity, low voltage","market for electricity, low voltage",CA-QC,ecoinvent_cutoff_3.10.1_image_SSP2-Base_2050+truck_carculator regionalized_wo
 ELECTRICITY_MV,Flow,"electricity, medium voltage","market for electricity, medium voltage",CA-QC,ecoinvent_cutoff_3.10.1_image_SSP2-Base_2050+truck_carculator regionalized_wo
 ETHANE,Flow,ethane,market for ethane,GLO,ecoinvent_cutoff_3.10.1_image_SSP2-Base_2050+truck_carculator regionalized_wo
-ETHANOL,Flow,"ethanol, without water, in 99.7% solution state, from fermentation","market for ethanol, without water, in 99.7% solution state, from fermentation",GLO,ecoinvent_cutoff_3.10.1_image_SSP2-Base_2050+truck_carculator regionalized_wo
+ETHANOL,Flow,"ethanol, without water, in 99.7% solution state, from ethylene","market for ethanol, without water, in 99.7% solution state, from ethylene",RoW,ecoinvent_cutoff_3.10.1_image_SSP2-Base_2050+truck_carculator regionalized_wo
 ETHYLBENZENE,Flow,ethyl benzene,market for ethyl benzene,RoW,ecoinvent_cutoff_3.10.1_image_SSP2-Base_2050+truck_carculator regionalized_wo
 ETHYLENE,Flow,ethylene,market for ethylene,RoW,ecoinvent_cutoff_3.10.1_image_SSP2-Base_2050+truck_carculator regionalized_wo
 FOOD,Flow,"sugar, from sugar beet",beet sugar production,RoW,ecoinvent_cutoff_3.10.1_image_SSP2-Base_2050+truck_carculator regionalized_wo

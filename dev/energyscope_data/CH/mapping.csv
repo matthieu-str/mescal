@@ -411,7 +411,7 @@ DIESEL,Resource,"diesel, low-sulfur","market for diesel, low-sulfur",CH,ecoinven
 ELEC_EXPORT,Resource,"electricity, high voltage","market group for electricity, high voltage",RER,ecoinvent_cutoff_3.10.1_image_SSP2-RCP26_2050 regionalized
 ELECTRICITY_EHV,Resource,"electricity, high voltage","market group for electricity, high voltage",RER,ecoinvent_cutoff_3.10.1_image_SSP2-RCP26_2050 regionalized
 ETHANE,Resource,ethane,market for ethane,GLO,ecoinvent_cutoff_3.10.1_image_SSP2-RCP26_2050 regionalized
-ETHANOL,Resource,"ethanol, without water, in 99.7% solution state, from fermentation","market for ethanol, without water, in 99.7% solution state, from fermentation",GLO,ecoinvent_cutoff_3.10.1_image_SSP2-RCP26_2050 regionalized
+ETHANOL,Resource,"ethanol, without water, in 99.7% solution state, from ethylene","market for ethanol, without water, in 99.7% solution state, from ethylene",RER,ecoinvent_cutoff_3.10.1_image_SSP2-RCP26_2050 regionalized
 ETHYLBENZENE,Resource,ethyl benzene,market for ethyl benzene,RER,ecoinvent_cutoff_3.10.1_image_SSP2-RCP26_2050 regionalized
 ETHYLENE,Resource,ethylene,market for ethylene,RER,ecoinvent_cutoff_3.10.1_image_SSP2-RCP26_2050 regionalized
 GASOLINE,Resource,"petrol, low-sulfur","market for petrol, low-sulfur",CH,ecoinvent_cutoff_3.10.1_image_SSP2-RCP26_2050 regionalized
