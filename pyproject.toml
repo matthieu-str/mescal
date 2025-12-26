@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=68.0", "setuptools-scm>=8.0"]
+requires = ["setuptools>=68.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -13,7 +13,8 @@ maintainers = [
 description = "Coupling Energy System Models with Life Cycle Assessment"
 readme = "README.md"
 dynamic = ["version"]
-license = {file = "LICENSE"}
+license = "MIT"
+license-files = ["LICENSE"]
 # Add here all kinds of additional classifiers as defined under
 # https://pypi.org/classifiers/
 classifiers = [
@@ -61,7 +62,6 @@ dev = [
 ]
 
 [tool.setuptools]
-license-files = ["LICENSE"]
 include-package-data = true
 packages = ["mescal"]
 
