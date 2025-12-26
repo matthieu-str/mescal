@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.3] - 2025-12-26
+
+### Added
+- Support for the decommissioning phase of energy technologies as a separate LCI dataset type in the ESM database. Datasets of `Type` "Decommission" can now be defined in the `mapping` file. The `unit_conversion` and `technology_compositions` files 
+should be updated accordingly. To handle cases where end-of-life intermediary flows are included in the "Construction" LCI datasets, the `_add_decommission_datasets` method (in `decommission.py`) builds on the `double_counting_removal` method 
+(in `double_counting.py`) to extract end-of-life flows and aggregate them in the new "Decommission" datasets. The `add_decommission_datasets` method is activated when setting `extract_eol_from_construction` to `True` in the `ESM` class.
+- The method `compute_territorial_impact_scores` (in `impact_assessment.py`) to compute territorial impact scores (i.e., impacts occurring in `esm_location` over the life-cycle). The `compute_territorial_impact_scores` method requires a contribution analysis of processes obtained 
+from the `compute_impact_scores` method. The `normalize_lca_metrics` (in `normalization.py`) and `generate_mod_file_ampl` (in `generate_lcia_obj_ampl.py`) methods have been updated accordingly to handle the integration of territorial and abroad impact scores in ESMs.
+- Generic examples of user input data files on [ReadTheDocs](https://mescal.readthedocs.io/en/latest/content/user_inputs.html). These include examples of `mapping`, `unit_conversion`, `model`, and `mapping_esm_flows_to_CPC_cat` derived from our applications with the [EnergyScope](https://library.energyscope.net/main/) model.
+- The integration of [`ABContributionAnalysis` class from Activity-Browser](https://github.com/LCA-ActivityBrowser/activity-browser/blob/main/activity_browser/mod/bw2analyzer/contribution.py) and the use of [`pypardiso`](https://github.com/haasad/PyPardiso) to improve LCIA computation speed.
+- The formulation of LCA equations in [AMPL](https://ampl.com/) for the EnergyScope **core version** (in `normalization.py` and `generate_lcia_obj_ampl.py`).
+- The comparison of system-level results in the `validation_double_counting` and `validation_direct_carbon_emissions` methods, i.e., the system-level primary energy use and system-level direct carbon emissions, respectively.
+- The `load_dependencies` argument to the `Database` class (in `database.py`) to control whether dependencies are loaded when loading databases.
+
+### Changed 
+- Formatting of columns of the `impact_scores` DataFrame returned by the `compute_impact_scores` method (in `impact_assessment.py`). The following columns were added: `Impact_category_unit`, `Functional unit`, `Impact_category (level x)` where `x` typically ranges from 1 to 3, depending on the LCIA method.
+
 ## [1.2.2] - 2025-10-13
 
 ### Changed
