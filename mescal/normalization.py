@@ -155,7 +155,7 @@ def normalize_lca_metrics(
     )
 
     if 'Unit' not in impact_abbrev.columns:
-        impact_abbrev['Impact_category_unit'] = impact_abbrev['Impact_category'].apply(lambda row: bd.Method(row).metadata['unit'])
+        impact_abbrev['Unit'] = impact_abbrev['Impact_category'].apply(lambda row: bd.Method(row).metadata['unit'])
 
     if specific_lcia_categories is not None:
         if len(specific_lcia_categories) > len(impact_abbrev):
@@ -171,6 +171,13 @@ def normalize_lca_metrics(
         raise ValueError("The demanded LCIA categories were not found in the impact_abbrev dataframe.")
 
     R = pd.merge(R, impact_abbrev, on='Impact_category')
+    missing_imp_cat = []
+    for imp_cat in list(impact_abbrev['Impact_category'].unique()):
+        if imp_cat not in list(R['Impact_category'].unique()):
+            missing_imp_cat.append(imp_cat)
+    if len(missing_imp_cat) > 0:
+        raise ValueError(f"The following impact categories were not found in the R dataframe: {missing_imp_cat}")
+
     if assessment_type == 'territorial emissions':
         contrib_processes = pd.merge(contrib_processes, impact_abbrev, on='Impact_category')
     elif assessment_type == 'direct emissions':
@@ -190,7 +197,7 @@ def normalize_lca_metrics(
         norm_unit = 'normalized'
         refactor = {}
         R_scaled = R[R['Type'].isin(['Operation', 'Resource'])]
-        for unit in R['Unit'].unique():
+        for unit in list(R['Unit'].unique()):
             # Scale the construction metrics to be at the same order of magnitude as the operation and resource metrics
             lcia_op_max = R[(R['Type'].isin(['Operation', 'Resource'])) & (R['Unit'] == unit)]['Value'].max()
             lcia_constr_max = R[(R['Type'].isin(['Construction', 'Decommission'])) & (R['Unit'] == unit)]['Value'].max()
@@ -212,7 +219,7 @@ def normalize_lca_metrics(
             max_per_cat_dict = {}
             max_per_cat = R_scaled[['Abbrev', 'Unit', 'max_unit']].drop_duplicates().reset_index()
             R_scaled = contrib_processes[contrib_processes['Type'].isin(['Operation', 'Resource'])]
-            for unit in contrib_processes['Unit'].unique():
+            for unit in list(contrib_processes['Unit'].unique()):
                 # Scale the construction metrics to be at the same order of magnitude as the operation and resource metrics
                 R_constr_imp = contrib_processes[(contrib_processes['Type'].isin(['Construction', 'Decommission'])) & (contrib_processes['Unit'] == unit)]
                 R_constr_imp['Value'] *= refactor[unit]
@@ -231,6 +238,8 @@ def normalize_lca_metrics(
             R_scaled = pd.concat([R_scaled_op, R_scaled_constr])
         else:  # assessment_type == 'direct emissions'
             R_scaled['Value_norm'] = R_scaled['Value_norm'].apply(lambda x: 0 if abs(x) < mip_gap else x)
+
+    R_scaled.reset_index(drop=True, inplace=True)
 
     if (output == 'write') | (output == 'both'):
 
