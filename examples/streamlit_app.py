@@ -1,5 +1,4 @@
 import argparse
-from io import BytesIO
 from pathlib import Path
 import shutil
 import subprocess
@@ -35,66 +34,96 @@ def _parse_cli_args():
 
 
 def launch_streamlit_app(
-    impact_scores_path,
-    unit_conversion_path,
-    contrib_data_path=None,
-    contrib_data_path_processes=None,
-    contrib_data_path_emissions=None,
-    app_path="streamlit_app.py",
+    impact_scores_df: pd.DataFrame,
+    unit_conversion_df: pd.DataFrame,
+    contrib_df: pd.DataFrame = None,
+    contrib_processes_df: pd.DataFrame = None,
+    contrib_emissions_df: pd.DataFrame = None,
+    app_path: str = "streamlit_app.py",
 ):
+    """
+    Launch the Streamlit app from Python with DataFrames.
+
+    Since Streamlit runs as a subprocess, DataFrames are saved to temporary files
+    and paths are passed via CLI arguments.
+
+    :param impact_scores_df: DataFrame with impact scores
+    :param unit_conversion_df: DataFrame with unit conversions
+    :param contrib_df: Single contribution DataFrame (legacy, use processes/emissions instead)
+    :param contrib_processes_df: Contribution DataFrame for processes
+    :param contrib_emissions_df: Contribution DataFrame for emissions
+    :param app_path: Path to the Streamlit app file
+    """
+    temp_dir = Path("temp_streamlit")
+    temp_dir.mkdir(exist_ok=True)
+
     cmd = [
         "streamlit",
         "run",
         str(Path(app_path)),
         "--",
     ]
-    if contrib_data_path:
-        cmd.extend(["--contrib_data_path", str(contrib_data_path)])
-    if contrib_data_path_processes:
-        cmd.extend(["--contrib_data_path_processes", str(contrib_data_path_processes)])
-    if contrib_data_path_emissions:
-        cmd.extend(["--contrib_data_path_emissions", str(contrib_data_path_emissions)])
+
+    # Save DataFrames to temp files and build CLI args
+    if contrib_df is not None:
+        contrib_path = temp_dir / "contrib_data.csv"
+        contrib_df.to_csv(contrib_path, index=False)
+        cmd.extend(["--contrib_data_path", str(contrib_path)])
+    if contrib_processes_df is not None:
+        contrib_processes_path = temp_dir / "contrib_data_processes.csv"
+        contrib_processes_df.to_csv(contrib_processes_path, index=False)
+        cmd.extend(["--contrib_data_path_processes", str(contrib_processes_path)])
+    if contrib_emissions_df is not None:
+        contrib_emissions_path = temp_dir / "contrib_data_emissions.csv"
+        contrib_emissions_df.to_csv(contrib_emissions_path, index=False)
+        cmd.extend(["--contrib_data_path_emissions", str(contrib_emissions_path)])
+
+    impact_path = temp_dir / "impact_scores.csv"
+    unit_path = temp_dir / "unit_conversion.csv"
+    impact_scores_df.to_csv(impact_path, index=False)
+    unit_conversion_df.to_csv(unit_path, index=False)
+
     cmd.extend([
         "--impact_scores_path",
-        str(impact_scores_path),
+        str(impact_path),
         "--unit_conversion_path",
-        str(unit_conversion_path),
+        str(unit_path),
     ])
     subprocess.run(cmd, check=True)
 
 
 def run_contribution_analysis(
-    contrib_data_path,
-    impact_scores_path,
-    unit_conversion_path,
-    contribution_type,
-    output_dir,
-    export_excel=True,
-    impact_categories=None,
-    annot_fmt=".1%",
-    threshold=None,
-    cell_size=None,
-    dpi=None,
-):
+        contrib_df: pd.DataFrame,
+        impact_scores_df: pd.DataFrame,
+        unit_conversion_df: pd.DataFrame,
+        contribution_type: str,
+        saving_path: str,
+        export_excel: bool = True,
+        impact_categories_list: list[str] = None,
+        annot_fmt: str = ".1%",
+        threshold: float = None,
+        cell_size: float = None,
+        dpi: int = None,
+) -> tuple[pd.DataFrame, dict]:
     grouped_df, unit_type_groups_dict = process_contribution_data(
-        contrib_data_path=contrib_data_path,
-        impact_scores_path=impact_scores_path,
-        unit_conversion_path=unit_conversion_path,
+        contrib_df=contrib_df,
+        impact_scores_df=impact_scores_df,
+        unit_conversion_df=unit_conversion_df,
         contribution_type=contribution_type,
-        output_dir=output_dir,
+        saving_path=saving_path,
         export_excel=export_excel,
     )
 
     plot_kwargs = {
         "df": grouped_df,
         "unit_type_groups_dict": unit_type_groups_dict,
-        "output_dir": output_dir,
+        "saving_path": saving_path,
         "contribution_type": contribution_type,
         "annot_fmt": annot_fmt,
     }
 
-    if impact_categories:
-        plot_kwargs["impact_categories"] = impact_categories
+    if impact_categories_list:
+        plot_kwargs["impact_categories_list"] = impact_categories_list
     if threshold is not None:
         plot_kwargs["threshold"] = threshold
     if cell_size is not None:
@@ -179,8 +208,8 @@ if cli_paths_provided or (contrib_file and impact_scores_file and unit_conversio
                 contrib_path = Path(cli_args.contrib_data_path)
             impact_path = Path(cli_args.impact_scores_path)
             unit_path = Path(cli_args.unit_conversion_path)
-            output_dir = Path("temp_streamlit/output")
-            output_dir.mkdir(parents=True, exist_ok=True)
+            saving_path = Path("temp_streamlit/output")
+            saving_path.mkdir(parents=True, exist_ok=True)
         else:
             # Create temporary directory for uploaded files
             # Note: This folder will be deleted once the app is closed
@@ -190,7 +219,7 @@ if cli_paths_provided or (contrib_file and impact_scores_file and unit_conversio
             contrib_path = temp_dir / "contrib_data.csv"
             impact_path = temp_dir / "impact_scores.csv"
             unit_path = temp_dir / "unit_conversion.csv"
-            output_dir = temp_dir / "output"
+            saving_path = temp_dir / "output"
 
             with open(contrib_path, "wb") as f:
                 f.write(contrib_file.getbuffer())
@@ -200,11 +229,15 @@ if cli_paths_provided or (contrib_file and impact_scores_file and unit_conversio
                 f.write(unit_conversion_file.getbuffer())
 
         with st.spinner("Loading data..."):
-            header_df = pd.read_csv(contrib_path, nrows=1)
-            columns = set(header_df.columns)
+            # Load CSVs into DataFrames
+            contrib_df = pd.read_csv(contrib_path)
+            impact_scores_df = pd.read_csv(impact_path)
+            unit_conversion_df = pd.read_csv(unit_path)
 
-            processes_cols = {"process_name", "process_reference_product"}
-            emissions_cols = {"ef_name", "ef_categories"}
+            columns = set(contrib_df.columns)
+
+            processes_cols = {"process_name"}
+            emissions_cols = {"ef_name"}
 
             effective_contribution_type = contribution_type
             if contribution_type == "processes" and not processes_cols.issubset(columns):
@@ -223,11 +256,11 @@ if cli_paths_provided or (contrib_file and impact_scores_file and unit_conversio
                     raise KeyError(f"Missing required columns for emissions: {missing}")
 
             grouped_df, unit_type_groups_dict = process_contribution_data(
-                contrib_data_path=str(contrib_path),
-                impact_scores_path=str(impact_path),
-                unit_conversion_path=str(unit_path),
+                contrib_df=contrib_df,
+                impact_scores_df=impact_scores_df,
+                unit_conversion_df=unit_conversion_df,
                 contribution_type=effective_contribution_type,
-                output_dir=str(output_dir),
+                saving_path=str(saving_path),
                 export_excel=False,
             )
 
@@ -238,14 +271,14 @@ if cli_paths_provided or (contrib_file and impact_scores_file and unit_conversio
 
         with col_left:
             st.subheader("Select Impact Categories")
-            impact_categories = (
+            impact_categories_list = (
                 grouped_df["impact_category"].dropna().unique().tolist()
                 if "impact_category" in grouped_df.columns
                 else []
             )
             selected_impact = st.multiselect(
                 "Impact Categories (leave empty for all)",
-                options=impact_categories,
+                options=impact_categories_list,
                 default=[],
             )
 
@@ -271,17 +304,17 @@ if cli_paths_provided or (contrib_file and impact_scores_file and unit_conversio
 
             impact_categories_param = selected_impact if selected_impact else None
             act_types_param = selected_act_types if selected_act_types else None
-            esm_keys_param = selected_esm if selected_esm else None
+            esm_units_param = selected_esm if selected_esm else None
 
             filtered_df = grouped_df.copy()
             if impact_categories_param:
                 filtered_df = filtered_df[filtered_df["impact_category"].isin(impact_categories_param)]
             if act_types_param:
                 filtered_df = filtered_df[filtered_df["act_type"].isin(act_types_param)]
-            if esm_keys_param:
+            if esm_units_param:
                 allowed_act_types = act_types_param or filtered_df["act_type"].dropna().unique().tolist()
                 allowed_techs = set()
-                for esm in esm_keys_param:
+                for esm in esm_units_param:
                     for at in allowed_act_types:
                         allowed_techs.update(unit_type_groups_dict.get((esm, at), []))
                 if allowed_techs:
@@ -295,7 +328,7 @@ if cli_paths_provided or (contrib_file and impact_scores_file and unit_conversio
 
             export_clicked = st.button("Export data to Excel", width='stretch')
             if export_clicked:
-                export_dir = output_dir / "export"
+                export_dir = saving_path / "export"
                 export_dir.mkdir(parents=True, exist_ok=True)
 
                 detail_col = "process_name" if effective_contribution_type == "processes" else "ef_name"
@@ -305,7 +338,7 @@ if cli_paths_provided or (contrib_file and impact_scores_file and unit_conversio
                     key: val
                     for key, val in unit_type_groups_dict.items()
                     if key[1] in export_act_types
-                    and (esm_keys_param is None or key[0] in esm_keys_param)
+                    and (esm_units_param is None or key[0] in esm_units_param)
                 }
 
                 _export_comprehensive_excel(
@@ -336,24 +369,24 @@ if cli_paths_provided or (contrib_file and impact_scores_file and unit_conversio
             st.markdown("---")
             if st.button("🎨 Plotting contribution analysis", type="primary", width='stretch'):
                 with st.spinner("Running contribution analysis..."):
-                    if output_dir.exists():
-                        shutil.rmtree(output_dir)
-                    output_dir.mkdir(parents=True)
+                    if saving_path.exists():
+                        shutil.rmtree(saving_path)
+                    saving_path.mkdir(parents=True)
 
                     plot_kwargs = {
                         "df": grouped_df,
                         "unit_type_groups_dict": unit_type_groups_dict,
-                        "output_dir": str(output_dir),
+                        "saving_path": str(saving_path),
                         "contribution_type": effective_contribution_type,
                         "annot_fmt": annot_fmt,
                     }
 
                     if impact_categories_param:
-                        plot_kwargs["impact_categories"] = impact_categories_param
+                        plot_kwargs["impact_categories_list"] = impact_categories_param
                     if act_types_param:
                         plot_kwargs["act_types"] = act_types_param
-                    if esm_keys_param:
-                        plot_kwargs["esm_keys"] = esm_keys_param
+                    if esm_units_param:
+                        plot_kwargs["esm_units"] = esm_units_param
                     if threshold is not None:
                         plot_kwargs["threshold"] = threshold
                     if cell_size is not None:
@@ -366,7 +399,7 @@ if cli_paths_provided or (contrib_file and impact_scores_file and unit_conversio
                         plot_kwargs["dpi"] = dpi
 
                     plot_contribution_analysis(**plot_kwargs)
-                    plot_files = sorted(output_dir.rglob("*.png"))
+                    plot_files = sorted(saving_path.rglob("*.png"))
 
                 st.success("Analysis complete!")
 

@@ -53,53 +53,34 @@ class ABContributionAnalysis(ContributionAnalysis):
             return results[limit, :][::-1]  # drop items under limit and set correct order
         
 def process_contribution_data(
-    contrib_data_path: str,
-    impact_scores_path: str,
-    unit_conversion_path: str,
-    contribution_type: str = 'processes',
-    output_dir: str = None,
-    export_excel: bool = False,
-    act_types: list = ['Construction', 'Operation', 'Resource']
+        contrib_df: pd.DataFrame,
+        impact_scores_df: pd.DataFrame,
+        unit_conversion_df: pd.DataFrame,
+        contribution_type: str = 'processes',
+        saving_path: str = None,
+        export_excel: bool = False,
+        act_types: list[str] = None,
 ) -> tuple[pd.DataFrame, dict]:
     """
     Process contribution analysis data for environmental impacts.
-    
-    Parameters:
-    -----------
-    contrib_data_path : str
-        Path to contribution analysis CSV (processes or emissions)
-    impact_scores_path : str
-        Path to impact scores CSV
-    unit_conversion_path : str
-        Path to unit conversion CSV
-    contribution_type : str, default='processes'
-        Type of contribution analysis: 'processes' or 'emissions'
-    output_dir : str, optional
-        Output directory for Excel file (required if export_excel=True)
-    export_excel : bool, default=False
-        Whether to export comprehensive Excel file
-    act_types : list, default=['Construction', 'Operation', 'Resource']
-        List of activity types for Excel export
-        
-    Returns:
-    --------
-    tuple[pd.DataFrame, dict]
-        - Processed DataFrame with impact_share column
-        - Unit type groups dictionary
+
+    :param contrib_df: contribution analysis dataframe (processes or emissions)
+    :param impact_scores_df: impact scores dataframe with total impacts
+    :param unit_conversion_df: unit conversion dataframe
+    :param contribution_type: Type of contribution analysis: 'processes' or 'emissions'
+    :param saving_path: Output directory for Excel file (required if export_excel=True)
+    :param export_excel: Whether to export comprehensive Excel file
+    :param act_types: List of activity types for Excel export
+    :return: Processed DataFrame with impact_share column, Unit type groups dictionary
     """
     # Define column mappings based on contribution type
     detail_col = 'process_name' if contribution_type == 'processes' else 'ef_name'
-    extra_cols = ['process_reference_product'] if contribution_type == 'processes' else ['ef_categories']
     
     if contribution_type not in ['processes', 'emissions']:
         raise ValueError("contribution_type must be 'processes' or 'emissions'")
     
-    # Load data
-    contrib_df = pd.read_csv(contrib_data_path)
-    impact_scores_df = pd.read_csv(impact_scores_path)
-    
     # Filter and prepare contribution data
-    contrib_df = contrib_df[['act_name', 'impact_category', 'score', 'act_type', detail_col] + extra_cols]
+    contrib_df = contrib_df[['act_name', 'impact_category', 'score', 'act_type', detail_col]]
     
     # Rename columns for merge
     impact_scores_df = impact_scores_df.rename(columns={
@@ -155,7 +136,6 @@ def process_contribution_data(
         grouped_df = pd.concat([grouped_df, pd.DataFrame(Others_rows)], ignore_index=True)
     
     # Load unit conversion mapping
-    unit_conversion_df = pd.read_csv(unit_conversion_path)
     unit_conversion_df = unit_conversion_df[
         (unit_conversion_df['ESM'] != 'unit') &
         (unit_conversion_df['Type'] != 'Other') &
@@ -169,16 +149,16 @@ def process_contribution_data(
     
     # Export to Excel if requested
     if export_excel:
-        if output_dir is None:
-            raise ValueError("output_dir must be provided when export_excel=True")
+        if saving_path is None:
+            raise ValueError("saving_path must be provided when export_excel=True")
         
         if act_types is None:
-            act_types = ['Construction', 'Operation', 'Resource']
+            act_types = ['Construction', 'Decommission', 'Operation', 'Resource']
         
         _export_comprehensive_excel(
             grouped_df, 
             unit_type_groups_dict, 
-            output_dir, 
+            saving_path,
             act_types,
             contribution_type,
             detail_col
@@ -186,12 +166,26 @@ def process_contribution_data(
     
     return grouped_df, unit_type_groups_dict
 
-def _export_comprehensive_excel(df, unit_type_groups_dict, output_dir, act_types, contribution_type, detail_col):
+def _export_comprehensive_excel(
+        df: pd.DataFrame,
+        unit_type_groups_dict: dict,
+        saving_path: str,
+        act_types: list[str],
+        contribution_type: str,
+        detail_col: str,
+) -> None:
     """
     Internal function to export comprehensive Excel file.
-    """
 
-    os.makedirs(output_dir, exist_ok=True)
+    :param df: DataFrame with contribution analysis results
+    :param unit_type_groups_dict: Dictionary mapping (ESM, Type) to list of technology names
+    :param saving_path: Output directory for Excel file
+    :param act_types: List of activity types to include in Excel export
+    :param contribution_type: Type of contribution analysis: 'processes' or 'emissions'
+    :param detail_col: Column name for process or emission details ('process_name' or 'ef_name')
+    :return: None
+    """
+    os.makedirs(saving_path, exist_ok=True)
     
     # Set filename based on contribution type
     if contribution_type == 'processes':
@@ -199,7 +193,7 @@ def _export_comprehensive_excel(df, unit_type_groups_dict, output_dir, act_types
     else:
         filename = 'contribution_analysis_emissions_results.xlsx'
     
-    output_path = os.path.join(output_dir, filename)
+    output_path = os.path.join(saving_path, filename)
     
     impact_categories = df['impact_category'].unique().tolist()
     
@@ -280,4 +274,3 @@ def _export_comprehensive_excel(df, unit_type_groups_dict, output_dir, act_types
     
     print(f"Comprehensive Excel saved to: {output_path}")
     print(f"Created {len(impact_categories)} sheets")
-

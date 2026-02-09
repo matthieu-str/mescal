@@ -793,49 +793,41 @@ class Plot:
 
 
 def plot_contribution_analysis(
-    df: pd.DataFrame,
-    unit_type_groups_dict: dict,
-    output_dir: str,
-    contribution_type: str = 'processes',
-    impact_categories: list = None,
-    act_types: list = ['Construction', 'Operation', 'Resource'],
-    esm_keys: list = None,
-    threshold: float = 0.05,
-    cell_size: float = 0.8,
-    min_fig_width: float = 10,
-    min_fig_height: float = 6,
-    dpi: int = 300,
-    annot_fmt: str = '.1%'
-):
+        df: pd.DataFrame,
+        unit_type_groups_dict: dict,
+        contribution_type: str = 'processes',
+        impact_categories_list: list[str] = None,
+        act_types: list[str] = None,
+        saving_path: str = None,
+        saving_format: str = 'png',
+        show_plot: bool = False,
+        esm_units: list[str] = None,
+        threshold: float = 0.05,
+        cell_size: float = 0.8,
+        min_fig_width: float = 10,
+        min_fig_height: float = 6,
+        dpi: int = 300,
+        annot_fmt: str = '.1%'
+) -> None:
     """
-    Generate heatmap visualizations for contribution analysis.
-    
-    Parameters:
-    -----------
-    df : pd.DataFrame
-        Processed contribution data with impact_share column
-    unit_type_groups_dict : dict
-        Mapping of (ESM, Type) to technology names
-    output_dir : str
-        Output directory for saving plots
-    contribution_type : str, default='processes'
-        Type of contribution analysis: 'processes' or 'emissions'
-    impact_categories : list, optional
-        List of impact categories to plot. If None, plots all categories.
-    act_types : list, default=['Construction', 'Operation', 'Resource']
-        List of activity types
-    threshold : float, default=0.05
-        Threshold for grouping small contributions into 'Others'
-    cell_size : float, default=0.8
-        Size per cell in inches for figure sizing
-    min_fig_width : float, default=10
-        Minimum figure width in inches
-    min_fig_height : float, default=6
-        Minimum figure height in inches
-    dpi : int, default=300
-        Resolution for saved figures
-    annot_fmt : str, default='.1%'
-        Format string for heatmap annotations
+    Generate heatmap visualizations for contribution analysis
+
+    :param df: Processed contribution data with impact_share column
+    :param unit_type_groups_dict: Mapping of (ESM, Type) to technology names
+    :param contribution_type: Type of contribution analysis: 'processes' or 'emissions'
+    :param impact_categories_list: List of impact categories to plot. If None, plots all categories.
+    :param act_types: List of activity types. If None, includes all types present in the data.
+    :param saving_path: Output directory for saving plots. If None, plots are not saved.
+    :param saving_format: Format for saved plots (e.g., 'png', 'pdf')
+    :param show_plot: Whether to display plots in the notebook
+    :param esm_units: List of ESM units to include. If None, includes all available units.
+    :param threshold: Threshold for grouping small contributions into 'Others'
+    :param cell_size: Size per cell in inches for figure sizing
+    :param min_fig_width: Minimum figure width in inches
+    :param min_fig_height: Minimum figure height in inches
+    :param dpi: Resolution for saved figures
+    :param annot_fmt: Format string for heatmap annotations
+    :return: None (plots are shown and/or saved)
     """
     # Define column name and folder based on contribution type
     detail_col = 'process_name' if contribution_type == 'processes' else 'ef_name'
@@ -844,18 +836,24 @@ def plot_contribution_analysis(
     
     if contribution_type not in ['processes', 'emissions']:
         raise ValueError("contribution_type must be 'processes' or 'emissions'")
-    
-    impact_categories = impact_categories or df['impact_category'].unique().tolist()
-    
-    os.makedirs(output_dir, exist_ok=True)
-    
+
+    impact_categories = impact_categories_list or df['impact_category'].unique().tolist()
+
+    df['impact_category'] = df['impact_category'].astype(str)  # Ensure impact_category is string for consistent processing
+
+    if saving_path is not None:
+        os.makedirs(saving_path, exist_ok=True)
+
+    if act_types is None:
+        act_types = ['Operation', 'Construction', 'Decommission', 'Resource']
+
     # Get unique ESM keys
-    all_esm_keys = sorted(set(esm for esm, typ in unit_type_groups_dict.keys() if typ in act_types))
-    if esm_keys is None:
-        esm_keys = all_esm_keys
+    all_esm_units = sorted(set(esm for esm, typ in unit_type_groups_dict.keys() if typ in act_types))
+    if esm_units is None:
+        esm_units = all_esm_units
     else:
-        esm_keys = [esm for esm in esm_keys if esm in all_esm_keys]
-    
+        esm_units = [esm for esm in esm_units if esm in all_esm_units]
+
     for impact_category in impact_categories:
         df_cat = df[df['impact_category'] == impact_category].copy()
         
@@ -876,12 +874,15 @@ def plot_contribution_analysis(
         
         # Create nested folder structure
         safe_impact = str(impact_category).replace('/', '_').replace(':', '_').replace(' ', '_').replace('(', '').replace(')', '').replace(',', '_').replace("'", "")
-        impact_output_dir = os.path.join(output_dir, folder_name, safe_impact)
-        os.makedirs(impact_output_dir, exist_ok=True)
-        
+        impact_output_dir = None
+
+        if saving_path is not None:
+            impact_output_dir = os.path.join(saving_path, folder_name, safe_impact)
+            os.makedirs(impact_output_dir, exist_ok=True)
+
         # Generate plots for each (act_type, esm) combination
         for at in act_types:
-            for esm in esm_keys:
+            for esm in esm_units:
                 tech_names = unit_type_groups_dict.get((esm, at), [])
                 sub = df_cat[(df_cat['act_type'] == at) & (df_cat['act_name'].isin(tech_names))]
                 
@@ -922,8 +923,13 @@ def plot_contribution_analysis(
                 ax.set_title(f"{at} - {esm}\n{impact_category}", fontsize=14, pad=10)
                 
                 plt.tight_layout()
-                
-                # Save figure
-                filename = f"{at}_{esm}.png"
-                plt.savefig(os.path.join(impact_output_dir, filename), bbox_inches='tight', dpi=dpi)
+
+                if saving_path is not None:
+                    # Save figure
+                    filename = f"{at}_{esm}.{saving_format}"
+                    plt.savefig(os.path.join(impact_output_dir, filename), bbox_inches='tight', dpi=dpi)
+
+                if show_plot:
+                    plt.show()
+
                 plt.close()
