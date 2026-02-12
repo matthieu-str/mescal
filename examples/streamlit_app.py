@@ -173,6 +173,7 @@ with st.sidebar:
         "Contribution Type",
         options=available_types,
         index=0,
+        format_func=str.capitalize,
     )
 
     st.markdown("---")
@@ -266,150 +267,147 @@ if cli_paths_provided or (contrib_file and impact_scores_file and unit_conversio
 
         st.success("Data loaded successfully!")
 
-        col_left, col_right = st.columns([1, 2], gap="large")
+        st.subheader("Select Impact Categories")
+        impact_categories_list = (
+            grouped_df["impact_category"].dropna().unique().tolist()
+            if "impact_category" in grouped_df.columns
+            else []
+        )
+        selected_impact = st.multiselect(
+            "Impact Categories (leave empty for all)",
+            options=impact_categories_list,
+            default=[],
+        )
+
+        st.subheader("Select Activity Types")
+        act_type_options = (
+            grouped_df["act_type"].dropna().unique().tolist()
+            if "act_type" in grouped_df.columns
+            else []
+        )
+        selected_act_types = st.multiselect(
+            "Activity Types (leave empty for all)",
+            options=act_type_options,
+            default=[],
+        )
+
+        st.subheader("Select ESM Units")
+        esm_options = sorted({esm for esm, _ in unit_type_groups_dict.keys()})
+        selected_esm = st.multiselect(
+            "ESM Units (leave empty for all)",
+            options=esm_options,
+            default=[],
+        )
+
+        impact_categories_param = selected_impact if selected_impact else None
+        act_types_param = selected_act_types if selected_act_types else None
+        esm_units_param = selected_esm if selected_esm else None
+
+        filtered_df = grouped_df.copy()
+        if impact_categories_param:
+            filtered_df = filtered_df[filtered_df["impact_category"].isin(impact_categories_param)]
+        if act_types_param:
+            filtered_df = filtered_df[filtered_df["act_type"].isin(act_types_param)]
+        if esm_units_param:
+            allowed_act_types = act_types_param or filtered_df["act_type"].dropna().unique().tolist()
+            allowed_techs = set()
+            for esm in esm_units_param:
+                for at in allowed_act_types:
+                    allowed_techs.update(unit_type_groups_dict.get((esm, at), []))
+            if allowed_techs:
+                filtered_df = filtered_df[filtered_df["act_name"].isin(allowed_techs)]
+            else:
+                filtered_df = filtered_df.iloc[0:0]
+
+        st.markdown("---")
+        st.subheader("Data Preview")
+        st.dataframe(filtered_df.head(20), width='stretch')
+
+        export_clicked = st.button("Export data to Excel", width='stretch')
+        if export_clicked:
+            export_dir = saving_path / "export"
+            export_dir.mkdir(parents=True, exist_ok=True)
+
+            detail_col = "process_name" if effective_contribution_type == "processes" else "ef_name"
+            export_act_types = act_types_param or ["Construction", "Operation", "Resource"]
+
+            export_unit_type_groups_dict = {
+                key: val
+                for key, val in unit_type_groups_dict.items()
+                if key[1] in export_act_types
+                and (esm_units_param is None or key[0] in esm_units_param)
+            }
+
+            _export_comprehensive_excel(
+                filtered_df,
+                export_unit_type_groups_dict,
+                str(export_dir),
+                export_act_types,
+                effective_contribution_type,
+                detail_col,
+            )
+
+            if effective_contribution_type == "processes":
+                export_name = "contribution_analysis_processes_results.xlsx"
+            else:
+                export_name = "contribution_analysis_emissions_results.xlsx"
+            export_path = export_dir / export_name
+
+            if export_path.exists():
+                with open(export_path, "rb") as f:
+                    st.download_button(
+                        label="Download Excel",
+                        data=f,
+                        file_name=export_name,
+                        mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                        width='stretch',
+                    )
+
+        st.markdown("---")
         plot_files = []
+        if st.button("🎨 Plotting contribution analysis", type="primary", width='stretch'):
+            with st.spinner("Running contribution analysis..."):
+                if saving_path.exists():
+                    shutil.rmtree(saving_path)
+                saving_path.mkdir(parents=True)
 
-        with col_left:
-            st.subheader("Select Impact Categories")
-            impact_categories_list = (
-                grouped_df["impact_category"].dropna().unique().tolist()
-                if "impact_category" in grouped_df.columns
-                else []
-            )
-            selected_impact = st.multiselect(
-                "Impact Categories (leave empty for all)",
-                options=impact_categories_list,
-                default=[],
-            )
-
-            st.subheader("Select Activity Types")
-            act_type_options = (
-                grouped_df["act_type"].dropna().unique().tolist()
-                if "act_type" in grouped_df.columns
-                else []
-            )
-            selected_act_types = st.multiselect(
-                "Activity Types (leave empty for all)",
-                options=act_type_options,
-                default=[],
-            )
-
-            st.subheader("Select ESM Units")
-            esm_options = sorted({esm for esm, _ in unit_type_groups_dict.keys()})
-            selected_esm = st.multiselect(
-                "ESM Units (leave empty for all)",
-                options=esm_options,
-                default=[],
-            )
-
-            impact_categories_param = selected_impact if selected_impact else None
-            act_types_param = selected_act_types if selected_act_types else None
-            esm_units_param = selected_esm if selected_esm else None
-
-            filtered_df = grouped_df.copy()
-            if impact_categories_param:
-                filtered_df = filtered_df[filtered_df["impact_category"].isin(impact_categories_param)]
-            if act_types_param:
-                filtered_df = filtered_df[filtered_df["act_type"].isin(act_types_param)]
-            if esm_units_param:
-                allowed_act_types = act_types_param or filtered_df["act_type"].dropna().unique().tolist()
-                allowed_techs = set()
-                for esm in esm_units_param:
-                    for at in allowed_act_types:
-                        allowed_techs.update(unit_type_groups_dict.get((esm, at), []))
-                if allowed_techs:
-                    filtered_df = filtered_df[filtered_df["act_name"].isin(allowed_techs)]
-                else:
-                    filtered_df = filtered_df.iloc[0:0]
-
-            st.markdown("---")
-            st.subheader("Data Preview")
-            st.dataframe(filtered_df.head(20), width='stretch')
-
-            export_clicked = st.button("Export data to Excel", width='stretch')
-            if export_clicked:
-                export_dir = saving_path / "export"
-                export_dir.mkdir(parents=True, exist_ok=True)
-
-                detail_col = "process_name" if effective_contribution_type == "processes" else "ef_name"
-                export_act_types = act_types_param or ["Construction", "Operation", "Resource"]
-
-                export_unit_type_groups_dict = {
-                    key: val
-                    for key, val in unit_type_groups_dict.items()
-                    if key[1] in export_act_types
-                    and (esm_units_param is None or key[0] in esm_units_param)
+                plot_kwargs = {
+                    "df": grouped_df,
+                    "unit_type_groups_dict": unit_type_groups_dict,
+                    "saving_path": str(saving_path),
+                    "contribution_type": effective_contribution_type,
+                    "annot_fmt": annot_fmt,
                 }
 
-                _export_comprehensive_excel(
-                    filtered_df,
-                    export_unit_type_groups_dict,
-                    str(export_dir),
-                    export_act_types,
-                    effective_contribution_type,
-                    detail_col,
-                )
+                if impact_categories_param:
+                    plot_kwargs["impact_categories_list"] = impact_categories_param
+                if act_types_param:
+                    plot_kwargs["act_types"] = act_types_param
+                if esm_units_param:
+                    plot_kwargs["esm_units"] = esm_units_param
+                if threshold is not None:
+                    plot_kwargs["threshold"] = threshold
+                if cell_size is not None:
+                    plot_kwargs["cell_size"] = cell_size
+                if min_fig_width is not None:
+                    plot_kwargs["min_fig_width"] = min_fig_width
+                if min_fig_height is not None:
+                    plot_kwargs["min_fig_height"] = min_fig_height
+                if dpi is not None:
+                    plot_kwargs["dpi"] = dpi
 
-                if effective_contribution_type == "processes":
-                    export_name = "contribution_analysis_processes_results.xlsx"
-                else:
-                    export_name = "contribution_analysis_emissions_results.xlsx"
-                export_path = export_dir / export_name
+                plot_contribution_analysis(**plot_kwargs)
+                plot_files = sorted(saving_path.rglob("*.png"))
 
-                if export_path.exists():
-                    with open(export_path, "rb") as f:
-                        st.download_button(
-                            label="Download Excel",
-                            data=f,
-                            file_name=export_name,
-                            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-                            width='stretch',
-                        )
+            st.success("Analysis complete!")
 
-            st.markdown("---")
-            if st.button("🎨 Plotting contribution analysis", type="primary", width='stretch'):
-                with st.spinner("Running contribution analysis..."):
-                    if saving_path.exists():
-                        shutil.rmtree(saving_path)
-                    saving_path.mkdir(parents=True)
-
-                    plot_kwargs = {
-                        "df": grouped_df,
-                        "unit_type_groups_dict": unit_type_groups_dict,
-                        "saving_path": str(saving_path),
-                        "contribution_type": effective_contribution_type,
-                        "annot_fmt": annot_fmt,
-                    }
-
-                    if impact_categories_param:
-                        plot_kwargs["impact_categories_list"] = impact_categories_param
-                    if act_types_param:
-                        plot_kwargs["act_types"] = act_types_param
-                    if esm_units_param:
-                        plot_kwargs["esm_units"] = esm_units_param
-                    if threshold is not None:
-                        plot_kwargs["threshold"] = threshold
-                    if cell_size is not None:
-                        plot_kwargs["cell_size"] = cell_size
-                    if min_fig_width is not None:
-                        plot_kwargs["min_fig_width"] = min_fig_width
-                    if min_fig_height is not None:
-                        plot_kwargs["min_fig_height"] = min_fig_height
-                    if dpi is not None:
-                        plot_kwargs["dpi"] = dpi
-
-                    plot_contribution_analysis(**plot_kwargs)
-                    plot_files = sorted(saving_path.rglob("*.png"))
-
-                st.success("Analysis complete!")
-
-        with col_right:
-            st.subheader("Generated Plots")
-            if plot_files:
-                for plot_file in plot_files:
-                    st.image(str(plot_file), caption=plot_file.name, width='stretch')
-            else:
-                st.info("Run the plotting to display figures here.")
+        st.markdown("---")
+        st.subheader("Generated Plots")
+        if plot_files:
+            for plot_file in plot_files:
+                st.image(str(plot_file), caption=plot_file.name, width='stretch')
+        else:
+            st.info("Run the plotting to display figures here.")
 
     except Exception as e:
         st.error(f"❌ Error: {str(e)}")
