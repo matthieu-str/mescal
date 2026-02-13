@@ -45,10 +45,12 @@ hidden:
 maxdepth: 1
 ---
 self
-examples/tutorial.ipynb
+content/setup
+content/user_inputs
+examples/tutorial_quick.ipynb
+examples/tutorial_advanced.ipynb
 content/methods
 content/glossary
-content/user_inputs
 content/api/index
 content/codeofconduct
 content/contributing
