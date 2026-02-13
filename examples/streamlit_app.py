@@ -2,9 +2,12 @@ import argparse
 from pathlib import Path
 import shutil
 import subprocess
+import io
 
 import pandas as pd
 import streamlit as st
+import matplotlib.pyplot as plt
+from PIL import Image
 
 from mescal.contribution_analysis import process_contribution_data, _export_comprehensive_excel
 from mescal.plot import plot_contribution_analysis
@@ -364,7 +367,11 @@ if cli_paths_provided or (contrib_file and impact_scores_file and unit_conversio
                     )
 
         st.markdown("---")
-        plot_files = []
+        
+        # Initialize session state for plot files
+        if 'plot_files' not in st.session_state:
+            st.session_state.plot_files = []
+        
         if st.button("🎨 Plotting contribution analysis", type="primary", width='stretch'):
             with st.spinner("Running contribution analysis..."):
                 if saving_path.exists():
@@ -397,15 +404,67 @@ if cli_paths_provided or (contrib_file and impact_scores_file and unit_conversio
                     plot_kwargs["dpi"] = dpi
 
                 plot_contribution_analysis(**plot_kwargs)
-                plot_files = sorted(saving_path.rglob("*.png"))
+                st.session_state.plot_files = sorted(saving_path.rglob("*.png"))
 
             st.success("Analysis complete!")
 
         st.markdown("---")
         st.subheader("Generated Plots")
-        if plot_files:
-            for plot_file in plot_files:
+        if st.session_state.plot_files:
+            for plot_file in st.session_state.plot_files:
                 st.image(str(plot_file), caption=plot_file.name, width='stretch')
+                
+                # Download section for each plot
+                col1, col2 = st.columns([2, 1])
+                with col1:
+                    download_format = st.selectbox(
+                        "Select download format:",
+                        options=["PNG", "PDF", "JPG"],
+                        index=0,
+                        key=f"format_{plot_file.name}"
+                    )
+                with col2:
+                    st.write("")  # Spacer
+                    st.write("")  # Spacer to align with selectbox
+                
+                # Create buffer and convert image if needed
+                buf = io.BytesIO()
+                
+                if download_format.lower() == "png":
+                    # Direct copy for PNG
+                    with open(plot_file, "rb") as f:
+                        buf.write(f.read())
+                else:
+                    # Convert to other formats
+                    img = Image.open(plot_file)
+                    if download_format.lower() == "jpg":
+                        # Convert RGBA to RGB for JPG
+                        if img.mode == "RGBA":
+                            rgb_img = Image.new("RGB", img.size, (255, 255, 255))
+                            rgb_img.paste(img, mask=img.split()[3])
+                            img = rgb_img
+                        img.save(buf, format="JPEG", quality=95)
+                    elif download_format.lower() == "pdf":
+                        # Convert RGBA to RGB for PDF
+                        if img.mode == "RGBA":
+                            rgb_img = Image.new("RGB", img.size, (255, 255, 255))
+                            rgb_img.paste(img, mask=img.split()[3])
+                            img = rgb_img
+                        img.save(buf, format="PDF", resolution=300.0)
+                
+                buf.seek(0)
+                
+                # Download button
+                file_base_name = plot_file.stem
+                st.download_button(
+                    label=f"📥 Download as {download_format}",
+                    data=buf,
+                    file_name=f"{file_base_name}.{download_format.lower()}",
+                    mime=f"image/{download_format.lower()}" if download_format.lower() != "svg" else "image/svg+xml",
+                    key=f"download_{plot_file.name}"
+                )
+                
+                st.markdown("---")
         else:
             st.info("Run the plotting to display figures here.")
 
