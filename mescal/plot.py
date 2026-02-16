@@ -91,8 +91,8 @@ class Plot:
             else:
                 unit = 'impact unit'
                 print('Please set the current brightway project to one where the impact category is present or provide '
-                        'a physical unit to the impact category in the metadata dictionary by filling the '
-                        '"impact_category_unit" key.')
+                      'a physical unit to the impact category in the metadata dictionary by filling the '
+                      '"impact_category_unit" key.')
 
         impact_category_name = impact_category[-1]
 
@@ -272,8 +272,8 @@ class Plot:
             else:
                 unit = 'impact unit'
                 print('Please set the current brightway project to one where the impact category is present or provide '
-                        'a physical unit to the impact category in the metadata dictionary by filling the '
-                        '"impact_category_unit" key.')
+                       'a physical unit to the impact category in the metadata dictionary by filling the '
+                       '"impact_category_unit" key.')
 
         impact_category_name = impact_category[-1]
 
@@ -391,7 +391,7 @@ class Plot:
 
         if impact_categories_list is None and impact_categories_units is None:
             raise ValueError('Please provide either a list of impact categories or a dictionary with impact categories '
-                                'and their physical units')
+                             'and their physical units')
 
         if impact_categories_list is None and impact_categories_units is not None:
             impact_categories_list = list(impact_categories_units.keys())
@@ -419,7 +419,7 @@ class Plot:
                     unit = 'impact unit'
                     if i == 0:
                         print('Please set the current brightway project to one where the impact categories are present'
-                                ' or provide physical units in the impact_categories_units dictionary.')
+                              ' or provide physical units in the impact_categories_units dictionary.')
 
             df_op = R[
                 (R['Name'].isin(technologies_list))
@@ -536,7 +536,7 @@ class Plot:
 
         if impact_categories_list is None and impact_categories_units is None:
             raise ValueError('Please provide either a list of impact categories or a dictionary with impact categories '
-                                'and their physical units')
+                             'and their physical units')
 
         if impact_categories_list is None and impact_categories_units is not None:
             impact_categories_list = list(impact_categories_units.keys())
@@ -561,7 +561,7 @@ class Plot:
                     unit = 'impact unit'
                     if impact_category == impact_categories_list[0]:
                         print('Please set the current brightway project to one where the impact categories are present '
-                                'or provide physical units in the impact_categories_units dictionary.')
+                              'or provide physical units in the impact_categories_units dictionary.')
 
             df = R[(R['Name'].isin(resources_list)) & (R['Impact_category'] == str(impact_category))]
 
@@ -641,7 +641,7 @@ class Plot:
             esm_results_res = self.esm_results_res
         else:
             raise ValueError('ESM results are needed to plot the results: please provide the esm_results_tech and '
-                                'esm_results_res dataframes')
+                             'esm_results_res dataframes')
 
         if saving_path is None:
             saving_path = ''
@@ -654,7 +654,7 @@ class Plot:
 
         if impact_categories_list is None and impact_categories_units is None:
             raise ValueError('Please provide either a list of impact categories or a dictionary with impact categories '
-                                'and their physical units')
+                             'and their physical units')
 
         if impact_categories_list is None and impact_categories_units is not None:
             impact_categories_list = list(impact_categories_units.keys())
@@ -678,8 +678,8 @@ class Plot:
                         impact_categories_names[str(cat)]['unit'] = 'impact unit'
                         if cat == impact_categories_list[0]:
                             print('Please set the current brightway project to one where impact categories are present '
-                                    'or provide physical units to the impact category in the impact_categories_units '
-                                    'dictionary.')
+                                  'or provide physical units to the impact category in the impact_categories_units '
+                                  'dictionary.')
 
         R = R[R['Impact_category'].isin([str(cat) for cat in impact_categories_list])]
 
@@ -688,11 +688,11 @@ class Plot:
         esm_results_res = esm_results_res[esm_results_res['Run'] == n_run]
 
         df_constr = R[R.Type == 'Construction'].merge(esm_results_tech[['Name', 'Capacity']],
-                                                        on=['Name'], how='left')
+                                                      on=['Name'], how='left')
         df_op = R[R.Type == 'Operation'].merge(esm_results_tech[['Name', 'Production']], on=['Name'], how='left')
         df_res = R[R.Type == 'Resource'].merge(esm_results_res[['Name', 'Import']], on=['Name'], how='left')
         df_decom = R[R.Type == 'Decommission'].merge(esm_results_tech[['Name', 'Capacity']],
-                                                        on=['Name'], how='left').fillna(0)
+                                                     on=['Name'], how='left').fillna(0)
 
         if self.lifetime is not None:
             # The construction impacts are divided by the lifetime to get the annual impact
