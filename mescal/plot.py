@@ -272,8 +272,8 @@ class Plot:
             else:
                 unit = 'impact unit'
                 print('Please set the current brightway project to one where the impact category is present or provide '
-                       'a physical unit to the impact category in the metadata dictionary by filling the '
-                       '"impact_category_unit" key.')
+                      'a physical unit to the impact category in the metadata dictionary by filling the '
+                      '"impact_category_unit" key.')
 
         impact_category_name = impact_category[-1]
 
