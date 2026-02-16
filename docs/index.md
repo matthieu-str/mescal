@@ -35,9 +35,10 @@ $ pip install mescal pypardiso
 
 We recommend installing the optional package `pypardiso` to speed up matrix calculations.
 
-## Main contributor
+## Main contributors
 
 - [Matthieu Souttre](https://github.com/matthieu-str)
+- [Arthur Chuat](https://github.com/ArthurChuat)
 
 ```{toctree}
 ---
