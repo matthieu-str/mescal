@@ -90,7 +90,7 @@ def generate_mod_file_ampl(
                 f.write(f'param {metric_type.lower()}_constr {{INDICATORS,TECHNOLOGIES,YEARS}} default 0;\n'
                         f'param {metric_type.lower()}_decom {{INDICATORS,TECHNOLOGIES,YEARS}} default 0;\n'
                         f'param {metric_type.lower()}_res {{INDICATORS,RESOURCES,YEARS}} default 0;\n'
-                        f'param limit_{metric_type.lower()} {{INDICATORS,YEARS}} default 1e10;\n'
+                        f'param limit_{metric_type.lower()} {{INDICATORS,YEARS}} default Infinity;\n'
                         f'var {metric_type}_constr {{INDICATORS,TECHNOLOGIES,YEARS}};\n'
                         f'var {metric_type}_decom {{INDICATORS,TECHNOLOGIES,YEARS}};\n'
                         f'var {metric_type}_op {{INDICATORS,TECHNOLOGIES,YEARS}};\n'
@@ -102,13 +102,13 @@ def generate_mod_file_ampl(
                     f.write('param direct_op {INDICATORS,TECHNOLOGIES,YEARS,YEARS} default 0;\n')
                 else:
                     f.write('param direct_op {INDICATORS,TECHNOLOGIES,YEARS} default 0;\n')
-                f.write('param limit_direct {INDICATORS,YEARS} default 1e10;\n'
+                f.write('param limit_direct {INDICATORS,YEARS} default Infinity;\n'
                         'var DIRECT_op {INDICATORS,TECHNOLOGIES,YEARS};\n'
                         'var TotalDIRECT {INDICATORS,YEARS};\n\n')
 
             if assessment_type == 'territorial emissions':
                 # Abroad emissions parameters and variables
-                f.write('param limit_abroad {INDICATORS,YEARS} default 1e10;\n'
+                f.write('param limit_abroad {INDICATORS,YEARS} default Infinity;\n'
                         'var ABROAD_constr {INDICATORS,TECHNOLOGIES,YEARS};\n'
                         'var ABROAD_decom {INDICATORS,TECHNOLOGIES,YEARS};\n'
                         'var ABROAD_op {INDICATORS,TECHNOLOGIES,YEARS};\n'
@@ -194,7 +194,7 @@ def generate_mod_file_ampl(
                         f'param {metric_type.lower()}_decom {{INDICATORS,TECHNOLOGIES}} default 0;\n'
                         f'param {metric_type.lower()}_op {{INDICATORS,TECHNOLOGIES}} default 0;\n'
                         f'param {metric_type.lower()}_res {{INDICATORS,RESOURCES}} default 0;\n'
-                        f'param limit_{metric_type.lower()} {{INDICATORS}} default 1e10;\n'
+                        f'param limit_{metric_type.lower()} {{INDICATORS}} default Infinity;\n'
                         f'var {metric_type}_constr {{INDICATORS,TECHNOLOGIES}};\n'
                         f'var {metric_type}_decom {{INDICATORS,TECHNOLOGIES}};\n'
                         f'var {metric_type}_op {{INDICATORS,TECHNOLOGIES}};\n'
@@ -203,13 +203,13 @@ def generate_mod_file_ampl(
 
             elif assessment_type == 'direct emissions':
                 f.write('param direct_op {INDICATORS,TECHNOLOGIES} default 0;\n'
-                        'param limit_direct {INDICATORS} default 1e10;\n'
+                        'param limit_direct {INDICATORS} default Infinity;\n'
                         'var DIRECT_op {INDICATORS,TECHNOLOGIES};\n'
                         'var TotalDIRECT {INDICATORS};\n\n')
 
             if assessment_type == 'territorial emissions':
                 # Abroad emissions parameters and variables
-                f.write('param limit_abroad {INDICATORS} default 1e10;\n'
+                f.write('param limit_abroad {INDICATORS} default Infinity;\n'
                         'var ABROAD_constr {INDICATORS,TECHNOLOGIES};\n'
                         'var ABROAD_decom {INDICATORS,TECHNOLOGIES};\n'
                         'var ABROAD_op {INDICATORS,TECHNOLOGIES};\n'
