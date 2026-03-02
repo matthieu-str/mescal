@@ -1,7 +1,7 @@
 # Glossary
 
 This glossary aims to clarify the terminology used in the method section of the present documentation, as well as the 
-articles related to `mescal`. 
+articles related to _mescal_. 
 
 ## LCA
 

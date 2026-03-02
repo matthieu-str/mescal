@@ -2,7 +2,7 @@
 
 You can download the different files by clicking the download button below, or suggest edits by filling in a form.
 
-For any question or remark about this data, please contact the maintainers of mescal (for example, matthieu.souttre@polymtl.ca). 
+For any question or remark about this data, please contact the maintainers of _mescal_ (for example, matthieu.souttre@polymtl.ca). 
 
 ## Mapping between ESM technologies and LCI datasets
 

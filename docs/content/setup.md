@@ -1,8 +1,8 @@
 # Setup
 
-This guide walks you through setting up your Brightway project using Activity Browser, preparing it for use with Mescal. We provide Jupyter notebooks for each step, available on the [Mescal GitHub repository](https://github.com/matthieu-str/mescal/tree/master/dev).
+This guide walks you through setting up your Brightway project using Activity Browser, preparing it for use with _mescal_. We provide Jupyter notebooks for each step, available on the [_mescal_ GitHub repository](https://github.com/matthieu-str/mescal/tree/master/dev).
 
-> **Questions or issues?** Please file an [issue](https://github.com/matthieu-str/mescal/issues) along with a detailed description or contact the Mescal maintainers at matthieu.souttre@polymtl.ca
+> **Questions or issues?** Please file an [issue](https://github.com/matthieu-str/mescal/issues) along with a detailed description or contact the _mescal_ maintainers (for example, at matthieu.souttre@polymtl.ca)
 
 ---
 <!-- 
@@ -63,7 +63,7 @@ Your project will store all databases, LCIA methods, and calculation setups in a
 
 ## Step 3: Import Ecoinvent Database
 
-This is the foundation for all LCA calculations in Mescal. However, note that Mescal would also work with any other background database (if any) in your Brightway project.
+This is the foundation for all LCA calculations in _mescal_. However, note that _mescal_ would also work with any other background database (if any) in your Brightway project.
 
 **In Activity Browser:**
 1. Navigate to **Database → Import database**
