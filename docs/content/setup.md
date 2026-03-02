@@ -5,33 +5,6 @@ This guide walks you through setting up your Brightway project using Activity Br
 > **Questions or issues?** Please file an [issue](https://github.com/matthieu-str/mescal/issues) along with a detailed description or contact the _mescal_ maintainers (for example, at matthieu.souttre@polymtl.ca)
 
 ---
-<!-- 
-
-## Prerequisites
-
-Before you begin, ensure you have:
-
-- **Python 3.10+** installed
-- **A valid ecoinvent license**  — [Get a license](https://ecoinvent.org/licenses/)
-- **Jupyter Notebook or JupyterLab** for running the setup notebooks
-
----
-
-## Setup Steps
-
-| Step | Description | Required? |
-|------|-------------|-----------|
-| 1 | Install Activity Browser | ✅ Yes |
-| 2 | Create a new project | ✅ Yes |
-| 3 | Import ecoinvent database | ✅ Yes |
-| 4 | Regionalize ecoinvent with Regioinvent | ⬜ Optional |
-| 5 | Create prospective databases with Premise | ⬜ Optional |
-| 6 | Regionalize Premise databases with Regiopremise | ⬜ Optional |
-| 7 | Install IMPACT World+ LCIA method | ⬜ Optional |
-| 8 | Add supplementary databases | ⬜ Optional | 
-
----
--->
 
 ![flowchart of the setup steps](../pics/setup.png "setup")
 
@@ -154,17 +127,3 @@ git clone https://github.com/matthieu-str/Regiopremise.git
 **📓 Notebook:** [download_impact_world_plus.ipynb](https://github.com/matthieu-str/mescal/blob/master/dev/download_impact_world_plus.ipynb)
 
 ---
-
-<!-- 
-## Step 8: Add Supplementary Databases (Optional)
-
-Depending on your energy system model, you may need additional life-cycle inventories not covered in ecoinvent.
-
-### Carculator — Vehicle LCA
-
-[Carculator](https://carculator.psi.ch/) provides detailed LCI for passenger vehicles, trucks, and buses with prospective scenarios.
-
-**📓 Notebook:** [carculator.ipynb](https://github.com/matthieu-str/mescal/blob/master/dev/carculator.ipynb)
-
---- 
--->
