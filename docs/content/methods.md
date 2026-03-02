@@ -16,7 +16,7 @@ the region of interest, a new LCI dataset can be copied and adapted from an exis
 providers) as a proxy. If you are using a spatialized LCI database (i.e., with region-specific elementary flows), 
 biosphere flows will be regionalized following the same procedure.
 
-![flowchart of the regionalization algorithm](../pics/regionalization_flowchart.png "regionalization"){ width=75% } 
+![flowchart of the regionalization algorithm](../pics/regionalization_flowchart.png "regionalization") 
 
 ## Double-counting removal
 
