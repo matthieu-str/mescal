@@ -13,7 +13,7 @@ from mescal.contribution_analysis import process_contribution_data, _export_comp
 from mescal.plot import plot_contribution_analysis
 
 import sys
-sys.path.insert(1, '../')
+sys.path.insert(1, '../../')
 
 
 st.set_page_config(
