@@ -8,7 +8,6 @@
 [![Read the documentation at https://mescal.readthedocs.io/](https://img.shields.io/readthedocs/mescal/latest.svg?label=Read%20the%20Docs)][read the docs]
 [![Tests](https://github.com/matthieu-str/mescal/actions/workflows/python-test.yml/badge.svg)][tests]
 [![Codecov](https://codecov.io/gh/matthieu-str/mescal/graph/badge.svg?token=7VUAW95C24)][codecov]
-[![DOI](https://zenodo.org/badge/813273884.svg)][doi]
 
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)][pre-commit]
 [![Black](https://img.shields.io/badge/code%20style-black-000000.svg)][black]
@@ -45,7 +44,16 @@ LCA indicators are then ready to be integrated in the ESM.
 ## How to use _mescal_?
 
 You can follow this [example notebook](https://github.com/matthieu-str/mescal/blob/master/examples/tutorial.ipynb) to learn how to use _mescal_. It presents a real application using the 
-[EnergyScope](https://library.energyscope.ch/main/) model. 
+[EnergyScope](https://www.energyscope.net/latest/) model. 
+
+If you use _mescal_ in a scientific publication, please cite [this paper](https://link.springer.com/article/10.1007/s44498-026-00005-3):
+
+Souttre, M., Majeau-Bettez, G., Maréchal, F., Margni, M., 2026. mescal: a tool for coupling energy system models with life-cycle assessment. J. Ind. Ecol. https://doi.org/10.1007/s44498-026-00005-3
+
+You can also specify the version of _mescal_ you used in your publication, e.g., by including the DOI of the version you used, which can be found on [Zenodo](https://doi.org/10.5281/zenodo.12727521).
+
+## Documentation
+The documentation for _mescal_ can be found at [https://mescal.readthedocs.io/en/latest/](https://mescal.readthedocs.io/en/latest/). It mainly contains set-up instructions, examples of input data files, and example notebooks on how to use _mescal_. 
 
 ## Requirements
 

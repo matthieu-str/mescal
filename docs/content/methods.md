@@ -1,5 +1,9 @@
 # Methods
 
+A detailed description of the methods implemented in _mescal_ is provided in [this publication]((https://link.springer.com/article/10.1007/s44498-026-00005-3)):
+
+Souttre, M., Majeau-Bettez, G., Maréchal, F., Margni, M., 2026. mescal: a tool for coupling energy system models with life-cycle assessment. J. Ind. Ecol. https://doi.org/10.1007/s44498-026-00005-3
+
 ## Mapping
 
 Modellers should provide a mapping between the technologies and resources in the ESM and the datasets in the LCI database. 
