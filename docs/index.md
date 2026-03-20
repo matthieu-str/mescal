@@ -24,7 +24,7 @@ LCI datasets are taken from ecoinvent and possibly other sources if some of the 
 
 If you use _mescal_ in a scientific publication, please cite [this paper](https://link.springer.com/article/10.1007/s44498-026-00005-3):
 
-Souttre, M., Majeau-Bettez, G., Maréchal, F., Margni, M., 2026. mescal: a tool for coupling energy system models with life-cycle assessment. J. Ind. Ecol. https://doi.org/10.1007/s44498-026-00005-3
+Souttre, M., Majeau-Bettez, G., Maréchal, F., Margni, M., 2026. mescal: a tool for coupling energy system models with life-cycle assessment. J. Ind. Ecol. [https://doi.org/10.1007/s44498-026-00005-3](https://doi.org/10.1007/s44498-026-00005-3)
 
 You can also specify the version of _mescal_ you used in your publication, e.g., by including the DOI of the version you used, which can be found on [Zenodo](https://doi.org/10.5281/zenodo.12727521).
 
