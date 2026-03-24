@@ -35,6 +35,8 @@ dependencies = [
     "pandas",
     "brightway2",
     "plotly",
+    "matplotlib",
+    "seaborn",
 ]
 
 [project.urls]
