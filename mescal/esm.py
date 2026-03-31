@@ -834,10 +834,10 @@ class ESM:
         df_tech_specifics = self.tech_specifics
 
         # Add a construction input to technologies that have a construction phase
-        mapping_op['OWN_CONSTRUCTION'] = mapping_op.apply(lambda row: has_construction(row, self.no_construction_list), axis=1)
+        mapping_op['OWN_CONSTRUCTION'] = (mapping_op['Name'].isin(self.no_construction_list)).astype(int) - 1
 
         # Add a decommission input to technologies that have a decommissioning phase outside their construction phase
-        mapping_op['OWN_DECOMMISSION'] = mapping_op.apply(lambda row: has_decommission(row, self.no_decommission_list), axis=1)
+        mapping_op['OWN_DECOMMISSION'] = (mapping_op['Name'].isin(self.no_decommission_list)).astype(int) - 1
 
         # Add a fuel input to mobility technologies (due to possible mismatch)
         mobility_list = list(df_tech_specifics[df_tech_specifics.Specifics == 'Mobility'].Name)
@@ -845,7 +845,7 @@ class ESM:
 
         # Add a fuel input to process activities that could have a mismatch
         process_list = list(df_tech_specifics[df_tech_specifics.Specifics == 'Process'].Name)
-        mapping_op['PROCESS_FUEL'] = mapping_op.apply(lambda row: is_process_activity(row, process_list), axis=1)
+        mapping_op['PROCESS_FUEL'] = (~mapping_op['Name'].isin(process_list)).astype(int) - 1
 
         return mapping_op
 
@@ -1194,33 +1194,6 @@ class ESM:
             else:
                 raise ValueError(f"Year of the following row is greater than the current year {self.year}: {row}")
 
-def has_construction(row: pd.Series, no_construction_list: list[str]) -> int:
-    """
-    Add a construction input to technologies that have a construction phase
-
-    :param row: row of the model file
-    :param no_construction_list: list of technologies for which the construction phase is not considered
-    :return: 0 if no construction phase, -1 otherwise
-    """
-    if row.Name in no_construction_list:
-        return 0
-    else:
-        return -1
-
-
-def has_decommission(row: pd.Series, no_decommission_list: list[str]) -> int:
-    """
-    Add a decommissioning input to technologies that have a decommissioning phase outside their construction phase
-
-    :param row: row of the model file
-    :param no_decommission_list: list of technologies for which the decommissioning phase is not considered
-    :return: -1 if decommissioning phase, 0 otherwise
-    """
-    if row.Name in no_decommission_list:
-        return 0
-    else:
-        return -1
-
 
 def is_transport(row: pd.Series, mobility_list: list[str]) -> int:
     """
@@ -1237,19 +1210,6 @@ def is_transport(row: pd.Series, mobility_list: list[str]) -> int:
     else:
         return 0
 
-
-def is_process_activity(row: pd.Series, process_list: list[str]) -> int:
-    """
-    Add a fuel input to process activities that could have a mismatch
-
-    :param row: row of the model file
-    :param process_list: list of process activities
-    :return: -1 if process activity, 0 otherwise
-    """
-    if row.Name in process_list:
-        return -1
-    else:
-        return 0
 
 class PathwayESM(ESM):
     """
