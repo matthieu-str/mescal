@@ -957,6 +957,9 @@ class ESM:
                         activity_code=activity_name_or_code,
                         biosphere_db_name=biosphere_db_name,
                     )
+            else:
+                self.logger.warning(f"Could not find activity {activity_name_or_code} in database {db_name} (modify "
+                                    f"written activities - DAC).")
 
         # Change carbon flows of biofuel mobility technologies
         biofuel_mob_tech = self.tech_specifics[self.tech_specifics.Specifics == 'Biofuel'][
@@ -978,6 +981,9 @@ class ESM:
                         biogenic_ratio=float(biogenic_ratio),
                         biosphere_db_name=biosphere_db_name,
                     )
+            else:
+                self.logger.warning(f"Could not find activity {activity_name_or_code} in database {db_name} (modify "
+                                    f"written activities - biofuel mobility technologies).")
 
         # Adjust carbon flows by a constant factor for some technologies
         carbon_flows_correction_tech = self.tech_specifics[self.tech_specifics.Specifics == 'Carbon flows'][
@@ -997,30 +1003,39 @@ class ESM:
                         activity_code=activity_name_or_code,
                         factor=float(factor),
                     )
+            else:
+                self.logger.warning(f"Could not find activity {activity_name_or_code} in database {db_name} (modify "
+                                    f"written activities - adjust direct carbon emissions).")
 
         # Add a CO2 flow to an activity
         add_fossil_carbon_flows_tech = self.tech_specifics[self.tech_specifics.Specifics.str.startswith('Add CO2')][
             ['Specifics', 'Name', 'Amount']].values.tolist()
         for spec, tech, amount in add_fossil_carbon_flows_tech:
+            found_act = False
             co2_flow_type = re.search(r'\((.*?)\)', spec).group(1)
-            activity_name_or_code = self._get_activity_name_or_code(tech=tech, return_type=return_type, phase='Resource')
-            if activity_name_or_code in [act[return_type] for act in db.db_as_list]:
-                if return_type == 'name':
-                    add_carbon_dioxide_flow(
-                        db_name=db_name,
-                        activity_name=activity_name_or_code,
-                        amount=float(amount),
-                        biosphere_db_name=biosphere_db_name,
-                        co2_flow_type=co2_flow_type,
-                    )
-                elif return_type == 'code':
-                    add_carbon_dioxide_flow(
-                        db_name=db_name,
-                        activity_code=activity_name_or_code,
-                        amount=float(amount),
-                        biosphere_db_name=biosphere_db_name,
-                        co2_flow_type=co2_flow_type,
-                    )
+            for phase in ['Operation', 'Resource']:
+                activity_name_or_code = self._get_activity_name_or_code(tech=tech, return_type=return_type, phase=phase)
+                if activity_name_or_code in [act[return_type] for act in db.db_as_list]:
+                    found_act = True
+                    if return_type == 'name':
+                        add_carbon_dioxide_flow(
+                            db_name=db_name,
+                            activity_name=activity_name_or_code,
+                            amount=float(amount),
+                            biosphere_db_name=biosphere_db_name,
+                            co2_flow_type=co2_flow_type,
+                        )
+                    elif return_type == 'code':
+                        add_carbon_dioxide_flow(
+                            db_name=db_name,
+                            activity_code=activity_name_or_code,
+                            amount=float(amount),
+                            biosphere_db_name=biosphere_db_name,
+                            co2_flow_type=co2_flow_type,
+                        )
+            if not found_act:
+                self.logger.warning(f"Could not find activity {activity_name_or_code} in database {db_name} (modify "
+                                    f"written activities - add CO2 flow).")
 
         # Add carbon capture to plant
         add_carbon_capture_tech = self.tech_specifics[self.tech_specifics.Specifics == 'Add CC'][
@@ -1046,6 +1061,9 @@ class ESM:
                         plant_type=str(type_and_ratio[0]),
                         capture_ratio=float(type_and_ratio[1]),
                     )
+            else:
+                self.logger.warning(f"Could not find activity {activity_name_or_code} in database {db_name} (modify "
+                                    f"written activities - add carbon capture flow).")
 
     def _get_activity_name_or_code(
             self,
