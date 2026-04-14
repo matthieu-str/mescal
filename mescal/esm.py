@@ -1065,6 +1065,35 @@ class ESM:
                 self.logger.warning(f"Could not find activity {activity_name_or_code} in database {db_name} (modify "
                                     f"written activities - add carbon capture flow).")
 
+        # Change the amount of a flow in a dataset
+        change_flow_amount_tech = self.tech_specifics[self.tech_specifics.Specifics.str.startswith('Change flow amount')][
+            ['Specifics', 'Name', 'Amount']].values.tolist()
+        for spec, tech, type_code_and_new_amount in change_flow_amount_tech:
+            ds_type = re.search(r'\((.*?)\)', spec).group(1)
+            activity_name_or_code = self._get_activity_name_or_code(tech=tech, return_type=return_type, phase=ds_type)
+            if activity_name_or_code in [act[return_type] for act in db.db_as_list]:
+                if return_type == 'name':
+                    type_code_and_new_amount = type_code_and_new_amount.split(', ')
+                    change_flow_amount(
+                        db_name=db_name,
+                        activity_name=activity_name_or_code,
+                        flow_type=str(type_code_and_new_amount[0]),
+                        flow_code=str(type_code_and_new_amount[1]),
+                        new_value=float(type_code_and_new_amount[2]),
+                    )
+                elif return_type == 'code':
+                    type_code_and_new_amount = type_code_and_new_amount.split(', ')
+                    change_flow_amount(
+                        db_name=db_name,
+                        activity_code=activity_name_or_code,
+                        flow_type=str(type_code_and_new_amount[0]),
+                        flow_code=str(type_code_and_new_amount[1]),
+                        new_value=float(type_code_and_new_amount[2]),
+                    )
+            else:
+                self.logger.warning(f"Could not find activity {activity_name_or_code} in database {db_name} (modify "
+                                    f"written activities - change flow amount).")
+
     def _get_activity_name_or_code(
             self,
             tech: str,

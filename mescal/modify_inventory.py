@@ -512,35 +512,45 @@ def adapt_rest_of_the_world_activity_based_on_other_activity(
     act.save()
 
 
-def change_flow_value(
-        activity_code: str,
-        database_name: str,
+def change_flow_amount(
+        db_name: str,
         flow_code: str,
-        flow_type: str,
-        new_value: float,
+        flow_type: str = 'biosphere',
+        new_value: float = 0.0,
+        activity_code: str = None,
+        activity_name: str = None,
 ) -> None:
     """
-    Change the value of a flow in an activity
+    Change the amount of a biosphere or technosphere flow in an activity
 
-    :param activity_code: code of the activity to be changed
-    :param database_name: name of the LCI database
-    :param flow_code: code of the flow to be changed
-    :param flow_type: type of the flow to be changed. Can be 'biosphere' or 'technosphere'.
-    :param new_value: new value of the flow
+    :param db_name: name of the LCI database
+    :param flow_code: code of the flow to be adjusted
+    :param flow_type: type of the flow to be adjusted. Can be 'biosphere' or 'technosphere'.
+    :param new_value: new amount of the flow
+    :param activity_code: code of the activity into which the flow must be adjusted
+    :param activity_name: name of the activity into which the flow must be adjusted
     :return: None (changes are saved in the database)
     """
-
-    act = bd.Database(database_name).get(activity_code)
+    if activity_name is not None:
+        act = [i for i in bd.Database(db_name).search(activity_name, limit=1000) if (
+            (activity_name == i.as_dict()['name'])
+        )][0]
+    elif activity_code is not None:
+        act = bd.Database(db_name).get(activity_code)
+    else:
+        raise ValueError("Either 'activity_name' or 'activity_code' should be provided")
 
     if flow_type == 'biosphere':
         for exc in [i for i in act.biosphere()]:
             if exc.input[1] == flow_code:
+                exc['comment'] = f"Amount changed from {exc['amount']} to {new_value}" + exc.get('comment', "")
                 exc['amount'] = new_value
                 exc.save()
 
     elif flow_type == 'technosphere':
         for exc in [i for i in act.technosphere()]:
             if exc.input[1] == flow_code:
+                exc['comment'] = f"Amount changed from {exc['amount']} to {new_value}" + exc.get('comment', "")
                 exc['amount'] = new_value
                 exc.save()
 

@@ -33,7 +33,7 @@ __all__ = (
     "add_carbon_dioxide_flow",
     "add_carbon_capture_to_plant",
     "adapt_rest_of_the_world_activity_based_on_other_activity",
-    "change_flow_value",
+    "change_flow_amount",
 )
 
 __version__ = "1.2.4"
