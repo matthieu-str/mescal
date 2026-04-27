@@ -8,6 +8,7 @@ from .modify_inventory import *
 from .database import Database, Dataset
 from .utils import random_code
 import re
+import bw2data
 
 
 class ESM:
@@ -150,6 +151,7 @@ class ESM:
         self.resources_without_unit_conversion_factor = set()
         self.locations_list = list(set([i['location'] for i in self.main_database.db_as_list]))
         self.added_decom_to_input_data = False
+        self.bw_version = "25" if int(bw2data.__version__[0]) >= 4 else "2"
 
 
     def __repr__(self):
