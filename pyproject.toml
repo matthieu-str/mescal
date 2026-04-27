@@ -51,7 +51,8 @@ testing = [
     "mescal",
     "pytest",
     "pytest-cov",
-    "python-coveralls"
+    "python-coveralls",
+    "pytest-tagging",
 ]
 dev = [
     "build",
@@ -59,6 +60,7 @@ dev = [
     "pylint",
     "pytest",
     "pytest-cov",
+    "pytest-tagging",
     "pytest-randomly",
     "setuptools",
 ]
