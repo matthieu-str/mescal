@@ -1,4 +1,5 @@
 from pathlib import Path
+import bw2data
 
 
 # Directories for data which comes with mescal
@@ -8,4 +9,7 @@ DATA_DIR = Path(__file__).resolve().parent / "data"
 DIR_DATABASE_CACHE = Path.cwd() / "export" / "cache"
 
 # Main brightway project name (used for tests)
-BW_PROJECT_NAME = "ecoinvent3.9.1"
+if int(bw2data.__version__[0]) >= 4:  # brightway25
+    BW_PROJECT_NAME = "ecoinvent3.9.1_bw2.5"
+else:  # brightway2
+    BW_PROJECT_NAME = "ecoinvent3.9.1"
