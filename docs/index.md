@@ -31,17 +31,36 @@ You can also specify the version of _mescal_ you used in your publication, e.g.,
 ## Requirements
 
 - **Python 3.10 or more**
-- Licence for [ecoinvent 3](https://ecoinvent.org/). The ecoinvent database is not included in this package. You may also check ecoinvent's [GDPR & EULA](https://ecoinvent.org/gdpr-eula/).
+- License for [ecoinvent 3](https://ecoinvent.org/). The ecoinvent database is not included in this package. You may also check ecoinvent's [GDPR & EULA](https://ecoinvent.org/gdpr-eula/).
 
 ## Installation
 
-You can install _mescal_ via [pip] from [PyPI]:
+You can install _mescal_ via [pip] from [PyPI].
+We recommend installing the optional package _pypardiso_ to speed up matrix calculations.
 
+Install with _brightway2_-compatible libraries:
 ```console
-$ pip install mescal pypardiso
+$ pip install "mescal[bw2]" pypardiso
 ```
 
-We recommend installing the optional package _pypardiso_ to speed up matrix calculations.
+Install with newer _brightway25_-compatible libraries:
+```console
+$ pip install "mescal[bw25]" pypardiso
+```
+
+For local development (editable install) from a cloned repository using `bw2`:
+```console
+$ pip install -e ".[bw2]"
+```
+Or using `bw25`:
+```console
+$ pip install -e ".[bw25]"
+```
+
+If Brightway libraries are already installed and should not be touched:
+```console
+$ pip install -e . --no-deps
+```
 
 ## Main contributors
 

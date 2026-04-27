@@ -113,7 +113,7 @@ git clone https://github.com/matthieu-str/Regiopremise.git
 
 ### Prerequisites
 
-- A Brightway2 project with a **Premise-generated** ecoinvent database
+- A Brightway project with a **Premise-generated** ecoinvent database
 - Trade data from [Zenodo](https://doi.org/10.5281/zenodo.11583814)
 
 **📓 Notebook:** [demo.ipynb](https://github.com/matthieu-str/Regiopremise/blob/master/doc/demo.ipynb)
