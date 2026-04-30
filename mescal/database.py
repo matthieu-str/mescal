@@ -286,7 +286,8 @@ class Database:
             new_db_name: str = None,
             old_main_db_names: list[str] or None = None,
             write: bool = False,
-            check_duplicates: bool = False
+            check_duplicates: bool = False,
+            based_on: str = 'code',
     ) -> None:
         """
         Merge multiple LCI databases in one database. The list of databases should contain one main database (e.g., an
@@ -301,6 +302,9 @@ class Database:
         :param write: if True, write the new database to Brightway
         :param check_duplicates: if True, check for duplicates in terms of (product, name, location) and remove them
             from exchanges and from the database
+        :param based_on: can be 'code' or 'name'. Useful in case of background databases being different from
+            main_ecoinvent_db_name. If 'code', the relinking is done based on the code of the activities,
+            if 'name', the relinking is done based on the name, product, location and database of the activities.
         :return: None
         """
 
@@ -315,6 +319,7 @@ class Database:
                     db.relink(
                         name_database_unlink=old_db_name,
                         database_relink_as_list=main_ecoinvent_db,
+                        based_on=based_on,
                     )
             else:
                 db.db_as_list = main_ecoinvent_db
