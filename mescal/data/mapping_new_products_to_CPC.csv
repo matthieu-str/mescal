@@ -116,6 +116,12 @@ unit construction,53269: Other constructions for manufacturing,contains,Activity
 "used fuel cell stack, 1MWe, AEC",39990: Other wastes n.e.c.,equals,Product
 "used fuel cell stack, 1MWe, PEM",39990: Other wastes n.e.c.,equals,Product
 "used fuel cell stack, 1MWe, SOEC",39990: Other wastes n.e.c.,equals,Product
+"used electrolyzer balance of plant, 1MWe, AEC",39990: Other wastes n.e.c.,equals,Product
+"used electrolyzer balance of plant, 1MWe, PEM",39990: Other wastes n.e.c.,equals,Product
+"used electrolyzer balance of plant, 1MWe, SOEC",39990: Other wastes n.e.c.,equals,Product
+"used electrolyzer stack, 1MWe, AEC",39990: Other wastes n.e.c.,equals,Product
+"used electrolyzer stack, 1MWe, PEM",39990: Other wastes n.e.c.,equals,Product
+"used electrolyzer stack, 1MWe, SOEC",39990: Other wastes n.e.c.,equals,Product
 wave energy converter platform,53262: Power plants,equals,Product
 "wood chips and particles, willow",31230: Wood in chips or particles,equals,Product
 "wood chips, dry, measured as dry mass",31230: Wood in chips or particles,equals,Product
