@@ -103,8 +103,8 @@ Gasoline-Powered Car,Construction,=1 * 8760 * 0.051 / (1.23 * 12000),unit,person
 Gasoline-Powered Car,Operation,=1/1.23,kilometer,person kilometer,"people per vehicle (1.23): (Chaire Mobilite, 2018)"
 Hybrid Electric Car,Construction,=1 * 8760 * 0.051 / (1.23 * 12000),unit,person kilometer per hour,"people per vehicle (1.23): (Chaire Mobilite, 2018), yearly distance (12000km): (Sacchi, 2022), capacity factor (0.051): (Limpens, 2021)"
 Hybrid Electric Car,Operation,=1/1.23,kilometer,person kilometer,"people per vehicle (1.23): (Chaire Mobilite, 2018)"
-Methanol-Powered Car ,Construction,=1 * 8760 * 0.051 / (1.5 * 7600),unit,person kilometer per hour,"number of passengers in cars (1.5): (Biedermann, 2023) ; yearly car distance (7600 km): (Biedermann, 2023), capacity factor (0.051): (Limpens, 2021)"
-Methanol-Powered Car ,Operation,=1 / 1.5,kilometer,person kilometer,"number of passengers in cars (1.5): (Biedermann, 2023)"
+Methanol-Powered Car ,Construction,=1 * 8760 * 0.051 / (1.23 * 12000),unit,person kilometer per hour,"people per vehicle (1.23): (Chaire Mobilite, 2018), yearly distance (12000km): (Sacchi, 2022), capacity factor (0.051): (Limpens, 2021)"
+Methanol-Powered Car ,Operation,=1/1.23,kilometer,person kilometer,"people per vehicle (1.23): (Chaire Mobilite, 2018)"
 Plug-in Hybrid Electric Car,Construction,=1 * 8760 * 0.051 / (1.23 * 12000),unit,person kilometer per hour,"people per vehicle (1.23): (Chaire Mobilite, 2018), yearly distance (12000km): (Sacchi, 2022), capacity factor (0.051): (Limpens, 2021)"
 Plug-in Hybrid Electric Car,Operation,=1/1.23,kilometer,person kilometer,"people per vehicle (1.23): (Chaire Mobilite, 2018)"
 Propane-Powered Car,Construction,=1 * 8760 * 0.051 / (1.23 * 12000),unit,person kilometer per hour,"people per vehicle (1.23): (Chaire Mobilite, 2018), yearly distance (12000km): (Sacchi, 2022), capacity factor (0.051): (Limpens, 2021)"
@@ -138,7 +138,7 @@ Electric-Powered Coach,Construction,=1 * 8760 * 0.297 / (21 * 50000),unit,person
 Electric-Powered Coach,Operation,=1,person kilometer,person kilometer,None
 Gasoline-Powered Coach,Construction,=1 * 8760 * 0.297 / (21 * 50000),unit,person kilometer per hour,"people per vehicle (21), yearly distance (50000 km): (Sacchi, 2022), capacity factor (0.297): (Limpens, 2021)"
 Gasoline-Powered Coach,Operation,=1,person kilometer,person kilometer,None
-Diesel Hybrid Coach,Construction,=1 * 8760 * 0.297/ (27 * 32000),unit,person kilometer per hour,"people per vehicle (27): (Schnidrig, 2020) ; yearly distance (32000 km): (Schnidrig, 2020) ; capacity factor (0.297): (Limpens, 2021)"
+Diesel Hybrid Coach,Construction,=1 * 8760 * 0.297 / (21 * 50000),unit,person kilometer per hour,"people per vehicle (21), yearly distance (50000 km): (Sacchi, 2022), capacity factor (0.297): (Limpens, 2021)"
 Diesel Hybrid Coach,Operation,=1,person kilometer,person kilometer,None
 Propane-Powered Coach,Construction,=1 * 8760 * 0.297 / (21 * 50000),unit,person kilometer per hour,"people per vehicle (21), yearly distance (50000 km): (Sacchi, 2022), capacity factor (0.297): (Limpens, 2021)"
 Propane-Powered Coach,Operation,=1,person kilometer,person kilometer,None
@@ -167,9 +167,9 @@ Coal Ultra-Supercritical,Construction,=1/380 / 1000,unit,kilowatt,Plant capacity
 Coal Ultra-Supercritical,Operation,1,kilowatt hour,kilowatt hour,None
 Coal Ultra-Supercritical with Carbon Capture,Construction,=1/380 / 1000,unit,kilowatt,Plant capacity (380 MWe)
 Coal Ultra-Supercritical with Carbon Capture,Operation,1,kilowatt hour,kilowatt hour,None
-Diesel-Powered Commuter Train,Construction,=1 * 8760 * 0.345 / (46 * 150000),unit,person kilometer per hour,"vehicle performance (150000 km/yr) (Wernet, 2016), people per vehicle (46): (Wernet, 2016), capacity factor (0.345): (Limpens, 2021)"
+Diesel-Powered Commuter Train,Construction,=1 * 8760 * 0.345 / (46 * 150000),unit,person kilometer per hour,"vehicle performance (150000 km/yr), people per vehicle (46): (Wernet, 2016), capacity factor (0.345): (Limpens, 2021)"
 Diesel-Powered Commuter Train,Operation,1,person kilometer,person kilometer,None
-Electric-Powered Commuter Train,Construction,=1 * 8760 * 0.345 / (46 * 150000),unit,person kilometer per hour,"vehicle performance (150000 km/yr) (Wernet, 2016), people per vehicle (46): (Wernet, 2016), capacity factor (0.345): (Limpens, 2021)"
+Electric-Powered Commuter Train,Construction,=1 * 8760 * 0.345 / (46 * 150000),unit,person kilometer per hour,"vehicle performance (150000 km/yr), people per vehicle (46): (Wernet, 2016), capacity factor (0.345): (Limpens, 2021)"
 Electric-Powered Commuter Train,Operation,1,person kilometer,person kilometer,None
 Conversion of Crops to Ethanol,Construction,=8760 * 0.86 / (90 * 7.42) / 1000000,unit,kilowatt,"LHV ethanol (7.42 kWh/kg): (Engineering ToolBox, 2003), capacity factor (0.86): (Moret, 2017), factory capacity (90 kt ethanol/year): (Wernet, 2016)"
 Conversion of Crops to Ethanol,Operation,=1 / 7.42,kilogram,kilowatt hour,"LHV ethanol (7.42 kWh/kg): (Engineering ToolBox, 2003)"
@@ -257,7 +257,7 @@ Diesel,Resource,=1 / 11.83,kilogram,kilowatt hour,"Diesel LHV (11.83 kWh/kg): (E
 Diesel to Storage,Construction,=1 / (16000*846*11.83),unit,kilowatt hour,"LHV diesel (11.83 kWh/kg), diesel density (0.846 kg/L): (Engineering ToolBox, 2003), capacity (16000 m3)"
 Direct Usage of stored CO2 ,Operation,1,kilogram,kilogram,None
 Deep Oil Reservoir Gas Recovery,Operation,1,kilogram,kilogram,None
-Electric Grid at Extra High Voltage,Construction,=1 / (2 * 1000000),kilometer,kilowatt kilometer,mean extreme high voltage electricity grid power ($P_{EHV} $ = 2 GW)
+Electric Grid at Extra High Voltage,Construction,=12581/35710000,kilometer,kilowatt,"Existing grid length (12581 km), corresponding grid capacity (35.71 GW): (Hydro-Quebec, 2023)"
 Electricity import,Resource,=1,kilowatt hour,kilowatt hour,None
 Electricity exports,Resource,=-1,kilowatt hour,kilowatt hour,Impacts of exports are counted negatively
 Electricity Storage,Construction,=1 / 0.114,kilogram,kilowatt hour,"Li-ion battery energy density (0.114 kWh/kg): (Notter, 2010)"
@@ -282,8 +282,8 @@ Food Production (heat pump),Construction,=8760*0.85 / 200 / 1000000,unit,kilogra
 Food Production (heat pump),Operation,1,kilogram,kilogram,None
 Food Production with Heat Recovery,Construction,=8760*0.85 / 200 / 1000000,unit,kilogram per hour,"yearly production (200 kt/yr): (Wernet, 2016) ; capacity factor (0.85): (Moret, 2017)"
 Food Production with Heat Recovery,Operation,1,kilogram,kilogram,None
-Fischer-Tropsch Synthesis,Construction,=8760 * 0.86/ (0.05 * 1000 * 11.83) / 1000000,unit,kilowatt,"yearly production (0.05 Mt/yr): (Althaus, 2007), LHV diesel (11.83 kWh/kg): (Engineering ToolBox, 2003) ; capacity factor (0.86): (Moret, 2017)"
-Fischer-Tropsch Synthesis,Operation,=1 / 11.83,kilogram,kilowatt hour,"LHV diesel (11.83 kWh/kg): (Engineering ToolBox, 2003)"
+BioDiesel Production via Fischer-Tropsch Synthesis,Construction,=8760 * 0.86/ (0.05 * 1000 * 11.83) / 1000000,unit,kilowatt,"yearly production (0.05 Mt/yr): (Althaus, 2007), LHV diesel (11.83 kWh/kg): (Engineering ToolBox, 2003) ; capacity factor (0.86): (Moret, 2017)"
+BioDiesel Production via Fischer-Tropsch Synthesis,Operation,=1 / 11.83,kilogram,kilowatt hour,"LHV diesel (11.83 kWh/kg): (Engineering ToolBox, 2003)"
 Hydrogen Production via Gasification,Construction,=1/5 / 1000,unit,kilowatt,Factory capacity (5 MWth)
 Hydrogen Production via Gasification,Operation,=1 / 33.3,kilogram,kilowatt hour,"LHV hydrogen (33.3 kWh/kg): (Engineering ToolBox, 2003)"
 Hydrogen Production via Gasification (plant),Construction,1,unit,unit,None
@@ -320,7 +320,7 @@ Combined Cycle Gas Turbine Hydrogen and Natural Gas Mix with Carbon Capture,Cons
 Combined Cycle Gas Turbine Hydrogen and Natural Gas Mix with Carbon Capture,Operation,=1,kilowatt hour,kilowatt hour,None
 Hydrogen to Storage,Construction,=1 / 33.3,kilogram,kilowatt hour,"LHV (33.3 kWh/kg): (Engineering ToolBox, 2003)"
 High Temperature to Low Temperature Conversion in Decentralized Systems,Operation,=1 * 3.6,megajoule,kilowatt hour,None
-Electric Grid at High Voltage,Construction,=1 / (500 * 1000),kilometer,kilowatt kilometer,mean high voltage electricity grid power ($P_{HV} $ = 500 MW)
+Electric Grid at High Voltage,Construction,=22341/30340000,kilometer,kilowatt,"Existing grid length (22341 km), corresponding grid capacity (30.34 GW): (Hydro-Quebec, 2023)"
 Hydroelectric Dam,Construction,=1 / 22583 / 1000,unit,kilowatt,"Capacity (22583 MWe): (Wernet, 2016)"
 Hydroelectric Dam,Operation,=1,kilowatt hour,kilowatt hour,None
 Hydrothermal Gasification,Construction,=1/5 / 1000,unit,kilowatt,Capacity (5 MW_th)
@@ -388,7 +388,7 @@ Propane-Powered Light Commercial Vehicle,Construction,=1 * 8760 * 0.093 / (0.75 
 Propane-Powered Light Commercial Vehicle,Operation,=1/0.75,kilometer,ton kilometer,"payload (750 kg): (Sacchi, 2021)"
 Light fuel oil,Resource,=1 * 3.6 / 42.6,kilogram,kilowatt hour,"Light fuel oil LHV (42.6 MJ/kg): (Engineering ToolBox, 2003)"
 Liquified natural gas,Resource,=1 * 3.6 / 39,cubic meter,kilowatt hour,"liquified natural gas LHV (39 MJ/m3): (Wernet, 2016)"
-Electric Grid at Low Voltage,Construction,=1 / 50,kilometer,kilowatt kilometer,mean low voltage electricity grid power ($P_{LV} $ = 50 kW)
+Electric Grid at Low Voltage,Construction,=120472/23550000,kilometer,kilowatt,"Existing grid length (120472 km), corresponding grid capacity (23.55 GW): (Hydro-Quebec, 2023)"
 Propylene Production via Metathesis,Construction,=3.6 * 8760 * 0.86 / (0.05 * 1000 * 50.285) / 1000000,unit,kilowatt,"ethylene heat of combustion (50.285 MJ/kg): (Engineering ToolBox, 2017), yearly production (0.05 Mt/yr): (Althaus, 2007), capacity factor (0.86): (Moret, 2017)"
 Propylene Production via Metathesis,Operation,=3.6 / 50.285,kilogram,kilowatt hour,"ethylene heat of combustion (50.285 MJ/kg): (Engineering ToolBox, 2017)"
 Methanation Process,Construction,=1/5 / 1000,unit,kilowatt,Capacity (5 MWth)
@@ -405,7 +405,7 @@ Conversion of Methanol to Aromatic Compounds,Operation,=3.6 / 41.833,kilogram,ki
 Conversion of Methanol to Olefinic Compounds,Construction,=3.6 * 8760 * 0.86 / (0.05 * 1000 * 50.285) / 1000000,unit,kilowatt,"ethylene heat of combustion (50.285 MJ/kg): (Engineering ToolBox, 2017), yearly production (0.05 Mt/yr): (Althaus, 2007), capacity factor (0.86): (Moret, 2017)"
 Conversion of Methanol to Olefinic Compounds,Operation,=3.6 / 50.285,kilogram,kilowatt hour,"ethylene heat of combustion (50.285 MJ/kg): (Engineering ToolBox, 2017)"
 Sequestration of CO2 in Mines,Operation,=1,kilogram,kilogram,None
-Electric Grid at Medium Voltage,Construction,=1 / (50 * 1000),kilometer,kilowatt kilometer,mean medium voltage electricity grid power ($P_{MV} $ = 50 MW)
+Electric Grid at Medium Voltage,Construction,=108096/21450000,kilometer,kilowatt,"Existing grid length (108096 km), corresponding grid capacity (21.45 GW): (Hydro-Quebec, 2023)"
 New Hydroelectric Dam,Construction,=1 / 22583 / 1000,unit,kilowatt,"Capacity (22583 MWe): (Wernet, 2016)"
 New Hydroelectric Dam,Operation,=1,kilowatt hour,kilowatt hour,None
 New Hydroelectric Power from River Flow,Construction,=1/13787 / 1000,unit,kilowatt,"Capacity (13787 MWe): (Wernet, 2016)"
@@ -426,6 +426,9 @@ Natural Gas Expansion from High Pressure to Medium Pressure (co-generation unit)
 Natural Gas Expansion from Medium Pressure to Low Pressure,Operation,=1 * 3.6 / 46.5,kilogram,kilowatt hour,"natural gas LHV (46.5 MJ/kg): (Wernet, 2016)"
 Natural Gas Expansion from Medium Pressure to Low Pressure (co-generation unit),Construction,=1*0.0202881 / 160,unit,kilowatt,"Cogeneration unit capacity (160 kW_el): (Wernet, 2016), power consumption (0.0202881 kW_el / kW_NG): (Schnidrig, 2023)"
 Natural Gas Expansion from Medium Pressure to Low Pressure (co-generation unit),Operation,=1 * 3.6 / 46.5,cubic meter,kilowatt hour,"natural gas LHV (46.5 MJ/kg): (Wernet, 2016)"
+Natural gas,Resource,=1 / (0.777 * 13.1),cubic meter,kilowatt hour,"natural gas LHV (39 MJ/m3): (Wernet, 2016)"
+Natural gas,Resource,=1 / (0.777 * 13.1),cubic meter,kilowatt hour,"natural gas LHV (39 MJ/m3): (Wernet, 2016)"
+Natural gas,Resource,=1 * 3.6 / 46.5,kilogram,kilowatt hour,"natural gas LHV (46.5 MJ/kg): (Wernet, 2016)"
 Plasma Natural Gas Pyrolysis,Construction,=1000/4000,unit,kilowatt,Capacity (4 kW)
 Plasma Natural Gas Pyrolysis,Operation,=1/33.3,kilogram,kilowatt hour,"H2 LHV (33.3 kWh/kg): (Engineering ToolBox, 2003)"
 Thermal Natural Gas Pyrolysis,Construction,=1000/4000,unit,kilowatt,Capacity (4 kW)
@@ -501,22 +504,22 @@ Diesel Hybrid School Bus,Construction,=1 * 8760 * 0.297 / (47 * 24000),unit,pers
 Diesel Hybrid School Bus,Operation,=1,person kilometer,person kilometer,None
 Propane-Powered School Bus,Construction,=1 * 8760 * 0.297 / (47 * 24000),unit,person kilometer per hour,"people per vehicle (47), yearly distance (24000 km): (CIRAIG, 2022), capacity factor (0.297): (Limpens, 2021)"
 Propane-Powered School Bus,Operation,=1,person kilometer,person kilometer,None
-100% BioDiesel-Powered Long Distance Semi-trailer truck,Construction,=1 * 8760 * 0.093 / (13.4 * 108000),unit,ton kilometer per hour,"payload (13.4 t), yearly distance (108000 km): (Sacchi, 2022), capacity factor (0.093): (Limpens, 2021)"
-100% BioDiesel-Powered Long Distance Semi-trailer truck,Operation,=1,ton kilometer,ton kilometer,None
-20% BioDiesel-Powered Long Distance Semi-trailer truck,Construction,=1 * 8760 * 0.093 / (11.7 * 274000),unit,ton kilometer per hour,"payload (13.4 t), yearly distance (108000 km): (Sacchi, 2022), capacity factor (0.093): (Limpens, 2021)"
-20% BioDiesel-Powered Long Distance Semi-trailer truck,Operation,=1,ton kilometer,ton kilometer,None
-Compressed Natural Gas-Powered Long Distance Semi-trailer truck,Construction,=1 * 8760 * 0.093 / (11.7 * 274000),unit,ton kilometer per hour,"payload (13.4 t), yearly distance (108000 km): (Sacchi, 2022), capacity factor (0.093): (Limpens, 2021)"
-Compressed Natural Gas-Powered Long Distance Semi-trailer truck,Operation,=1,ton kilometer,ton kilometer,None
-Diesel-Powered Long Distance Semi-trailer truck,Construction,=1 * 8760 * 0.093 / (11.7 * 274000),unit,ton kilometer per hour,"payload (13.4 t), yearly distance (108000 km): (Sacchi, 2022), capacity factor (0.093): (Limpens, 2021)"
-Diesel-Powered Long Distance Semi-trailer truck,Operation,=1,ton kilometer,ton kilometer,None
-Electric-Powered Long Distance Semi-trailer truck,Construction,=1 * 8760 * 0.093 / (11.7 * 274000),unit,ton kilometer per hour,"payload (13.4 t), yearly distance (108000 km): (Sacchi, 2022), capacity factor (0.093): (Limpens, 2021)"
-Electric-Powered Long Distance Semi-trailer truck,Operation,=1,ton kilometer,ton kilometer,None
-Hydrogen Fuel Cell-Powered Long Distance Semi-trailer truck,Construction,=1 * 8760 * 0.093 / (11.7 * 274000),unit,ton kilometer per hour,"payload (13.4 t), yearly distance (108000 km): (Sacchi, 2022), capacity factor (0.093): (Limpens, 2021)"
-Hydrogen Fuel Cell-Powered Long Distance Semi-trailer truck,Operation,=1,ton kilometer,ton kilometer,None
-Diesel Hybrid Long Distance Semi-trailer truck,Construction,=1 * 8760 * 0.093 / (11.7 * 274000),unit,ton kilometer per hour,"payload (13.4 t), yearly distance (108000 km): (Sacchi, 2022), capacity factor (0.093): (Limpens, 2021)"
-Diesel Hybrid Long Distance Semi-trailer truck,Operation,=1,ton kilometer,ton kilometer,None
-Propane-Powered Long Distance Semi-trailer truck,Construction,=1 * 8760 * 0.093 / (11.7 * 274000),unit,ton kilometer per hour,"payload (13.4 t), yearly distance (108000 km): (Sacchi, 2022), capacity factor (0.093): (Limpens, 2021)"
-Propane-Powered Long Distance Semi-trailer truck,Operation,=1,ton kilometer,ton kilometer,None
+100% BioDiesel-Powered Long Distance Semi-trailer truck,Construction,=1 * 8760 * 0.093 / (13.4 * 108000),unit,ton kilometer per hour,"payload (13.4 t), yearly distance (108000 km): (Sacchi, 2021), capacity factor (0.093): (Limpens, 2021)"
+100% BioDiesel-Powered Long Distance Semi-trailer truck,Operation,=1/13.4,kilometer,ton kilometer,"payload (13.4 t): (Sacchi, 2021)"
+20% BioDiesel-Powered Long Distance Semi-trailer truck,Construction,=1 * 8760 * 0.093 / (13.4 * 108000),unit,ton kilometer per hour,"payload (13.4 t), yearly distance (108000 km): (Sacchi, 2021), capacity factor (0.093): (Limpens, 2021)"
+20% BioDiesel-Powered Long Distance Semi-trailer truck,Operation,=1/13.4,kilometer,ton kilometer,"payload (13.4 t): (Sacchi, 2021)"
+Compressed Natural Gas-Powered Long Distance Semi-trailer truck,Construction,=1 * 8760 * 0.093 / (13.4 * 108000),unit,ton kilometer per hour,"payload (13.4 t), yearly distance (108000 km): (Sacchi, 2021), capacity factor (0.093): (Limpens, 2021)"
+Compressed Natural Gas-Powered Long Distance Semi-trailer truck,Operation,=1/13.4,kilometer,ton kilometer,"payload (13.4 t): (Sacchi, 2021)"
+Diesel-Powered Long Distance Semi-trailer truck,Construction,=1 * 8760 * 0.093 / (13.4 * 108000),unit,ton kilometer per hour,"payload (13.4 t), yearly distance (108000 km): (Sacchi, 2021), capacity factor (0.093): (Limpens, 2021)"
+Diesel-Powered Long Distance Semi-trailer truck,Operation,=1/13.4,kilometer,ton kilometer,"payload (13.4 t): (Sacchi, 2021)"
+Electric-Powered Long Distance Semi-trailer truck,Construction,=1 * 8760 * 0.093 / (13.4 * 108000),unit,ton kilometer per hour,"payload (13.4 t), yearly distance (108000 km): (Sacchi, 2021), capacity factor (0.093): (Limpens, 2021)"
+Electric-Powered Long Distance Semi-trailer truck,Operation,1,ton kilometer,ton kilometer,None
+Hydrogen Fuel Cell-Powered Long Distance Semi-trailer truck,Construction,=1 * 8760 * 0.093 / (13.4 * 108000),unit,ton kilometer per hour,"payload (13.4 t), yearly distance (108000 km): (Sacchi, 2021), capacity factor (0.093): (Limpens, 2021)"
+Hydrogen Fuel Cell-Powered Long Distance Semi-trailer truck,Operation,=1/13.4,kilometer,ton kilometer,"payload (13.4 t): (Sacchi, 2021)"
+Diesel Hybrid Long Distance Semi-trailer truck,Construction,=1 * 8760 * 0.093 / (13.4 * 108000),unit,ton kilometer per hour,"payload (13.4 t), yearly distance (108000 km): (Sacchi, 2021), capacity factor (0.093): (Limpens, 2021)"
+Diesel Hybrid Long Distance Semi-trailer truck,Operation,=1/13.4,kilometer,ton kilometer,"payload (13.4 t): (Sacchi, 2021)"
+Propane-Powered Long Distance Semi-trailer truck,Construction,=1 * 8760 * 0.093 / (13.4 * 108000),unit,ton kilometer per hour,"payload (13.4 t), yearly distance (108000 km): (Sacchi, 2021), capacity factor (0.093): (Limpens, 2021)"
+Propane-Powered Long Distance Semi-trailer truck,Operation,=1/13.4,kilometer,ton kilometer,"payload (13.4 t): (Sacchi, 2021)"
 100% BioDiesel-Powered Short Distance Semi-trailer truck,Construction,=1 * 8760 * 0.093 / (6.3 * 73000),unit,ton kilometer per hour,"payload (6.3 t), yearly distance (73000 km): (Sacchi, 2021), capacity factor (0.093): (Limpens, 2021)"
 100% BioDiesel-Powered Short Distance Semi-trailer truck,Operation,=1/6.3,kilometer,ton kilometer,"payload (6.3 t): (Sacchi, 2021)"
 20% BioDiesel-Powered Short Distance Semi-trailer truck,Construction,=1 * 8760 * 0.093 / (6.3 * 73000),unit,ton kilometer per hour,"payload (6.3 t), yearly distance (73000 km): (Sacchi, 2021), capacity factor (0.093): (Limpens, 2021)"
@@ -595,7 +598,7 @@ High to Medium Voltage Transformer,Operation,1,kilowatt hour,kilowatt hour,None
 Low to Medium Voltage Transformer,Operation,1,kilowatt hour,kilowatt hour,None
 Medium to High Voltage Transformer,Operation,1,kilowatt hour,kilowatt hour,None
 Medium to Low Voltage Transformer,Operation,1,kilowatt hour,kilowatt hour,None
-Diesel-Powered Train,Construction,=1 * 8760 * 0.275 / (343 * (20000000/40)),unit,person kilometer per hour,"distance over lifetime (20mio km), lifetime (40y): (Wernet, 2016), people per vehicle (343): (Schnidrig, 2020), capacity factor (0.275): (Limpens, 2021)"
+Diesel-Powered Train,Construction,=1 * 8760 * 0.275 / (343 * 400000),unit,person kilometer per hour,"yearly distance (400000 km), people per vehicle (343): (Schnidrig, 2020), capacity factor (0.275): (Limpens, 2021)"
 Diesel-Powered Train,Operation,=1,person kilometer,person kilometer,None
 Electric-Powered Train,Construction,=1 * 8760 * 0.275 / (343 * 400000),unit,person kilometer per hour,"yearly distance (400000 km), people per vehicle (343): (Schnidrig, 2020), capacity factor (0.275): (Limpens, 2021)"
 Electric-Powered Train,Operation,=1,person kilometer,person kilometer,None
@@ -619,28 +622,28 @@ Natural Gas-Powered Freight Train,Construction,=(40 * 8760 * 0.342) / (9600000 *
 Natural Gas-Powered Freight Train,Operation,1,ton kilometer,ton kilometer,None
 Natural Gas-Powered Freight Train (locomotive),Construction,2,unit,unit,"2 locomotives per train (Spielmann, 2007)"
 Natural Gas-Powered Freight Train (wagon),Construction,20,unit,unit,"20 wagon per train: (Spielmann, 2007); "
-Hydrogen-Powered Train,Construction,=40 * 8760 * 0.275 / (343 * 20000000),unit,person kilometer per hour,"distance over lifetime (20mio km), lifetime (40y): (Wernet, 2016), people per vehicle (343): (Schnidrig, 2020), capacity factor (0.275): (Limpens, 2021)"
+Hydrogen-Powered Train,Construction,=1 * 8760 * 0.275 / (343 * 400000),unit,person kilometer per hour,"yearly distance (400000 km), people per vehicle (343): (Schnidrig, 2020), capacity factor (0.275): (Limpens, 2021)"
 Hydrogen-Powered Train,Operation,=1,person kilometer,person kilometer,None
-Natural Gas-Powered Train,Construction,=40 * 8760 * 0.275 / (343 * 20000000),unit,person kilometer per hour,"distance over lifetime (20mio km), lifetime (40y): (Wernet, 2016), people per vehicle (343): (Schnidrig, 2020), capacity factor (0.275): (Limpens, 2021)"
+Natural Gas-Powered Train,Construction,=1 * 8760 * 0.275 / (343 * 400000),unit,person kilometer per hour,"yearly distance (400000 km), people per vehicle (343): (Schnidrig, 2020), capacity factor (0.275): (Limpens, 2021)"
 Natural Gas-Powered Train,Operation,=1,person kilometer,person kilometer,None
-Tramway,Construction,=1 * 8760 * 0.342 / (28 * 27300),unit,person kilometer per hour,"Yearly distance (27300 km/yr): (Wernet, 2016) ; people per vehicle (28): (Wernet, 2016), capacity factor (0.342): (Limpens, 2021)"
+Tramway,Construction,=1 * 8760 * 0.342 / (28 * 27300),unit,person kilometer per hour,"yearly distance (27300 km/yr): (Wernet, 2016) ; people per vehicle (28): (Wernet, 2016), capacity factor (0.342): (Limpens, 2021)"
 Tramway,Operation,=1,person kilometer,person kilometer,None
-100% BioDiesel-Powered Long Distance Truck,Construction,=1 * 8760 * 0.093 / (7.4 * 98000),unit,ton kilometer per hour,"payload (7.4 t), yearly distance (98000 km): (Sacchi, 2022), capacity factor (0.093): (Limpens, 2021)"
-100% BioDiesel-Powered Long Distance Truck,Operation,=1,ton kilometer,ton kilometer,None
-20% BioDiesel-Powered Long Distance Truck,Construction,=1 * 8760 * 0.093 / (7.4 * 98000),unit,ton kilometer per hour,"payload (7.4 t), yearly distance (98000 km): (Sacchi, 2022), capacity factor (0.093): (Limpens, 2021)"
-20% BioDiesel-Powered Long Distance Truck,Operation,=1,ton kilometer,ton kilometer,None
-Compressed Natural Gas-Powered Long Distance Truck,Construction,=1 * 8760 * 0.093 / (7.4 * 98000),unit,ton kilometer per hour,"payload (7.4 t), yearly distance (98000 km): (Sacchi, 2022), capacity factor (0.093): (Limpens, 2021)"
-Compressed Natural Gas-Powered Long Distance Truck,Operation,=1,ton kilometer,ton kilometer,None
-Diesel-Powered Long Distance Truck,Construction,=1 * 8760 * 0.093 / (7.4 * 98000),unit,ton kilometer per hour,"payload (7.4 t), yearly distance (98000 km): (Sacchi, 2022), capacity factor (0.093): (Limpens, 2021)"
-Diesel-Powered Long Distance Truck,Operation,=1,ton kilometer,ton kilometer,None
-Electric-Powered Long Distance Truck,Construction,=1 * 8760 * 0.093 / (7.4 * 98000),unit,ton kilometer per hour,"payload (7.4 t), yearly distance (98000 km): (Sacchi, 2022), capacity factor (0.093): (Limpens, 2021)"
-Electric-Powered Long Distance Truck,Operation,=1,ton kilometer,ton kilometer,None
-Gasoline-Powered Long Distance Truck,Construction,=1 * 8760 * 0.093 / (7.4 * 98000),unit,ton kilometer per hour,"payload (7.4 t), yearly distance (98000 km): (Sacchi, 2022), capacity factor (0.093): (Limpens, 2021)"
-Gasoline-Powered Long Distance Truck,Operation,=1,ton kilometer,ton kilometer,None
-Diesel Hybrid Long Distance Truck,Construction,=1 * 8760 * 0.093 / (7.4 * 98000),unit,ton kilometer per hour,"payload (7.4 t), yearly distance (98000 km): (Sacchi, 2022), capacity factor (0.093): (Limpens, 2021)"
-Diesel Hybrid Long Distance Truck,Operation,=1,ton kilometer,ton kilometer,None
-Propane-Powered Long Distance Truck,Construction,=1 * 8760 * 0.093 / (7.4 * 98000),unit,ton kilometer per hour,"payload (7.4 t), yearly distance (98000 km): (Sacchi, 2022), capacity factor (0.093): (Limpens, 2021)"
-Propane-Powered Long Distance Truck,Operation,=1,ton kilometer,ton kilometer,None
+100% BioDiesel-Powered Long Distance Truck,Construction,=1 * 8760 * 0.093 / (7.4 * 98000),unit,ton kilometer per hour,"payload (7.4 t), yearly distance (98000 km): (Sacchi, 2021), capacity factor (0.093): (Limpens, 2021)"
+100% BioDiesel-Powered Long Distance Truck,Operation,=1/7.4,kilometer,ton kilometer,"payload (7.4 t): (Sacchi, 2021)"
+20% BioDiesel-Powered Long Distance Truck,Construction,=1 * 8760 * 0.093 / (7.4 * 98000),unit,ton kilometer per hour,"payload (7.4 t), yearly distance (98000 km): (Sacchi, 2021), capacity factor (0.093): (Limpens, 2021)"
+20% BioDiesel-Powered Long Distance Truck,Operation,=1/7.4,kilometer,ton kilometer,"payload (7.4 t): (Sacchi, 2021)"
+Compressed Natural Gas-Powered Long Distance Truck,Construction,=1 * 8760 * 0.093 / (7.4 * 98000),unit,ton kilometer per hour,"payload (7.4 t), yearly distance (98000 km): (Sacchi, 2021), capacity factor (0.093): (Limpens, 2021)"
+Compressed Natural Gas-Powered Long Distance Truck,Operation,=1/7.4,kilometer,ton kilometer,"payload (7.4 t): (Sacchi, 2021)"
+Diesel-Powered Long Distance Truck,Construction,=1 * 8760 * 0.093 / (7.4 * 98000),unit,ton kilometer per hour,"payload (7.4 t), yearly distance (98000 km): (Sacchi, 2021), capacity factor (0.093): (Limpens, 2021)"
+Diesel-Powered Long Distance Truck,Operation,=1/7.4,kilometer,ton kilometer,"payload (7.4 t): (Sacchi, 2021)"
+Electric-Powered Long Distance Truck,Construction,=1 * 8760 * 0.093 / (7.4 * 98000),unit,ton kilometer per hour,"payload (7.4 t), yearly distance (98000 km): (Sacchi, 2021), capacity factor (0.093): (Limpens, 2021)"
+Electric-Powered Long Distance Truck,Operation,1,ton kilometer,ton kilometer,None
+Gasoline-Powered Long Distance Truck,Construction,=1 * 8760 * 0.093 / (7.4 * 98000),unit,ton kilometer per hour,"payload (7.4 t), yearly distance (98000 km): (Sacchi, 2021), capacity factor (0.093): (Limpens, 2021)"
+Gasoline-Powered Long Distance Truck,Operation,=1/7.4,kilometer,ton kilometer,"payload (7.4 t): (Sacchi, 2021)"
+Diesel Hybrid Long Distance Truck,Construction,=1 * 8760 * 0.093 / (7.4 * 98000),unit,ton kilometer per hour,"payload (7.4 t), yearly distance (98000 km): (Sacchi, 2021), capacity factor (0.093): (Limpens, 2021)"
+Diesel Hybrid Long Distance Truck,Operation,=1/7.4,kilometer,ton kilometer,"payload (7.4 t): (Sacchi, 2021)"
+Propane-Powered Long Distance Truck,Construction,=1 * 8760 * 0.093 / (7.4 * 98000),unit,ton kilometer per hour,"payload (7.4 t), yearly distance (98000 km): (Sacchi, 2021), capacity factor (0.093): (Limpens, 2021)"
+Propane-Powered Long Distance Truck,Operation,=1/7.4,kilometer,ton kilometer,"payload (7.4 t): (Sacchi, 2021)"
 100% BioDiesel-Powered Short Distance Truck,Construction,=1 * 8760 * 0.093 / (3.2 * 78000),unit,ton kilometer per hour,"payload (3.2 t), yearly distance (78000 km): (Sacchi, 2021), capacity factor (0.093): (Limpens, 2021)"
 100% BioDiesel-Powered Short Distance Truck,Operation,=1/3.2,kilometer,ton kilometer,"payload (3.2 t): (Sacchi, 2021)"
 20% BioDiesel-Powered Short Distance Truck,Construction,=1 * 8760 * 0.093 / (3.2 * 78000),unit,ton kilometer per hour,"payload (3.2 t), yearly distance (78000 km): (Sacchi, 2021), capacity factor (0.093): (Limpens, 2021)"
@@ -659,10 +662,10 @@ Propane-Powered Short Distance Truck,Construction,=1 * 8760 * 0.093 / (3.2 * 780
 Propane-Powered Short Distance Truck,Operation,=1/3.2,kilometer,ton kilometer,"payload (3.2 t): (Sacchi, 2021)"
 Sequestration of CO2 in Unmineable Coal Seams,Operation,=1,kilogram,kilogram,None
 Uranium,Resource,=1 * 3.6 / (3900*1000),kilogram,kilowatt hour,"Nuclear fuel heat value (3900 GJ/kg) (World Nuclear Association, n.d.)"
-Waste,Resource,=-1 * 3.6 / 12.35,kilogram,kilowatt hour,"Municipal solid waste LHV (12.35 MJ/kg): (Moret, 2017)"
+Organic and Paper Waste,Resource,=-1 * 3.6 / 12.35,kilogram,kilowatt hour,"Municipal solid waste LHV (12.35 MJ/kg): (Moret, 2017)"
 Biogenic waste,Resource,=-1 * 3.6 / (6.087*0.95),kilogram,kilowatt hour,"Biowaste HHV (6.087 MJ/kg): (Wernet, 2016), HHV to LHV ratio (0.95): (Engineering ToolBox, 2003)"
 Fossil waste,Resource,=-1 * 3.6 / 2.453,kilogram,kilowatt hour,"Refinery sludge LHV (2.453 MJ/kg): (Wernet, 2016)"
-Wet biomass,Resource,=1 * 3.6 / (0.95*15),kilogram,kilowatt hour,"HHV manure (15 MJ/kg): (Marin-Batista, 2020), LHV-to-HHV ratio (0.95)"
+"Wet Biomass Waste from Industry, Agriculture and Municipalities",Resource,=1 * 3.6 / (0.95*15),kilogram,kilowatt hour,"HHV manure (15 MJ/kg): (Marin-Batista, 2020), LHV-to-HHV ratio (0.95)"
 Wind Energy Offshore,Construction,=1000/2000000,unit,kilowatt,Capacity (2 MW)
 Wind Energy Offshore,Operation,=1,kilowatt hour,kilowatt hour,None
 Wind Energy Offshore (fixed parts),Construction,1,unit,unit,None
@@ -675,7 +678,7 @@ New Wind Energy Onshore,Construction,=1000/2000000,unit,kilowatt,Capacity (2 MW)
 New Wind Energy Onshore,Operation,=1,kilowatt hour,kilowatt hour,None
 New Wind Energy Onshore (connection),Construction,1,unit,unit,None
 New Wind Energy Onshore (co-generation unit),Construction,1,unit,unit,None
-Wood,Resource,=1 * 3.6 / 15.4,kilogram,kilowatt hour,"LHV wood (15.4 MJ/kg): (Engineering ToolBox, 2003)"
+"Waste Wood from Industry, Agriculture and Forestry",Resource,=1 * 3.6 / 15.4,kilogram,kilowatt hour,"LHV wood (15.4 MJ/kg): (Engineering ToolBox, 2003)"
 Conversion of Wood to Methanol,Construction,=(24*0.86)/2.7 / 1000000,unit,kilowatt,"Daily production (2700 t/day): (Wernet, 2016), LHV methanol (5.54 kWh/kg): (Engineering ToolBox, 2003), capacity factor (0.86): (Moret, 2017)"
 Conversion of Wood to Methanol,Operation,=1 / 5.54,kilogram,kilowatt hour,"LHV methanol (5.54 kWh/kg): (Engineering ToolBox, 2003)"
 Xylene,Resource,=1 * 3.6 / 40.961,kilogram,kilowatt hour,"Xylene LHV (40.961 MJ/kg): (Wikipedia, 2023)"
@@ -689,8 +692,8 @@ BioEthanol-Powered Car (E10 Blend),Construction,=1 * 8760 * 0.051 / (1.23 * 1200
 BioEthanol-Powered Car (E10 Blend),Operation,=1/1.23,kilometer,person kilometer,"people per vehicle (1.23): (Chaire Mobilite, 2018)"
 BioEthanol-Powered Car with E85 Blend,Construction,=1 * 8760 * 0.051 / (1.23 * 12000),unit,person kilometer per hour,"people per vehicle (1.23): (Chaire Mobilite, 2018), yearly distance (12000km): (Sacchi, 2022), capacity factor (0.051): (Limpens, 2021)"
 BioEthanol-Powered Car with E85 Blend,Operation,=1/1.23,kilometer,person kilometer,"people per vehicle (1.23): (Chaire Mobilite, 2018)"
-Biomethanol-Powered Car ,Construction,=1 * 8760 * 0.051 / (1.5 * 7600),unit,person kilometer per hour,"number of passengers in cars (1.5): (Biedermann, 2023) ; yearly car distance (7600 km): (Biedermann, 2023), capacity factor (0.051): (Limpens, 2021)"
-Biomethanol-Powered Car ,Operation,=1 / 1.5,kilometer,person kilometer,"number of passengers in cars (1.5): (Biedermann, 2023)"
+Biomethanol-Powered Car ,Construction,=1 * 8760 * 0.051 / (1.23 * 12000),unit,person kilometer per hour,"people per vehicle (1.23): (Chaire Mobilite, 2018), yearly distance (12000km): (Sacchi, 2022), capacity factor (0.051): (Limpens, 2021)"
+Biomethanol-Powered Car ,Operation,=1/1.23,kilometer,person kilometer,"people per vehicle (1.23): (Chaire Mobilite, 2018)"
 Combined Cycle BioGas Turbine,Construction,=1/400 / 1000,unit,kilowatt,Capacity (400 MW_el)
 Combined Cycle BioGas Turbine,Operation,=1,kilowatt hour,kilowatt hour,None
 Combined Cycle BioGas Turbine with Carbon Capture,Construction,=1/400 / 1000,unit,kilowatt,Capacity (400 MW_el)
@@ -795,8 +798,8 @@ Bio-Jet Fuel-Powered Short Haul Passenger Plane,Construction,=1 * 8760 * 0.349 /
 Bio-Jet Fuel-Powered Short Haul Passenger Plane,Operation,=1,person kilometer,person kilometer,None
 10% BioEthanol-Powered School Bus,Construction,=1 * 8760 * 0.297 / (47 * 24000),unit,person kilometer per hour,"people per vehicle (47), yearly distance (24000 km): (CIRAIG, 2022), capacity factor (0.297): (Limpens, 2021)"
 10% BioEthanol-Powered School Bus,Operation,=1,person kilometer,person kilometer,None
-Compressed Synthetic Natural Gas-Powered Long Distance Semi-trailer truck,Construction,=1 * 8760 * 0.093 / (11.7 * 274000),unit,ton kilometer per hour,"payload (13.4 t), yearly distance (108000 km): (Sacchi, 2022), capacity factor (0.093): (Limpens, 2021)"
-Compressed Synthetic Natural Gas-Powered Long Distance Semi-trailer truck,Operation,=1,ton kilometer,ton kilometer,None
+Compressed Synthetic Natural Gas-Powered Long Distance Semi-trailer truck,Construction,=1 * 8760 * 0.093 / (13.4 * 108000),unit,ton kilometer per hour,"payload (13.4 t), yearly distance (108000 km): (Sacchi, 2021), capacity factor (0.093): (Limpens, 2021)"
+Compressed Synthetic Natural Gas-Powered Long Distance Semi-trailer truck,Operation,=1/13.4,kilometer,ton kilometer,"payload (13.4 t): (Sacchi, 2021)"
 Compressed Synthetic Natural Gas-Powered Short Distance Semi-trailer truck,Construction,=1 * 8760 * 0.093 / (6.3 * 73000),unit,ton kilometer per hour,"payload (6.3 t), yearly distance (73000 km): (Sacchi, 2021), capacity factor (0.093): (Limpens, 2021)"
 Compressed Synthetic Natural Gas-Powered Short Distance Semi-trailer truck,Operation,=1/6.3,kilometer,ton kilometer,"payload (6.3 t): (Sacchi, 2021)"
 Compressed Synthetic Natural Gas-Powered Sport Utility Vehicle,Construction,=1 * 8760 * 0.051 / (1.23 * 12000),unit,person kilometer per hour,"people per vehicle (1.23): (Chaire Mobilite, 2018), yearly distance (12000km): (Sacchi, 2022), capacity factor (0.051): (Limpens, 2021)"
@@ -805,7 +808,7 @@ Compressed Synthetic Natural Gas-Powered Sport Utility Vehicle,Operation,=1,pers
 10% BioEthanol-Powered Sport Utility Vehicle,Operation,=1,person kilometer,person kilometer,None
 85% BioEthanol-Powered Sport Utility Vehicle,Construction,=1 * 8760 * 0.051 / (1.23 * 12000),unit,person kilometer per hour,"people per vehicle (1.23): (Chaire Mobilite, 2018), yearly distance (12000km): (Sacchi, 2022), capacity factor (0.051): (Limpens, 2021)"
 85% BioEthanol-Powered Sport Utility Vehicle,Operation,=1,person kilometer,person kilometer,None
-BioDiesel-Powered Train,Construction,=1 * 8760 * 0.275 / (343 * (20000000/40)),unit,person kilometer per hour,"distance over lifetime (20mio km), lifetime (40y): (Wernet, 2016), people per vehicle (343): (Schnidrig, 2020), capacity factor (0.275): (Limpens, 2021)"
+BioDiesel-Powered Train,Construction,=1 * 8760 * 0.275 / (343 * 400000),unit,person kilometer per hour,"yearly distance (400000 km), people per vehicle (343): (Schnidrig, 2020), capacity factor (0.275): (Limpens, 2021)"
 BioDiesel-Powered Train,Operation,=1,person kilometer,person kilometer,None
 Biodiesel-Powered Freight Train,Construction,=(40 * 8760 * 0.342) / (9600000 * 20 * 26),unit,ton kilometer per hour,"Lifetime distance 9600000 km: (Spielmann, 2007); train composition 2 Locomotives:  (Schnidrig, 2020); Lifetime of train 40 years:  (Spielmann, 2007); 20 waggon per train: (Spielmann, 2007); Load per wagon: 26t  (Spielmann, 2007); capacity factor (0.342): (Limpens, 2021)"
 Biodiesel-Powered Freight Train,Operation,1,ton kilometer,ton kilometer,None
@@ -815,21 +818,21 @@ Natural Synthetic Gas-Powered Freight Train,Construction,=(40 * 8760 * 0.342) / 
 Natural Synthetic Gas-Powered Freight Train,Operation,1,ton kilometer,ton kilometer,None
 Natural Synthetic Gas-Powered Freight Train (locomotive),Construction,2,unit,unit,"2 locomotives per train (Spielmann, 2007)"
 Natural Synthetic Gas-Powered Freight Train (wagon),Construction,20,unit,unit,"20 wagon per train: (Spielmann, 2007); "
-Synthetic Natural Gas-Powered Train,Construction,=40 * 8760 * 0.275 / (343 * 20000000),unit,person kilometer per hour,"distance over lifetime (20mio km), lifetime (40y): (Wernet, 2016), people per vehicle (343): (Schnidrig, 2020), capacity factor (0.275): (Limpens, 2021)"
+Synthetic Natural Gas-Powered Train,Construction,=1 * 8760 * 0.275 / (343 * 400000),unit,person kilometer per hour,"yearly distance (400000 km), people per vehicle (343): (Schnidrig, 2020), capacity factor (0.275): (Limpens, 2021)"
 Synthetic Natural Gas-Powered Train,Operation,=1,person kilometer,person kilometer,None
-Compressed Synthetic Natural Gas-Powered Long Distance Truck,Construction,=1 * 8760 * 0.093 / (7.4 * 98000),unit,ton kilometer per hour,"payload (7.4 t), yearly distance (98000 km): (Sacchi, 2022), capacity factor (0.093): (Limpens, 2021)"
-Compressed Synthetic Natural Gas-Powered Long Distance Truck,Operation,=1,ton kilometer,ton kilometer,None
+Compressed Synthetic Natural Gas-Powered Long Distance Truck,Construction,=1 * 8760 * 0.093 / (7.4 * 98000),unit,ton kilometer per hour,"payload (7.4 t), yearly distance (98000 km): (Sacchi, 2021), capacity factor (0.093): (Limpens, 2021)"
+Compressed Synthetic Natural Gas-Powered Long Distance Truck,Operation,=1/7.4,kilometer,ton kilometer,"payload (7.4 t): (Sacchi, 2021)"
 Compressed Synthetic Natural Gas-Powered Short Distance Truck,Construction,=1 * 8760 * 0.093 / (3.2 * 78000),unit,ton kilometer per hour,"payload (3.2 t), yearly distance (78000 km): (Sacchi, 2021), capacity factor (0.093): (Limpens, 2021)"
 Compressed Synthetic Natural Gas-Powered Short Distance Truck,Operation,=1/3.2,kilometer,ton kilometer,"payload (3.2 t): (Sacchi, 2021)"
 Bio-ethanol,Resource,=1 * 3.6 / 31.58,kilogram,kilowatt hour,"Ethanol LHV (31.58 MJ/kg): (Wernet, 2016)"
-Hydrogen Grid at Extra High Pressure,Construction,=1 / (12133 * 1000),kilometer,kilowatt kilometer,"Power size connected to the extreme high-pressure H2 grid ($P_{EHP}$ = 12133 MW): (Schnidrig, 2023)"
-Natural Gas Grid at Extra High Pressure,Construction,=1 / (51500 * 1000),kilometer,kilowatt kilometer,"Power size connected to the extreme high-pressure NG grid ($P_{EHP}$ = 51500 MW): (Schnidrig, 2023)"
-Hydrogen Grid at High Pressure,Construction,=1 / (1557 * 1000),kilometer,kilowatt kilometer,"Power size connected to the high-pressure H2 grid ($P_{HP}$ = 1557 MW): (Schnidrig, 2023)"
-Natural Gas Grid at High Pressure,Construction,=1 / (6140 * 1000),kilometer,kilowatt kilometer,"Power size connected to the high-pressure NG grid ($P_{HP}$ = 6140 MW): (Schnidrig, 2023)"
-Hydrogen Grid at Low Pressure,Construction,=1 / (0.2 * 1000),kilometer,kilowatt kilometer,"Power size connected to the medium-pressure H2 grid ($P_{LP}$ = 0.2 MW): (Schnidrig, 2023)"
-Natural Gas Grid at Low Pressure,Construction,=1 / (0.425 * 1000),kilometer,kilowatt kilometer,"Power size connected to the low-pressure NG grid ($P_{LP}$ = 0.425 MW): (Schnidrig, 2023)"
-Hydrogen Grid at Medium Pressure,Construction,=1 / (132 * 1000),kilometer,kilowatt kilometer,"Power size connected to the medium-pressure H2 grid ($P_{MP}$ = 132 MW): (Schnidrig, 2023)"
-Natural Gas Grid at Medium Pressure,Construction,=1 / (425 * 1000),kilometer,kilowatt kilometer,"Power size connected to the medium-pressure NG grid ($P_{MP}$ = 425 MW): (Schnidrig, 2023)"
+Hydrogen Grid at Extra High Pressure,Construction,=789/9760000,kilometer,kilowatt,Same as EHP_NG_GRID
+Natural Gas Grid at Extra High Pressure,Construction,=789/9760000,kilometer,kilowatt,"Existing grid length (789 km), corresponding grid capacity (9.76 GW): data from communications with Energir"
+Hydrogen Grid at High Pressure,Construction,=76/9760000,kilometer,kilowatt,Same as HP_NG_GRID
+Natural Gas Grid at High Pressure,Construction,=76/9760000,kilometer,kilowatt,"Existing grid length (76 km), corresponding grid capacity (9.76 GW): data from communications with Energir"
+Hydrogen Grid at Low Pressure,Construction,=7560/5050000,kilometer,kilowatt,Same as LP_NG_GRID
+Natural Gas Grid at Low Pressure,Construction,=7560/5050000,kilometer,kilowatt,"Existing grid length (7560 km), corresponding grid capacity (5.05 GW): data from communications with Energir"
+Hydrogen Grid at Medium Pressure,Construction,=1966/9740000,kilometer,kilowatt,Same as MP_NG_GRID
+Natural Gas Grid at Medium Pressure,Construction,=1966/9740000,kilometer,kilowatt,"Existing grid length (1966 km), corresponding grid capacity (9.74 GW): data from communications with Energir"
 Acetic acid,Flow,=1 * 3.6 / 14.55,kilogram,kilowatt hour,"acetic acid heat of combustion (14.55 MJ/kg): (Engineering ToolBox, 2017)"
 Acetone,Flow,=1 / 8.22,kilogram,kilowatt hour,"Acetone LHV (8.22 kWh/kg): (Engineering ToolBox, 2003)"
 Benzene,Flow,=1 * 3.6 / 42.5,kilogram,kilowatt hour,"Benzene heat of combustion (42.5 MJ/kg): (Wernet, 2016)"
@@ -852,6 +855,9 @@ Light fuel oil,Flow,=1 * 3.6 / 42.6,kilogram,kilowatt hour,"Light fuel oil LHV (
 Liquified natural gas,Flow,=1 * 3.6 / 39,cubic meter,kilowatt hour,"liquified natural gas LHV (39 MJ/m3): (Wernet, 2016)"
 Methanol,Flow,=1 / 5.54,kilogram,kilowatt hour,"LHV methanol (5.54 kWh/kg): (Engineering ToolBox, 2003)"
 Natural gas,Flow,=1 * 3.6 / 39,cubic meter,kilowatt hour,"natural gas LHV (39 MJ/m3): (Wernet, 2016)"
+Natural gas,Flow,=1 / (0.777 * 13.1),cubic meter,kilowatt hour,"natural gas LHV (39 MJ/m3): (Wernet, 2016)"
+Natural gas,Flow,=1 / (0.777 * 13.1),cubic meter,kilowatt hour,"natural gas LHV (39 MJ/m3): (Wernet, 2016)"
+Natural gas,Flow,=1 / (0.777 * 13.1),cubic meter,kilowatt hour,"natural gas LHV (39 MJ/m3): (Wernet, 2016)"
 Polyethylene,Flow,=1,kilogram,kilogram,None
 Polyethylene terephthalate,Flow,=1,kilogram,kilogram,None
 Phenol,Flow,=1 * 3.6 / 32.45,kilogram,kilowatt hour,"phenol heat of combustion (32.45 MJ/kg): (Engineering ToolBox, 2017)"
@@ -864,13 +870,67 @@ Synthetic natural gas,Flow,=1 / (0.777 * 13.1),cubic meter,kilowatt hour,"natura
 Styrene,Flow,=1,kilogram,kilogram,None
 Toluene,Flow,=1 * 3.6 / 42.43,kilogram,kilowatt hour,"Toluene heat of combustion (42.43 MJ/kg): (Engineering ToolBox, 2017)"
 Uranium,Flow,=1 * 3.6 / (3900*1000),kilogram,kilowatt hour,"Nuclear fuel heat value (3900 GJ/kg) (World Nuclear Association, n.d.)"
-Waste,Flow,=-1 * 3.6 / 12.35,kilogram,kilowatt hour,"Municipal solid waste LHV (12.35 MJ/kg): (Moret, 2017)"
+Organic and Paper Waste,Flow,=-1 * 3.6 / 12.35,kilogram,kilowatt hour,"Municipal solid waste LHV (12.35 MJ/kg): (Moret, 2017)"
 Biogenic waste,Flow,=-1 * 3.6 / (6.087*0.95),kilogram,kilowatt hour,"Biowaste HHV (6.087 MJ/kg): (Wernet, 2016), HHV to LHV ratio (0.95): (Engineering ToolBox, 2003)"
 Fossil waste,Flow,=-1 * 3.6 / 2.453,kilogram,kilowatt hour,"Refinery sludge LHV (2.453 MJ/kg): (Wernet, 2016)"
-Wet biomass,Flow,=1 * 3.6 / (0.95*15),kilogram,kilowatt hour,"HHV manure (15 MJ/kg): (Marin-Batista, 2020), LHV-to-HHV ratio (0.95)"
-Wood,Flow,=1 * 3.6 / 15.4,kilogram,kilowatt hour,"LHV wood (15.4 MJ/kg): (Engineering ToolBox, 2003)"
+"Wet Biomass Waste from Industry, Agriculture and Municipalities",Flow,=1 * 3.6 / (0.95*15),kilogram,kilowatt hour,"HHV manure (15 MJ/kg): (Marin-Batista, 2020), LHV-to-HHV ratio (0.95)"
+"Waste Wood from Industry, Agriculture and Forestry",Flow,=1 * 3.6 / 15.4,kilogram,kilowatt hour,"LHV wood (15.4 MJ/kg): (Engineering ToolBox, 2003)"
 Xylene,Flow,=1 * 3.6 / 40.961,kilogram,kilowatt hour,"Xylene LHV (40.961 MJ/kg): (Wikipedia, 2023)"
 Bio-ethanol,Flow,=1 * 3.6 / 31.58,kilogram,kilowatt hour,"Ethanol LHV (31.58 MJ/kg): (Wernet, 2016)"
 Synthetic natural gas,Flow,=1 * 3.6 / 39,cubic meter,kilowatt hour,"natural gas LHV (39 MJ/m3): (Wernet, 2016)"
 Heat (high temperature),Flow,=1 * 3.6,megajoule,kilowatt hour,None
+Heat (low temperature),Flow,=1 * 3.6,megajoule,kilowatt hour,None
 Carbon dioxide,Flow,1,kilogram,kilogram,None
+Unharvested wood,Resource,=3.6/18.43,kilogram,kilowatt hour,"energy content (dry) (18.43 MJ/kg): (WSP, 2021)"
+Residual forest biomass,Resource,=3.6/18.61,kilogram,kilowatt hour,"energy content (dry) (18.61 MJ/kg): (WSP, 2021)"
+By-products from primary processing,Resource,=3.6/19.06,kilogram,kilowatt hour,"energy content (dry) (19.06 MJ/kg): (WSP, 2021)"
+By-products from secondary processing,Resource,=3.6/18.93,kilogram,kilowatt hour,"energy content (dry) (18.93 MJ/kg): (WSP, 2021)"
+Animal manure,Resource,=3.6 / 7.09,kilogram,kilowatt hour,"energy content (dry) (7.09 MJ/kg): (WSP, 2021)"
+Crop production and residues,Resource,=3.6/15.34,kilogram,kilowatt hour,"energy content (dry) (15.34 MJ/kg): (WSP, 2021)"
+"Food waste, green waste, and other organic matter",Resource,=-1 * 3.6 / 17.09,kilogram,kilowatt hour,"energy content (dry) (17.09 MJ/kg): (WSP, 2021)"
+Paper and cardboard,Resource,=3.6/15.98,kilogram,kilowatt hour,"energy content (dry) (15.98 MJ/kg): (WSP, 2021)"
+Pulp and paper mill residues,Resource,=-1 * 3.6 / 11.24,kilogram,kilowatt hour,"energy content (dry) (11.24 MJ/kg): (WSP, 2021)"
+"Construction, renovation, and demolition wood waste",Resource,=3.6/18.63,kilogram,kilowatt hour,"energy content (dry) (18.63 MJ/kg): (WSP, 2021)"
+Municipal sludge,Resource,=-1 * 3.6 / 7.64,kilogram,kilowatt hour,"energy content (dry) (7.64 MJ/kg): (WSP, 2021)"
+Unharvested wood,Flow,=3.6/18.43,kilogram,kilowatt hour,"energy content (dry) (18.43 MJ/kg): (WSP, 2021)"
+Residual forest biomass,Flow,=3.6/18.61,kilogram,kilowatt hour,"energy content (dry) (18.61 MJ/kg): (WSP, 2021)"
+By-products from primary processing,Flow,=3.6/19.06,kilogram,kilowatt hour,"energy content (dry) (19.06 MJ/kg): (WSP, 2021)"
+By-products from secondary processing,Flow,=3.6/18.93,kilogram,kilowatt hour,"energy content (dry) (18.93 MJ/kg): (WSP, 2021)"
+Animal manure,Flow,=3.6 / 7.09,kilogram,kilowatt hour,"energy content (dry) (7.09 MJ/kg): (WSP, 2021)"
+Crop production and residues,Flow,=3.6/15.34,kilogram,kilowatt hour,"energy content (dry) (15.34 MJ/kg): (WSP, 2021)"
+"Food waste, green waste, and other organic matter",Flow,=-1 * 3.6 / 17.09,kilogram,kilowatt hour,"energy content (dry) (17.09 MJ/kg): (WSP, 2021)"
+Paper and cardboard,Flow,=3.6/15.98,kilogram,kilowatt hour,"energy content (dry) (15.98 MJ/kg): (WSP, 2021)"
+Pulp and paper mill residues,Flow,=-1 * 3.6 / 11.24,kilogram,kilowatt hour,"energy content (dry) (11.24 MJ/kg): (WSP, 2021)"
+"Construction, renovation, and demolition wood waste",Flow,=3.6/18.63,kilogram,kilowatt hour,"energy content (dry) (18.63 MJ/kg): (WSP, 2021)"
+Municipal sludge,Flow,=-1 * 3.6 / 7.64,kilogram,kilowatt hour,"energy content (dry) (7.64 MJ/kg): (WSP, 2021)"
+Heavy fuel oil,Resource,=1/10.83,kilogram,kilowatt hour,"LHV HFO (10.83 kWh/kg): (Engineering ToolBox, 2003)"
+Heavy fuel oil,Flow,=1/10.83,kilogram,kilowatt hour,"LHV HFO (10.83 kWh/kg): (Engineering ToolBox, 2003)"
+Oil-Powered Container Ship,Construction,=8760 * 0.7 / (7200 * 1000000),unit,ton kilometer per hour,"Load capacity (deadweight tonnage) (43000 tonnes), yearly activity (7200 Mtkm/yr), capacity factor (0.70): (Wernet, 2016)"
+Oil-Powered Container Ship,Operation,1,ton kilometer,ton kilometer,None
+Methanol-Powered Container Ship,Construction,=8760 * 0.7 / (7200 * 1000000),unit,ton kilometer per hour,"Load capacity (deadweight tonnage) (43000 tonnes), yearly activity (7200 Mtkm/yr), capacity factor (0.70): (Wernet, 2016)"
+Methanol-Powered Container Ship,Operation,1,ton kilometer,ton kilometer,None
+Oil-Powered Oil Tanker Ship,Construction,=8760 * 0.48 / (4100 * 1000000),unit,ton kilometer per hour,"Load capacity (deadweight tonnage) (36000 tonnes), yearly activity (4100 Mtkm/yr), capacity factor (0.48): (Wernet, 2016)"
+Oil-Powered Oil Tanker Ship,Operation,1,ton kilometer,ton kilometer,None
+Methanol-Powered Oil Tanker Ship,Construction,=8760 * 0.48 / (4100 * 1000000),unit,ton kilometer per hour,"Load capacity (deadweight tonnage) (36000 tonnes), yearly activity (4100 Mtkm/yr), capacity factor (0.48): (Wernet, 2016)"
+Methanol-Powered Oil Tanker Ship,Operation,1,ton kilometer,ton kilometer,None
+Oil-Powered Bulk Carrier Ship,Construction,=8760 * 0.53 / (5100 * 1000000),unit,ton kilometer per hour,"Load capacity (deadweight tonnage) (51000 tonnes), yearly activity (5100 Mtkm/yr), capacity factor (0.53): (Wernet, 2016)"
+Oil-Powered Bulk Carrier Ship,Operation,1,ton kilometer,ton kilometer,None
+Methanol-Powered Bulk Carrier Ship,Construction,=8760 * 0.53 / (5100 * 1000000),unit,ton kilometer per hour,"Load capacity (deadweight tonnage) (51000 tonnes), yearly activity (5100 Mtkm/yr), capacity factor (0.53): (Wernet, 2016)"
+Methanol-Powered Bulk Carrier Ship,Operation,1,ton kilometer,ton kilometer,None
+BioOil-Powered Container Ship,Construction,=8760 * 0.7 / (7200 * 1000000),unit,ton kilometer per hour,"Load capacity (deadweight tonnage) (43000 tonnes), yearly activity (7200 Mtkm/yr), capacity factor (0.70): (Wernet, 2016)"
+BioOil-Powered Container Ship,Operation,1,ton kilometer,ton kilometer,None
+BioMethanol-Powered Container Ship,Construction,=8760 * 0.7 / (7200 * 1000000),unit,ton kilometer per hour,"Load capacity (deadweight tonnage) (43000 tonnes), yearly activity (7200 Mtkm/yr), capacity factor (0.70): (Wernet, 2016)"
+BioMethanol-Powered Container Ship,Operation,1,ton kilometer,ton kilometer,None
+BioOil-Powered Oil Tanker Ship,Construction,=8760 * 0.48 / (4100 * 1000000),unit,ton kilometer per hour,"Load capacity (deadweight tonnage) (36000 tonnes), yearly activity (4100 Mtkm/yr), capacity factor (0.48): (Wernet, 2016)"
+BioOil-Powered Oil Tanker Ship,Operation,1,ton kilometer,ton kilometer,None
+BioMethanol-Powered Oil Tanker Ship,Construction,=8760 * 0.48 / (4100 * 1000000),unit,ton kilometer per hour,"Load capacity (deadweight tonnage) (36000 tonnes), yearly activity (4100 Mtkm/yr), capacity factor (0.48): (Wernet, 2016)"
+BioMethanol-Powered Oil Tanker Ship,Operation,1,ton kilometer,ton kilometer,None
+BioOil-Powered Bulk Carrier Ship,Construction,=8760 * 0.53 / (5100 * 1000000),unit,ton kilometer per hour,"Load capacity (deadweight tonnage) (51000 tonnes), yearly activity (5100 Mtkm/yr), capacity factor (0.53): (Wernet, 2016)"
+BioOil-Powered Bulk Carrier Ship,Operation,1,ton kilometer,ton kilometer,None
+BioMethanol-Powered Bulk Carrier Ship,Construction,=8760 * 0.53 / (5100 * 1000000),unit,ton kilometer per hour,"Load capacity (deadweight tonnage) (51000 tonnes), yearly activity (5100 Mtkm/yr), capacity factor (0.53): (Wernet, 2016)"
+BioMethanol-Powered Bulk Carrier Ship,Operation,1,ton kilometer,ton kilometer,None
+Post-Combustion Carbon Capture using Amines,Operation,1,kilogram,kilogram,None
+Post-Combustion Carbon Capture using Membranes,Operation,1,kilogram,kilogram,None
+Post-Combustion Carbon Capture using MOFs,Operation,1,kilogram,kilogram,None
+Carbon Transport and Injection,Operation,1,kilogram,kilogram,None
+Post-Combustion Carbon Capture,Operation,1,kilogram,kilogram,None

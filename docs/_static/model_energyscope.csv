@@ -34,7 +34,7 @@ BIOETHANOL_TO_BIOJETFUELS,CO2_A,0.192,Conversion of BioEthanol to Jet Fuels,CO2 
 BIOGAS_ATR,H2_HP,1.0,Biogas Auto-Thermal Reforming,Hydrogen (high pressure)
 BIOGAS_ATR,WOOD,-2.783,Biogas Auto-Thermal Reforming,Woody biomass
 BIOGAS_ATR_CCS,CO2_C,0.72,Biogas Auto-Thermal Reforming with Carbon Capture,Captured CO2
-BIOGAS_ATR_CCS,CO2_E,-0.08,Biogas Auto-Thermal Reforming with Carbon Capture,CO2 emission (from nonconcentrated spot sources)
+BIOGAS_ATR_CCS,CO2_E,0.08,Biogas Auto-Thermal Reforming with Carbon Capture,CO2 emission (from nonconcentrated spot sources)
 BIOGAS_ATR_CCS,H2_HP,1.0,Biogas Auto-Thermal Reforming with Carbon Capture,Hydrogen (high pressure)
 BIOGAS_ATR_CCS,WOOD,-3.199,Biogas Auto-Thermal Reforming with Carbon Capture,Woody biomass
 BIOGAS_BIOMETHANE,CO2_C,-0.198,Biomass to Biomethane,Captured CO2
@@ -45,15 +45,27 @@ BIOGAS_BIOMETHANE,SNG_MP,1.0,Biomass to Biomethane,Synthetic natural gas (medium
 BIOGAS_SMR,H2_HP,1.0,Biogas Steam Methane Reforming,Hydrogen (high pressure)
 BIOGAS_SMR,WOOD,-1.711,Biogas Steam Methane Reforming,Woody biomass
 BIOGAS_SMR_CCS,CO2_C,0.443,Biogas Steam Methane Reforming with Carbon Capture,Captured CO2
-BIOGAS_SMR_CCS,CO2_E,-0.049,Biogas Steam Methane Reforming with Carbon Capture,CO2 emission (from nonconcentrated spot sources)
+BIOGAS_SMR_CCS,CO2_E,0.049,Biogas Steam Methane Reforming with Carbon Capture,CO2 emission (from nonconcentrated spot sources)
 BIOGAS_SMR_CCS,H2_HP,1.0,Biogas Steam Methane Reforming with Carbon Capture,Hydrogen (high pressure)
 BIOGAS_SMR_CCS,WOOD,-1.967,Biogas Steam Methane Reforming with Carbon Capture,Woody biomass
+BIOMASS_AGRICULTURE_DEJECTION,CO2_E,-0.388235,Animal manure,CO2 emission (from nonconcentrated spot sources)
+BIOMASS_AGRICULTURE_DEJECTION,WET_BIOMASS,1.0,Animal manure,Wet biomass
+BIOMASS_AGRICULTURE_RESIDUAL,CO2_E,-0.388235,Crop production and residues,CO2 emission (from nonconcentrated spot sources)
+BIOMASS_AGRICULTURE_RESIDUAL,WOOD,1.0,Crop production and residues,Woody biomass
+BIOMASS_FORESTRY_LEFTOVER1,CO2_E,-0.388235,By-products from primary processing,CO2 emission (from nonconcentrated spot sources)
+BIOMASS_FORESTRY_LEFTOVER1,WOOD,1.0,By-products from primary processing,Woody biomass
+BIOMASS_FORESTRY_LEFTOVER2,CO2_E,-0.388235,By-products from secondary processing,CO2 emission (from nonconcentrated spot sources)
+BIOMASS_FORESTRY_LEFTOVER2,WOOD,1.0,By-products from secondary processing,Woody biomass
+BIOMASS_FORESTRY_RESIDUAL,CO2_E,-0.388235,Residual forest biomass,CO2 emission (from nonconcentrated spot sources)
+BIOMASS_FORESTRY_RESIDUAL,WOOD,1.0,Residual forest biomass,Woody biomass
+BIOMASS_FORESTRY_UNEXPLOITED,CO2_E,-0.388235,Unharvested wood,CO2 emission (from nonconcentrated spot sources)
+BIOMASS_FORESTRY_UNEXPLOITED,WOOD,1.0,Unharvested wood,Woody biomass
 BIOMASS_GAS_EF_H2,CO2_E,0.589,Hydrogen from Biomass Gasification Entrained Flow ,CO2 emission (from nonconcentrated spot sources)
 BIOMASS_GAS_EF_H2,ELECTRICITY_LV,0.034,Hydrogen from Biomass Gasification Entrained Flow ,Electricity (low voltage)
 BIOMASS_GAS_EF_H2,H2_MP,1.0,Hydrogen from Biomass Gasification Entrained Flow ,Hydrogen (medium pressure)
 BIOMASS_GAS_EF_H2,WOOD,-2.107,Hydrogen from Biomass Gasification Entrained Flow ,Woody biomass
 BIOMASS_GAS_EF_H2_CCS,CO2_C,0.763,Hydrogen from Biomass Gasification Entrained Flow with Carbon Capture,Captured CO2
-BIOMASS_GAS_EF_H2_CCS,CO2_E,-0.085,Hydrogen from Biomass Gasification Entrained Flow with Carbon Capture,CO2 emission (from nonconcentrated spot sources)
+BIOMASS_GAS_EF_H2_CCS,CO2_E,0.085,Hydrogen from Biomass Gasification Entrained Flow with Carbon Capture,CO2 emission (from nonconcentrated spot sources)
 BIOMASS_GAS_EF_H2_CCS,ELECTRICITY_LV,0.034,Hydrogen from Biomass Gasification Entrained Flow with Carbon Capture,Electricity (low voltage)
 BIOMASS_GAS_EF_H2_CCS,H2_MP,1.0,Hydrogen from Biomass Gasification Entrained Flow with Carbon Capture,Hydrogen (medium pressure)
 BIOMASS_GAS_EF_H2_CCS,WOOD,-2.422,Hydrogen from Biomass Gasification Entrained Flow with Carbon Capture,Woody biomass
@@ -62,10 +74,20 @@ BIOMASS_GAS_FB_H2,ELECTRICITY_LV,0.064,Hydrogen from Biomass Gasification Fuidiz
 BIOMASS_GAS_FB_H2,H2_MP,1.0,Hydrogen from Biomass Gasification Fuidized Bed ,Hydrogen (medium pressure)
 BIOMASS_GAS_FB_H2,WOOD,-2.662,Hydrogen from Biomass Gasification Fuidized Bed ,Woody biomass
 BIOMASS_GAS_FB_H2_CCS,CO2_C,0.964,Hydrogen from Biomass Gasification Fuidized Bed with Carbon Capture,Captured CO2
-BIOMASS_GAS_FB_H2_CCS,CO2_E,-0.107,Hydrogen from Biomass Gasification Fuidized Bed with Carbon Capture,CO2 emission (from nonconcentrated spot sources)
+BIOMASS_GAS_FB_H2_CCS,CO2_E,0.107,Hydrogen from Biomass Gasification Fuidized Bed with Carbon Capture,CO2 emission (from nonconcentrated spot sources)
 BIOMASS_GAS_FB_H2_CCS,ELECTRICITY_LV,0.064,Hydrogen from Biomass Gasification Fuidized Bed with Carbon Capture,Electricity (low voltage)
 BIOMASS_GAS_FB_H2_CCS,H2_MP,1.0,Hydrogen from Biomass Gasification Fuidized Bed with Carbon Capture,Hydrogen (medium pressure)
 BIOMASS_GAS_FB_H2_CCS,WOOD,-3.06,Hydrogen from Biomass Gasification Fuidized Bed with Carbon Capture,Woody biomass
+BIOMASS_WASTE_BUILDING,CO2_E,-0.388235,"Construction, renovation, and demolition wood waste",CO2 emission (from nonconcentrated spot sources)
+BIOMASS_WASTE_BUILDING,WOOD,1.0,"Construction, renovation, and demolition wood waste",Woody biomass
+BIOMASS_WASTE_MUNICIPAL,CO2_E,-0.388235,Municipal sludge,CO2 emission (from nonconcentrated spot sources)
+BIOMASS_WASTE_MUNICIPAL,WET_BIOMASS,1.0,Municipal sludge,Wet biomass
+BIOMASS_WASTE_ORGANIC,CO2_E,-0.388235,"Food waste, green waste, and other organic matter",CO2 emission (from nonconcentrated spot sources)
+BIOMASS_WASTE_ORGANIC,WASTE,1.0,"Food waste, green waste, and other organic matter",Waste
+BIOMASS_WASTE_PAPER,CO2_E,-0.388235,Paper and cardboard,CO2 emission (from nonconcentrated spot sources)
+BIOMASS_WASTE_PAPER,WASTE,1.0,Paper and cardboard,Waste
+BIOMASS_WASTE_PAPER_FABRIC,CO2_E,-0.388235,Pulp and paper mill residues,CO2 emission (from nonconcentrated spot sources)
+BIOMASS_WASTE_PAPER_FABRIC,WET_BIOMASS,1.0,Pulp and paper mill residues,Wet biomass
 BIOMETHANE_TO_BIOMETHANOL,BIO_METHANOL,1.0,Conversion of BioMethane to Methanol,Bio-methanol
 BIOMETHANE_TO_BIOMETHANOL,CO2_A,-0.25,Conversion of BioMethane to Methanol,CO2 emission (from carbon-intensive fields)
 BIOMETHANE_TO_BIOMETHANOL,SNG_MP,-1.4,Conversion of BioMethane to Methanol,Synthetic natural gas (medium pressure)
@@ -89,6 +111,18 @@ BIOMETHANOL_TO_OLEFINS,PROPYLENE,1.643,Conversion of BioMethanol to Olefinic Com
 BIO_DIESEL,BIO_DIESEL,1.0,Bio-diesel,Bio-diesel
 BIO_ETHANOL,BIO_ETHANOL,1.0,Bio-ethanol,Bio-ethanol
 BIO_ETHANOL,CO2_E,-0.2579384463,Bio-ethanol,CO2 emission (from nonconcentrated spot sources)
+BULK_CARRIER_BIOMEOH,BIO_METHANOL,-0.0606,BioMethanol-Powered Bulk Carrier Ship,Bio-methanol
+BULK_CARRIER_BIOMEOH,CO2_E,0.0405359999999999,BioMethanol-Powered Bulk Carrier Ship,CO2 emission (from nonconcentrated spot sources)
+BULK_CARRIER_BIOMEOH,MOB_FREIGHT,1.0,BioMethanol-Powered Bulk Carrier Ship,Freight mobility
+BULK_CARRIER_BIO,BIO_HFO,-0.0606,BioOil-Powered Bulk Carrier Ship,
+BULK_CARRIER_BIO,CO2_E,0.04504,BioOil-Powered Bulk Carrier Ship,CO2 emission (from nonconcentrated spot sources)
+BULK_CARRIER_BIO,MOB_FREIGHT,1.0,BioOil-Powered Bulk Carrier Ship,Freight mobility
+BULK_CARRIER,CO2_E,0.04504,Oil-Powered Bulk Carrier Ship,CO2 emission (from nonconcentrated spot sources)
+BULK_CARRIER,HFO,-0.0606,Oil-Powered Bulk Carrier Ship,
+BULK_CARRIER,MOB_FREIGHT,1.0,Oil-Powered Bulk Carrier Ship,Freight mobility
+BULK_CARRIER_MEOH,CO2_E,0.0405359999999999,Methanol-Powered Bulk Carrier Ship,CO2 emission (from nonconcentrated spot sources)
+BULK_CARRIER_MEOH,METHANOL,-0.0606,Methanol-Powered Bulk Carrier Ship,Methanol
+BULK_CARRIER_MEOH,MOB_FREIGHT,1.0,Methanol-Powered Bulk Carrier Ship,Freight mobility
 BUS_BIODIESEL_B100,BIO_DIESEL,-0.391,100% BioDiesel-Powered Bus,Bio-diesel
 BUS_BIODIESEL_B100,CO2_E,0.112,100% BioDiesel-Powered Bus,CO2 emission (from nonconcentrated spot sources)
 BUS_BIODIESEL_B100,MOB_PUBLIC,1.0,100% BioDiesel-Powered Bus,Public mobility
@@ -118,6 +152,31 @@ BUS_HY_DIESEL,MOB_PUBLIC,1.0,Diesel Hybrid Bus,Public mobility
 BUS_PROPANE,CO2_E,0.111,Propane-Powered Bus,CO2 emission (from nonconcentrated spot sources)
 BUS_PROPANE,MOB_PUBLIC,1.0,Propane-Powered Bus,Public mobility
 BUS_PROPANE,PROPANE,-0.472,Propane-Powered Bus,Propane
+CARBON_CAPTURE,CO2_A,-1.11,Post-Combustion Carbon Capture,CO2 emission (from carbon-intensive fields)
+CARBON_CAPTURE,CO2_C,1.0,Post-Combustion Carbon Capture,Captured CO2
+CARBON_CAPTURE,CO2_E,0.11,Post-Combustion Carbon Capture,CO2 emission (from nonconcentrated spot sources)
+CARBON_CAPTURE,ELECTRICITY_HV,-0.161,Post-Combustion Carbon Capture,Electricity (high voltage)
+CARBON_CAPTURE,HEAT_HIGH_T,-1.186,Post-Combustion Carbon Capture,Heat (high temperature)
+CARBON_CAPTURE_AMINES,CO2_A,-1.11,Post-Combustion Carbon Capture using Amines,CO2 emission (from carbon-intensive fields)
+CARBON_CAPTURE_AMINES,CO2_C,1.0,Post-Combustion Carbon Capture using Amines,Captured CO2
+CARBON_CAPTURE_AMINES,CO2_E,0.11,Post-Combustion Carbon Capture using Amines,CO2 emission (from nonconcentrated spot sources)
+CARBON_CAPTURE_AMINES,ELECTRICITY_HV,-0.015,Post-Combustion Carbon Capture using Amines,Electricity (high voltage)
+CARBON_CAPTURE_AMINES,HEAT_HIGH_T,-1.0,Post-Combustion Carbon Capture using Amines,Heat (high temperature)
+CARBON_CAPTURE_MEMBRANES,CO2_A,-1.11,Post-Combustion Carbon Capture using Membranes,CO2 emission (from carbon-intensive fields)
+CARBON_CAPTURE_MEMBRANES,CO2_C,1.0,Post-Combustion Carbon Capture using Membranes,Captured CO2
+CARBON_CAPTURE_MEMBRANES,CO2_E,0.11,Post-Combustion Carbon Capture using Membranes,CO2 emission (from nonconcentrated spot sources)
+CARBON_CAPTURE_MEMBRANES,ELECTRICITY_HV,-0.37,Post-Combustion Carbon Capture using Membranes,Electricity (high voltage)
+CARBON_CAPTURE_MOF,CO2_A,-1.11,Post-Combustion Carbon Capture using MOFs,CO2 emission (from carbon-intensive fields)
+CARBON_CAPTURE_MOF,CO2_C,1.0,Post-Combustion Carbon Capture using MOFs,Captured CO2
+CARBON_CAPTURE_MOF,CO2_E,0.11,Post-Combustion Carbon Capture using MOFs,CO2 emission (from nonconcentrated spot sources)
+CARBON_CAPTURE_MOF,ELECTRICITY_HV,-0.2,Post-Combustion Carbon Capture using MOFs,Electricity (high voltage)
+CARBON_CAPTURE_MOF,HEAT_HIGH_T,-0.22,Post-Combustion Carbon Capture using MOFs,Heat (high temperature)
+CARBON_MINERALIZATION,CO2_C,-1.0,Carbon Mineralization,Captured CO2
+CARBON_MINERALIZATION,CO2_S,1.0,Carbon Mineralization,Sequestrated CO2
+CARBON_MINERALIZATION,ELECTRICITY_HV,-0.49,Carbon Mineralization,Electricity (high voltage)
+CARBON_TRANSPORT_INJECTION,CO2_C,-1.0,Carbon Transport and Injection,Captured CO2
+CARBON_TRANSPORT_INJECTION,CO2_S,1.0,Carbon Transport and Injection,Sequestrated CO2
+CARBON_TRANSPORT_INJECTION,ELECTRICITY_HV,-0.185,Carbon Transport and Injection,Electricity (high voltage)
 CAR_BIODIESEL_B100,BIO_DIESEL,-0.441,100% BioDiesel-Powered Car,Bio-diesel
 CAR_BIODIESEL_B100,CO2_E,0.108,100% BioDiesel-Powered Car,CO2 emission (from nonconcentrated spot sources)
 CAR_BIODIESEL_B100,MOB_PRIVATE,1.0,100% BioDiesel-Powered Car,Private mobility
@@ -286,6 +345,18 @@ COMMUTER_RAIL_DIESEL,DIESEL,-0.27,Diesel-Powered Commuter Train,Diesel
 COMMUTER_RAIL_DIESEL,MOB_PUBLIC,1.0,Diesel-Powered Commuter Train,Public mobility
 COMMUTER_RAIL_ELEC,ELECTRICITY_HV,-0.092,Electric-Powered Commuter Train,Electricity (high voltage)
 COMMUTER_RAIL_ELEC,MOB_PUBLIC,1.0,Electric-Powered Commuter Train,Public mobility
+CONTAINER_BIOMEOH,BIO_METHANOL,-0.116,BioMethanol-Powered Container Ship,Bio-methanol
+CONTAINER_BIOMEOH,CO2_E,0.044496,BioMethanol-Powered Container Ship,CO2 emission (from nonconcentrated spot sources)
+CONTAINER_BIOMEOH,MOB_FREIGHT,1.0,BioMethanol-Powered Container Ship,Freight mobility
+CONTAINER_BIO,BIO_HFO,-0.116,BioOil-Powered Container Ship,
+CONTAINER_BIO,CO2_E,0.04944,BioOil-Powered Container Ship,CO2 emission (from nonconcentrated spot sources)
+CONTAINER_BIO,MOB_FREIGHT,1.0,BioOil-Powered Container Ship,Freight mobility
+CONTAINER,CO2_E,0.04944,Oil-Powered Container Ship,CO2 emission (from nonconcentrated spot sources)
+CONTAINER,HFO,-0.116,Oil-Powered Container Ship,
+CONTAINER,MOB_FREIGHT,1.0,Oil-Powered Container Ship,Freight mobility
+CONTAINER_MEOH,CO2_E,0.044496,Methanol-Powered Container Ship,CO2 emission (from nonconcentrated spot sources)
+CONTAINER_MEOH,METHANOL,-0.116,Methanol-Powered Container Ship,Methanol
+CONTAINER_MEOH,MOB_FREIGHT,1.0,Methanol-Powered Container Ship,Freight mobility
 CROPS_TO_ETHANOL,BIO_ETHANOL,1.0,Conversion of Crops to Ethanol,Bio-ethanol
 CROPS_TO_ETHANOL,CO2_A,0.154,Conversion of Crops to Ethanol,CO2 emission (from carbon-intensive fields)
 CROPS_TO_ETHANOL,WET_BIOMASS,-1.786,Conversion of Crops to Ethanol,Wet biomass
@@ -300,11 +371,12 @@ CUMENE_PROCESS,PHENOL,0.92,Cumene Production Process,Phenol
 CUMENE_PROCESS,PROPYLENE,-0.95,Cumene Production Process,Propylene
 DAC_HT,CO2_C,1.0,Direct Air Capture at High Temperature,Captured CO2
 DAC_HT,CO2_E,-1.0,Direct Air Capture at High Temperature,CO2 emission (from nonconcentrated spot sources)
-DAC_HT,ELECTRICITY_MV,-1.535,Direct Air Capture at High Temperature,Electricity (medium voltage)
+DAC_HT,ELECTRICITY_MV,-0.367,Direct Air Capture at High Temperature,Electricity (medium voltage)
+DAC_HT,HEAT_HIGH_T,-1.472,Direct Air Capture at High Temperature,Heat (high temperature)
 DAC_LT,CO2_C,1.0,Direct Air Capture at Low Temperature,Captured CO2
 DAC_LT,CO2_E,-1.0,Direct Air Capture at Low Temperature,CO2 emission (from nonconcentrated spot sources)
-DAC_LT,ELECTRICITY_MV,-0.25,Direct Air Capture at Low Temperature,Electricity (medium voltage)
-DAC_LT,HEAT_HIGH_T,-1.75,Direct Air Capture at Low Temperature,Heat (high temperature)
+DAC_LT,ELECTRICITY_MV,-0.275,Direct Air Capture at Low Temperature,Electricity (medium voltage)
+DAC_LT,HEAT_LOW_T_DECEN,-2.722,Direct Air Capture at Low Temperature,"Heat (low temperature, decentralized)"
 DEC_ADVCOGEN_H2,ELECTRICITY_MV,2.64,Decentralized Cogeneration with Hydrogen,Electricity (medium voltage)
 DEC_ADVCOGEN_H2,H2_MP,-4.55,Decentralized Cogeneration with Hydrogen,Hydrogen (medium pressure)
 DEC_ADVCOGEN_H2,HEAT_LOW_T_DECEN,1.0,Decentralized Cogeneration with Hydrogen,"Heat (low temperature, decentralized)"
@@ -339,7 +411,7 @@ DEC_COGEN_OIL,CO2_E,0.625,Decentralized Cogeneration with Oil Combustion,CO2 emi
 DEC_COGEN_OIL,ELECTRICITY_LV,0.91,Decentralized Cogeneration with Oil Combustion,Electricity (low voltage)
 DEC_COGEN_OIL,HEAT_LOW_T_DECEN,1.0,Decentralized Cogeneration with Oil Combustion,"Heat (low temperature, decentralized)"
 DEC_COGEN_OIL,LFO,-2.33,Decentralized Cogeneration with Oil Combustion,Light fuel oil
-DEC_COGEN_WOOD,CO2_A,0.733,Decentralized Cogeneration with Wood Combustion,CO2 emission (from carbon-intensive fields)
+DEC_COGEN_WOOD,CO2_E,0.733,Decentralized Cogeneration with Wood Combustion,CO2 emission (from nonconcentrated spot sources)
 DEC_COGEN_WOOD,ELECTRICITY_MV,0.34,Decentralized Cogeneration with Wood Combustion,Electricity (medium voltage)
 DEC_COGEN_WOOD,HEAT_LOW_T_DECEN,1.0,Decentralized Cogeneration with Wood Combustion,"Heat (low temperature, decentralized)"
 DEC_COGEN_WOOD,WOOD,-1.887,Decentralized Cogeneration with Wood Combustion,Woody biomass
@@ -448,11 +520,11 @@ FOOD_PROD_HP,HEAT_HIGH_T,-0.009,Food Production (heat pump),Heat (high temperatu
 FOOD_PROD_HR,ELECTRICITY_MV,-0.61,Food Production with Heat Recovery,Electricity (medium voltage)
 FOOD_PROD_HR,FOOD,1.0,Food Production with Heat Recovery,Food
 FOOD_PROD_HR,HEAT_HIGH_T,-1.285,Food Production with Heat Recovery,Heat (high temperature)
-FT,BIO_DIESEL,1.0,Fischer-Tropsch Synthesis,Bio-diesel
-FT,CO2_A,0.464,Fischer-Tropsch Synthesis,CO2 emission (from carbon-intensive fields)
-FT,ELECTRICITY_MV,-0.004,Fischer-Tropsch Synthesis,Electricity (medium voltage)
-FT,HEAT_LOW_T_DHN,0.395,Fischer-Tropsch Synthesis,"Heat (low temperature, district heating network)"
-FT,WOOD,-1.879,Fischer-Tropsch Synthesis,Woody biomass
+FT,BIO_DIESEL,1.0,BioDiesel Production via Fischer-Tropsch Synthesis,Bio-diesel
+FT,CO2_A,0.464,BioDiesel Production via Fischer-Tropsch Synthesis,CO2 emission (from carbon-intensive fields)
+FT,ELECTRICITY_MV,-0.004,BioDiesel Production via Fischer-Tropsch Synthesis,Electricity (medium voltage)
+FT,HEAT_LOW_T_DHN,0.395,BioDiesel Production via Fischer-Tropsch Synthesis,"Heat (low temperature, district heating network)"
+FT,WOOD,-1.879,BioDiesel Production via Fischer-Tropsch Synthesis,Woody biomass
 GASIFICATION_H2,CO2_A,0.635,Hydrogen Production via Gasification,CO2 emission (from carbon-intensive fields)
 GASIFICATION_H2,ELECTRICITY_MV,-0.093,Hydrogen Production via Gasification,Electricity (medium voltage)
 GASIFICATION_H2,H2_MP,1.0,Hydrogen Production via Gasification,Hydrogen (medium pressure)
@@ -517,6 +589,7 @@ H2_SNG_CCGT_CCS,H2_MP,-0.4,Combined Cycle Gas Turbine Hydrogen and Synthetic Nat
 H2_SNG_CCGT_CCS,SNG_MP,-1.325,Combined Cycle Gas Turbine Hydrogen and Synthetic Natural Gas Mix with Carbon Capture,Synthetic natural gas (medium pressure)
 H2_STO,H2_EHP,-1.0,Hydrogen to Storage,Hydrogen (extra high pressure)
 H2_STO,H2_S,1.0,Hydrogen to Storage,Stored hydrogen
+HFO,HFO,1.0,Heavy fuel oil,
 HT_LT,HEAT_HIGH_T,-1.0,High Temperature to Low Temperature Conversion,Heat (high temperature)
 HT_LT,HEAT_LOW_T_DHN,1.0,High Temperature to Low Temperature Conversion,"Heat (low temperature, district heating network)"
 HT_LT_DEC,HEAT_HIGH_T,-1.0,High Temperature to Low Temperature Conversion in Decentralized Systems,Heat (high temperature)
@@ -684,6 +757,9 @@ NG_EXP_ML_COGEN,ELECTRICITY_MV,0.02,Natural Gas Expansion from Medium Pressure t
 NG_EXP_ML_COGEN,HEAT_LOW_T_DECEN,-0.02,Natural Gas Expansion from Medium Pressure to Low Pressure (co-generation unit),"Heat (low temperature, decentralized)"
 NG_EXP_ML_COGEN,NG_LP,1.0,Natural Gas Expansion from Medium Pressure to Low Pressure (co-generation unit),Natural gas (low pressure)
 NG_EXP_ML_COGEN,NG_MP,-1.0,Natural Gas Expansion from Medium Pressure to Low Pressure (co-generation unit),Natural gas (medium pressure)
+NG_HP,NG_HP,1.0,Natural gas,Natural gas (high pressure)
+NG_LP,NG_LP,1.0,Natural gas,Natural gas (low pressure)
+NG_MP,NG_MP,1.0,Natural gas,Natural gas (medium pressure)
 NG_PYROLYSIS_PLASMA,H2_MP,1.0,Plasma Natural Gas Pyrolysis,Hydrogen (medium pressure)
 NG_PYROLYSIS_PLASMA,HEAT_HIGH_T,-0.356,Plasma Natural Gas Pyrolysis,Heat (high temperature)
 NG_PYROLYSIS_PLASMA,HEAT_LOW_T_DHN,0.244,Plasma Natural Gas Pyrolysis,"Heat (low temperature, district heating network)"
@@ -712,6 +788,18 @@ OCGT_LARGE,NG_HP,-2.5,Open Cycle Gas Turbine 243 MW,Natural gas (high pressure)
 OCGT_SMALL,CO2_A,0.524,Open Cycle Gas Turbine 100 MW,CO2 emission (from carbon-intensive fields)
 OCGT_SMALL,ELECTRICITY_HV,1.0,Open Cycle Gas Turbine 100 MW,Electricity (high voltage)
 OCGT_SMALL,NG_HP,-2.5,Open Cycle Gas Turbine 100 MW,Natural gas (high pressure)
+OIL_TANKER_BIOMEOH,BIO_METHANOL,-0.1,BioMethanol-Powered Oil Tanker Ship,Bio-methanol
+OIL_TANKER_BIOMEOH,CO2_E,0.059598,BioMethanol-Powered Oil Tanker Ship,CO2 emission (from nonconcentrated spot sources)
+OIL_TANKER_BIOMEOH,MOB_FREIGHT,1.0,BioMethanol-Powered Oil Tanker Ship,Freight mobility
+OIL_TANKER_BIO,BIO_HFO,-0.1,BioOil-Powered Oil Tanker Ship,
+OIL_TANKER_BIO,CO2_E,0.06622,BioOil-Powered Oil Tanker Ship,CO2 emission (from nonconcentrated spot sources)
+OIL_TANKER_BIO,MOB_FREIGHT,1.0,BioOil-Powered Oil Tanker Ship,Freight mobility
+OIL_TANKER,CO2_E,0.06622,Oil-Powered Oil Tanker Ship,CO2 emission (from nonconcentrated spot sources)
+OIL_TANKER,HFO,-0.1,Oil-Powered Oil Tanker Ship,
+OIL_TANKER,MOB_FREIGHT,1.0,Oil-Powered Oil Tanker Ship,Freight mobility
+OIL_TANKER_MEOH,CO2_E,0.059598,Methanol-Powered Oil Tanker Ship,CO2 emission (from nonconcentrated spot sources)
+OIL_TANKER_MEOH,METHANOL,-0.1,Methanol-Powered Oil Tanker Ship,Methanol
+OIL_TANKER_MEOH,MOB_FREIGHT,1.0,Methanol-Powered Oil Tanker Ship,Freight mobility
 PAFC,ELECTRICITY_LV,1.647,Phosphoric Acid Fuel Cell,Electricity (low voltage)
 PAFC,H2_HP,-2.941,Phosphoric Acid Fuel Cell,Hydrogen (high pressure)
 PAFC,HEAT_LOW_T_DECEN,1.0,Phosphoric Acid Fuel Cell,"Heat (low temperature, decentralized)"
@@ -736,23 +824,23 @@ PET,PET,1.0,Polyethylene terephthalate,Polyethylene terephthalate
 PET_FORMATION,ETHYLENE,-1.424,Polyethylene Terephthalate Formation,Ethylene
 PET_FORMATION,PET,1.0,Polyethylene Terephthalate Formation,Polyethylene terephthalate
 PHENOL,PHENOL,1.0,Phenol,Phenol
-PLANE_FREIGHT_BIO,BIO_JETFUEL,-1.294,Bio-Jet Fuel-Powered Freight Plane,Bio-jetfuel
-PLANE_FREIGHT_BIO,CO2_E,0.324,Bio-Jet Fuel-Powered Freight Plane,CO2 emission (from nonconcentrated spot sources)
+PLANE_FREIGHT_BIO,BIO_JETFUEL,-0.617,Bio-Jet Fuel-Powered Freight Plane,Bio-jetfuel
+PLANE_FREIGHT_BIO,CO2_E,0.154,Bio-Jet Fuel-Powered Freight Plane,CO2 emission (from nonconcentrated spot sources)
 PLANE_FREIGHT_BIO,MOB_FREIGHT,1.0,Bio-Jet Fuel-Powered Freight Plane,Freight mobility
-PLANE_FREIGHT,CO2_E,0.324,Plane Freight,CO2 emission (from nonconcentrated spot sources)
-PLANE_FREIGHT,JETFUEL,-1.294,Plane Freight,Jet fuel
+PLANE_FREIGHT,CO2_E,0.154,Plane Freight,CO2 emission (from nonconcentrated spot sources)
+PLANE_FREIGHT,JETFUEL,-0.617,Plane Freight,Jet fuel
 PLANE_FREIGHT,MOB_FREIGHT,1.0,Plane Freight,Freight mobility
-PLANE_LH_BIO,BIO_JETFUEL,-0.734,Bio-Jet Fuel-Powered Long Haul Passenger Plane,Bio-jetfuel
-PLANE_LH_BIO,CO2_E,0.183,Bio-Jet Fuel-Powered Long Haul Passenger Plane,CO2 emission (from nonconcentrated spot sources)
+PLANE_LH_BIO,BIO_JETFUEL,-0.352,Bio-Jet Fuel-Powered Long Haul Passenger Plane,Bio-jetfuel
+PLANE_LH_BIO,CO2_E,0.088,Bio-Jet Fuel-Powered Long Haul Passenger Plane,CO2 emission (from nonconcentrated spot sources)
 PLANE_LH_BIO,MOB_PUBLIC,1.0,Bio-Jet Fuel-Powered Long Haul Passenger Plane,Public mobility
-PLANE_LH,CO2_E,0.183,Passenger Plane long haul,CO2 emission (from nonconcentrated spot sources)
-PLANE_LH,JETFUEL,-0.734,Passenger Plane long haul,Jet fuel
+PLANE_LH,CO2_E,0.088,Passenger Plane long haul,CO2 emission (from nonconcentrated spot sources)
+PLANE_LH,JETFUEL,-0.352,Passenger Plane long haul,Jet fuel
 PLANE_LH,MOB_PUBLIC,1.0,Passenger Plane long haul,Public mobility
-PLANE_SH_BIO,BIO_JETFUEL,-0.734,Bio-Jet Fuel-Powered Short Haul Passenger Plane,Bio-jetfuel
-PLANE_SH_BIO,CO2_E,0.183,Bio-Jet Fuel-Powered Short Haul Passenger Plane,CO2 emission (from nonconcentrated spot sources)
+PLANE_SH_BIO,BIO_JETFUEL,-0.352,Bio-Jet Fuel-Powered Short Haul Passenger Plane,Bio-jetfuel
+PLANE_SH_BIO,CO2_E,0.088,Bio-Jet Fuel-Powered Short Haul Passenger Plane,CO2 emission (from nonconcentrated spot sources)
 PLANE_SH_BIO,MOB_PUBLIC,1.0,Bio-Jet Fuel-Powered Short Haul Passenger Plane,Public mobility
-PLANE_SH,CO2_E,0.183,Passenger Plane short haul,CO2 emission (from nonconcentrated spot sources)
-PLANE_SH,JETFUEL,-0.734,Passenger Plane short haul,Jet fuel
+PLANE_SH,CO2_E,0.088,Passenger Plane short haul,CO2 emission (from nonconcentrated spot sources)
+PLANE_SH,JETFUEL,-0.352,Passenger Plane short haul,Jet fuel
 PLANE_SH,MOB_PUBLIC,1.0,Passenger Plane short haul,Public mobility
 POLYPROPYLENE_PP,PP,1.0,Polypropylene Production,Polypropylene
 POLYPROPYLENE_PP,PROPYLENE,-1.191,Polypropylene Production,Propylene
@@ -1022,18 +1110,14 @@ TRAIN_FREIGHT_DIESEL,DIESEL,-0.051,Diesel-Powered Freight Train,Diesel
 TRAIN_FREIGHT_DIESEL,MOB_FREIGHT,1.0,Diesel-Powered Freight Train,Freight mobility
 TRAIN_FREIGHT_ELEC,ELECTRICITY_EHV,-0.068,"Electric-Powered Freight Train (co-generation unit, components for electricity)",Electricity (extra high voltage)
 TRAIN_FREIGHT_ELEC,MOB_FREIGHT,1.0,"Electric-Powered Freight Train (co-generation unit, components for electricity)",Freight mobility
-TRAIN_FREIGHT_H2,H2_EHP,-0.022,Hydrogen-Powered Freight Train,Hydrogen (extra high pressure)
 TRAIN_FREIGHT_H2,H2_HP,-0.333,Hydrogen-Powered Freight Train,Hydrogen (high pressure)
 TRAIN_FREIGHT_H2,MOB_FREIGHT,1.0,Hydrogen-Powered Freight Train,Freight mobility
-TRAIN_FREIGHT_H2_HYBRID,H2_EHP,-0.02,Hybrid Battery-Fuel Cell-Powered Freight Train,Hydrogen (extra high pressure)
-TRAIN_FREIGHT_H2_HYBRID,MOB_FREIGHT,1.0,Hybrid Battery-Fuel Cell-Powered Freight Train,Freight mobility
 TRAIN_FREIGHT_NG,CO2_E,0.057,Natural Gas-Powered Freight Train,CO2 emission (from nonconcentrated spot sources)
 TRAIN_FREIGHT_NG,MOB_FREIGHT,1.0,Natural Gas-Powered Freight Train,Freight mobility
 TRAIN_FREIGHT_NG,NG_HP,-0.251,Natural Gas-Powered Freight Train,Natural gas (high pressure)
 TRAIN_FREIGHT_SNG,CO2_E,0.057,Natural Synthetic Gas-Powered Freight Train,CO2 emission (from nonconcentrated spot sources)
 TRAIN_FREIGHT_SNG,MOB_FREIGHT,1.0,Natural Synthetic Gas-Powered Freight Train,Freight mobility
 TRAIN_FREIGHT_SNG,SNG_HP,-0.251,Natural Synthetic Gas-Powered Freight Train,Synthetic natural gas (high pressure)
-TRAIN_H2,H2_EHP,-0.294,Hydrogen-Powered Train,Hydrogen (extra high pressure)
 TRAIN_H2,H2_HP,-0.312,Hydrogen-Powered Train,Hydrogen (high pressure)
 TRAIN_H2,MOB_PUBLIC,1.0,Hydrogen-Powered Train,Public mobility
 TRAIN_NG,CO2_E,0.076,Natural Gas-Powered Train,CO2 emission (from nonconcentrated spot sources)
@@ -1084,13 +1168,13 @@ TRUCK_SH_CNG,NG_HP,-0.608,Compressed Natural Gas-Powered Short Distance Truck,Na
 TRUCK_SH_CSNG,CO2_E,0.105,Compressed Synthetic Natural Gas-Powered Short Distance Truck,CO2 emission (from nonconcentrated spot sources)
 TRUCK_SH_CSNG,MOB_FREIGHT,1.0,Compressed Synthetic Natural Gas-Powered Short Distance Truck,Freight mobility
 TRUCK_SH_CSNG,SNG_HP,-0.608,Compressed Synthetic Natural Gas-Powered Short Distance Truck,Synthetic natural gas (high pressure)
-TRUCK_SH_DIESEL,CO2_E,0.126,Diesel-Powered Short Distance Truck,CO2 emission (from nonconcentrated spot sources)
-TRUCK_SH_DIESEL,DIESEL,-0.478,Diesel-Powered Short Distance Truck,Diesel
+TRUCK_SH_DIESEL,CO2_E,0.4022,Diesel-Powered Short Distance Truck,CO2 emission (from nonconcentrated spot sources)
+TRUCK_SH_DIESEL,DIESEL,-1.5227,Diesel-Powered Short Distance Truck,Diesel
 TRUCK_SH_DIESEL,MOB_FREIGHT,1.0,Diesel-Powered Short Distance Truck,Freight mobility
 TRUCK_SH_EV,ELECTRICITY_MV,-0.382,Electric-Powered Short Distance Truck,Electricity (medium voltage)
 TRUCK_SH_EV,MOB_FREIGHT,1.0,Electric-Powered Short Distance Truck,Freight mobility
-TRUCK_SH_GASOLINE,CO2_E,0.158,Gasoline-Powered Short Distance Truck,CO2 emission (from nonconcentrated spot sources)
-TRUCK_SH_GASOLINE,GASOLINE,-0.582,Gasoline-Powered Short Distance Truck,Gasoline
+TRUCK_SH_GASOLINE,CO2_E,0.3724,Gasoline-Powered Short Distance Truck,CO2 emission (from nonconcentrated spot sources)
+TRUCK_SH_GASOLINE,GASOLINE,-1.3734,Gasoline-Powered Short Distance Truck,Gasoline
 TRUCK_SH_GASOLINE,MOB_FREIGHT,1.0,Gasoline-Powered Short Distance Truck,Freight mobility
 TRUCK_SH_HY_DIESEL,CO2_E,0.112,Diesel Hybrid Short Distance Truck,CO2 emission (from nonconcentrated spot sources)
 TRUCK_SH_HY_DIESEL,DIESEL,-0.424,Diesel Hybrid Short Distance Truck,Diesel

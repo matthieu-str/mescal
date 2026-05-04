@@ -317,3 +317,15 @@ TRAIN_FREIGHT_BIODIESEL_LD,['BIO_DIESEL'],
 TRUCK_LH_CSNG_LD,['SNG_HP'],
 TRUCK_SH_CSNG_MD,['SNG_HP'],
 TRUCK_SH_CSNG_SD,['SNG_HP'],
+BULK_CARRIER_ELD,['HFO'],
+BULK_CARRIER_MEOH_ELD,"['METHANOL', 'TRANSPORT_FUEL']","HFO taken as a proxy, direct emissions to correct"
+CONTAINER_ELD,['HFO'],
+CONTAINER_MEOH_ELD,"['METHANOL', 'TRANSPORT_FUEL']","HFO taken as a proxy, direct emissions to correct"
+OIL_TANKER_ELD,['HFO'],
+OIL_TANKER_MEOH_ELD,"['METHANOL', 'TRANSPORT_FUEL']","HFO taken as a proxy, direct emissions to correct"
+BULK_CARRIER_BIO_ELD,['BIO_HFO'],
+BULK_CARRIER_BIOMEOH_ELD,"['BIO_METHANOL', 'TRANSPORT_FUEL']","HFO taken as a proxy, direct emissions to correct"
+CONTAINER_BIO_ELD,['BIO_HFO'],
+CONTAINER_BIOMEOH_ELD,"['BIO_METHANOL', 'TRANSPORT_FUEL']","HFO taken as a proxy, direct emissions to correct"
+OIL_TANKER_BIO_ELD,['BIO_HFO'],
+OIL_TANKER_BIOMEOH_ELD,"['BIO_METHANOL', 'TRANSPORT_FUEL']","HFO taken as a proxy, direct emissions to correct"

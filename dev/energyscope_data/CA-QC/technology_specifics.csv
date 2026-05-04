@@ -259,3 +259,16 @@ BIOMASS_WASTE_PAPER,"Add CO2 (non-fossil, resource correction)",1.481333333,"CO2
 BIOMASS_WASTE_PAPER_FABRIC,"Add CO2 (non-fossil, resource correction)",1.224666667,"CO2 uptake flow (biogenic) derived from the carbon allocation (0.334 kg C/kg municipal waste in ecoinvent), and considering the molecular weight ratio (44/12) to express it as CO2."
 BIOMASS_WASTE_BUILDING,"Add CO2 (non-fossil, resource correction)",1.811333333,"CO2 uptake flow (biogenic) derived from the carbon allocation (0.494 kg C/kg waste wood in ecoinvent), and considering the molecular weight ratio (44/12) to express it as CO2."
 BIOMASS_WASTE_MUNICIPAL,"Add CO2 (non-fossil, resource correction)",1.224666667,"CO2 uptake flow (biogenic) derived from the carbon allocation (0.334 kg C/kg municipal waste in ecoinvent), and considering the molecular weight ratio (44/12) to express it as CO2."
+BULK_CARRIER_BIO_ELD,Biofuel,1,
+BULK_CARRIER_BIOMEOH_ELD,Biofuel,1,
+CONTAINER_BIO_ELD,Biofuel,1,
+CONTAINER_BIOMEOH_ELD,Biofuel,1,
+OIL_TANKER_BIO_ELD,Biofuel,1,
+OIL_TANKER_BIOMEOH_ELD,Biofuel,1,
+CARBON_CAPTURE_AMINES,Add CO2 (fossil),-1,CO2 capture flow
+CARBON_CAPTURE_MEMBRANES,Add CO2 (fossil),-1,CO2 capture flow
+CARBON_CAPTURE_MOF,Add CO2 (fossil),-1,CO2 capture flow
+CARBON_CAPTURE,Add CO2 (fossil),-1,CO2 capture flow
+CO2_TO_DIESEL,Change flow amount (Operation),"biosphere, cc6a1abb-b123-4ca6-8f16-38209df609be, 0.0",CO2 capture flow already accounted in CO2 capture technologies
+AN_DIG,Change flow amount (Operation),"biosphere, cc6a1abb-b123-4ca6-8f16-38209df609be, 0.0",CO2 capture flow already accounted in CO2 capture technologies
+AN_DIG_SI,Change flow amount (Operation),"biosphere, cc6a1abb-b123-4ca6-8f16-38209df609be, 0.0",CO2 capture flow already accounted in CO2 capture technologies

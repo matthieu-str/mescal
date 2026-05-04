@@ -209,6 +209,8 @@ Gerloff, Niklas. 2021. “Comparative Life-Cycle-Assessment Analysis of Three Ma
 
 Grasby, S. E., D. M. Allen, S. Bell, Z. Chen, G. Ferguson, A. Jessop, M. Kelman, M. Ko, J. Majorowicz, M. Moore, J. Raymond, and R. Therrien. 2012. Geothermal Energy Resource Potential of Canada. rev. 6914. doi:10.4095/291488.
 
+Hydro-Québec, 2023. Nos Grands Equipements. https://www.hydroquebec.com/data/enseignants/pdf/grands-equipements-hydro-quebec.pdf
+
 IEA-SHC. 2004. “Solar Thermal Statistics Conversion Method - M2 to GWth.”
 
 Kamidelivand, Mitra, Peter Deeney, Fiona Devoy McAuliffe, Kevin Leyne, Michael Togneri, and Jimmy Murphy. 2023. “Scenario Analysis of Cost-Effectiveness of Maintenance Strategies for Fixed Tidal Stream Turbines in the Atlantic Ocean.” Journal of Marine Science and Engineering 11(5):1046. doi:10.3390/jmse11051046.
@@ -248,3 +250,5 @@ Wikipedia. 2023. “Heat of Combustion.” https://en.wikipedia.org/wiki/Heat_of
 Willauer, Heather, Dennis Hardy, Kenneth Schultz, and Frederick Williams. 2012. “The Feasibility and Current Estimated Capital Costs of Producing Jet Fuel at Sea Using Carbon Dioxide and Hydrogen.” Journal of Renewable Sustainable Energy. doi:10.1063/1.4719723.
 
 World Nuclear Association. n.d. “Heat Values of Various Fuels.” Retrieved April 16, 2024. https://world-nuclear.org/information-library/facts-and-figures/heat-values-of-various-fuels.aspx.
+
+WSP, 2021. Inventaire de la biomasse disponible pour produire de la bioénergie et portrait de la production de la bioénergie sur le territoire québécois (No. Réf. WSP : 201-03354-00). Rapport réalisé par WSP Canada Inc., pour le compte du Ministère de l’Énergie et des Ressources naturelles.

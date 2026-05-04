@@ -34,7 +34,7 @@ Conversion of BioEthanol to Jet Fuels,CO2 emission (from carbon-intensive fields
 Biogas Auto-Thermal Reforming,Hydrogen (high pressure),1.0
 Biogas Auto-Thermal Reforming,Woody biomass,-2.783
 Biogas Auto-Thermal Reforming with Carbon Capture,Captured CO2,0.72
-Biogas Auto-Thermal Reforming with Carbon Capture,CO2 emission (from nonconcentrated spot sources),-0.08
+Biogas Auto-Thermal Reforming with Carbon Capture,CO2 emission (from nonconcentrated spot sources),0.08
 Biogas Auto-Thermal Reforming with Carbon Capture,Hydrogen (high pressure),1.0
 Biogas Auto-Thermal Reforming with Carbon Capture,Woody biomass,-3.199
 Biomass to Biomethane,Captured CO2,-0.198
@@ -45,15 +45,27 @@ Biomass to Biomethane,Synthetic natural gas (medium pressure),1.0
 Biogas Steam Methane Reforming,Hydrogen (high pressure),1.0
 Biogas Steam Methane Reforming,Woody biomass,-1.711
 Biogas Steam Methane Reforming with Carbon Capture,Captured CO2,0.443
-Biogas Steam Methane Reforming with Carbon Capture,CO2 emission (from nonconcentrated spot sources),-0.049
+Biogas Steam Methane Reforming with Carbon Capture,CO2 emission (from nonconcentrated spot sources),0.049
 Biogas Steam Methane Reforming with Carbon Capture,Hydrogen (high pressure),1.0
 Biogas Steam Methane Reforming with Carbon Capture,Woody biomass,-1.967
+Animal manure,CO2 emission (from nonconcentrated spot sources),-0.388235
+Animal manure,Wet biomass,1.0
+Crop production and residues,CO2 emission (from nonconcentrated spot sources),-0.388235
+Crop production and residues,Woody biomass,1.0
+By-products from primary processing,CO2 emission (from nonconcentrated spot sources),-0.388235
+By-products from primary processing,Woody biomass,1.0
+By-products from secondary processing,CO2 emission (from nonconcentrated spot sources),-0.388235
+By-products from secondary processing,Woody biomass,1.0
+Residual forest biomass,CO2 emission (from nonconcentrated spot sources),-0.388235
+Residual forest biomass,Woody biomass,1.0
+Unharvested wood,CO2 emission (from nonconcentrated spot sources),-0.388235
+Unharvested wood,Woody biomass,1.0
 Hydrogen from Biomass Gasification Entrained Flow ,CO2 emission (from nonconcentrated spot sources),0.589
 Hydrogen from Biomass Gasification Entrained Flow ,Electricity (low voltage),0.034
 Hydrogen from Biomass Gasification Entrained Flow ,Hydrogen (medium pressure),1.0
 Hydrogen from Biomass Gasification Entrained Flow ,Woody biomass,-2.107
 Hydrogen from Biomass Gasification Entrained Flow with Carbon Capture,Captured CO2,0.763
-Hydrogen from Biomass Gasification Entrained Flow with Carbon Capture,CO2 emission (from nonconcentrated spot sources),-0.085
+Hydrogen from Biomass Gasification Entrained Flow with Carbon Capture,CO2 emission (from nonconcentrated spot sources),0.085
 Hydrogen from Biomass Gasification Entrained Flow with Carbon Capture,Electricity (low voltage),0.034
 Hydrogen from Biomass Gasification Entrained Flow with Carbon Capture,Hydrogen (medium pressure),1.0
 Hydrogen from Biomass Gasification Entrained Flow with Carbon Capture,Woody biomass,-2.422
@@ -62,10 +74,20 @@ Hydrogen from Biomass Gasification Fuidized Bed ,Electricity (low voltage),0.064
 Hydrogen from Biomass Gasification Fuidized Bed ,Hydrogen (medium pressure),1.0
 Hydrogen from Biomass Gasification Fuidized Bed ,Woody biomass,-2.662
 Hydrogen from Biomass Gasification Fuidized Bed with Carbon Capture,Captured CO2,0.964
-Hydrogen from Biomass Gasification Fuidized Bed with Carbon Capture,CO2 emission (from nonconcentrated spot sources),-0.107
+Hydrogen from Biomass Gasification Fuidized Bed with Carbon Capture,CO2 emission (from nonconcentrated spot sources),0.107
 Hydrogen from Biomass Gasification Fuidized Bed with Carbon Capture,Electricity (low voltage),0.064
 Hydrogen from Biomass Gasification Fuidized Bed with Carbon Capture,Hydrogen (medium pressure),1.0
 Hydrogen from Biomass Gasification Fuidized Bed with Carbon Capture,Woody biomass,-3.06
+"Construction, renovation, and demolition wood waste",CO2 emission (from nonconcentrated spot sources),-0.388235
+"Construction, renovation, and demolition wood waste",Woody biomass,1.0
+Municipal sludge,CO2 emission (from nonconcentrated spot sources),-0.388235
+Municipal sludge,Wet biomass,1.0
+"Food waste, green waste, and other organic matter",CO2 emission (from nonconcentrated spot sources),-0.388235
+"Food waste, green waste, and other organic matter",Waste,1.0
+Paper and cardboard,CO2 emission (from nonconcentrated spot sources),-0.388235
+Paper and cardboard,Waste,1.0
+Pulp and paper mill residues,CO2 emission (from nonconcentrated spot sources),-0.388235
+Pulp and paper mill residues,Wet biomass,1.0
 Conversion of BioMethane to Methanol,Bio-methanol,1.0
 Conversion of BioMethane to Methanol,CO2 emission (from carbon-intensive fields),-0.25
 Conversion of BioMethane to Methanol,Synthetic natural gas (medium pressure),-1.4
@@ -89,6 +111,18 @@ Conversion of BioMethanol to Olefinic Compounds,Propylene,1.643
 Bio-diesel,Bio-diesel,1.0
 Bio-ethanol,Bio-ethanol,1.0
 Bio-ethanol,CO2 emission (from nonconcentrated spot sources),-0.2579384463
+BioMethanol-Powered Bulk Carrier Ship,Bio-methanol,-0.0606
+BioMethanol-Powered Bulk Carrier Ship,CO2 emission (from nonconcentrated spot sources),0.0405359999999999
+BioMethanol-Powered Bulk Carrier Ship,Freight mobility,1.0
+BioOil-Powered Bulk Carrier Ship,,-0.0606
+BioOil-Powered Bulk Carrier Ship,CO2 emission (from nonconcentrated spot sources),0.04504
+BioOil-Powered Bulk Carrier Ship,Freight mobility,1.0
+Oil-Powered Bulk Carrier Ship,CO2 emission (from nonconcentrated spot sources),0.04504
+Oil-Powered Bulk Carrier Ship,,-0.0606
+Oil-Powered Bulk Carrier Ship,Freight mobility,1.0
+Methanol-Powered Bulk Carrier Ship,CO2 emission (from nonconcentrated spot sources),0.0405359999999999
+Methanol-Powered Bulk Carrier Ship,Methanol,-0.0606
+Methanol-Powered Bulk Carrier Ship,Freight mobility,1.0
 100% BioDiesel-Powered Bus,Bio-diesel,-0.391
 100% BioDiesel-Powered Bus,CO2 emission (from nonconcentrated spot sources),0.112
 100% BioDiesel-Powered Bus,Public mobility,1.0
@@ -118,6 +152,31 @@ Diesel Hybrid Bus,Public mobility,1.0
 Propane-Powered Bus,CO2 emission (from nonconcentrated spot sources),0.111
 Propane-Powered Bus,Public mobility,1.0
 Propane-Powered Bus,Propane,-0.472
+Post-Combustion Carbon Capture,CO2 emission (from carbon-intensive fields),-1.11
+Post-Combustion Carbon Capture,Captured CO2,1.0
+Post-Combustion Carbon Capture,CO2 emission (from nonconcentrated spot sources),0.11
+Post-Combustion Carbon Capture,Electricity (high voltage),-0.161
+Post-Combustion Carbon Capture,Heat (high temperature),-1.186
+Post-Combustion Carbon Capture using Amines,CO2 emission (from carbon-intensive fields),-1.11
+Post-Combustion Carbon Capture using Amines,Captured CO2,1.0
+Post-Combustion Carbon Capture using Amines,CO2 emission (from nonconcentrated spot sources),0.11
+Post-Combustion Carbon Capture using Amines,Electricity (high voltage),-0.015
+Post-Combustion Carbon Capture using Amines,Heat (high temperature),-1.0
+Post-Combustion Carbon Capture using Membranes,CO2 emission (from carbon-intensive fields),-1.11
+Post-Combustion Carbon Capture using Membranes,Captured CO2,1.0
+Post-Combustion Carbon Capture using Membranes,CO2 emission (from nonconcentrated spot sources),0.11
+Post-Combustion Carbon Capture using Membranes,Electricity (high voltage),-0.37
+Post-Combustion Carbon Capture using MOFs,CO2 emission (from carbon-intensive fields),-1.11
+Post-Combustion Carbon Capture using MOFs,Captured CO2,1.0
+Post-Combustion Carbon Capture using MOFs,CO2 emission (from nonconcentrated spot sources),0.11
+Post-Combustion Carbon Capture using MOFs,Electricity (high voltage),-0.2
+Post-Combustion Carbon Capture using MOFs,Heat (high temperature),-0.22
+Carbon Mineralization,Captured CO2,-1.0
+Carbon Mineralization,Sequestrated CO2,1.0
+Carbon Mineralization,Electricity (high voltage),-0.49
+Carbon Transport and Injection,Captured CO2,-1.0
+Carbon Transport and Injection,Sequestrated CO2,1.0
+Carbon Transport and Injection,Electricity (high voltage),-0.185
 100% BioDiesel-Powered Car,Bio-diesel,-0.441
 100% BioDiesel-Powered Car,CO2 emission (from nonconcentrated spot sources),0.108
 100% BioDiesel-Powered Car,Private mobility,1.0
@@ -286,6 +345,18 @@ Diesel-Powered Commuter Train,Diesel,-0.27
 Diesel-Powered Commuter Train,Public mobility,1.0
 Electric-Powered Commuter Train,Electricity (high voltage),-0.092
 Electric-Powered Commuter Train,Public mobility,1.0
+BioMethanol-Powered Container Ship,Bio-methanol,-0.116
+BioMethanol-Powered Container Ship,CO2 emission (from nonconcentrated spot sources),0.044496
+BioMethanol-Powered Container Ship,Freight mobility,1.0
+BioOil-Powered Container Ship,,-0.116
+BioOil-Powered Container Ship,CO2 emission (from nonconcentrated spot sources),0.04944
+BioOil-Powered Container Ship,Freight mobility,1.0
+Oil-Powered Container Ship,CO2 emission (from nonconcentrated spot sources),0.04944
+Oil-Powered Container Ship,,-0.116
+Oil-Powered Container Ship,Freight mobility,1.0
+Methanol-Powered Container Ship,CO2 emission (from nonconcentrated spot sources),0.044496
+Methanol-Powered Container Ship,Methanol,-0.116
+Methanol-Powered Container Ship,Freight mobility,1.0
 Conversion of Crops to Ethanol,Bio-ethanol,1.0
 Conversion of Crops to Ethanol,CO2 emission (from carbon-intensive fields),0.154
 Conversion of Crops to Ethanol,Wet biomass,-1.786
@@ -300,11 +371,12 @@ Cumene Production Process,Phenol,0.92
 Cumene Production Process,Propylene,-0.95
 Direct Air Capture at High Temperature,Captured CO2,1.0
 Direct Air Capture at High Temperature,CO2 emission (from nonconcentrated spot sources),-1.0
-Direct Air Capture at High Temperature,Electricity (medium voltage),-1.535
+Direct Air Capture at High Temperature,Electricity (medium voltage),-0.367
+Direct Air Capture at High Temperature,Heat (high temperature),-1.472
 Direct Air Capture at Low Temperature,Captured CO2,1.0
 Direct Air Capture at Low Temperature,CO2 emission (from nonconcentrated spot sources),-1.0
-Direct Air Capture at Low Temperature,Electricity (medium voltage),-0.25
-Direct Air Capture at Low Temperature,Heat (high temperature),-1.75
+Direct Air Capture at Low Temperature,Electricity (medium voltage),-0.275
+Direct Air Capture at Low Temperature,"Heat (low temperature, decentralized)",-2.722
 Decentralized Cogeneration with Hydrogen,Electricity (medium voltage),2.64
 Decentralized Cogeneration with Hydrogen,Hydrogen (medium pressure),-4.55
 Decentralized Cogeneration with Hydrogen,"Heat (low temperature, decentralized)",1.0
@@ -339,7 +411,7 @@ Decentralized Cogeneration with Oil Combustion,CO2 emission (from nonconcentrate
 Decentralized Cogeneration with Oil Combustion,Electricity (low voltage),0.91
 Decentralized Cogeneration with Oil Combustion,"Heat (low temperature, decentralized)",1.0
 Decentralized Cogeneration with Oil Combustion,Light fuel oil,-2.33
-Decentralized Cogeneration with Wood Combustion,CO2 emission (from carbon-intensive fields),0.733
+Decentralized Cogeneration with Wood Combustion,CO2 emission (from nonconcentrated spot sources),0.733
 Decentralized Cogeneration with Wood Combustion,Electricity (medium voltage),0.34
 Decentralized Cogeneration with Wood Combustion,"Heat (low temperature, decentralized)",1.0
 Decentralized Cogeneration with Wood Combustion,Woody biomass,-1.887
@@ -448,11 +520,11 @@ Food Production (heat pump),Heat (high temperature),-0.009
 Food Production with Heat Recovery,Electricity (medium voltage),-0.61
 Food Production with Heat Recovery,Food,1.0
 Food Production with Heat Recovery,Heat (high temperature),-1.285
-Fischer-Tropsch Synthesis,Bio-diesel,1.0
-Fischer-Tropsch Synthesis,CO2 emission (from carbon-intensive fields),0.464
-Fischer-Tropsch Synthesis,Electricity (medium voltage),-0.004
-Fischer-Tropsch Synthesis,"Heat (low temperature, district heating network)",0.395
-Fischer-Tropsch Synthesis,Woody biomass,-1.879
+BioDiesel Production via Fischer-Tropsch Synthesis,Bio-diesel,1.0
+BioDiesel Production via Fischer-Tropsch Synthesis,CO2 emission (from carbon-intensive fields),0.464
+BioDiesel Production via Fischer-Tropsch Synthesis,Electricity (medium voltage),-0.004
+BioDiesel Production via Fischer-Tropsch Synthesis,"Heat (low temperature, district heating network)",0.395
+BioDiesel Production via Fischer-Tropsch Synthesis,Woody biomass,-1.879
 Hydrogen Production via Gasification,CO2 emission (from carbon-intensive fields),0.635
 Hydrogen Production via Gasification,Electricity (medium voltage),-0.093
 Hydrogen Production via Gasification,Hydrogen (medium pressure),1.0
@@ -517,6 +589,7 @@ Combined Cycle Gas Turbine Hydrogen and Synthetic Natural Gas Mix with Carbon Ca
 Combined Cycle Gas Turbine Hydrogen and Synthetic Natural Gas Mix with Carbon Capture,Synthetic natural gas (medium pressure),-1.325
 Hydrogen to Storage,Hydrogen (extra high pressure),-1.0
 Hydrogen to Storage,Stored hydrogen,1.0
+Heavy fuel oil,,1.0
 High Temperature to Low Temperature Conversion,Heat (high temperature),-1.0
 High Temperature to Low Temperature Conversion,"Heat (low temperature, district heating network)",1.0
 High Temperature to Low Temperature Conversion in Decentralized Systems,Heat (high temperature),-1.0
@@ -684,6 +757,9 @@ Natural Gas Expansion from Medium Pressure to Low Pressure (co-generation unit),
 Natural Gas Expansion from Medium Pressure to Low Pressure (co-generation unit),"Heat (low temperature, decentralized)",-0.02
 Natural Gas Expansion from Medium Pressure to Low Pressure (co-generation unit),Natural gas (low pressure),1.0
 Natural Gas Expansion from Medium Pressure to Low Pressure (co-generation unit),Natural gas (medium pressure),-1.0
+Natural gas,Natural gas (high pressure),1.0
+Natural gas,Natural gas (low pressure),1.0
+Natural gas,Natural gas (medium pressure),1.0
 Plasma Natural Gas Pyrolysis,Hydrogen (medium pressure),1.0
 Plasma Natural Gas Pyrolysis,Heat (high temperature),-0.356
 Plasma Natural Gas Pyrolysis,"Heat (low temperature, district heating network)",0.244
@@ -712,6 +788,18 @@ Open Cycle Gas Turbine 243 MW,Natural gas (high pressure),-2.5
 Open Cycle Gas Turbine 100 MW,CO2 emission (from carbon-intensive fields),0.524
 Open Cycle Gas Turbine 100 MW,Electricity (high voltage),1.0
 Open Cycle Gas Turbine 100 MW,Natural gas (high pressure),-2.5
+BioMethanol-Powered Oil Tanker Ship,Bio-methanol,-0.1
+BioMethanol-Powered Oil Tanker Ship,CO2 emission (from nonconcentrated spot sources),0.059598
+BioMethanol-Powered Oil Tanker Ship,Freight mobility,1.0
+BioOil-Powered Oil Tanker Ship,,-0.1
+BioOil-Powered Oil Tanker Ship,CO2 emission (from nonconcentrated spot sources),0.06622
+BioOil-Powered Oil Tanker Ship,Freight mobility,1.0
+Oil-Powered Oil Tanker Ship,CO2 emission (from nonconcentrated spot sources),0.06622
+Oil-Powered Oil Tanker Ship,,-0.1
+Oil-Powered Oil Tanker Ship,Freight mobility,1.0
+Methanol-Powered Oil Tanker Ship,CO2 emission (from nonconcentrated spot sources),0.059598
+Methanol-Powered Oil Tanker Ship,Methanol,-0.1
+Methanol-Powered Oil Tanker Ship,Freight mobility,1.0
 Phosphoric Acid Fuel Cell,Electricity (low voltage),1.647
 Phosphoric Acid Fuel Cell,Hydrogen (high pressure),-2.941
 Phosphoric Acid Fuel Cell,"Heat (low temperature, decentralized)",1.0
@@ -736,23 +824,23 @@ Polyethylene terephthalate,Polyethylene terephthalate,1.0
 Polyethylene Terephthalate Formation,Ethylene,-1.424
 Polyethylene Terephthalate Formation,Polyethylene terephthalate,1.0
 Phenol,Phenol,1.0
-Bio-Jet Fuel-Powered Freight Plane,Bio-jetfuel,-1.294
-Bio-Jet Fuel-Powered Freight Plane,CO2 emission (from nonconcentrated spot sources),0.324
+Bio-Jet Fuel-Powered Freight Plane,Bio-jetfuel,-0.617
+Bio-Jet Fuel-Powered Freight Plane,CO2 emission (from nonconcentrated spot sources),0.154
 Bio-Jet Fuel-Powered Freight Plane,Freight mobility,1.0
-Plane Freight,CO2 emission (from nonconcentrated spot sources),0.324
-Plane Freight,Jet fuel,-1.294
+Plane Freight,CO2 emission (from nonconcentrated spot sources),0.154
+Plane Freight,Jet fuel,-0.617
 Plane Freight,Freight mobility,1.0
-Bio-Jet Fuel-Powered Long Haul Passenger Plane,Bio-jetfuel,-0.734
-Bio-Jet Fuel-Powered Long Haul Passenger Plane,CO2 emission (from nonconcentrated spot sources),0.183
+Bio-Jet Fuel-Powered Long Haul Passenger Plane,Bio-jetfuel,-0.352
+Bio-Jet Fuel-Powered Long Haul Passenger Plane,CO2 emission (from nonconcentrated spot sources),0.088
 Bio-Jet Fuel-Powered Long Haul Passenger Plane,Public mobility,1.0
-Passenger Plane long haul,CO2 emission (from nonconcentrated spot sources),0.183
-Passenger Plane long haul,Jet fuel,-0.734
+Passenger Plane long haul,CO2 emission (from nonconcentrated spot sources),0.088
+Passenger Plane long haul,Jet fuel,-0.352
 Passenger Plane long haul,Public mobility,1.0
-Bio-Jet Fuel-Powered Short Haul Passenger Plane,Bio-jetfuel,-0.734
-Bio-Jet Fuel-Powered Short Haul Passenger Plane,CO2 emission (from nonconcentrated spot sources),0.183
+Bio-Jet Fuel-Powered Short Haul Passenger Plane,Bio-jetfuel,-0.352
+Bio-Jet Fuel-Powered Short Haul Passenger Plane,CO2 emission (from nonconcentrated spot sources),0.088
 Bio-Jet Fuel-Powered Short Haul Passenger Plane,Public mobility,1.0
-Passenger Plane short haul,CO2 emission (from nonconcentrated spot sources),0.183
-Passenger Plane short haul,Jet fuel,-0.734
+Passenger Plane short haul,CO2 emission (from nonconcentrated spot sources),0.088
+Passenger Plane short haul,Jet fuel,-0.352
 Passenger Plane short haul,Public mobility,1.0
 Polypropylene Production,Polypropylene,1.0
 Polypropylene Production,Propylene,-1.191
@@ -1022,18 +1110,14 @@ Diesel-Powered Freight Train,Diesel,-0.051
 Diesel-Powered Freight Train,Freight mobility,1.0
 "Electric-Powered Freight Train (co-generation unit, components for electricity)",Electricity (extra high voltage),-0.068
 "Electric-Powered Freight Train (co-generation unit, components for electricity)",Freight mobility,1.0
-Hydrogen-Powered Freight Train,Hydrogen (extra high pressure),-0.022
 Hydrogen-Powered Freight Train,Hydrogen (high pressure),-0.333
 Hydrogen-Powered Freight Train,Freight mobility,1.0
-Hybrid Battery-Fuel Cell-Powered Freight Train,Hydrogen (extra high pressure),-0.02
-Hybrid Battery-Fuel Cell-Powered Freight Train,Freight mobility,1.0
 Natural Gas-Powered Freight Train,CO2 emission (from nonconcentrated spot sources),0.057
 Natural Gas-Powered Freight Train,Freight mobility,1.0
 Natural Gas-Powered Freight Train,Natural gas (high pressure),-0.251
 Natural Synthetic Gas-Powered Freight Train,CO2 emission (from nonconcentrated spot sources),0.057
 Natural Synthetic Gas-Powered Freight Train,Freight mobility,1.0
 Natural Synthetic Gas-Powered Freight Train,Synthetic natural gas (high pressure),-0.251
-Hydrogen-Powered Train,Hydrogen (extra high pressure),-0.294
 Hydrogen-Powered Train,Hydrogen (high pressure),-0.312
 Hydrogen-Powered Train,Public mobility,1.0
 Natural Gas-Powered Train,CO2 emission (from nonconcentrated spot sources),0.076
@@ -1084,13 +1168,13 @@ Compressed Natural Gas-Powered Short Distance Truck,Natural gas (high pressure),
 Compressed Synthetic Natural Gas-Powered Short Distance Truck,CO2 emission (from nonconcentrated spot sources),0.105
 Compressed Synthetic Natural Gas-Powered Short Distance Truck,Freight mobility,1.0
 Compressed Synthetic Natural Gas-Powered Short Distance Truck,Synthetic natural gas (high pressure),-0.608
-Diesel-Powered Short Distance Truck,CO2 emission (from nonconcentrated spot sources),0.126
-Diesel-Powered Short Distance Truck,Diesel,-0.478
+Diesel-Powered Short Distance Truck,CO2 emission (from nonconcentrated spot sources),0.4022
+Diesel-Powered Short Distance Truck,Diesel,-1.5227
 Diesel-Powered Short Distance Truck,Freight mobility,1.0
 Electric-Powered Short Distance Truck,Electricity (medium voltage),-0.382
 Electric-Powered Short Distance Truck,Freight mobility,1.0
-Gasoline-Powered Short Distance Truck,CO2 emission (from nonconcentrated spot sources),0.158
-Gasoline-Powered Short Distance Truck,Gasoline,-0.582
+Gasoline-Powered Short Distance Truck,CO2 emission (from nonconcentrated spot sources),0.3724
+Gasoline-Powered Short Distance Truck,Gasoline,-1.3734
 Gasoline-Powered Short Distance Truck,Freight mobility,1.0
 Diesel Hybrid Short Distance Truck,CO2 emission (from nonconcentrated spot sources),0.112
 Diesel Hybrid Short Distance Truck,Diesel,-0.424
