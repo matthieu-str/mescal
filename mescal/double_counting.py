@@ -394,7 +394,11 @@ def _double_counting_removal(
                     CPC_constr = 'None'
                 CPC_constr_list.append(CPC_constr)
                 mapping_esm_flows_to_CPC_dict['OWN_CONSTRUCTION'] += [CPC_constr]
-                mapping_CPC_to_esm_flows_dict[CPC_constr] = ['OWN_CONSTRUCTION']
+                if CPC_constr in mapping_CPC_to_esm_flows_dict:  # avoid overwriting an existing entry
+                    if 'OWN_CONSTRUCTION' not in mapping_CPC_to_esm_flows_dict[CPC_constr]:  # avoid duplicates
+                        mapping_CPC_to_esm_flows_dict[CPC_constr] += ['OWN_CONSTRUCTION']
+                else:
+                    mapping_CPC_to_esm_flows_dict[CPC_constr] = ['OWN_CONSTRUCTION']
 
         # Decommission activity
         if tech in no_decommission_list or ds_type != 'Operation':
@@ -421,7 +425,7 @@ def _double_counting_removal(
                     CPC_decom = 'None'
                 CPC_decom_list.append(CPC_decom)
                 mapping_esm_flows_to_CPC_dict['OWN_DECOMMISSION'] += [CPC_decom]
-                if CPC_decom in mapping_CPC_to_esm_flows_dict:
+                if CPC_decom in mapping_CPC_to_esm_flows_dict:  # avoid overwriting an existing entry
                     if 'OWN_DECOMMISSION' not in mapping_CPC_to_esm_flows_dict[CPC_decom]:  # avoid duplicates
                         mapping_CPC_to_esm_flows_dict[CPC_decom] += ['OWN_DECOMMISSION']
                 else:
