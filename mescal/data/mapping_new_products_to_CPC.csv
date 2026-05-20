@@ -1,4 +1,5 @@
 Name,CPC,Search type,Where
+2 wt-% potassium iodide solution,"34231: Chemical elements n.e.c.; inorganic acids except phosphoric, nitric and sulphonitric; inorganic oxygen compoun[…]",equals,Product
 amine-based silica,"35310: Organic surface active agents, except soap",equals,Product
 biodiesel,35491: Biodiesel,contains,Product
 biogas,"17200: Coal gas, water gas, producer gas and similar gases, other than petroleum gases and other gaseous hydrocarbons",equals,Product
@@ -43,7 +44,8 @@ electricity production,17100: Electrical energy,contains,Product
 "ethanol, from forest residue","34139: Other alcohols, phenols, phenol-alcohols, and their halogenated, sulphonated, nitrated or nitrosated derivativ[…]",equals,Product
 EV charger,"464: Accumulators, primary cells and primary batteries, and parts thereof",contains,Product
 "facility, construction",53269: Other constructions for manufacturing,contains,Activity
-farming and supply of,23140: Other cereal grain products (including corn flakes),contains,Product
+farming and supply of,23140: Other cereal grain products (including corn flakes),contains,Activity
+fixed bed reactor,53269: Other constructions for manufacturing,equals,Product
 forest residue,23140: Other cereal grain products (including corn flakes),equals,Product
 fuel supply for cng vehicles,"12020: Natural gas, liquefied or in the gaseous state",contains,Activity
 fuel supply for methane vehicles,"12020: Natural gas, liquefied or in the gaseous state",contains,Activity
@@ -52,6 +54,7 @@ fuel supply for hydrogen vehicles,"34210: Hydrogen, nitrogen, oxygen, carbon dio
 "fuel cell system, 1 kWe, proton exchange membrane (PEM)",46410: Primary cells and primary batteries,equals,Product
 geothermal heat plant,"43913: Refrigerating and freezing equipment and heat pumps, except household type equipment",equals,Product
 hard coal IGCC power plant 450MW,53262: Power plants,equals,Product
+"heat, central or small-scale",17300: Steam and hot water,equals,Product
 "heat, deep geothermal",17300: Steam and hot water,equals,Product
 "heat, from residential heating system",17300: Steam and hot water,equals,Product
 "heat, district or industrial",17300: Steam and hot water,equals,Product
@@ -99,6 +102,7 @@ synthetic gas factory,53269: Other constructions for manufacturing,equals,Produc
 tank construction,53269: Other constructions for manufacturing,contains,Activity
 tap water,18000: Natural water,contains,Product
 transmission pipeline,53251: Local pipelines,contains,Activity
+"transport, pipeline, supercritical carbon dioxide, 200km without recompression",65131: Transport services via pipeline of petroleum and natural gas,equals,Product
 "transport, freight, lorry",6511: Road transport services of freight,contains,Product
 "transport, passenger bus",64: Passenger transport services,contains,Product
 "transport, passenger car","64119: Other land transportation services of passengers, n.e.c.",contains,Product
@@ -122,6 +126,7 @@ unit construction,53269: Other constructions for manufacturing,contains,Activity
 "used electrolyzer stack, 1MWe, AEC",39990: Other wastes n.e.c.,equals,Product
 "used electrolyzer stack, 1MWe, PEM",39990: Other wastes n.e.c.,equals,Product
 "used electrolyzer stack, 1MWe, SOEC",39990: Other wastes n.e.c.,equals,Product
+"water, deionized",18000: Natural water,equals,Product
 wave energy converter platform,53262: Power plants,equals,Product
 "wood chips and particles, willow",31230: Wood in chips or particles,equals,Product
 "wood chips, dry, measured as dry mass",31230: Wood in chips or particles,equals,Product
