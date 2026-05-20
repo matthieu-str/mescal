@@ -548,8 +548,10 @@ def _double_counting_removal(
                         technosphere_inputs_CPC.append(dict(act_flow['classifications'])['CPC'])
                     else:
                         technosphere_inputs_CPC.append('None')
+                        self.products_without_a_cpc_category.add(act_flow["reference product"])
                 else:
                     technosphere_inputs_CPC.append('None')
+                    self.products_without_a_cpc_category.add(act_flow["reference product"])
 
             # Finding the indices of technosphere flows that are also in the ESM inputs
             # (i.e., flows that we want to put to zero)
