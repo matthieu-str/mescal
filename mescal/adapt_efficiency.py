@@ -320,7 +320,9 @@ def _get_esm_input_quantity(
             # This allows the user to put a fuel that is not an input in the ESM but in the LCI dataset in the
             # efficiency file. This is useful in case of mismatch (different fuel consumed between ESM and LCI dataset).
             # However, direct emissions must then be adjusted (tech_specifics file).
-            self.logger.warning(f'Flow of type {flow} found for {row.Name} in efficiency file, but not in model file.')
+            if flow not in ['TRANSPORT_FUEL', 'PROCESS_FUEL']:
+                self.logger.warning(f'Flow of type {flow} found for {row.Name} in efficiency file, but not in '
+                                    f'model file.')
             input_amount += 0
     if input_amount == 0:
         raise ValueError(f'No flow of type(s) {flows_list} found for {row.Name} in the model file')
@@ -343,7 +345,9 @@ def _get_esm_input_unit(
                 & (unit_conversion.Type == 'Flow')
             ].ESM.values[0])
         except IndexError:
-            self.logger.warning(f'Flow of type {flow} found for {row.Name} in efficiency file, but not in unit conversion file.')
+            if flow not in ['TRANSPORT_FUEL', 'PROCESS_FUEL']:
+                self.logger.warning(f'Flow of type {flow} found for {row.Name} in efficiency file, but not in unit '
+                                    f'conversion file.')
 
     unit_list = list(set(unit_list))  # remove duplicates
     if len(unit_list) == 0:
