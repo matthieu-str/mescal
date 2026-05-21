@@ -423,16 +423,13 @@ model = [
     ['CAR_GASOLINE', 'MOB_PASSENGER', 1],
     ['CAR_GASOLINE', 'GASOLINE', -0.4],  # the "efficiency" in the ESM is 1/0.4 pkm/kWh
     ['CAR_GASOLINE', 'CO2_E', 0.2],
-    ['CAR_GASOLINE', 'CONSTRUCTION', -1],
     ['CAR_PROPANE', 'MOB_PASSENGER', 1],
     ['CAR_PROPANE', 'PROPANE', -0.8],  # the "efficiency" in the ESM is 1/0.8 pkm/kWh
     ['CAR_PROPANE', 'CO2_E', 0.2],
-    ['CAR_PROPANE', 'CONSTRUCTION', -1],
     ['CAR_BIODIESEL_B20', 'MOB_PASSENGER', 1],
     ['CAR_BIODIESEL_B20', 'BIO_DIESEL', -0.1],
     ['CAR_BIODIESEL_B20', 'DIESEL', -0.4],  # the "efficiency" in the ESM is 1/(0.1+0.4) pkm/kWh
     ['CAR_BIODIESEL_B20', 'CO2_E', 0.2],
-    ['CAR_BIODIESEL_B20', 'CONSTRUCTION', -1],
 ]
 
 efficiency = [

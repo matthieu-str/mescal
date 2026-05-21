@@ -343,7 +343,6 @@ mapping_esm_flows_to_CPC = [
 model = [
     ['HEAT_PUMP', 'HEAT', 1],
     ['HEAT_PUMP', 'ELECTRICITY', -0.25],
-    ['HEAT_PUMP', 'CONSTRUCTION', -1],
 ]
 
 unit_conversion = [
