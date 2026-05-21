@@ -150,6 +150,8 @@ class ESM:
         self.resources_without_unit_conversion_factor = set()
         self.locations_list = list(set([i['location'] for i in self.main_database.db_as_list]))
         self.added_decom_to_input_data = False
+        self.missing_construction_flow = None
+        self.missing_input_flow_dict = None
 
 
     def __repr__(self):
@@ -774,6 +776,41 @@ class ESM:
         self.double_counting_removal_amount = double_counting_removal_amount
         self.df_flows_set_to_zero = df_flows_set_to_zero
         self.df_activities_subject_to_double_counting = df_activities_subject_to_double_counting
+
+        succeeded_dc = double_counting_removal_amount[
+            double_counting_removal_amount['Type'] == 'Operation'
+        ][['Name', 'Flow']].values.tolist()
+
+        no_construction_list = self.no_construction_list
+        missing_construction_flow = [i for i in df_activities_subject_to_double_counting.Name.unique() if (
+                [i, 'CONSTRUCTION'] not in succeeded_dc
+                and [i, 'OWN_CONSTRUCTION'] not in succeeded_dc
+                and i not in no_construction_list
+        )]
+
+        if len(missing_construction_flow) > 0:
+            self.logger.warning(
+                f"No construction input flow was found in the following operation datasets (this is not necessarily "
+                f"an issue, but you might want to have a look): {missing_construction_flow}")
+
+        missing_input_flow = [i for i in self.model[self.model.Amount < 0][['Name', 'Flow']].values.tolist() if (
+                (i not in succeeded_dc)
+                & (i[0] in df_activities_subject_to_double_counting.Name.unique())
+                & ([i[0], 'TRANSPORT_FUEL'] not in succeeded_dc)
+                & ([i[0], 'PROCESS_FUEL'] not in succeeded_dc)
+        )]
+        missing_input_flow_dict = {}
+        for key, value in missing_input_flow:
+            missing_input_flow_dict.setdefault(key, []).append(value)
+
+        self.missing_construction_flow = missing_construction_flow
+        self.missing_input_flow_dict = missing_input_flow_dict
+
+        if len(missing_input_flow) > 0:
+            self.logger.warning(
+                f"Some input flows could not be found in the following operation datasets (this might be due to the "
+                f"operation dataset being a proxy of the technology or to an unmapped CPC category): "
+                f"{missing_input_flow_dict}")
 
         if self.extract_eol_from_construction:
             self._add_decommission_datasets()
