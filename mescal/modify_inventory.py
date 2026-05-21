@@ -118,7 +118,7 @@ def change_fossil_carbon_flows_of_biofuels(
             new_bf_categories = bf.as_dict()['categories']
             new_bf_name = bf.as_dict()['name'].replace('fossil', 'non-fossil')
 
-            new_biosphere_act_list = [bio_act for bio_act in bd.Database(biosphere_db_name).search(new_bf_name, limit=1000) if (
+            new_biosphere_act_list = [bio_act for bio_act in bd.Database(biosphere_db_name) if (
                     (bio_act['name'] == new_bf_name)
                     & (bio_act['categories'] == new_bf_categories)
             )]  # looking for the equivalent non-fossil flow in the biosphere database
@@ -129,9 +129,9 @@ def change_fossil_carbon_flows_of_biofuels(
             elif (len(new_biosphere_act_list) == 0
                   and bf.as_dict()['categories'] == ('air', 'lower stratosphere + upper troposphere')):
                 # The "Carbon dioxide, non-fossil" elementary flow does not exist in the biosphere database
-                # for the category ('air', 'lower stratosphere + upper troposphere') in ecoinvent 3.10 and before
+                # for the category ('air', 'lower stratosphere + upper troposphere') in ecoinvent 3.10 and 3.11
                 new_bf_categories = ('air', 'urban air close to ground')  # we consider this category as a proxy
-                new_biosphere_act = [bio_act for bio_act in bd.Database(biosphere_db_name).search(new_bf_name, limit=1000) if (
+                new_biosphere_act = [bio_act for bio_act in bd.Database(biosphere_db_name) if (
                         (bio_act['name'] == new_bf_name)
                         & (bio_act['categories'] == new_bf_categories)
                 )][0]
@@ -288,7 +288,7 @@ def add_carbon_dioxide_flow(
     else:
         category = ('natural resource', 'in air')  # resource
 
-    co2_flow = [bio_act for bio_act in bd.Database(biosphere_db_name).search(f'Carbon dioxide, {co2_flow_type}', limit=1000) if (
+    co2_flow = [bio_act for bio_act in bd.Database(biosphere_db_name) if (
         (bio_act['name'] == f'Carbon dioxide, {co2_flow_type}')
         & (bio_act['categories'] == category)
     )][0]
