@@ -835,8 +835,8 @@ def validation_double_counting(
             db_type='validation',
         )
 
-        df.Flow = df.Flow.astype('string').str.replace("['", "")
-        df.Flow = df.Flow.astype('string').str.replace("']", "")
+        df.Flow = df.Flow.astype('string').str.replace("['", "", regex=False)
+        df.Flow = df.Flow.astype('string').str.replace("']", "", regex=False)
 
         df['Input difference (ESM unit)'] = df['ESM input quantity (ESM unit)'] - df['LCA input quantity (ESM unit) aggregated']
         df['Input difference (%)'] = df.apply(
