@@ -153,7 +153,7 @@ def compute_impact_scores(
     else:
         raise ValueError('The assessment type must be either "esm" or "direct emissions')
 
-    activities_bw = {(i['database'], i['code']): i for i in activities}
+    activities_bw = {((i['database'], i['code']) if self.bw_version == "2" else i['id']): i for i in activities}
 
     impact_categories = self._get_impact_categories(methods)
     if len(impact_categories) == 0:
@@ -669,8 +669,8 @@ def compute_territorial_impact_scores(
 
     return df_contrib_processes
 
-@staticmethod
-def _get_impact_categories(methods: list[str]) -> list[str]:
+
+def _get_impact_categories(self, methods: list[str]) -> list[str]:
     """
     Get all impact categories from a list of methods
 
@@ -679,7 +679,7 @@ def _get_impact_categories(methods: list[str]) -> list[str]:
     """
     all_cat = []
     for method in methods:
-        cat = [i for i in bd.methods if i[0] == method]
+        cat = [i for i in bd.methods if i[0 if self.bw_version == "2" else 1] == method]
         if len(cat) == 0:
             raise ValueError(f'The LCIA method {method} is not available in your brightway project')
         all_cat.extend(cat)
@@ -874,6 +874,7 @@ class MultiLCA(object):
         self.limit_type = limit_type
         df_res_rows = []
         req_tech_list = []
+        self.bw_version = "25" if int(bc.__version__[0]) >= 2 else "2"
 
         self.func_units = cs['inv']
         self.methods = cs['ia']
