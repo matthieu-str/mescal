@@ -746,7 +746,7 @@ class ESM:
                             'Unit': unit,
                             'Amount': v4,
                         })
-            double_counting_removal_amount = pd.DataFrame(records_amount)
+        double_counting_removal_amount = pd.DataFrame(records_amount)
 
         records_count = []
         for tech, v1 in ei_removal_count.items():
@@ -760,7 +760,7 @@ class ESM:
                             'Unit': unit,
                             'Count': v4,
                         })
-            double_counting_removal_count = pd.DataFrame(records_count)
+        double_counting_removal_count = pd.DataFrame(records_count)
 
         double_counting_removal_amount = double_counting_removal_amount.merge(
             double_counting_removal_count,
