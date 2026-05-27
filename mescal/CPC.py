@@ -63,6 +63,8 @@ def add_CPC_categories(
         name = mapping_new_products_to_CPC.Name.iloc[i]
         CPC_category = mapping_new_products_to_CPC.CPC.iloc[i]
         search_type = mapping_new_products_to_CPC["Search type"].iloc[i]
+        if 'Overwrite existing' in mapping_new_products_to_CPC.columns and overwrite_existing_CPC:
+            overwrite_existing_CPC = mapping_new_products_to_CPC['Overwrite existing'].iloc[i]
         self._add_product_or_activity_CPC_category(name, CPC_category, search_type, key, overwrite_existing_CPC)
 
     if write:
