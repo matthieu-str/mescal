@@ -490,12 +490,9 @@ unit_conversion = [
 
 double_counting_removal = [
     ['CAR_GASOLINE', 'Operation', 'GASOLINE', 0.05 * 0.4 + (0.03 + 0.01) * 0.6, 'kilogram', 2],
-    ['CAR_GASOLINE', 'Operation', 'TRANSPORT_FUEL', 0.05 * 0.4 + (0.03 + 0.01) * 0.6, 'kilogram', 2],
     ['CAR_GASOLINE', 'Operation', 'CONSTRUCTION', 5e-6 * 0.4 + 5e-6 * 0.6, 'unit', 2],
-    ['CAR_PROPANE', 'Operation', 'TRANSPORT_FUEL', 0.05, 'kilogram', 1],
     ['CAR_PROPANE', 'Operation', 'CONSTRUCTION', 5e-6, 'unit', 1],
-    ['CAR_BIODIESEL_B20', 'Operation', 'DIESEL', 0.06, 'kilogram', 1],
-    ['CAR_BIODIESEL_B20', 'Operation', 'TRANSPORT_FUEL', 0.06, 'kilogram', 1],
+    ['CAR_BIODIESEL_B20', 'Operation', 'BIO_DIESEL', 0.06, 'kilogram', 1],
     ['CAR_BIODIESEL_B20', 'Operation', 'CONSTRUCTION', 5e-6, 'unit', 1],
 ]
 
