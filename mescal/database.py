@@ -169,6 +169,7 @@ class Database:
         self.logger.addHandler(ch)
         self.logger.propagate = False
         self.create_pickle = create_pickle
+        self.overwritten_cpc_categories = []
 
         if db_as_list is not None and db_names is not None:
             raise ValueError('Only one of db_names or db_as_list should be provided.')

@@ -107,10 +107,18 @@ def _add_product_or_activity_CPC_category(
                 act['classifications'] += [('CPC', CPC_category)]
             else:
                 if overwrite_existing_CPC:
-                    act['classifications'] = [
-                        ('CPC', CPC_category) if k == 'CPC' else (k, v)
-                        for (k, v) in act['classifications']
-                    ]  # overwrite the existing CPC category while keeping the other classifications
+                    old_CPC_category = dict(act['classifications'])['CPC']
+                    if CPC_category != old_CPC_category:
+                        act['classifications'] = [
+                            ('CPC', CPC_category) if k == 'CPC' else (k, v)
+                            for (k, v) in act['classifications']
+                        ]  # overwrite the existing CPC category while keeping the other classifications
+                        self.overwritten_cpc_categories.append([
+                            old_CPC_category,
+                            CPC_category,
+                            act['reference product'],
+                            act['name'],
+                        ])
                 else:
                     pass  # if the activities already has a CPC category, we do not overwrite it
 
