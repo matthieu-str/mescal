@@ -658,6 +658,11 @@ def _double_counting_removal(
                                 flow['name'] = f'{sub_comp}, Decommission'
 
                 # add the removed amount in the ei_removal dict for post-analysis
+                res_categories = (  # reordering the list to have TRANSPORT_FUEL and PROCESS_FUEL being checked at last
+                    [e for e in res_categories if e not in ['TRANSPORT_FUEL', 'PROCESS_FUEL']]
+                    + (['TRANSPORT_FUEL'] if 'TRANSPORT_FUEL' in res_categories else [])
+                    + (['PROCESS_FUEL'] if 'PROCESS_FUEL' in res_categories else [])
+                )
                 for cat in res_categories:
                     if cat in ES_inputs:
                         # only adds the amount for the relevant category
@@ -667,10 +672,12 @@ def _double_counting_removal(
                             # old amount (e.g., GWh) multiplied by factor as we went down in the tree
                             ei_removal[tech][cat]['amount'][flow['unit']] = abs(old_amount * new_act_op_d_c_amount)
                             ei_removal[tech][cat]['count'][flow['unit']] = 1  # count (i.e., number of flows put to zero)
+                            break  # to avoid double-counting, the removed amount can be associated to one single ESM flow
                         else:
                             # old amount (e.g., GWh) multiplied by factor as we went down in the tree
                             ei_removal[tech][cat]['amount'][flow['unit']] += abs(old_amount * new_act_op_d_c_amount)
                             ei_removal[tech][cat]['count'][flow['unit']] += 1  # count (i.e., number of flows put to zero)
+                            break  # to avoid double-counting, the removed amount can be associated to one single ESM flow
 
                 # Setting the amount to zero
                 flow['comment'] = f'Original amount: {old_amount}. ' + flow.get('comment', '')
