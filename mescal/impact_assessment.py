@@ -728,23 +728,6 @@ def _aggregate_direct_emissions_activities(
                 if 'output' in exc:
                     exc['output'] = (esm_direct_emissions_db_name, exc['output'][1])
 
-        # In the case of forced background check, we keep only the main activity, and remove the other ones
-        elif tech in self.activities_background_search['Operation']:
-            for i in range(len(activities)):
-                if activities['Activity code'].iloc[i] == old_act['code'] and activities['Amount'].iloc[i] == 1.0:
-                    act = [j for j in direct_emissions_db if j['code'] == activities['Activity code'].iloc[i]][0]
-                    act['name'] = f'{tech}, Operation'
-                    for exc in act['exchanges']:
-                        if exc['type'] == 'production':
-                            exc['name'] = f'{tech}, Operation'
-                            exc['database'] = esm_direct_emissions_db_name
-                            if 'input' in exc:
-                                exc['input'] = (esm_direct_emissions_db_name, exc['input'][1])
-                        if 'output' in exc:
-                            exc['output'] = (esm_direct_emissions_db_name, exc['output'][1])
-                else:  # remove activity from database
-                    direct_emissions_db = [j for j in direct_emissions_db if j['code'] != activities['Activity code'].iloc[i]]
-
         else:
             exchanges = [
                 {
@@ -762,17 +745,28 @@ def _aggregate_direct_emissions_activities(
                 exc_code = activities.iloc[i]['Activity code']
                 exc_amount = activities.iloc[i]['Amount']
                 exc_act = [i for i in direct_emissions_db if i['code'] == exc_code][0]
-                new_exc = {
-                    "name": exc_act['name'],
-                    "product": exc_act['reference product'],
-                    "location": exc_act['location'],
-                    "unit": exc_act['unit'],
-                    "amount": exc_amount,
-                    "database": esm_direct_emissions_db_name,
-                    "code": exc_code,
-                    "type": "technosphere",
-                }
-                exchanges.append(new_exc)
+
+                if exc_code == old_act['code'] and exc_amount == 1.0:  # main activity: we add biosphere flows (if any)
+                     for exc in exc_act['exchanges']:
+                         if exc['type'] == 'production':
+                             continue  # the production flow has already been included
+                         if 'output' in exc:
+                             exc['output'] = (esm_direct_emissions_db_name, exc['output'][1])
+                         exchanges.append(exc)
+
+                else:  # next levels in the process tree
+                    new_exc = {
+                        "name": exc_act['name'],
+                        "product": exc_act['reference product'],
+                        "location": exc_act['location'],
+                        "unit": exc_act['unit'],
+                        "amount": exc_amount,
+                        "database": esm_direct_emissions_db_name,
+                        "code": exc_code,
+                        "type": "technosphere",
+                    }
+                    exchanges.append(new_exc)
+
             new_act = {
                 "name": f'{tech}, Operation',
                 "reference product": old_act['reference product'],
