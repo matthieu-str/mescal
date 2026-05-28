@@ -251,11 +251,13 @@ mapping = [
 ]
 
 mapping_new_product_to_CPC = [
-    ['hydrogen-fuelled locomotive', '0001: Locomotives', 'equals', 'Product'],
+    ['hydrogen-fuelled locomotive', '0001: Locomotives', 'equals', 'Product', True],
+    ['locomotive', '0001: Locomotives', 'equals', 'Product', True],
+    ['goods wagon', '0002: Wagons', 'equals', 'Product', False],
 ]
 
 mapping = pd.DataFrame(data=mapping, columns=['Name', 'Type', 'Product', 'Activity', 'Location', 'Database'])
-mapping_new_product_to_CPC = pd.DataFrame(data=mapping_new_product_to_CPC, columns=['Name', 'CPC', 'Search type', 'Where'])
+mapping_new_product_to_CPC = pd.DataFrame(data=mapping_new_product_to_CPC, columns=['Name', 'CPC', 'Search type', 'Where', 'Overwrite existing'])
 
 
 @pytest.mark.tags("requires_ecoinvent")
@@ -288,13 +290,14 @@ def test_CPC():
     db = Database(db_as_list=dummy_esm_db)
     db.add_CPC_categories(
         mapping_new_products_to_CPC=mapping_new_product_to_CPC,
+        overwrite_existing_CPC=True,
     )
     for ds in db.db_as_list:
-        if ds['name'] == 'TRAIN_FREIGHT_H2_LOC, Construction':  # new product
+        if ds['name'] == 'TRAIN_FREIGHT_H2_LOC, Construction':  # new product, CPC should be added
             assert dict(ds['classifications'])['CPC'] == "0001: Locomotives"
-        elif ds['name'] == 'TRAIN_FREIGHT_DIESEL_LOC, Construction':  # existing product
-            assert dict(ds['classifications'])['CPC'] == "4951: Rail locomotives and locomotive tenders"
-        else:  # existing product
+        elif ds['name'] == 'TRAIN_FREIGHT_DIESEL_LOC, Construction':  # existing product, but CPC should be overwritten
+            assert dict(ds['classifications'])['CPC'] == "0001: Locomotives"
+        else:  # "TRAIN_FREIGHT_DIESEL_WAG, Construction" existing product and CPC should not be overwritten
             assert dict(ds['classifications'])['CPC'] == "49533: Railway or tramway goods vans and wagons, not self-propelled"
 
 
