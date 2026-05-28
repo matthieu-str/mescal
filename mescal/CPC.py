@@ -64,8 +64,16 @@ def add_CPC_categories(
         CPC_category = mapping_new_products_to_CPC.CPC.iloc[i]
         search_type = mapping_new_products_to_CPC["Search type"].iloc[i]
         if 'Overwrite existing' in mapping_new_products_to_CPC.columns and overwrite_existing_CPC:
-            overwrite_existing_CPC = mapping_new_products_to_CPC['Overwrite existing'].iloc[i]
-        self._add_product_or_activity_CPC_category(name, CPC_category, search_type, key, overwrite_existing_CPC)
+            overwrite_existing_CPC_temp = mapping_new_products_to_CPC['Overwrite existing'].iloc[i]
+        else:
+            overwrite_existing_CPC_temp = overwrite_existing_CPC
+        self._add_product_or_activity_CPC_category(name, CPC_category, search_type, key, overwrite_existing_CPC_temp)
+
+    if len(self.overwritten_cpc_categories) > 0:
+        self.overwritten_cpc_categories = pd.DataFrame(
+            data=self.overwritten_cpc_categories,
+            columns=['Old', 'New', 'Product', 'Activity'],
+        ).drop_duplicates()
 
     if write:
         if new_db_name is None:
