@@ -62,8 +62,8 @@ BUS_FC_H2,Construction,Hydrogen Fuel Cell-Powered Bus,passenger bus,"passenger b
 BUS_FC_H2,Operation,Hydrogen Fuel Cell-Powered Bus,"transport, passenger bus","transport, passenger bus, fuel cell electric, 13m double deck urban bus"
 BUS_GASOLINE,Operation,Gasoline-Powered Bus,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m double deck urban bus, EURO-VI"
 BUS_GASOLINE,Construction,Gasoline-Powered Bus,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m double deck urban bus, EURO-VI"
-BUS_HY_DIESEL,Operation,Diesel Hybrid Bus,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel hybrid, 13m double deck urban bus, EURO-VI"
-BUS_HY_DIESEL,Construction,Diesel Hybrid Bus,"Passenger bus, EURO-VI","Passenger bus, diesel hybrid, 13m double deck urban bus, EURO-VI"
+BUS_HY_DIESEL,Operation,Hybrid Diesel-Powered Bus,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel hybrid, 13m double deck urban bus, EURO-VI"
+BUS_HY_DIESEL,Construction,Hybrid Diesel-Powered Bus,"Passenger bus, EURO-VI","Passenger bus, diesel hybrid, 13m double deck urban bus, EURO-VI"
 BUS_PROPANE,Construction,Propane-Powered Bus,"Passenger bus, EURO-VI","Passenger bus, compressed gas, 13m double deck urban bus, EURO-VI"
 BUS_PROPANE,Operation,Propane-Powered Bus,"transport, passenger bus, EURO-VI","transport, passenger bus, compressed gas, 13m double deck urban bus, EURO-VI"
 CAR_BIODIESEL_B100,Operation,100% BioDiesel-Powered Car,"transport, passenger car, EURO-6ab","transport, passenger car, diesel, Medium, EURO-6ab"
@@ -84,12 +84,12 @@ CAR_FC_H2,Construction,Fuel Cell-Powered Car with Hydrogen,passenger car,"passen
 CAR_FC_H2,Operation,Fuel Cell-Powered Car with Hydrogen,"transport, passenger car","transport, passenger car, fuel cell electric, Medium"
 CAR_GASOLINE,Construction,Gasoline-Powered Car,"Passenger car, EURO-6ab","Passenger car, gasoline, Medium, EURO-6ab"
 CAR_GASOLINE,Operation,Gasoline-Powered Car,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline, Medium, EURO-6ab"
-CAR_HEV,Operation,Hybrid Electric Car,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline hybrid, Medium, EURO-6ab"
-CAR_HEV,Construction,Hybrid Electric Car,"Passenger car, EURO-6ab","Passenger car, gasoline hybrid, Medium, EURO-6ab"
+CAR_HEV,Operation,Hybrid Gasoline-Powered Car,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline hybrid, Medium, EURO-6ab"
+CAR_HEV,Construction,Hybrid Gasoline-Powered Car,"Passenger car, EURO-6ab","Passenger car, gasoline hybrid, Medium, EURO-6ab"
 CAR_MEOH,Construction,Methanol-Powered Car ,"Passenger car, EURO-6ab","Passenger car, gasoline, Medium, EURO-6ab"
 CAR_MEOH,Operation,Methanol-Powered Car ,"transport, passenger car, EURO-6ab","transport, passenger car, gasoline, Medium, EURO-6ab"
-CAR_PHEV,Operation,Plug-in Hybrid Electric Car,"transport, passenger car, EURO-6ab","transport, passenger car, plugin gasoline hybrid, Medium, EURO-6ab"
-CAR_PHEV,Construction,Plug-in Hybrid Electric Car,"Passenger car, EURO-6ab","Passenger car, plugin gasoline hybrid, Medium, EURO-6ab"
+CAR_PHEV,Operation,Plug-in Hybrid Gasoline-Powered Car,"transport, passenger car, EURO-6ab","transport, passenger car, plugin gasoline hybrid, Medium, EURO-6ab"
+CAR_PHEV,Construction,Plug-in Hybrid Gasoline-Powered Car,"Passenger car, EURO-6ab","Passenger car, plugin gasoline hybrid, Medium, EURO-6ab"
 CAR_PROPANE,Operation,Propane-Powered Car,"transport, passenger car, EURO-6ab","transport, passenger car, compressed gas, Medium, EURO-6ab"
 CAR_PROPANE,Construction,Propane-Powered Car,"Passenger car, EURO-6ab","Passenger car, compressed gas, Medium, EURO-6ab"
 CCGT,Construction,Combined Cycle Gas Turbine,"NGCC power plant, 400MWe","market for gas power plant, combined cycle, 400MW electrical"
@@ -98,8 +98,8 @@ CCGT_CC,Operation,Combined Cycle Gas Turbine with Carbon Capture,"electricity, h
 CCGT_CC,Construction,Combined Cycle Gas Turbine with Carbon Capture,"NGCC power plant, 400MWe","market for gas power plant, combined cycle, 400MW electrical"
 CEMENT_PROD,Operation,Cement Production,"cement, CEM II/B","cement production, CEM II/B"
 CEMENT_PROD,Construction,Cement Production,cement factory,cement factory construction
-CEMENT_PROD_HP,Operation,Cement Production (heat pump),"cement, CEM II/B","cement production, CEM II/B"
-CEMENT_PROD_HP,Construction,Cement Production (heat pump),cement factory,cement factory construction
+CEMENT_PROD_HP,Operation,Cement Production with Heat Pump,"cement, CEM II/B","cement production, CEM II/B"
+CEMENT_PROD_HP,Construction,Cement Production with Heat Pump,cement factory,cement factory construction
 CO2_METHANOL,Operation,Conversion of CO2 to Methanol,methanol,"methanol production, natural gas reforming"
 CO2_METHANOL,Construction,Conversion of CO2 to Methanol,methanol factory,methanol factory construction
 CO2_STO,Construction,CO2 Storage (input),"liquid storage tank, chemicals, organics","market for liquid storage tank, chemicals, organics"
@@ -147,8 +147,8 @@ COAL_US_CC,Operation,Coal Ultra-Supercritical with Carbon Capture,"electricity, 
 COAL_US_CC,Construction,Coal Ultra-Supercritical with Carbon Capture,lignite power plant,market for lignite power plant
 COMMUTER_RAIL_DIESEL,Construction,Diesel-Powered Commuter Train,"train, passenger, regional","train production, passenger, regional"
 COMMUTER_RAIL_DIESEL,Operation,Diesel-Powered Commuter Train,"transport, passenger train","transport, passenger train"
-COMMUTER_RAIL_ELEC,Construction,Electric-Powered Commuter Train,"train, passenger, regional","train production, passenger, regional"
-COMMUTER_RAIL_ELEC,Operation,Electric-Powered Commuter Train,"transport, passenger train","transport, passenger train, regional"
+COMMUTER_RAIL_ELEC,Construction,Metro,"train, passenger, regional","train production, passenger, regional"
+COMMUTER_RAIL_ELEC,Operation,Metro,"transport, passenger train","transport, passenger train, regional"
 CROPS_TO_ETHANOL,Operation,Conversion of Crops to Ethanol,"ethanol, from corn","ethanol production, via fermentation, from corn, energy allocation"
 CROPS_TO_ETHANOL,Construction,Conversion of Crops to Ethanol,ethanol fermentation plant,market for ethanol fermentation plant
 CROPS_TO_JETFUELS,Operation,Conversion of Crops to Jet Fuels,"kerosene, synthetic","kerosene production, synthetic, Fischer Tropsch process, hydrogen from wood gasification, energy allocation"
@@ -183,8 +183,8 @@ DEC_COGEN_WOOD_BOILER,Construction,Decentralized Cogeneration with Wood Combusti
 DEC_COGEN_WOOD_TURBINE,Construction,Decentralized Cogeneration with Wood Combustion (co-generation unit),"heat and power co-generation unit, organic Rankine cycle, 200kW electrical","heat and power co-generation unit construction, organic Rankine cycle, 200kW electrical"
 DEC_DIRECT_ELEC,Construction,Decentralized Direct Electricity,"auxiliary heating unit, electric, 5kW","auxiliary heating unit production, electric, 5kW"
 DEC_DIRECT_ELEC,Operation,Decentralized Direct Electricity,"electricity, low voltage","market for electricity, low voltage"
-DEC_HP_ELEC,Construction,Decentralized Heat Pump Electricity ,"heat pump, brine-water, 10kW","heat pump production, brine-water, 10kW"
-DEC_HP_ELEC,Operation,Decentralized Heat Pump Electricity ,"heat, air-water heat pump 10kW","heat production, air-water heat pump 10kW"
+DEC_HP_ELEC,Construction,Decentralized Heat Pump Electricity,"heat pump, brine-water, 10kW","heat pump production, brine-water, 10kW"
+DEC_HP_ELEC,Operation,Decentralized Heat Pump Electricity,"heat, air-water heat pump 10kW","heat production, air-water heat pump 10kW"
 DEC_SOLAR,Construction,Decentralized Solar Thermal ,"flat plate solar collector, Cu absorber","flat plate solar collector production, Cu absorber"
 DEC_THHP_GAS,Operation,Decentralized Thermal Gas Heat Pump,"heat, future","heat production, natural gas, at diffusion absorption heat pump 4kW, future"
 DEC_THHP_GAS_HEX,Construction,Decentralized Thermal Gas Heat Pump (heat exchanger),"borehole heat exchanger, 150m","borehole heat exchanger production, 150m"
@@ -236,18 +236,18 @@ ETHYLENE_POLYMERIZATION,Construction,Ethylene Polymerization,"chemical factory, 
 ETHYLENE_POLYMERIZATION,Operation,Ethylene Polymerization,ethylene,"unsaturated hydrocarbons production, steam cracking operation, average"
 FOOD_PROD,Operation,Food Production,"sugar, from sugar beet",beet sugar production
 FOOD_PROD,Construction,Food Production,sugar refinery,sugar refinery construction
-FOOD_PROD_HP,Construction,Food Production (heat pump),sugar refinery,sugar refinery construction
-FOOD_PROD_HP,Operation,Food Production (heat pump),"sugar, from sugar beet",beet sugar production
+FOOD_PROD_HP,Construction,Food Production with Heat Pump,sugar refinery,sugar refinery construction
+FOOD_PROD_HP,Operation,Food Production with Heat Pump,"sugar, from sugar beet",beet sugar production
 FOOD_PROD_HR,Operation,Food Production with Heat Recovery,"sugar, from sugar beet",beet sugar production
 FOOD_PROD_HR,Construction,Food Production with Heat Recovery,sugar refinery,sugar refinery construction
 FT,Operation,BioDiesel Production via Fischer-Tropsch Synthesis,"diesel, synthetic, vehicle grade","diesel production, synthetic, from Fischer Tropsch process, hydrogen from wood gasification, energy allocation, at fuelling station"
 FT,Construction,BioDiesel Production via Fischer-Tropsch Synthesis,"chemical factory, organics","chemical factory construction, organics"
-GASIFICATION_H2,Operation,Hydrogen Production via Gasification,"hydrogen, gaseous, 25 bar","hydrogen production, gaseous, 25 bar, from heatpipe reformer gasification of woody biomass, at gasification plant"
-GASIFICATION_H2_PLANT,Construction,Hydrogen Production via Gasification (plant),synthetic gas factory,synthetic gas factory construction
-GASIFICATION_H2_TANK,Construction,Hydrogen Production via Gasification (storage tank),"liquid storage tank, chemicals, organics","market for liquid storage tank, chemicals, organics"
-GASIFICATION_SNG,Operation,Synthetic Natural Gas Production via Gasification,"syngas, RWGS, Production","syngas, RWGS, Production, for Fischer Tropsch process, hydrogen from wood gasification"
-GASIFICATION_SNG_PLANT,Construction,Synthetic Natural Gas Production via Gasification (plant),synthetic gas factory,synthetic gas factory construction
-GASIFICATION_SNG_TANK,Construction,Synthetic Natural Gas Production via Gasification (storage tank),"liquid storage tank, chemicals, organics","market for liquid storage tank, chemicals, organics"
+GASIFICATION_H2,Operation,Hydrogen Production via Wood Gasification,"hydrogen, gaseous, 25 bar","hydrogen production, gaseous, 25 bar, from heatpipe reformer gasification of woody biomass, at gasification plant"
+GASIFICATION_H2_PLANT,Construction,Hydrogen Production via Wood Gasification (plant),synthetic gas factory,synthetic gas factory construction
+GASIFICATION_H2_TANK,Construction,Hydrogen Production via Wood Gasification (storage tank),"liquid storage tank, chemicals, organics","market for liquid storage tank, chemicals, organics"
+GASIFICATION_SNG,Operation,Synthetic Natural Gas Production via Wood Gasification,"syngas, RWGS, Production","syngas, RWGS, Production, for Fischer Tropsch process, hydrogen from wood gasification"
+GASIFICATION_SNG_PLANT,Construction,Synthetic Natural Gas Production via Wood Gasification (plant),synthetic gas factory,synthetic gas factory construction
+GASIFICATION_SNG_TANK,Construction,Synthetic Natural Gas Production via Wood Gasification (storage tank),"liquid storage tank, chemicals, organics","market for liquid storage tank, chemicals, organics"
 GASO_STO,Construction,Gasoline to Storage,"liquid storage tank, chemicals, organics","liquid storage tank production, chemicals, organics"
 GEOTHERMAL,Construction,Geothermal Energy Utilization,"geothermal power plant, 5.5MWel",geothermal power plant construction
 GEOTHERMAL,Operation,Geothermal Energy Utilization,"electricity, high voltage","electricity production, deep geothermal"
@@ -260,14 +260,14 @@ H2_COMP_LM,Operation,Hydrogen Compression from Low Pressure to Medium Pressure,"
 H2_COMP_MH,Operation,Hydrogen Compression from Medium Pressure to High Pressure,"hydrogen, gaseous, low pressure","market for hydrogen, gaseous, low pressure"
 H2_COMP_MH,Construction,Hydrogen Compression from Medium Pressure to High Pressure,"compressor, for hydrogen transmission",compressor assembly for transmission hydrogen pipeline
 H2_EXP_EH,Operation,Hydrogen Expansion from Extra High Pressure to High Pressure,"hydrogen, gaseous, low pressure","market for hydrogen, gaseous, low pressure"
-H2_EXP_EH_COGEN,Construction,Hydrogen Expansion from Extra High Pressure to High Pressure (co-generation unit),"air input/output unit, heat and power co-generation unit, 160kW electrical","air input/output unit production, heat and power co-generation unit, 160kW electrical"
-H2_EXP_EH_COGEN,Operation,Hydrogen Expansion from Extra High Pressure to High Pressure (co-generation unit),"hydrogen, gaseous, low pressure","market for hydrogen, gaseous, low pressure"
+H2_EXP_EH_COGEN,Construction,Hydrogen Expansion with Cogeneration from Extra High Pressure to High Pressure,"air input/output unit, heat and power co-generation unit, 160kW electrical","air input/output unit production, heat and power co-generation unit, 160kW electrical"
+H2_EXP_EH_COGEN,Operation,Hydrogen Expansion with Cogeneration from Extra High Pressure to High Pressure,"hydrogen, gaseous, low pressure","market for hydrogen, gaseous, low pressure"
 H2_EXP_HM,Operation,Hydrogen Expansion from High Pressure to Medium Pressure,"hydrogen, gaseous, low pressure","market for hydrogen, gaseous, low pressure"
-H2_EXP_HM_COGEN,Construction,Hydrogen Expansion from High Pressure to Medium Pressure (co-generation unit),"air input/output unit, heat and power co-generation unit, 160kW electrical","air input/output unit production, heat and power co-generation unit, 160kW electrical"
-H2_EXP_HM_COGEN,Operation,Hydrogen Expansion from High Pressure to Medium Pressure (co-generation unit),"hydrogen, gaseous, low pressure","market for hydrogen, gaseous, low pressure"
+H2_EXP_HM_COGEN,Construction,Hydrogen Expansion with Cogeneration from High Pressure to Medium Pressure,"air input/output unit, heat and power co-generation unit, 160kW electrical","air input/output unit production, heat and power co-generation unit, 160kW electrical"
+H2_EXP_HM_COGEN,Operation,Hydrogen Expansion with Cogeneration from High Pressure to Medium Pressure,"hydrogen, gaseous, low pressure","market for hydrogen, gaseous, low pressure"
 H2_EXP_ML,Operation,Hydrogen Expansion from Medium Pressure to Low Pressure,"hydrogen, gaseous, low pressure","market for hydrogen, gaseous, low pressure"
-H2_EXP_ML_COGEN,Operation,Hydrogen Expansion from Medium Pressure to Low Pressure (co-generation unit),"hydrogen, gaseous, low pressure","market for hydrogen, gaseous, low pressure"
-H2_EXP_ML_COGEN,Construction,Hydrogen Expansion from Medium Pressure to Low Pressure (co-generation unit),"air input/output unit, heat and power co-generation unit, 160kW electrical","air input/output unit production, heat and power co-generation unit, 160kW electrical"
+H2_EXP_ML_COGEN,Operation,Hydrogen Expansion with Cogeneration from Medium Pressure to Low Pressure,"hydrogen, gaseous, low pressure","market for hydrogen, gaseous, low pressure"
+H2_EXP_ML_COGEN,Construction,Hydrogen Expansion with Cogeneration from Medium Pressure to Low Pressure,"air input/output unit, heat and power co-generation unit, 160kW electrical","air input/output unit production, heat and power co-generation unit, 160kW electrical"
 H2_NG_CCGT,Construction,Combined Cycle Gas Turbine Hydrogen and Natural Gas Mix,"NGCC power plant, 400MWe","market for gas power plant, combined cycle, 400MW electrical"
 H2_NG_CCGT,Operation,Combined Cycle Gas Turbine Hydrogen and Natural Gas Mix,"electricity, high voltage","electricity production, at natural gas-fired combined cycle power plant"
 H2_NG_CCGT_CCS,Operation,Combined Cycle Gas Turbine Hydrogen and Natural Gas Mix with Carbon Capture,"electricity, high voltage","electricity production, at natural gas-fired combined cycle power plant, post, pipeline 200km, storage 1000m"
@@ -275,15 +275,15 @@ H2_NG_CCGT_CCS,Construction,Combined Cycle Gas Turbine Hydrogen and Natural Gas 
 H2_STO,Construction,Hydrogen to Storage,high pressure hydrogen storage tank,high pressure hydrogen storage tank
 HT_LT_DEC,Operation,High Temperature to Low Temperature Conversion in Decentralized Systems,"heat, district or industrial, other than natural gas","market for heat, district or industrial, other than natural gas"
 HV_GRID,Construction,Electric Grid at High Voltage,"transmission network, electricity, high voltage","transmission network construction, electricity, high voltage"
-HYDRO_DAM,Construction,Hydroelectric Dam,"hydropower plant, reservoir","hydropower plant construction, reservoir"
-HYDRO_DAM,Operation,Hydroelectric Dam,"electricity, high voltage","electricity production, hydro, reservoir, non-alpine region"
+HYDRO_DAM,Construction,Existing Hydroelectric Dam,"hydropower plant, reservoir","hydropower plant construction, reservoir"
+HYDRO_DAM,Operation,Existing Hydroelectric Dam,"electricity, high voltage","electricity production, hydro, reservoir, non-alpine region"
 HYDRO_GAS,Operation,Hydrothermal Gasification,"syngas, RWGS, Production","syngas, RWGS, Production, for Fischer Tropsch process, hydrogen from wood gasification"
 HYDRO_GAS,Construction,Hydrothermal Gasification,synthetic gas factory,synthetic gas factory construction
-HYDRO_GAS_CHP,Operation,"Hydrothermal Gasification (co-generation unit, components for heat and electricity)","syngas, RWGS, Production","syngas, RWGS, Production, for Fischer Tropsch process, hydrogen from wood gasification"
+HYDRO_GAS_CHP,Operation,Hydrothermal Gasification with Combined Heat and Power,"syngas, RWGS, Production","syngas, RWGS, Production, for Fischer Tropsch process, hydrogen from wood gasification"
 HYDRO_GAS_CHP_PLANT,Construction,Hydrothermal Gasification with Combined Heat and Power (plant),synthetic gas factory,synthetic gas factory construction
 HYDRO_GAS_CHP_TURBINE,Construction,Hydrothermal Gasification with Combined Heat and Power (co-generation unit),"heat and power co-generation unit, organic Rankine cycle, 200kW electrical","heat and power co-generation unit construction, organic Rankine cycle, 200kW electrical"
-HYDRO_RIVER,Construction,Hydroelectric Power from River Flow,"hydropower plant, run-of-river","hydropower plant construction, run-of-river"
-HYDRO_RIVER,Operation,Hydroelectric Power from River Flow,"electricity, high voltage","electricity production, hydro, run-of-river"
+HYDRO_RIVER,Construction,Existing Hydroelectric Power from River Flow,"hydropower plant, run-of-river","hydropower plant construction, run-of-river"
+HYDRO_RIVER,Operation,Existing Hydroelectric Power from River Flow,"electricity, high voltage","electricity production, hydro, run-of-river"
 IND_BOILER_COAL,Operation,Industrial Boiler with Coal Combustion,"heat, district or industrial, other than natural gas","heat production, at hard coal industrial furnace 1-10MW"
 IND_BOILER_COAL,Construction,Industrial Boiler with Coal Combustion,"industrial furnace, coal, 1-10MW","industrial furnace production, coal, 1-10MW"
 IND_BOILER_GAS,Construction,Industrial Boiler with Gas Combustion,"industrial furnace, natural gas","industrial furnace production, natural gas"
@@ -361,14 +361,14 @@ NG_COMP_LM,Construction,Natural Gas Compression from Low Pressure to Medium Pres
 NG_COMP_MH,Operation,Natural Gas Compression from Medium Pressure to High Pressure,"natural gas, medium pressure, vehicle grade","market for natural gas, medium pressure, vehicle grade"
 NG_COMP_MH,Construction,Natural Gas Compression from Medium Pressure to High Pressure,"air compressor, screw-type compressor, 300kW","air compressor production, screw-type compressor, 300kW"
 NG_EXP_EH,Operation,Natural Gas Expansion from Extra High Pressure to High Pressure,"natural gas, high pressure","market for natural gas, high pressure"
-NG_EXP_EH_COGEN,Construction,Natural Gas Expansion from Extra High Pressure to High Pressure (co-generation unit),"air input/output unit, heat and power co-generation unit, 160kW electrical","air input/output unit production, heat and power co-generation unit, 160kW electrical"
-NG_EXP_EH_COGEN,Operation,Natural Gas Expansion from Extra High Pressure to High Pressure (co-generation unit),"natural gas, high pressure","market for natural gas, high pressure"
+NG_EXP_EH_COGEN,Construction,Natural Gas Expansion with Cogeneration from Extra High Pressure to High Pressure,"air input/output unit, heat and power co-generation unit, 160kW electrical","air input/output unit production, heat and power co-generation unit, 160kW electrical"
+NG_EXP_EH_COGEN,Operation,Natural Gas Expansion with Cogeneration from Extra High Pressure to High Pressure,"natural gas, high pressure","market for natural gas, high pressure"
 NG_EXP_HM,Operation,Natural Gas Expansion from High Pressure to Medium Pressure,"natural gas, high pressure","market for natural gas, high pressure"
-NG_EXP_HM_COGEN,Construction,Natural Gas Expansion from High Pressure to Medium Pressure (co-generation unit),"air input/output unit, heat and power co-generation unit, 160kW electrical","air input/output unit production, heat and power co-generation unit, 160kW electrical"
-NG_EXP_HM_COGEN,Operation,Natural Gas Expansion from High Pressure to Medium Pressure (co-generation unit),"natural gas, high pressure","market for natural gas, high pressure"
+NG_EXP_HM_COGEN,Construction,Natural Gas Expansion with Cogeneration from High Pressure to Medium Pressure,"air input/output unit, heat and power co-generation unit, 160kW electrical","air input/output unit production, heat and power co-generation unit, 160kW electrical"
+NG_EXP_HM_COGEN,Operation,Natural Gas Expansion with Cogeneration from High Pressure to Medium Pressure,"natural gas, high pressure","market for natural gas, high pressure"
 NG_EXP_ML,Operation,Natural Gas Expansion from Medium Pressure to Low Pressure,"natural gas, medium pressure, vehicle grade","market for natural gas, medium pressure, vehicle grade"
-NG_EXP_ML_COGEN,Construction,Natural Gas Expansion from Medium Pressure to Low Pressure (co-generation unit),"air input/output unit, heat and power co-generation unit, 160kW electrical","air input/output unit production, heat and power co-generation unit, 160kW electrical"
-NG_EXP_ML_COGEN,Operation,Natural Gas Expansion from Medium Pressure to Low Pressure (co-generation unit),"natural gas, medium pressure, vehicle grade","market for natural gas, medium pressure, vehicle grade"
+NG_EXP_ML_COGEN,Construction,Natural Gas Expansion with Cogeneration from Medium Pressure to Low Pressure,"air input/output unit, heat and power co-generation unit, 160kW electrical","air input/output unit production, heat and power co-generation unit, 160kW electrical"
+NG_EXP_ML_COGEN,Operation,Natural Gas Expansion with Cogeneration from Medium Pressure to Low Pressure,"natural gas, medium pressure, vehicle grade","market for natural gas, medium pressure, vehicle grade"
 NG_PYROLYSIS_PLASMA,Operation,Plasma Natural Gas Pyrolysis,"hydrogen, gaseous, 100 bar","hydrogen production, gaseous, 100 bar, from methane pyrolysis"
 NG_PYROLYSIS_PLASMA,Construction,Plasma Natural Gas Pyrolysis,"air compressor, screw-type compressor, 4kW","market for air compressor, screw-type compressor, 4kW"
 NG_PYROLYSIS_THERMAL,Construction,Thermal Natural Gas Pyrolysis,"air compressor, screw-type compressor, 4kW","market for air compressor, screw-type compressor, 4kW"
@@ -387,8 +387,8 @@ PAFC,Operation,Phosphoric Acid Fuel Cell,"electricity, from residential heating 
 PAFC,Construction,Phosphoric Acid Fuel Cell,"fuel cell system, 1 kWe, proton exchange membrane (PEM)","fuel cell system assembly, 1 kWe, proton exchange membrane (PEM)"
 PAPER_MAKING,Construction,Paper Production,"paper mill, integrated","paper mill construction, integrated"
 PAPER_MAKING,Operation,Paper Production,"paper, newsprint","paper production, newsprint, recycled"
-PAPER_MAKING_HP,Construction,Paper Production (heat pump),"paper mill, integrated","paper mill construction, integrated"
-PAPER_MAKING_HP,Operation,Paper Production (heat pump),"paper, newsprint","paper production, newsprint, recycled"
+PAPER_MAKING_HP,Construction,Paper Production with Heat Pump,"paper mill, integrated","paper mill construction, integrated"
+PAPER_MAKING_HP,Operation,Paper Production with Heat Pump,"paper, newsprint","paper production, newsprint, recycled"
 PAPER_MAKING_HR,Construction,Paper Production with Heat Recovery,"paper mill, integrated","paper mill construction, integrated"
 PAPER_MAKING_HR,Operation,Paper Production with Heat Recovery,"paper, newsprint","paper production, newsprint, recycled"
 PEMFC,Construction,Proton Exchange Membrane Fuel Cell,"fuel cell system, 1 kWe, proton exchange membrane (PEM)","fuel cell system assembly, 1 kWe, proton exchange membrane (PEM)"
@@ -399,12 +399,12 @@ PEM_ELECTROLYSIS_STACK,Construction,Proton Exchange Membrane Electrolysis (stack
 PEM_ELECTROLYSIS_STACK_DECOM,Construction,Proton Exchange Membrane Electrolysis (stack decommissioning),"used electrolyzer stack, 1MWe, PEM","treatment of electrolyzer stack, 1MWe, PEM"
 PET_FORMATION,Operation,Polyethylene Terephthalate Formation,"polyethylene terephthalate, granulate, amorphous","polyethylene terephthalate production, granulate, amorphous"
 PET_FORMATION,Construction,Polyethylene Terephthalate Formation,"chemical factory, organics","chemical factory construction, organics"
-PLANE_FREIGHT,Construction,Plane Freight,"aircraft, dedicated freight, medium haul","market for aircraft, dedicated freight, medium haul"
-PLANE_FREIGHT,Operation,Plane Freight,"transport, freight, aircraft, medium haul","transport, freight, aircraft, dedicated freight, medium haul"
-PLANE_LH,Operation,Passenger Plane long haul,"transport, passenger aircraft, very short haul","transport, passenger aircraft, very short haul"
-PLANE_LH,Construction,Passenger Plane long haul,"aircraft, passenger, very short haul","market for aircraft, passenger, very short haul"
-PLANE_SH,Construction,Passenger Plane short haul,"aircraft, passenger, medium haul","market for aircraft, passenger, medium haul"
-PLANE_SH,Operation,Passenger Plane short haul,"transport, passenger aircraft, medium haul","transport, passenger aircraft, medium haul"
+PLANE_FREIGHT,Construction,Jet Fuel-Powered Freight Plane,"aircraft, dedicated freight, long haul","market for aircraft, dedicated freight, long haul"
+PLANE_FREIGHT,Operation,Jet Fuel-Powered Freight Plane,"transport, freight, aircraft, long haul","transport, freight, aircraft, dedicated freight, long haul"
+PLANE_LH,Operation,Jet Fuel-Powered Long Haul Passenger Plane ,"transport, passenger aircraft, long haul","transport, passenger aircraft, long haul"
+PLANE_LH,Construction,Jet Fuel-Powered Long Haul Passenger Plane ,"aircraft, passenger, long haul","market for aircraft, passenger, long haul"
+PLANE_SH,Construction,Jet Fuel-Powered Passenger Plane,"aircraft, passenger, medium haul","market for aircraft, passenger, medium haul"
+PLANE_SH,Operation,Jet Fuel-Powered Passenger Plane,"transport, passenger aircraft, medium haul","transport, passenger aircraft, medium haul"
 POLYPROPYLENE_PP,Operation,Polypropylene Production,"polypropylene, granulate","polypropylene production, granulate"
 POLYPROPYLENE_PP,Construction,Polypropylene Production,"chemical factory, organics","chemical factory construction, organics"
 PV_ROOF,Operation,Slanted-Roof Photovoltaic Solar Energy,"electricity, low voltage","electricity production, photovoltaic, 3kWp slanted-roof installation, multi-Si, panel, mounted"
@@ -482,8 +482,8 @@ SOFC,Construction,Solid Oxide Fuel Cell,"fuel cell, stack solid oxide, 125kW ele
 SOFC,Operation,Solid Oxide Fuel Cell,"electricity, from residential heating system","electricity, residential, by conversion of hydrogen using fuel cell, SOFC, allocated by exergy, distributed by pipeline, produced by Electrolysis, PEM using electricity from grid"
 STEEL_MAKING,Operation,Steel Production,"steel, chromium steel 18/8","market for steel, chromium steel 18/8"
 STEEL_MAKING,Construction,Steel Production,aluminium casting facility,aluminium casting facility construction
-STEEL_MAKING_HP,Construction,Steel Production (heat pump),aluminium casting facility,aluminium casting facility construction
-STEEL_MAKING_HP,Operation,Steel Production (heat pump),"steel, chromium steel 18/8","market for steel, chromium steel 18/8"
+STEEL_MAKING_HP,Construction,Steel Production with Heat Pump,aluminium casting facility,aluminium casting facility construction
+STEEL_MAKING_HP,Operation,Steel Production with Heat Pump,"steel, chromium steel 18/8","market for steel, chromium steel 18/8"
 STEEL_MAKING_HR,Operation,Steel Production with Heat Recovery,"steel, chromium steel 18/8","market for steel, chromium steel 18/8"
 STEEL_MAKING_HR,Construction,Steel Production with Heat Recovery,aluminium casting facility,aluminium casting facility construction
 STYRENE_POLYMERIZATION,Construction,Styrene Polymerization Process,"chemical factory, organics","chemical factory construction, organics"
@@ -525,20 +525,10 @@ TRAIN_DIESEL,Construction,Diesel-Powered Train,"train, passenger, long-distance"
 TRAIN_ELEC,Operation,Electric-Powered Train,"transport, passenger train","transport, passenger train, high-speed"
 TRAIN_ELEC,Construction,Electric-Powered Train,"train, passenger, high speed","market for train, passenger, high speed"
 TRAIN_FREIGHT_DIESEL,Operation,Diesel-Powered Freight Train,"transport, freight train","transport, freight train, diesel"
-TRAIN_FREIGHT_DIESEL_LOC,Construction,Diesel-Powered Freight Train (locomotive),locomotive,locomotive production
-TRAIN_FREIGHT_DIESEL_WAG,Construction,Diesel-Powered Freight Train (wagon),goods wagon,goods wagon production
-TRAIN_FREIGHT_ELEC,Operation,"Electric-Powered Freight Train (co-generation unit, components for electricity)","transport, freight train","transport, freight train, electricity"
-TRAIN_FREIGHT_ELEC_LOC,Construction,Electric-Powered Freight Train (locomotive),locomotive,locomotive production
-TRAIN_FREIGHT_ELEC_WAG,Construction,Electric-Powered Freight Train (wagon),goods wagon,goods wagon production
-TRAIN_FREIGHT_H2,Operation,Hydrogen-Powered Freight Train,"transport, freight train","transport, freight train, electricity"
-TRAIN_FREIGHT_H2_LOC,Construction,Hydrogen-Powered Freight Train (locomotive),locomotive,locomotive production
-TRAIN_FREIGHT_H2_WAG,Construction,Hydrogen-Powered Freight Train (wagon),goods wagon,goods wagon production
+TRAIN_FREIGHT_ELEC,Operation,Electric-Powered Freight Train,"transport, freight train","transport, freight train, electricity"
+TRAIN_FREIGHT_H2,Operation,Hydrogen-Powered Freight Train,"transport, freight train","transport, freight train, fuel cell, hydrogen"
 TRAIN_FREIGHT_H2_HYBRID,Operation,Hybrid Battery-Fuel Cell-Powered Freight Train,"transport, freight train","transport, freight train, electricity"
-TRAIN_FREIGHT_H2_HYBRID_LOC,Construction,Hybrid Battery-Fuel Cell-Powered Freight Train (locomotive),locomotive,locomotive production
-TRAIN_FREIGHT_H2_HYBRID_WAG,Construction,Hybrid Battery-Fuel Cell-Powered Freight Train (wagon),goods wagon,goods wagon production
 TRAIN_FREIGHT_NG,Operation,Natural Gas-Powered Freight Train,"transport, freight train","transport, freight train, diesel"
-TRAIN_FREIGHT_NG_LOC,Construction,Natural Gas-Powered Freight Train (locomotive),locomotive,locomotive production
-TRAIN_FREIGHT_NG_WAG,Construction,Natural Gas-Powered Freight Train (wagon),goods wagon,goods wagon production
 TRAIN_H2,Operation,Hydrogen-Powered Train,"transport, passenger train","transport, passenger train"
 TRAIN_H2,Construction,Hydrogen-Powered Train,"train, passenger, long-distance","train production, passenger, long-distance"
 TRAIN_NG,Operation,Natural Gas-Powered Train,"transport, passenger train","transport, passenger train"
@@ -581,9 +571,9 @@ UNMINEABLE_COAL_SEAM,Operation,Sequestration of CO2 in Unmineable Coal Seams,"ca
 WIND_OFFSHORE,Operation,Wind Energy Offshore,"electricity, high voltage","electricity production, wind, 1-3MW turbine, offshore"
 WIND_OFFSHORE_FIXED,Construction,Wind Energy Offshore (fixed parts),"wind power plant, 2MW, offshore, fixed parts","market for wind power plant, 2MW, offshore, fixed parts"
 WIND_OFFSHORE_MOVING,Construction,Wind Energy Offshore (moving parts),"wind power plant, 2MW, offshore, moving parts","market for wind power plant, 2MW, offshore, moving parts"
-WIND_ONSHORE,Operation,Wind Energy Onshore,"electricity, high voltage","electricity production, wind, 1-3MW turbine, onshore"
-WIND_ONSHORE_CONNECTION,Construction,Wind Energy Onshore (connection),"wind turbine network connection, 2MW, onshore","wind turbine network connection construction, 2MW, onshore"
-WIND_ONSHORE_TURBINE,Construction,Wind Energy Onshore (co-generation unit),"wind turbine, 2MW, onshore","wind turbine construction, 2MW, onshore"
+WIND_ONSHORE,Operation,Existing Wind Energy Onshore,"electricity, high voltage","electricity production, wind, 1-3MW turbine, onshore"
+WIND_ONSHORE_CONNECTION,Construction,Existing Wind Energy Onshore (connection),"wind turbine network connection, 2MW, onshore","wind turbine network connection construction, 2MW, onshore"
+WIND_ONSHORE_TURBINE,Construction,Existing Wind Energy Onshore (co-generation unit),"wind turbine, 2MW, onshore","wind turbine construction, 2MW, onshore"
 NEW_WIND_ONSHORE,Operation,New Wind Energy Onshore,"electricity, high voltage","electricity production, wind, 1-3MW turbine, onshore"
 NEW_WIND_ONSHORE_CONNECTION,Construction,New Wind Energy Onshore (connection),"wind turbine network connection, 2MW, onshore","wind turbine network connection construction, 2MW, onshore"
 NEW_WIND_ONSHORE_TURBINE,Construction,New Wind Energy Onshore (co-generation unit),"wind turbine, 2MW, onshore","wind turbine construction, 2MW, onshore"
@@ -603,6 +593,9 @@ ETHYLBENZENE,Resource,Ethylbenzene,ethyl benzene,market for ethyl benzene
 ETHYLENE,Resource,Ethylene,ethylene,market for ethylene
 GASOLINE,Resource,Gasoline,"petrol, low-sulfur","market for petrol, low-sulfur"
 H2_EHP,Resource,Hydrogen,"hydrogen, gaseous, low pressure","market for hydrogen, gaseous, low pressure"
+H2_HP,Resource,Hydrogen,"hydrogen, gaseous, low pressure","market for hydrogen, gaseous, low pressure"
+H2_LP,Resource,Hydrogen,"hydrogen, gaseous, low pressure","market for hydrogen, gaseous, low pressure"
+H2_MP,Resource,Hydrogen,"hydrogen, gaseous, low pressure","market for hydrogen, gaseous, low pressure"
 JETFUEL,Resource,Jetfuel,kerosene,market for kerosene
 LFO,Resource,Light fuel oil,light fuel oil,market for light fuel oil
 LNG,Resource,Liquified natural gas,"natural gas, liquefied","market for natural gas, liquefied"
@@ -643,6 +636,9 @@ ETHYLBENZENE,Flow,Ethylbenzene,ethyl benzene,market for ethyl benzene
 ETHYLENE,Flow,Ethylene,ethylene,market for ethylene
 GASOLINE,Flow,Gasoline,"petrol, low-sulfur","market for petrol, low-sulfur"
 H2_EHP,Flow,Hydrogen,"hydrogen, gaseous, low pressure","market for hydrogen, gaseous, low pressure"
+H2_HP,Flow,Hydrogen,"hydrogen, gaseous, low pressure","market for hydrogen, gaseous, low pressure"
+H2_LP,Flow,Hydrogen,"hydrogen, gaseous, low pressure","market for hydrogen, gaseous, low pressure"
+H2_MP,Flow,Hydrogen,"hydrogen, gaseous, low pressure","market for hydrogen, gaseous, low pressure"
 HEAT_HIGH_T,Flow,Heat (high temperature),"heat, district or industrial, other than natural gas","market for heat, district or industrial, other than natural gas"
 HEAT_LOW_T_DECEN,Flow,Heat (low temperature),"heat, central or small-scale, other than natural gas","market for heat, central or small-scale, other than natural gas"
 JETFUEL,Flow,Jetfuel,kerosene,market for kerosene
@@ -754,14 +750,14 @@ SNG_COMP_LM,Construction,Synthetic Natural Gas Compression from Low Pressure to 
 SNG_COMP_MH,Operation,Synthetic Natural Gas Compression from Medium Pressure to High Pressure,"natural gas, medium pressure, vehicle grade","market for natural gas, medium pressure, vehicle grade"
 SNG_COMP_MH,Construction,Synthetic Natural Gas Compression from Medium Pressure to High Pressure,"air compressor, screw-type compressor, 300kW","air compressor production, screw-type compressor, 300kW"
 SNG_EXP_EH,Operation,Synthetic Natural Gas Expansion from Extra High Pressure to High Pressure,"natural gas, high pressure","market for natural gas, high pressure"
-SNG_EXP_EH_COGEN,Construction,Synthetic Natural Gas Expansion from Extra High Pressure to High Pressure (co-generation unit),"air input/output unit, heat and power co-generation unit, 160kW electrical","air input/output unit production, heat and power co-generation unit, 160kW electrical"
-SNG_EXP_EH_COGEN,Operation,Synthetic Natural Gas Expansion from Extra High Pressure to High Pressure (co-generation unit),"natural gas, high pressure","market for natural gas, high pressure"
+SNG_EXP_EH_COGEN,Construction,Synthetic Natural Gas Expansion with Cogeneration from Extra High Pressure to High Pressure,"air input/output unit, heat and power co-generation unit, 160kW electrical","air input/output unit production, heat and power co-generation unit, 160kW electrical"
+SNG_EXP_EH_COGEN,Operation,Synthetic Natural Gas Expansion with Cogeneration from Extra High Pressure to High Pressure,"natural gas, high pressure","market for natural gas, high pressure"
 SNG_EXP_HM,Operation,Synthetic Natural Gas Expansion from High Pressure to Medium Pressure,"natural gas, high pressure","market for natural gas, high pressure"
-SNG_EXP_HM_COGEN,Construction,Synthetic Natural Gas Expansion from High Pressure to Medium Pressure (co-generation unit),"air input/output unit, heat and power co-generation unit, 160kW electrical","air input/output unit production, heat and power co-generation unit, 160kW electrical"
-SNG_EXP_HM_COGEN,Operation,Synthetic Natural Gas Expansion from High Pressure to Medium Pressure (co-generation unit),"natural gas, high pressure","market for natural gas, high pressure"
+SNG_EXP_HM_COGEN,Construction,Synthetic Natural Gas Expansion with Cogeneration from High Pressure to Medium Pressure,"air input/output unit, heat and power co-generation unit, 160kW electrical","air input/output unit production, heat and power co-generation unit, 160kW electrical"
+SNG_EXP_HM_COGEN,Operation,Synthetic Natural Gas Expansion with Cogeneration from High Pressure to Medium Pressure,"natural gas, high pressure","market for natural gas, high pressure"
 SNG_EXP_ML,Operation,Synthetic Natural Gas Expansion from Medium Pressure to Low Pressure,"natural gas, medium pressure, vehicle grade","market for natural gas, medium pressure, vehicle grade"
-SNG_EXP_ML_COGEN,Construction,Synthetic Natural Gas Expansion from Medium Pressure to Low Pressure (co-generation unit),"air input/output unit, heat and power co-generation unit, 160kW electrical","air input/output unit production, heat and power co-generation unit, 160kW electrical"
-SNG_EXP_ML_COGEN,Operation,Synthetic Natural Gas Expansion from Medium Pressure to Low Pressure (co-generation unit),"natural gas, medium pressure, vehicle grade","market for natural gas, medium pressure, vehicle grade"
+SNG_EXP_ML_COGEN,Construction,Synthetic Natural Gas Expansion with Cogeneration from Medium Pressure to Low Pressure,"air input/output unit, heat and power co-generation unit, 160kW electrical","air input/output unit production, heat and power co-generation unit, 160kW electrical"
+SNG_EXP_ML_COGEN,Operation,Synthetic Natural Gas Expansion with Cogeneration from Medium Pressure to Low Pressure,"natural gas, medium pressure, vehicle grade","market for natural gas, medium pressure, vehicle grade"
 SNG_PYROLYSIS_PLASMA,Operation,Plasma Synthetic Natural Gas Pyrolysis,"hydrogen, gaseous, 100 bar","hydrogen production, gaseous, 100 bar, from methane pyrolysis"
 SNG_PYROLYSIS_PLASMA,Construction,Plasma Synthetic Natural Gas Pyrolysis,"air compressor, screw-type compressor, 4kW","market for air compressor, screw-type compressor, 4kW"
 SNG_PYROLYSIS_THERMAL,Construction,Thermal Synthetic Natural Gas Pyrolysis,"air compressor, screw-type compressor, 4kW","market for air compressor, screw-type compressor, 4kW"
@@ -778,8 +774,8 @@ PLANE_FREIGHT_BIO,Construction,Bio-Jet Fuel-Powered Freight Plane,"aircraft, ded
 PLANE_FREIGHT_BIO,Operation,Bio-Jet Fuel-Powered Freight Plane,"transport, freight, aircraft, medium haul","transport, freight, aircraft, dedicated freight, medium haul"
 PLANE_LH_BIO,Operation,Bio-Jet Fuel-Powered Long Haul Passenger Plane,"transport, passenger aircraft, very short haul","transport, passenger aircraft, very short haul"
 PLANE_LH_BIO,Construction,Bio-Jet Fuel-Powered Long Haul Passenger Plane,"aircraft, passenger, very short haul","market for aircraft, passenger, very short haul"
-PLANE_SH_BIO,Construction,Bio-Jet Fuel-Powered Short Haul Passenger Plane,"aircraft, passenger, medium haul","market for aircraft, passenger, medium haul"
-PLANE_SH_BIO,Operation,Bio-Jet Fuel-Powered Short Haul Passenger Plane,"transport, passenger aircraft, medium haul","transport, passenger aircraft, medium haul"
+PLANE_SH_BIO,Construction,Bio-Jet Fuel-Powered Passenger Plane,"aircraft, passenger, medium haul","market for aircraft, passenger, medium haul"
+PLANE_SH_BIO,Operation,Bio-Jet Fuel-Powered Passenger Plane,"transport, passenger aircraft, medium haul","transport, passenger aircraft, medium haul"
 SCHOOLBUS_BIOETOH_E10,Operation,10% BioEthanol-Powered School Bus,"transport, passenger bus, EURO-VI","transport, passenger bus, diesel, 13m single deck urban bus, EURO-VI"
 SCHOOLBUS_BIOETOH_E10,Construction,10% BioEthanol-Powered School Bus,"Passenger bus, EURO-VI","Passenger bus, diesel, 13m single deck urban bus, EURO-VI"
 SEMI_LH_CSNG,Operation,Compressed Synthetic Natural Gas-Powered Long Distance Semi-trailer truck,"transport, truck","transport, truck, compressed gas, 26t, long haul"
@@ -795,11 +791,7 @@ SUV_BIOETOH_E85,Construction,85% BioEthanol-Powered Sport Utility Vehicle,"Passe
 TRAIN_BIODIESEL,Operation,BioDiesel-Powered Train,"transport, passenger train","transport, passenger train"
 TRAIN_BIODIESEL,Construction,BioDiesel-Powered Train,"train, passenger, long-distance","train production, passenger, long-distance"
 TRAIN_FREIGHT_BIODIESEL,Operation,Biodiesel-Powered Freight Train,"transport, freight train","transport, freight train, diesel"
-TRAIN_FREIGHT_BIODIESEL_LOC,Construction,Biodiesel-Powered Freight Train (locomotive),locomotive,locomotive production
-TRAIN_FREIGHT_BIODIESEL_WAG,Construction,Biodiesel-Powered Freight Train (wagon),goods wagon,goods wagon production
 TRAIN_FREIGHT_SNG,Operation,Natural Synthetic Gas-Powered Freight Train,"transport, freight train","transport, freight train, diesel"
-TRAIN_FREIGHT_SNG_LOC,Construction,Natural Synthetic Gas-Powered Freight Train (locomotive),locomotive,locomotive production
-TRAIN_FREIGHT_SNG_WAG,Construction,Natural Synthetic Gas-Powered Freight Train (wagon),goods wagon,goods wagon production
 TRAIN_SNG,Operation,Synthetic Natural Gas-Powered Train,"transport, passenger train","transport, passenger train"
 TRAIN_SNG,Construction,Synthetic Natural Gas-Powered Train,"train, passenger, long-distance","train production, passenger, long-distance"
 TRUCK_LH_CSNG,Construction,Compressed Synthetic Natural Gas-Powered Long Distance Truck,truck,"truck, compressed gas, 18t, long haul"
@@ -816,7 +808,7 @@ LP_NG_GRID,Construction,Natural Gas Grid at Low Pressure,"pipeline, natural gas,
 MP_H2_GRID,Construction,Hydrogen Grid at Medium Pressure,"pipeline, for hydrogen distribution","pipeline, hydrogen, low pressure distribution network"
 MP_NG_GRID,Construction,Natural Gas Grid at Medium Pressure,"pipeline, natural gas, low pressure distribution network","pipeline construction, natural gas, low pressure distribution network"
 BIOMASS_FORESTRY_UNEXPLOITED,Resource,Unharvested wood,"wood chips, wet, measured as dry mass","market for wood chips, wet, measured as dry mass"
-BIOMASS_FORESTRY_RESIDUAL,Resource,Residual forest biomass,"wood chips, wet, measured as dry mass","market for wood chips, wet, measured as dry mass"
+BIOMASS_FORESTRY_RESIDUAL,Resource,Residual forest biomass,forest residue,supply of forest residue
 BIOMASS_FORESTRY_LEFTOVER1,Resource,By-products from primary processing,"wood chips, wet, measured as dry mass","market for wood chips, wet, measured as dry mass"
 BIOMASS_FORESTRY_LEFTOVER2,Resource,By-products from secondary processing,"wood chips, wet, measured as dry mass","market for wood chips, wet, measured as dry mass"
 BIOMASS_AGRICULTURE_DEJECTION,Resource,Animal manure,"manure, solid, cattle","market for manure, solid, cattle"
@@ -827,7 +819,7 @@ BIOMASS_WASTE_PAPER_FABRIC,Resource,Pulp and paper mill residues,municipal solid
 BIOMASS_WASTE_BUILDING,Resource,"Construction, renovation, and demolition wood waste","waste wood, post-consumer","market for waste wood, post-consumer"
 BIOMASS_WASTE_MUNICIPAL,Resource,Municipal sludge,municipal solid waste,market for municipal solid waste
 BIOMASS_FORESTRY_UNEXPLOITED,Flow,Unharvested wood,"wood chips, wet, measured as dry mass","market for wood chips, wet, measured as dry mass"
-BIOMASS_FORESTRY_RESIDUAL,Flow,Residual forest biomass,"wood chips, wet, measured as dry mass","market for wood chips, wet, measured as dry mass"
+BIOMASS_FORESTRY_RESIDUAL,Flow,Residual forest biomass,forest residue,supply of forest residue
 BIOMASS_FORESTRY_LEFTOVER1,Flow,By-products from primary processing,"wood chips, wet, measured as dry mass","market for wood chips, wet, measured as dry mass"
 BIOMASS_FORESTRY_LEFTOVER2,Flow,By-products from secondary processing,"wood chips, wet, measured as dry mass","market for wood chips, wet, measured as dry mass"
 BIOMASS_AGRICULTURE_DEJECTION,Flow,Animal manure,"manure, solid, cattle","market for manure, solid, cattle"
@@ -861,8 +853,8 @@ OIL_TANKER_BIO,Operation,BioOil-Powered Oil Tanker Ship,"transport, freight, sea
 OIL_TANKER_BIO,Construction,BioOil-Powered Oil Tanker Ship,"tanker, for petroleum","tanker production, for petroleum"
 OIL_TANKER_BIOMEOH,Operation,BioMethanol-Powered Oil Tanker Ship,"transport, freight, sea, tanker for petroleum","transport, freight, sea, tanker for petroleum"
 OIL_TANKER_BIOMEOH,Construction,BioMethanol-Powered Oil Tanker Ship,"tanker, for petroleum","tanker production, for petroleum"
-HFO,Resource,Heavy fuel oil,heavy fuel oil,market for heavy fuel oil
-HFO,Flow,Heavy fuel oil,heavy fuel oil,market for heavy fuel oil
+HFO,Resource,Boat fuel,heavy fuel oil,market for heavy fuel oil
+HFO,Flow,Boat fuel,heavy fuel oil,market for heavy fuel oil
 CARBON_CAPTURE_AMINES,Operation,Post-Combustion Carbon Capture using Amines,"carbon dioxide, captured","carbon dioxide, captured, at cement production plant, using monoethanolamine"
 CARBON_CAPTURE_MEMBRANES,Operation,Post-Combustion Carbon Capture using Membranes,"carbon dioxide, captured","carbon dioxide, captured, at cement production plant, using direct separation"
 CARBON_CAPTURE_MOF,Operation,Post-Combustion Carbon Capture using MOFs,"carbon dioxide, captured","carbon dioxide, captured, at cement production plant, using direct separation"

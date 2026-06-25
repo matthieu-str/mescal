@@ -31,6 +31,7 @@ Benzene,Benzene,1.0
 Conversion of BioEthanol to Jet Fuels,Bio-ethanol,-1.754
 Conversion of BioEthanol to Jet Fuels,Bio-jetfuel,1.0
 Conversion of BioEthanol to Jet Fuels,CO2 emission (from carbon-intensive fields),0.192
+Biogas Auto-Thermal Reforming,CO2 emission (from carbon-intensive fields),0.695
 Biogas Auto-Thermal Reforming,Hydrogen (high pressure),1.0
 Biogas Auto-Thermal Reforming,Woody biomass,-2.783
 Biogas Auto-Thermal Reforming with Carbon Capture,Captured CO2,0.72
@@ -42,6 +43,7 @@ Biomass to Biomethane,Electricity (medium voltage),-0.024
 Biomass to Biomethane,Hydrogen (medium pressure),-1.191
 Biomass to Biomethane,Heat (high temperature),0.189
 Biomass to Biomethane,Synthetic natural gas (medium pressure),1.0
+Biogas Steam Methane Reforming,CO2 emission (from carbon-intensive fields),0.428
 Biogas Steam Methane Reforming,Hydrogen (high pressure),1.0
 Biogas Steam Methane Reforming,Woody biomass,-1.711
 Biogas Steam Methane Reforming with Carbon Capture,Captured CO2,0.443
@@ -60,7 +62,7 @@ Residual forest biomass,CO2 emission (from nonconcentrated spot sources),-0.3882
 Residual forest biomass,Woody biomass,1.0
 Unharvested wood,CO2 emission (from nonconcentrated spot sources),-0.388235
 Unharvested wood,Woody biomass,1.0
-Hydrogen from Biomass Gasification Entrained Flow ,CO2 emission (from nonconcentrated spot sources),0.589
+Hydrogen from Biomass Gasification Entrained Flow ,CO2 emission (from carbon-intensive fields),0.589
 Hydrogen from Biomass Gasification Entrained Flow ,Electricity (low voltage),0.034
 Hydrogen from Biomass Gasification Entrained Flow ,Hydrogen (medium pressure),1.0
 Hydrogen from Biomass Gasification Entrained Flow ,Woody biomass,-2.107
@@ -69,7 +71,7 @@ Hydrogen from Biomass Gasification Entrained Flow with Carbon Capture,CO2 emissi
 Hydrogen from Biomass Gasification Entrained Flow with Carbon Capture,Electricity (low voltage),0.034
 Hydrogen from Biomass Gasification Entrained Flow with Carbon Capture,Hydrogen (medium pressure),1.0
 Hydrogen from Biomass Gasification Entrained Flow with Carbon Capture,Woody biomass,-2.422
-Hydrogen from Biomass Gasification Fuidized Bed ,CO2 emission (from nonconcentrated spot sources),0.745
+Hydrogen from Biomass Gasification Fuidized Bed ,CO2 emission (from carbon-intensive fields),0.745
 Hydrogen from Biomass Gasification Fuidized Bed ,Electricity (low voltage),0.064
 Hydrogen from Biomass Gasification Fuidized Bed ,Hydrogen (medium pressure),1.0
 Hydrogen from Biomass Gasification Fuidized Bed ,Woody biomass,-2.662
@@ -89,7 +91,7 @@ Paper and cardboard,Waste,1.0
 Pulp and paper mill residues,CO2 emission (from nonconcentrated spot sources),-0.388235
 Pulp and paper mill residues,Wet biomass,1.0
 Conversion of BioMethane to Methanol,Bio-methanol,1.0
-Conversion of BioMethane to Methanol,CO2 emission (from carbon-intensive fields),-0.25
+Conversion of BioMethane to Methanol,CO2 emission (from carbon-intensive fields),0.25
 Conversion of BioMethane to Methanol,Synthetic natural gas (medium pressure),-1.4
 BioMethanol Cabonylation Process,Acetic acid,1.0
 BioMethanol Cabonylation Process,Bio-methanol,-2.066
@@ -146,9 +148,9 @@ Hydrogen Fuel Cell-Powered Bus,Public mobility,1.0
 Gasoline-Powered Bus,CO2 emission (from nonconcentrated spot sources),0.111
 Gasoline-Powered Bus,Gasoline,-0.472
 Gasoline-Powered Bus,Public mobility,1.0
-Diesel Hybrid Bus,CO2 emission (from nonconcentrated spot sources),0.08
-Diesel Hybrid Bus,Diesel,-0.281
-Diesel Hybrid Bus,Public mobility,1.0
+Hybrid Diesel-Powered Bus,CO2 emission (from nonconcentrated spot sources),0.08
+Hybrid Diesel-Powered Bus,Diesel,-0.281
+Hybrid Diesel-Powered Bus,Public mobility,1.0
 Propane-Powered Bus,CO2 emission (from nonconcentrated spot sources),0.111
 Propane-Powered Bus,Public mobility,1.0
 Propane-Powered Bus,Propane,-0.472
@@ -221,17 +223,17 @@ Fuel Cell-Powered Car with Hydrogen,Private mobility,1.0
 Gasoline-Powered Car,CO2 emission (from nonconcentrated spot sources),0.116
 Gasoline-Powered Car,Gasoline,-0.426
 Gasoline-Powered Car,Private mobility,1.0
-Hybrid Electric Car,CO2 emission (from nonconcentrated spot sources),0.09
-Hybrid Electric Car,Gasoline,-0.381
-Hybrid Electric Car,Private mobility,1.0
+Hybrid Gasoline-Powered Car,CO2 emission (from nonconcentrated spot sources),0.09
+Hybrid Gasoline-Powered Car,Gasoline,-0.381
+Hybrid Gasoline-Powered Car,Private mobility,1.0
 Methanol-Powered Car ,CO2 emission (from nonconcentrated spot sources),0.111
 Methanol-Powered Car ,Gasoline,-0.39
 Methanol-Powered Car ,Methanol,-0.05
 Methanol-Powered Car ,Private mobility,1.0
-Plug-in Hybrid Electric Car,CO2 emission (from nonconcentrated spot sources),0.052
-Plug-in Hybrid Electric Car,Electricity (medium voltage),-0.112
-Plug-in Hybrid Electric Car,Gasoline,-0.222
-Plug-in Hybrid Electric Car,Private mobility,1.0
+Plug-in Hybrid Gasoline-Powered Car,CO2 emission (from nonconcentrated spot sources),0.052
+Plug-in Hybrid Gasoline-Powered Car,Electricity (medium voltage),-0.112
+Plug-in Hybrid Gasoline-Powered Car,Gasoline,-0.222
+Plug-in Hybrid Gasoline-Powered Car,Private mobility,1.0
 Propane-Powered Car,CO2 emission (from nonconcentrated spot sources),0.11
 Propane-Powered Car,Private mobility,1.0
 Propane-Powered Car,Propane,-0.529
@@ -253,10 +255,10 @@ Cement Production,Cement,1.0
 Cement Production,CO2 emission (from carbon-intensive fields),0.185
 Cement Production,Electricity (medium voltage),-0.108
 Cement Production,Heat (high temperature),-0.862
-Cement Production (heat pump),Cement,1.0
-Cement Production (heat pump),CO2 emission (from carbon-intensive fields),0.185
-Cement Production (heat pump),Electricity (medium voltage),-0.058
-Cement Production (heat pump),Heat (high temperature),-0.862
+Cement Production with Heat Pump,Cement,1.0
+Cement Production with Heat Pump,CO2 emission (from carbon-intensive fields),0.185
+Cement Production with Heat Pump,Electricity (medium voltage),-0.058
+Cement Production with Heat Pump,Heat (high temperature),-0.862
 Conversion of CO2 to Methanol,Captured CO2,-0.25
 Conversion of CO2 to Methanol,Hydrogen (medium pressure),-1.5
 Conversion of CO2 to Methanol,Methanol,1.0
@@ -343,8 +345,8 @@ Coal Ultra-Supercritical with Carbon Capture,Electricity (high voltage),1.0
 Diesel-Powered Commuter Train,CO2 emission (from nonconcentrated spot sources),0.102
 Diesel-Powered Commuter Train,Diesel,-0.27
 Diesel-Powered Commuter Train,Public mobility,1.0
-Electric-Powered Commuter Train,Electricity (high voltage),-0.092
-Electric-Powered Commuter Train,Public mobility,1.0
+Metro,Electricity (high voltage),-0.092
+Metro,Public mobility,1.0
 BioMethanol-Powered Container Ship,Bio-methanol,-0.116
 BioMethanol-Powered Container Ship,CO2 emission (from nonconcentrated spot sources),0.044496
 BioMethanol-Powered Container Ship,Freight mobility,1.0
@@ -417,8 +419,8 @@ Decentralized Cogeneration with Wood Combustion,"Heat (low temperature, decentra
 Decentralized Cogeneration with Wood Combustion,Woody biomass,-1.887
 Decentralized Direct Electricity,Electricity (low voltage),-1.0
 Decentralized Direct Electricity,"Heat (low temperature, decentralized)",1.0
-Decentralized Heat Pump Electricity ,Electricity (low voltage),-0.33
-Decentralized Heat Pump Electricity ,"Heat (low temperature, decentralized)",1.0
+Decentralized Heat Pump Electricity,Electricity (low voltage),-0.33
+Decentralized Heat Pump Electricity,"Heat (low temperature, decentralized)",1.0
 Decentralized Energy System Renovation,"Heat (low temperature, decentralized)",1.0
 Decentralized Solar Thermal ,"Heat (low temperature, decentralized)",1.0
 Decentralized Solar Thermal ,Solar resource,-1.0
@@ -474,6 +476,7 @@ District Heating Network with Heat Pump Electricity,Electricity (medium voltage)
 District Heating Network with Heat Pump Electricity,"Heat (low temperature, district heating network)",1.0
 District Heating Network Renovation,"Heat (low temperature, district heating network)",1.0
 Diesel,Diesel,1.0
+Diesel (stored),Stored diesel,1.0
 Diesel to Storage,Diesel,-1.0
 Diesel to Storage,Stored diesel,1.0
 Direct Usage of stored CO2 ,Captured CO2,-1.0
@@ -485,6 +488,7 @@ Deep Oil Reservoir Gas Recovery,Electricity (medium voltage),-0.0001
 Electricity import,CO2 emission (from nonconcentrated spot sources),0.4818
 Electricity import,Electricity (extra high voltage),1.0
 Electricity exports,Electricity (extra high voltage),-1.0
+Electricity (stored),Stored electricity,1.0
 Electricity Storage,Electricity (low voltage),-1.0
 Electricity Storage,Stored electricity,1.0
 Enhanced Oil Recovery,Captured CO2,-1.0
@@ -514,9 +518,9 @@ Ethylene Polymerization,Polyethylene,1.0
 Food Production,Electricity (medium voltage),-0.61
 Food Production,Food,1.0
 Food Production,Heat (high temperature),-1.6
-Food Production (heat pump),Electricity (medium voltage),-0.788
-Food Production (heat pump),Food,1.0
-Food Production (heat pump),Heat (high temperature),-0.009
+Food Production with Heat Pump,Electricity (medium voltage),-0.788
+Food Production with Heat Pump,Food,1.0
+Food Production with Heat Pump,Heat (high temperature),-0.009
 Food Production with Heat Recovery,Electricity (medium voltage),-0.61
 Food Production with Heat Recovery,Food,1.0
 Food Production with Heat Recovery,Heat (high temperature),-1.285
@@ -525,16 +529,17 @@ BioDiesel Production via Fischer-Tropsch Synthesis,CO2 emission (from carbon-int
 BioDiesel Production via Fischer-Tropsch Synthesis,Electricity (medium voltage),-0.004
 BioDiesel Production via Fischer-Tropsch Synthesis,"Heat (low temperature, district heating network)",0.395
 BioDiesel Production via Fischer-Tropsch Synthesis,Woody biomass,-1.879
-Hydrogen Production via Gasification,CO2 emission (from carbon-intensive fields),0.635
-Hydrogen Production via Gasification,Electricity (medium voltage),-0.093
-Hydrogen Production via Gasification,Hydrogen (medium pressure),1.0
-Hydrogen Production via Gasification,Heat (high temperature),0.288
-Hydrogen Production via Gasification,Woody biomass,-1.63
-Synthetic Natural Gas Production via Gasification,CO2 emission (from carbon-intensive fields),0.327
-Synthetic Natural Gas Production via Gasification,Heat (high temperature),0.324
-Synthetic Natural Gas Production via Gasification,Synthetic natural gas (medium pressure),1.0
-Synthetic Natural Gas Production via Gasification,Woody biomass,-1.351
+Hydrogen Production via Wood Gasification,CO2 emission (from carbon-intensive fields),0.635
+Hydrogen Production via Wood Gasification,Electricity (medium voltage),-0.093
+Hydrogen Production via Wood Gasification,Hydrogen (medium pressure),1.0
+Hydrogen Production via Wood Gasification,Heat (high temperature),0.288
+Hydrogen Production via Wood Gasification,Woody biomass,-1.63
+Synthetic Natural Gas Production via Wood Gasification,CO2 emission (from carbon-intensive fields),0.327
+Synthetic Natural Gas Production via Wood Gasification,Heat (high temperature),0.324
+Synthetic Natural Gas Production via Wood Gasification,Synthetic natural gas (medium pressure),1.0
+Synthetic Natural Gas Production via Wood Gasification,Woody biomass,-1.351
 Gasoline,Gasoline,1.0
+Gasoline (stored),Stored gasoline,1.0
 Gasoline to Storage,Gasoline,-1.0
 Gasoline to Storage,Stored gasoline,1.0
 Geothermal Energy Utilization,Electricity (medium voltage),1.0
@@ -553,22 +558,25 @@ Hydrogen Compression from Medium Pressure to High Pressure,Hydrogen (medium pres
 Hydrogen,Hydrogen (extra high pressure),1.0
 Hydrogen Expansion from Extra High Pressure to High Pressure,Hydrogen (extra high pressure),-1.0
 Hydrogen Expansion from Extra High Pressure to High Pressure,Hydrogen (high pressure),1.0
-Hydrogen Expansion from Extra High Pressure to High Pressure (co-generation unit),Electricity (medium voltage),0.007
-Hydrogen Expansion from Extra High Pressure to High Pressure (co-generation unit),Hydrogen (extra high pressure),-1.0
-Hydrogen Expansion from Extra High Pressure to High Pressure (co-generation unit),Hydrogen (high pressure),1.0
-Hydrogen Expansion from Extra High Pressure to High Pressure (co-generation unit),"Heat (low temperature, decentralized)",-0.007
+Hydrogen Expansion with Cogeneration from Extra High Pressure to High Pressure,Electricity (medium voltage),0.007
+Hydrogen Expansion with Cogeneration from Extra High Pressure to High Pressure,Hydrogen (extra high pressure),-1.0
+Hydrogen Expansion with Cogeneration from Extra High Pressure to High Pressure,Hydrogen (high pressure),1.0
+Hydrogen Expansion with Cogeneration from Extra High Pressure to High Pressure,"Heat (low temperature, decentralized)",-0.007
 Hydrogen Expansion from High Pressure to Medium Pressure,Hydrogen (high pressure),-1.0
 Hydrogen Expansion from High Pressure to Medium Pressure,Hydrogen (medium pressure),1.0
-Hydrogen Expansion from High Pressure to Medium Pressure (co-generation unit),Electricity (medium voltage),0.01
-Hydrogen Expansion from High Pressure to Medium Pressure (co-generation unit),Hydrogen (high pressure),-1.0
-Hydrogen Expansion from High Pressure to Medium Pressure (co-generation unit),Hydrogen (medium pressure),1.0
-Hydrogen Expansion from High Pressure to Medium Pressure (co-generation unit),"Heat (low temperature, decentralized)",-0.01
+Hydrogen Expansion with Cogeneration from High Pressure to Medium Pressure,Electricity (medium voltage),0.01
+Hydrogen Expansion with Cogeneration from High Pressure to Medium Pressure,Hydrogen (high pressure),-1.0
+Hydrogen Expansion with Cogeneration from High Pressure to Medium Pressure,Hydrogen (medium pressure),1.0
+Hydrogen Expansion with Cogeneration from High Pressure to Medium Pressure,"Heat (low temperature, decentralized)",-0.01
 Hydrogen Expansion from Medium Pressure to Low Pressure,Hydrogen (low pressure),1.0
 Hydrogen Expansion from Medium Pressure to Low Pressure,Hydrogen (medium pressure),-1.0
-Hydrogen Expansion from Medium Pressure to Low Pressure (co-generation unit),Electricity (medium voltage),0.02
-Hydrogen Expansion from Medium Pressure to Low Pressure (co-generation unit),Hydrogen (low pressure),1.0
-Hydrogen Expansion from Medium Pressure to Low Pressure (co-generation unit),Hydrogen (medium pressure),-1.0
-Hydrogen Expansion from Medium Pressure to Low Pressure (co-generation unit),"Heat (low temperature, decentralized)",-0.201
+Hydrogen Expansion with Cogeneration from Medium Pressure to Low Pressure,Electricity (medium voltage),0.02
+Hydrogen Expansion with Cogeneration from Medium Pressure to Low Pressure,Hydrogen (low pressure),1.0
+Hydrogen Expansion with Cogeneration from Medium Pressure to Low Pressure,Hydrogen (medium pressure),-1.0
+Hydrogen Expansion with Cogeneration from Medium Pressure to Low Pressure,"Heat (low temperature, decentralized)",-0.201
+Hydrogen,Hydrogen (high pressure),1.0
+Hydrogen,Hydrogen (low pressure),1.0
+Hydrogen,Hydrogen (medium pressure),1.0
 Combined Cycle Gas Turbine Hydrogen and Natural Gas Mix,CO2 emission (from carbon-intensive fields),0.32
 Combined Cycle Gas Turbine Hydrogen and Natural Gas Mix,Electricity (high voltage),1.0
 Combined Cycle Gas Turbine Hydrogen and Natural Gas Mix,Hydrogen (medium pressure),-0.362
@@ -589,23 +597,23 @@ Combined Cycle Gas Turbine Hydrogen and Synthetic Natural Gas Mix with Carbon Ca
 Combined Cycle Gas Turbine Hydrogen and Synthetic Natural Gas Mix with Carbon Capture,Synthetic natural gas (medium pressure),-1.325
 Hydrogen to Storage,Hydrogen (extra high pressure),-1.0
 Hydrogen to Storage,Stored hydrogen,1.0
-Heavy fuel oil,,1.0
+Boat fuel,,1.0
 High Temperature to Low Temperature Conversion,Heat (high temperature),-1.0
 High Temperature to Low Temperature Conversion,"Heat (low temperature, district heating network)",1.0
 High Temperature to Low Temperature Conversion in Decentralized Systems,Heat (high temperature),-1.0
 High Temperature to Low Temperature Conversion in Decentralized Systems,"Heat (low temperature, decentralized)",1.0
-Hydroelectric Dam,Electricity (extra high voltage),1.0
-Hydroelectric Dam,Hydro resource,-1.0
+Existing Hydroelectric Dam,Electricity (extra high voltage),1.0
+Existing Hydroelectric Dam,Hydro resource,-1.0
 Hydrothermal Gasification,CO2 emission (from carbon-intensive fields),0.689
 Hydrothermal Gasification,Electricity (medium voltage),0.094
 Hydrothermal Gasification,Synthetic natural gas (medium pressure),1.0
 Hydrothermal Gasification,Wet biomass,-2.36
-"Hydrothermal Gasification (co-generation unit, components for heat and electricity)",CO2 emission (from carbon-intensive fields),1.481
-"Hydrothermal Gasification (co-generation unit, components for heat and electricity)",Electricity (medium voltage),1.0
-"Hydrothermal Gasification (co-generation unit, components for heat and electricity)",Heat (high temperature),1.319
-"Hydrothermal Gasification (co-generation unit, components for heat and electricity)",Wet biomass,-3.937
-Hydroelectric Power from River Flow,Electricity (extra high voltage),1.0
-Hydroelectric Power from River Flow,Hydro resource,-1.0
+Hydrothermal Gasification with Combined Heat and Power,CO2 emission (from carbon-intensive fields),1.481
+Hydrothermal Gasification with Combined Heat and Power,Electricity (medium voltage),1.0
+Hydrothermal Gasification with Combined Heat and Power,Heat (high temperature),1.319
+Hydrothermal Gasification with Combined Heat and Power,Wet biomass,-3.937
+Existing Hydroelectric Power from River Flow,Electricity (extra high voltage),1.0
+Existing Hydroelectric Power from River Flow,Hydro resource,-1.0
 Industrial Boiler with BioGas Combustion,CO2 emission (from carbon-intensive fields),0.202
 Industrial Boiler with BioGas Combustion,Heat (high temperature),1.0
 Industrial Boiler with BioGas Combustion,Synthetic natural gas (medium pressure),-1.02
@@ -699,7 +707,7 @@ Propylene Production via Metathesis,Propylene,-3.226
 Methanation Process,Captured CO2,-0.198
 Methanation Process,Hydrogen (medium pressure),-1.282
 Methanation Process,Synthetic natural gas (medium pressure),1.0
-Conversion of Methane to Methanol,CO2 emission (from carbon-intensive fields),-0.25
+Conversion of Methane to Methanol,CO2 emission (from carbon-intensive fields),0.25
 Conversion of Methane to Methanol,Methanol,1.0
 Conversion of Methane to Methanol,Natural gas (medium pressure),-1.4
 Methanol,Methanol,1.0
@@ -741,29 +749,31 @@ Natural gas,Natural gas (extra high pressure),1.0
 Natural Gas Expansion from Extra High Pressure to High Pressure,"Heat (low temperature, decentralized)",-0.001
 Natural Gas Expansion from Extra High Pressure to High Pressure,Natural gas (extra high pressure),-1.0
 Natural Gas Expansion from Extra High Pressure to High Pressure,Natural gas (high pressure),1.0
-Natural Gas Expansion from Extra High Pressure to High Pressure (co-generation unit),Electricity (medium voltage),0.005
-Natural Gas Expansion from Extra High Pressure to High Pressure (co-generation unit),"Heat (low temperature, decentralized)",-0.005
-Natural Gas Expansion from Extra High Pressure to High Pressure (co-generation unit),Natural gas (extra high pressure),-1.0
-Natural Gas Expansion from Extra High Pressure to High Pressure (co-generation unit),Natural gas (high pressure),1.0
+Natural Gas Expansion with Cogeneration from Extra High Pressure to High Pressure,Electricity (medium voltage),0.005
+Natural Gas Expansion with Cogeneration from Extra High Pressure to High Pressure,"Heat (low temperature, decentralized)",-0.005
+Natural Gas Expansion with Cogeneration from Extra High Pressure to High Pressure,Natural gas (extra high pressure),-1.0
+Natural Gas Expansion with Cogeneration from Extra High Pressure to High Pressure,Natural gas (high pressure),1.0
 Natural Gas Expansion from High Pressure to Medium Pressure,Natural gas (high pressure),-1.0
 Natural Gas Expansion from High Pressure to Medium Pressure,Natural gas (medium pressure),1.0
-Natural Gas Expansion from High Pressure to Medium Pressure (co-generation unit),Electricity (medium voltage),0.004
-Natural Gas Expansion from High Pressure to Medium Pressure (co-generation unit),"Heat (low temperature, decentralized)",-0.004
-Natural Gas Expansion from High Pressure to Medium Pressure (co-generation unit),Natural gas (high pressure),-1.0
-Natural Gas Expansion from High Pressure to Medium Pressure (co-generation unit),Natural gas (medium pressure),1.0
+Natural Gas Expansion with Cogeneration from High Pressure to Medium Pressure,Electricity (medium voltage),0.004
+Natural Gas Expansion with Cogeneration from High Pressure to Medium Pressure,"Heat (low temperature, decentralized)",-0.004
+Natural Gas Expansion with Cogeneration from High Pressure to Medium Pressure,Natural gas (high pressure),-1.0
+Natural Gas Expansion with Cogeneration from High Pressure to Medium Pressure,Natural gas (medium pressure),1.0
 Natural Gas Expansion from Medium Pressure to Low Pressure,Natural gas (low pressure),1.0
 Natural Gas Expansion from Medium Pressure to Low Pressure,Natural gas (medium pressure),-1.0
-Natural Gas Expansion from Medium Pressure to Low Pressure (co-generation unit),Electricity (medium voltage),0.02
-Natural Gas Expansion from Medium Pressure to Low Pressure (co-generation unit),"Heat (low temperature, decentralized)",-0.02
-Natural Gas Expansion from Medium Pressure to Low Pressure (co-generation unit),Natural gas (low pressure),1.0
-Natural Gas Expansion from Medium Pressure to Low Pressure (co-generation unit),Natural gas (medium pressure),-1.0
+Natural Gas Expansion with Cogeneration from Medium Pressure to Low Pressure,Electricity (medium voltage),0.02
+Natural Gas Expansion with Cogeneration from Medium Pressure to Low Pressure,"Heat (low temperature, decentralized)",-0.02
+Natural Gas Expansion with Cogeneration from Medium Pressure to Low Pressure,Natural gas (low pressure),1.0
+Natural Gas Expansion with Cogeneration from Medium Pressure to Low Pressure,Natural gas (medium pressure),-1.0
 Natural gas,Natural gas (high pressure),1.0
 Natural gas,Natural gas (low pressure),1.0
 Natural gas,Natural gas (medium pressure),1.0
+Plasma Natural Gas Pyrolysis,Sequestrated CO2,0.336
 Plasma Natural Gas Pyrolysis,Hydrogen (medium pressure),1.0
 Plasma Natural Gas Pyrolysis,Heat (high temperature),-0.356
 Plasma Natural Gas Pyrolysis,"Heat (low temperature, district heating network)",0.244
 Plasma Natural Gas Pyrolysis,Natural gas (medium pressure),-1.867
+Thermal Natural Gas Pyrolysis,Sequestrated CO2,0.342
 Thermal Natural Gas Pyrolysis,Hydrogen (medium pressure),1.0
 Thermal Natural Gas Pyrolysis,Heat (high temperature),-0.537
 Thermal Natural Gas Pyrolysis,"Heat (low temperature, district heating network)",0.39
@@ -771,6 +781,7 @@ Thermal Natural Gas Pyrolysis,Natural gas (medium pressure),-1.902
 Natural Gas Reforming,CO2 emission (from carbon-intensive fields),0.27
 Natural Gas Reforming,Hydrogen (medium pressure),1.0
 Natural Gas Reforming,Natural gas (medium pressure),-1.365
+Natural gas (stored),Stored natural gas,1.0
 Natural Gas to Storage,Natural gas (extra high pressure),-1.0
 Natural Gas to Storage,Stored natural gas,1.0
 Nuclear Power Generation,CO2 emission (from carbon-intensive fields),0.011
@@ -806,9 +817,9 @@ Phosphoric Acid Fuel Cell,"Heat (low temperature, decentralized)",1.0
 Paper Production,Electricity (extra high voltage),-0.65
 Paper Production,Heat (high temperature),-2.22
 Paper Production,Paper,1.0
-Paper Production (heat pump),Electricity (high voltage),-0.789
-Paper Production (heat pump),Heat (high temperature),-0.383
-Paper Production (heat pump),Paper,1.0
+Paper Production with Heat Pump,Electricity (high voltage),-0.789
+Paper Production with Heat Pump,Heat (high temperature),-0.383
+Paper Production with Heat Pump,Paper,1.0
 Paper Production with Heat Recovery,Electricity (extra high voltage),-1.104
 Paper Production with Heat Recovery,Heat (high temperature),-0.383
 Paper Production with Heat Recovery,Heat waste,0.05
@@ -827,21 +838,21 @@ Phenol,Phenol,1.0
 Bio-Jet Fuel-Powered Freight Plane,Bio-jetfuel,-0.617
 Bio-Jet Fuel-Powered Freight Plane,CO2 emission (from nonconcentrated spot sources),0.154
 Bio-Jet Fuel-Powered Freight Plane,Freight mobility,1.0
-Plane Freight,CO2 emission (from nonconcentrated spot sources),0.154
-Plane Freight,Jet fuel,-0.617
-Plane Freight,Freight mobility,1.0
+Jet Fuel-Powered Freight Plane,CO2 emission (from nonconcentrated spot sources),0.154
+Jet Fuel-Powered Freight Plane,Jet fuel,-0.617
+Jet Fuel-Powered Freight Plane,Freight mobility,1.0
 Bio-Jet Fuel-Powered Long Haul Passenger Plane,Bio-jetfuel,-0.352
 Bio-Jet Fuel-Powered Long Haul Passenger Plane,CO2 emission (from nonconcentrated spot sources),0.088
 Bio-Jet Fuel-Powered Long Haul Passenger Plane,Public mobility,1.0
-Passenger Plane long haul,CO2 emission (from nonconcentrated spot sources),0.088
-Passenger Plane long haul,Jet fuel,-0.352
-Passenger Plane long haul,Public mobility,1.0
-Bio-Jet Fuel-Powered Short Haul Passenger Plane,Bio-jetfuel,-0.352
-Bio-Jet Fuel-Powered Short Haul Passenger Plane,CO2 emission (from nonconcentrated spot sources),0.088
-Bio-Jet Fuel-Powered Short Haul Passenger Plane,Public mobility,1.0
-Passenger Plane short haul,CO2 emission (from nonconcentrated spot sources),0.088
-Passenger Plane short haul,Jet fuel,-0.352
-Passenger Plane short haul,Public mobility,1.0
+Jet Fuel-Powered Long Haul Passenger Plane ,CO2 emission (from nonconcentrated spot sources),0.088
+Jet Fuel-Powered Long Haul Passenger Plane ,Jet fuel,-0.352
+Jet Fuel-Powered Long Haul Passenger Plane ,Public mobility,1.0
+Bio-Jet Fuel-Powered Passenger Plane,Bio-jetfuel,-0.352
+Bio-Jet Fuel-Powered Passenger Plane,CO2 emission (from nonconcentrated spot sources),0.088
+Bio-Jet Fuel-Powered Passenger Plane,Public mobility,1.0
+Jet Fuel-Powered Passenger Plane,CO2 emission (from nonconcentrated spot sources),0.088
+Jet Fuel-Powered Passenger Plane,Jet fuel,-0.352
+Jet Fuel-Powered Passenger Plane,Public mobility,1.0
 Polypropylene Production,Polypropylene,1.0
 Polypropylene Production,Propylene,-1.191
 Polypropylene,Polypropylene,1.0
@@ -859,6 +870,11 @@ Pyrolysis Process,Bio-light fuel oil,1.0
 Pyrolysis Process,CO2 emission (from carbon-intensive fields),0.322
 Pyrolysis Process,Electricity (medium voltage),0.024
 Pyrolysis Process,Woody biomass,-1.502
+Geothermal potential,Geothermal resource,1.0
+Hydro potential,Hydro resource,1.0
+Solar potential,Solar resource,1.0
+Offshore wind potential,Wind resource,1.0
+Onshore wind potential,Wind resource,1.0
 100% BioDiesel-Powered School Bus,Bio-diesel,-0.062
 100% BioDiesel-Powered School Bus,CO2 emission (from nonconcentrated spot sources),0.018
 100% BioDiesel-Powered School Bus,Public mobility,1.0
@@ -971,26 +987,28 @@ Synthetic natural gas,Synthetic natural gas (extra high pressure),1.0
 Synthetic Natural Gas Expansion from Extra High Pressure to High Pressure,"Heat (low temperature, decentralized)",-0.001
 Synthetic Natural Gas Expansion from Extra High Pressure to High Pressure,Synthetic natural gas (extra high pressure),-1.0
 Synthetic Natural Gas Expansion from Extra High Pressure to High Pressure,Synthetic natural gas (high pressure),1.0
-Synthetic Natural Gas Expansion from Extra High Pressure to High Pressure (co-generation unit),Electricity (medium voltage),0.005
-Synthetic Natural Gas Expansion from Extra High Pressure to High Pressure (co-generation unit),"Heat (low temperature, decentralized)",-0.005
-Synthetic Natural Gas Expansion from Extra High Pressure to High Pressure (co-generation unit),Synthetic natural gas (extra high pressure),-1.0
-Synthetic Natural Gas Expansion from Extra High Pressure to High Pressure (co-generation unit),Synthetic natural gas (high pressure),1.0
+Synthetic Natural Gas Expansion with Cogeneration from Extra High Pressure to High Pressure,Electricity (medium voltage),0.005
+Synthetic Natural Gas Expansion with Cogeneration from Extra High Pressure to High Pressure,"Heat (low temperature, decentralized)",-0.005
+Synthetic Natural Gas Expansion with Cogeneration from Extra High Pressure to High Pressure,Synthetic natural gas (extra high pressure),-1.0
+Synthetic Natural Gas Expansion with Cogeneration from Extra High Pressure to High Pressure,Synthetic natural gas (high pressure),1.0
 Synthetic Natural Gas Expansion from High Pressure to Medium Pressure,Synthetic natural gas (high pressure),-1.0
 Synthetic Natural Gas Expansion from High Pressure to Medium Pressure,Synthetic natural gas (medium pressure),1.0
-Synthetic Natural Gas Expansion from High Pressure to Medium Pressure (co-generation unit),Electricity (medium voltage),0.004
-Synthetic Natural Gas Expansion from High Pressure to Medium Pressure (co-generation unit),"Heat (low temperature, decentralized)",-0.004
-Synthetic Natural Gas Expansion from High Pressure to Medium Pressure (co-generation unit),Synthetic natural gas (high pressure),-1.0
-Synthetic Natural Gas Expansion from High Pressure to Medium Pressure (co-generation unit),Synthetic natural gas (medium pressure),1.0
+Synthetic Natural Gas Expansion with Cogeneration from High Pressure to Medium Pressure,Electricity (medium voltage),0.004
+Synthetic Natural Gas Expansion with Cogeneration from High Pressure to Medium Pressure,"Heat (low temperature, decentralized)",-0.004
+Synthetic Natural Gas Expansion with Cogeneration from High Pressure to Medium Pressure,Synthetic natural gas (high pressure),-1.0
+Synthetic Natural Gas Expansion with Cogeneration from High Pressure to Medium Pressure,Synthetic natural gas (medium pressure),1.0
 Synthetic Natural Gas Expansion from Medium Pressure to Low Pressure,Synthetic natural gas (low pressure),1.0
 Synthetic Natural Gas Expansion from Medium Pressure to Low Pressure,Synthetic natural gas (medium pressure),-1.0
-Synthetic Natural Gas Expansion from Medium Pressure to Low Pressure (co-generation unit),Electricity (medium voltage),0.02
-Synthetic Natural Gas Expansion from Medium Pressure to Low Pressure (co-generation unit),"Heat (low temperature, decentralized)",-0.02
-Synthetic Natural Gas Expansion from Medium Pressure to Low Pressure (co-generation unit),Synthetic natural gas (low pressure),1.0
-Synthetic Natural Gas Expansion from Medium Pressure to Low Pressure (co-generation unit),Synthetic natural gas (medium pressure),-1.0
+Synthetic Natural Gas Expansion with Cogeneration from Medium Pressure to Low Pressure,Electricity (medium voltage),0.02
+Synthetic Natural Gas Expansion with Cogeneration from Medium Pressure to Low Pressure,"Heat (low temperature, decentralized)",-0.02
+Synthetic Natural Gas Expansion with Cogeneration from Medium Pressure to Low Pressure,Synthetic natural gas (low pressure),1.0
+Synthetic Natural Gas Expansion with Cogeneration from Medium Pressure to Low Pressure,Synthetic natural gas (medium pressure),-1.0
+Plasma Synthetic Natural Gas Pyrolysis,Sequestrated CO2,0.336
 Plasma Synthetic Natural Gas Pyrolysis,Hydrogen (medium pressure),1.0
 Plasma Synthetic Natural Gas Pyrolysis,Heat (high temperature),-0.356
 Plasma Synthetic Natural Gas Pyrolysis,"Heat (low temperature, district heating network)",0.244
 Plasma Synthetic Natural Gas Pyrolysis,Synthetic natural gas (medium pressure),-1.867
+Thermal Synthetic Natural Gas Pyrolysis,Sequestrated CO2,0.342
 Thermal Synthetic Natural Gas Pyrolysis,Hydrogen (medium pressure),1.0
 Thermal Synthetic Natural Gas Pyrolysis,Heat (high temperature),-0.537
 Thermal Synthetic Natural Gas Pyrolysis,"Heat (low temperature, district heating network)",0.39
@@ -998,6 +1016,7 @@ Thermal Synthetic Natural Gas Pyrolysis,Synthetic natural gas (medium pressure),
 Synthetic Natural Gas Reforming,CO2 emission (from carbon-intensive fields),0.27
 Synthetic Natural Gas Reforming,Hydrogen (medium pressure),1.0
 Synthetic Natural Gas Reforming,Synthetic natural gas (medium pressure),-1.365
+Synthetic natural gas (stored),Stored synthetic natural gas,1.0
 Synthetic Natural Gas to Storage,Synthetic natural gas (extra high pressure),-1.0
 Synthetic Natural Gas to Storage,Stored synthetic natural gas,1.0
 Solid Oxide Electrolysis Cell Electrolysis,Electricity (high voltage),-1.25
@@ -1008,9 +1027,9 @@ Solid Oxide Fuel Cell,"Heat (low temperature, decentralized)",1.0
 Steel Production,Electricity (extra high voltage),-0.716
 Steel Production,Heat (high temperature),-0.725
 Steel Production,Steel,1.0
-Steel Production (heat pump),Electricity (medium voltage),-0.609
-Steel Production (heat pump),Heat (high temperature),-0.66
-Steel Production (heat pump),Steel,1.0
+Steel Production with Heat Pump,Electricity (medium voltage),-0.609
+Steel Production with Heat Pump,Heat (high temperature),-0.66
+Steel Production with Heat Pump,Steel,1.0
 Steel Production with Heat Recovery,Electricity (high voltage),-0.716
 Steel Production with Heat Recovery,Heat (high temperature),-0.66
 Steel Production with Heat Recovery,Steel,1.0
@@ -1108,8 +1127,8 @@ Biodiesel-Powered Freight Train,Freight mobility,1.0
 Diesel-Powered Freight Train,CO2 emission (from nonconcentrated spot sources),0.001
 Diesel-Powered Freight Train,Diesel,-0.051
 Diesel-Powered Freight Train,Freight mobility,1.0
-"Electric-Powered Freight Train (co-generation unit, components for electricity)",Electricity (extra high voltage),-0.068
-"Electric-Powered Freight Train (co-generation unit, components for electricity)",Freight mobility,1.0
+Electric-Powered Freight Train,Electricity (extra high voltage),-0.068
+Electric-Powered Freight Train,Freight mobility,1.0
 Hydrogen-Powered Freight Train,Hydrogen (high pressure),-0.333
 Hydrogen-Powered Freight Train,Freight mobility,1.0
 Natural Gas-Powered Freight Train,CO2 emission (from nonconcentrated spot sources),0.057
@@ -1189,8 +1208,8 @@ Sequestration of CO2 in Unmineable Coal Seams,Electricity (medium voltage),-0.00
 Uranium,Uranium,1.0
 Wind Energy Offshore,Electricity (medium voltage),1.0
 Wind Energy Offshore,Wind resource,-1.0
-Wind Energy Onshore,Electricity (medium voltage),1.0
-Wind Energy Onshore,Wind resource,-1.0
+Existing Wind Energy Onshore,Electricity (medium voltage),1.0
+Existing Wind Energy Onshore,Wind resource,-1.0
 Conversion of Wood to Methanol,Bio-methanol,1.0
 Conversion of Wood to Methanol,CO2 emission (from carbon-intensive fields),0.56
 Conversion of Wood to Methanol,Electricity (medium voltage),2.636
