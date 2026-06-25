@@ -535,10 +535,10 @@ PEM_ELECTROLYSIS_STACK,Construction,"electrolyzer, 1MWe, PEM, Stack","electrolyz
 PEM_ELECTROLYSIS_STACK_DECOM,Construction,"used electrolyzer stack, 1MWe, PEM","treatment of electrolyzer stack, 1MWe, PEM",RER,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050+truck_carculator
 PET_FORMATION,Operation,"polyethylene terephthalate, granulate, amorphous","polyethylene terephthalate production, granulate, amorphous",CA-QC,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050+truck_carculator
 PET_FORMATION,Construction,"chemical factory, organics","chemical factory construction, organics",RoW,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050+truck_carculator
-PLANE_FREIGHT_ELD,Construction,"aircraft, dedicated freight, medium haul","market for aircraft, dedicated freight, medium haul",GLO,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050+truck_carculator
-PLANE_FREIGHT_ELD,Operation,"transport, freight, aircraft, medium haul","transport, freight, aircraft, dedicated freight, medium haul",GLO,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050+truck_carculator
-PLANE_LH_ELD,Operation,"transport, passenger aircraft, very short haul","transport, passenger aircraft, very short haul",GLO,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050+truck_carculator
-PLANE_LH_ELD,Construction,"aircraft, passenger, very short haul","market for aircraft, passenger, very short haul",GLO,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050+truck_carculator
+PLANE_FREIGHT_ELD,Construction,"aircraft, dedicated freight, long haul","market for aircraft, dedicated freight, long haul",GLO,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050+truck_carculator
+PLANE_FREIGHT_ELD,Operation,"transport, freight, aircraft, long haul","transport, freight, aircraft, dedicated freight, long haul",GLO,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050+truck_carculator
+PLANE_LH_ELD,Operation,"transport, passenger aircraft, long haul","transport, passenger aircraft, long haul",GLO,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050+truck_carculator
+PLANE_LH_ELD,Construction,"aircraft, passenger, long haul","market for aircraft, passenger, long haul",GLO,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050+truck_carculator
 PLANE_SH_LD,Construction,"aircraft, passenger, medium haul","market for aircraft, passenger, medium haul",GLO,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050+truck_carculator
 PLANE_SH_LD,Operation,"transport, passenger aircraft, medium haul","transport, passenger aircraft, medium haul",GLO,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050+truck_carculator
 POLYPROPYLENE_PP,Operation,"polypropylene, granulate","polypropylene production, granulate",RoW,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050+truck_carculator
@@ -764,8 +764,8 @@ TRAIN_FREIGHT_ELEC_ELD_WAG,Construction,goods wagon,goods wagon production,RoW,e
 TRAIN_FREIGHT_ELEC_LD,Operation,"transport, freight train","transport, freight train, electricity",RoW,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050+truck_carculator
 TRAIN_FREIGHT_ELEC_LD_LOC,Construction,locomotive,locomotive production,RoW,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050+truck_carculator
 TRAIN_FREIGHT_ELEC_LD_WAG,Construction,goods wagon,goods wagon production,RoW,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050+truck_carculator
-TRAIN_FREIGHT_H2_ELD,Operation,"transport, freight train","transport, freight train, electricity",RoW,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050+truck_carculator
-TRAIN_FREIGHT_H2_ELD_LOC,Construction,locomotive,locomotive production,RoW,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050+truck_carculator
+TRAIN_FREIGHT_H2_ELD,Operation,"transport, freight train","transport, freight train, fuel cell, hydrogen",CAN,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050+truck_carculator
+TRAIN_FREIGHT_H2_ELD_LOC,Construction,"locomotive fuel cell, hydrogen","production of locomotive, fuel cell, hydrogen",GLO,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050+truck_carculator
 TRAIN_FREIGHT_H2_ELD_WAG,Construction,goods wagon,goods wagon production,RoW,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050+truck_carculator
 TRAIN_FREIGHT_H2_HYBRID_ELD,Operation,"transport, freight train","transport, freight train, electricity",RoW,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050+truck_carculator
 TRAIN_FREIGHT_H2_HYBRID_ELD_LOC,Construction,locomotive,locomotive production,RoW,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050+truck_carculator
@@ -773,8 +773,8 @@ TRAIN_FREIGHT_H2_HYBRID_ELD_WAG,Construction,goods wagon,goods wagon production,
 TRAIN_FREIGHT_H2_HYBRID_LD,Operation,"transport, freight train","transport, freight train, electricity",RoW,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050+truck_carculator
 TRAIN_FREIGHT_H2_HYBRID_LD_LOC,Construction,locomotive,locomotive production,RoW,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050+truck_carculator
 TRAIN_FREIGHT_H2_HYBRID_LD_WAG,Construction,goods wagon,goods wagon production,RoW,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050+truck_carculator
-TRAIN_FREIGHT_H2_LD,Operation,"transport, freight train","transport, freight train, electricity",RoW,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050+truck_carculator
-TRAIN_FREIGHT_H2_LD_LOC,Construction,locomotive,locomotive production,RoW,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050+truck_carculator
+TRAIN_FREIGHT_H2_LD,Operation,"transport, freight train","transport, freight train, fuel cell, hydrogen",CAN,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050+truck_carculator
+TRAIN_FREIGHT_H2_LD_LOC,Construction,"locomotive fuel cell, hydrogen","production of locomotive, fuel cell, hydrogen",GLO,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050+truck_carculator
 TRAIN_FREIGHT_H2_LD_WAG,Construction,goods wagon,goods wagon production,RoW,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050+truck_carculator
 TRAIN_FREIGHT_NG_ELD,Operation,"transport, freight train","transport, freight train, diesel",US,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050+truck_carculator
 TRAIN_FREIGHT_NG_ELD_LOC,Construction,locomotive,locomotive production,RoW,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050+truck_carculator
@@ -1154,7 +1154,7 @@ LP_NG_GRID,Construction,"pipeline, natural gas, low pressure distribution networ
 MP_H2_GRID,Construction,"pipeline, for hydrogen distribution","pipeline, hydrogen, low pressure distribution network",RER,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050+truck_carculator
 MP_NG_GRID,Construction,"pipeline, natural gas, low pressure distribution network","pipeline construction, natural gas, low pressure distribution network",RoW,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050+truck_carculator
 BIOMASS_FORESTRY_UNEXPLOITED,Resource,"wood chips, wet, measured as dry mass","market for wood chips, wet, measured as dry mass",CA-QC,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050+truck_carculator
-BIOMASS_FORESTRY_RESIDUAL,Resource,"wood chips, wet, measured as dry mass","market for wood chips, wet, measured as dry mass",CA-QC,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050+truck_carculator
+BIOMASS_FORESTRY_RESIDUAL,Resource,forest residue,supply of forest residue,CAN,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050+truck_carculator
 BIOMASS_FORESTRY_LEFTOVER1,Resource,"wood chips, wet, measured as dry mass","market for wood chips, wet, measured as dry mass",CA-QC,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050+truck_carculator
 BIOMASS_FORESTRY_LEFTOVER2,Resource,"wood chips, wet, measured as dry mass","market for wood chips, wet, measured as dry mass",CA-QC,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050+truck_carculator
 BIOMASS_AGRICULTURE_DEJECTION,Resource,"manure, solid, cattle","market for manure, solid, cattle",GLO,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050+truck_carculator
@@ -1165,7 +1165,7 @@ BIOMASS_WASTE_PAPER_FABRIC,Resource,municipal solid waste,market for municipal s
 BIOMASS_WASTE_BUILDING,Resource,"waste wood, post-consumer","market for waste wood, post-consumer",RoW,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050+truck_carculator
 BIOMASS_WASTE_MUNICIPAL,Resource,municipal solid waste,market for municipal solid waste,CA,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050+truck_carculator
 BIOMASS_FORESTRY_UNEXPLOITED,Flow,"wood chips, wet, measured as dry mass","market for wood chips, wet, measured as dry mass",CA-QC,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050+truck_carculator
-BIOMASS_FORESTRY_RESIDUAL,Flow,"wood chips, wet, measured as dry mass","market for wood chips, wet, measured as dry mass",CA-QC,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050+truck_carculator
+BIOMASS_FORESTRY_RESIDUAL,Flow,forest residue,supply of forest residue,CAN,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050+truck_carculator
 BIOMASS_FORESTRY_LEFTOVER1,Flow,"wood chips, wet, measured as dry mass","market for wood chips, wet, measured as dry mass",CA-QC,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050+truck_carculator
 BIOMASS_FORESTRY_LEFTOVER2,Flow,"wood chips, wet, measured as dry mass","market for wood chips, wet, measured as dry mass",CA-QC,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050+truck_carculator
 BIOMASS_AGRICULTURE_DEJECTION,Flow,"manure, solid, cattle","market for manure, solid, cattle",GLO,ecoinvent_cutoff_3.10.1_image_SSP2-L_2050+truck_carculator
