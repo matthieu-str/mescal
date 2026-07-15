@@ -274,13 +274,13 @@ def normalize_lca_metrics(
                 if self.pathway:
                     if self.operation_metrics_for_all_time_steps:
                         f.write(
-                            f"let {metric_type}_{_short_name_ds_type(R_scaled.Type.iloc[i])}['{R_scaled.Abbrev.iloc[i]}',"
-                            f"'{R_scaled.Name.iloc[i]}',{R_scaled.Year.iloc[i]},{R_scaled.Year_inst.iloc[i]}] "
+                            f"let {metric_type}_{_short_name_ds_type(R_scaled.Type.iloc[i])}['YEAR_{R_scaled.Year.iloc[i]}',"
+                            f"'YEAR_{R_scaled.Year_inst.iloc[i]}','{R_scaled.Abbrev.iloc[i]}','{R_scaled.Name.iloc[i]}'] "
                             f":= {R_scaled.Value_norm.iloc[i]}; #{norm_unit} {R_scaled.Unit.iloc[i]}\n")
                     else:
                         f.write(
-                            f"let {metric_type}_{_short_name_ds_type(R_scaled.Type.iloc[i])}['{R_scaled.Abbrev.iloc[i]}',"
-                            f"'{R_scaled.Name.iloc[i]}',{R_scaled.Year.iloc[i]}] := {R_scaled.Value_norm.iloc[i]}; "
+                            f"let {metric_type}_{_short_name_ds_type(R_scaled.Type.iloc[i])}['YEAR_{R_scaled.Year.iloc[i]}',"
+                            f"'{R_scaled.Abbrev.iloc[i]}','{R_scaled.Name.iloc[i]}'] := {R_scaled.Value_norm.iloc[i]}; "
                             f"#{norm_unit} {R_scaled.Unit.iloc[i]}\n")
                 else:
                     f.write(f"let {metric_type}_{_short_name_ds_type(R_scaled.Type.iloc[i])}['{R_scaled.Abbrev.iloc[i]}','{R_scaled.Name.iloc[i]}'] "

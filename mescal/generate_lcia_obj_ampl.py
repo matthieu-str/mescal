@@ -84,80 +84,80 @@ def generate_mod_file_ampl(
             # Declaring the parameters and variables
             if assessment_type in ['esm', 'territorial emissions']:
                 if self.operation_metrics_for_all_time_steps:
-                    f.write(f'param {metric_type.lower()}_op {{INDICATORS,TECHNOLOGIES,YEARS,YEARS}} default 0;\n')
+                    f.write(f'param {metric_type.lower()}_op {{YEARS,YEARS,INDICATORS,TECHNOLOGIES}} default 0;\n')
                 else:
-                    f.write(f'param {metric_type.lower()}_op {{INDICATORS,TECHNOLOGIES,YEARS}} default 0;\n')
-                f.write(f'param {metric_type.lower()}_constr {{INDICATORS,TECHNOLOGIES,YEARS}} default 0;\n'
-                        f'param {metric_type.lower()}_decom {{INDICATORS,TECHNOLOGIES,YEARS}} default 0;\n'
-                        f'param {metric_type.lower()}_res {{INDICATORS,RESOURCES,YEARS}} default 0;\n'
-                        f'param limit_{metric_type.lower()} {{INDICATORS,YEARS}} default Infinity;\n'
-                        f'var {metric_type}_constr {{INDICATORS,TECHNOLOGIES,YEARS}};\n'
-                        f'var {metric_type}_decom {{INDICATORS,TECHNOLOGIES,YEARS}};\n'
-                        f'var {metric_type}_op {{INDICATORS,TECHNOLOGIES,YEARS}};\n'
-                        f'var {metric_type}_res {{INDICATORS,RESOURCES,YEARS}};\n'
-                        f'var Total{metric_type} {{INDICATORS,YEARS}};\n\n')
+                    f.write(f'param {metric_type.lower()}_op {{YEARS,INDICATORS,TECHNOLOGIES}} default 0;\n')
+                f.write(f'param {metric_type.lower()}_constr {{YEARS,INDICATORS,TECHNOLOGIES}} default 0;\n'
+                        f'param {metric_type.lower()}_decom {{YEARS,INDICATORS,TECHNOLOGIES}} default 0;\n'
+                        f'param {metric_type.lower()}_res {{YEARS,INDICATORS,RESOURCES}} default 0;\n'
+                        f'param limit_{metric_type.lower()} {{YEARS,INDICATORS}} default Infinity;\n'
+                        f'var {metric_type}_constr {{YEARS,INDICATORS,TECHNOLOGIES}};\n'
+                        f'var {metric_type}_decom {{YEARS,INDICATORS,TECHNOLOGIES}};\n'
+                        f'var {metric_type}_op {{YEARS,INDICATORS,TECHNOLOGIES}};\n'
+                        f'var {metric_type}_res {{YEARS,INDICATORS,RESOURCES}};\n'
+                        f'var Total{metric_type} {{YEARS,INDICATORS}};\n\n')
 
             elif assessment_type == 'direct emissions':
                 if self.operation_metrics_for_all_time_steps:
-                    f.write('param direct_op {INDICATORS,TECHNOLOGIES,YEARS,YEARS} default 0;\n')
+                    f.write('param direct_op {YEARS,YEARS,INDICATORS,TECHNOLOGIES} default 0;\n')
                 else:
-                    f.write('param direct_op {INDICATORS,TECHNOLOGIES,YEARS} default 0;\n')
-                f.write('param limit_direct {INDICATORS,YEARS} default Infinity;\n'
-                        'var DIRECT_op {INDICATORS,TECHNOLOGIES,YEARS};\n'
-                        'var TotalDIRECT {INDICATORS,YEARS};\n\n')
+                    f.write('param direct_op {YEARS,INDICATORS,TECHNOLOGIES} default 0;\n')
+                f.write('param limit_direct {YEARS,INDICATORS} default Infinity;\n'
+                        'var DIRECT_op {YEARS,INDICATORS,TECHNOLOGIES};\n'
+                        'var TotalDIRECT {YEARS,INDICATORS};\n\n')
 
             if assessment_type == 'territorial emissions':
                 # Abroad emissions parameters and variables
-                f.write('param limit_abroad {INDICATORS,YEARS} default Infinity;\n'
-                        'var ABROAD_constr {INDICATORS,TECHNOLOGIES,YEARS};\n'
-                        'var ABROAD_decom {INDICATORS,TECHNOLOGIES,YEARS};\n'
-                        'var ABROAD_op {INDICATORS,TECHNOLOGIES,YEARS};\n'
-                        'var ABROAD_res {INDICATORS,RESOURCES,YEARS};\n'
-                        'var TotalABROAD {INDICATORS,YEARS};\n\n')
+                f.write('param limit_abroad {YEARS,INDICATORS} default Infinity;\n'
+                        'var ABROAD_constr {YEARS,INDICATORS,TECHNOLOGIES};\n'
+                        'var ABROAD_decom {YEARS,INDICATORS,TECHNOLOGIES};\n'
+                        'var ABROAD_op {YEARS,INDICATORS,TECHNOLOGIES};\n'
+                        'var ABROAD_res {YEARS,INDICATORS,RESOURCES};\n'
+                        'var TotalABROAD {YEARS,INDICATORS};\n\n')
 
             if assessment_type in ['esm', 'territorial emissions']:
                 # Equation of infrastructure variables (construction and decommission impacts scaled with the installed capacity)
                 f.write('# Construction\n'
-                        f'subject to {metric_type.lower()}_constr_calc {{id in INDICATORS, i in TECHNOLOGIES, y in YEARS}}:\n'
-                        f'  {metric_type}_constr[id,i,y] = sum {{y_inst in YEARS: y_inst <= y}} {metric_type.lower()}_constr[id,i,y_inst] '
-                        f'* F_Mult[i,y_inst] / lifetime[i,y_inst];\n\n')
+                        f'subject to {metric_type.lower()}_constr_calc {{y in YEARS_WND diff YEAR_ONE, id in INDICATORS, i in TECHNOLOGIES}}:\n'
+                        f'  {metric_type}_constr[y,id,i] = sum {{y_inst in YEARS: y_inst <= y}} {metric_type.lower()}_constr[y_inst,id,i] '
+                        f'* F_Mult[y_inst,i] / lifetime[y_inst,i];\n\n')
 
                 f.write('# Decommission\n'
-                        f'subject to {metric_type.lower()}_decom_calc {{id in INDICATORS, i in TECHNOLOGIES, y in YEARS}}:\n'
-                        f'  {metric_type}_decom[id,i,y] = sum {{y_inst in YEARS: y_inst <= y}} {metric_type.lower()}_decom[id,i,y_inst] '
-                        f'* F_Mult[i,y_inst] / lifetime[i,y_inst];\n\n')
+                        f'subject to {metric_type.lower()}_decom_calc {{y in YEARS_WND diff YEAR_ONE, id in INDICATORS, i in TECHNOLOGIES}}:\n'
+                        f'  {metric_type}_decom[y,id,i] = sum {{y_inst in YEARS: y_inst <= y}} {metric_type.lower()}_decom[y_inst,id,i] '
+                        f'* F_Mult[y_inst,i] / lifetime[y_inst,i];\n\n')
 
             # Equation of operation variables (operation impacts scaled with the annual production)
             if self.operation_metrics_for_all_time_steps:
                 f.write('# Operation\n'
-                        f'subject to {metric_type.lower()}_op_calc {{id in INDICATORS, i in TECHNOLOGIES, y in YEARS}}:\n'
-                        f'  {metric_type}_op[id,i,y] = sum {{y_inst in YEARS: y_inst <= y}} '
-                        f'{metric_type.lower()}_op[id,i,y,y_inst] * sum {{t in PERIODS}} (t_op[t] * F_Mult_t[i,t,y,y_inst]);\n\n')
+                        f'subject to {metric_type.lower()}_op_calc {{y in YEARS_WND diff YEAR_ONE, id in INDICATORS, i in TECHNOLOGIES}}:\n'
+                        f'  {metric_type}_op[y,id,i] = sum {{y_inst in YEARS: y_inst <= y}} '
+                        f'{metric_type.lower()}_op[y,y_inst,id,i] * sum {{t in PERIODS}} (t_op[t] * F_Mult_t[y,y_inst,i,t]);\n\n')
             else:
                 f.write('# Operation\n'
-                        f'subject to {metric_type.lower()}_op_calc {{id in INDICATORS, i in TECHNOLOGIES, y in YEARS}}:\n'
-                        f'  {metric_type}_op[id,i,y] = {metric_type.lower()}_op[id,i,y] * sum {{t in PERIODS}} (t_op[t] * F_Mult_t[i,t,y]);\n\n')
+                        f'subject to {metric_type.lower()}_op_calc {{y in YEARS_WND diff YEAR_ONE, id in INDICATORS, i in TECHNOLOGIES}}:\n'
+                        f'  {metric_type}_op[y,id,i] = {metric_type.lower()}_op[y,id,i] * sum {{t in PERIODS}} (t_op[t] * F_Mult_t[y,i,t]);\n\n')
 
             if assessment_type in ['esm', 'territorial emissions']:
                 # Equation of resource variables (resources impacts scaled with the annual usage)
                 f.write('# Resources\n'
-                        f'subject to {metric_type.lower()}_res_calc {{id in INDICATORS, r in RESOURCES, y in YEARS}}:\n'
-                        f'  {metric_type}_res[id,r,y] = {metric_type.lower()}_res[id,r,y] * sum {{t in PERIODS}} (t_op[t] * F_Mult_t[r,t,y]);\n\n')
+                        f'subject to {metric_type.lower()}_res_calc {{y in YEARS_WND diff YEAR_ONE, id in INDICATORS, r in RESOURCES}}:\n'
+                        f'  {metric_type}_res[y,id,r] = {metric_type.lower()}_res[y,id,r] * sum {{t in PERIODS}} (t_op[t] * F_Mult_t[y,r,t]);\n\n')
 
             if assessment_type == 'territorial emissions':
                 # Equations of abroad emissions
                 f.write('# Abroad impacts\n'
-                        'subject to abroad_constr_calc {id in INDICATORS, i in TECHNOLOGIES y in YEARS}:\n'
-                        '  ABROAD_constr[id,i,y] = LCIA_constr[id,i,y] - TERRITORIAL_constr[id,i,y];\n'
+                        'subject to abroad_constr_calc {y in YEARS_WND diff YEAR_ONE, id in INDICATORS, i in TECHNOLOGIES}:\n'
+                        '  ABROAD_constr[y,id,i] = LCIA_constr[y,id,i] - TERRITORIAL_constr[y,id,i];\n'
                         '\n'
-                        'subject to abroad_decom_calc {id in INDICATORS, i in TECHNOLOGIES y in YEARS}:\n'
-                        '  ABROAD_decom[id,i,y] = LCIA_decom[id,i,y] - TERRITORIAL_decom[id,i,y];\n'
+                        'subject to abroad_decom_calc {y in YEARS_WND diff YEAR_ONE, id in INDICATORS, i in TECHNOLOGIES}:\n'
+                        '  ABROAD_decom[y,id,i] = LCIA_decom[y,id,i] - TERRITORIAL_decom[y,id,i];\n'
                         '\n'
-                        'subject to abroad_op_calc {id in INDICATORS, i in TECHNOLOGIES y in YEARS}:\n'
-                        '  ABROAD_op[id,i,y] = LCIA_op[id,i,y] - TERRITORIAL_op[id,i,y];\n'
+                        'subject to abroad_op_calc {y in YEARS_WND diff YEAR_ONE, id in INDICATORS, i in TECHNOLOGIES}:\n'
+                        '  ABROAD_op[y,id,i] = LCIA_op[y,id,i] - TERRITORIAL_op[y,id,i];\n'
                         '\n'
-                        'subject to abroad_res_calc {id in INDICATORS, r in RESOURCES y in YEARS}:\n'
-                        '  ABROAD_res[id,r,y] = LCIA_res[id,r,y] - TERRITORIAL_res[id,r,y];\n\n')
+                        'subject to abroad_res_calc {y in YEARS_WND diff YEAR_ONE, id in INDICATORS, r in RESOURCES}:\n'
+                        '  ABROAD_res[y,id,r] = LCIA_res[y,id,r] - TERRITORIAL_res[y,id,r];\n\n')
 
             # Equation defining the total impact (sum over all technologies and resources)
             if assessment_type in ['esm', 'territorial emissions']:
@@ -166,12 +166,12 @@ def generate_mod_file_ampl(
                 else:
                     metric_type_list = [metric_type]
                 for metric in metric_type_list:
-                    f.write(f'subject to total{metric}_calc_r {{id in INDICATORS, y in YEARS}}:\n'
-                            f'  Total{metric}[id,y] = sum {{i in TECHNOLOGIES}} ({metric}_constr[id,i,y] + {metric}_decom[id,i,y] '
-                            f'+ {metric}_op[id,i,y]) + sum{{r in RESOURCES}} ({metric}_res[id,r,y]);\n\n')
+                    f.write(f'subject to total{metric}_calc_r {{y in YEARS_WND diff YEAR_ONE, id in INDICATORS}}:\n'
+                            f'  Total{metric}[y,id] = sum {{i in TECHNOLOGIES}} ({metric}_constr[y,id,i] + {metric}_decom[y,id,i] '
+                            f'+ {metric}_op[y,id,i]) + sum{{r in RESOURCES}} ({metric}_res[y,id,r]);\n\n')
             elif assessment_type == 'direct emissions':
-                f.write('subject to totalDIRECT_calc_r {id in INDICATORS, y in YEARS}:\n'
-                        '  TotalDIRECT[id,y] = sum {i in TECHNOLOGIES} DIRECT_op[id,i,y];\n\n')
+                f.write('subject to totalDIRECT_calc_r {y in YEARS_WND diff YEAR_ONE, id in INDICATORS}:\n'
+                        '  TotalDIRECT[y,id] = sum {i in TECHNOLOGIES} DIRECT_op[y,id,i];\n\n')
 
             # Equation putting a limit to the total impact
             if assessment_type == 'territorial emissions':
@@ -179,14 +179,14 @@ def generate_mod_file_ampl(
             else:
                 metric_type_list = [metric_type]
             for metric in metric_type_list:
-                f.write(f'subject to total{metric}_limit {{id in INDICATORS, y in YEARS}}:\n'
-                        f'  Total{metric}[id,y] <= limit_{metric.lower()}[id,y];\n\n')
+                f.write(f'subject to total{metric}_limit {{y in YEARS_WND diff YEAR_ONE, id in INDICATORS}}:\n'
+                        f'  Total{metric}[y,id] <= limit_{metric.lower()}[y,id];\n\n')
 
                 # Declaring the total amount variables
                 for abbrev in list(impact_abbrev.Abbrev):
                     f.write(f'var Total{metric}_{abbrev}{{y in YEARS}};\n'
-                            f'subject to {metric}_{abbrev}_cal{{y in YEARS}}:\n'
-                            f"  Total{metric}_{abbrev}[y] = Total{metric}['{abbrev}',y] + TotalCost[y]*1e-6;\n\n")
+                            f'subject to {metric}_{abbrev}_cal{{y in YEARS_WND diff YEAR_ONE}}:\n'
+                            f"  Total{metric}_{abbrev}[y] = Total{metric}[y,'{abbrev}'] + TotalCost[y]*1e-6;\n\n")
         else:
             # Declaring the parameters and variables
             if assessment_type in ['esm', 'territorial emissions']:
