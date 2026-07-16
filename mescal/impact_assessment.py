@@ -659,7 +659,7 @@ def compute_territorial_impact_scores(
                 | (x['database'] == self.esm_db_name)  # process in the foreground (therefore in the ESM location)
         ) else False, axis=1)
 
-    group_cols = ['act_name', 'act_type', 'impact_category']
+    group_cols = ['act_name', 'act_type', 'impact_category'] + ['Year'] if self.pathway else []
     df_contrib_processes = df_contrib_processes.groupby(
         group_cols + ['territorial']
     ).sum()[['score', 'amount']].reset_index()
