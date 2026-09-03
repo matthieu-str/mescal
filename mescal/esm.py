@@ -324,6 +324,7 @@ class ESM:
         """
         # Check if the inputs are consistent
         main_database_name = self.main_database_name
+        main_database = self.main_database
         biosphere_db_name = self.biosphere_db_name
         model = self.model
         mapping = self.mapping
@@ -444,6 +445,25 @@ class ESM:
                 f"List of flows that are in the model file but not in the ESM flows to CPC mapping file. "
                 f"It might be an issue for double counting if these flows are inputs of some ESM technologies: "
                 f"{sorted(set_flows_not_in_mapping_esm_flows_to_CPC_cat)}"
+            )
+
+        # Check if LCA units are coherent between unit conversion file and LCI database
+        mapping_and_units = pd.merge(unit_conversion, mapping, on=['Name', 'Type'])
+        mapping_and_units['LCA_db'] = mapping_and_units.apply(
+            lambda x: [i['unit'] for i in main_database.db_as_list if
+                       i['name'] == x['Activity']
+                       and i['reference product'] == x['Product']
+                       and i['location'] == x['Location']
+                       ][0],
+            axis=1)
+        list_mismatched_units = mapping_and_units[
+            mapping_and_units['LCA'] != mapping_and_units['LCA_db']
+        ][['Name', 'Type', 'LCA', 'LCA_db']].values.tolist()
+        if len(list_mismatched_units) > 0:
+            no_warning = False
+            self.logger.warning(
+                "List of technologies or resources that have a different unit in the unit conversion file and in the "
+                f"LCI database. Please check your inputs [Name, Type, Your LCA unit, LCA unit in the database]: {list_mismatched_units}"
             )
 
         if lifetime is not None:
