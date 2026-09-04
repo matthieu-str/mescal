@@ -186,10 +186,6 @@ def _change_location_activity(
 
     # Imports and exports are special cases for which we keep the initial location
     if esm_tech_name in self.import_export_list:
-        if activity_type == 'technosphere':
-            self.best_loc_in_ranking[(product, activity, database)] = location
-        elif activity_type == 'biosphere':
-            self.best_loc_in_ranking[(activity, categories, database)] = location
         return location
 
     # special case where there is only one location
