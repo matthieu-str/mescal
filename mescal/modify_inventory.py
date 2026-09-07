@@ -359,52 +359,82 @@ def add_carbon_capture_to_plant(
 
     # add processes required for CCS to technosphere flows for the different plant types
     if plant_type == 'cement':
-        ccs_product_name = 'carbon dioxide, captured at cement plant'
-        ccs_activity_name = 'carbon dioxide, captured at cement production plant, using monoethanolamine'
+        ccs_product_activity_names = [
+            (
+                'carbon dioxide, captured at cement plant',
+                'carbon dioxide, captured at cement production plant, using monoethanolamine'
+            ),
+            (
+                'carbon dioxide, captured and reused',
+                'carbon dioxide, captured at cement production plant, for subsequent reuse',
+            )
+        ]
     elif plant_type == 'hydrogen':
-        ccs_product_name = 'carbon dioxide, captured at hydrogen production plant, pre, pipeline 200km, storage 1000m'
-        ccs_activity_name = 'carbon dioxide, captured at hydrogen production plant, pre, pipeline 200km, storage 1000m'
+        ccs_product_activity_names = [
+            (
+                'carbon dioxide, captured at hydrogen production plant, pre, pipeline 200km, storage 1000m',
+                'carbon dioxide, captured at hydrogen production plant, pre, pipeline 200km, storage 1000m'
+            )
+        ]
     elif plant_type == 'municipal solid waste':
-        ccs_product_name = 'carbon dioxide, captured and reused'
-        ccs_activity_name = 'carbon dioxide, captured at municipal solid waste incineration plant, for subsequent reuse'
+        ccs_product_activity_names = [
+            (
+                'carbon dioxide, captured and reused',
+                'carbon dioxide, captured at municipal solid waste incineration plant, for subsequent reuse'
+            ),
+            (
+                'carbon dioxide, captured',
+                'carbon dioxide, captured, at municipal solid waste incineration plant, for subsequent reuse'
+            )
+        ]
     elif plant_type == 'synthetic natural gas':
-        ccs_product_name = (
-            'carbon dioxide, captured at synthetic natural gas plant, post, 200km pipeline, storage '
-            '1000m')
-        ccs_activity_name = (
-            'carbon dioxide, captured at synthetic natural gas plant, post, 200km pipeline, storage '
-            '1000m')
+        ccs_product_activity_names = [
+            (
+                'carbon dioxide, captured at synthetic natural gas plant, post, 200km pipeline, storage 1000m',
+                'carbon dioxide, captured at synthetic natural gas plant, post, 200km pipeline, storage 1000m'
+            )
+        ]
     elif plant_type == 'wood':
-        ccs_product_name = (
-            'carbon dioxide, captured at wood burning power plant 20 MW post, pipeline 200km, storage '
-            '1000m')
-        ccs_activity_name = (
-            'carbon dioxide, captured at wood burning power plant 20 MW post, pipeline 200km, storage '
-            '1000m')
+        ccs_product_activity_names = [
+            (
+                'carbon dioxide, captured at wood burning power plant 20 MW post, pipeline 200km, storage 1000m',
+                'carbon dioxide, captured at wood burning power plant 20 MW post, pipeline 200km, storage 1000m'
+            )
+        ]
     elif plant_type == 'hard coal':
-        ccs_product_name = (
-            'carbon dioxide, captured from hard coal-fired power plant, post, pipeline 200km, storage '
-            '1000m')
-        ccs_activity_name = (
-            'carbon dioxide, captured from hard coal-fired power plant, post, pipeline 200km, storage '
-            '1000m')
+        ccs_product_activity_names = [
+            (
+                'carbon dioxide, captured from hard coal-fired power plant, post, pipeline 200km, storage 1000m',
+                'carbon dioxide, captured from hard coal-fired power plant, post, pipeline 200km, storage 1000m'
+            )
+        ]
     elif plant_type == 'lignite':
-        ccs_product_name = 'carbon dioxide, captured from lignite, post, pipeline 200km, storage 1000m'
-        ccs_activity_name = 'carbon dioxide, captured from lignite, post, pipeline 200km, storage 1000m'
+        ccs_product_activity_names = [
+            (
+                'carbon dioxide, captured from lignite, post, pipeline 200km, storage 1000m',
+                'carbon dioxide, captured from lignite, post, pipeline 200km, storage 1000m'
+            )
+        ]
     elif plant_type == 'natural gas':
-        ccs_product_name = 'carbon dioxide, captured from natural gas, post, 200km pipeline, storage 1000m'
-        ccs_activity_name = 'carbon dioxide, captured from natural gas, post, 200km pipeline, storage 1000m'
+        ccs_product_activity_names = [
+            (
+                'carbon dioxide, captured from natural gas, post, 200km pipeline, storage 1000m',
+                'carbon dioxide, captured from natural gas, post, 200km pipeline, storage 1000m'
+            )
+        ]
     else:
         raise ValueError(f"Unexpected plant type: {plant_type}. Should be 'cement', 'hydrogen', 'municipal solid "
                          f"waste', 'synthetic natural gas', 'wood', 'hard coal', 'lignite', or 'natural gas'.")
 
-    ccs_act_list = [i for i in bd.Database(premise_database_name).search(ccs_activity_name, limit=1000) if (
-        (ccs_activity_name == i.as_dict()['name'])
-        & (ccs_product_name == i.as_dict()['reference product'])
-    )]
+    ccs_act_list = []
+    for ccs_product_name, ccs_activity_name in ccs_product_activity_names:
+        ccs_act_list += [i for i in bd.Database(premise_database_name).search(ccs_activity_name, limit=1000) if (
+            (ccs_activity_name == i.as_dict()['name'])
+            & (ccs_product_name == i.as_dict()['reference product'])
+        )]
 
     if len(ccs_act_list) == 0:
-        raise ValueError(f"No activity found with name {ccs_activity_name} and reference product {ccs_product_name}")
+        raise ValueError(f"No carbon capture activity found for {plant_type} plants.")
 
     elif len(ccs_act_list) == 1:
         ccs_act = ccs_act_list[0]
@@ -414,8 +444,7 @@ def add_carbon_capture_to_plant(
             ccs_act = [i for i in ccs_act_list if i['location'] == 'World'][0]
         except IndexError:
             ccs_act = ccs_act_list[0]  # take the first one if no activity with location 'World' is found
-            print(f"Multiple activities found with name {ccs_activity_name} and reference product {ccs_product_name}. "
-                  f"Taking the first one.")
+            print(f"Multiple carbon capture activities found for {plant_type} plants. Taking the first one.")
 
     # add a new non-fossil elementary flow to the activity
     new_ccs_exc = act.new_exchange(
