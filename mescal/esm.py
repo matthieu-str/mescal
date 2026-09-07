@@ -1141,21 +1141,21 @@ class ESM:
             activity_name_or_code = self._get_activity_name_or_code(tech=tech, return_type=return_type, phase=ds_type)
             if activity_name_or_code in [act[return_type] for act in db.db_as_list]:
                 if return_type == 'name':
-                    type_code_and_new_amount = type_code_and_new_amount.split(', ')
+                    type_code_and_new_amount = type_code_and_new_amount.split('; ')
                     change_flow_amount(
                         db_name=db_name,
                         activity_name=activity_name_or_code,
                         flow_type=str(type_code_and_new_amount[0]),
-                        flow_code=str(type_code_and_new_amount[1]),
+                        flow_code_or_name=str(type_code_and_new_amount[1]),
                         new_value=float(type_code_and_new_amount[2]),
                     )
                 elif return_type == 'code':
-                    type_code_and_new_amount = type_code_and_new_amount.split(', ')
+                    type_code_and_new_amount = type_code_and_new_amount.split('; ')
                     change_flow_amount(
                         db_name=db_name,
                         activity_code=activity_name_or_code,
                         flow_type=str(type_code_and_new_amount[0]),
-                        flow_code=str(type_code_and_new_amount[1]),
+                        flow_code_or_name=str(type_code_and_new_amount[1]),
                         new_value=float(type_code_and_new_amount[2]),
                     )
             else:

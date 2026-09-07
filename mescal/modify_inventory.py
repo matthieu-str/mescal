@@ -543,7 +543,7 @@ def adapt_rest_of_the_world_activity_based_on_other_activity(
 
 def change_flow_amount(
         db_name: str,
-        flow_code: str,
+        flow_code_or_name: str,
         flow_type: str = 'biosphere',
         new_value: float = 0.0,
         activity_code: str = None,
@@ -553,7 +553,7 @@ def change_flow_amount(
     Change the amount of a biosphere or technosphere flow in an activity
 
     :param db_name: name of the LCI database
-    :param flow_code: code of the flow to be adjusted
+    :param flow_code_or_name: code or name of the flow to be adjusted
     :param flow_type: type of the flow to be adjusted. Can be 'biosphere' or 'technosphere'.
     :param new_value: new amount of the flow
     :param activity_code: code of the activity into which the flow must be adjusted
@@ -571,14 +571,14 @@ def change_flow_amount(
 
     if flow_type == 'biosphere':
         for exc in [i for i in act.biosphere()]:
-            if exc.input[1] == flow_code:
+            if exc.input[1] == flow_code_or_name or exc['name'] == flow_code_or_name:
                 exc['comment'] = f"Amount changed from {exc['amount']} to {new_value}" + exc.get('comment', "")
                 exc['amount'] = new_value
                 exc.save()
 
     elif flow_type == 'technosphere':
         for exc in [i for i in act.technosphere()]:
-            if exc.input[1] == flow_code:
+            if exc.input[1] == flow_code_or_name or exc['name'] == flow_code_or_name:
                 exc['comment'] = f"Amount changed from {exc['amount']} to {new_value}" + exc.get('comment', "")
                 exc['amount'] = new_value
                 exc.save()
