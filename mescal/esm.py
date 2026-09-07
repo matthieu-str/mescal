@@ -832,6 +832,16 @@ class ESM:
                 f"operation dataset being a proxy of the technology or to an unmapped CPC category): "
                 f"{missing_input_flow_dict}")
 
+        for tec in missing_construction_flow:
+            if tec in missing_input_flow_dict:
+                missing_input_flow_dict[tec] += ['CONSTRUCTION']
+            else:
+                missing_input_flow_dict[tec] = ['CONSTRUCTION']
+
+        missing_input_flow_df = pd.DataFrame(
+            data=[missing_input_flow_dict.keys(), missing_input_flow_dict.values()]
+        ).T.rename({0: 'Name', 1: 'Missing input flows'}, axis=1)
+
         if self.extract_eol_from_construction:
             self._add_decommission_datasets()
 
@@ -848,6 +858,7 @@ class ESM:
             double_counting_removal_amount.to_csv(f"{self.results_path_file}double_counting_removal.csv", index=False)
             df_flows_set_to_zero.to_csv(f"{self.results_path_file}removed_flows_list.csv", index=False)
             df_activities_subject_to_double_counting.to_csv(f"{self.results_path_file}activities_subject_to_double_counting.csv", index=False)
+            missing_input_flow_df.to_csv(f"{self.results_path_file}missing_input_flows.csv", index=False)
             self.validation_double_counting(save_validation_report=True, return_validation_report=False)
 
         if write_database:
