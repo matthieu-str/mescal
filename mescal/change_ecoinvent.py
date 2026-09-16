@@ -59,7 +59,7 @@ def concatenate_change_reports(
     :param v_to: final version of the ecoinvent database
     :return: concatenated change report annex as a pandas DataFrame
     """
-    ecoinvent_versions = ['3.8', '3.9', '3.9.1', '3.10', '3.10.1', '3.11']
+    ecoinvent_versions = ['3.8', '3.9', '3.9.1', '3.10', '3.10.1', '3.11', '3.12']
     change_reports = []
     i = 0
     while v_from != ecoinvent_versions[i]:
