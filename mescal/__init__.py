@@ -36,7 +36,7 @@ __all__ = (
     "change_flow_amount",
 )
 
-__version__ = "1.2.4"
+__version__ = "1.2.5"
 
 from .database import Database, Dataset
 from .esm import ESM, PathwayESM

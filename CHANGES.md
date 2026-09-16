@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.5] - 2026-09-16
+
+### Added
+- The possibility to modify the amount of a flow (technosphere or biosphere) of an LCI dataset via the `technology_specifics` file (`change_flow_amount` in `modify_inventory.py`) and to identify the modified flow by its name (alternatively to its code).
+- Testing whether the physical units given in the `unit_conversion` file correspond to the ones in the LCI database (`check_inputs` in `esm.py`).
+- The optional column `Overwrite existing` in the `mapping_new_products_to_CPC` file to overwrite existing categories for specific products only.
+- The class variable `overwritten_cpc_categories` (for `Database` class) giving the overwritten CPC categories with the `add_CPC_categories` method.
+
+### Changed
+- The formulation of [AMPL](https://ampl.com/) files in `normalize_lca_metrics` (in `normalization.py`) and `generate_mod_file_ampl` (in `generate_lcia_obj_ampl.py`) for [EnergyScope-Pathway](https://github.com/CIRAIG/EnergyScope-Quebec) compatibility.
+- For the computation of direct emissions (`impact_assessment.py`), keep n+1 levels activities (if identified as foreground) instead of single level.
+- Removed entries in `best_loc_in_ranking` class variable (`_change_location_activity` in `regionalization.py`) for imports and exports, because those are special cases.
+
 ## [1.2.4] - 2026-03-24
 
 ### Added
