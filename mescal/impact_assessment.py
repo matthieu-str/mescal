@@ -656,7 +656,7 @@ def compute_territorial_impact_scores(
     df_contrib_processes['territorial'] = df_contrib_processes.apply(
         lambda x: True if (
                 (x['process_location'] == self.esm_location)  # process located in the ESM location
-                | (x['database'] == self.esm_db_name)  # process in the foreground (therefore in the ESM location)
+                | (x['database'] == self.esm_db_name and x['act_type'] == 'Operation')  # operational process in the foreground (therefore in the ESM location)
         ) else False, axis=1)
 
     group_cols = ['act_name', 'act_type', 'impact_category'] + (['Year'] if self.pathway else [])
