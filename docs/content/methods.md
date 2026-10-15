@@ -6,10 +6,10 @@ Souttre, M., Majeau-Bettez, G., Maréchal, F., Margni, M., 2026. mescal: a tool 
 
 ## Mapping
 
-Modellers should provide a mapping between the technologies and resources in the ESM and the datasets in the LCI database. 
+Modelers should provide a mapping between the technologies and resources in the ESM and the datasets in the LCI database. 
 Typically, a technology is mapped with an infrastructure LCI dataset (construction and end-of-life) and an operation 
 LCI dataset, while resources are mapped with a single (operation) LCI dataset. However, this structure is not mandatory 
-and can be adapted to the specific needs of the modeller.
+and can be adapted to the specific needs of the modeler.
 
 ![mapping between esm technologies and lci datasets](../pics/mapping.png "mapping")
 
@@ -24,7 +24,7 @@ biosphere flows will be regionalized following the same procedure.
 
 ## Double-counting removal
 
-Double-counting occurs regarding the flows that are explicitly modelled in the ESM, e.g., energy flows 
+Double-counting occurs regarding the flows that are explicitly modeled in the ESM, e.g., energy flows 
 (electricity, heat, fuels, etc.). Such flows should be set to zero in the LCI datasets in order to avoid an 
 overestimation of the impacts. The double-counting removal algorithm is as follows:
 
@@ -40,6 +40,14 @@ and LCI databases can be automatically corrected.
 
 The set of LCA indicators to be included in the ESM is computed using an LCIA method, e.g., [IMPACT World+](https://www.impactworldplus.org/), 
 [ReCiPe](https://www.rivm.nl/en/life-cycle-assessment-lca/recipe), etc. 
+
+## Generate files for your ESM
+
+Once the LCA indicators have been computed, they can be integrated into the ESM. _mescal_ currently supports the 
+[AMPL](https://ampl.com/) programming language for this purpose. However, if your ESM uses a different programming 
+language, please contact us so that we can implement a dedicated function for it. Here is a 
+[practical example](https://www.energyscope.net/latest/library/run-with-lca/) with the EnergyScope model (core version), 
+which is based on AMPL.
 
 ## Feeding the ESM results back in the LCA database
 
