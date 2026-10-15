@@ -327,7 +327,10 @@ def compute_impact_scores(
         pass
 
     # Maximum length of list of subcomponents
-    N_subcomp_max = max(len(i) for i in technology_compositions.Components)
+    if len(technology_compositions) == 0:
+        N_subcomp_max = 0
+    else:
+        N_subcomp_max = max(len(i) for i in technology_compositions.Components)
 
     # Associate new code to composition of technologies (this code does not correspond to any activity in the database,
     # it is only used as an identifier for the user)
