@@ -412,7 +412,7 @@ def compute_impact_scores(
             df_req_technosphere_constr.drop(columns=[technology_compositions.iloc[i][f'New_code_component_{j}']
                                         for j in range(1, len(subcomp_list) + 1)], inplace=True)
 
-    if contribution_analysis is not None:
+    if contribution_analysis is not None and len(df_comp_list) > 0:
         df_comp_all = pd.concat(df_comp_list)  # concatenate composition results in a single dataframe
 
         df_comp_all = pd.merge(  # adding the unit conversion factors to the dataframe
