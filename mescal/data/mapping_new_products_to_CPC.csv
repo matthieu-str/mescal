@@ -44,7 +44,7 @@ electricity production,17100: Electrical energy,contains,Product,FALSE
 "ethanol, from forest residue","34139: Other alcohols, phenols, phenol-alcohols, and their halogenated, sulphonated, nitrated or nitrosated derivativ[…]",equals,Product,FALSE
 EV charger,"464: Accumulators, primary cells and primary batteries, and parts thereof",contains,Product,FALSE
 "facility, construction",53269: Other constructions for manufacturing,contains,Activity,FALSE
-farming and supply of,23140: Other cereal grain products (including corn flakes),contains,Activity,FALSE
+farming and supply of,23140: Other cereal grain products (including corn flakes),contains,Activity,TRUE
 fixed bed reactor,53269: Other constructions for manufacturing,equals,Product,FALSE
 forest residue,23140: Other cereal grain products (including corn flakes),equals,Product,FALSE
 fuel supply for cng vehicles,"12020: Natural gas, liquefied or in the gaseous state",contains,Activity,FALSE
@@ -67,7 +67,7 @@ inverter,46220: Parts of electricity distribution or control apparatus,contains,
 "kerosene, synthetic",3334: Kerosenes,equals,Product,FALSE
 light duty truck,49114: Motor vehicles n.e.c. for the transport of goods,contains,Product,FALSE
 Light duty truck,49114: Motor vehicles n.e.c. for the transport of goods,contains,Product,FALSE
-lignocellulosic biomass,31230: Wood in chips or particles,equals,Product,FALSE
+lignocellulosic biomass,31230: Wood in chips or particles,equals,Product,TRUE
 medium duty truck,49114: Motor vehicles n.e.c. for the transport of goods,contains,Product,FALSE
 Medium duty truck,49114: Motor vehicles n.e.c. for the transport of goods,contains,Product,FALSE
 "methane, from electrochemical methanation","17200: Coal gas, water gas, producer gas and similar gases, other than petroleum gases and other gaseous hydrocarbons",equals,Product,FALSE
@@ -78,6 +78,7 @@ methanol,"34139: Other alcohols, phenols, phenol-alcohols, and their halogenated
 "NGCC power plant, 400MWe",53262: Power plants,equals,Product,FALSE
 "naphtha, synthetic",33330: Naphtha,equals,Product,FALSE
 nickel-based catalyst for methanation,"415: Semi-finished products of copper, nickel, aluminium, lead, zinc and tin or their alloys",equals,Product,FALSE
+"nitrogen, liquid",34210c: Nitrogen,equals,Product,TRUE
 open ground construction,87360: Installation services of electrical machinery and apparatus n.e.c.,contains,Product,FALSE
 passenger bus,49112: Public-transport type passenger motor vehicles,equals,Product,FALSE
 "Passenger bus, EURO-VI",49112: Public-transport type passenger motor vehicles,equals,Product,FALSE
@@ -93,11 +94,11 @@ photovoltaic laminate,87360: Installation services of electrical machinery and a
 "pipeline, for hydrogen transmission",53251: Local pipelines,equals,Product,FALSE
 plant construction,53269: Other constructions for manufacturing,contains,Activity,FALSE
 sabatier reaction methanation unit,53269: Other constructions for manufacturing,equals,Product,FALSE
-"syngas, from biomass gasification","12020: Natural gas, liquefied or in the gaseous state",equals,Product,FALSE
-"syngas, from biomass gasification, pre, pipeline 200km, storage 1000m","12020: Natural gas, liquefied or in the gaseous state",equals,Product,FALSE
-"syngas, from biomass gasification, pre, pipeline 400km, storage 3000m","12020: Natural gas, liquefied or in the gaseous state",equals,Product,FALSE
-"syngas, RWGS, Production","12020: Natural gas, liquefied or in the gaseous state",equals,Product,FALSE
-"syngas, RWGS, Production, for Fischer Tropsch process, hydrogen from electrolysis","12020: Natural gas, liquefied or in the gaseous state",equals,Product,FALSE
+"syngas, from biomass gasification","17200: Coal gas, water gas, producer gas and similar gases, other than petroleum gases and other gaseous hydrocarbons",equals,Product,TRUE
+"syngas, from biomass gasification, pre, pipeline 200km, storage 1000m","17200: Coal gas, water gas, producer gas and similar gases, other than petroleum gases and other gaseous hydrocarbons",equals,Product,TRUE
+"syngas, from biomass gasification, pre, pipeline 400km, storage 3000m","17200: Coal gas, water gas, producer gas and similar gases, other than petroleum gases and other gaseous hydrocarbons",equals,Product,TRUE
+"syngas, RWGS, Production","17200: Coal gas, water gas, producer gas and similar gases, other than petroleum gases and other gaseous hydrocarbons",equals,Product,TRUE
+"syngas, RWGS, Production, for Fischer Tropsch process, hydrogen from electrolysis","17200: Coal gas, water gas, producer gas and similar gases, other than petroleum gases and other gaseous hydrocarbons",equals,Product,TRUE
 synthetic gas factory,53269: Other constructions for manufacturing,equals,Product,FALSE
 tank construction,53269: Other constructions for manufacturing,contains,Activity,FALSE
 tap water,18000: Natural water,contains,Product,FALSE
