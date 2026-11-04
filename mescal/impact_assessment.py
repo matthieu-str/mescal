@@ -531,7 +531,6 @@ def validation_direct_carbon_emissions(
     """
 
     model = self.model
-    unit_conversion = self.unit_conversion
 
     if save_df is False and return_df is False:
         raise ValueError('You must set at least one of the parameters save_df or return_df to True')
@@ -547,47 +546,28 @@ def validation_direct_carbon_emissions(
 
     R_direct = R_direct[R_direct['Impact_category'] == lcia_method_carbon_emissions]
     R_direct = R_direct[R_direct['Type'] == 'Operation']
-    R_direct.rename(columns={'Value': 'LCA direct carbon emissions (LCA unit)'}, inplace=True)
+    R_direct.rename(columns={'Value': 'LCA direct carbon emissions'}, inplace=True)
     R_direct.drop(columns=['Impact_category', 'Type'], inplace=True)
 
-    R_direct['ESM direct carbon emissions (ESM unit)'] = R_direct.apply(
+    R_direct['ESM direct carbon emissions'] = R_direct.apply(
         lambda row: sum(model[(model.Name == row.Name) & (model.Flow.isin(carbon_flow_in_esm))]['Amount']),
         axis=1
     )
 
-    # Get the unit conversion factor of the output unit
-    R_direct = R_direct.merge(
-        unit_conversion[unit_conversion.Type == 'Operation'][['Name', 'Value', 'LCA', 'ESM']],
-        how='left',
-        on='Name',
-    )
-
-    R_direct.rename(
-        columns={'Value': 'Output conversion factor', 'LCA': 'LCA output unit', 'ESM': 'ESM output unit'},
-        inplace=True
-    )
-
-    R_direct['LCA direct carbon emissions (ESM unit)'] = (
-            R_direct['LCA direct carbon emissions (LCA unit)'] * R_direct['Output conversion factor'])
-
     R_direct['Direct carbon emissions difference'] = (
-            R_direct['ESM direct carbon emissions (ESM unit)'] - R_direct['LCA direct carbon emissions (ESM unit)'])
+            R_direct['ESM direct carbon emissions'] - R_direct['LCA direct carbon emissions'])
     R_direct['Direct carbon emissions difference (%)'] = R_direct.apply(
-        lambda row: (row['Direct carbon emissions difference'] / row['LCA direct carbon emissions (ESM unit)']) * 100
-        if row['LCA direct carbon emissions (ESM unit)'] != 0 else None,
+        lambda row: (row['Direct carbon emissions difference'] / row['LCA direct carbon emissions']) * 100
+        if row['LCA direct carbon emissions'] != 0 else None,
         axis=1
     )
 
     df_columns = [
         'Name',
-        'ESM direct carbon emissions (ESM unit)',
-        'LCA direct carbon emissions (ESM unit)',
+        'ESM direct carbon emissions',
+        'LCA direct carbon emissions',
         'Direct carbon emissions difference',
         'Direct carbon emissions difference (%)',
-        'LCA direct carbon emissions (LCA unit)',
-        'LCA output unit',
-        'ESM output unit',
-        'Output conversion factor',
     ]
 
     if 'Year' in R_direct.columns:
