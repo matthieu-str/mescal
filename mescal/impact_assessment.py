@@ -336,9 +336,9 @@ def compute_impact_scores(
     # it is only used as an identifier for the user)
     technology_compositions['New_code'] = technology_compositions.apply(lambda row: random_code(), axis=1)
 
-    for i in range(len(technology_compositions)):
-        for j in range(len(technology_compositions.Components.iloc[i])):
-            technology_compositions.loc[i, 'Component_' + str(j + 1)] = technology_compositions.Components.iloc[i][j]
+    for row in technology_compositions.itertuples():  # index is kept to write in the corresponding row
+        for j, component in enumerate(row.Components):
+            technology_compositions.loc[row.Index, 'Component_' + str(j + 1)] = component
 
     # Find the new codes of the subcomponents
     for i in range(1, N_subcomp_max + 1):
@@ -352,16 +352,16 @@ def compute_impact_scores(
         ).drop(columns=f'Name_component_{i}')
 
     df_comp_list = []  # list to store the contribution analysis results for each technology composition
-    for i in range(len(technology_compositions)):
-        tech_name = technology_compositions.iloc[i].Name
-        tech_type = technology_compositions.iloc[i].Type
-        subcomp_list = technology_compositions.iloc[i].Components
-        new_code_composition = technology_compositions.iloc[i].New_code
+    for row in technology_compositions.itertuples(index=False):
+        tech_name = row.Name
+        tech_type = row.Type
+        subcomp_list = row.Components
+        new_code_composition = row.New_code
         R_tech_constr[new_code_composition] = len(impact_categories) * [0]  # initialize the new column
 
         for j in range(1, len(subcomp_list) + 1):
             R_tech_constr[new_code_composition] += R_tech_constr[
-                technology_compositions.iloc[i][f'New_code_component_{j}']
+                getattr(row, f'New_code_component_{j}')
             ]  # sum up the impacts of the subcomponents
 
         R_tech_constr[new_code_composition] *= float(
@@ -370,7 +370,7 @@ def compute_impact_scores(
                 & (unit_conversion.Type == tech_type)].Value.iloc[0]
         )  # multiply the composition column with its unit conversion factor
 
-        R_tech_constr.drop(columns=[technology_compositions.iloc[i][f'New_code_component_{j}']
+        R_tech_constr.drop(columns=[getattr(row, f'New_code_component_{j}')
                                     for j in range(1, len(subcomp_list) + 1)], inplace=True)
         # remove subcomponents from dataframe
 
@@ -400,7 +400,7 @@ def compute_impact_scores(
 
             for j in range(1, len(subcomp_list) + 1):
                 df_req_technosphere_constr[new_code_composition] += df_req_technosphere_constr[
-                    technology_compositions.iloc[i][f'New_code_component_{j}']
+                    getattr(row, f'New_code_component_{j}')
                 ]  # sum up the requirements of the subcomponents
 
             df_req_technosphere_constr[new_code_composition] *= float(
@@ -409,7 +409,7 @@ def compute_impact_scores(
                     & (unit_conversion.Type == tech_type)].Value.iloc[0]
             )  # multiply the composition column with its unit conversion factor
 
-            df_req_technosphere_constr.drop(columns=[technology_compositions.iloc[i][f'New_code_component_{j}']
+            df_req_technosphere_constr.drop(columns=[getattr(row, f'New_code_component_{j}')
                                         for j in range(1, len(subcomp_list) + 1)], inplace=True)
 
     if contribution_analysis is not None and len(df_comp_list) > 0:
@@ -724,9 +724,7 @@ def _aggregate_direct_emissions_activities(
                     "unit": old_act['unit'],
                 }
             ]
-            for i in range(len(activities)):
-                exc_code = activities.iloc[i]['Activity code']
-                exc_amount = activities.iloc[i]['Amount']
+            for exc_code, exc_amount in activities[['Activity code', 'Amount']].itertuples(index=False, name=None):
                 exc_act = [i for i in direct_emissions_db if i['code'] == exc_code][0]
 
                 if exc_code == old_act['code'] and exc_amount == 1.0:  # main activity: we add biosphere flows (if any)

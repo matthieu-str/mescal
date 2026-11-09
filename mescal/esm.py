@@ -932,13 +932,13 @@ class ESM:
         db_as_list = self.main_database.db_as_list
         db_as_dict_code = self.main_database.db_as_dict_code
 
-        for i in range(len(mapping_type)):
+        for row in mapping_type.itertuples(index=False):
             ds = self._create_new_activity(
-                name=mapping_type['Name'].iloc[i],
+                name=row.Name,
                 act_type=act_type,
-                current_code=mapping_type['Current_code'].iloc[i],
-                new_code=mapping_type['New_code'].iloc[i],
-                database_name=mapping_type['Database'].iloc[i],
+                current_code=row.Current_code,
+                new_code=row.New_code,
+                database_name=row.Database,
                 db_as_dict_code=db_as_dict_code,
             )
             db_as_list.append(ds)

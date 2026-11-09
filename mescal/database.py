@@ -648,11 +648,11 @@ class Database:
         """
         db_dict_name = self.db_as_dict_name
         missing_flows = []
-        for i in range(len(mapping)):
-            act_name = mapping.Activity.iloc[i]
-            act_prod = mapping.Product.iloc[i]
-            act_loc = mapping.Location.iloc[i]
-            act_database = mapping.Database.iloc[i]
+        for row in mapping.itertuples(index=False):
+            act_name = row.Activity
+            act_prod = row.Product
+            act_loc = row.Location
+            act_database = row.Database
             if (act_name, act_prod, act_loc, act_database) in db_dict_name:
                 pass
             else:
@@ -722,14 +722,14 @@ class Database:
         tech_premise = pd.DataFrame(columns=['Name', 'Type', 'Product', 'Activity', 'Location', 'Database'])
         complement_premise = []
 
-        for i in range(len(df_mapping)):
+        for row in df_mapping.itertuples(index=False):
 
-            esm_tech_name = df_mapping.Name.iloc[i]
-            act_type = df_mapping.Type.iloc[i]
-            product = df_mapping.Product.iloc[i]
-            activity = df_mapping.Activity.iloc[i]
-            region = df_mapping.Location.iloc[i]
-            database = df_mapping.Database.iloc[i]
+            esm_tech_name = row.Name
+            act_type = row.Type
+            product = row.Product
+            activity = row.Activity
+            region = row.Location
+            database = row.Database
 
             new_activity, new_product, new_location = premise_changing_names(
                 activity_name=activity,
@@ -753,15 +753,19 @@ class Database:
                 except KeyError:
                     self.logger.info(f"No inventory in the premise database for {esm_tech_name, act_type}")
                     complement_premise.append((esm_tech_name, act_type))
-                    tech_premise.loc[i] = [esm_tech_name, act_type, product, activity, new_location, database]
+                    tech_premise.loc[len(tech_premise)] = [
+                        esm_tech_name, act_type, product, activity, new_location, database,
+                    ]
 
                 else:
-                    tech_premise.loc[i] = [esm_tech_name, act_type, new_product, new_activity, new_location,
-                                           name_premise_db]
+                    tech_premise.loc[len(tech_premise)] = [
+                        esm_tech_name, act_type, new_product, new_activity, new_location, name_premise_db,
+                    ]
 
             else:
-                tech_premise.loc[i] = [esm_tech_name, act_type, new_product, new_activity, new_location,
-                                       name_premise_db]
+                tech_premise.loc[len(tech_premise)] = [
+                    esm_tech_name, act_type, new_product, new_activity, new_location, name_premise_db,
+                ]
 
         for i in range(len(complement_premise)):
             esm_tech_name = complement_premise[i][0]
@@ -810,18 +814,22 @@ class Database:
         tech_premise.reset_index(inplace=True, drop=True)
         tech_premise_adjusted = pd.DataFrame(columns=tech_premise.columns)
 
-        for i in range(len(tech_premise)):
-            esm_tech_name = tech_premise.Name.iloc[i]
-            act_type = tech_premise.Type.iloc[i]
-            product = tech_premise.Product.iloc[i]
-            activity = tech_premise.Activity.iloc[i]
-            region = tech_premise.Location.iloc[i]
-            database = tech_premise.Database.iloc[i]
+        for row in tech_premise.itertuples(index=False):
+            esm_tech_name = row.Name
+            act_type = row.Type
+            product = row.Product
+            activity = row.Activity
+            region = row.Location
+            database = row.Database
 
             if database == name_premise_db:
-                tech_premise_adjusted.loc[i] = [esm_tech_name, act_type, product, activity, region, database]
+                tech_premise_adjusted.loc[len(tech_premise_adjusted)] = [
+                    esm_tech_name, act_type, product, activity, region, database,
+                ]
             else:
-                tech_premise_adjusted.loc[i] = [esm_tech_name, act_type, product, activity, region, complement_db_name]
+                tech_premise_adjusted.loc[len(tech_premise_adjusted)] = [
+                    esm_tech_name, act_type, product, activity, region, complement_db_name,
+                ]
 
         return tech_premise_adjusted
 

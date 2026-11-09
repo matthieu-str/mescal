@@ -233,9 +233,9 @@ def change_location_mapping_file(self) -> None:
     missing_datasets = []
 
     if 'Location' not in mapping.columns:
-        for i in range(len(mapping)):
-            activity_name = mapping.Activity.iloc[i]
-            product_name = mapping.Product.iloc[i]
+        for row in mapping.itertuples():  # index is kept to write in the corresponding row
+            activity_name = row.Activity
+            product_name = row.Product
             try:
                 location = [a for a in wurst.get_many(main_database_as_list, *[
                     wurst.equals('name', activity_name),
@@ -244,7 +244,7 @@ def change_location_mapping_file(self) -> None:
             except IndexError:
                 missing_datasets.append((product_name, activity_name))
                 location = None
-            mapping.at[i, 'Location'] = location
+            mapping.at[row.Index, 'Location'] = location
 
     if len(missing_datasets) > 0:
         raise ValueError(f"The following datasets could not be found in the database: {missing_datasets}")

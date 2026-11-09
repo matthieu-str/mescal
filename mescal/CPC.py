@@ -52,19 +52,21 @@ def add_CPC_categories(
 
     self._add_CPC_categories_based_on_existing_activities(mapping_existing_products_to_CPC)
 
-    for i in range(len(mapping_new_products_to_CPC)):
-        if mapping_new_products_to_CPC.Where.iloc[i] == 'Product':
+    for row_values in mapping_new_products_to_CPC.itertuples(index=False, name=None):
+        # some column names contain spaces, thus values are accessed through a dictionary
+        row = dict(zip(mapping_new_products_to_CPC.columns, row_values))
+        if row['Where'] == 'Product':
             key = 'reference product'
-        elif mapping_new_products_to_CPC.Where.iloc[i] == 'Activity':
+        elif row['Where'] == 'Activity':
             key = 'name'
         else:
             raise ValueError('In the mapping_new_products_to_CPC.csv file, the "Where" column must be either "Product" '
                              'or "Activity"')
-        name = mapping_new_products_to_CPC.Name.iloc[i]
-        CPC_category = mapping_new_products_to_CPC.CPC.iloc[i]
-        search_type = mapping_new_products_to_CPC["Search type"].iloc[i]
+        name = row['Name']
+        CPC_category = row['CPC']
+        search_type = row['Search type']
         if 'Overwrite existing' in mapping_new_products_to_CPC.columns and overwrite_existing_CPC:
-            overwrite_existing_CPC_temp = mapping_new_products_to_CPC['Overwrite existing'].iloc[i]
+            overwrite_existing_CPC_temp = row['Overwrite existing']
         else:
             overwrite_existing_CPC_temp = overwrite_existing_CPC
         self._add_product_or_activity_CPC_category(name, CPC_category, search_type, key, overwrite_existing_CPC_temp)

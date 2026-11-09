@@ -350,8 +350,8 @@ def _double_counting_removal(
         for x in v:
             mapping_CPC_to_esm_flows_dict.setdefault(x, []).append(k)
 
-    for i in tqdm(range(len(df))):
-        tech = df['Name'].iloc[i]  # name of ESM technology
+    for row in tqdm(df.itertuples(index=False), total=len(df)):
+        tech = row.Name  # name of ESM technology
         # print(tech)
 
         # Initialization of the list of construction/decommission activities and corresponding CPC categories
@@ -432,15 +432,15 @@ def _double_counting_removal(
                     mapping_CPC_to_esm_flows_dict[CPC_decom] = ['OWN_DECOMMISSION']
 
         # Main activity
-        database_main = df['Database'].iloc[i]  # LCA database of the technology
-        current_code_main = df['Current_code'].iloc[i]  # code in ecoinvent
+        database_main = row.Database  # LCA database of the technology
+        current_code_main = row.Current_code  # code in ecoinvent
 
         # identification of the activity in ecoinvent database
         act = db_dict_code[(database_main, current_code_main)]
 
         if db_type == 'esm':
             # Copy the activity and change the database (no new activity in original ecoinvent database)
-            new_code = df['New_code'].iloc[i]  # new code defined previously
+            new_code = row.New_code  # new code defined previously
             new_act = copy.deepcopy(act)
             new_act['code'] = new_code
             new_act['database'] = esm_db_name
@@ -522,7 +522,7 @@ def _double_counting_removal(
 
             if perform_d_c[id_d_c][4] == 'all':
                 # list of inputs in the ESM (i.e., negative flows in layers_in_out)
-                ES_inputs = list(df.iloc[:, N:].iloc[i][df.iloc[:, N:].iloc[i] < 0].index)
+                ES_inputs = [flow for flow, amount in zip(df.columns[N:], row[N:]) if amount < 0]
             else:
                 ES_inputs = perform_d_c[id_d_c][4]
 

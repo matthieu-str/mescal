@@ -78,28 +78,32 @@ def handle_multi_processes_ecoinvent(df: pd.DataFrame) -> pd.DataFrame:
     :return: updated dataframe with multi-processes activities separated
     """
     updated_df = pd.DataFrame(data=[], columns=df.columns)
-    for i in range(len(df)):
-        if ';' in str(df['Reference Product'].iloc[i]):
+    for row_values in df.itertuples(index=False, name=None):
+        # column names contain spaces, thus values are accessed through a dictionary
+        row = dict(zip(df.columns, row_values))
+        if ';' in str(row['Reference Product']):
 
-            products = df['Reference Product'].iloc[i].split(';\n')
-            units = df['Unit'].iloc[i].split(';\n')
+            products = row['Reference Product'].split(';\n')
+            units = row['Unit'].split(';\n')
 
-            if str(df['Reference Product - new'].iloc[i]) == 'nan':
+            if str(row['Reference Product - new']) == 'nan':
                 new_products = ['nan'] * len(products)
             else:
-                new_products = df['Reference Product - new'].iloc[i].split(';\n')
-            if str(df['Unit - new'].iloc[i]) == 'nan':
+                new_products = row['Reference Product - new'].split(';\n')
+            if str(row['Unit - new']) == 'nan':
                 new_units = ['nan'] * len(units)
             else:
-                new_units = df['Unit - new'].iloc[i].split(';\n')
+                new_units = row['Unit - new'].split(';\n')
 
             for product, unit, new_product, new_unit in zip(products, units, new_products, new_units):
-                updated_df.loc[len(updated_df)] = [df['Activity Name'].iloc[i], df['Geography'].iloc[i], product, unit,
-                                                   df['Activity Name - new'].iloc[i], df['Geography - new'].iloc[i],
-                                                   new_product, new_unit, df['Deleted'].iloc[i],
-                                                   df['Version from'].iloc[i], df['Version to'].iloc[i]]
+                updated_df.loc[len(updated_df)] = [
+                    row['Activity Name'], row['Geography'], product, unit,
+                    row['Activity Name - new'], row['Geography - new'],
+                    new_product, new_unit, row['Deleted'],
+                    row['Version from'], row['Version to'],
+                ]
         else:
-            updated_df.loc[len(updated_df)] = df.iloc[i].tolist()
+            updated_df.loc[len(updated_df)] = list(row_values)
 
     return updated_df
 
@@ -121,9 +125,9 @@ def load_concatenated_ecoinvent_change_report(
 
     df_glo = df[(df['Geography'] == 'GLO') & (df['Geography - new'] == 'GLO')]  # global activities
 
-    for i in range(len(df_glo)):
+    for row in df_glo.itertuples(index=False, name=None):
         # Add new row for the same activity but with RoW as location to fill missing locations in the change report
-        new_row = df_glo.iloc[i].tolist()
+        new_row = list(row)
         new_row[1], new_row[5] = 'RoW', 'RoW'
         df.loc[len(df)] = new_row
 
@@ -159,14 +163,14 @@ def update_mapping_file(
     if unit_to_change is None:
         unit_to_change = []
 
-    for i in range(len(mapping)):
+    for row in mapping.itertuples(index=False):
 
-        activity_name = mapping['Activity'].iloc[i]
-        activity_prod = mapping['Product'].iloc[i]
-        activity_geo = mapping['Location'].iloc[i]
-        tech_name = mapping['Name'].iloc[i]
-        tech_type = mapping['Type'].iloc[i]
-        database = mapping['Database'].iloc[i]
+        activity_name = row.Activity
+        activity_prod = row.Product
+        activity_geo = row.Location
+        tech_name = row.Name
+        tech_type = row.Type
+        database = row.Database
 
         # REMIND and IMAGE regions are not in the change report
         if activity_geo in ['CAZ', 'CHA', 'NEU', 'EUR', 'IND', 'JPN', 'LAM', 'MEA', 'OAS', 'REF', 'SSA', 'USA',
@@ -198,15 +202,17 @@ def update_mapping_file(
                     f"ecoinvent version and should be replaced.")
 
             else:
-                updated_mapping.loc[i] = [tech_name, tech_type, activity_prod_new, activity_name_new, activity_geo_new,
-                                          database]
+                updated_mapping.loc[len(updated_mapping)] = [
+                    tech_name, tech_type, activity_prod_new,
+                    activity_name_new, activity_geo_new, database,
+                ]
 
                 print(tech_name, tech_type)
                 print(f"Old: {activity_prod} - {activity_name} - {activity_geo}")
                 print(f"New: {activity_prod_new} - {activity_name_new} - {activity_geo_new}")
 
         else:
-            updated_mapping.loc[i] = mapping.iloc[i]
+            updated_mapping.loc[len(updated_mapping)] = list(row)
 
     return updated_mapping, counter, unit_to_change
 

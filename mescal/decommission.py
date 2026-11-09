@@ -84,17 +84,20 @@ def _add_decommission_datasets(
                 'database': esm_db_name,
             }]
 
-            for i in range(len(df_removed_decom_tech)):
+            for amount, code, name, product, unit, location, database in df_removed_decom_tech[[
+                'Amount (scaled to the FU)', 'Removed flow code', 'Removed flow activity', 'Removed flow product',
+                'Unit', 'Removed flow location', 'Removed flow database'
+            ]].itertuples(index=False, name=None):
                 exchanges.append(
                     {
-                        'amount': df_removed_decom_tech['Amount (scaled to the FU)'].iloc[i],
-                        'code': df_removed_decom_tech['Removed flow code'].iloc[i],
+                        'amount': amount,
+                        'code': code,
                         'type': 'technosphere',
-                        'name': df_removed_decom_tech['Removed flow activity'].iloc[i],
-                        'product': df_removed_decom_tech['Removed flow product'].iloc[i],
-                        'unit': df_removed_decom_tech['Unit'].iloc[i],
-                        'location': df_removed_decom_tech['Removed flow location'].iloc[i],
-                        'database': df_removed_decom_tech['Removed flow database'].iloc[i],
+                        'name': name,
+                        'product': product,
+                        'unit': unit,
+                        'location': location,
+                        'database': database,
                     }
                 )
 

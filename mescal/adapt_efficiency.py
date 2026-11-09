@@ -185,24 +185,24 @@ def _correct_esm_and_lca_efficiency_differences(
 
     if db_type != 'validation':
 
-        for i in range(len(efficiency)):
+        for row in efficiency.itertuples(index=False):
 
             for year in [self.year] if (not self.operation_metrics_for_all_time_steps or db_type == 'esm') \
                     else [y for y in self.list_of_years if y <= self.year]:
 
                 act_to_adapt_list = []  # there might be several activities to adapt for one technology in case of market
                 techno_flows_to_correct_dict = {}
-                tech = efficiency['Name'].iloc[i]
-                flows_list = efficiency['Flow'].iloc[i]
+                tech = row.Name
+                flows_list = row.Flow
 
                 CPC_list = []  # list of CPC categories corresponding to the fuel flow(s) of the technology
                 for flow in flows_list:
                     CPC_list += mapping_esm_flows_to_CPC_cat[mapping_esm_flows_to_CPC_cat['Flow'] == flow]['CPC'].values[0]
 
                 df_removed_flows = removed_flows[removed_flows.Name == tech]  # flows removed during double counting removal
-                for j in range(len(df_removed_flows)):
-                    (main_act_database, main_act_code, removed_act_database, removed_act_code) = df_removed_flows[
-                        ['Database', 'Code', 'Removed flow database', 'Removed flow code']].iloc[j]
+                for (main_act_database, main_act_code, removed_act_database, removed_act_code) in df_removed_flows[
+                        ['Database', 'Code', 'Removed flow database', 'Removed flow code']
+                ].itertuples(index=False, name=None):
                     act_exc = db_dict_code[removed_act_database, removed_act_code]
                     if 'classifications' in act_exc:
                         if 'CPC' in dict(act_exc['classifications']):
@@ -280,9 +280,10 @@ def _correct_esm_and_lca_efficiency_differences(
                         )
                 for act in act_to_adapt_list:
                     if self.operation_metrics_for_all_time_steps and db_type == 'esm results':
-                        efficiency_ratio = efficiency[f'efficiency_ratio ({year})'].iloc[i]
+                        # column name is not a valid identifier, thus the value is accessed by position
+                        efficiency_ratio = row[efficiency.columns.get_loc(f'efficiency_ratio ({year})')]
                     else:
-                        efficiency_ratio = efficiency['efficiency_ratio'].iloc[i]
+                        efficiency_ratio = row.efficiency_ratio
                     techno_flows_to_correct = techno_flows_to_correct_dict[(act['database'], act['code'])]
                     act = self._adapt_flows_to_efficiency_difference(act, efficiency_ratio, techno_flows_to_correct)
 
@@ -389,9 +390,8 @@ def _get_lca_input_flow_unit_or_product(
         CPC_list += mapping_esm_flows_to_CPC_cat[mapping_esm_flows_to_CPC_cat['Flow'] == flow]['CPC'].values[0]
     df_removed_flows = removed_flows[removed_flows.Name == row.Name]
 
-    for i in range(len(df_removed_flows)):
-        removed_act_database, removed_act_code = df_removed_flows[
-            ['Removed flow database', 'Removed flow code']].iloc[i]
+    for removed_act_database, removed_act_code in df_removed_flows[
+            ['Removed flow database', 'Removed flow code']].itertuples(index=False, name=None):
         act_exc = db_dict_code[removed_act_database, removed_act_code]
         if 'classifications' in act_exc:
             if 'CPC' in dict(act_exc['classifications']):

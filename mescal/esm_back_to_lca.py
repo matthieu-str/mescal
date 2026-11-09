@@ -85,11 +85,11 @@ def create_new_database_with_esm_results(
 
     # Create the new LCI datasets from the ESM results
     self.logger.info("Creating new LCI datasets from the ESM results...")
-    for i in tqdm(range(len(flows))):
+    for row in tqdm(flows.itertuples(index=False), total=len(flows)):
 
-        original_activity_prod = flows.Product.iloc[i]
-        original_activity_name = flows.Activity.iloc[i]
-        original_activity_database = flows.Database.iloc[i]
+        original_activity_prod = row.Product
+        original_activity_name = row.Activity
+        original_activity_database = row.Database
 
         if (
                 original_activity_name,
@@ -293,11 +293,11 @@ def connect_esm_results_to_database(
         ]
 
     # Plugging the new activity in the database
-    for i in tqdm(range(len(flows))):
+    for row in tqdm(flows.itertuples(index=False), total=len(flows)):
 
-        original_activity_name = flows.Activity.iloc[i]
-        activity_prod = flows.Product.iloc[i]
-        activity_database = flows.Database.iloc[i]
+        original_activity_name = row.Activity
+        activity_prod = row.Product
+        activity_database = row.Database
 
         if (
                 original_activity_name,
@@ -495,10 +495,10 @@ def _create_or_modify_activity_from_esm_results(
         on='Name'
     )
 
-    act_to_flows_dict = {(flows['Product'].iloc[i], flows['Activity'].iloc[i]): list(
-        flows[(flows['Product'] == flows['Product'].iloc[i])
-              & (flows['Activity'] == flows['Activity'].iloc[i])]['Name']
-    ) for i in range(len(flows))}
+    act_to_flows_dict = {(row.Product, row.Activity): list(
+        flows[(flows['Product'] == row.Product)
+              & (flows['Activity'] == row.Activity)]['Name']
+    ) for row in flows.itertuples(index=False)}
 
     flows_list = act_to_flows_dict[(original_activity_prod, original_activity_name)]
     end_use_tech_list = list(model[model.Output.isin(flows_list)].Name.unique())
@@ -513,9 +513,9 @@ def _create_or_modify_activity_from_esm_results(
     except ValueError:
         pass
 
-    for i in range(len(tech_to_remove_layers)):
-        if set(flows_list) == set(tech_to_remove_layers.Layers.iloc[i]):
-            for tech in tech_to_remove_layers.Technologies.iloc[i]:
+    for row in tech_to_remove_layers.itertuples(index=False):
+        if set(flows_list) == set(row.Layers):
+            for tech in row.Technologies:
                 end_use_tech_list.remove(tech)
         else:
             pass
@@ -981,11 +981,8 @@ def _replace_mobility_end_use_type(row: pd.Series, new_end_use_types: pd.DataFra
     :return: updated end use type
     """
 
-    for i in range(len(new_end_use_types)):
-        name = new_end_use_types.Name.iloc[i]
-        old_eut = new_end_use_types.Old.iloc[i]
-        new_eut = new_end_use_types.New.iloc[i]
-        search_type = new_end_use_types['Search type'].iloc[i]
+    for name, old_eut, new_eut, search_type in new_end_use_types[
+            ['Name', 'Old', 'New', 'Search type']].itertuples(index=False, name=None):
         if search_type == 'startswith':
             if (row['Name'].startswith(name)) & (old_eut in row['Flow']) & (row['Amount'] == 1.0):
                 return new_eut

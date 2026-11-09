@@ -210,8 +210,8 @@ def normalize_lca_metrics(
         if assessment_type == 'direct emissions':
             max_per_cat_dict = {}
             max_per_cat = R_scaled[['Abbrev', 'Unit', 'max_unit']].drop_duplicates().reset_index()
-            for i in range(len(max_per_cat)):
-                max_per_cat_dict[max_per_cat['Unit'][i]] = max_per_cat['max_unit'][i]
+            for row in max_per_cat.itertuples(index=False):
+                max_per_cat_dict[row.Unit] = row.max_unit
             R_scaled = R_direct.copy()
             R_scaled['max_unit'] = R_scaled.apply(lambda x: max_per_cat_dict[x['Unit']], axis=1)
 
@@ -224,8 +224,8 @@ def normalize_lca_metrics(
                 R_constr_imp = contrib_processes[(contrib_processes['Type'].isin(['Construction', 'Decommission'])) & (contrib_processes['Unit'] == unit)]
                 R_constr_imp['Value'] *= refactor[unit]
                 R_scaled = pd.concat([R_scaled, R_constr_imp])  # R matrix but with refactor applied to construction metrics
-            for i in range(len(max_per_cat)):
-                max_per_cat_dict[max_per_cat['Unit'][i]] = max_per_cat['max_unit'][i]
+            for row in max_per_cat.itertuples(index=False):
+                max_per_cat_dict[row.Unit] = row.max_unit
             R_scaled['max_unit'] = R_scaled.apply(lambda x: max_per_cat_dict[x['Unit']], axis=1)
 
         R_scaled['Value_norm'] = R_scaled['Value'] / R_scaled['max_unit']
@@ -269,22 +269,22 @@ def normalize_lca_metrics(
                 f.write(f"set INDICATORS := {' '.join(R_scaled['Abbrev'].unique())};\n\n")
 
             # Declare the LCA indicators values
-            for i in range(len(R_scaled)):
+            for row in R_scaled.itertuples(index=False):
                 # Declaring the LCIA parameters
                 if self.pathway:
                     if self.operation_metrics_for_all_time_steps:
                         f.write(
-                            f"let {metric_type}_{_short_name_ds_type(R_scaled.Type.iloc[i])}['YEAR_{R_scaled.Year.iloc[i]}',"
-                            f"'YEAR_{R_scaled.Year_inst.iloc[i]}','{R_scaled.Abbrev.iloc[i]}','{R_scaled.Name.iloc[i]}'] "
-                            f":= {R_scaled.Value_norm.iloc[i]}; #{norm_unit} {R_scaled.Unit.iloc[i]}\n")
+                            f"let {metric_type}_{_short_name_ds_type(row.Type)}['YEAR_{row.Year}',"
+                            f"'YEAR_{row.Year_inst}','{row.Abbrev}','{row.Name}'] "
+                            f":= {row.Value_norm}; #{norm_unit} {row.Unit}\n")
                     else:
                         f.write(
-                            f"let {metric_type}_{_short_name_ds_type(R_scaled.Type.iloc[i])}['YEAR_{R_scaled.Year.iloc[i]}',"
-                            f"'{R_scaled.Abbrev.iloc[i]}','{R_scaled.Name.iloc[i]}'] := {R_scaled.Value_norm.iloc[i]}; "
-                            f"#{norm_unit} {R_scaled.Unit.iloc[i]}\n")
+                            f"let {metric_type}_{_short_name_ds_type(row.Type)}['YEAR_{row.Year}',"
+                            f"'{row.Abbrev}','{row.Name}'] := {row.Value_norm}; "
+                            f"#{norm_unit} {row.Unit}\n")
                 else:
-                    f.write(f"let {metric_type}_{_short_name_ds_type(R_scaled.Type.iloc[i])}['{R_scaled.Abbrev.iloc[i]}','{R_scaled.Name.iloc[i]}'] "
-                            f":= {R_scaled.Value_norm.iloc[i]}; #{norm_unit} {R_scaled.Unit.iloc[i]}\n")
+                    f.write(f"let {metric_type}_{_short_name_ds_type(row.Type)}['{row.Abbrev}','{row.Name}'] "
+                            f":= {row.Value_norm}; #{norm_unit} {row.Unit}\n")
 
         if not skip_normalization:
             # To come back to the original values, we save the maximum value of each unit
