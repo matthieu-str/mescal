@@ -32,7 +32,7 @@ dependencies = [
     # dependencies as strings with quotes, e.g. "foo"
     # You can add version requirements like "foo>2.0"
     "wurst==0.4",
-    "pandas",
+    "pandas<3",
     "brightway2",
     "plotly",
     "matplotlib",
