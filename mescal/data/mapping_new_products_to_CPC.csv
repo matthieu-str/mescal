@@ -46,7 +46,7 @@ EV charger,"464: Accumulators, primary cells and primary batteries, and parts th
 "facility, construction",53269: Other constructions for manufacturing,contains,Activity,FALSE
 farming and supply of,23140: Other cereal grain products (including corn flakes),contains,Activity,TRUE
 fixed bed reactor,53269: Other constructions for manufacturing,equals,Product,FALSE
-forest residue,23140: Other cereal grain products (including corn flakes),equals,Product,FALSE
+forest residue,23140: Other cereal grain products (including corn flakes),equals,Product,TRUE
 fuel supply for cng vehicles,"12020: Natural gas, liquefied or in the gaseous state",contains,Activity,FALSE
 fuel supply for methane vehicles,"12020: Natural gas, liquefied or in the gaseous state",contains,Activity,FALSE
 fuel supply for diesel vehicles,33370: Fuel oils n.e.c.,contains,Activity,FALSE
