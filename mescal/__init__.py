@@ -7,6 +7,7 @@ __all__ = (
     # esm.py
     "ESM",
     "PathwayESM",
+    "MultiRegionalESM",
 
     # database.py
     "Database",
@@ -39,7 +40,7 @@ __all__ = (
 __version__ = "1.2.5"
 
 from .database import Database, Dataset
-from .esm import ESM, PathwayESM
+from .esm import ESM, PathwayESM, MultiRegionalESM
 from .plot import Plot
 from .utils import *
 from .change_ecoinvent import *

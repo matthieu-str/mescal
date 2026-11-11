@@ -106,6 +106,7 @@ def compute_impact_scores(
     unit_conversion = self.unit_conversion
     lifetime = self.lifetime
     technology_compositions = self.technology_compositions
+    multi_regional = self.multi_regional
 
     if assessment_type == 'esm':
         calculation_setup_name = 'impact_scores'
@@ -201,6 +202,7 @@ def compute_impact_scores(
         data=unit_conversion_code['Value'].values,
         index=unit_conversion_code['New_code'],
     )
+    unit_conversion = unit_conversion.drop(columns=['New_code']).drop_duplicates()
 
     R = R * unit_conversion_code[R.columns]  # multiply each column by its unit conversion factor
 
@@ -248,7 +250,7 @@ def compute_impact_scores(
         R_long = R_long.merge(
             right=mapping[mapping.Type == 'Operation'][['Name', 'New_code', 'Type']],
             on='New_code',
-            how='left'
+            how='left',
         )
         R_long = expand_impact_category_levels(R_long)
         R_long['Impact_category_unit'] = R_long['Impact_category'].apply(lambda row: bd.Method(row).metadata['unit'])
@@ -307,7 +309,7 @@ def compute_impact_scores(
                 right=lifetime[['Name', 'LCA']],
                 left_on='act_name',
                 right_on='Name',
-                how='left'
+                how='left',
             )
 
             # divide the construction score and amount columns by the technologies lifetime in LCI datasets
@@ -344,9 +346,9 @@ def compute_impact_scores(
     for i in range(1, N_subcomp_max + 1):
         technology_compositions = pd.merge(
             left=technology_compositions,
-            right=mapping_infra[['Name', 'Type', 'New_code']],
-            left_on=[f'Component_{i}', 'Type'],
-            right_on=['Name', 'Type'],
+            right=mapping_infra[['Name', 'Type', 'New_code'] + (['Region'] if multi_regional else [])],
+            left_on=[f'Component_{i}', 'Type'] + (['Region'] if multi_regional else []),
+            right_on=['Name', 'Type'] + (['Region'] if multi_regional else []),
             suffixes=('', f'_component_{i}'),
             how='left'
         ).drop(columns=f'Name_component_{i}')
@@ -357,7 +359,7 @@ def compute_impact_scores(
         tech_type = row.Type
         subcomp_list = row.Components
         new_code_composition = row.New_code
-        R_tech_constr[new_code_composition] = len(impact_categories) * [0]  # initialize the new column
+        R_tech_constr[new_code_composition] = 0  # initialize the new column
 
         for j in range(1, len(subcomp_list) + 1):
             R_tech_constr[new_code_composition] += R_tech_constr[
@@ -396,7 +398,7 @@ def compute_impact_scores(
             )
 
         if req_technosphere:
-            df_req_technosphere_constr[new_code_composition] = len(df_req_technosphere_constr) * [0]  # initialize the new column
+            df_req_technosphere_constr[new_code_composition] = 0  # initialize the new column
 
             for j in range(1, len(subcomp_list) + 1):
                 df_req_technosphere_constr[new_code_composition] += df_req_technosphere_constr[
@@ -490,9 +492,8 @@ def compute_impact_scores(
         df_req_technosphere.rename(columns={
             'level_0': 'Technosphere flow database',
             'level_1': 'Technosphere flow code',
-            'value': 'Amount'
+            'value': 'Amount',
         }, inplace=True)
-        df_req_technosphere.drop(columns=['New_code'], inplace=True)
 
     if contribution_analysis is not None:
         df_contrib_analysis_results = pd.concat(
@@ -817,7 +818,7 @@ class MultiLCA(object):
             self,
             cs_name: str,
             contribution_analysis: str,
-            limit: int or float,
+            limit: int | float,
             limit_type: str,
             req_technosphere: bool,
             log_config=None,

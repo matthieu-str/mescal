@@ -23,18 +23,18 @@ def _regionalize_activity_foreground(
     db_dict_code = main_database.db_as_dict_code
     db_dict_name = main_database.db_as_dict_name
 
-    if act['location'] in accepted_locations:
+    if (
+            (act['location'] in accepted_locations)
+            | (act['name'].split(',')[0] in self.import_export_list)  # imports/exports are special cases for which we do not regionalize
+    ):
         new_act = copy.deepcopy(act)
-
-    # Imports and exports are special cases for which we do not regionalize
-    elif act['name'].split(',')[0] in self.import_export_list:
-        new_act = copy.deepcopy(act)
+        new_act['comment'] = f'This LCI dataset is a copy from {act["location"]}. ' + new_act.get('comment', '')
 
     else:
         new_act = copy.deepcopy(act)
         new_act_name = new_act['name']
         new_act_product = new_act['reference product']
-        new_act['comment'] = f'This LCI dataset has been adapted to {esm_location}. ' + new_act.get('comment', '')
+        new_act['comment'] = f'This LCI dataset has been copied from {new_act["location"]} and adapted to {esm_location}. ' + new_act.get('comment', '')
         new_act['location'] = esm_location
         prod_flow = Dataset(new_act).get_production_flow()
         prod_flow['location'] = esm_location

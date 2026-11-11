@@ -36,7 +36,7 @@ class ESM:
             technology_compositions: pd.DataFrame = None,
             results_path_file: str = 'results/',
             tech_specifics: pd.DataFrame = None,
-            regionalize_foregrounds: str or list[str] = None,
+            regionalize_foregrounds: str | list[str] = None,
             accepted_locations: list[str] = None,
             esm_location: str = 'GLO',
             locations_ranking: list[str] = None,
@@ -152,6 +152,8 @@ class ESM:
         self.added_decom_to_input_data = False
         self.missing_construction_flow = None
         self.missing_input_flow_dict = None
+        self.multi_regional = False
+        self.region = None
 
 
     def __repr__(self):
@@ -303,13 +305,13 @@ class ESM:
 
         if self.efficiency is not None:
             self.efficiency = self.efficiency[self.efficiency.Name.isin(mapping_names)].reset_index(drop=True)
-        if len(self.efficiency) == 0:
-            self.efficiency = None
+            if len(self.efficiency) == 0:
+                self.efficiency = None
 
         if self.lifetime is not None:
             self.lifetime = self.lifetime[self.lifetime.Name.isin(mapping_names)].reset_index(drop=True)
-        if len(self.lifetime) == 0:
-            self.lifetime = None
+            if len(self.lifetime) == 0:
+                self.lifetime = None
 
         if self.technology_compositions is not None:
             self.technology_compositions = self.technology_compositions[
@@ -583,13 +585,17 @@ class ESM:
         if write_database is False and return_database is False:
             raise ValueError('Please set either return_database or write_database to True.')
 
-        if write_database is False and len(self.tech_specifics) > 0:
+        if write_database is False and len(self.tech_specifics) > 0 and not self.multi_regional:
             self.logger.warning('Some of the changes from tech_specifics.csv will not be applied as the ESM database '
                                 'will not be written to brightway (write_database is False).')
 
         if self.regionalize_foregrounds != [] and self.locations_ranking is None:
             raise ValueError("Please provide a locations ranking (locations_ranking) for the foreground regionalization "
                              "process")
+
+        # Adding the Location column if it is missing
+        if 'Location' not in self.mapping.columns:
+            self.change_location_mapping_file()
 
         # Adding current code to the mapping file
         self.mapping['Current_code'] = self.mapping.apply(lambda row: self.main_database.get_code(
@@ -978,6 +984,8 @@ class ESM:
 
         if act_type in self.regionalize_foregrounds:
             new_act = self._regionalize_activity_foreground(act=new_act)
+        else:
+            new_act['comment'] = f'This LCI dataset is a copy from {new_act["location"]}. ' + new_act.get('comment', '')
 
         return new_act
 
@@ -1243,7 +1251,7 @@ class ESM:
             return self.esm_db.db_as_dict_name[(
                 f"{row['Name']}, {row['Type']}",
                 row['Product'],
-                row['Location'],
+                row['Location'] if not self.multi_regional else self.esm_location,
                 self.esm_db_name,
             )]['code']
 
@@ -1324,6 +1332,181 @@ def is_transport(row: pd.Series, mobility_list: list[str]) -> int:
         return -1
     else:
         return 0
+
+
+class MultiRegionalESM(ESM):
+    """
+    The MultiRegionalESM class inherits from the ESM class and is used to create the ESM databases, impact score
+    dataframes, .dat files, etc. corresponding to the different regions of a multi-regional ESM.
+    """
+
+    def __init__(
+            self,
+            esm_locations: list[str] = None,
+            accepted_locations: dict[str, list[str]] = None,
+            locations_ranking: dict[str, list[str]] = None,
+            *args, **kwargs
+    ):
+        super().__init__(
+            esm_location=esm_locations[0],
+            accepted_locations=accepted_locations[esm_locations[0]],
+            locations_ranking=locations_ranking[esm_locations[0]],
+            *args,
+            **kwargs,
+        )
+
+        self.esm_locations = esm_locations
+        self.accepted_locations = accepted_locations
+        self.locations_ranking = locations_ranking
+        self.region = None
+        self.multi_regional = True
+
+    def change_location_mapping_file(self):
+        accepted_locations_all_regions = self.accepted_locations
+        locations_ranking_all_regions = self.locations_ranking
+        list_mapping_all_regions = []
+        for region in self.esm_locations:
+            self.esm_location = region
+            self.accepted_locations = accepted_locations_all_regions[region]
+            self.locations_ranking = locations_ranking_all_regions[region]
+            self.best_loc_in_ranking = {}
+            super().change_location_mapping_file()
+            mapping_copy = self.mapping.copy()
+            mapping_copy['Region'] = region
+            list_mapping_all_regions.append(mapping_copy)
+
+        self.mapping = pd.concat(list_mapping_all_regions)
+        self.accepted_locations = accepted_locations_all_regions
+        self.locations_ranking = locations_ranking_all_regions
+
+    def create_esm_database(
+            self,
+            return_database: bool = False,
+            write_database: bool = True,
+            *args, **kwargs
+    ) -> Database | None:
+
+        if write_database is False and len(self.tech_specifics) > 0:
+            self.logger.warning('Some of the changes from tech_specifics.csv will not be applied as the ESM database '
+                                'will not be written to brightway (write_database is False).')
+
+        all_esm_databases = Database(db_as_list=[])
+
+        # Store the original ESM variable values
+        original_results_path_file = self.results_path_file
+        accepted_locations_all_regions = self.accepted_locations
+        locations_ranking_all_regions = self.locations_ranking
+        if 'Location' not in self.mapping.columns or 'Region' not in self.mapping.columns:
+            self.change_location_mapping_file()
+        mapping_all_regions = self.mapping
+
+        self.region = self.esm_locations[0]
+        self.results_path_file += f'{self.region}/'
+
+        for region in self.esm_locations:  # Iterate over all regions
+
+            # Update the ESM variable values for the current region
+            self.results_path_file = self.results_path_file.replace(self.region, region)
+            self.esm_location = region
+            self.accepted_locations = accepted_locations_all_regions[region]
+            self.locations_ranking = locations_ranking_all_regions[region]
+            self.best_loc_in_ranking = {}
+            self.mapping = mapping_all_regions[mapping_all_regions['Region'] == region]
+
+            # # Location column computed again with region-specific locations_ranking
+            # # And renew the activity codes
+            # columns_to_drop = []
+            # for col in ['Location', 'Current_code', 'New_code']:
+            #     if col in self.mapping.columns:
+            #         columns_to_drop.append(col)
+            # self.mapping = self.mapping.drop(columns=columns_to_drop)
+
+            self.region = region
+
+            self.logger.info(f"Creating datasets for region {region}")
+            # create the ESM database for the current region
+            esm_db = super().create_esm_database(
+                return_database=True,
+                write_database=False,
+                *args, **kwargs
+            )
+
+            # Change the dataset locations to the current region
+            mapping = self.mapping
+            for act in esm_db.db_as_list:
+                if (
+                        (act['name'].split(', ')[0] in list(mapping['Name'].unique()))
+                        & (act['name'].split(', ')[1] in ['Operation', 'Construction', 'Decommission', 'Resource'])
+                ):  # if act is an ESM technology/resource
+                    prod_flow = Dataset(act).get_production_flow()
+                    act['location'] = region
+                    prod_flow['location'] = region
+                    act['comment'] = f'ESM region: {region}. ' + act.get('comment', '')
+
+            all_esm_databases += esm_db  # concatenate all ESM databases created for each region
+
+        # Restore the original ESM variable values
+        self.results_path_file = original_results_path_file
+        self.accepted_locations = accepted_locations_all_regions
+        self.locations_ranking = locations_ranking_all_regions
+        self.mapping = mapping_all_regions
+
+        if write_database:
+            self.logger.info("Starting to write database")
+            t1_mod_inv = time.time()
+
+            all_esm_databases.write_to_brightway(self.esm_db_name)
+
+            # Modify the written database according to the tech_specifics.csv file
+            self._modify_written_activities(db=all_esm_databases)
+
+            t2_mod_inv = time.time()
+            self.logger.info(f"Database written in {round(t2_mod_inv - t1_mod_inv, 1)} seconds")
+
+        if return_database:
+            if write_database:
+                all_esm_databases = Database(db_names=self.esm_db_name)  # accounts for modifications from tech_specifics.csv file
+
+            return all_esm_databases
+
+    def _get_new_code(self) -> None:
+
+        mapping_all_regions = self.mapping
+        list_mapping_all_regions = []
+
+        for region in self.esm_locations:  # Iterate over all regions
+
+            # Update the ESM variable values for the current region
+            self.esm_location = region
+            self.mapping = mapping_all_regions[mapping_all_regions['Region'] == region]
+
+            super()._get_new_code()
+            list_mapping_all_regions.append(self.mapping)
+
+        self.mapping = pd.concat(list_mapping_all_regions)
+
+    def compute_impact_scores(self, *args, **kwargs):
+
+        if 'Location' not in self.mapping.columns or 'Region' not in self.mapping.columns:
+            self.change_location_mapping_file()
+
+        if 'Region' not in self.technology_compositions.columns:
+            self.technology_compositions = self.technology_compositions.merge(pd.DataFrame({'Region': self.esm_locations}), how='cross')
+
+        impact_scores, contrib_analysis, df_req_technosphere = super().compute_impact_scores(*args, **kwargs)
+
+        df_new_codes = pd.concat([
+            self.mapping[['New_code', 'Region']],
+            self.technology_compositions[['New_code', 'Region']],
+        ])
+        code_to_region_dict = dict(zip(df_new_codes['New_code'], df_new_codes['Region']))
+        impact_scores['Region'] = impact_scores.apply(lambda x: code_to_region_dict[x['New_code']], axis=1)
+        if contrib_analysis is not None:
+            contrib_analysis['act_region'] = contrib_analysis.apply(lambda x: code_to_region_dict[x['act_code']], axis=1)
+        if df_req_technosphere is not None:
+            df_req_technosphere['Region'] = df_req_technosphere.apply(lambda x: code_to_region_dict[x['New_code']], axis=1)
+
+        return impact_scores, contrib_analysis, df_req_technosphere
 
 
 class PathwayESM(ESM):
